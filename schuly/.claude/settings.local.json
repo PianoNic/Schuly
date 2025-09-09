@@ -4,7 +4,9 @@
       "Bash(flutter analyze:*)",
       "Bash(flutter pub:*)",
       "Bash(flutter build:*)",
-      "Bash(flutter clean:*)"
+      "Bash(flutter clean:*)",
+      "Bash(adb logcat:*)",
+      "Read(//f/**)"
     ],
     "deny": [],
     "ask": []

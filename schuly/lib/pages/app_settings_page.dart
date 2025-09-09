@@ -12,8 +12,18 @@ class AppSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('App Einstellungen'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(
+          'Einstellungen',
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.normal,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -203,17 +213,28 @@ class _ApiUrlFieldState extends State<_ApiUrlField> {
         const SizedBox(height: 8),
         Row(
           children: [
-            ElevatedButton(
-              onPressed: () async {
-                if (_currentUrl != null && _currentUrl!.isNotEmpty) {
-                  await setApiBaseUrl(_currentUrl!);
-                  setState(() {});
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('API URL geändert: $_currentUrl'), backgroundColor: Colors.green),
-                  );
-                }
+            Builder(
+              builder: (context) {
+                final appColors = Theme.of(context).extension<AppColors>();
+                final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
+                
+                return ElevatedButton(
+                  onPressed: () async {
+                    if (_currentUrl != null && _currentUrl!.isNotEmpty) {
+                      await setApiBaseUrl(_currentUrl!);
+                      setState(() {});
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('API URL geändert: $_currentUrl'), backgroundColor: seedColor),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: seedColor,
+                    foregroundColor: Colors.white,
+                  ),
+                  child: const Text('API URL speichern'),
+                );
               },
-              child: const Text('API URL speichern'),
             ),
           ],
         ),

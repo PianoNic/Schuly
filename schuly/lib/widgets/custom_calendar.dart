@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../providers/theme_provider.dart';
 
 class CustomCalendar extends StatefulWidget {
   final DateTime selectedDate;
@@ -83,6 +84,9 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 
   Widget _buildHeader() {
+    final appColors = Theme.of(context).extension<AppColors>();
+    final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
@@ -95,7 +99,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                 curve: Curves.easeInOut,
               );
             },
-            icon: const Icon(Icons.chevron_left),
+            icon: Icon(Icons.chevron_left, color: seedColor),
           ),
           Text(
             '${_getMonthName(_currentMonth.month)} ${_currentMonth.year}',
@@ -108,7 +112,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                 curve: Curves.easeInOut,
               );
             },
-            icon: const Icon(Icons.chevron_right),
+            icon: Icon(Icons.chevron_right, color: seedColor),
           ),
         ],
       ),
@@ -211,6 +215,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
     final isSelected = _isSameDay(date, widget.selectedDate);
     final isToday = _isSameDay(date, DateTime.now());
     final hasEvent = _hasEvent(date);
+    final appColors = Theme.of(context).extension<AppColors>();
+    final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
 
     return GestureDetector(
       onTap: isCurrentMonth ? () => widget.onDateChanged(date) : null,
@@ -218,11 +224,11 @@ class _CustomCalendarState extends State<CustomCalendar> {
         margin: const EdgeInsets.all(0.5),
         decoration: BoxDecoration(
           color: isSelected
-              ? Theme.of(context).colorScheme.primary
+              ? seedColor
               : null,
           border: isToday
               ? Border.all(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: seedColor,
                   width: 2,
                 )
               : null,
@@ -254,7 +260,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                   decoration: BoxDecoration(
                     color: isSelected
                         ? Theme.of(context).colorScheme.onPrimary
-                        : Theme.of(context).colorScheme.primary,
+                        : seedColor,
                     shape: BoxShape.circle,
                   ),
                 ),

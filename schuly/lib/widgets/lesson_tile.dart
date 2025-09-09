@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../providers/theme_provider.dart';
 
 class LessonTile extends StatelessWidget {
   final String day;
@@ -18,11 +19,15 @@ class LessonTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    final surfaceContainer = appColors?.surfaceContainer ?? 
+        Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3);
+    
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
+        color: surfaceContainer,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

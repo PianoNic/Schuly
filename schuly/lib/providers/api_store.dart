@@ -35,6 +35,7 @@ class ApiStore extends ChangeNotifier {
   List<SettingDto>? settings;
   // List<Object>? topics;
   UserInfoDto? userInfo;
+  Map<String, dynamic>? appInfo;
 
   // In-memory user map: email -> {email, password, access_token, refresh_token, expires_at}
   Map<String, Map<String, dynamic>> _users = {};
@@ -191,11 +192,12 @@ class ApiStore extends ChangeNotifier {
       // fetchExams(),
       fetchGrades(),
       // fetchLateness(),
-      fetchNotifications(),
-      fetchSettings(),
+      // fetchNotifications(),
+      // fetchSettings(),
       // fetchTopics(),
       fetchUserInfo(),
-      fetchStudentIdCard(),
+      // fetchStudentIdCard(),
+      fetchAppInfo(),
     ]);
   }
 
@@ -349,6 +351,33 @@ class ApiStore extends ChangeNotifier {
       lastApiError = null;
     } on ApiException catch (e) {
       _handleApiError(e);
+    }
+    notifyListeners();
+  }
+
+  Future<void> fetchAppInfo() async {
+    try {
+      final appApi = AppApi();
+      // Get the raw HTTP response instead of trying to deserialize
+      final httpResponse = await appApi.appAppInfoWithHttpInfo().timeout(Duration(seconds: 5));
+      
+      if (httpResponse.statusCode == 200) {
+        // Manually parse the JSON response
+        final responseBody = httpResponse.body;
+        if (responseBody.isNotEmpty) {
+          final jsonData = jsonDecode(responseBody);
+          if (jsonData is Map<String, dynamic>) {
+            appInfo = jsonData;
+          } else {
+            appInfo = {'raw': jsonData.toString()};
+          }
+        }
+      }
+      lastApiError = null;
+    } on ApiException catch (e) {
+      _handleApiError(e);
+    } catch (e) {
+      lastApiError = e.toString();
     }
     notifyListeners();
   }

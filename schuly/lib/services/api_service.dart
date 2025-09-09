@@ -6,7 +6,7 @@ class ApiService {
   MobileProxyApi get _mobileApi => MobileProxyApi();
 
   Future<http.Response> authenticateWithResponse(String email, String password) {
-    return _authApi.authenticateMobileWithHttpInfo(email, password);
+    return _authApi.authenticateMobileWithHttpInfo(email, password).timeout(Duration(minutes: 1));
   }
 
   Future<Object?> authenticate(String email, String password) {

@@ -3,15 +3,11 @@ name: Build and Release Flutter Apps
 on:
   release:
     types: [published]
-  pull_request:
-    types: [closed]
-    branches: [main]
   workflow_dispatch:
 
 jobs:
   build-android:
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -57,7 +53,6 @@ jobs:
 
   build-ios:
     runs-on: macos-latest
-    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

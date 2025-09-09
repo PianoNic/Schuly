@@ -72,14 +72,14 @@ class ApiStore extends ChangeNotifier {
 
   // Add a user (login and store)
   Future<String?> addUser(String email, String password) async {
-    print('[addUser] Attempting login for: ' + email);
+    print('[addUser] Attempting login for: $email');
     try {
       final response = await _authApi.authenticateMobileApiApiAuthenticateMobilePostWithHttpInfo(email, password);
       print('[addUser] API response: statusCode=${response.statusCode}, body=${response.body}');
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         try {
           final result = jsonDecode(response.body);
-          print('[addUser] Decoded result: ' + result.toString());
+          print('[addUser] Decoded result: $result');
           if (result['access_token'] != null) {
             final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
             final expiresIn = result['expires_in'] ?? 3600;
@@ -98,9 +98,9 @@ class ApiStore extends ChangeNotifier {
               await _setAuthFromUser(_users[email]!);
               print('[addUser] User persisted and auth set.');
             } catch (storageError, stack) {
-              print('[addUser] Error persisting user: ' + storageError.toString());
+              print('[addUser] Error persisting user: $storageError');
               print(stack);
-              return 'Login succeeded but failed to persist user: ' + storageError.toString();
+              return 'Login succeeded but failed to persist user: $storageError';
             }
             notifyListeners();
             return null; // Success
@@ -109,18 +109,18 @@ class ApiStore extends ChangeNotifier {
             return 'Login failed: No access_token in response. Body: \\${response.body}';
           }
         } catch (jsonError, stack) {
-          print('[addUser] JSON decode error: ' + jsonError.toString());
+          print('[addUser] JSON decode error: $jsonError');
           print(stack);
-          return 'Login failed: JSON decode error: ' + jsonError.toString();
+          return 'Login failed: JSON decode error: $jsonError';
         }
       } else {
         print('[addUser] Login failed: statusCode=\\${response.statusCode}, body=\\${response.body}');
         return 'Login failed: statusCode=\\${response.statusCode}, body=\\${response.body}';
       }
     } catch (e, stack) {
-      print('[addUser] Exception: ' + e.toString());
+      print('[addUser] Exception: $e');
       print(stack);
-      return 'Login error: ' + e.toString() + '\\n' + stack.toString();
+      return 'Login error: $e\\n$stack';
     }
   }
 

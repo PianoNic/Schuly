@@ -193,7 +193,7 @@ class AccountPage extends StatelessWidget {
                           final ok = await apiStore.addUser(email, user['password']);
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text(ok == null ? 'Token aktualisiert!' : ok),
+                              content: Text(ok ?? 'Token aktualisiert!'),
                               backgroundColor: ok == null ? Colors.green : Colors.red,
                             ),
                           );

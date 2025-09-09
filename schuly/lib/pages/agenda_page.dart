@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/agenda_item.dart';
+import '../widgets/custom_calendar.dart';
 import '../providers/api_store.dart';
 // import '../api/lib/model/agenda_dto.dart';
 // import '../api/lib/api.dart';
@@ -14,6 +15,19 @@ class AgendaPage extends StatefulWidget {
 
 class _AgendaPageState extends State<AgendaPage> {
   DateTime _selectedDay = DateTime.now();
+
+  Set<DateTime> _getDatesWithEvents(List<dynamic>? agenda) {
+    if (agenda == null) return {};
+    
+    final datesWithEvents = <DateTime>{};
+    for (final item in agenda) {
+      final start = DateTime.tryParse(item.startDate);
+      if (start != null) {
+        datesWithEvents.add(DateTime(start.year, start.month, start.day));
+      }
+    }
+    return datesWithEvents;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +44,11 @@ class _AgendaPageState extends State<AgendaPage> {
             child: Column(
               children: [
                 Card(
-                  child: CalendarDatePicker(
-                    initialDate: _selectedDay,
+                  child: CustomCalendar(
+                    selectedDate: _selectedDay,
                     firstDate: DateTime.now().subtract(const Duration(days: 365)),
                     lastDate: DateTime.now().add(const Duration(days: 365)),
+                    datesWithEvents: _getDatesWithEvents(agenda),
                     onDateChanged: (date) {
                       setState(() {
                         _selectedDay = date;

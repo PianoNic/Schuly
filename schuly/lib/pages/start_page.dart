@@ -73,7 +73,7 @@ class StartPage extends StatelessWidget {
                                   '${end.hour.toString().padLeft(2, '0')}:${end.minute.toString().padLeft(2, '0')}'
                                 : '';
                               final subject = item.text;
-                              final room = item.roomId;
+                              final room = item.roomToken;
                               final teacher = item.teachers.isNotEmpty ? item.teachers.join(', ') : '';
                               return LessonTile(
                                 day: dayStr,

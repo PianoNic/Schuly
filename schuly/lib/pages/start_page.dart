@@ -202,7 +202,7 @@ class StartPage extends StatelessWidget {
                             // Define what counts as "open" (robust to status variants)
                             final openStatuses = {'offen', 'open', 'ofage', 'unexcused', 'pending'};
                             final openAbsences = absences.where((absence) {
-                              final status = absence.statusEAE;
+                              final status = absence.statusEAB;
                               return openStatuses.contains(status.toLowerCase());
                             }).toList();
 
@@ -216,7 +216,7 @@ class StartPage extends StatelessWidget {
                                     absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
                                     absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
                                     excuseUntil: _formatDateTime(absence.dateEAB, null),
-                                    status: 'offen',
+                                    status: absence.statusEAB,
                                     reason: absence.reason,
                                   );
                                 }).toList();
@@ -231,7 +231,7 @@ class StartPage extends StatelessWidget {
                                 absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
                                 absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
                                 excuseUntil: _formatDateTime(absence.dateEAB, null),
-                                status: 'offen',
+                                status: absence.statusEAB,
                                 reason: absence.reason,
                               );
                             }).toList();

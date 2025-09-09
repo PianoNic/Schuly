@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/api_store.dart';
+import 'package:schuly/api/lib/api.dart';
 
 class AbsenzenPage extends StatelessWidget {
   const AbsenzenPage({super.key});
+
+  String _formatDateTime(String date, String? time) {
+    if (date.isEmpty) return '';
+    final datePart = date.length > 10 ? date.substring(0, 10) : date;
+    final dateFormatted = datePart.split('-').reversed.join('.');
+    if (time == null || time.isEmpty) {
+      // Try to extract time from date if present
+      if (date.length > 10) {
+        final timePart = date.substring(11, 16);
+        return '$dateFormatted $timePart';
+      }
+      return dateFormatted;
+    }
+    final timeShort = time.length >= 5 ? time.substring(0, 5) : time;
+    return '$dateFormatted $timeShort';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +45,28 @@ class AbsenzenPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ...absences.map((absence) {
-                      return CompactAbsenceItem(
-                        absentFrom: absence.dateFrom,
-                        absentTo: absence.dateTo,
-                        excuseUntil: absence.excusedDate ?? '',
-                        status: absence.statusEAE,
-                        reason: absence.reason,
-                      );
-                    }),
+                    ...(() {
+                      // Accept both Map and AbsenceDto, robust to all shapes
+                      final List absRaw = absences;
+                      final List<AbsenceDto> validAbsences = absRaw.map((a) {
+                        if (a is AbsenceDto) return a;
+                        try {
+                          return AbsenceDto.fromJson(a as Map<String, dynamic>);
+                        } catch (_) {
+                          return null;
+                        }
+                      }).whereType<AbsenceDto>().toList();
+
+                      return validAbsences.map((absence) {
+                        return CompactAbsenceItem(
+                          absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
+                          absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
+                          excuseUntil: _formatDateTime(absence.dateEAB, null),
+                          status: absence.statusEAB,
+                          reason: absence.reason,
+                        );
+                      }).toList();
+                    })(),
                   ],
                 ),
               );
@@ -67,8 +97,6 @@ class CompactAbsenceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Always use 'offen' for status icon/text in the detail card
-    const String displayStatus = 'offen';
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -86,7 +114,7 @@ class CompactAbsenceItem extends StatelessWidget {
             _buildDetailRow('Von:', absentFrom),
             _buildDetailRow('Bis:', absentTo),
             _buildDetailRow('Entschuldigen bis:', excuseUntil),
-            _buildDetailRow('Status:', displayStatus),
+            _buildDetailRow('Status:', status),
           ],
         ),
       ),

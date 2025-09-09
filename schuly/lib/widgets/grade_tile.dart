@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/grade_utils.dart';
+import '../providers/theme_provider.dart';
 
 class GradeTile extends StatelessWidget {
   final String subject;
@@ -17,18 +18,22 @@ class GradeTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
+    final lightBackground = appColors?.lightBackground ?? seedColor.withOpacity(0.1);
+    
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: confirmed
-            ? Colors.green.withValues(alpha: 0.1)
-            : Colors.orange.withValues(alpha: 0.1),
+            ? lightBackground
+            : Colors.orange.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: confirmed
-              ? Colors.green.withValues(alpha: 0.1)
-              : Colors.orange.withValues(alpha: 0.1),
+              ? seedColor.withOpacity(0.2)
+              : Colors.orange.withOpacity(0.3),
         ),
       ),
       child: Row(
@@ -62,7 +67,7 @@ class GradeTile extends StatelessWidget {
           ),
           Icon(
             confirmed ? Icons.check_circle : Icons.pending,
-            color: confirmed ? Colors.green : Colors.orange,
+            color: confirmed ? seedColor : Colors.orange,
           ),
         ],
       ),

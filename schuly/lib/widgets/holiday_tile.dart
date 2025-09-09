@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../providers/theme_provider.dart';
 
 class HolidayTile extends StatelessWidget {
   final String name;
@@ -14,17 +15,21 @@ class HolidayTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
+    final lightBackground = appColors?.lightBackground ?? seedColor.withOpacity(0.1);
+    
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.green.withOpacity(0.1),
+        color: lightBackground,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.green.withOpacity(0.3)),
+        border: Border.all(color: seedColor.withOpacity(0.3)),
       ),
       child: Row(
         children: [
-          Icon(Icons.beach_access, color: Colors.green[700]),
+          Icon(Icons.beach_access, color: seedColor),
           const SizedBox(width: 12),
           Expanded(
             child: Column(

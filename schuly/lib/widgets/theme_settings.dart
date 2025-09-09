@@ -85,6 +85,9 @@ class ThemeSettings extends StatelessWidget {
 
   Widget _buildThemeModeOption(BuildContext context, ThemeMode mode, String label, IconData icon) {
     final isSelected = themeProvider.themeMode == mode;
+    final appColors = Theme.of(context).extension<AppColors>();
+    final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
+    final lightBackground = appColors?.lightBackground ?? seedColor.withOpacity(0.1);
     
     return InkWell(
       onTap: () => themeProvider.setThemeMode(mode),
@@ -93,12 +96,12 @@ class ThemeSettings extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected 
-              ? Theme.of(context).colorScheme.primaryContainer
+              ? lightBackground
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: isSelected 
-                ? Theme.of(context).colorScheme.primary
+                ? seedColor
                 : Theme.of(context).colorScheme.outline.withOpacity(0.2),
           ),
         ),
@@ -107,7 +110,7 @@ class ThemeSettings extends StatelessWidget {
             Icon(
               icon,
               color: isSelected 
-                  ? Theme.of(context).colorScheme.onPrimaryContainer
+                  ? seedColor
                   : Theme.of(context).colorScheme.onSurface,
             ),
             const SizedBox(width: 12),
@@ -115,7 +118,7 @@ class ThemeSettings extends StatelessWidget {
               label,
               style: TextStyle(
                 color: isSelected 
-                    ? Theme.of(context).colorScheme.onPrimaryContainer
+                    ? seedColor
                     : Theme.of(context).colorScheme.onSurface,
                 fontWeight: isSelected ? FontWeight.w500 : FontWeight.normal,
               ),
@@ -124,7 +127,7 @@ class ThemeSettings extends StatelessWidget {
             if (isSelected)
               Icon(
                 Icons.check,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                color: seedColor,
               ),
           ],
         ),
@@ -134,6 +137,9 @@ class ThemeSettings extends StatelessWidget {
 
   Widget _buildColorOption(BuildContext context, Color color, String label) {
     final isSelected = themeProvider.seedColor == color;
+    final lightBackground = isSelected 
+        ? color.withOpacity(0.1)
+        : Colors.transparent;
     
     return InkWell(
       onTap: () => themeProvider.setSeedColor(color),
@@ -141,6 +147,7 @@ class ThemeSettings extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
+          color: lightBackground,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSelected 

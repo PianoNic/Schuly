@@ -6,6 +6,7 @@ import 'pages/notes_page.dart';
 import 'pages/absenzen_page.dart';
 import 'pages/account_page.dart';
 import 'pages/login_page.dart';
+import 'pages/student_card_page.dart';
 import 'providers/theme_provider.dart';
 import 'providers/api_store.dart';
 import 'services/storage_service.dart';
@@ -130,43 +131,87 @@ class _MyHomePageState extends State<MyHomePage> {
       AccountPage(themeProvider: widget.themeProvider),
     ];
 
+    // Page titles for the header
+    final List<String> pageTitles = [
+      'Start',
+      'Agenda',
+      'Noten',
+      'Absenzen',
+      'Account',
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          pageTitles[_selectedIndex],
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.normal,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+        ),
+        actions: _selectedIndex != 4 ? [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const StudentCardPage()),
+              );
+            },
+            icon: Icon(
+              Icons.badge_outlined,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            tooltip: 'Schülerausweis',
+          ),
+        ] : null,
       ),
       // 5. PageView is replaced with a direct index call to the list
       body: pages[_selectedIndex],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: _onItemTapped,
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'Start',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.calendar_today_outlined),
-            selectedIcon: Icon(Icons.calendar_today),
-            label: 'Agenda',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.grade_outlined),
-            selectedIcon: Icon(Icons.grade),
-            label: 'Noten',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.list_alt_outlined),
-            selectedIcon: Icon(Icons.list_alt),
-            label: 'Absenzen',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Account',
-          ),
-        ],
+      bottomNavigationBar: Builder(
+        builder: (context) {
+          final appColors = Theme.of(context).extension<AppColors>();
+          final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
+          
+          return NavigationBar(
+            selectedIndex: _selectedIndex,
+            onDestinationSelected: _onItemTapped,
+            animationDuration: const Duration(milliseconds: 300),
+            destinations: [
+              NavigationDestination(
+                icon: Icon(Icons.home_outlined, 
+                  color: _selectedIndex == 0 ? seedColor : null),
+                selectedIcon: Icon(Icons.home, color: seedColor),
+                label: 'Start',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.calendar_today_outlined,
+                  color: _selectedIndex == 1 ? seedColor : null),
+                selectedIcon: Icon(Icons.calendar_today, color: seedColor),
+                label: 'Agenda',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.grade_outlined,
+                  color: _selectedIndex == 2 ? seedColor : null),
+                selectedIcon: Icon(Icons.grade, color: seedColor),
+                label: 'Noten',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.list_alt_outlined,
+                  color: _selectedIndex == 3 ? seedColor : null),
+                selectedIcon: Icon(Icons.list_alt, color: seedColor),
+                label: 'Absenzen',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.person_outline,
+                  color: _selectedIndex == 4 ? seedColor : null),
+                selectedIcon: Icon(Icons.person, color: seedColor),
+                label: 'Account',
+              ),
+            ],
+          );
+        },
       ),
     );
   }

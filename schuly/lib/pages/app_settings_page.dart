@@ -1,12 +1,57 @@
 import 'package:flutter/material.dart';
 import '../widgets/theme_settings.dart';
 import '../providers/theme_provider.dart';
+import '../services/storage_service.dart';
 import '../main.dart';
 
-class AppSettingsPage extends StatelessWidget {
+class AppSettingsPage extends StatefulWidget {
   final ThemeProvider themeProvider;
 
   const AppSettingsPage({super.key, required this.themeProvider});
+
+  @override
+  State<AppSettingsPage> createState() => _AppSettingsPageState();
+}
+
+class _AppSettingsPageState extends State<AppSettingsPage> {
+  bool _pushNotificationsEnabled = true;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPushNotificationSetting();
+  }
+
+  Future<void> _loadPushNotificationSetting() async {
+    final enabled = await StorageService.getPushNotificationsEnabled();
+    setState(() {
+      _pushNotificationsEnabled = enabled;
+      _isLoading = false;
+    });
+  }
+
+  Future<void> _togglePushNotifications(bool value) async {
+    setState(() {
+      _pushNotificationsEnabled = value;
+    });
+    
+    await StorageService.setPushNotificationsEnabled(value);
+    
+    if (!mounted) return;
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          value 
+            ? 'Push-Benachrichtigungen aktiviert' 
+            : 'Push-Benachrichtigungen deaktiviert'
+        ),
+        backgroundColor: value ? Colors.green : Colors.orange,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +75,7 @@ class AppSettingsPage extends StatelessWidget {
         child: Column(
           children: [
             // Theme Settings Card
-            ThemeSettings(themeProvider: themeProvider),
+            ThemeSettings(themeProvider: widget.themeProvider),
 
             const SizedBox(height: 16),
 
@@ -48,25 +93,23 @@ class AppSettingsPage extends StatelessWidget {
                     const SizedBox(height: 16),
 
                     // Notifications Toggle
-                    _buildSettingsTile(
-                      context,
-                      icon: Icons.notifications_outlined,
-                      title: 'Benachrichtigungen',
-                      subtitle: 'Push-Benachrichtigungen aktivieren',
-                      trailing: Switch(
-                        value: true, // You can make this stateful later
-                        onChanged: (value) {
-                          // TODO: Implement notification settings
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                'Benachrichtigungen - Coming Soon!',
-                              ),
+                    _isLoading 
+                        ? const Center(child: CircularProgressIndicator())
+                        : _buildSettingsTile(
+                            context,
+                            icon: _pushNotificationsEnabled 
+                                ? Icons.notifications_outlined
+                                : Icons.notifications_off_outlined,
+                            title: 'Push-Benachrichtigungen',
+                            subtitle: _pushNotificationsEnabled 
+                                ? 'Benachrichtigungen sind aktiviert'
+                                : 'Benachrichtigungen sind deaktiviert',
+                            trailing: Switch(
+                              value: _pushNotificationsEnabled,
+                              onChanged: _togglePushNotifications,
                             ),
-                          );
-                        },
-                      ),
-                    ),
+                            isEnabled: true,
+                          ),
 
                     const Divider(),
 
@@ -159,14 +202,34 @@ class AppSettingsPage extends StatelessWidget {
     required String subtitle,
     required Widget trailing,
     VoidCallback? onTap,
+    bool isEnabled = true,
   }) {
+    final theme = Theme.of(context);
+    final disabledColor = theme.colorScheme.onSurface.withOpacity(0.38);
+    
     return ListTile(
-      leading: Icon(icon),
-      title: Text(title),
-      subtitle: Text(subtitle, style: Theme.of(context).textTheme.bodySmall),
+      leading: Icon(
+        icon, 
+        color: isEnabled ? null : disabledColor,
+      ),
+      title: Text(
+        title,
+        style: isEnabled 
+          ? null 
+          : TextStyle(color: disabledColor),
+      ),
+      subtitle: Text(
+        subtitle, 
+        style: theme.textTheme.bodySmall?.copyWith(
+          color: isEnabled 
+            ? theme.textTheme.bodySmall?.color 
+            : disabledColor,
+        ),
+      ),
       trailing: trailing,
-      onTap: onTap,
+      onTap: isEnabled ? onTap : null,
       contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+      enabled: isEnabled,
     );
   }
 }

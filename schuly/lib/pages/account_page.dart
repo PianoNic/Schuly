@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/info_row.dart';
 import '../widgets/profile_header.dart';
+import '../widgets/help_support_modal.dart';
 import '../providers/theme_provider.dart';
 import '../providers/api_store.dart';
 import 'app_settings_page.dart';
@@ -162,10 +163,13 @@ class AccountPage extends StatelessWidget {
                       subtitle: const Text('Häufige Fragen und Kontakt'),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Hilfe & Support - Coming Soon!'),
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                           ),
+                          builder: (context) => const HelpSupportModal(),
                         );
                       },
                     ),

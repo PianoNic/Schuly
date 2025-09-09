@@ -2,13 +2,8 @@ import 'package:schuly/api/lib/api.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  late final AuthApi _authApi;
-  late final MobileProxyApi _mobileApi;
-
-  ApiService() {
-    _authApi = AuthApi();
-    _mobileApi = MobileProxyApi();
-  }
+  AuthApi get _authApi => AuthApi();
+  MobileProxyApi get _mobileApi => MobileProxyApi();
 
   Future<http.Response> authenticateWithResponse(String email, String password) {
     return _authApi.authenticateMobileWithHttpInfo(email, password);

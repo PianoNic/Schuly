@@ -167,8 +167,30 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ] : null,
       ),
-      // 5. PageView is replaced with a direct index call to the list
-      body: pages[_selectedIndex],
+      // 5. PageView is replaced with animated page transitions
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 200),
+        switchInCurve: Curves.easeIn,
+        switchOutCurve: Curves.easeOut,
+        transitionBuilder: (Widget child, Animation<double> animation) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+        layoutBuilder: (Widget? currentChild, List<Widget> previousChildren) {
+          return Stack(
+            children: <Widget>[
+              ...previousChildren,
+              if (currentChild != null) currentChild,
+            ],
+          );
+        },
+        child: Container(
+          key: ValueKey(_selectedIndex),
+          child: pages[_selectedIndex],
+        ),
+      ),
       bottomNavigationBar: Builder(
         builder: (context) {
           final appColors = Theme.of(context).extension<AppColors>();

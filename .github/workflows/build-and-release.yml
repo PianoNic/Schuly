@@ -1,0 +1,268 @@
+name: Build and Release Flutter Apps
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Get dependencies
+        run: |
+          cd schuly
+          flutter pub get
+
+      - name: Generate app icons
+        run: |
+          cd schuly
+          dart run flutter_launcher_icons
+
+      - name: Build Android APK
+        run: |
+          cd schuly
+          flutter build apk --release
+
+      - name: Build Android App Bundle
+        run: |
+          cd schuly
+          flutter build appbundle --release
+
+      - name: Rename and upload APK artifact
+        run: |
+          mkdir -p artifacts
+          cp schuly/build/app/outputs/flutter-apk/app-release.apk artifacts/schuly.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: artifacts/schuly.apk
+
+      - name: Upload AAB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-aab
+          path: schuly/build/app/outputs/bundle/release/app-release.aab
+
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Get dependencies
+        run: |
+          cd schuly
+          flutter pub get
+
+      - name: Generate app icons
+        run: |
+          cd schuly
+          dart run flutter_launcher_icons
+
+      - name: Build iOS (unsigned)
+        run: |
+          cd schuly
+          flutter build ios --release --no-codesign
+
+      - name: Create iOS Archive
+        run: |
+          cd schuly/ios
+          xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -destination generic/platform=iOS -archivePath build/Runner.xcarchive archive CODE_SIGNING_ALLOWED=NO
+
+      - name: Export IPA
+        run: |
+          cd schuly/ios
+          mkdir -p build/ipa
+          cp -r build/Runner.xcarchive/Products/Applications/Runner.app build/ipa/
+          cd build/ipa
+          zip -r ../schuly.ipa Runner.app
+
+      - name: Upload iOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-ipa
+          path: schuly/ios/build/schuly.ipa
+
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Get dependencies
+        run: |
+          cd schuly
+          flutter pub get
+
+      - name: Build Web
+        run: |
+          cd schuly
+          flutter build web --release
+
+      - name: Create Web Archive
+        run: |
+          cd schuly/build
+          zip -r schuly-web.zip web/
+
+      - name: Upload Web artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: schuly/build/schuly-web.zip
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Get dependencies
+        run: |
+          cd schuly
+          flutter pub get
+
+      - name: Build Windows
+        run: |
+          cd schuly
+          flutter build windows --release
+
+      - name: Create Windows Archive
+        run: |
+          cd schuly/build/windows/x64/runner
+          Compress-Archive -Path Release/* -DestinationPath ../schuly-windows.zip
+
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: schuly/build/windows/x64/schuly-windows.zip
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Get dependencies
+        run: |
+          cd schuly
+          flutter pub get
+
+      - name: Build Linux
+        run: |
+          cd schuly
+          flutter build linux --release
+
+      - name: Create Linux Archive
+        run: |
+          cd schuly/build/linux/x64/release
+          tar -czf ../schuly-linux.tar.gz bundle/
+
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-build
+          path: schuly/build/linux/x64/schuly-linux.tar.gz
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Get dependencies
+        run: |
+          cd schuly
+          flutter pub get
+
+      - name: Build macOS
+        run: |
+          cd schuly
+          flutter build macos --release
+
+      - name: Create macOS Archive
+        run: |
+          cd schuly/build/macos/Build/Products/Release
+          zip -r ../schuly-macos.zip schuly.app
+
+      - name: Upload macOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-build
+          path: schuly/build/macos/Build/Products/schuly-macos.zip
+
+  upload-to-release:
+    needs: [build-android, build-ios, build-web, build-windows, build-linux, build-macos]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Upload Assets to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            android-apk/schuly.apk
+            ios-ipa/schuly.ipa
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:schuly/api/lib/api.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../services/api_service.dart';
+import '../services/storage_service.dart';
 import 'dart:convert';
 
 class ApiStore extends ChangeNotifier {
@@ -18,9 +19,8 @@ class ApiStore extends ChangeNotifier {
     notifyListeners();
   }
 
-  // API instances
-  final AuthorizationApi _authApi = AuthorizationApi();
-  final MobileAPIApi _mobileApi = MobileAPIApi();
+  // API service
+  final ApiService _apiService = ApiService();
 
   // Data for all endpoints
   // List<AbsenceNoticeStatusDto>? absenceNoticeStatus;
@@ -32,17 +32,9 @@ class ApiStore extends ChangeNotifier {
   List<GradeDto>? grades;
   // List<Object>? lateness;
   List<Object>? notifications;
-  // List<SettingDto>? settings;
+  List<SettingDto>? settings;
   // List<Object>? topics;
   UserInfoDto? userInfo;
-
-  // Secure storage
-  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
-
-  // User model for storage
-  static const _usersKey = 'users'; // JSON-encoded list of user emails
-  static const _activeUserKey = 'active_user';
-  static const _apiUrlKey = 'api_url';
 
   // In-memory user map: email -> {email, password, access_token, refresh_token, expires_at}
   Map<String, Map<String, dynamic>> _users = {};
@@ -54,17 +46,11 @@ class ApiStore extends ChangeNotifier {
 
   // On startup, load users from secure storage
   Future<void> loadUsers() async {
-    final usersJson = await _secureStorage.read(key: _usersKey);
-    final active = await _secureStorage.read(key: _activeUserKey);
-    if (usersJson != null) {
-      _users = Map<String, Map<String, dynamic>>.from(
-        (Map<String, dynamic>.from(await _decodeJson(usersJson)))
-      );
-    }
-    _activeUserEmail = active;
+    _users = await StorageService.getUsers();
+    _activeUserEmail = await StorageService.getActiveUser();
+    
     if (_activeUserEmail != null && _users[_activeUserEmail] != null) {
       await _setAuthFromUser(_users[_activeUserEmail]!);
-      // Fetch all data once after user is loaded
       await fetchAll();
     }
     notifyListeners();
@@ -74,7 +60,7 @@ class ApiStore extends ChangeNotifier {
   Future<String?> addUser(String email, String password) async {
     print('[addUser] Attempting login for: $email');
     try {
-      final response = await _authApi.authenticateMobileApiApiAuthenticateMobilePostWithHttpInfo(email, password);
+      final response = await _apiService.authenticateWithResponse(email, password);
       print('[addUser] API response: statusCode=${response.statusCode}, body=${response.body}');
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         try {
@@ -94,7 +80,8 @@ class ApiStore extends ChangeNotifier {
             };
             _activeUserEmail = email;
             try {
-              await _persistUsers();
+              await StorageService.saveUser(email, _users[email]!);
+              await StorageService.setActiveUser(email);
               await _setAuthFromUser(_users[email]!);
               print('[addUser] User persisted and auth set.');
             } catch (storageError, stack) {
@@ -128,7 +115,7 @@ class ApiStore extends ChangeNotifier {
   Future<void> switchUser(String email) async {
     if (_users.containsKey(email)) {
       _activeUserEmail = email;
-      await _secureStorage.write(key: _activeUserKey, value: email);
+      await StorageService.setActiveUser(email);
       await _setAuthFromUser(_users[email]!);
       notifyListeners();
     }
@@ -137,15 +124,17 @@ class ApiStore extends ChangeNotifier {
   // Remove a user
   Future<void> removeUser(String email) async {
     _users.remove(email);
+    await StorageService.removeUser(email);
+    
     if (_activeUserEmail == email) {
       _activeUserEmail = _users.keys.isNotEmpty ? _users.keys.first : null;
+      await StorageService.setActiveUser(_activeUserEmail);
       if (_activeUserEmail != null) {
         await _setAuthFromUser(_users[_activeUserEmail]!);
       } else {
         bearerToken = null;
       }
     }
-    await _persistUsers();
     notifyListeners();
   }
 
@@ -168,23 +157,20 @@ class ApiStore extends ChangeNotifier {
     bearerToken = user['access_token'];
   }
 
-  // Internal: persist users to secure storage
-  Future<void> _persistUsers() async {
-    await _secureStorage.write(key: _usersKey, value: await _encodeJson(_users));
-    if (_activeUserEmail != null) {
-      await _secureStorage.write(key: _activeUserKey, value: _activeUserEmail);
+  // Internal: handle API errors consistently
+  void _handleApiError(ApiException e) {
+    if (e.code == 403 && e.message != null && e.message!.contains('Not authenticated')) {
+      lastApiError = 'Not authenticated';
+    } else {
+      lastApiError = e.toString();
     }
   }
 
-  // Helpers for JSON encoding/decoding
-  Future<String> _encodeJson(Map<String, dynamic> data) async => Future.value(jsonEncode(data));
-  Future<Map<String, dynamic>> _decodeJson(String data) async => Future.value(Map<String, dynamic>.from(jsonDecode(data)));
 
   // Auth method
   Future<bool> loginMobile(String email, String password) async {
     try {
-      final result = await _authApi.authenticateMobileApiApiAuthenticateMobilePost(email, password);
-      // Expecting a map with a bearer token
+      final result = await _apiService.authenticate(email, password);
       if (result is Map && result['access_token'] != null) {
         bearerToken = result['access_token'] as String;
         return true;
@@ -206,7 +192,7 @@ class ApiStore extends ChangeNotifier {
       fetchGrades(),
       // fetchLateness(),
       fetchNotifications(),
-      // fetchSettings(),
+      fetchSettings(),
       // fetchTopics(),
       fetchUserInfo(),
       fetchStudentIdCard(),
@@ -243,28 +229,20 @@ class ApiStore extends ChangeNotifier {
 
   Future<void> fetchAbsences() async {
     try {
-      absences = await _mobileApi.getMobileAbsencesApiMobileAbsencesGet();
+      absences = await _apiService.getAbsences();
       lastApiError = null;
     } on ApiException catch (e) {
-      if (e.code == 403 && e.message != null && e.message!.contains('Not authenticated')) {
-        lastApiError = 'Not authenticated';
-      } else {
-        lastApiError = e.toString();
-      }
+      _handleApiError(e);
     }
     notifyListeners();
   }
 
   Future<void> fetchAgenda() async {
     try {
-      agenda = await _mobileApi.getMobileEventsApiMobileAgendaGet();
+      agenda = await _apiService.getAgenda();
       lastApiError = null;
     } on ApiException catch (e) {
-      if (e.code == 403 && e.message != null && e.message!.contains('Not authenticated')) {
-        lastApiError = 'Not authenticated';
-      } else {
-        lastApiError = e.toString();
-      }
+      _handleApiError(e);
     }
     notifyListeners();
   }
@@ -285,14 +263,10 @@ class ApiStore extends ChangeNotifier {
 
   Future<void> fetchGrades() async {
     try {
-      grades = await _mobileApi.getMobileGradesApiMobileGradesGet();
+      grades = await _apiService.getGrades();
       lastApiError = null;
     } on ApiException catch (e) {
-      if (e.code == 403 && e.message != null && e.message!.contains('Not authenticated')) {
-        lastApiError = 'Not authenticated';
-      } else {
-        lastApiError = e.toString();
-      }
+      _handleApiError(e);
     }
     notifyListeners();
   }
@@ -313,14 +287,10 @@ class ApiStore extends ChangeNotifier {
 
   Future<void> fetchNotifications() async {
     try {
-      notifications = await _mobileApi.getMobileNotificationsApiMobileNotificationsGet();
+      notifications = await _apiService.getNotifications();
       lastApiError = null;
     } on ApiException catch (e) {
-      if (e.code == 403 && e.message != null && e.message!.contains('Not authenticated')) {
-        lastApiError = 'Not authenticated';
-      } else {
-        lastApiError = e.toString();
-      }
+      _handleApiError(e);
     }
     notifyListeners();
   }
@@ -355,28 +325,30 @@ class ApiStore extends ChangeNotifier {
 
   Future<void> fetchUserInfo() async {
     try {
-      userInfo = await _mobileApi.getMobileUserInfoApiMobileUserInfoGet();
+      userInfo = await _apiService.getUserInfo();
       lastApiError = null;
     } on ApiException catch (e) {
-      if (e.code == 403 && e.message != null && e.message!.contains('Not authenticated')) {
-        lastApiError = 'Not authenticated';
-      } else {
-        lastApiError = e.toString();
-      }
+      _handleApiError(e);
     }
     notifyListeners();
   }
 
   Future<void> fetchStudentIdCard() async {
     try {
-      studentIdCard = await _mobileApi.getMobileCockpitReportApiMobileStudentidcardReportIdGet(50505);
+      studentIdCard = await _apiService.getStudentIdCard(50505);
       lastApiError = null;
     } on ApiException catch (e) {
-      if (e.code == 403 && e.message != null && e.message!.contains('Not authenticated')) {
-        lastApiError = 'Not authenticated';
-      } else {
-        lastApiError = e.toString();
-      }
+      _handleApiError(e);
+    }
+    notifyListeners();
+  }
+
+  Future<void> fetchSettings() async {
+    try {
+      settings = await _apiService.getSettings();
+      lastApiError = null;
+    } on ApiException catch (e) {
+      _handleApiError(e);
     }
     notifyListeners();
   }
@@ -386,9 +358,7 @@ class ApiStore extends ChangeNotifier {
     _users.clear();
     _activeUserEmail = null;
     bearerToken = null;
-    await _secureStorage.deleteAll();
-    // Optionally clear API URL as well
-    await _secureStorage.delete(key: _apiUrlKey);
+    await StorageService.clearAll();
     notifyListeners();
   }
 

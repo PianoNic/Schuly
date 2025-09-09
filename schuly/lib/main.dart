@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'pages/start_page.dart';
 import 'pages/agenda_page.dart';
 import 'pages/notes_page.dart';
@@ -9,24 +8,23 @@ import 'pages/account_page.dart';
 import 'pages/login_page.dart';
 import 'providers/theme_provider.dart';
 import 'providers/api_store.dart';
+import 'services/storage_service.dart';
 import 'package:schuly/api/lib/api.dart';
 
-String apiBaseUrl = 'https://schulware.pianonic.ch'; // Default, can be changed at runtime
-const _apiUrlKey = 'api_base_url';
-final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+String apiBaseUrl = 'https://schulware.pianonic.ch';
 
 Future<void> loadApiBaseUrl() async {
-  final storedUrl = await _secureStorage.read(key: _apiUrlKey);
+  final storedUrl = await StorageService.getApiUrl();
   if (storedUrl != null && storedUrl.isNotEmpty) {
     apiBaseUrl = storedUrl;
-    defaultApiClient.basePath = apiBaseUrl;
+    defaultApiClient = ApiClient(basePath: apiBaseUrl);
   }
 }
 
 Future<void> setApiBaseUrl(String url) async {
   apiBaseUrl = url;
-  defaultApiClient.basePath = url;
-  await _secureStorage.write(key: _apiUrlKey, value: url);
+  defaultApiClient = ApiClient(basePath: url);
+  await StorageService.setApiUrl(url);
 }
 
 void main() async {
@@ -35,7 +33,7 @@ void main() async {
   final apiStore = ApiStore();
   await apiStore.loadUsers();
   await apiStore.autoLoginIfNeeded();
-  defaultApiClient.basePath = apiBaseUrl;
+  defaultApiClient = ApiClient(basePath: apiBaseUrl);
   runApp(
     MultiProvider(
       providers: [

@@ -68,7 +68,7 @@ class _AgendaPageState extends State<AgendaPage> {
                             return AgendaItem(
                               time: '${item.startDate.substring(11, 16)} - ${item.endDate.substring(11, 16)}',
                               subject: item.text,
-                              room: item.roomId,
+                              room: item.roomToken,
                               color: Colors.blue, // Optionally parse item.color
                             );
                           }),

@@ -7,6 +7,7 @@ class StorageService {
   static const String _usersKey = 'users';
   static const String _activeUserKey = 'active_user';
   static const String _apiUrlKey = 'api_url';
+  static const String _pushNotificationsKey = 'push_notifications_enabled';
 
   static Future<void> saveUser(String email, Map<String, dynamic> userData) async {
     final users = await getUsers();
@@ -47,6 +48,17 @@ class StorageService {
 
   static Future<void> setApiUrl(String url) async {
     await _storage.write(key: _apiUrlKey, value: url);
+  }
+
+  // Push notification settings
+  static Future<void> setPushNotificationsEnabled(bool enabled) async {
+    await _storage.write(key: _pushNotificationsKey, value: enabled.toString());
+  }
+  
+  static Future<bool> getPushNotificationsEnabled() async {
+    final value = await _storage.read(key: _pushNotificationsKey);
+    // Default to true if not set
+    return value?.toLowerCase() == 'true' || value == null;
   }
 
   static Future<void> clearAll() async {

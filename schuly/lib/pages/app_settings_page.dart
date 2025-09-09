@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/theme_settings.dart';
 import '../providers/theme_provider.dart';
+import '../providers/api_store.dart';
 import '../services/storage_service.dart';
 import '../main.dart';
 
@@ -21,6 +23,16 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   void initState() {
     super.initState();
     _loadPushNotificationSetting();
+    _loadApiInfo();
+  }
+
+  Future<void> _loadApiInfo() async {
+    final apiStore = Provider.of<ApiStore>(context, listen: false);
+    try {
+      await apiStore.fetchAppInfo();
+    } catch (e) {
+      // Ignore errors when loading API info on settings page
+    }
   }
 
   Future<void> _loadPushNotificationSetting() async {
@@ -182,6 +194,56 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 16),
+                    Consumer<ApiStore>(
+                      builder: (context, apiStore, child) {
+                        // Always show the container with debug info
+                        final hasAppInfo = apiStore.appInfo != null;
+                        final version = hasAppInfo ? (apiStore.appInfo!['version'] ?? 'unbekannt') : 'Lädt...';
+                        final environment = hasAppInfo ? (apiStore.appInfo!['environment'] ?? 'unbekannt') : 'Lädt...';
+                        final lastError = apiStore.lastApiError ?? 'Kein Fehler';
+                        
+                        return Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.only(bottom: 16),
+                          decoration: BoxDecoration(
+                            color: hasAppInfo 
+                                ? Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3)
+                                : Colors.orange.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: hasAppInfo 
+                                  ? Theme.of(context).colorScheme.outline.withOpacity(0.2)
+                                  : Colors.orange.withOpacity(0.3),
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                hasAppInfo ? 'Aktuelle API Info' : 'API Info Status',
+                                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text('Version: $version'),
+                              Text('Umgebung: $environment'),
+                              if (!hasAppInfo) ...[
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Fehler: $lastError',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.orange[700],
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                     _ApiUrlField(),
                   ],
                 ),
@@ -256,6 +318,7 @@ class _ApiUrlFieldState extends State<_ApiUrlField> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -295,7 +358,7 @@ class _ApiUrlFieldState extends State<_ApiUrlField> {
                     backgroundColor: seedColor,
                     foregroundColor: Colors.white,
                   ),
-                  child: const Text('API URL speichern'),
+                  child: const Text('Speichern'),
                 );
               },
             ),

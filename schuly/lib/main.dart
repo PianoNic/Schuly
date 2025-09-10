@@ -11,6 +11,7 @@ import 'providers/theme_provider.dart';
 import 'providers/api_store.dart';
 import 'providers/homepage_config_provider.dart';
 import 'services/storage_service.dart';
+import 'services/push_notification_service.dart';
 import 'widgets/homepage_config_modal.dart';
 import 'package:schuly/api/lib/api.dart';
 
@@ -32,6 +33,10 @@ Future<void> setApiBaseUrl(String url) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize push notifications
+  await PushNotificationService.initialize();
+  
   await loadApiBaseUrl();
   final apiStore = ApiStore();
   await apiStore.loadUsers();

@@ -4,7 +4,9 @@ import '../widgets/theme_settings.dart';
 import '../providers/theme_provider.dart';
 import '../providers/api_store.dart';
 import '../services/storage_service.dart';
+import '../services/push_notification_service.dart';
 import '../main.dart';
+import 'notification_config_page.dart';
 
 class AppSettingsPage extends StatefulWidget {
   final ThemeProvider themeProvider;
@@ -16,13 +18,13 @@ class AppSettingsPage extends StatefulWidget {
 }
 
 class _AppSettingsPageState extends State<AppSettingsPage> {
-  bool _pushNotificationsEnabled = true;
+  bool _pushNotificationsEnabled = false;
   bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _loadPushNotificationSetting();
+    _loadSettings();
     _loadApiInfo();
   }
 
@@ -35,10 +37,11 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
     }
   }
 
-  Future<void> _loadPushNotificationSetting() async {
-    final enabled = await StorageService.getPushNotificationsEnabled();
+  Future<void> _loadSettings() async {
+    final pushNotificationsEnabled = await StorageService.getPushNotificationsEnabled();
+    
     setState(() {
-      _pushNotificationsEnabled = enabled;
+      _pushNotificationsEnabled = pushNotificationsEnabled;
       _isLoading = false;
     });
   }
@@ -50,20 +53,12 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
     
     await StorageService.setPushNotificationsEnabled(value);
     
-    if (!mounted) return;
-    
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          value 
-            ? 'Push-Benachrichtigungen aktiviert' 
-            : 'Push-Benachrichtigungen deaktiviert'
-        ),
-        backgroundColor: value ? Colors.green : Colors.orange,
-        duration: const Duration(seconds: 2),
-      ),
-    );
+    // If disabling push notifications, cancel all notifications
+    if (!value) {
+      await PushNotificationService.cancelAllNotifications();
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +119,32 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                           ),
 
                     const Divider(),
+
+                    // PushAssist Configuration
+                    _isLoading 
+                        ? const SizedBox.shrink()
+                        : _buildSettingsTile(
+                            context,
+                            icon: Icons.settings_outlined,
+                            title: 'Benachrichtigungen konfigurieren',
+                            subtitle: 'Wählen Sie Typen und Timing für Benachrichtigungen',
+                            trailing: const Icon(Icons.chevron_right),
+                            onTap: _pushNotificationsEnabled ? () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const NotificationConfigPage(),
+                                ),
+                              ).then((_) {
+                                // Reload settings when returning from config page
+                                _loadSettings();
+                              });
+                            } : null,
+                            isEnabled: _pushNotificationsEnabled,
+                          ),
+
+                    const Divider(),
+
 
                     // Language Setting
                     _buildSettingsTile(

@@ -173,7 +173,7 @@ class StartPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Offene Absenzen',
+                              'Letzte Absenzen',
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                             TextButton.icon(
@@ -199,34 +199,19 @@ class StartPage extends StatelessWidget {
                               }
                             }).whereType<AbsenceDto>().toList();
 
-                            // Define what counts as "open" (robust to status variants)
-                            final openStatuses = {'offen', 'open', 'ofage', 'unexcused', 'pending'};
-                            final openAbsences = absences.where((absence) {
-                              final status = absence.statusEAB;
-                              return openStatuses.contains(status.toLowerCase());
-                            }).toList();
-
-                            if (openAbsences.isEmpty) {
-                              if (absences.isEmpty) {
-                                return [const Center(child: Text('Keine Absenzen gefunden.'))];
-                              } else {
-                                // Show up to 3 most recent absences with any status
-                                final fallbackAbsences = absences.take(3).map((absence) {
-                                  return CompactAbsenceItem(
-                                    absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
-                                    absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
-                                    excuseUntil: _formatDateTime(absence.dateEAB, null),
-                                    status: absence.statusEAB,
-                                    reason: absence.reason,
-                                  );
-                                }).toList();
-                                return [
-                                  const Center(child: Text('Keine offenen Absenzen.')), ...fallbackAbsences
-                                ];
-                              }
+                            if (absences.isEmpty) {
+                              return [const Center(child: Text('Keine Absenzen gefunden.'))];
                             }
-                            // Show up to 3 open absences
-                            return openAbsences.take(3).map((absence) {
+
+                            // Show up to 3 most recent absences regardless of status
+                            // Sort by date to show most recent first
+                            absences.sort((a, b) {
+                              final aDate = DateTime.tryParse(a.dateFrom) ?? DateTime.fromMillisecondsSinceEpoch(0);
+                              final bDate = DateTime.tryParse(b.dateFrom) ?? DateTime.fromMillisecondsSinceEpoch(0);
+                              return bDate.compareTo(aDate); // Most recent first
+                            });
+
+                            return absences.take(3).map((absence) {
                               return CompactAbsenceItem(
                                 absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
                                 absentTo: _formatDateTime(absence.dateTo, absence.hourTo),

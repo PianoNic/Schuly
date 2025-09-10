@@ -13,6 +13,7 @@ import 'providers/homepage_config_provider.dart';
 import 'services/storage_service.dart';
 import 'services/push_notification_service.dart';
 import 'widgets/homepage_config_modal.dart';
+import 'widgets/release_notes_dialog.dart';
 import 'package:schuly/api/lib/api.dart';
 
 String apiBaseUrl = 'https://schulware.pianonic.ch';
@@ -112,6 +113,11 @@ class _MyHomePageState extends State<MyHomePage> {
     if (apiStore.userEmails.isNotEmpty && apiStore.activeUserEmail != null) {
       apiStore.fetchAll();
     }
+    
+    // Show release notes dialog if there are new updates
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ReleaseNotesDialog.showIfNeeded(context);
+    });
   }
 
   // 2. _onItemTapped is simplified

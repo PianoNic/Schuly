@@ -85,6 +85,15 @@ class StorageService {
     return int.tryParse(value);
   }
 
+  // Generic string methods for release notes
+  static Future<void> setString(String key, String value) async {
+    await _storage.write(key: key, value: value);
+  }
+
+  static Future<String?> getString(String key) async {
+    return await _storage.read(key: key);
+  }
+
   static Future<void> clearAll() async {
     await _storage.deleteAll();
   }

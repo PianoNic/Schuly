@@ -21,35 +21,33 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.x'
+          flutter-version: '3.24.x'
           channel: 'stable'
           cache: true
 
       - name: Get dependencies
-        run: |
-          cd schuly
-          flutter pub get
+        run: flutter pub get
 
       - name: Generate app icons
-        run: |
-          cd schuly
-          dart run flutter_launcher_icons
+        run: dart run flutter_launcher_icons
 
       - name: Build Android APK
-        run: |
-          cd schuly
-          flutter build apk --release
+        run: flutter build apk --release --build-name="${{ github.ref_name }}" --build-number="${{ github.run_number }}"
 
-      - name: Rename and upload APK
+      - name: Build Android AAB (App Bundle)
+        run: flutter build appbundle --release --build-name="${{ github.ref_name }}" --build-number="${{ github.run_number }}"
+
+      - name: Prepare artifacts
         run: |
           mkdir -p artifacts
-          cp schuly/build/app/outputs/flutter-apk/app-release.apk artifacts/schuly.apk
+          cp build/app/outputs/flutter-apk/app-release.apk artifacts/schuly-${{ github.ref_name }}.apk
+          cp build/app/outputs/bundle/release/app-release.aab artifacts/schuly-${{ github.ref_name }}.aab
 
-      - name: Upload APK artifact
+      - name: Upload Android artifacts
         uses: actions/upload-artifact@v4
         with:
           name: android-build
-          path: artifacts/schuly.apk
+          path: artifacts/
 
   build-ios:
     runs-on: macos-latest
@@ -60,44 +58,38 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.x'
+          flutter-version: '3.24.x'
           channel: 'stable'
           cache: true
 
       - name: Get dependencies
-        run: |
-          cd schuly
-          flutter pub get
+        run: flutter pub get
 
       - name: Generate app icons
-        run: |
-          cd schuly
-          dart run flutter_launcher_icons
+        run: dart run flutter_launcher_icons
 
       - name: Build iOS (unsigned)
-        run: |
-          cd schuly
-          flutter build ios --release --no-codesign
+        run: flutter build ios --release --no-codesign --build-name="${{ github.ref_name }}" --build-number="${{ github.run_number }}"
 
       - name: Create iOS Archive
         run: |
-          cd schuly/ios
+          cd ios
           xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -destination generic/platform=iOS -archivePath build/Runner.xcarchive archive CODE_SIGNING_ALLOWED=NO
 
       - name: Export iOS IPA
         run: |
-          cd schuly/ios
+          cd ios
           mkdir -p artifacts
           mkdir -p build/ipa
           cp -r build/Runner.xcarchive/Products/Applications/Runner.app build/ipa/
           cd build/ipa
-          zip -r ../../artifacts/schuly.ipa Runner.app
+          zip -r ../../artifacts/schuly-${{ github.ref_name }}.ipa Runner.app
 
       - name: Upload iOS artifact
         uses: actions/upload-artifact@v4
         with:
           name: ios-build
-          path: schuly/ios/artifacts/schuly.ipa
+          path: ios/artifacts/
 
   upload-to-release:
     needs: [build-android, build-ios]
@@ -111,7 +103,28 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            android-build/schuly.apk
-            ios-build/schuly.ipa
+            android-build/schuly-${{ github.ref_name }}.apk
+            android-build/schuly-${{ github.ref_name }}.aab
+            ios-build/schuly-${{ github.ref_name }}.ipa
+          name: "Schuly ${{ github.ref_name }}"
+          body: |
+            ## Schuly Release ${{ github.ref_name }}
+            
+            ### 📱 Downloads:
+            - **Android APK**: `schuly-${{ github.ref_name }}.apk` (For sideloading)
+            - **Android AAB**: `schuly-${{ github.ref_name }}.aab` (For Google Play Store)
+            - **iOS IPA**: `schuly-${{ github.ref_name }}.ipa` (Unsigned - for development)
+            
+            ### 🚀 New in this version:
+            - Enhanced notification system with triple vibration pattern
+            - Configurable notification timing (2, 5, 10, 20, 30, 50 minutes)
+            - Clean UI without distracting snackbar messages
+            - Improved Android notification permissions handling
+            
+            ### 📋 Installation:
+            1. **Android**: Download the APK and install (enable "Install from unknown sources")
+            2. **iOS**: Requires development provisioning profile
+            
+            **Build Number**: ${{ github.run_number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

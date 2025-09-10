@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../widgets/info_row.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/help_support_modal.dart';
+import '../widgets/account_switcher.dart';
 import '../providers/theme_provider.dart';
 import '../providers/api_store.dart';
 import 'app_settings_page.dart';
@@ -230,104 +231,14 @@ class AccountPage extends StatelessWidget {
   }
 
   void _showAccountSwitcher(BuildContext context) {
-    final apiStore = Provider.of<ApiStore>(context, listen: false);
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (BuildContext context) {
-        final users = apiStore.userEmails;
-        final activeEmail = apiStore.activeUserEmail;
-        return Padding(
-          padding: EdgeInsets.only(
-            left: 20,
-            right: 20,
-            top: 20,
-            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.4),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text('Account wechseln', style: Theme.of(context).textTheme.titleLarge),
-              const SizedBox(height: 20),
-              if (users.isEmpty)
-                const Text('Noch kein Account hinzugefügt.'),
-              for (final email in users)
-                Card(
-                  margin: const EdgeInsets.symmetric(vertical: 4),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: email == activeEmail
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.surfaceContainerHighest,
-                      child: Icon(
-                        Icons.person,
-                        color: email == activeEmail
-                            ? Theme.of(context).colorScheme.onPrimary
-                            : Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                    title: Text(email, style: TextStyle(fontWeight: email == activeEmail ? FontWeight.bold : FontWeight.normal)),
-                    subtitle: email == activeEmail ? const Text('Aktiv') : null,
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (email != activeEmail)
-                          IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
-                            tooltip: 'Account entfernen',
-                            onPressed: () async {
-                              await apiStore.removeUser(email);
-                              Navigator.of(context).pop();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Account entfernt: $email'), backgroundColor: Colors.red),
-                              );
-                            },
-                          ),
-                        if (email != activeEmail)
-                          IconButton(
-                            icon: const Icon(Icons.check_circle, color: Colors.green),
-                            tooltip: 'Account aktivieren',
-                            onPressed: () async {
-                              await apiStore.switchUser(email);
-                              Navigator.of(context).pop();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Account gewechselt: $email'), backgroundColor: Colors.green),
-                              );
-                            },
-                          ),
-                        if (email == activeEmail)
-                          const Icon(Icons.check_circle, color: Colors.green),
-                      ],
-                    ),
-                  ),
-                ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton.icon(
-                  onPressed: () => _showAddAccountDialog(context, apiStore),
-                  icon: const Icon(Icons.add),
-                  label: const Text('Account hinzufügen'),
-                  style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 16)),
-                ),
-              ),
-              const SizedBox(height: 40),
-            ],
-          ),
-        );
-      },
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      builder: (BuildContext context) => const AccountSwitcher(),
     );
   }
 
@@ -339,18 +250,20 @@ class AccountPage extends StatelessWidget {
     bool showPassword = false;
     showDialog(
       context: context,
-      barrierDismissible: false,
+      barrierDismissible: !isLoading,
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setState) {
-            return AlertDialog(
-              title: const Text('Account hinzufügen'),
-              content: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextFormField(
+            return PopScope(
+              canPop: !isLoading,
+              child: AlertDialog(
+                title: const Text('Account hinzufügen'),
+                content: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextFormField(
                       controller: emailController,
                       decoration: const InputDecoration(labelText: 'E-Mail'),
                       validator: (v) => v == null || v.isEmpty ? 'E-Mail eingeben' : null,
@@ -397,6 +310,7 @@ class AccountPage extends StatelessWidget {
                   child: isLoading ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)) : const Text('Hinzufügen'),
                 ),
               ],
+              ),
             );
           },
         );

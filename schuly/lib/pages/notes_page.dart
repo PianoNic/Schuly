@@ -93,7 +93,7 @@ class NotesPage extends StatelessWidget {
                       ],
                     ),
                   );
-                }).toList(),
+                }),
               ],
             ),
           ),

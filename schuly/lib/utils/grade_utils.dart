@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../api/lib/api.dart';
+import 'package:schuly/api/lib/api.dart';
 
 class GradeUtils {
   static Color getGradeColor(double grade) {

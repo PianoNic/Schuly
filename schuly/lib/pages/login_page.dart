@@ -26,9 +26,51 @@ class _LoginPageState extends State<LoginPage> {
     _apiBaseUrlController.text = widget.initialApiBaseUrl ?? apiBaseUrl;
   }
 
+  Future<void> _performLogin() async {
+    if (_formKey.currentState == null || !_formKey.currentState!.validate()) return;
+    
+    setState(() => _isLoading = true);
+    
+    try {
+      final apiStore = Provider.of<ApiStore>(context, listen: false);
+      
+      if (widget.onApiBaseUrlChanged != null) {
+        widget.onApiBaseUrlChanged!(_apiBaseUrlController.text.trim());
+      }
+      
+      final error = await apiStore.addUser(_emailController.text.trim(), _passwordController.text);
+      
+      if (mounted) {
+        if (error == null) {
+          await apiStore.fetchAll();
+          // Login successful - navigation is handled by main app
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(error),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Unerwarteter Fehler: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final apiStore = Provider.of<ApiStore>(context, listen: false);
     return Scaffold(
       body: Center(
         child: Padding(
@@ -43,13 +85,25 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('Login', style: Theme.of(context).textTheme.headlineSmall),
+                    Text(
+                      'Anmelden',
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                     const SizedBox(height: 24),
                     TextFormField(
                       controller: _apiBaseUrlController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'API Base URL',
+                        prefixIcon: const Icon(Icons.cloud_outlined),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
+                      keyboardType: TextInputType.url,
+                      textInputAction: TextInputAction.next,
                       validator: (v) => v == null || v.isEmpty ? 'API Endpoint eingeben' : null,
                       onChanged: (value) async {
                         await setApiBaseUrl(value.trim());
@@ -61,51 +115,66 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _emailController,
-                      decoration: const InputDecoration(labelText: 'E-Mail'),
-                      validator: (v) => v == null || v.isEmpty ? 'E-Mail eingeben' : null,
+                      decoration: InputDecoration(
+                        labelText: 'E-Mail-Adresse',
+                        prefixIcon: const Icon(Icons.email_outlined),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
+                      validator: (v) {
+                        if (v == null || v.isEmpty) {
+                          return 'Bitte geben Sie eine E-Mail-Adresse ein';
+                        }
+                        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(v)) {
+                          return 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _passwordController,
                       decoration: InputDecoration(
                         labelText: 'Passwort',
+                        prefixIcon: const Icon(Icons.lock_outlined),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         suffixIcon: IconButton(
-                          icon: Icon(_showPassword ? Icons.visibility : Icons.visibility_off),
+                          icon: Icon(_showPassword ? Icons.visibility_off : Icons.visibility),
                           onPressed: () => setState(() => _showPassword = !_showPassword),
                         ),
                       ),
                       obscureText: !_showPassword,
-                      validator: (v) => v == null || v.isEmpty ? 'Passwort eingeben' : null,
+                      textInputAction: TextInputAction.done,
+                      validator: (v) => v == null || v.isEmpty ? 'Bitte geben Sie Ihr Passwort ein' : null,
+                      onFieldSubmitted: (_) {
+                        if (!_isLoading && _formKey.currentState!.validate()) {
+                          _performLogin();
+                        }
+                      },
                     ),
                     const SizedBox(height: 24),
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: _isLoading
-                            ? null
-                            : () async {
-                                if (_formKey.currentState == null || !_formKey.currentState!.validate()) return;
-                                setState(() => _isLoading = true);
-                                if (widget.onApiBaseUrlChanged != null) {
-                                  widget.onApiBaseUrlChanged!(_apiBaseUrlController.text.trim());
-                                }
-                                final error = await apiStore.addUser(_emailController.text.trim(), _passwordController.text);
-                                if (error == null) {
-                                  await apiStore.fetchAll();
-                                  // ignore: use_build_context_synchronously
-                                  // Navigator.of(context).pushReplacementNamed('/');
-                                } else {
-                                  if (!mounted) return;
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(error), backgroundColor: Colors.red),
-                                  );
-                                }
-                                if (!mounted) return;
-                                setState(() => _isLoading = false);
-                              },
+                      child: FilledButton(
+                        onPressed: _isLoading ? null : _performLogin,
+                        style: FilledButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                         child: _isLoading
-                            ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))
-                            : const Text('Login'),
+                            ? const SizedBox(
+                                width: 20, 
+                                height: 20, 
+                                child: CircularProgressIndicator(strokeWidth: 2),
+                              )
+                            : const Text('Anmelden'),
                       ),
                     ),
                   ],

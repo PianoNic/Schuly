@@ -3,27 +3,8 @@ import 'package:provider/provider.dart';
 import '../providers/api_store.dart';
 import 'package:schuly/api/lib/api.dart';
 
-class AbsenzenPage extends StatefulWidget {
+class AbsenzenPage extends StatelessWidget {
   const AbsenzenPage({super.key});
-
-  @override
-  State<AbsenzenPage> createState() => _AbsenzenPageState();
-}
-
-class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 4, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
 
   String _formatDateTime(String date, String? time) {
     if (date.isEmpty) return '';
@@ -44,113 +25,52 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(48.0), // Reduced from default ~56
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 0, // Remove toolbar space completely
-          bottom: TabBar(
-            controller: _tabController,
-            tabs: const [
-              Tab(text: 'Alle Absenzen'),
-              Tab(text: 'Verspätungen'),
-              Tab(text: 'Absenzen'),
-              Tab(text: 'Meldungen'),
-            ],
-          ),
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _buildAllAbsencesTab(),
-          _buildEmptyTab('Keine offenen Verspätungen'),
-          _buildEmptyTab('Keine offenen Absenzen'),
-          _buildEmptyTab('Keine offenen Meldungen'),
-        ],
-      ),
-    );
-  }
+      body: SafeArea(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await Provider.of<ApiStore>(context, listen: false).fetchAbsences();
+          },
+          child: Consumer<ApiStore>(
+            builder: (context, apiStore, _) {
+              final absences = apiStore.absences;
+              if (absences == null) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (absences.isEmpty) {
+                return const Center(child: Text('Keine Absenzen gefunden.'));
+              }
+              return SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ...(() {
+                      // Accept both Map and AbsenceDto, robust to all shapes
+                      final List absRaw = absences;
+                      final List<AbsenceDto> validAbsences = absRaw.map((a) {
+                        if (a is AbsenceDto) return a;
+                        try {
+                          return AbsenceDto.fromJson(a as Map<String, dynamic>);
+                        } catch (_) {
+                          return null;
+                        }
+                      }).whereType<AbsenceDto>().toList();
 
-  Widget _buildAllAbsencesTab() {
-    return RefreshIndicator(
-      onRefresh: () async {
-        await Provider.of<ApiStore>(context, listen: false).fetchAbsences();
-      },
-      child: Consumer<ApiStore>(
-        builder: (context, apiStore, _) {
-          final absences = apiStore.absences;
-          if (absences == null) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (absences.isEmpty) {
-            return const Center(child: Text('Keine Absenzen gefunden.'));
-          }
-          return SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ...(() {
-                  // Accept both Map and AbsenceDto, robust to all shapes
-                  final List absRaw = absences;
-                  final List<AbsenceDto> validAbsences = absRaw.map((a) {
-                    if (a is AbsenceDto) return a;
-                    try {
-                      return AbsenceDto.fromJson(a as Map<String, dynamic>);
-                    } catch (_) {
-                      return null;
-                    }
-                  }).whereType<AbsenceDto>().toList();
-
-                  return validAbsences.map((absence) {
-                    return CompactAbsenceItem(
-                      absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
-                      absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
-                      excuseUntil: _formatDateTime(absence.dateEAB, null),
-                      status: absence.statusEAB,
-                      reason: absence.reason,
-                    );
-                  }).toList();
-                })(),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildEmptyTab(String message) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        await Provider.of<ApiStore>(context, listen: false).fetchAbsences();
-      },
-      child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height - 200,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.check_circle_outline,
-                  size: 64,
-                  color: Colors.green.withOpacity(0.6),
+                      return validAbsences.map((absence) {
+                        return CompactAbsenceItem(
+                          absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
+                          absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
+                          excuseUntil: _formatDateTime(absence.dateEAB, null),
+                          status: absence.statusEAB,
+                          reason: absence.reason,
+                        );
+                      }).toList();
+                    })(),
+                  ],
                 ),
-                const SizedBox(height: 16),
-                Text(
-                  message,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),

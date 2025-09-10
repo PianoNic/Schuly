@@ -205,7 +205,7 @@ class StartPage extends StatelessWidget {
                 else ...[
                   ...(() {
                     final List absRaw = absences;
-                    final List absList = absRaw.map((a) {
+                    final List<AbsenceDto> absList = absRaw.map((a) {
                       if (a is AbsenceDto) return a;
                       try {
                         return AbsenceDto.fromJson(a as Map<String, dynamic>);

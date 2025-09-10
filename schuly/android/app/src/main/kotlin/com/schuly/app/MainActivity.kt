@@ -1,4 +1,4 @@
-package com.example.schuly
+package com.schuly.app
 
 import android.content.Intent
 import android.net.Uri

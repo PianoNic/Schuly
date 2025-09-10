@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import '../widgets/theme_settings.dart';
 import '../providers/theme_provider.dart';
 import '../providers/api_store.dart';
@@ -20,12 +21,15 @@ class AppSettingsPage extends StatefulWidget {
 class _AppSettingsPageState extends State<AppSettingsPage> {
   bool _pushNotificationsEnabled = false;
   bool _isLoading = true;
+  String _appVersion = '1.0.0';
+  String _appBuildNumber = '1';
 
   @override
   void initState() {
     super.initState();
     _loadSettings();
     _loadApiInfo();
+    _loadAppVersion();
   }
 
   Future<void> _loadApiInfo() async {
@@ -34,6 +38,18 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
       await apiStore.fetchAppInfo();
     } catch (e) {
       // Ignore errors when loading API info on settings page
+    }
+  }
+
+  Future<void> _loadAppVersion() async {
+    try {
+      final packageInfo = await PackageInfo.fromPlatform();
+      setState(() {
+        _appVersion = packageInfo.version;
+        _appBuildNumber = packageInfo.buildNumber;
+      });
+    } catch (e) {
+      // Keep default values if package info fails to load
     }
   }
 
@@ -169,13 +185,13 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       context,
                       icon: Icons.info_outlined,
                       title: 'Über die App',
-                      subtitle: 'Version 1.0.0',
+                      subtitle: 'Version $_appVersion+$_appBuildNumber',
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {
                         showAboutDialog(
                           context: context,
                           applicationName: 'Schuly',
-                          applicationVersion: '1.0.0',
+                          applicationVersion: '$_appVersion+$_appBuildNumber',
                           applicationLegalese: 'Schuly © 2025 PianoNic',
                           children: [
                             const SizedBox(height: 16),

@@ -9,6 +9,8 @@ import '../services/push_notification_service.dart';
 import '../main.dart';
 import 'notification_config_page.dart';
 import 'release_notes_page.dart';
+import '../services/app_update_service.dart';
+import '../widgets/app_update_dialog.dart';
 
 class AppSettingsPage extends StatefulWidget {
   final ThemeProvider themeProvider;
@@ -22,6 +24,7 @@ class AppSettingsPage extends StatefulWidget {
 class _AppSettingsPageState extends State<AppSettingsPage> {
   bool _pushNotificationsEnabled = false;
   bool _isLoading = true;
+  bool _isCheckingUpdates = false;
   String _appVersion = '1.0.0';
   String _appBuildNumber = '1';
 
@@ -76,6 +79,48 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
     }
   }
 
+  Future<void> _checkForUpdates() async {
+    setState(() {
+      _isCheckingUpdates = true;
+    });
+
+    try {
+      final updateRelease = await AppUpdateService.checkForUpdates();
+      
+      if (mounted) {
+        setState(() {
+          _isCheckingUpdates = false;
+        });
+
+        if (updateRelease != null) {
+          // Show update dialog
+          await AppUpdateDialog.showIfAvailable(context);
+        } else {
+          // Show "no updates" message
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Sie verwenden bereits die neueste Version'),
+                backgroundColor: Colors.green,
+              ),
+            );
+          }
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isCheckingUpdates = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Fehler beim Suchen nach Updates: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -196,6 +241,22 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                           ),
                         );
                       },
+                    ),
+
+                    // Check for Updates
+                    _buildSettingsTile(
+                      context,
+                      icon: Icons.system_update,
+                      title: 'Nach Updates suchen',
+                      subtitle: 'Auf neue Versionen prüfen',
+                      trailing: _isCheckingUpdates 
+                          ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Icon(Icons.chevron_right),
+                      onTap: _isCheckingUpdates ? null : _checkForUpdates,
                     ),
 
                     const Divider(),

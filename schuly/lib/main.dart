@@ -9,7 +9,9 @@ import 'pages/login_page.dart';
 import 'pages/student_card_page.dart';
 import 'providers/theme_provider.dart';
 import 'providers/api_store.dart';
+import 'providers/homepage_config_provider.dart';
 import 'services/storage_service.dart';
+import 'widgets/homepage_config_modal.dart';
 import 'package:schuly/api/lib/api.dart';
 
 String apiBaseUrl = 'https://schulware.pianonic.ch';
@@ -40,6 +42,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => apiStore),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => HomepageConfigProvider()),
       ],
       child: const SchulyApp(),
     ),
@@ -120,6 +123,21 @@ class _MyHomePageState extends State<MyHomePage> {
     _onItemTapped(index);
   }
 
+  void _showHomepageConfigDialog(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: true,
+      enableDrag: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (context) => const HomepageConfigModal(),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     // 4. A list of pages is created to be indexed
@@ -151,7 +169,32 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
-        actions: _selectedIndex != 4 ? [
+        actions: _selectedIndex == 0 ? [
+          // Homepage configuration icon
+          IconButton(
+            onPressed: () {
+              _showHomepageConfigDialog(context);
+            },
+            icon: Icon(
+              Icons.tune,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            tooltip: 'Start-Seite anpassen',
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const StudentCardPage()),
+              );
+            },
+            icon: Icon(
+              Icons.badge_outlined,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            tooltip: 'Schülerausweis',
+          ),
+        ] : _selectedIndex != 4 ? [
           IconButton(
             onPressed: () {
               Navigator.push(

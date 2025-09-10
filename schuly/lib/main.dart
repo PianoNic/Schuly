@@ -14,6 +14,7 @@ import 'services/storage_service.dart';
 import 'services/push_notification_service.dart';
 import 'widgets/homepage_config_modal.dart';
 import 'widgets/release_notes_dialog.dart';
+import 'widgets/app_update_dialog.dart';
 import 'package:schuly/api/lib/api.dart';
 
 String apiBaseUrl = 'https://schulware.pianonic.ch';
@@ -114,9 +115,15 @@ class _MyHomePageState extends State<MyHomePage> {
       apiStore.fetchAll();
     }
     
-    // Show release notes dialog if there are new updates
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ReleaseNotesDialog.showIfNeeded(context);
+    // Show app update dialog and release notes dialog if needed
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // Check for app updates first (higher priority)
+      await AppUpdateDialog.showIfAvailable(context);
+      
+      // Then check for release notes
+      if (context.mounted) {
+        await ReleaseNotesDialog.showIfNeeded(context);
+      }
     });
   }
 

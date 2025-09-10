@@ -29,25 +29,68 @@ class SectionConfig {
     );
   }
 
+  // Map IconData to string identifier for JSON serialization
+  static String _getIconKey(IconData iconData) {
+    if (iconData == Icons.schedule) return 'schedule';
+    if (iconData == Icons.beach_access) return 'beach_access';
+    if (iconData == Icons.grade) return 'grade';
+    if (iconData == Icons.list_alt) return 'list_alt';
+    return 'schedule'; // fallback
+  }
+
+  // Map string identifier back to IconData
+  static IconData _getIconFromKey(String key) {
+    switch (key) {
+      case 'schedule':
+        return Icons.schedule;
+      case 'beach_access':
+        return Icons.beach_access;
+      case 'grade':
+        return Icons.grade;
+      case 'list_alt':
+        return Icons.list_alt;
+      default:
+        return Icons.schedule; // fallback
+    }
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'title': title,
-      'icon': icon.codePoint,
+      'icon': _getIconKey(icon),
       'isVisible': isVisible,
     };
   }
 
   static SectionConfig fromJson(Map<String, dynamic> json) {
+    IconData iconData;
+    
+    // Handle both old format (codePoint) and new format (string key)
+    if (json['icon'] is int) {
+      // Old format - migrate from codePoint to string key
+      iconData = _getIconFromCodePoint(json['icon']);
+    } else {
+      // New format - use string key
+      iconData = _getIconFromKey(json['icon']);
+    }
+    
     return SectionConfig(
       id: json['id'],
       title: json['title'],
-      icon: IconData(
-        json['icon'],
-        fontFamily: 'MaterialIcons',
-      ),
+      icon: iconData,
       isVisible: json['isVisible'],
     );
+  }
+
+  // Helper method to migrate from old codePoint format
+  static IconData _getIconFromCodePoint(int codePoint) {
+    // Map known codePoints to their corresponding Icons
+    if (codePoint == Icons.schedule.codePoint) return Icons.schedule;
+    if (codePoint == Icons.beach_access.codePoint) return Icons.beach_access;
+    if (codePoint == Icons.grade.codePoint) return Icons.grade;
+    if (codePoint == Icons.list_alt.codePoint) return Icons.list_alt;
+    return Icons.schedule; // fallback
   }
 }
 

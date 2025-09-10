@@ -117,24 +117,24 @@ jobs:
             android-build/schuly-${{ github.ref_name }}.aab
             ios-build/schuly-${{ github.ref_name }}.ipa
           name: "Schuly ${{ github.ref_name }}"
+          draft: false
+          prerelease: false
+          generate_release_notes: true
           body: |
-            ## Schuly Release ${{ github.ref_name }}
+            ## 🚀 Schuly ${{ github.ref_name }}
             
-            ### 📱 Downloads:
-            - **Android APK**: `schuly-${{ github.ref_name }}.apk` (For sideloading)
-            - **Android AAB**: `schuly-${{ github.ref_name }}.aab` (For Google Play Store)
-            - **iOS IPA**: `schuly-${{ github.ref_name }}.ipa` (Unsigned - for development)
+            This release was automatically generated from the latest changes.
             
-            ### 🚀 New in this version:
-            - Enhanced notification system with triple vibration pattern
-            - Configurable notification timing (2, 5, 10, 20, 30, 50 minutes)
-            - Clean UI without distracting snackbar messages
-            - Improved Android notification permissions handling
+            ### 📦 What's included:
+            - Android APK (for sideloading)
+            - Android AAB (for Google Play Store)
+            - iOS IPA (unsigned, for development)
             
-            ### 📋 Installation:
-            1. **Android**: Download the APK and install (enable "Install from unknown sources")
+            ### 📋 How to install:
+            1. **Android**: Download the APK file and install it on your device
             2. **iOS**: Requires development provisioning profile
             
             **Build Number**: ${{ github.run_number }}
+            **Previous Version**: Check the commit history for changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

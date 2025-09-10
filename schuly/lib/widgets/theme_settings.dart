@@ -60,9 +60,15 @@ class ThemeSettings extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
-            _buildThemeModeOption(context, ThemeMode.system, 'Automatisch', Icons.brightness_auto),
-            _buildThemeModeOption(context, ThemeMode.light, 'Hell', Icons.light_mode),
-            _buildThemeModeOption(context, ThemeMode.dark, 'Dunkel', Icons.dark_mode),
+            Row(
+              children: [
+                Expanded(child: _buildThemeModeOption(context, ThemeMode.system, 'Automatisch', Icons.brightness_auto, enabled: true)),
+                const SizedBox(width: 8),
+                Expanded(child: _buildThemeModeOption(context, ThemeMode.light, 'Hell', Icons.light_mode, enabled: !themeProvider.useMaterialYou)),
+                const SizedBox(width: 8),
+                Expanded(child: _buildThemeModeOption(context, ThemeMode.dark, 'Dunkel', Icons.dark_mode, enabled: !themeProvider.useMaterialYou)),
+              ],
+            ),
             
             const SizedBox(height: 24),
             
@@ -72,56 +78,106 @@ class ThemeSettings extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
-            _buildColorModeToggle(context),
+            // Color mode selection (mutually exclusive)
+            Row(
+              children: [
+                Expanded(child: _buildColorStyleOption(context, 'material_you', 'Material\nYou', Icons.color_lens)),
+                const SizedBox(width: 8),
+                Expanded(child: _buildColorStyleOption(context, 'classic', 'Klassisch', Icons.palette_outlined)),
+                const SizedBox(width: 8),
+                Expanded(child: _buildColorStyleOption(context, 'neon', 'Neon', Icons.auto_awesome)),
+              ],
+            ),
             
             const SizedBox(height: 24),
             
-            // Color Selection
-            Text(
-              themeProvider.isNeonMode ? 'Neon Akzentfarbe' : 'Klassische Akzentfarbe',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 12),
-            
-            // 3x3 Grid for colors
-            LayoutBuilder(
-              builder: (context, constraints) {
-                final availableWidth = constraints.maxWidth;
-                final itemWidth = (availableWidth - 16) / 3; // 3 columns with 8px spacing each
-                
-                return Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: _predefinedColors.map((colorOption) => 
-                    SizedBox(
-                      width: itemWidth,
-                      child: _buildColorOption(
-                        context, 
-                        colorOption.color, 
-                        colorOption.name,
+            // Color Selection (only shown when not using Material You)
+            if (!themeProvider.useMaterialYou) ...[
+              Text(
+                themeProvider.isNeonMode ? 'Neon Akzentfarbe' : 'Klassische Akzentfarbe',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 12),
+              
+              // 3x3 Grid for colors
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final availableWidth = constraints.maxWidth;
+                  final itemWidth = (availableWidth - 16) / 3; // 3 columns with 8px spacing each
+                  
+                  return Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: _predefinedColors.map((colorOption) => 
+                      SizedBox(
+                        width: itemWidth,
+                        child: _buildColorOption(
+                          context, 
+                          colorOption.color, 
+                          colorOption.name,
+                        ),
+                      ),
+                    ).toList(),
+                  );
+                },
+              ),
+            ] else
+              // Material You info when enabled
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainer,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.palette,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Material You aktiv',
+                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            'Farben werden automatisch vom Systemdesign übernommen',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
                       ),
                     ),
-                  ).toList(),
-                );
-              },
-            ),
+                  ],
+                ),
+              ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildThemeModeOption(BuildContext context, ThemeMode mode, String label, IconData icon) {
+  Widget _buildThemeModeOption(BuildContext context, ThemeMode mode, String label, IconData icon, {bool enabled = true}) {
     final isSelected = themeProvider.themeMode == mode;
     final appColors = Theme.of(context).extension<AppColors>();
     final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
     final lightBackground = appColors?.lightBackground ?? seedColor.withOpacity(0.1);
     
     return InkWell(
-      onTap: () => themeProvider.setThemeMode(mode),
+      onTap: enabled ? () => themeProvider.setThemeMode(mode) : null,
       borderRadius: BorderRadius.circular(8),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        height: 72, // Fixed height for consistency (increased for 2-line text)
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
         decoration: BoxDecoration(
           color: isSelected 
               ? lightBackground
@@ -130,74 +186,56 @@ class ThemeSettings extends StatelessWidget {
           border: Border.all(
             color: isSelected 
                 ? seedColor
-                : Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                : Theme.of(context).colorScheme.outline.withOpacity(enabled ? 0.2 : 0.1),
           ),
         ),
-        child: Row(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               icon,
-              color: isSelected 
-                  ? seedColor
-                  : Theme.of(context).colorScheme.onSurface,
+              color: enabled
+                  ? (isSelected 
+                      ? seedColor
+                      : Theme.of(context).colorScheme.onSurface)
+                  : Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+              size: 20,
             ),
-            const SizedBox(width: 12),
+            const SizedBox(height: 2),
             Text(
               label,
               style: TextStyle(
-                color: isSelected 
-                    ? seedColor
-                    : Theme.of(context).colorScheme.onSurface,
+                color: enabled
+                    ? (isSelected 
+                        ? seedColor
+                        : Theme.of(context).colorScheme.onSurface)
+                    : Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
                 fontWeight: isSelected ? FontWeight.w500 : FontWeight.normal,
+                fontSize: 12,
               ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            const Spacer(),
-            if (isSelected)
-              Icon(
-                Icons.check,
-                color: seedColor,
-              ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildColorModeToggle(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: _buildColorModeOption(
-            context, 
-            false, 
-            'Klassisch', 
-            Icons.palette_outlined,
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _buildColorModeOption(
-            context, 
-            true, 
-            'Neon', 
-            Icons.auto_awesome,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildColorModeOption(BuildContext context, bool isNeon, String label, IconData icon) {
-    final isSelected = themeProvider.isNeonMode == isNeon;
+  Widget _buildColorStyleOption(BuildContext context, String style, String label, IconData icon) {
+    final isSelected = _getSelectedColorStyle() == style;
     final appColors = Theme.of(context).extension<AppColors>();
     final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
     final lightBackground = appColors?.lightBackground ?? seedColor.withOpacity(0.1);
     
     return InkWell(
-      onTap: () => themeProvider.setNeonMode(isNeon),
+      onTap: () => _setColorStyle(style),
       borderRadius: BorderRadius.circular(8),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        height: 72, // Fixed height for consistency (increased for 2-line text)
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
         decoration: BoxDecoration(
           color: isSelected 
               ? lightBackground
@@ -209,7 +247,8 @@ class ThemeSettings extends StatelessWidget {
                 : Theme.of(context).colorScheme.outline.withOpacity(0.2),
           ),
         ),
-        child: Row(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
@@ -219,7 +258,7 @@ class ThemeSettings extends StatelessWidget {
                   : Theme.of(context).colorScheme.onSurface,
               size: 20,
             ),
-            const SizedBox(width: 8),
+            const SizedBox(height: 2),
             Text(
               label,
               style: TextStyle(
@@ -227,13 +266,43 @@ class ThemeSettings extends StatelessWidget {
                     ? seedColor
                     : Theme.of(context).colorScheme.onSurface,
                 fontWeight: isSelected ? FontWeight.w500 : FontWeight.normal,
+                fontSize: 12,
               ),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
       ),
     );
   }
+
+  String _getSelectedColorStyle() {
+    if (themeProvider.useMaterialYou) return 'material_you';
+    if (themeProvider.isNeonMode) return 'neon';
+    return 'classic';
+  }
+
+  void _setColorStyle(String style) {
+    switch (style) {
+      case 'classic':
+        themeProvider.setNeonMode(false);
+        themeProvider.setMaterialYou(false);
+        break;
+      case 'neon':
+        themeProvider.setNeonMode(true);
+        themeProvider.setMaterialYou(false);
+        break;
+      case 'material_you':
+        themeProvider.setMaterialYou(true);
+        // setMaterialYou already disables neon mode in the provider
+        // Switch to system/automatic theme since Material You handles light/dark automatically
+        themeProvider.setThemeMode(ThemeMode.system);
+        break;
+    }
+  }
+
 
   Widget _buildColorOption(BuildContext context, Color color, String label) {
     final isSelected = themeProvider.seedColor == color;

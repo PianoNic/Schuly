@@ -43,11 +43,13 @@ class ThemeProvider extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.system;
   Color _seedColor = Colors.blue; // Default to classic blue
   bool _isNeonMode = false; // Default to classic colors
+  bool _useMaterialYou = true; // Default to Material You for modern experience
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
   static const _themeModeKey = 'theme_mode';
   static const _seedColorKey = 'seed_color';
   static const _neonModeKey = 'neon_mode';
+  static const _materialYouKey = 'material_you';
 
   ThemeProvider() {
     _loadThemePrefs();
@@ -56,6 +58,7 @@ class ThemeProvider extends ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
   Color get seedColor => _seedColor;
   bool get isNeonMode => _isNeonMode;
+  bool get useMaterialYou => _useMaterialYou;
   
   // List of neon colors for special effects
   static const List<Color> _neonColors = [
@@ -94,12 +97,25 @@ class ThemeProvider extends ChangeNotifier {
   void setSeedColor(Color color) {
     _seedColor = color;
     _storage.write(key: _seedColorKey, value: color.value.toString());
+    
+    // Disable Material You when manually selecting a color
+    if (_useMaterialYou) {
+      _useMaterialYou = false;
+      _storage.write(key: _materialYouKey, value: 'false');
+    }
+    
     notifyListeners();
   }
 
   void setNeonMode(bool isNeon) {
     _isNeonMode = isNeon;
     _storage.write(key: _neonModeKey, value: isNeon.toString());
+    
+    // Disable Material You when switching to manual color selection
+    if (_useMaterialYou) {
+      _useMaterialYou = false;
+      _storage.write(key: _materialYouKey, value: 'false');
+    }
     
     // Switch to appropriate default color when toggling modes
     if (isNeon && _classicColors.contains(_seedColor)) {
@@ -113,10 +129,17 @@ class ThemeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setMaterialYou(bool useMaterialYou) {
+    _useMaterialYou = useMaterialYou;
+    _storage.write(key: _materialYouKey, value: useMaterialYou.toString());
+    notifyListeners();
+  }
+
   Future<void> _loadThemePrefs() async {
     final mode = await _storage.read(key: _themeModeKey);
     final color = await _storage.read(key: _seedColorKey);
     final neonMode = await _storage.read(key: _neonModeKey);
+    final materialYou = await _storage.read(key: _materialYouKey);
     
     if (mode != null) {
       _themeMode = ThemeMode.values.firstWhere((e) => e.name == mode, orElse: () => ThemeMode.system);
@@ -127,6 +150,9 @@ class ThemeProvider extends ChangeNotifier {
     if (neonMode != null) {
       _isNeonMode = neonMode == 'true';
     }
+    if (materialYou != null) {
+      _useMaterialYou = materialYou == 'true';
+    }
     notifyListeners();
   }
 
@@ -134,105 +160,147 @@ class ThemeProvider extends ChangeNotifier {
     await _storage.delete(key: _themeModeKey);
     await _storage.delete(key: _seedColorKey);
     await _storage.delete(key: _neonModeKey);
+    await _storage.delete(key: _materialYouKey);
     _themeMode = ThemeMode.system;
     _seedColor = Colors.blue; // Reset to classic blue
     _isNeonMode = false; // Reset to classic mode
+    _useMaterialYou = true; // Reset to Material You default
     notifyListeners();
   }
 
-  ThemeData get lightTheme => ThemeData(
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: _seedColor,
-      brightness: Brightness.light,
-    ),
-    useMaterial3: true,
-    navigationBarTheme: NavigationBarThemeData(
-      indicatorColor: isNeonColor ? _seedColor.withOpacity(0.15) : _seedColor.withOpacity(0.2),
-      backgroundColor: Colors.white,
-      shadowColor: isNeonColor ? _seedColor.withOpacity(0.1) : null,
-    ),
-    cardTheme: const CardThemeData(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
-    ),
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      iconTheme: IconThemeData(color: _seedColor),
-      actionsIconTheme: IconThemeData(color: _seedColor),
-    ),
-    switchTheme: SwitchThemeData(
-      thumbColor: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) {
-          return _seedColor;
-        }
-        return null;
-      }),
-      trackColor: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) {
-          return _seedColor.withOpacity(0.5);
-        }
-        return null;
-      }),
-    ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: _seedColor,
-      foregroundColor: Colors.white,
-    ),
-    extensions: <ThemeExtension<dynamic>>[
-      AppColors(
-        seedColor: _seedColor,
-        lightBackground: _seedColor.withOpacity(0.1),
-        surfaceContainer: _seedColor.withOpacity(0.05),
+  ThemeData get lightTheme {
+    final colorScheme = _useMaterialYou 
+        ? null // Let Material 3 use system dynamic colors
+        : ColorScheme.fromSeed(
+            seedColor: _seedColor,
+            brightness: Brightness.light,
+          );
+    
+    // Create base theme with or without Material You
+    final baseTheme = ThemeData(
+      colorScheme: colorScheme,
+      useMaterial3: true,
+    );
+    
+    // Get the actual color scheme (either dynamic or manual)
+    final actualColorScheme = baseTheme.colorScheme;
+    final effectiveSeedColor = _useMaterialYou 
+        ? actualColorScheme.primary 
+        : _seedColor;
+    
+    return baseTheme.copyWith(
+      navigationBarTheme: NavigationBarThemeData(
+        indicatorColor: isNeonColor && !_useMaterialYou 
+            ? effectiveSeedColor.withOpacity(0.15) 
+            : effectiveSeedColor.withOpacity(0.2),
+        backgroundColor: Colors.white,
+        shadowColor: isNeonColor && !_useMaterialYou 
+            ? effectiveSeedColor.withOpacity(0.1) 
+            : null,
       ),
-    ],
-  );
+      cardTheme: const CardThemeData(
+        elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(color: effectiveSeedColor),
+        actionsIconTheme: IconThemeData(color: effectiveSeedColor),
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return effectiveSeedColor;
+          }
+          return null;
+        }),
+        trackColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return effectiveSeedColor.withOpacity(0.5);
+          }
+          return null;
+        }),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: effectiveSeedColor,
+        foregroundColor: Colors.white,
+      ),
+      extensions: <ThemeExtension<dynamic>>[
+        AppColors(
+          seedColor: effectiveSeedColor,
+          lightBackground: effectiveSeedColor.withOpacity(0.1),
+          surfaceContainer: effectiveSeedColor.withOpacity(0.05),
+        ),
+      ],
+    );
+  }
 
-  ThemeData get darkTheme => ThemeData(
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: _seedColor,
-      brightness: Brightness.dark,
-    ),
-    useMaterial3: true,
-    navigationBarTheme: NavigationBarThemeData(
-      indicatorColor: isNeonColor ? _seedColor.withOpacity(0.25) : _seedColor.withOpacity(0.3),
-      backgroundColor: const Color(0xFF1C1B1F),
-      shadowColor: isNeonColor ? _seedColor.withOpacity(0.2) : null,
-    ),
-    cardTheme: const CardThemeData(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
-    ),
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      iconTheme: IconThemeData(color: _seedColor),
-      actionsIconTheme: IconThemeData(color: _seedColor),
-    ),
-    switchTheme: SwitchThemeData(
-      thumbColor: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) {
-          return _seedColor;
-        }
-        return null;
-      }),
-      trackColor: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) {
-          return _seedColor.withOpacity(0.5);
-        }
-        return null;
-      }),
-    ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: _seedColor,
-      foregroundColor: Colors.white,
-    ),
-    extensions: <ThemeExtension<dynamic>>[
-      AppColors(
-        seedColor: _seedColor,
-        lightBackground: _seedColor.withOpacity(0.15),
-        surfaceContainer: _seedColor.withOpacity(0.1),
+  ThemeData get darkTheme {
+    final colorScheme = _useMaterialYou 
+        ? null // Let Material 3 use system dynamic colors
+        : ColorScheme.fromSeed(
+            seedColor: _seedColor,
+            brightness: Brightness.dark,
+          );
+    
+    // Create base theme with or without Material You
+    final baseTheme = ThemeData(
+      colorScheme: colorScheme,
+      useMaterial3: true,
+    );
+    
+    // Get the actual color scheme (either dynamic or manual)
+    final actualColorScheme = baseTheme.colorScheme;
+    final effectiveSeedColor = _useMaterialYou 
+        ? actualColorScheme.primary 
+        : _seedColor;
+    
+    return baseTheme.copyWith(
+      navigationBarTheme: NavigationBarThemeData(
+        indicatorColor: isNeonColor && !_useMaterialYou
+            ? effectiveSeedColor.withOpacity(0.25) 
+            : effectiveSeedColor.withOpacity(0.3),
+        backgroundColor: const Color(0xFF1C1B1F),
+        shadowColor: isNeonColor && !_useMaterialYou 
+            ? effectiveSeedColor.withOpacity(0.2) 
+            : null,
       ),
-    ],
-  );
+      cardTheme: const CardThemeData(
+        elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(color: effectiveSeedColor),
+        actionsIconTheme: IconThemeData(color: effectiveSeedColor),
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return effectiveSeedColor;
+          }
+          return null;
+        }),
+        trackColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return effectiveSeedColor.withOpacity(0.5);
+          }
+          return null;
+        }),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: effectiveSeedColor,
+        foregroundColor: Colors.white,
+      ),
+      extensions: <ThemeExtension<dynamic>>[
+        AppColors(
+          seedColor: effectiveSeedColor,
+          lightBackground: effectiveSeedColor.withOpacity(0.15),
+          surfaceContainer: effectiveSeedColor.withOpacity(0.1),
+        ),
+      ],
+    );
+  }
 }

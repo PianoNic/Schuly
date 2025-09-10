@@ -36,6 +36,7 @@ jobs:
 
       - name: Get current version
         id: current_version
+        working-directory: ./schuly
         run: |
           CURRENT_VERSION=$(grep '^version:' pubspec.yaml | cut -d' ' -f2 | cut -d'+' -f1)
           echo "current=$CURRENT_VERSION" >> $GITHUB_OUTPUT
@@ -52,6 +53,7 @@ jobs:
           echo "New version will be: $NEW_VERSION"
 
       - name: Update pubspec.yaml
+        working-directory: ./schuly
         run: |
           sed -i "s/^version: .*/version: ${{ steps.new_version.outputs.version }}+${{ github.run_number }}/" pubspec.yaml
 
@@ -59,7 +61,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add pubspec.yaml
+          git add schuly/pubspec.yaml
           git commit -m "🔖 Bump version to ${{ steps.new_version.outputs.version }}"
 
       - name: Create and push tag

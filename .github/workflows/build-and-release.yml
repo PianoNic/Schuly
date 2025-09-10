@@ -26,18 +26,23 @@ jobs:
           cache: true
 
       - name: Get dependencies
+        working-directory: ./schuly
         run: flutter pub get
 
       - name: Generate app icons
+        working-directory: ./schuly
         run: dart run flutter_launcher_icons
 
       - name: Build Android APK
+        working-directory: ./schuly
         run: flutter build apk --release --build-name="${{ github.ref_name }}" --build-number="${{ github.run_number }}"
 
       - name: Build Android AAB (App Bundle)
+        working-directory: ./schuly
         run: flutter build appbundle --release --build-name="${{ github.ref_name }}" --build-number="${{ github.run_number }}"
 
       - name: Prepare artifacts
+        working-directory: ./schuly
         run: |
           mkdir -p artifacts
           cp build/app/outputs/flutter-apk/app-release.apk artifacts/schuly-${{ github.ref_name }}.apk
@@ -47,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: android-build
-          path: artifacts/
+          path: schuly/artifacts/
 
   build-ios:
     runs-on: macos-latest
@@ -63,20 +68,25 @@ jobs:
           cache: true
 
       - name: Get dependencies
+        working-directory: ./schuly
         run: flutter pub get
 
       - name: Generate app icons
+        working-directory: ./schuly
         run: dart run flutter_launcher_icons
 
       - name: Build iOS (unsigned)
+        working-directory: ./schuly
         run: flutter build ios --release --no-codesign --build-name="${{ github.ref_name }}" --build-number="${{ github.run_number }}"
 
       - name: Create iOS Archive
+        working-directory: ./schuly
         run: |
           cd ios
           xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -destination generic/platform=iOS -archivePath build/Runner.xcarchive archive CODE_SIGNING_ALLOWED=NO
 
       - name: Export iOS IPA
+        working-directory: ./schuly
         run: |
           cd ios
           mkdir -p artifacts
@@ -89,7 +99,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ios-build
-          path: ios/artifacts/
+          path: schuly/ios/artifacts/
 
   upload-to-release:
     needs: [build-android, build-ios]

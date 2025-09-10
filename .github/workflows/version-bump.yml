@@ -59,8 +59,8 @@ jobs:
 
       - name: Commit version bump
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "79938743+Pianonic@users.noreply.github.com"
+          git config --local user.name "PianoNic"
           git add schuly/pubspec.yaml
           git commit -m "🔖 Bump version to ${{ steps.new_version.outputs.version }}"
 

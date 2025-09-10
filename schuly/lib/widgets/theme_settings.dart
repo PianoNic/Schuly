@@ -9,17 +9,35 @@ class ThemeSettings extends StatelessWidget {
     required this.themeProvider,
   });
 
-  // 9 predefined colors for 3x3 grid
-  final List<ColorOption> _predefinedColors = const [
-    ColorOption(color: Colors.red, name: 'Rot'),
+  // Dynamic color lists based on neon mode
+  List<ColorOption> get _predefinedColors => themeProvider.isNeonMode 
+    ? _neonColors 
+    : _classicColors;
+
+  // 9 neon accent colors for 3x3 grid
+  final List<ColorOption> _neonColors = const [
+    ColorOption(color: Color(0xFF8A2BE2), name: 'Neon Violett'),  // Neon Violet
+    ColorOption(color: Color(0xFF00FFFF), name: 'Neon Cyan'),     // Neon Cyan
+    ColorOption(color: Color(0xFF39FF14), name: 'Neon Grün'),     // Neon Green
+    ColorOption(color: Color(0xFFFF69B4), name: 'Neon Pink'),     // Neon Pink (lighter)
+    ColorOption(color: Color(0xFFFF6600), name: 'Neon Orange'),   // Neon Orange
+    ColorOption(color: Color(0xFF0080FF), name: 'Neon Blau'),     // Neon Blue
+    ColorOption(color: Color(0xFFFF0040), name: 'Neon Rot'),      // Neon Red
+    ColorOption(color: Color(0xFFFFFF00), name: 'Neon Gelb'),     // Neon Yellow
+    ColorOption(color: Color(0xFF00FF80), name: 'Neon Mint'),     // Neon Mint (replaced lila)
+  ];
+
+  // 9 classic colors for 3x3 grid
+  final List<ColorOption> _classicColors = const [
     ColorOption(color: Colors.blue, name: 'Blau'),
-    ColorOption(color: Colors.green, name: 'Grün'),
-    ColorOption(color: Colors.purple, name: 'Lila'),
-    ColorOption(color: Colors.orange, name: 'Orange'),
     ColorOption(color: Colors.teal, name: 'Türkis'),
-    ColorOption(color: Colors.indigo, name: 'Indigo'),
+    ColorOption(color: Colors.green, name: 'Grün'),
     ColorOption(color: Colors.pink, name: 'Pink'),
+    ColorOption(color: Colors.orange, name: 'Orange'),
+    ColorOption(color: Colors.indigo, name: 'Indigo'),
+    ColorOption(color: Colors.red, name: 'Rot'),
     ColorOption(color: Colors.amber, name: 'Gelb'),
+    ColorOption(color: Colors.purple, name: 'Lila'),
   ];
 
   @override
@@ -48,9 +66,19 @@ class ThemeSettings extends StatelessWidget {
             
             const SizedBox(height: 24),
             
+            // Color Mode Toggle
+            Text(
+              'Farbstil',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            _buildColorModeToggle(context),
+            
+            const SizedBox(height: 24),
+            
             // Color Selection
             Text(
-              'Akzentfarbe',
+              themeProvider.isNeonMode ? 'Neon Akzentfarbe' : 'Klassische Akzentfarbe',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
@@ -135,10 +163,83 @@ class ThemeSettings extends StatelessWidget {
     );
   }
 
+  Widget _buildColorModeToggle(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: _buildColorModeOption(
+            context, 
+            false, 
+            'Klassisch', 
+            Icons.palette_outlined,
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: _buildColorModeOption(
+            context, 
+            true, 
+            'Neon', 
+            Icons.auto_awesome,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildColorModeOption(BuildContext context, bool isNeon, String label, IconData icon) {
+    final isSelected = themeProvider.isNeonMode == isNeon;
+    final appColors = Theme.of(context).extension<AppColors>();
+    final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
+    final lightBackground = appColors?.lightBackground ?? seedColor.withOpacity(0.1);
+    
+    return InkWell(
+      onTap: () => themeProvider.setNeonMode(isNeon),
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected 
+              ? lightBackground
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: isSelected 
+                ? seedColor
+                : Theme.of(context).colorScheme.outline.withOpacity(0.2),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: isSelected 
+                  ? seedColor
+                  : Theme.of(context).colorScheme.onSurface,
+              size: 20,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected 
+                    ? seedColor
+                    : Theme.of(context).colorScheme.onSurface,
+                fontWeight: isSelected ? FontWeight.w500 : FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildColorOption(BuildContext context, Color color, String label) {
     final isSelected = themeProvider.seedColor == color;
+    final shouldShowNeonEffect = themeProvider.isNeonMode;
     final lightBackground = isSelected 
-        ? color.withOpacity(0.1)
+        ? color.withOpacity(shouldShowNeonEffect ? 0.08 : 0.1)
         : Colors.transparent;
     
     return InkWell(
@@ -155,6 +256,13 @@ class ThemeSettings extends StatelessWidget {
                 : Theme.of(context).colorScheme.outline.withOpacity(0.2),
             width: isSelected ? 2 : 1,
           ),
+          boxShadow: isSelected && shouldShowNeonEffect ? [
+            BoxShadow(
+              color: color.withOpacity(0.3),
+              blurRadius: 8,
+              spreadRadius: 0,
+            ),
+          ] : null,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -165,11 +273,18 @@ class ThemeSettings extends StatelessWidget {
               decoration: BoxDecoration(
                 color: color,
                 shape: BoxShape.circle,
+                boxShadow: shouldShowNeonEffect ? [
+                  BoxShadow(
+                    color: color.withOpacity(0.4),
+                    blurRadius: 6,
+                    spreadRadius: 0,
+                  ),
+                ] : null,
               ),
               child: isSelected
-                  ? const Icon(
+                  ? Icon(
                       Icons.check,
-                      color: Colors.white,
+                      color: _getContrastColor(color),
                       size: 20,
                     )
                   : null,
@@ -181,7 +296,7 @@ class ThemeSettings extends StatelessWidget {
                 color: isSelected 
                     ? color
                     : Theme.of(context).colorScheme.onSurface,
-                fontWeight: isSelected ? FontWeight.w500 : FontWeight.normal,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
               ),
               textAlign: TextAlign.center,
               maxLines: 1,
@@ -191,6 +306,13 @@ class ThemeSettings extends StatelessWidget {
         ),
       ),
     );
+  }
+
+
+  Color _getContrastColor(Color color) {
+    // Calculate luminance to determine if we need light or dark text
+    final luminance = (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
+    return luminance > 0.5 ? Colors.black : Colors.white;
   }
 }
 

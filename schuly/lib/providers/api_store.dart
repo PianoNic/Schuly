@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:schuly/api/lib/api.dart';
 import '../services/api_service.dart';
 import '../services/storage_service.dart';
+import '../services/push_notification_service.dart';
 import 'dart:convert';
 
 class ApiStore extends ChangeNotifier {
@@ -243,6 +244,11 @@ class ApiStore extends ChangeNotifier {
     try {
       agenda = await _apiService.getAgenda();
       lastApiError = null;
+      
+      // Schedule push notifications for agenda items if PushAssist is enabled
+      if (agenda != null) {
+        await PushNotificationService.scheduleAgendaNotifications(agenda!);
+      }
     } on ApiException catch (e) {
       _handleApiError(e);
     }

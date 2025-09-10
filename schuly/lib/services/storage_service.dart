@@ -8,6 +8,8 @@ class StorageService {
   static const String _activeUserKey = 'active_user';
   static const String _apiUrlKey = 'api_url';
   static const String _pushNotificationsKey = 'push_notifications_enabled';
+  static const String _notificationAdvanceMinutesKey = 'notification_advance_minutes';
+  static const String _notificationTypePrefix = 'notification_enabled_';
 
   static Future<void> saveUser(String email, Map<String, dynamic> userData) async {
     final users = await getUsers();
@@ -57,8 +59,30 @@ class StorageService {
   
   static Future<bool> getPushNotificationsEnabled() async {
     final value = await _storage.read(key: _pushNotificationsKey);
-    // Default to true if not set
-    return value?.toLowerCase() == 'true' || value == null;
+    // Default to false if not set (changed from true)
+    return value?.toLowerCase() == 'true';
+  }
+
+  // Notification type settings
+  static Future<void> setNotificationEnabled(String type, bool enabled) async {
+    await _storage.write(key: '$_notificationTypePrefix$type', value: enabled.toString());
+  }
+  
+  static Future<bool?> getNotificationEnabled(String type) async {
+    final value = await _storage.read(key: '$_notificationTypePrefix$type');
+    if (value == null) return null;
+    return value.toLowerCase() == 'true';
+  }
+
+  // Notification advance time settings
+  static Future<void> setNotificationAdvanceMinutes(int minutes) async {
+    await _storage.write(key: _notificationAdvanceMinutesKey, value: minutes.toString());
+  }
+  
+  static Future<int?> getNotificationAdvanceMinutes() async {
+    final value = await _storage.read(key: _notificationAdvanceMinutesKey);
+    if (value == null) return null;
+    return int.tryParse(value);
   }
 
   static Future<void> clearAll() async {

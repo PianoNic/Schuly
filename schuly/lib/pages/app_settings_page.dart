@@ -8,6 +8,7 @@ import '../services/storage_service.dart';
 import '../services/push_notification_service.dart';
 import '../main.dart';
 import 'notification_config_page.dart';
+import 'release_notes_page.dart';
 
 class AppSettingsPage extends StatefulWidget {
   final ThemeProvider themeProvider;
@@ -173,6 +174,25 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Spracheinstellungen - Coming Soon!'),
+                          ),
+                        );
+                      },
+                    ),
+
+                    const Divider(),
+
+                    // Release Notes
+                    _buildSettingsTile(
+                      context,
+                      icon: Icons.article_outlined,
+                      title: 'Was ist neu',
+                      subtitle: 'Changelog und neue Features',
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ReleaseNotesPage(),
                           ),
                         );
                       },

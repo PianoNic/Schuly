@@ -177,39 +177,31 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 
   List<List<DateTime?>> _generateCalendarData(DateTime month) {
-    final List<List<DateTime?>> weeks = [];
-    
-    // Get first and last day of the month
-    final firstDay = DateTime(month.year, month.month, 1);
-    final lastDay = DateTime(month.year, month.month + 1, 0);
-    
-    // Find the Monday of the first week
-    DateTime current = firstDay;
-    while (current.weekday != 1) {
-      current = current.subtract(const Duration(days: 1));
-    }
-    
-    // Generate weeks
-    while (current.isBefore(lastDay) || current.month == month.month) {
-      final List<DateTime?> week = [];
-      
-      // Add 7 days for this week
-      for (int i = 0; i < 7; i++) {
-        final date = current.add(Duration(days: i));
-        week.add(date);
-      }
-      
-      weeks.add(week);
-      current = current.add(const Duration(days: 7));
-      
-      // Stop if we have enough weeks and passed the month
-      if (weeks.length >= 6 || (current.month > month.month && weeks.length >= 4)) {
-        break;
-      }
-    }
-    
-    return weeks;
+  final List<List<DateTime?>> weeks = [];
+  
+  // Use UTC to avoid DST issues, or force time to noon
+  final firstDay = DateTime(month.year, month.month, 1, 12); // noon
+  
+  DateTime current = firstDay;
+  while (current.weekday != 1) {
+    current = current.subtract(const Duration(days: 1));
+    current = DateTime(current.year, current.month, current.day, 12); // keep noon
   }
+  
+  while (weeks.isEmpty || (weeks.last.any((date) => date?.month == month.month) && weeks.length < 6)) {
+    final List<DateTime?> week = [];
+    
+    for (int i = 0; i < 7; i++) {
+      final date = DateTime(current.year, current.month, current.day + i, 12);
+      week.add(date);
+    }
+    
+    weeks.add(week);
+    current = DateTime(current.year, current.month, current.day + 7, 12);
+  }
+  
+  return weeks;
+}
 
   Widget _buildDayCell(DateTime date, bool isCurrentMonth) {
     final isSelected = _isSameDay(date, widget.selectedDate);

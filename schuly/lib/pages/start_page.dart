@@ -8,10 +8,17 @@ import '../providers/homepage_config_provider.dart';
 import '../pages/absenzen_page.dart';
 import 'package:schuly/api/lib/api.dart';
 
-class StartPage extends StatelessWidget {
+class StartPage extends StatefulWidget {
   final VoidCallback? onNavigateToAbsenzen;
 
   const StartPage({super.key, this.onNavigateToAbsenzen});
+
+  @override
+  State<StartPage> createState() => _StartPageState();
+}
+
+class _StartPageState extends State<StartPage> {
+  DateTime _selectedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +44,7 @@ class StartPage extends StatelessWidget {
               children: [
                 for (final section in sections)
                   if (section.isVisible)
-                    _buildSection(context, section.id, agenda, grades, absences, apiStore, onNavigateToAbsenzen),
+                    _buildSection(context, section.id, agenda, grades, absences, apiStore, widget.onNavigateToAbsenzen),
               ],
             ),
           ),
@@ -55,9 +62,37 @@ class StartPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Nächste Lektionen',
-                  style: Theme.of(context).textTheme.titleLarge,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Nächste Lektionen',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedDay = _selectedDay.subtract(const Duration(days: 1));
+                            });
+                          },
+                          icon: const Icon(Icons.chevron_left),
+                          tooltip: 'Vorheriger Tag',
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedDay = _selectedDay.add(const Duration(days: 1));
+                            });
+                          },
+                          icon: const Icon(Icons.chevron_right),
+                          tooltip: 'Nächster Tag',
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 12),
                 if (agenda == null)
@@ -66,9 +101,8 @@ class StartPage extends StatelessWidget {
                   const Center(child: Text('Keine Lektionen gefunden.'))
                 else ...[
                   ...(() {
-                    final now = DateTime.now();
                     final lessons = agenda
-                        .where((item) => (item.eventType == 'Timetable') && DateTime.tryParse(item.startDate)?.isAfter(now) == true)
+                        .where((item) => item.eventType == 'Timetable')
                         .toList();
                     lessons.sort((a, b) {
                       final aStart = DateTime.tryParse(a.startDate) ?? DateTime.fromMillisecondsSinceEpoch(0);
@@ -76,15 +110,14 @@ class StartPage extends StatelessWidget {
                       return aStart.compareTo(bStart);
                     });
                     if (lessons.isEmpty) return <Widget>[const Center(child: Text('Keine Lektionen gefunden.'))];
-                    final nextDay = DateTime.tryParse(lessons.first.startDate)?.toLocal();
-                    if (nextDay == null) return <Widget>[const Center(child: Text('Keine Lektionen gefunden.'))];
                     final sameDayLessons = lessons.where((item) {
                       final start = DateTime.tryParse(item.startDate)?.toLocal();
                       return start != null &&
-                          start.year == nextDay.year &&
-                          start.month == nextDay.month &&
-                          start.day == nextDay.day;
+                          start.year == _selectedDay.year &&
+                          start.month == _selectedDay.month &&
+                          start.day == _selectedDay.day;
                     }).toList();
+                    if (sameDayLessons.isEmpty) return <Widget>[Center(child: Text('Keine Lektionen für ${_selectedDay.day}.${_selectedDay.month}.${_selectedDay.year}'))];
                     return sameDayLessons.map<Widget>((item) {
                       final start = DateTime.tryParse(item.startDate);
                       final end = DateTime.tryParse(item.endDate);
@@ -193,7 +226,7 @@ class StartPage extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     TextButton.icon(
-                      onPressed: onNavigateToAbsenzen,
+                      onPressed: widget.onNavigateToAbsenzen,
                       icon: const Icon(Icons.arrow_forward),
                       label: const Text('Alle anzeigen'),
                     ),

@@ -346,7 +346,7 @@ class MobileProxyApi {
   }
 
   /// Get Mobile Lateness
-  Future<List<Object>?> mobileLateness() async {
+  Future<List<LatenessDto>?> mobileLateness() async {
     final response = await mobileLatenessWithHttpInfo();
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -356,8 +356,8 @@ class MobileProxyApi {
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       final responseBody = await _decodeBodyBytes(response);
-      return (await apiClient.deserializeAsync(responseBody, 'List<Object>') as List)
-        .cast<Object>()
+      return (await apiClient.deserializeAsync(responseBody, 'List<LatenessDto>') as List)
+        .cast<LatenessDto>()
         .toList(growable: false);
 
     }

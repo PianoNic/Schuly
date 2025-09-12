@@ -188,6 +188,8 @@ class ApiClient {
           return AbsenceNoticeStatusDto.fromJson(value);
         case 'AgendaDto':
           return AgendaDto.fromJson(value);
+        case 'AppInfoDto':
+          return AppInfoDto.fromJson(value);
         case 'ClassInfoDto':
           return ClassInfoDto.fromJson(value);
         case 'ExamDto':
@@ -198,6 +200,8 @@ class ApiClient {
           return GradeDto.fromJson(value);
         case 'HTTPValidationError':
           return HTTPValidationError.fromJson(value);
+        case 'LatenessDto':
+          return LatenessDto.fromJson(value);
         case 'SettingDto':
           return SettingDto.fromJson(value);
         case 'StudentIdCardDto':

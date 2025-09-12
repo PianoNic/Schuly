@@ -41,6 +41,59 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
     return '$dateFormatted $timeShort';
   }
 
+
+  Widget _buildGenericDetailRowWithStatus(String label, String statusText) {
+    IconData icon;
+    Color color;
+
+    final statusLower = statusText.toLowerCase();
+    if (statusLower.contains('entschuldigt') || statusLower.contains('excused')) {
+      icon = Icons.check_circle;
+      color = Colors.green;
+    } else if (statusLower.contains('offen') || statusLower.contains('open') || statusLower.contains('pending')) {
+      icon = Icons.schedule;
+      color = Colors.orange;
+    } else if (statusLower.contains('confirmed') || statusLower.contains('bestätigt')) {
+      icon = Icons.verified;
+      color = Colors.blue;
+    } else if (statusLower.contains('abgelehnt') || statusLower.contains('rejected') || statusLower.contains('denied')) {
+      icon = Icons.cancel;
+      color = Colors.red;
+    } else {
+      icon = Icons.info;
+      color = Colors.grey;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 100,
+            child: Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(icon, color: color, size: 16),
+                const SizedBox(width: 6),
+                Text(
+                  statusText,
+                  style: TextStyle(color: color, fontWeight: FontWeight.w500, fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,15 +118,205 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
         controller: _tabController,
         children: [
           _buildAllAbsencesTab(),
-          _buildEmptyTab('Keine offenen Verspätungen'),
-          _buildEmptyTab('Keine offenen Absenzen'),
-          _buildEmptyTab('Keine offenen Meldungen'),
+          _buildLatenessTab(),
+          _buildAbsencesTab(),
+          _buildAbsenceNoticesTab(),
         ],
       ),
     );
   }
 
   Widget _buildAllAbsencesTab() {
+    return RefreshIndicator(
+      onRefresh: () async {
+        final apiStore = Provider.of<ApiStore>(context, listen: false);
+        await Future.wait([
+          apiStore.fetchAbsences(),
+          apiStore.fetchLateness(),
+          apiStore.fetchAbsenceNotices(),
+        ]);
+      },
+      child: Consumer<ApiStore>(
+        builder: (context, apiStore, _) {
+          final absences = apiStore.absences;
+          final lateness = apiStore.lateness;
+          final absenceNotices = apiStore.absenceNotices;
+          
+          bool isLoading = absences == null || lateness == null || absenceNotices == null;
+          bool isEmpty = (absences?.isEmpty ?? true) && 
+                        (lateness?.isEmpty ?? true) && 
+                        (absenceNotices?.isEmpty ?? true);
+          
+          if (isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (isEmpty) {
+            return const Center(child: Text('Keine Absenzen gefunden.'));
+          }
+          
+          return SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Absences section
+                if (absences.isNotEmpty) ...[
+                  Text('Absenzen', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  ...(() {
+                    final List absRaw = absences;
+                    final List<AbsenceDto> validAbsences = absRaw.map((a) {
+                      if (a is AbsenceDto) return a;
+                      try {
+                        return AbsenceDto.fromJson(a as Map<String, dynamic>);
+                      } catch (_) {
+                        return null;
+                      }
+                    }).whereType<AbsenceDto>().toList();
+
+                    return validAbsences.map((absence) {
+                      return CompactAbsenceItem(
+                        absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
+                        absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
+                        excuseUntil: _formatDateTime(absence.dateEAB, null),
+                        status: absence.statusEAB,
+                        reason: absence.reason,
+                      );
+                    }).toList();
+                  })(),
+                  const SizedBox(height: 16),
+                ],
+                
+                // Lateness section
+                if (lateness.isNotEmpty) ...[
+                  Text('Verspätungen', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  ..._buildLatenessItems(lateness),
+                  const SizedBox(height: 16),
+                ],
+                
+                // Absence notices section
+                if (absenceNotices.isNotEmpty) ...[
+                  Text('Meldungen', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  ..._buildGenericItems(absenceNotices, 'Meldung'),
+                ],
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  List<Widget> _buildLatenessItems(List<LatenessDto> latenessItems) {
+    return latenessItems.map((lateness) {
+      return LatenessItem(
+        date: lateness.date,
+        duration: lateness.duration,
+        reason: lateness.reason ?? 'Kein Grund angegeben',
+        excused: lateness.excused,
+        comment: lateness.comment ?? 'Kein Kommentar angegeben',
+        courseToken: lateness.courseToken,
+      );
+    }).toList();
+  }
+
+  List<Widget> _buildGenericItems(List<Object> items, String itemType) {
+    return items.map((item) {
+      Map<String, dynamic> itemData = {};
+      if (item is Map<String, dynamic>) {
+        itemData = item;
+      } else {
+        try {
+          itemData = {'data': item.toString()};
+        } catch (_) {
+          itemData = {'data': 'Unbekannte Daten'};
+        }
+      }
+
+      return Card(
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 2,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                itemType,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 12),
+              ...itemData.entries.map((entry) {
+                final isStatusField = entry.key.toLowerCase().contains('status') || 
+                                     entry.key.toLowerCase().contains('excused') ||
+                                     entry.key.toLowerCase().contains('entschuldigt');
+                
+                if (isStatusField) {
+                  return _buildGenericDetailRowWithStatus('${entry.key}:', entry.value?.toString() ?? 'N/A');
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 100,
+                          child: Text(
+                            '${entry.key}:',
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            entry.value?.toString() ?? 'N/A',
+                            textAlign: TextAlign.right,
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              }),
+            ],
+          ),
+        ),
+      );
+    }).toList();
+  }
+
+  Widget _buildLatenessTab() {
+    return RefreshIndicator(
+      onRefresh: () async {
+        await Provider.of<ApiStore>(context, listen: false).fetchLateness();
+      },
+      child: Consumer<ApiStore>(
+        builder: (context, apiStore, _) {
+          final lateness = apiStore.lateness;
+          if (lateness == null) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (lateness.isEmpty) {
+            return const Center(child: Text('Keine Verspätungen gefunden.'));
+          }
+          return SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: _buildLatenessItems(lateness),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildAbsencesTab() {
     return RefreshIndicator(
       onRefresh: () async {
         await Provider.of<ApiStore>(context, listen: false).fetchAbsences();
@@ -94,7 +337,6 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ...(() {
-                  // Accept both Map and AbsenceDto, robust to all shapes
                   final List absRaw = absences;
                   final List<AbsenceDto> validAbsences = absRaw.map((a) {
                     if (a is AbsenceDto) return a;
@@ -123,36 +365,170 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
     );
   }
 
-  Widget _buildEmptyTab(String message) {
+  Widget _buildAbsenceNoticesTab() {
     return RefreshIndicator(
       onRefresh: () async {
-        await Provider.of<ApiStore>(context, listen: false).fetchAbsences();
+        await Provider.of<ApiStore>(context, listen: false).fetchAbsenceNotices();
       },
-      child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height - 200,
-          child: Center(
+      child: Consumer<ApiStore>(
+        builder: (context, apiStore, _) {
+          final absenceNotices = apiStore.absenceNotices;
+          if (absenceNotices == null) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (absenceNotices.isEmpty) {
+            return const Center(child: Text('Keine Meldungen gefunden.'));
+          }
+          return SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: _buildGenericItems(absenceNotices, 'Meldung'),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// Lateness Item Widget
+class LatenessItem extends StatelessWidget {
+  final DateTime date;
+  final String duration;
+  final String reason;
+  final bool excused;
+  final String comment;
+  final String courseToken;
+
+  const LatenessItem({
+    super.key,
+    required this.date,
+    required this.duration,
+    required this.reason,
+    required this.excused,
+    required this.comment,
+    required this.courseToken,
+  });
+
+  String _formatDate(DateTime date) {
+    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
+  }
+
+  String _formatDuration(String duration) {
+    // Convert duration from minutes to readable format
+    try {
+      final minutes = int.parse(duration);
+      if (minutes < 60) {
+        return '$minutes Min.';
+      } else {
+        final hours = minutes ~/ 60;
+        final remainingMinutes = minutes % 60;
+        if (remainingMinutes == 0) {
+          return '$hours Std.';
+        } else {
+          return '$hours Std. $remainingMinutes Min.';
+        }
+      }
+    } catch (_) {
+      return duration; // Return original if parsing fails
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Verspätung vom ${_formatDate(date)}',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 12),
+            _buildDetailRow('Dauer:', _formatDuration(duration)),
+            _buildDetailRow('Kurs:', courseToken),
+            _buildDetailRow('Grund:', reason),
+            _buildDetailRow('Kommentar:', comment),
+            _buildDetailRowWithStatus('Status:', excused),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 100,
+            child: Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              textAlign: TextAlign.right,
+              style: const TextStyle(fontSize: 12),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailRowWithStatus(String label, bool excusedStatus) {
+    IconData icon;
+    Color color;
+    String displayText;
+
+    if (excusedStatus) {
+      icon = Icons.check_circle;
+      color = Colors.green;
+      displayText = 'Entschuldigt';
+    } else {
+      icon = Icons.cancel;
+      color = Colors.red;
+      displayText = 'Nicht entschuldigt';
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 100,
+            child: Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Icon(
-                  Icons.check_circle_outline,
-                  size: 64,
-                  color: Colors.green.withOpacity(0.6),
-                ),
-                const SizedBox(height: 16),
+                Icon(icon, color: color, size: 16),
+                const SizedBox(width: 6),
                 Text(
-                  message,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                  textAlign: TextAlign.center,
+                  displayText,
+                  style: TextStyle(color: color, fontWeight: FontWeight.w500, fontSize: 12),
                 ),
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -194,7 +570,7 @@ class CompactAbsenceItem extends StatelessWidget {
             _buildDetailRow('Von:', absentFrom),
             _buildDetailRow('Bis:', absentTo),
             _buildDetailRow('Entschuldigen bis:', excuseUntil),
-            _buildDetailRow('Status:', status),
+            _buildDetailRowWithStatusText('Status:', status),
           ],
         ),
       ),
@@ -208,7 +584,7 @@ class CompactAbsenceItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: 100,
+            width: 130,
             child: Text(
               label,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
@@ -219,6 +595,58 @@ class CompactAbsenceItem extends StatelessWidget {
               value,
               textAlign: TextAlign.right,
               style: const TextStyle(fontSize: 12),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailRowWithStatusText(String label, String statusText) {
+    IconData icon;
+    Color color;
+
+    final statusLower = statusText.toLowerCase();
+    if (statusLower.contains('entschuldigt') || statusLower.contains('excused')) {
+      icon = Icons.check_circle;
+      color = Colors.green;
+    } else if (statusLower.contains('offen') || statusLower.contains('open') || statusLower.contains('pending')) {
+      icon = Icons.schedule;
+      color = Colors.orange;
+    } else if (statusLower.contains('confirmed') || statusLower.contains('bestätigt')) {
+      icon = Icons.verified;
+      color = Colors.blue;
+    } else if (statusLower.contains('abgelehnt') || statusLower.contains('rejected') || statusLower.contains('denied')) {
+      icon = Icons.cancel;
+      color = Colors.red;
+    } else {
+      icon = Icons.info;
+      color = Colors.grey;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 130,
+            child: Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(icon, color: color, size: 16),
+                const SizedBox(width: 6),
+                Text(
+                  statusText,
+                  style: TextStyle(color: color, fontWeight: FontWeight.w500, fontSize: 12),
+                ),
+              ],
             ),
           ),
         ],

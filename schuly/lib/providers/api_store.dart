@@ -25,13 +25,13 @@ class ApiStore extends ChangeNotifier {
 
   // Data for all endpoints
   // List<AbsenceNoticeStatusDto>? absenceNoticeStatus;
-  // List<Object>? absenceNotices;
+  List<Object>? absenceNotices;
   List<AbsenceDto>? absences;
   StudentIdCardDto? studentIdCard;
   List<AgendaDto>? agenda;
   // List<ExamDto>? exams;
   List<GradeDto>? grades;
-  // List<Object>? lateness;
+  List<LatenessDto>? lateness;
   List<Object>? notifications;
   List<SettingDto>? settings;
   // List<Object>? topics;
@@ -187,12 +187,12 @@ class ApiStore extends ChangeNotifier {
   Future<void> fetchAll() async {
   await Future.wait([
       // fetchAbsenceNoticeStatus(),
-      // fetchAbsenceNotices(),
+      fetchAbsenceNotices(),
       fetchAbsences(),
       fetchAgenda(),
       // fetchExams(),
       fetchGrades(),
-      // fetchLateness(),
+      fetchLateness(),
       // fetchNotifications(),
       // fetchSettings(),
       // fetchTopics(),
@@ -233,6 +233,26 @@ class ApiStore extends ChangeNotifier {
   Future<void> fetchAbsences() async {
     try {
       absences = await _apiService.getAbsences();
+      lastApiError = null;
+    } on ApiException catch (e) {
+      _handleApiError(e);
+    }
+    notifyListeners();
+  }
+
+  Future<void> fetchLateness() async {
+    try {
+      lateness = await _apiService.getLateness();
+      lastApiError = null;
+    } on ApiException catch (e) {
+      _handleApiError(e);
+    }
+    notifyListeners();
+  }
+
+  Future<void> fetchAbsenceNotices() async {
+    try {
+      absenceNotices = await _apiService.getAbsenceNotices();
       lastApiError = null;
     } on ApiException catch (e) {
       _handleApiError(e);

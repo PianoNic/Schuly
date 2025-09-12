@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **appAppInfo**
-> Object appAppInfo()
+> AppInfoDto appAppInfo()
 
 App Info
 
@@ -36,7 +36,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Object**](Object.md)
+[**AppInfoDto**](AppInfoDto.md)
 
 ### Authorization
 

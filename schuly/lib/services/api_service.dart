@@ -40,4 +40,12 @@ class ApiService {
   Future<List<SettingDto>?> getSettings() {
     return _mobileApi.mobileSettings();
   }
+
+  Future<List<LatenessDto>?> getLateness() {
+    return _mobileApi.mobileLateness();
+  }
+
+  Future<List<Object>?> getAbsenceNotices() {
+    return _mobileApi.mobileAbsencenotices();
+  }
 }

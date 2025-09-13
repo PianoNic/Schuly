@@ -193,8 +193,12 @@ class ReleaseNotesService {
     final v2Parts = version2.split('.').map(int.parse).toList();
     
     // Pad shorter version with zeros
-    while (v1Parts.length < 3) v1Parts.add(0);
-    while (v2Parts.length < 3) v2Parts.add(0);
+    while (v1Parts.length < 3) {
+      v1Parts.add(0);
+    }
+    while (v2Parts.length < 3) {
+      v2Parts.add(0);
+    }
     
     for (int i = 0; i < 3; i++) {
       if (v1Parts[i] > v2Parts[i]) return true;

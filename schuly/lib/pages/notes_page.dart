@@ -57,19 +57,17 @@ class NotesPage extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                 decoration: BoxDecoration(
-                                  color: subjectAverage != null 
-                                      ? GradeUtils.getGradeColor(subjectAverage)
-                                      : Colors.grey[600],
-                                  borderRadius: BorderRadius.circular(10),
+                                  color: Theme.of(context).colorScheme.primaryContainer,
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
                                 child: Text(
-                                  subjectAverage != null 
+                                  subjectAverage != null
                                       ? GradeUtils.formatGrade(subjectAverage)
                                       : '?',
-                                  style: const TextStyle(
-                                    color: Colors.white,
+                                  style: TextStyle(
+                                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14,
                                   ),

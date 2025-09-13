@@ -122,91 +122,91 @@ class AbsenceItem extends StatelessWidget {
             margin: EdgeInsets.zero,
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Details',
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            const SizedBox(height: 8),
-                            _buildDetailRow('Grund:', reason),
-                            _buildDetailRow('Von:', absentFrom),
-                            _buildDetailRow('Bis:', absentTo),
-                            _buildDetailRow('Entschuldigen bis:', excuseUntil),
-                            _buildDetailRow('Status:', status),
-                          ],
-                        ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Details',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          const SizedBox(height: 8),
+                          _buildDetailRow('Grund:', reason),
+                          _buildDetailRow('Von:', absentFrom),
+                          _buildDetailRow('Bis:', absentTo),
+                          _buildDetailRow('Entschuldigen bis:', excuseUntil),
+                          _buildDetailRow('Status:', status),
+                        ],
                       ),
-                      if (isOpen) ...[
-                        const SizedBox(width: 16),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(
-                              width: 120,
-                              child: OutlinedButton.icon(
-                                onPressed: () {
-                                  // TODO: Implement excuse functionality
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('Entschuldigung - Coming Soon!'),
-                                    ),
-                                  );
-                                },
-                                icon: const Icon(Icons.edit, size: 16),
-                                label: const Text(
-                                  'Entschuldigen',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: Colors.green,
-                                  side: const BorderSide(color: Colors.green),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
+                    ),
+                    if (isOpen) ...[
+                      const SizedBox(width: 16),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            width: 120,
+                            child: OutlinedButton.icon(
+                              onPressed: () {
+                                // TODO: Implement excuse functionality
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Entschuldigung - Coming Soon!'),
                                   ),
+                                );
+                              },
+                              icon: const Icon(Icons.edit, size: 16),
+                              label: const Text(
+                                'Entschuldigen',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.green,
+                                side: const BorderSide(color: Colors.green),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 8),
-                            SizedBox(
-                              width: 120,
-                              child: OutlinedButton.icon(
-                                onPressed: () {
-                                  _showDeleteDialog(context);
-                                },
-                                icon: const Icon(Icons.delete, size: 16),
-                                label: const Text(
-                                  'Löschen',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: Colors.red,
-                                  side: const BorderSide(color: Colors.red),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
+                          ),
+                          const SizedBox(height: 8),
+                          SizedBox(
+                            width: 120,
+                            child: OutlinedButton.icon(
+                              onPressed: () {
+                                _showDeleteDialog(context);
+                              },
+                              icon: const Icon(Icons.delete, size: 16),
+                              label: const Text(
+                                'Löschen',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.red,
+                                side: const BorderSide(color: Colors.red),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ],
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
           ),
+        ),
         ],
       ),
     );

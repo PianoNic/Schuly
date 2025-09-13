@@ -59,20 +59,6 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
     });
   }
 
-  String _getNotificationTypeName(String type) {
-    switch (type) {
-      case 'agenda':
-        return 'Stundenplan-Benachrichtigungen';
-      case 'grades':
-        return 'Noten-Benachrichtigungen';
-      case 'absences':
-        return 'Abwesenheits-Benachrichtigungen';
-      case 'general':
-        return 'Allgemeine Benachrichtigungen';
-      default:
-        return 'Benachrichtigungen';
-    }
-  }
 
 
   @override

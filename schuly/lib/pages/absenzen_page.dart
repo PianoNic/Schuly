@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/api_store.dart';
+import '../providers/theme_provider.dart';
 import 'package:schuly/api/lib/api.dart';
 
 class AbsenzenPage extends StatefulWidget {
@@ -236,54 +237,58 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
         }
       }
 
-      return Card(
+      final appColors = Theme.of(context).extension<AppColors>();
+      final surfaceContainer = appColors?.surfaceContainer ??
+          Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3);
+
+      return Container(
         margin: const EdgeInsets.symmetric(vertical: 8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        elevation: 2,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                itemType,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(height: 12),
-              ...itemData.entries.map((entry) {
-                final isStatusField = entry.key.toLowerCase().contains('status') || 
-                                     entry.key.toLowerCase().contains('excused') ||
-                                     entry.key.toLowerCase().contains('entschuldigt');
-                
-                if (isStatusField) {
-                  return _buildGenericDetailRowWithStatus('${entry.key}:', entry.value?.toString() ?? 'N/A');
-                } else {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          child: Text(
-                            '${entry.key}:',
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-                          ),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: surfaceContainer,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              itemType,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 12),
+            ...itemData.entries.map((entry) {
+              final isStatusField = entry.key.toLowerCase().contains('status') ||
+                                   entry.key.toLowerCase().contains('excused') ||
+                                   entry.key.toLowerCase().contains('entschuldigt');
+
+              if (isStatusField) {
+                return _buildGenericDetailRowWithStatus('${entry.key}:', entry.value?.toString() ?? 'N/A');
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 100,
+                        child: Text(
+                          '${entry.key}:',
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                         ),
-                        Expanded(
-                          child: Text(
-                            entry.value?.toString() ?? 'N/A',
-                            textAlign: TextAlign.right,
-                            style: const TextStyle(fontSize: 12),
-                          ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          entry.value?.toString() ?? 'N/A',
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(fontSize: 12),
                         ),
-                      ],
-                    ),
-                  );
-                }
-              }),
-            ],
-          ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            }),
+          ],
         ),
       );
     }).toList();
@@ -438,12 +443,17 @@ class LatenessItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    final appColors = Theme.of(context).extension<AppColors>();
+    final surfaceContainer = appColors?.surfaceContainer ??
+        Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3);
+
+    return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: surfaceContainer,
+        borderRadius: BorderRadius.circular(8),
+      ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -458,7 +468,6 @@ class LatenessItem extends StatelessWidget {
             _buildDetailRow('Kommentar:', comment),
             _buildDetailRowWithStatus('Status:', excused),
           ],
-        ),
       ),
     );
   }
@@ -553,17 +562,22 @@ class CompactAbsenceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    final appColors = Theme.of(context).extension<AppColors>();
+    final surfaceContainer = appColors?.surfaceContainer ??
+        Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3);
+
+    return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              reason,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: surfaceContainer,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            reason,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
@@ -572,7 +586,6 @@ class CompactAbsenceItem extends StatelessWidget {
             _buildDetailRow('Entschuldigen bis:', excuseUntil),
             _buildDetailRowWithStatusText('Status:', status),
           ],
-        ),
       ),
     );
   }

@@ -35,14 +35,12 @@ Future<void> setApiBaseUrl(String url) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize push notifications
   await PushNotificationService.initialize();
-  
+
   await loadApiBaseUrl();
   final apiStore = ApiStore();
-  await apiStore.loadUsers();
-  await apiStore.autoLoginIfNeeded();
   defaultApiClient = ApiClient(basePath: apiBaseUrl);
   runApp(
     MultiProvider(
@@ -56,14 +54,39 @@ void main() async {
   );
 }
 
-class SchulyApp extends StatelessWidget {
+class SchulyApp extends StatefulWidget {
   const SchulyApp({super.key});
+
+  @override
+  State<SchulyApp> createState() => _SchulyAppState();
+}
+
+class _SchulyAppState extends State<SchulyApp> {
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the ApiStore asynchronously
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final apiStore = Provider.of<ApiStore>(context, listen: false);
+      apiStore.initialize();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Consumer<ApiStore>(
       builder: (context, apiStore, _) {
+        // Show splash screen during initialization
+        if (!apiStore.isInitialized) {
+          return MaterialApp(
+            theme: themeProvider.lightTheme,
+            darkTheme: themeProvider.darkTheme,
+            themeMode: themeProvider.themeMode,
+            home: const SplashScreen(),
+          );
+        }
+
         if (apiStore.userEmails.isEmpty) {
           // Wrap LoginPage in MaterialApp with theming
           return MaterialApp(
@@ -121,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
       await AppUpdateDialog.showIfAvailable(context);
       
       // Then check for release notes
-      if (context.mounted) {
+      if (mounted) {
         await ReleaseNotesDialog.showIfNeeded(context);
       }
     });
@@ -295,6 +318,60 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // App icon
+            ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Image.asset(
+                'assets/app_icon.png',
+                width: 120,
+                height: 120,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(height: 32),
+            Text(
+              'schulNetz',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: 32,
+              height: 32,
+              child: CircularProgressIndicator(
+                strokeWidth: 3,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Initialisiere...',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

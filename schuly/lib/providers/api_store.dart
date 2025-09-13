@@ -6,6 +6,10 @@ import '../services/push_notification_service.dart';
 import 'dart:convert';
 
 class ApiStore extends ChangeNotifier {
+  // Initialization state
+  bool _isInitialized = false;
+  bool get isInitialized => _isInitialized;
+
   // Auth
   String? _bearerToken;
   String? get bearerToken => _bearerToken;
@@ -50,10 +54,25 @@ class ApiStore extends ChangeNotifier {
   Future<void> loadUsers() async {
     _users = await StorageService.getUsers();
     _activeUserEmail = await StorageService.getActiveUser();
-    
+
     if (_activeUserEmail != null && _users[_activeUserEmail] != null) {
       await _setAuthFromUser(_users[_activeUserEmail]!);
-      await fetchAll();
+    }
+    notifyListeners();
+  }
+
+  // Initialize the app (load users and authenticate)
+  Future<void> initialize() async {
+    try {
+      await loadUsers();
+      await autoLoginIfNeeded();
+      if (_activeUserEmail != null && _users[_activeUserEmail] != null) {
+        await fetchAll();
+      }
+      _isInitialized = true;
+    } catch (e) {
+      print('[initialize] Error during initialization: $e');
+      _isInitialized = true; // Still mark as initialized to show the app
     }
     notifyListeners();
   }

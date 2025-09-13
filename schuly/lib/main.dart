@@ -123,7 +123,7 @@ class _SchulyAppState extends State<SchulyApp> {
         );
       },
     );
-  }
+  } 
 }
 
 class MyHomePage extends StatefulWidget {

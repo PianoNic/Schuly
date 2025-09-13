@@ -36,7 +36,6 @@ class NotesPage extends StatelessWidget {
                 // Subject Cards
                 ...gradesBySubject.entries.map((entry) {
                   final subjectAverage = GradeUtils.calculateWeightedAverage(entry.value);
-                  print('Subject: ${entry.key}, Average: $subjectAverage, Grades count: ${entry.value.length}');
                   
                   return Card(
                     margin: const EdgeInsets.only(bottom: 16),
@@ -80,11 +79,8 @@ class NotesPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
                           child: Column(
-                            children: entry.value.map((grade) => GradeTile(
-                                  subject: grade.title,
-                                  grade: grade.mark,
-                                  date: grade.date,
-                                  confirmed: grade.isConfirmed,
+                            children: entry.value.map((gradeData) => GradeTile(
+                                  grade: gradeData,
                                 )).toList(),
                           ),
                         ),

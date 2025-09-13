@@ -199,11 +199,8 @@ class _StartPageState extends State<StartPage> {
                   ...(() {
                     final List<GradeDto> gradesList = grades.cast<GradeDto>().toList();
                     gradesList.sort((a, b) => b.date.compareTo(a.date));
-                    return gradesList.take(3).map((grade) => GradeTile(
-                      subject: grade.title,
-                      grade: grade.mark,
-                      date: grade.date,
-                      confirmed: grade.isConfirmed,
+                    return gradesList.take(3).map((gradeData) => GradeTile(
+                      grade: gradeData,
                     ));
                   })(),
                 ],

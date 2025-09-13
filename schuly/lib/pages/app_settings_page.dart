@@ -277,18 +277,11 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                           children: [
                             const SizedBox(height: 16),
                             const Text(
-                              'Eine professionelle App für Schüler zur Verwaltung von Schulnetz-Daten. '
+                              'Eine custom App für Schüler zur Verwaltung von Schulnetz-Daten. '
                               'Verwalten Sie Ihren Stundenplan, Noten und wichtige Termine an einem Ort.',
                               style: TextStyle(fontSize: 14),
                             ),
                             const SizedBox(height: 12),
-                            const Text(
-                              'Entwickelt mit Flutter für eine moderne und benutzerfreundliche Erfahrung.',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
                           ],
                         );
                       },

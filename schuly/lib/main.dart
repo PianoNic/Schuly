@@ -113,11 +113,11 @@ class _SchulyAppState extends State<SchulyApp> {
         return DynamicColorBuilder(
           builder: (lightDynamic, darkDynamic) {
             return MaterialApp(
-              title: 'schulNetz',
+              title: 'Schuly',
               theme: themeProvider.lightTheme(lightDynamic),
               darkTheme: themeProvider.darkTheme(darkDynamic),
               themeMode: themeProvider.themeMode,
-              home: MyHomePage(title: 'schulNetz', themeProvider: themeProvider),
+              home: MyHomePage(title: 'Schuly', themeProvider: themeProvider),
             );
           },
         );
@@ -359,7 +359,7 @@ class SplashScreen extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             Text(
-              'schulNetz',
+              'Schuly',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.onSurface,

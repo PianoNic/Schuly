@@ -48,6 +48,7 @@ dependencies:
   path_provider: ^2.1.4
   dio: ^5.7.0
   open_file: ^3.5.7
+  dynamic_color: ^1.7.0
 
 dev_dependencies:
   flutter_test:

@@ -16,6 +16,7 @@ import 'widgets/homepage_config_modal.dart';
 import 'widgets/release_notes_dialog.dart';
 import 'widgets/app_update_dialog.dart';
 import 'package:schuly/api/lib/api.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 
 String apiBaseUrl = 'https://schulware.pianonic.ch';
 
@@ -79,34 +80,46 @@ class _SchulyAppState extends State<SchulyApp> {
       builder: (context, apiStore, _) {
         // Show splash screen during initialization
         if (!apiStore.isInitialized) {
-          return MaterialApp(
-            theme: themeProvider.lightTheme,
-            darkTheme: themeProvider.darkTheme,
-            themeMode: themeProvider.themeMode,
-            home: const SplashScreen(),
+          return DynamicColorBuilder(
+            builder: (lightDynamic, darkDynamic) {
+              return MaterialApp(
+                theme: themeProvider.lightTheme(lightDynamic),
+                darkTheme: themeProvider.darkTheme(darkDynamic),
+                themeMode: themeProvider.themeMode,
+                home: const SplashScreen(),
+              );
+            },
           );
         }
 
         if (apiStore.userEmails.isEmpty) {
           // Wrap LoginPage in MaterialApp with theming
-          return MaterialApp(
-            theme: themeProvider.lightTheme,
-            darkTheme: themeProvider.darkTheme,
-            themeMode: themeProvider.themeMode,
-            home: LoginPage(
-              onApiBaseUrlChanged: (url) async {
-                await setApiBaseUrl(url);
-              },
-              initialApiBaseUrl: apiBaseUrl,
-            ),
+          return DynamicColorBuilder(
+            builder: (lightDynamic, darkDynamic) {
+              return MaterialApp(
+                theme: themeProvider.lightTheme(lightDynamic),
+                darkTheme: themeProvider.darkTheme(darkDynamic),
+                themeMode: themeProvider.themeMode,
+                home: LoginPage(
+                  onApiBaseUrlChanged: (url) async {
+                    await setApiBaseUrl(url);
+                  },
+                  initialApiBaseUrl: apiBaseUrl,
+                ),
+              );
+            },
           );
         }
-        return MaterialApp(
-          title: 'schulNetz',
-          theme: themeProvider.lightTheme,
-          darkTheme: themeProvider.darkTheme,
-          themeMode: themeProvider.themeMode,
-          home: MyHomePage(title: 'schulNetz', themeProvider: themeProvider),
+        return DynamicColorBuilder(
+          builder: (lightDynamic, darkDynamic) {
+            return MaterialApp(
+              title: 'schulNetz',
+              theme: themeProvider.lightTheme(lightDynamic),
+              darkTheme: themeProvider.darkTheme(darkDynamic),
+              themeMode: themeProvider.themeMode,
+              home: MyHomePage(title: 'schulNetz', themeProvider: themeProvider),
+            );
+          },
         );
       },
     );

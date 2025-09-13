@@ -156,6 +156,30 @@ class ThemeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Calculate card color based on background with proper contrast
+  Color _calculateCardColor(Color backgroundColor, bool isLight) {
+    // Extract RGB values
+    int r = backgroundColor.red;
+    int g = backgroundColor.green;
+    int b = backgroundColor.blue;
+
+    if (isLight) {
+      // For light theme: darken the background slightly
+      // Example: f7f9ff -> f2f3fa (subtract small amount)
+      r = (r - 8).clamp(0, 255);
+      g = (g - 10).clamp(0, 255);
+      b = (b - 8).clamp(0, 255);
+    } else {
+      // For dark theme: lighten the background slightly
+      // Example: 101418 -> 181d20 (add small amount)
+      r = (r + 8).clamp(0, 255);
+      g = (g + 9).clamp(0, 255);
+      b = (b + 8).clamp(0, 255);
+    }
+
+    return Color.fromARGB(255, r, g, b);
+  }
+
   Future<void> clearThemePrefs() async {
     await _storage.delete(key: _themeModeKey);
     await _storage.delete(key: _seedColorKey);
@@ -168,14 +192,14 @@ class ThemeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  ThemeData get lightTheme {
-    final colorScheme = _useMaterialYou 
-        ? null // Let Material 3 use system dynamic colors
+  ThemeData lightTheme([ColorScheme? lightDynamicColorScheme]) {
+    final colorScheme = _useMaterialYou && lightDynamicColorScheme != null
+        ? lightDynamicColorScheme
         : ColorScheme.fromSeed(
             seedColor: _seedColor,
             brightness: Brightness.light,
           );
-    
+
     // Create base theme with or without Material You
     final baseTheme = ThemeData(
       colorScheme: colorScheme,
@@ -190,17 +214,25 @@ class ThemeProvider extends ChangeNotifier {
     
     return baseTheme.copyWith(
       navigationBarTheme: NavigationBarThemeData(
-        indicatorColor: isNeonColor && !_useMaterialYou 
-            ? effectiveSeedColor.withOpacity(0.15) 
-            : effectiveSeedColor.withOpacity(0.2),
-        backgroundColor: Colors.white,
-        shadowColor: isNeonColor && !_useMaterialYou 
-            ? effectiveSeedColor.withOpacity(0.1) 
+        indicatorColor: _useMaterialYou
+            ? null // Let Material You handle indicator color
+            : (isNeonColor
+                ? effectiveSeedColor.withOpacity(0.15)
+                : effectiveSeedColor.withOpacity(0.2)),
+        backgroundColor: _useMaterialYou ? null : Colors.white, // Let Material You handle color
+        shadowColor: isNeonColor && !_useMaterialYou
+            ? effectiveSeedColor.withOpacity(0.1)
             : null,
       ),
-      cardTheme: const CardThemeData(
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+      cardTheme: CardThemeData(
+        elevation: _useMaterialYou && lightDynamicColorScheme != null ? 4 : 2,
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+        color: _useMaterialYou && lightDynamicColorScheme != null
+            ? _calculateCardColor(actualColorScheme.surface, true)
+            : null,
+        shadowColor: _useMaterialYou && lightDynamicColorScheme != null
+            ? actualColorScheme.shadow.withOpacity(0.2)
+            : null,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
@@ -236,14 +268,14 @@ class ThemeProvider extends ChangeNotifier {
     );
   }
 
-  ThemeData get darkTheme {
-    final colorScheme = _useMaterialYou 
-        ? null // Let Material 3 use system dynamic colors
+  ThemeData darkTheme([ColorScheme? darkDynamicColorScheme]) {
+    final colorScheme = _useMaterialYou && darkDynamicColorScheme != null
+        ? darkDynamicColorScheme
         : ColorScheme.fromSeed(
             seedColor: _seedColor,
             brightness: Brightness.dark,
           );
-    
+
     // Create base theme with or without Material You
     final baseTheme = ThemeData(
       colorScheme: colorScheme,
@@ -258,17 +290,25 @@ class ThemeProvider extends ChangeNotifier {
     
     return baseTheme.copyWith(
       navigationBarTheme: NavigationBarThemeData(
-        indicatorColor: isNeonColor && !_useMaterialYou
-            ? effectiveSeedColor.withOpacity(0.25) 
-            : effectiveSeedColor.withOpacity(0.3),
-        backgroundColor: const Color(0xFF1C1B1F),
-        shadowColor: isNeonColor && !_useMaterialYou 
-            ? effectiveSeedColor.withOpacity(0.2) 
+        indicatorColor: _useMaterialYou
+            ? null // Let Material You handle indicator color
+            : (isNeonColor
+                ? effectiveSeedColor.withOpacity(0.25)
+                : effectiveSeedColor.withOpacity(0.3)),
+        backgroundColor: _useMaterialYou ? null : const Color(0xFF1C1B1F), // Let Material You handle color
+        shadowColor: isNeonColor && !_useMaterialYou
+            ? effectiveSeedColor.withOpacity(0.2)
             : null,
       ),
-      cardTheme: const CardThemeData(
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+      cardTheme: CardThemeData(
+        elevation: _useMaterialYou && darkDynamicColorScheme != null ? 4 : 2,
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+        color: _useMaterialYou && darkDynamicColorScheme != null
+            ? _calculateCardColor(actualColorScheme.surface, false)
+            : null,
+        shadowColor: _useMaterialYou && darkDynamicColorScheme != null
+            ? actualColorScheme.shadow.withOpacity(0.3)
+            : null,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,

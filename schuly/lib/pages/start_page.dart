@@ -19,6 +19,83 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> {
   DateTime _selectedDay = DateTime.now();
+  bool _hasInitializedSelectedDay = false;
+  PageController _pageController = PageController();
+  List<DateTime> _availableDates = [];
+
+  List<DateTime> _getAvailableDates(List<dynamic> agenda) {
+    final lessons = agenda
+        .where((item) => item.eventType == 'Timetable')
+        .toList();
+
+    final availableDates = <DateTime>[];
+    final seenDates = <String>{};
+
+    for (final lesson in lessons) {
+      final start = DateTime.tryParse(lesson.startDate)?.toLocal();
+      if (start != null) {
+        final dateKey = '${start.year}-${start.month}-${start.day}';
+        if (!seenDates.contains(dateKey)) {
+          seenDates.add(dateKey);
+          availableDates.add(DateTime(start.year, start.month, start.day));
+        }
+      }
+    }
+
+    availableDates.sort();
+    return availableDates;
+  }
+
+  double _calculateOptimalHeight(List<dynamic> agenda, List<DateTime> availableDates) {
+    int maxLessonsPerDay = 0;
+
+    for (final date in availableDates) {
+      final lessonsForDate = agenda
+          .where((item) => item.eventType == 'Timetable')
+          .where((item) {
+            final start = DateTime.tryParse(item.startDate)?.toLocal();
+            return start != null &&
+                start.year == date.year &&
+                start.month == date.month &&
+                start.day == date.day;
+          }).length;
+
+      if (lessonsForDate > maxLessonsPerDay) {
+        maxLessonsPerDay = lessonsForDate;
+      }
+    }
+
+    // Calculate height: each lesson tile is approximately 64px + 8px margin
+    const double lessonTileHeight = 72.0; // More accurate estimate
+    const double minHeight = 150.0; // Minimum height
+
+    double calculatedHeight = (maxLessonsPerDay * lessonTileHeight);
+    return calculatedHeight > minHeight ? calculatedHeight : minHeight;
+  }
+
+  DateTime? _findPreviousAvailableDate(List<DateTime> availableDates, DateTime currentDate) {
+    for (int i = availableDates.length - 1; i >= 0; i--) {
+      if (availableDates[i].isBefore(currentDate)) {
+        return availableDates[i];
+      }
+    }
+    return null;
+  }
+
+  DateTime? _findNextAvailableDate(List<DateTime> availableDates, DateTime currentDate) {
+    for (final date in availableDates) {
+      if (date.isAfter(currentDate)) {
+        return date;
+      }
+    }
+    return null;
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,30 +142,50 @@ class _StartPageState extends State<StartPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Nächste Lektionen',
-                      style: Theme.of(context).textTheme.titleLarge,
+                    Flexible(
+                      child: Text(
+                        'Nächste Lektionen',
+                        style: Theme.of(context).textTheme.titleLarge,
+                        overflow: TextOverflow.visible,
+                        softWrap: true,
+                      ),
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _selectedDay = _selectedDay.subtract(const Duration(days: 1));
-                            });
-                          },
+                          onPressed: _availableDates.isNotEmpty ? () {
+                            final currentIndex = _availableDates.indexWhere((date) =>
+                              date.year == _selectedDay.year &&
+                              date.month == _selectedDay.month &&
+                              date.day == _selectedDay.day
+                            );
+                            if (currentIndex > 0) {
+                              _pageController.previousPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                          } : null,
                           icon: const Icon(Icons.chevron_left),
-                          tooltip: 'Vorheriger Tag',
+                          tooltip: 'Vorheriger Tag mit Lektionen',
                         ),
                         IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _selectedDay = _selectedDay.add(const Duration(days: 1));
-                            });
-                          },
+                          onPressed: _availableDates.isNotEmpty ? () {
+                            final currentIndex = _availableDates.indexWhere((date) =>
+                              date.year == _selectedDay.year &&
+                              date.month == _selectedDay.month &&
+                              date.day == _selectedDay.day
+                            );
+                            if (currentIndex < _availableDates.length - 1) {
+                              _pageController.nextPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                          } : null,
                           icon: const Icon(Icons.chevron_right),
-                          tooltip: 'Nächster Tag',
+                          tooltip: 'Nächster Tag mit Lektionen',
                         ),
                       ],
                     ),
@@ -100,45 +197,122 @@ class _StartPageState extends State<StartPage> {
                 else if (agenda.isEmpty)
                   const Center(child: Text('Keine Lektionen gefunden.'))
                 else ...[
-                  ...(() {
-                    final lessons = agenda
-                        .where((item) => item.eventType == 'Timetable')
-                        .toList();
-                    lessons.sort((a, b) {
-                      final aStart = DateTime.tryParse(a.startDate) ?? DateTime.fromMillisecondsSinceEpoch(0);
-                      final bStart = DateTime.tryParse(b.startDate) ?? DateTime.fromMillisecondsSinceEpoch(0);
-                      return aStart.compareTo(bStart);
-                    });
-                    if (lessons.isEmpty) return <Widget>[const Center(child: Text('Keine Lektionen gefunden.'))];
-                    final sameDayLessons = lessons.where((item) {
-                      final start = DateTime.tryParse(item.startDate)?.toLocal();
-                      return start != null &&
-                          start.year == _selectedDay.year &&
-                          start.month == _selectedDay.month &&
-                          start.day == _selectedDay.day;
-                    }).toList();
-                    if (sameDayLessons.isEmpty) return <Widget>[Center(child: Text('Keine Lektionen für ${_selectedDay.day}.${_selectedDay.month}.${_selectedDay.year}'))];
-                    return sameDayLessons.map<Widget>((item) {
-                      final start = DateTime.tryParse(item.startDate);
-                      final end = DateTime.tryParse(item.endDate);
-                      final dayStr = start != null ?
-                          '${_weekdayShort(start.weekday)} ${start.day.toString().padLeft(2, '0')}.${start.month.toString().padLeft(2, '0')}' :
-                          '';
-                      final timeStr = (start != null && end != null)
-                          ? '${start.hour.toString().padLeft(2, '0')}:${start.minute.toString().padLeft(2, '0')} - '
-                              '${end.hour.toString().padLeft(2, '0')}:${end.minute.toString().padLeft(2, '0')}'
-                          : '';
-                      final subject = item.text;
-                      final room = item.roomToken;
-                      final teacher = item.teachers.isNotEmpty ? item.teachers.join(', ') : '';
-                      return LessonTile(
-                        day: dayStr,
-                        time: timeStr,
-                        subject: subject,
-                        room: room,
-                        teacher: teacher,
-                      );
-                    }).toList();
+                  (() {
+                    // Initialize available dates and page controller
+                    if (!_hasInitializedSelectedDay && agenda.isNotEmpty) {
+                      _availableDates = _getAvailableDates(agenda);
+                      if (_availableDates.isNotEmpty) {
+                          // Find the first date that is today or in the future
+                          final today = DateTime.now();
+                          final todayDate = DateTime(today.year, today.month, today.day);
+
+                          DateTime? bestDate;
+                          int bestIndex = 0;
+                          for (int i = 0; i < _availableDates.length; i++) {
+                            if (!_availableDates[i].isBefore(todayDate)) {
+                              bestDate = _availableDates[i];
+                              bestIndex = i;
+                              break;
+                            }
+                          }
+
+                          // If no future dates, use the last available date
+                          if (bestDate == null && _availableDates.isNotEmpty) {
+                            bestDate = _availableDates.last;
+                            bestIndex = _availableDates.length - 1;
+                          }
+
+                          if (bestDate != null) {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              if (mounted) {
+                                setState(() {
+                                  _selectedDay = bestDate!;
+                                  _hasInitializedSelectedDay = true;
+                                });
+                                _pageController = PageController(initialPage: bestIndex);
+                              }
+                            });
+                          } else {
+                            _hasInitializedSelectedDay = true;
+                          }
+                        } else {
+                          _hasInitializedSelectedDay = true;
+                        }
+                      }
+
+                    if (_availableDates.isEmpty) {
+                      return const Center(child: Text('Keine Lektionen gefunden.'));
+                    }
+
+                    // Calculate optimal height based on the day with most lessons
+                    final optimalHeight = _calculateOptimalHeight(agenda, _availableDates);
+
+                    return SizedBox(
+                      height: optimalHeight,
+                      child: PageView.builder(
+                        controller: _pageController,
+                        itemCount: _availableDates.length,
+                        padEnds: false,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _selectedDay = _availableDates[index];
+                          });
+                        },
+                        itemBuilder: (context, index) {
+                          final selectedDate = _availableDates[index];
+                          final lessons = agenda
+                              .where((item) => item.eventType == 'Timetable')
+                              .toList();
+
+                          final sameDayLessons = lessons.where((item) {
+                            final start = DateTime.tryParse(item.startDate)?.toLocal();
+                            return start != null &&
+                                start.year == selectedDate.year &&
+                                start.month == selectedDate.month &&
+                                start.day == selectedDate.day;
+                          }).toList();
+
+                          sameDayLessons.sort((a, b) {
+                            final aStart = DateTime.tryParse(a.startDate) ?? DateTime.fromMillisecondsSinceEpoch(0);
+                            final bStart = DateTime.tryParse(b.startDate) ?? DateTime.fromMillisecondsSinceEpoch(0);
+                            return aStart.compareTo(bStart);
+                          });
+
+                          if (sameDayLessons.isEmpty) {
+                            return Center(
+                              child: Text('Keine Lektionen für ${selectedDate.day}.${selectedDate.month}.${selectedDate.year}')
+                            );
+                          }
+
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: ListView(
+                              children: sameDayLessons.map<Widget>((item) {
+                              final start = DateTime.tryParse(item.startDate);
+                              final end = DateTime.tryParse(item.endDate);
+                              final dayStr = start != null ?
+                                  '${_weekdayShort(start.weekday)} ${start.day.toString().padLeft(2, '0')}.${start.month.toString().padLeft(2, '0')}' :
+                                  '';
+                              final timeStr = (start != null && end != null)
+                                  ? '${start.hour.toString().padLeft(2, '0')}:${start.minute.toString().padLeft(2, '0')} - '
+                                      '${end.hour.toString().padLeft(2, '0')}:${end.minute.toString().padLeft(2, '0')}'
+                                  : '';
+                              final subject = item.text;
+                              final room = item.roomToken;
+                              final teacher = item.teachers.isNotEmpty ? item.teachers.join(', ') : '';
+                              return LessonTile(
+                                day: dayStr,
+                                time: timeStr,
+                                subject: subject,
+                                room: room,
+                                teacher: teacher,
+                              );
+                            }).toList(),
+                            ),
+                          );
+                        },
+                      ),
+                    );
                   })(),
                 ],
               ],

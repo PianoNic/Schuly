@@ -287,7 +287,7 @@ class _StartPageState extends State<StartPage> {
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: ListView(
-                              children: sameDayLessons.map<Widget>((item) {
+                                children: sameDayLessons.map<Widget>((item) {
                               final start = DateTime.tryParse(item.startDate);
                               final end = DateTime.tryParse(item.endDate);
                               final dayStr = start != null ?
@@ -306,8 +306,10 @@ class _StartPageState extends State<StartPage> {
                                 subject: subject,
                                 room: room,
                                 teacher: teacher,
+                                startTime: start,
+                                endTime: end,
                               );
-                            }).toList(),
+                              }).toList(),
                             ),
                           );
                         },

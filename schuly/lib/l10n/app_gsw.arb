@@ -1,0 +1,476 @@
+{
+  "@@locale": "gsw",
+
+  "appTitle": "Schuly",
+
+  "noAccountAdded": "No kei Account hinzuegfüegt.",
+
+  "addAccount": "Account hinzuefüege",
+
+  "noActiveAccount": "Kei aktive Account usgwählt.",
+
+  "selectAccount": "Account uswähle",
+
+  "personalInformation": "Persönlichi Informatione",
+
+  "quickActions": "Schnäll Aktione",
+
+  "appSettings": "App Iistellige",
+
+  "designAndSettings": "Design und Iistellige aapasse",
+
+  "helpAndSupport": "Hilf & Support",
+
+  "getHelpAndSupport": "Hilf und Support becho",
+
+  "addAnotherAccount": "Witere Account hinzuefüege",
+
+  "addMultipleAccounts": "Mehreri Accounts hinzuefüege",
+
+  "logout": "Abmälde",
+
+  "signOutFromApp": "Vo de App abmälde",
+
+  "name": "Name",
+
+  "street": "Strass",
+
+  "zipCity": "PLZ Ort",
+
+  "birthDate": "Geburtstag",
+
+  "phone": "Telefon",
+
+  "email": "E-Mail",
+
+  "nationality": "Nationalität",
+
+  "hometown": "Haimatort",
+
+  "mobile": "Handy",
+
+  "profile1": "Profil 1",
+
+  "profile2": "Profil 2",
+
+  "start": "Start",
+
+  "agenda": "Agenda",
+
+  "grades": "Note",
+
+  "absences": "Absänze",
+
+  "account": "Account",
+
+  "language": "Sprach",
+
+  "selectLanguage": "Sprach uswähle",
+
+  "english": "Änglisch",
+
+  "german": "Düütsch",
+
+  "swissGerman": "Schwiizerdüütsch",
+
+  "pirate": "Pirate",
+
+  "kawaii": "Kawaii",
+
+  "cancel": "Abbräche",
+
+  "confirm": "Bestätige",
+
+  "pushNotifications": "Push-Benachrichtigige",
+
+  "featureInDevelopment": "Feature wird no entwicklet",
+
+  "configureNotifications": "Benachrichtigige konfiguriere",
+
+  "chooseTypesAndTiming": "Wähl Type und Timing für Benachrichtigige",
+
+  "whatsNew": "Was isch nöi",
+
+  "changelogAndFeatures": "Changelog und nöii Features",
+
+  "checkForUpdates": "Nach Updates sueche",
+
+  "checkForNewVersions": "Uf nöii Versione prüefe",
+
+  "aboutApp": "Über d App",
+
+  "version": "Version",
+
+  "delete": "Lösche",
+
+  "close": "Zumache",
+
+  "add": "Hinzuefüege",
+
+  "loading": "Ladet...",
+
+  "noEventsForThisDay": "Kei Termin für dä Tag",
+
+  "nextLessons": "Nächschti Lektione",
+
+  "nextHolidays": "Nächschti Ferie",
+
+  "studentIdCard": "Schüeluswys",
+
+  "reloadPage": "Syte neu lade",
+  "loadingStudentIdCard": "Schüeluswys wird glade...",
+
+  "enterValidEmail": "Bitte gäbid e gültigi E-Mail-Adrässe ii",
+
+  "areYouSure": "Sind Si sicher?",
+
+  "updateAvailable": "Update verfüegbar!",
+
+  "later": "Spöter",
+
+  "yes": "Ja",
+
+  "no": "Nei",
+
+  "confirmed": "Bestätigt",
+
+  "lateness": "Verspätige",
+
+  "noLatenessFound": "Kei Verspätige gfunde",
+
+  "selectReason": "Bitte wähled en Grund us",
+
+  "selectDate": "Bitte wähled es Datum us",
+
+  "emailAddress": "E-Mail-Adrässe",
+
+  "password": "Passwort",
+
+  "login": "Amälde",
+
+  "enterEmailAddress": "Bitte gäbid e E-Mail-Adrässe ii",
+
+  "getNewToken": "Nöis Token hole",
+  "getNewTokenSubtitle": "Hol es nöis Token für de aktive Account",
+  "tokenUpdated": "Token aktualisiert!",
+  "noActiveAccountSnack": "Kei aktive Account!",
+  "addAccountTitle": "Account hinzuefüege",
+  "emailLabel": "E-Mail",
+  "enterEmail": "E-Mail igäh",
+  "passwordLabel": "Passwort",
+  "enterPassword": "Passwort igäh",
+  "accountAdded": "Account hinzuegfüegt!",
+  "logoutTitle": "Abmälde",
+  "logoutConfirm": "Bisch sicher, dass du dich abmäldsch?",
+  "loggedOut": "Abmäldet!",
+
+  "designSettings": "Design Iistellige",
+  "appearance": "Darstellig",
+  "automatic": "Automatisch",
+  "light": "Hell",
+  "dark": "Dunkel",
+  "colorStyle": "Farbstil",
+  "materialYou": "Material\nYou",
+  "classic": "Klassisch",
+  "neon": "Neon",
+  "neonAccentColor": "Neon Akzentfarb",
+  "classicAccentColor": "Klassischi Akzentfarb",
+  "materialYouActive": "Material You aktiv",
+  "materialYouInfo": "Farbe werde automatisch vom System übernoh",
+
+  "neonViolet": "Neon Violett",
+  "neonCyan": "Neon Cyan",
+  "neonGreen": "Neon Grün",
+  "neonPink": "Neon Pink",
+  "neonOrange": "Neon Orange",
+  "neonBlue": "Neon Blau",
+  "neonRed": "Neon Rot",
+  "neonYellow": "Neon Gelb",
+  "neonMint": "Neon Mint",
+  "blue": "Blau",
+  "teal": "Türkis",
+  "green": "Grün",
+  "pink": "Pink",
+  "orange": "Orange",
+  "indigo": "Indigo",
+  "red": "Rot",
+  "yellow": "Gelb",
+  "purple": "Lila",
+
+  "previousLessonsDay": "Vorhärige Tag mit Lektione",
+  "nextLessonsDay": "Nächschte Tag mit Lektione",
+  "noLessonsFound": "Kei Lektione gfunde.",
+  "noLessonsForDay": "Kei Lektione für {day}.{month}.{year}",
+  "agendaForDate": "Termine für {day}.{month}.{year}",
+  "noAgendaForDay": "Kei Termine für däne Tag.",
+  "noHolidaysFound": "Kei Ferie gfunde.",
+  "latestGrades": "Letschte Note",
+  "noGradesFound": "Kei Note gfunde.",
+  "openAbsences": "Offeni Absänze",
+  "showAll": "Alli azeige",
+  "@showAll": {"description": "Button text to show all release notes"},
+  "noAbsencesFound": "Kei Absänze gfunde.",
+  "noOpenAbsences": "Kei offeni Absänze.",
+  "noReleaseNotes": "Kei Release Notes verfügbar",
+  "releaseNotesInfo": "Updates und nöii Features werde da aazeigt",
+
+  "notificationTypes": "Benachrichtigigstyp",
+  "timetable": "Stundeplan",
+  "agendaNotificationSubtitle": "Benachrichtigige vor de Lektione",
+  "gradeNotificationSubtitle": "Benachrichtigige bi nöie Note",
+  "absenceNotificationSubtitle": "Benachrichtigige bi Abwäsenheitsänderige",
+  "generalNotifications": "Allgemeini Mitteilige",
+  "generalNotificationSubtitle": "Wichtigi Schulinformatione und Updates",
+  "notificationTime": "Benachrichtigigsziit",
+  "notificationAdvanceQuestion": "Wie vill Minute vor de Lektion wotsch benachrichtigt werde?",
+  "minutesBeforeClass": "{minutes} Min",
+  "currentAdvanceSetting": "Aktuelli Iistellig: {minutes} Minute vor de Lektion",
+  "test": "Test",
+  "sendTestNotification": "Test-Benachrichtigig schicke",
+  "checkNotificationsWork": "Lueg, ob d'Benachrichtigige funktioniere",
+
+  "gradeDetails": "Notedetail",
+  "basicInformation": "Grundinformatione",
+  "titleLabel": "Titel",
+  "subjectLabel": "Fach",
+  "courseLabel": "Kurs",
+  "dateLabel": "Datum",
+  "confirmedLabel": "Bestätigt",
+  "gradeLabel": "Note",
+  "pointsLabel": "Punkt",
+  "weightLabel": "Gwicht",
+  "courseGradeLabel": "Kursnote",
+  "classAverage": "Klassedurchschnitt",
+  "examGroupLabel": "Prüefigsgruppe",
+  "classAverageLabel": "Klassedurchschnitt",
+  "groupWeightLabel": "Gruppenwicht",
+  "commentLabel": "Kommentar",
+
+  "latestVersionMessage": "Du hesch scho d neuscht Version.",
+  "versionWithNumber": "Version {version}+{build}",
+  "@versionWithNumber": {"description": "Versionsstring mit Versions- und Buildnummer.", "placeholders": {"version": {}, "build": {}}},
+  "appLegalese": "Schuly © 2025 PianoNic",
+  "appDescription": "E Spezial-App für Schüeler zum Verwalte vo Schulnetz-Däte. Verwalte din Stundenplan, d Note und wichtigi Termine an einem Ort.",
+  "apiEndpoint": "API Endpoint",
+
+  "enterApiEndpoint": "Bitte API Endpoint igäh",
+  "@enterApiEndpoint": {"description": "Validierigsmäldig für läre API Endpoint"},
+  "currentApiInfo": "Aktuelli API Info",
+  "apiInfoStatus": "API Info Status",
+  "environment": "Umgebig",
+  "error": "Fähler",
+  "apiBaseUrl": "API Basis-URL",
+  "save": "Speichere",
+  "apiUrlChanged": "API URL gänderet: {url}",
+  "@apiUrlChanged": {"description": "Snackbar-Nachricht, wenn d API-URL gänderet wird", "placeholders": {"url": {}}},
+  "@getColorName": {"description": "Gibt de lokalisiert Farbnamen für e Schlüssel zrugg."},
+
+  "switchAccount": "Account uswähle",
+  "@switchAccount": {"description": "Header/title for the account switcher modal"},
+
+  "accountCount": "{count, plural, =1{1 Account} other{{count} Accounts}}",
+  "@accountCount": {"description": "Shows the number of accounts", "placeholders": {"count": {}}},
+
+  "noAccounts": "Kei Accounts verfügbar.",
+  "@noAccounts": {"description": "Message when there are no accounts to switch"},
+
+  "addFirstAccount": "Füeg din erste Account zue!",
+  "@addFirstAccount": {"description": "Subtitle encouraging the user to add their first account"},
+
+  "active": "Aktiv",
+  "@active": {"description": "Label for the active account"},
+
+  "available": "Verfügbar",
+  "@available": {"description": "Label for available (not active) accounts"},
+
+  "removeAccount": "Account entferne",
+  "@removeAccount": {"description": "Button/dialog title for removing an account"},
+
+  "confirmRemoveAccount": "Account {email} entferne?",
+  "@confirmRemoveAccount": {"description": "Confirmation for removing an account", "placeholders": {"email": {}}},
+
+  "remove": "Entferne",
+  "@remove": {"description": "Button text for confirming removal"},
+
+  "switchedAccount": "Zu {email} gwechsellet",
+  "@switchedAccount": {"description": "Snackbar message when switching account", "placeholders": {"email": {}}},
+
+  "switchAccountError": "Accountwechsel isch fehlgschlage: {error}",
+  "@switchAccountError": {"description": "Error message when switching account fails", "placeholders": {"error": {}}},
+
+  "removedAccount": "Account {email} entfernet",
+  "@removedAccount": {"description": "Snackbar message when removing account", "placeholders": {"email": {}}},
+
+  "removeAccountError": "Account chönnt nöd entfernet werde: {error}",
+  "@removeAccountError": {"description": "Error message when removing account fails", "placeholders": {"error": {}}},
+
+  "unexpectedError": "Unerwartete Fehler: {error}",
+  "@unexpectedError": {"description": "Generic error message", "placeholders": {"error": {}}},
+
+  "weekdayMon": "Mä",
+  "@weekdayMon": {"description": "Abkürzig für Mäntig (Montag)"},
+  "weekdayTue": "Di",
+  "@weekdayTue": {"description": "Abkürzig für Zischtig (Dienstag)"},
+  "weekdayWed": "Mi",
+  "@weekdayWed": {"description": "Abkürzig für Mittwuch (Mittwoch)"},
+  "weekdayThu": "Du",
+  "@weekdayThu": {"description": "Abkürzig für Dunschtig (Donnerstag)"},
+  "weekdayFri": "Fr",
+  "@weekdayFri": {"description": "Abkürzig für Friitig (Freitag)"},
+  "weekdaySat": "Sa",
+  "@weekdaySat": {"description": "Abkürzig für Samschtig (Samstag)"},
+  "weekdaySun": "Su",
+  "@weekdaySun": {"description": "Abkürzig für Sunntig (Sonntag)"},
+
+  "absencesTabAll": "Alli Absänze",
+  "absencesTabLateness": "Verspötig",
+  "absencesTabAbsences": "Absänze",
+  "absencesTabNotices": "Meldigä",
+  "absencesSection": "Absänze",
+  "latenessSection": "Verspötig",
+  "noticesSection": "Meldigä",
+  "noticeItem": "Meldig",
+  "noReasonGiven": "Kei Grund aagee",
+  "noCommentGiven": "Kei Kommentar aagee",
+  "unknownData": "Unbekannti Date",
+  "noNoticesFound": "Kei Meldigä gfunde.",
+  "noLatenessFound": "Kei Verspötig gfunde.",
+  "minutes": "Min.",
+  "hours": "Std.",
+  "latenessFrom": "Verspötig vom",
+  "duration": "Duur",
+  "course": "Kurs",
+  "reason": "Grund",
+  "comment": "Kommentar",
+  "status": "Status",
+  "excused": "Entschuldigt",
+  "notExcused": "Nöd entschuldigt",
+  "from": "Vo",
+  "to": "Bis",
+  "excuseUntil": "Entschuldige bis",
+  "details": "Detail",
+  "excuse": "Entschuldige",
+  "excuseComingSoon": "Entschuldigung - Chunt gli!",
+  "deleteAbsenceTitle": "Absänz lösche",
+  "deleteAbsenceConfirm": "Bisch sicher, dass du die Absänz lösche wotsch? Die Aktion cha nöd rückgängig gmacht werde.",
+  "absenceDeleted": "Absänz glöscht!",
+
+  "emailSupport": "E-Mail Support",
+  "@emailSupport": {"description": "Titel für E-Mail Support Karte"},
+  "contactByEmail": "Kontaktier mi direkt per E-Mail",
+  "@contactByEmail": {"description": "Untertitel für E-Mail Support Karte"},
+  "bugReport": "Bug Report / Feature Request",
+  "@bugReport": {"description": "Titel für Bug Report Karte"},
+  "reportBugsOrRequestFeatures": "Meld Bugs oder schlag nöii Features vor",
+  "@reportBugsOrRequestFeatures": {"description": "Untertitel für Bug Report Karte"},
+  "copy": "Kopiere",
+  "@copy": {"description": "Buttontext zum Kopiere"},
+  "copiedToClipboard": "I d Zwüscheablage kopiert",
+  "@copiedToClipboard": {"description": "Snackbar-Nachricht bim Kopiere"},
+  "ok": "OK",
+  "@ok": {"description": "OK Buttontext"},
+  "error": "Fähler",
+  "@error": {"description": "Dialogtitel für Fehler"},
+  "emailAppError": "E-Mail-App het nöd chönne öppnet werde. Bitte kontaktier üs manuell unter: {email}",
+  "@emailAppError": {"description": "Fehlermeldig, wenn E-Mail-App nöd öppnet werde cha", "placeholders": {"email": {}}},
+  "browserError": "Browser het nöd chönne öppnet werde. Bitte bsuech d Site manuell: {url}",
+  "@browserError": {"description": "Fehlermeldig, wenn Browser nöd öppnet werde cha", "placeholders": {"url": {}}},
+
+  "appUpdateTest": "App Update Test",
+  "readyToTest": "Bereit zum Teste",
+  "updateSystemTest": "Update System Test",
+  "statusLabel": "Status: {status}",
+  "checking": "Prüefe...",
+  "forceShowUpdateDialog": "Update-Dialog zwinge",
+  "clearDismissedUpdates": "Verworfeni Updates lösche",
+  "howItWorks": "So funktionierts:",
+  "updateStep1": "1. Prüeft GitHub Releases uf nöiiri Versione",
+  "updateStep2": "2. Ladet APK vo GitHub Release Assets abe",
+  "updateStep3": "3. Öppnet Android Installer automatisch",
+  "updateStep4": "4. Merkt sich verworfeni Updates bis App neu startet",
+  "checkingForUpdates": "Sueche nach Updates...",
+  "updateAvailableVersion": "Update verfüegbar: v{version}",
+  "noUpdatesAvailable": "Kei Updates verfüegbar oder Update verworfe",
+  "errorCheckingUpdates": "Fähler bim Sueche nach Updates: {error}",
+  "showingUpdateDialog": "Zeige Update-Dialog...",
+  "updateDialogShown": "Update-Dialog aazeigt",
+  "errorShowingDialog": "Fähler bim Aazeige vom Dialog: {error}",
+  "clearingDismissedUpdates": "Lösche verworfeni Updates...",
+  "dismissedUpdatesCleared": "Verworfeni Updates glöscht",
+  "errorClearingDismissed": "Fähler bim Lösche vo verworfene Updates: {error}",
+
+  "illness": "Chranket",
+  "accident": "Unfall",
+  "military": "Militär",
+  "medicalCertificateForSport": "Gültigs Arztziignis für Sport",
+  "otherAbsence": "Anderi Absänz",
+  "createNewAbsence": "Nöii Absänz erfasse",
+  "reasonRequired": "Grund *",
+  "create": "Erfasse",
+
+  "noError": "Kei Fähler",
+  "unknown": "Unbekannt",
+
+  "currentVersion": "Aktuell: {version}",
+  "latestVersion": "Nöiste: {version}",
+  "downloadingUpdate": "Update wird abelade...",
+  "installingUpdate": "Update wird installiert...",
+  "install": "Installiere",
+  "downloading": "Wird abelade...",
+  "installing": "Wird installiert...",
+  "downloadError": "Fähler bim Abelade vom Update",
+  "downloadErrorDetails": "Download Fähler: {error}",
+  "installationNotAllowed": "Installation nöd erlaubt",
+  "installationError": "Fähler bi der Installation",
+  "installationErrorDetails": "Installation Fähler: {error}",
+  "updateInstallationStarted": "Update Installation gstartet",
+
+  "selectReason": "Bitte wähl en Grund uus",
+  "selectDate": "Bitte wähl es Datum uus",
+  "absentFrom": "Abwäsend vo *",
+  "absentTo": "Abwäsend bis *",
+  "toDateMustBeAfterFromDate": "Bis-Datum muess nach Vo-Datum ligge",
+  "absentFromTime": "Abwäsend ab (Ziit)",
+  "absentToTime": "Abwäsend bis (Ziit)",
+  "absenceCreatedSuccessfully": "Absänz erfolgriich erfasst!",
+  "customizeHomepage": "Start-Siite aapasse",
+  "visible": "Sichtbar",
+  "hidden": "Uusblendet",
+  "pushAssistNotifications": "PushAssist Benachrichtigunge",
+  "notificationsBeforeClasses": "Benachrichtigunge vor Schuëlstunde",
+  "testNotifications": "Test Benachrichtigunge",
+  "testNotificationDescription": "Test Benachrichtigung für PushAssist",
+  "nextClass": "Nächsti Stund: {subject}",
+  "roomAndTeacher": "Ruum: {room}{teacher}",
+  "teacher": " • Lährer: {teacher}",
+  "vibrationTest": "🔔 PushAssist Vibration Test",
+  "vibrationTestMessage": "Di Benachrichtigung sött vibriere! Prüef dini Gerät-Iistellige falls nöd.",
+  "monday": "Mä",
+  "tuesday": "Zì",
+  "wednesday": "Mì",
+  "thursday": "Dù",
+  "friday": "Fr",
+  "saturday": "Sa",
+  "sunday": "Sù",
+  "january": "Januar",
+  "february": "Februar",
+  "march": "März",
+  "april": "April",
+  "may": "Mai",
+  "june": "Juni",
+  "july": "Juli",
+  "august": "August",
+  "september": "September",
+  "october": "Oktober",
+  "november": "November",
+  "december": "Dezember",
+
+  "studentIdCardTooltip": "Schüeleruuswis",
+  "customizeHomepageTooltip": "Start-Siite aapasse",
+  "switchAccountButton": "Account wächsle",
+  "fetchingAppInfo": "App-Informatione abrüefe...",
+  "checkingUpdatesInitialization": "Updates prüefe...",
+  "loadingData": "Date lade...",
+  "finalizingInitialization": "Initialisierig abschliesse...",
+  "errorCheckingUpdatesDetails": "Fähler bim Sueche nach Updates: {error}"
+}

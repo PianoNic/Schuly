@@ -1,0 +1,1382 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Schuly",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+
+  "noAccountAdded": "No account added yet.",
+  "@noAccountAdded": {
+    "description": "Message shown when no accounts are configured"
+  },
+
+  "addAccount": "Add Account",
+  "@addAccount": {
+    "description": "Button text to add a new account"
+  },
+
+  "noActiveAccount": "No active account selected.",
+  "@noActiveAccount": {
+    "description": "Message shown when no account is currently active"
+  },
+
+  "selectAccount": "Select Account",
+  "@selectAccount": {
+    "description": "Button text to select an account"
+  },
+
+  "personalInformation": "Personal Information",
+  "@personalInformation": {
+    "description": "Title for personal information section"
+  },
+
+  "quickActions": "Quick Actions",
+  "@quickActions": {
+    "description": "Title for quick actions section"
+  },
+
+  "appSettings": "App Settings",
+  "@appSettings": {
+    "description": "Menu item for app settings"
+  },
+
+  "designAndSettings": "Customize design and settings",
+  "@designAndSettings": {
+    "description": "Subtitle for app settings option"
+  },
+
+  "helpAndSupport": "Help & Support",
+  "@helpAndSupport": {
+    "description": "Menu item for help and support"
+  },
+
+  "getHelpAndSupport": "Get help and support",
+  "@getHelpAndSupport": {
+    "description": "Subtitle for help and support option"
+  },
+
+  "emailSupport": "Email Support",
+  "@emailSupport": {
+    "description": "Title for email support card"
+  },
+
+  "contactByEmail": "Contact me directly by email",
+  "@contactByEmail": {
+    "description": "Subtitle for email support card"
+  },
+
+  "bugReport": "Bug Report / Feature Request",
+  "@bugReport": {
+    "description": "Title for bug report card"
+  },
+
+  "reportBugsOrRequestFeatures": "Report bugs or request new features",
+  "@reportBugsOrRequestFeatures": {
+    "description": "Subtitle for bug report card"
+  },
+
+  "copy": "Copy",
+  "@copy": {
+    "description": "Button text to copy to clipboard"
+  },
+
+  "copiedToClipboard": "Copied to clipboard",
+  "@copiedToClipboard": {
+    "description": "Snackbar message when copied to clipboard"
+  },
+
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  },
+
+  "error": "Error",
+  "@error": {
+    "description": "Dialog title for errors"
+  },
+
+  "emailAppError": "Could not open email app. Please contact us manually at: {email}",
+  "@emailAppError": {
+    "description": "Error message when email app cannot be opened",
+    "placeholders": {
+      "email": {}
+    }
+  },
+
+  "browserError": "Could not open browser. Please visit manually: {url}",
+  "@browserError": {
+    "description": "Error message when browser cannot be opened",
+    "placeholders": {
+      "url": {}
+    }
+  },
+
+  "addAnotherAccount": "Add Another Account",
+  "@addAnotherAccount": {
+    "description": "Menu item to add another account"
+  },
+
+  "addMultipleAccounts": "Add multiple accounts",
+  "@addMultipleAccounts": {
+    "description": "Subtitle for add account option"
+  },
+
+  "logout": "Logout",
+  "@logout": {
+    "description": "Menu item to logout"
+  },
+
+  "signOutFromApp": "Sign out from the app",
+  "@signOutFromApp": {
+    "description": "Subtitle for logout option"
+  },
+
+  "name": "Name",
+  "@name": {
+    "description": "Label for name field"
+  },
+
+  "street": "Street",
+  "@street": {
+    "description": "Label for street field"
+  },
+
+  "zipCity": "ZIP City",
+  "@zipCity": {
+    "description": "Label for zip code and city field"
+  },
+
+  "birthDate": "Birth Date",
+  "@birthDate": {
+    "description": "Label for birth date field"
+  },
+
+  "phone": "Phone",
+  "@phone": {
+    "description": "Label for phone field"
+  },
+
+  "email": "Email",
+  "@email": {
+    "description": "Label for email field"
+  },
+
+  "nationality": "Nationality",
+  "@nationality": {
+    "description": "Label for nationality field"
+  },
+
+  "hometown": "Hometown",
+  "@hometown": {
+    "description": "Label for hometown field"
+  },
+
+  "mobile": "Mobile",
+  "@mobile": {
+    "description": "Label for mobile phone field"
+  },
+
+  "profile1": "Profile 1",
+  "@profile1": {
+    "description": "Label for profile 1 field"
+  },
+
+  "profile2": "Profile 2",
+  "@profile2": {
+    "description": "Label for profile 2 field"
+  },
+
+  "start": "Start",
+  "@start": {
+    "description": "Navigation tab label for start/home page"
+  },
+
+  "agenda": "Agenda",
+  "@agenda": {
+    "description": "Navigation tab label for agenda/schedule page"
+  },
+
+  "grades": "Grades",
+  "@grades": {
+    "description": "Navigation tab label for grades page"
+  },
+
+  "absences": "Absences",
+  "@absences": {
+    "description": "Navigation tab label for absences page"
+  },
+
+  "account": "Account",
+  "@account": {
+    "description": "Navigation tab label for account page"
+  },
+
+  "language": "Language",
+  "@language": {
+    "description": "Label for language selection"
+  },
+
+  "selectLanguage": "Select Language",
+  "@selectLanguage": {
+    "description": "Title for language selection dialog"
+  },
+
+  "english": "English",
+  "@english": {
+    "description": "English language option"
+  },
+
+  "german": "German",
+  "@german": {
+    "description": "German language option"
+  },
+
+  "swissGerman": "Swiss German",
+  "@swissGerman": {
+    "description": "Swiss German language option"
+  },
+
+  "pirate": "Pirate",
+  "@pirate": {
+    "description": "Pirate language option"
+  },
+
+  "kawaii": "Kawaii",
+  "@kawaii": {
+    "description": "Kawaii language option"
+  },
+
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Confirm button text"
+  },
+
+  "pushNotifications": "Push Notifications",
+  "@pushNotifications": {
+    "description": "Label for push notifications setting"
+  },
+
+  "featureInDevelopment": "Feature in development",
+  "@featureInDevelopment": {
+    "description": "Subtitle for features not yet available"
+  },
+
+  "configureNotifications": "Configure Notifications",
+  "@configureNotifications": {
+    "description": "Menu item for notification configuration"
+  },
+
+  "chooseTypesAndTiming": "Choose types and timing for notifications",
+  "@chooseTypesAndTiming": {
+    "description": "Subtitle for notification configuration"
+  },
+
+  "whatsNew": "What's New",
+  "@whatsNew": {
+    "description": "Menu item for release notes"
+  },
+
+  "changelogAndFeatures": "Changelog and new features",
+  "@changelogAndFeatures": {
+    "description": "Subtitle for what's new option"
+  },
+
+  "checkForUpdates": "Check for Updates",
+  "@checkForUpdates": {
+    "description": "Menu item to check for app updates"
+  },
+
+  "checkForNewVersions": "Check for new versions",
+  "@checkForNewVersions": {
+    "description": "Subtitle for update check option"
+  },
+
+  "aboutApp": "About App",
+  "@aboutApp": {
+    "description": "Menu item for app information"
+  },
+
+  "version": "Version",
+  "@version": {
+    "description": "Version label"
+  },
+
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button text"
+  },
+
+  "close": "Close",
+  "@close": {
+    "description": "Close button text"
+  },
+
+  "add": "Add",
+  "@add": {
+    "description": "Add button text"
+  },
+
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading text"
+  },
+
+  "noEventsForThisDay": "No events for this day",
+  "@noEventsForThisDay": {
+    "description": "Message when no events are found for selected day"
+  },
+
+  "agendaForDate": "Agenda for {day}.{month}.{year}",
+  "@agendaForDate": {
+    "description": "Agenda section header for a specific date.",
+    "placeholders": {
+      "day": {},
+      "month": {},
+      "year": {}
+    }
+  },
+
+  "noAgendaForDay": "No events for this day.",
+
+  "nextLessons": "Next Lessons",
+  "@nextLessons": {
+    "description": "Title for next lessons section"
+  },
+
+  "nextHolidays": "Next Holidays",
+  "@nextHolidays": {
+    "description": "Title for next holidays section"
+  },
+
+  "studentIdCard": "Student ID Card",
+  "@studentIdCard": {
+    "description": "Student ID card label"
+  },
+
+  "reloadPage": "Reload page",
+  "@reloadPage": {
+    "description": "Button text to reload the page"
+  },
+
+  "loadingStudentIdCard": "Loading student ID card...",
+  "@loadingStudentIdCard": {
+    "description": "Message shown when student ID card is loading"
+  },
+
+  "enterValidEmail": "Please enter a valid email address",
+  "@enterValidEmail": {
+    "description": "Validation message for email input"
+  },
+
+  "areYouSure": "Are you sure?",
+  "@areYouSure": {
+    "description": "Confirmation dialog title"
+  },
+
+  "updateAvailable": "Update Available!",
+  "@updateAvailable": {
+    "description": "Update dialog title"
+  },
+
+  "later": "Later",
+  "@later": {
+    "description": "Later button text"
+  },
+
+  "yes": "Yes",
+  "@yes": {
+    "description": "Yes button text"
+  },
+
+  "no": "No",
+  "@no": {
+    "description": "No button text"
+  },
+
+  "confirmed": "Confirmed",
+  "@confirmed": {
+    "description": "Status: confirmed"
+  },
+
+  "lateness": "Lateness",
+  "@lateness": {
+    "description": "Lateness/tardiness label"
+  },
+
+  "noLatenessFound": "No lateness found",
+  "@noLatenessFound": {
+    "description": "Message when no lateness records found"
+  },
+
+  "selectReason": "Please select a reason",
+  "@selectReason": {
+    "description": "Validation for reason selection"
+  },
+
+  "selectDate": "Please select a date",
+  "@selectDate": {
+    "description": "Validation for date selection"
+  },
+
+  "emailAddress": "Email Address",
+  "@emailAddress": {
+    "description": "Email address input label"
+  },
+
+  "password": "Password",
+  "@password": {
+    "description": "Password input label"
+  },
+
+  "login": "Login",
+  "@login": {
+    "description": "Login button text"
+  },
+
+  "enterEmailAddress": "Please enter an email address",
+  "@enterEmailAddress": {
+    "description": "Validation message for empty email"
+  },
+
+  "getNewToken": "Get new token",
+  "@getNewToken": {
+    "description": "Button text to fetch a new token for the active account"
+  },
+
+  "getNewTokenSubtitle": "Fetch a new token for the active account",
+  "@getNewTokenSubtitle": {
+    "description": "Subtitle for fetching a new token"
+  },
+
+  "tokenUpdated": "Token updated!",
+  "@tokenUpdated": {
+    "description": "Message shown when token is successfully updated"
+  },
+
+  "noActiveAccountSnack": "No active account!",
+  "@noActiveAccountSnack": {
+    "description": "Snackbar message when no active account is selected"
+  },
+
+  "addAccountTitle": "Add Account",
+  "@addAccountTitle": {
+    "description": "Title for add account dialog"
+  },
+
+  "emailLabel": "Email",
+  "@emailLabel": {
+    "description": "Label for email input field"
+  },
+
+  "enterEmail": "Enter email",
+  "@enterEmail": {
+    "description": "Placeholder for email input field"
+  },
+
+  "passwordLabel": "Password",
+  "@passwordLabel": {
+    "description": "Label for password input field"
+  },
+
+  "enterPassword": "Enter password",
+  "@enterPassword": {
+    "description": "Placeholder for password input field"
+  },
+
+  "accountAdded": "Account added!",
+  "@accountAdded": {
+    "description": "Message shown when account is successfully added"
+  },
+
+  "logoutTitle": "Logout",
+  "@logoutTitle": {
+    "description": "Title for logout dialog"
+  },
+
+  "logoutConfirm": "Are you sure you want to log out?",
+  "@logoutConfirm": {
+    "description": "Confirmation message for logout"
+  },
+
+  "loggedOut": "Logged out!",
+  "@loggedOut": {
+    "description": "Message shown when user is successfully logged out"
+  },
+
+  "designSettings": "Design Settings",
+  "@designSettings": {
+    "description": "Title for design settings section"
+  },
+
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Label for appearance settings"
+  },
+
+  "automatic": "Automatic",
+  "@automatic": {
+    "description": "Option for automatic appearance mode"
+  },
+
+  "light": "Light",
+  "@light": {
+    "description": "Option for light appearance mode"
+  },
+
+  "dark": "Dark",
+  "@dark": {
+    "description": "Option for dark appearance mode"
+  },
+
+  "colorStyle": "Color Style",
+  "@colorStyle": {
+    "description": "Label for color style settings"
+  },
+
+  "materialYou": "Material\nYou",
+  "@materialYou": {
+    "description": "Option for Material You color style"
+  },
+
+  "classic": "Classic",
+  "@classic": {
+    "description": "Option for classic color style"
+  },
+
+  "neon": "Neon",
+  "@neon": {
+    "description": "Option for neon color style"
+  },
+
+  "neonAccentColor": "Neon Accent Color",
+  "@neonAccentColor": {
+    "description": "Label for neon accent color settings"
+  },
+
+  "classicAccentColor": "Classic Accent Color",
+  "@classicAccentColor": {
+    "description": "Label for classic accent color settings"
+  },
+
+  "materialYouActive": "Material You active",
+  "@materialYouActive": {
+    "description": "Message indicating Material You is active"
+  },
+
+  "materialYouInfo": "Colors are automatically taken from the system theme.",
+  "@materialYouInfo": {
+    "description": "Information about Material You color style"
+  },
+
+  "neonViolet": "Neon Violet",
+  "@neonViolet": {
+    "description": "Neon violet color option"
+  },
+
+  "neonCyan": "Neon Cyan",
+  "@neonCyan": {
+    "description": "Neon cyan color option"
+  },
+
+  "neonGreen": "Neon Green",
+  "@neonGreen": {
+    "description": "Neon green color option"
+  },
+
+  "neonPink": "Neon Pink",
+  "@neonPink": {
+    "description": "Neon pink color option"
+  },
+
+  "neonOrange": "Neon Orange",
+  "@neonOrange": {
+    "description": "Neon orange color option"
+  },
+
+  "neonBlue": "Neon Blue",
+  "@neonBlue": {
+    "description": "Neon blue color option"
+  },
+
+  "neonRed": "Neon Red",
+  "@neonRed": {
+    "description": "Neon red color option"
+  },
+
+  "neonYellow": "Neon Yellow",
+  "@neonYellow": {
+    "description": "Neon yellow color option"
+  },
+
+  "neonMint": "Neon Mint",
+  "@neonMint": {
+    "description": "Neon mint color option"
+  },
+
+  "blue": "Blue",
+  "@blue": {
+    "description": "Blue color option"
+  },
+
+  "teal": "Teal",
+  "@teal": {
+    "description": "Teal color option"
+  },
+
+  "green": "Green",
+  "@green": {
+    "description": "Green color option"
+  },
+
+  "pink": "Pink",
+  "@pink": {
+    "description": "Pink color option"
+  },
+
+  "orange": "Orange",
+  "@orange": {
+    "description": "Orange color option"
+  },
+
+  "indigo": "Indigo",
+  "@indigo": {
+    "description": "Indigo color option"
+  },
+
+  "red": "Red",
+  "@red": {
+    "description": "Red color option"
+  },
+
+  "yellow": "Yellow",
+  "@yellow": {
+    "description": "Yellow color option"
+  },
+
+  "purple": "Purple",
+  "@purple": {
+    "description": "Purple color option"
+  },
+
+  "previousLessonsDay": "Previous day with lessons",
+  "nextLessonsDay": "Next day with lessons",
+  "noLessonsFound": "No lessons found.",
+  "noLessonsForDay": "No lessons for {day}.{month}.{year}",
+  "noHolidaysFound": "No holidays found.",
+  "latestGrades": "Latest grades",
+  "noGradesFound": "No grades found.",
+  "openAbsences": "Open absences",
+  "showAll": "Show all",
+  "@showAll": {
+    "description": "Button text to show all release notes"
+  },
+  "noAbsencesFound": "No absences found.",
+  "noOpenAbsences": "No open absences.",
+  "noReleaseNotes": "No release notes available",
+  "releaseNotesInfo": "Updates and new features will be shown here",
+  "notificationTypes": "Notification types",
+  "timetable": "Timetable",
+  "agendaNotificationSubtitle": "Notifications before lessons",
+  "gradeNotificationSubtitle": "Notifications for new grades",
+  "absenceNotificationSubtitle": "Notifications for absence changes",
+  "generalNotifications": "General notifications",
+  "generalNotificationSubtitle": "Important school information and updates",
+  "notificationTime": "Notification time",
+  "notificationAdvanceQuestion": "How many minutes before class do you want to be notified?",
+  "minutesBeforeClass": "{minutes} min",
+  "currentAdvanceSetting": "Current setting: {minutes} minutes before class",
+  "test": "Test",
+  "sendTestNotification": "Send test notification",
+  "checkNotificationsWork": "Check if notifications work",
+  "gradeDetails": "Grade Details",
+  "basicInformation": "Basic Information",
+  "titleLabel": "Title",
+  "subjectLabel": "Subject",
+  "courseLabel": "Course",
+  "dateLabel": "Date",
+  "confirmedLabel": "Confirmed",
+  "gradeLabel": "Grade",
+  "pointsLabel": "Points",
+  "weightLabel": "Weight",
+  "courseGradeLabel": "Course Grade",
+  "classAverage": "Class Average",
+  "examGroupLabel": "Exam Group",
+  "classAverageLabel": "Class Average",
+  "groupWeightLabel": "Group Weight",
+  "commentLabel": "Comment",
+  "latestVersionMessage": "You are already using the latest version.",
+  "versionWithNumber": "Version {version}+{build}",
+  "@versionWithNumber": {
+    "description": "Version string with version and build number.",
+    "placeholders": {
+      "version": {},
+      "build": {}
+    }
+  },
+  "appLegalese": "Schuly © 2025 PianoNic",
+  "appDescription": "A custom app for students to manage Schulnetz data. Manage your timetable, grades, and important dates in one place.",
+  "apiEndpoint": "API Endpoint",
+
+  "enterApiEndpoint": "Please enter API endpoint",
+  "@enterApiEndpoint": {
+    "description": "Validation message for empty API endpoint"
+  },
+  "currentApiInfo": "Current API Info",
+  "apiInfoStatus": "API Info Status",
+  "environment": "Environment",
+  "error": "Error",
+  "apiBaseUrl": "API Base URL",
+  "save": "Save",
+  "apiUrlChanged": "API URL changed: {url}",
+  "@apiUrlChanged": {
+    "description": "Snackbar message when API URL is changed",
+    "placeholders": {
+      "url": {}
+    }
+  },
+  "@getColorName": {
+    "description": "Returns the localized color name for a given key."
+  },
+  "switchAccount": "Switch Account",
+  "@switchAccount": {
+    "description": "Header/title for the account switcher modal"
+  },
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": {
+    "description": "Shows the number of accounts",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "noAccounts": "No accounts available.",
+  "@noAccounts": {
+    "description": "Message when there are no accounts to switch"
+  },
+  "addFirstAccount": "Add your first account to get started!",
+  "@addFirstAccount": {
+    "description": "Subtitle encouraging the user to add their first account"
+  },
+  "active": "Active",
+  "@active": {
+    "description": "Label for the active account"
+  },
+  "available": "Available",
+  "@available": {
+    "description": "Label for available (not active) accounts"
+  },
+  "removeAccount": "Remove Account",
+  "@removeAccount": {
+    "description": "Button/dialog title for removing an account"
+  },
+  "confirmRemoveAccount": "Remove account {email}?",
+  "@confirmRemoveAccount": {
+    "description": "Confirmation for removing an account",
+    "placeholders": {
+      "email": {}
+    }
+  },
+  "remove": "Remove",
+  "@remove": {
+    "description": "Button text for confirming removal"
+  },
+  "switchedAccount": "Switched to {email}",
+  "@switchedAccount": {
+    "description": "Snackbar message when switching account",
+    "placeholders": {
+      "email": {}
+    }
+  },
+  "switchAccountError": "Failed to switch account: {error}",
+  "@switchAccountError": {
+    "description": "Error message when switching account fails",
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "removedAccount": "Removed account {email}",
+  "@removedAccount": {
+    "description": "Snackbar message when removing account",
+    "placeholders": {
+      "email": {}
+    }
+  },
+  "removeAccountError": "Failed to remove account: {error}",
+  "@removeAccountError": {
+    "description": "Error message when removing account fails",
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "unexpectedError": "Unexpected error: {error}",
+  "@unexpectedError": {
+    "description": "Generic error message",
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "weekdayMon": "Mon",
+  "@weekdayMon": {
+    "description": "Abbreviation for Monday"
+  },
+  "weekdayTue": "Tue",
+  "@weekdayTue": {
+    "description": "Abbreviation for Tuesday"
+  },
+  "weekdayWed": "Wed",
+  "@weekdayWed": {
+    "description": "Abbreviation for Wednesday"
+  },
+  "weekdayThu": "Thu",
+  "@weekdayThu": {
+    "description": "Abbreviation for Thursday"
+  },
+  "weekdayFri": "Fri",
+  "@weekdayFri": {
+    "description": "Abbreviation for Friday"
+  },
+  "weekdaySat": "Sat",
+  "@weekdaySat": {
+    "description": "Abbreviation for Saturday"
+  },
+  "weekdaySun": "Sun",
+  "@weekdaySun": {
+    "description": "Abbreviation for Sunday"
+  },
+  "absencesTabAll": "All Absences",
+  "absencesTabLateness": "Lateness",
+  "absencesTabAbsences": "Absences",
+  "absencesTabNotices": "Notices",
+  "absencesSection": "Absences",
+  "latenessSection": "Lateness",
+  "noticesSection": "Notices",
+  "noticeItem": "Notice",
+  "noReasonGiven": "No reason given",
+  "noCommentGiven": "No comment given",
+  "unknownData": "Unknown data",
+  "noNoticesFound": "No notices found.",
+  "minutes": "min",
+  "hours": "hr",
+  "latenessFrom": "Lateness from",
+  "duration": "Duration",
+  "course": "Course",
+  "reason": "Reason",
+  "comment": "Comment",
+  "status": "Status",
+  "excused": "Excused",
+  "notExcused": "Not excused",
+  "from": "From",
+  "to": "To",
+  "excuseUntil": "Excuse until",
+  "details": "Details",
+  "excuse": "Excuse",
+  "excuseComingSoon": "Excuse - Coming Soon!",
+  "deleteAbsenceTitle": "Delete Absence",
+  "deleteAbsenceConfirm": "Are you sure you want to delete this absence? This action cannot be undone.",
+  "absenceDeleted": "Absence deleted!",
+
+  "appUpdateTest": "App Update Test",
+  "@appUpdateTest": {
+    "description": "Title for app update test page"
+  },
+
+  "readyToTest": "Ready to test",
+  "@readyToTest": {
+    "description": "Initial status message for update test"
+  },
+
+  "updateSystemTest": "Update System Test",
+  "@updateSystemTest": {
+    "description": "Title for update system test section"
+  },
+
+  "statusLabel": "Status: {status}",
+  "@statusLabel": {
+    "description": "Status label with status value",
+    "placeholders": {
+      "status": {}
+    }
+  },
+
+  "checking": "Checking...",
+  "@checking": {
+    "description": "Progress text when checking for updates"
+  },
+
+  "forceShowUpdateDialog": "Force Show Update Dialog",
+  "@forceShowUpdateDialog": {
+    "description": "Button text to force show update dialog"
+  },
+
+  "clearDismissedUpdates": "Clear Dismissed Updates",
+  "@clearDismissedUpdates": {
+    "description": "Button text to clear dismissed updates"
+  },
+
+  "howItWorks": "How it works:",
+  "@howItWorks": {
+    "description": "Title for explanation section"
+  },
+
+  "updateStep1": "1. Checks GitHub releases for newer versions",
+  "@updateStep1": {
+    "description": "First step of update process"
+  },
+
+  "updateStep2": "2. Downloads APK from GitHub release assets",
+  "@updateStep2": {
+    "description": "Second step of update process"
+  },
+
+  "updateStep3": "3. Opens Android installer automatically",
+  "@updateStep3": {
+    "description": "Third step of update process"
+  },
+
+  "updateStep4": "4. Remembers dismissed updates until app restart",
+  "@updateStep4": {
+    "description": "Fourth step of update process"
+  },
+
+  "checkingForUpdates": "Checking for updates...",
+  "@checkingForUpdates": {
+    "description": "Status when checking for updates"
+  },
+
+  "updateAvailableVersion": "Update available: v{version}",
+  "@updateAvailableVersion": {
+    "description": "Status when update is available",
+    "placeholders": {
+      "version": {}
+    }
+  },
+
+  "noUpdatesAvailable": "No updates available or update dismissed",
+  "@noUpdatesAvailable": {
+    "description": "Status when no updates are available"
+  },
+
+  "errorCheckingUpdates": "Error checking for updates: {error}",
+  "@errorCheckingUpdates": {
+    "description": "Error message when checking for updates fails",
+    "placeholders": {
+      "error": {}
+    }
+  },
+
+  "showingUpdateDialog": "Showing update dialog...",
+  "@showingUpdateDialog": {
+    "description": "Status when showing update dialog"
+  },
+
+  "updateDialogShown": "Update dialog shown",
+  "@updateDialogShown": {
+    "description": "Status when update dialog is shown"
+  },
+
+  "errorShowingDialog": "Error showing dialog: {error}",
+  "@errorShowingDialog": {
+    "description": "Error message when showing dialog fails",
+    "placeholders": {
+      "error": {}
+    }
+  },
+
+  "clearingDismissedUpdates": "Clearing dismissed updates...",
+  "@clearingDismissedUpdates": {
+    "description": "Status when clearing dismissed updates"
+  },
+
+  "dismissedUpdatesCleared": "Dismissed updates cleared",
+  "@dismissedUpdatesCleared": {
+    "description": "Status when dismissed updates are cleared"
+  },
+
+  "errorClearingDismissed": "Error clearing dismissed: {error}",
+  "@errorClearingDismissed": {
+    "description": "Error message when clearing dismissed updates fails",
+    "placeholders": {
+      "error": {}
+    }
+  },
+
+  "illness": "Illness",
+  "@illness": {
+    "description": "Absence reason: illness"
+  },
+
+  "accident": "Accident",
+  "@accident": {
+    "description": "Absence reason: accident"
+  },
+
+  "military": "Military",
+  "@military": {
+    "description": "Absence reason: military"
+  },
+
+  "medicalCertificateForSport": "Valid medical certificate for sports",
+  "@medicalCertificateForSport": {
+    "description": "Absence reason: medical certificate for sports"
+  },
+
+  "otherAbsence": "Other absence",
+  "@otherAbsence": {
+    "description": "Absence reason: other"
+  },
+
+  "createNewAbsence": "Create new absence",
+  "@createNewAbsence": {
+    "description": "Title for creating a new absence"
+  },
+
+  "reasonRequired": "Reason *",
+  "@reasonRequired": {
+    "description": "Required field label for absence reason"
+  },
+
+  "create": "Create",
+  "@create": {
+    "description": "Create button text"
+  },
+
+  "noError": "No error",
+  "@noError": {
+    "description": "Message when there are no errors"
+  },
+
+  "unknown": "Unknown",
+  "@unknown": {
+    "description": "Unknown value placeholder"
+  },
+
+  "currentVersion": "Current: {version}",
+  "@currentVersion": {
+    "description": "Current version label in update dialog",
+    "placeholders": {
+      "version": {}
+    }
+  },
+
+  "latestVersion": "Latest: {version}",
+  "@latestVersion": {
+    "description": "Latest version label in update dialog",
+    "placeholders": {
+      "version": {}
+    }
+  },
+
+  "downloadingUpdate": "Update is being downloaded...",
+  "@downloadingUpdate": {
+    "description": "Status message during update download"
+  },
+
+  "installingUpdate": "Update is being installed...",
+  "@installingUpdate": {
+    "description": "Status message during update installation"
+  },
+
+  "install": "Install",
+  "@install": {
+    "description": "Install button text"
+  },
+
+  "downloading": "Downloading...",
+  "@downloading": {
+    "description": "Downloading button text"
+  },
+
+  "installing": "Installing...",
+  "@installing": {
+    "description": "Installing button text"
+  },
+
+  "downloadError": "Error downloading update",
+  "@downloadError": {
+    "description": "Error message when download fails"
+  },
+
+  "downloadErrorDetails": "Download error: {error}",
+  "@downloadErrorDetails": {
+    "description": "Detailed download error message",
+    "placeholders": {
+      "error": {}
+    }
+  },
+
+  "installationNotAllowed": "Installation not allowed",
+  "@installationNotAllowed": {
+    "description": "Error when installation permission is denied"
+  },
+
+  "installationError": "Installation error",
+  "@installationError": {
+    "description": "Generic installation error message"
+  },
+
+  "installationErrorDetails": "Installation error: {error}",
+  "@installationErrorDetails": {
+    "description": "Detailed installation error message",
+    "placeholders": {
+      "error": {}
+    }
+  },
+
+  "updateInstallationStarted": "Update installation started",
+  "@updateInstallationStarted": {
+    "description": "Success message when installation starts"
+  },
+
+  "selectReason": "Please select a reason",
+  "@selectReason": {
+    "description": "Validation for reason selection"
+  },
+
+  "selectDate": "Please select a date",
+  "@selectDate": {
+    "description": "Validation for date selection"
+  },
+
+  "absentFrom": "Absent from *",
+  "@absentFrom": {
+    "description": "Label for absence start date field"
+  },
+
+  "absentTo": "Absent to *",
+  "@absentTo": {
+    "description": "Label for absence end date field"
+  },
+
+  "toDateMustBeAfterFromDate": "End date must be after start date",
+  "@toDateMustBeAfterFromDate": {
+    "description": "Validation for date range"
+  },
+
+  "absentFromTime": "Absent from (time)",
+  "@absentFromTime": {
+    "description": "Label for absence start time field"
+  },
+
+  "absentToTime": "Absent to (time)",
+  "@absentToTime": {
+    "description": "Label for absence end time field"
+  },
+
+  "absenceCreatedSuccessfully": "Absence created successfully!",
+  "@absenceCreatedSuccessfully": {
+    "description": "Success message for absence creation"
+  },
+
+  "customizeHomepage": "Customize homepage",
+  "@customizeHomepage": {
+    "description": "Title for homepage configuration modal"
+  },
+
+  "visible": "Visible",
+  "@visible": {
+    "description": "Status text for visible sections"
+  },
+
+  "hidden": "Hidden",
+  "@hidden": {
+    "description": "Status text for hidden sections"
+  },
+
+  "pushAssistNotifications": "PushAssist Notifications",
+  "@pushAssistNotifications": {
+    "description": "Notification channel name"
+  },
+
+  "notificationsBeforeClasses": "Notifications before classes",
+  "@notificationsBeforeClasses": {
+    "description": "Notification channel description"
+  },
+
+  "testNotifications": "Test Notifications",
+  "@testNotifications": {
+    "description": "Test notification channel name"
+  },
+
+  "testNotificationDescription": "Test notification for PushAssist",
+  "@testNotificationDescription": {
+    "description": "Test notification channel description"
+  },
+
+  "nextClass": "Next class: {subject}",
+  "@nextClass": {
+    "description": "Notification title for next class",
+    "placeholders": {
+      "subject": {}
+    }
+  },
+
+  "roomAndTeacher": "Room: {room}{teacher}",
+  "@roomAndTeacher": {
+    "description": "Notification body with room and teacher",
+    "placeholders": {
+      "room": {},
+      "teacher": {}
+    }
+  },
+
+  "teacher": " • Teacher: {teacher}",
+  "@teacher": {
+    "description": "Teacher part of notification",
+    "placeholders": {
+      "teacher": {}
+    }
+  },
+
+  "vibrationTest": "🔔 PushAssist Vibration Test",
+  "@vibrationTest": {
+    "description": "Test notification title"
+  },
+
+  "vibrationTestMessage": "This notification should vibrate! Check your device settings if it doesn't.",
+  "@vibrationTestMessage": {
+    "description": "Test notification message"
+  },
+
+  "monday": "Mon",
+  "@monday": {
+    "description": "Monday abbreviation"
+  },
+
+  "tuesday": "Tue",
+  "@tuesday": {
+    "description": "Tuesday abbreviation"
+  },
+
+  "wednesday": "Wed",
+  "@wednesday": {
+    "description": "Wednesday abbreviation"
+  },
+
+  "thursday": "Thu",
+  "@thursday": {
+    "description": "Thursday abbreviation"
+  },
+
+  "friday": "Fri",
+  "@friday": {
+    "description": "Friday abbreviation"
+  },
+
+  "saturday": "Sat",
+  "@saturday": {
+    "description": "Saturday abbreviation"
+  },
+
+  "sunday": "Sun",
+  "@sunday": {
+    "description": "Sunday abbreviation"
+  },
+
+  "january": "January",
+  "@january": {
+    "description": "January month name"
+  },
+
+  "february": "February",
+  "@february": {
+    "description": "February month name"
+  },
+
+  "march": "March",
+  "@march": {
+    "description": "March month name"
+  },
+
+  "april": "April",
+  "@april": {
+    "description": "April month name"
+  },
+
+  "may": "May",
+  "@may": {
+    "description": "May month name"
+  },
+
+  "june": "June",
+  "@june": {
+    "description": "June month name"
+  },
+
+  "july": "July",
+  "@july": {
+    "description": "July month name"
+  },
+
+  "august": "August",
+  "@august": {
+    "description": "August month name"
+  },
+
+  "september": "September",
+  "@september": {
+    "description": "September month name"
+  },
+
+  "october": "October",
+  "@october": {
+    "description": "October month name"
+  },
+
+  "november": "November",
+  "@november": {
+    "description": "November month name"
+  },
+
+  "december": "December",
+  "@december": {
+    "description": "December month name"
+  },
+
+  "studentIdCardTooltip": "Student ID card",
+  "@studentIdCardTooltip": {
+    "description": "Tooltip for student ID card button"
+  },
+
+  "customizeHomepageTooltip": "Customize homepage",
+  "@customizeHomepageTooltip": {
+    "description": "Tooltip for homepage customization button"
+  },
+
+  "switchAccountButton": "Switch account",
+  "@switchAccountButton": {
+    "description": "Button text to switch account"
+  },
+
+  "fetchingAppInfo": "Fetching app information...",
+  "@fetchingAppInfo": {
+    "description": "Loading message during app initialization"
+  },
+
+  "checkingUpdatesInitialization": "Checking for updates...",
+  "@checkingUpdatesInitialization": {
+    "description": "Loading message during update check on startup"
+  },
+
+  "loadingData": "Loading data...",
+  "@loadingData": {
+    "description": "Loading message during data fetch"
+  },
+
+  "finalizingInitialization": "Finalizing initialization...",
+  "@finalizingInitialization": {
+    "description": "Loading message during app startup finalization"
+  },
+
+  "errorCheckingUpdatesDetails": "Error checking for updates: {error}",
+  "@errorCheckingUpdatesDetails": {
+    "description": "Detailed error message for update check failure",
+    "placeholders": {
+      "error": {}
+    }
+  }
+}

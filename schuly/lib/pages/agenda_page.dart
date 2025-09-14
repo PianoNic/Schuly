@@ -3,8 +3,7 @@ import 'package:provider/provider.dart';
 import '../widgets/agenda_item.dart';
 import '../widgets/custom_calendar.dart';
 import '../providers/api_store.dart';
-// import '../api/lib/model/agenda_dto.dart';
-// import '../api/lib/api.dart';
+import '../l10n/app_localizations.dart';
 
 class AgendaPage extends StatefulWidget {
   const AgendaPage({super.key});
@@ -31,6 +30,7 @@ class _AgendaPageState extends State<AgendaPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Consumer<ApiStore>(
       builder: (context, apiStore, _) {
         final agenda = apiStore.agenda;
@@ -65,7 +65,7 @@ class _AgendaPageState extends State<AgendaPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'Termine für ${_selectedDay.day}.${_selectedDay.month}.${_selectedDay.year}',
+                          localizations.agendaForDate(_selectedDay.day, _selectedDay.month, _selectedDay.year), // TODO: Add agendaForDate to ARB
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 16),
@@ -94,7 +94,7 @@ class _AgendaPageState extends State<AgendaPage> {
                               start.month == _selectedDay.month &&
                               start.day == _selectedDay.day;
                           }).isEmpty)
-                            const Center(child: Text('Keine Termine für diesen Tag')),
+                            Center(child: Text(localizations.noAgendaForDay)), // TODO: Add noAgendaForDay to ARB
                         ],
                       ],
                     ),
@@ -108,3 +108,5 @@ class _AgendaPageState extends State<AgendaPage> {
     );
   }
 }
+
+// TODO: Add agendaForDate (with params), noAgendaForDay to ARB files

@@ -7,6 +7,7 @@ import '../providers/api_store.dart';
 import '../providers/homepage_config_provider.dart';
 import '../pages/absenzen_page.dart';
 import 'package:schuly/api/lib/api.dart';
+import '../l10n/app_localizations.dart';
 
 class StartPage extends StatefulWidget {
   final VoidCallback? onNavigateToAbsenzen;
@@ -73,23 +74,6 @@ class _StartPageState extends State<StartPage> {
     return calculatedHeight > minHeight ? calculatedHeight : minHeight;
   }
 
-  DateTime? _findPreviousAvailableDate(List<DateTime> availableDates, DateTime currentDate) {
-    for (int i = availableDates.length - 1; i >= 0; i--) {
-      if (availableDates[i].isBefore(currentDate)) {
-        return availableDates[i];
-      }
-    }
-    return null;
-  }
-
-  DateTime? _findNextAvailableDate(List<DateTime> availableDates, DateTime currentDate) {
-    for (final date in availableDates) {
-      if (date.isAfter(currentDate)) {
-        return date;
-      }
-    }
-    return null;
-  }
 
   @override
   void dispose() {
@@ -131,6 +115,7 @@ class _StartPageState extends State<StartPage> {
   }
 
   Widget _buildSection(BuildContext context, String sectionId, dynamic agenda, dynamic grades, dynamic absences, ApiStore apiStore, VoidCallback? onNavigateToAbsenzen) {
+    final localizations = AppLocalizations.of(context)!;
     switch (sectionId) {
       case 'lessons':
         return Card(
@@ -144,7 +129,7 @@ class _StartPageState extends State<StartPage> {
                   children: [
                     Flexible(
                       child: Text(
-                        'Nächste Lektionen',
+                        localizations.nextLessons,
                         style: Theme.of(context).textTheme.titleLarge,
                         overflow: TextOverflow.visible,
                         softWrap: true,
@@ -168,7 +153,7 @@ class _StartPageState extends State<StartPage> {
                             }
                           } : null,
                           icon: const Icon(Icons.chevron_left),
-                          tooltip: 'Vorheriger Tag mit Lektionen',
+                          tooltip: localizations.previousLessonsDay,
                         ),
                         IconButton(
                           onPressed: _availableDates.isNotEmpty ? () {
@@ -185,7 +170,7 @@ class _StartPageState extends State<StartPage> {
                             }
                           } : null,
                           icon: const Icon(Icons.chevron_right),
-                          tooltip: 'Nächster Tag mit Lektionen',
+                          tooltip: localizations.nextLessonsDay,
                         ),
                       ],
                     ),
@@ -195,7 +180,7 @@ class _StartPageState extends State<StartPage> {
                 if (agenda == null)
                   const Center(child: CircularProgressIndicator())
                 else if (agenda.isEmpty)
-                  const Center(child: Text('Keine Lektionen gefunden.'))
+                  Center(child: Text(localizations.noLessonsFound))
                 else ...[
                   (() {
                     // Initialize available dates and page controller
@@ -241,7 +226,7 @@ class _StartPageState extends State<StartPage> {
                       }
 
                     if (_availableDates.isEmpty) {
-                      return const Center(child: Text('Keine Lektionen gefunden.'));
+                      return Center(child: Text(localizations.noLessonsFound));
                     }
 
                     // Calculate optimal height based on the day with most lessons
@@ -280,7 +265,7 @@ class _StartPageState extends State<StartPage> {
 
                           if (sameDayLessons.isEmpty) {
                             return Center(
-                              child: Text('Keine Lektionen für ${selectedDate.day}.${selectedDate.month}.${selectedDate.year}')
+                              child: Text(localizations.noLessonsForDay(selectedDate.day, selectedDate.month, selectedDate.year))
                             );
                           }
 
@@ -329,7 +314,7 @@ class _StartPageState extends State<StartPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Nächste Ferien',
+                  localizations.nextHolidays,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 12),
@@ -349,7 +334,7 @@ class _StartPageState extends State<StartPage> {
                         );
                       }),
                   if (agenda.where((item) => item.eventType.toLowerCase().contains('holiday') || item.eventType.toLowerCase().contains('ferien')).isEmpty)
-                    const Center(child: Text('Keine Ferien gefunden.')),
+                    Center(child: Text(localizations.noHolidaysFound)),
                 ],
               ],
             ),
@@ -363,14 +348,14 @@ class _StartPageState extends State<StartPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Letzte Noten',
+                  localizations.latestGrades,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 12),
                 if (grades == null)
                   const Center(child: CircularProgressIndicator())
                 else if (grades.isEmpty)
-                  const Center(child: Text('Keine Noten gefunden.'))
+                  Center(child: Text(localizations.noGradesFound))
                 else ...[
                   ...(() {
                     final List<GradeDto> gradesList = grades.cast<GradeDto>().toList();
@@ -391,19 +376,9 @@ class _StartPageState extends State<StartPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Offene Absenzen',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    TextButton.icon(
-                      onPressed: widget.onNavigateToAbsenzen,
-                      icon: const Icon(Icons.arrow_forward),
-                      label: const Text('Alle anzeigen'),
-                    ),
-                  ],
+                Text(
+                  localizations.openAbsences,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 12),
                 if (absences == null)
@@ -426,7 +401,7 @@ class _StartPageState extends State<StartPage> {
                     }).toList();
                     if (openAbsences.isEmpty) {
                       if (absList.isEmpty) {
-                        return [const Center(child: Text('Keine Absenzen gefunden.'))];
+                        return [Center(child: Text(localizations.noAbsencesFound))];
                       } else {
                         final fallbackAbsences = absList.take(3).map((absence) {
                           return CompactAbsenceItem(
@@ -435,10 +410,11 @@ class _StartPageState extends State<StartPage> {
                             excuseUntil: _formatDateTime(absence.dateEAB, null),
                             status: absence.statusEAB,
                             reason: absence.reason,
+                            localizations: localizations,
                           );
                         }).toList();
                         return [
-                          const Center(child: Text('Keine offenen Absenzen.')), ...fallbackAbsences
+                          Center(child: Text(localizations.noOpenAbsences)), ...fallbackAbsences
                         ];
                       }
                     }
@@ -449,6 +425,7 @@ class _StartPageState extends State<StartPage> {
                         excuseUntil: _formatDateTime(absence.dateEAB, null),
                         status: absence.statusEAB,
                         reason: absence.reason,
+                        localizations: localizations,
                       );
                     }).toList();
                   })(),
@@ -463,21 +440,22 @@ class _StartPageState extends State<StartPage> {
   }
 
   String _weekdayShort(int weekday) {
+    final localizations = AppLocalizations.of(context)!;
     switch (weekday) {
       case 1:
-        return 'Mo';
+        return localizations.weekdayMon;
       case 2:
-        return 'Di';
+        return localizations.weekdayTue;
       case 3:
-        return 'Mi';
+        return localizations.weekdayWed;
       case 4:
-        return 'Do';
+        return localizations.weekdayThu;
       case 5:
-        return 'Fr';
+        return localizations.weekdayFri;
       case 6:
-        return 'Sa';
+        return localizations.weekdaySat;
       case 7:
-        return 'So';
+        return localizations.weekdaySun;
       default:
         return '';
     }

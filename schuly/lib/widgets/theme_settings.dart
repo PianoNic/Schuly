@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../providers/theme_provider.dart';
+import '../l10n/app_localizations.dart';
 
 class ThemeSettings extends StatelessWidget {
   final ThemeProvider themeProvider;
@@ -16,32 +17,33 @@ class ThemeSettings extends StatelessWidget {
 
   // 9 neon accent colors for 3x3 grid
   final List<ColorOption> _neonColors = const [
-    ColorOption(color: Color(0xFF8A2BE2), name: 'Neon Violett'),  // Neon Violet
-    ColorOption(color: Color(0xFF00FFFF), name: 'Neon Cyan'),     // Neon Cyan
-    ColorOption(color: Color(0xFF39FF14), name: 'Neon Grün'),     // Neon Green
-    ColorOption(color: Color(0xFFFF69B4), name: 'Neon Pink'),     // Neon Pink (lighter)
-    ColorOption(color: Color(0xFFFF6600), name: 'Neon Orange'),   // Neon Orange
-    ColorOption(color: Color(0xFF0080FF), name: 'Neon Blau'),     // Neon Blue
-    ColorOption(color: Color(0xFFFF0040), name: 'Neon Rot'),      // Neon Red
-    ColorOption(color: Color(0xFFFFFF00), name: 'Neon Gelb'),     // Neon Yellow
-    ColorOption(color: Color(0xFF00FF80), name: 'Neon Mint'),     // Neon Mint (replaced lila)
+    ColorOption(color: Color(0xFF8A2BE2), name: 'neonViolet'),  // Neon Violet
+    ColorOption(color: Color(0xFF00FFFF), name: 'neonCyan'),     // Neon Cyan
+    ColorOption(color: Color(0xFF39FF14), name: 'neonGreen'),     // Neon Green
+    ColorOption(color: Color(0xFFFF69B4), name: 'neonPink'),     // Neon Pink (lighter)
+    ColorOption(color: Color(0xFFFF6600), name: 'neonOrange'),   // Neon Orange
+    ColorOption(color: Color(0xFF0080FF), name: 'neonBlue'),     // Neon Blue
+    ColorOption(color: Color(0xFFFF0040), name: 'neonRed'),      // Neon Red
+    ColorOption(color: Color(0xFFFFFF00), name: 'neonYellow'),     // Neon Yellow
+    ColorOption(color: Color(0xFF00FF80), name: 'neonMint'),     // Neon Mint (replaced lila)
   ];
 
   // 9 classic colors for 3x3 grid
   final List<ColorOption> _classicColors = const [
-    ColorOption(color: Colors.blue, name: 'Blau'),
-    ColorOption(color: Colors.teal, name: 'Türkis'),
-    ColorOption(color: Colors.green, name: 'Grün'),
-    ColorOption(color: Colors.pink, name: 'Pink'),
-    ColorOption(color: Colors.orange, name: 'Orange'),
-    ColorOption(color: Colors.indigo, name: 'Indigo'),
-    ColorOption(color: Colors.red, name: 'Rot'),
-    ColorOption(color: Colors.amber, name: 'Gelb'),
-    ColorOption(color: Colors.purple, name: 'Lila'),
+    ColorOption(color: Colors.blue, name: 'blue'),
+    ColorOption(color: Colors.teal, name: 'teal'),
+    ColorOption(color: Colors.green, name: 'green'),
+    ColorOption(color: Colors.pink, name: 'pink'),
+    ColorOption(color: Colors.orange, name: 'orange'),
+    ColorOption(color: Colors.indigo, name: 'indigo'),
+    ColorOption(color: Colors.red, name: 'red'),
+    ColorOption(color: Colors.amber, name: 'yellow'),
+    ColorOption(color: Colors.purple, name: 'purple'),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -49,24 +51,24 @@ class ThemeSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Design Einstellungen',
+              localizations.designSettings,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 16),
             
             // Theme Mode Selection
             Text(
-              'Darstellung',
+              localizations.appearance,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
             Row(
               children: [
-                Expanded(child: _buildThemeModeOption(context, ThemeMode.system, 'Automatisch', Icons.brightness_auto, enabled: true)),
+                Expanded(child: _buildThemeModeOption(context, ThemeMode.system, localizations.automatic, Icons.brightness_auto, enabled: true)),
                 const SizedBox(width: 8),
-                Expanded(child: _buildThemeModeOption(context, ThemeMode.light, 'Hell', Icons.light_mode, enabled: !themeProvider.useMaterialYou)),
+                Expanded(child: _buildThemeModeOption(context, ThemeMode.light, localizations.light, Icons.light_mode, enabled: !themeProvider.useMaterialYou)),
                 const SizedBox(width: 8),
-                Expanded(child: _buildThemeModeOption(context, ThemeMode.dark, 'Dunkel', Icons.dark_mode, enabled: !themeProvider.useMaterialYou)),
+                Expanded(child: _buildThemeModeOption(context, ThemeMode.dark, localizations.dark, Icons.dark_mode, enabled: !themeProvider.useMaterialYou)),
               ],
             ),
             
@@ -74,18 +76,18 @@ class ThemeSettings extends StatelessWidget {
             
             // Color Mode Toggle
             Text(
-              'Farbstil',
+              localizations.colorStyle,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
             // Color mode selection (mutually exclusive)
             Row(
               children: [
-                Expanded(child: _buildColorStyleOption(context, 'material_you', 'Material\nYou', Icons.color_lens)),
+                Expanded(child: _buildColorStyleOption(context, 'material_you', localizations.materialYou, Icons.color_lens)),
                 const SizedBox(width: 8),
-                Expanded(child: _buildColorStyleOption(context, 'classic', 'Klassisch', Icons.palette_outlined)),
+                Expanded(child: _buildColorStyleOption(context, 'classic', localizations.classic, Icons.palette_outlined)),
                 const SizedBox(width: 8),
-                Expanded(child: _buildColorStyleOption(context, 'neon', 'Neon', Icons.auto_awesome)),
+                Expanded(child: _buildColorStyleOption(context, 'neon', localizations.neon, Icons.auto_awesome)),
               ],
             ),
             
@@ -94,7 +96,7 @@ class ThemeSettings extends StatelessWidget {
             // Color Selection (only shown when not using Material You)
             if (!themeProvider.useMaterialYou) ...[
               Text(
-                themeProvider.isNeonMode ? 'Neon Akzentfarbe' : 'Klassische Akzentfarbe',
+                themeProvider.isNeonMode ? localizations.neonAccentColor : localizations.classicAccentColor,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 12),
@@ -129,7 +131,7 @@ class ThemeSettings extends StatelessWidget {
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                    color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
                   ),
                 ),
                 child: Row(
@@ -144,14 +146,14 @@ class ThemeSettings extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Material You aktiv',
+                            localizations.materialYouActive,
                             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            'Farben werden automatisch vom Systemdesign übernommen',
+                            localizations.materialYouInfo,
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
@@ -170,7 +172,7 @@ class ThemeSettings extends StatelessWidget {
     final isSelected = themeProvider.themeMode == mode;
     final appColors = Theme.of(context).extension<AppColors>();
     final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
-    final lightBackground = appColors?.lightBackground ?? seedColor.withOpacity(0.1);
+    final lightBackground = appColors?.lightBackground ?? seedColor.withValues(alpha: 0.1);
     
     return InkWell(
       onTap: enabled ? () => themeProvider.setThemeMode(mode) : null,
@@ -186,7 +188,7 @@ class ThemeSettings extends StatelessWidget {
           border: Border.all(
             color: isSelected 
                 ? seedColor
-                : Theme.of(context).colorScheme.outline.withOpacity(enabled ? 0.2 : 0.1),
+                : Theme.of(context).colorScheme.outline.withValues(alpha: enabled ? 0.2 : 0.1),
           ),
         ),
         child: Column(
@@ -199,7 +201,7 @@ class ThemeSettings extends StatelessWidget {
                   ? (isSelected 
                       ? seedColor
                       : Theme.of(context).colorScheme.onSurface)
-                  : Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+                  : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
               size: 20,
             ),
             const SizedBox(height: 2),
@@ -210,7 +212,7 @@ class ThemeSettings extends StatelessWidget {
                     ? (isSelected 
                         ? seedColor
                         : Theme.of(context).colorScheme.onSurface)
-                    : Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+                    : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
                 fontWeight: isSelected ? FontWeight.w500 : FontWeight.normal,
                 fontSize: 12,
               ),
@@ -228,7 +230,7 @@ class ThemeSettings extends StatelessWidget {
     final isSelected = _getSelectedColorStyle() == style;
     final appColors = Theme.of(context).extension<AppColors>();
     final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
-    final lightBackground = appColors?.lightBackground ?? seedColor.withOpacity(0.1);
+    final lightBackground = appColors?.lightBackground ?? seedColor.withValues(alpha: 0.1);
     
     return InkWell(
       onTap: () => _setColorStyle(style),
@@ -244,7 +246,7 @@ class ThemeSettings extends StatelessWidget {
           border: Border.all(
             color: isSelected 
                 ? seedColor
-                : Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                : Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
           ),
         ),
         child: Column(
@@ -303,12 +305,36 @@ class ThemeSettings extends StatelessWidget {
     }
   }
 
+  String _getColorName(AppLocalizations localizations, String key) {
+    switch (key) {
+      case 'blue': return localizations.blue;
+      case 'teal': return localizations.teal;
+      case 'green': return localizations.green;
+      case 'pink': return localizations.pink;
+      case 'orange': return localizations.orange;
+      case 'indigo': return localizations.indigo;
+      case 'red': return localizations.red;
+      case 'yellow': return localizations.yellow;
+      case 'purple': return localizations.purple;
+      case 'neonViolet': return localizations.neonViolet;
+      case 'neonCyan': return localizations.neonCyan;
+      case 'neonGreen': return localizations.neonGreen;
+      case 'neonPink': return localizations.neonPink;
+      case 'neonOrange': return localizations.neonOrange;
+      case 'neonBlue': return localizations.neonBlue;
+      case 'neonRed': return localizations.neonRed;
+      case 'neonYellow': return localizations.neonYellow;
+      case 'neonMint': return localizations.neonMint;
+      default: return key;
+    }
+  }
 
-  Widget _buildColorOption(BuildContext context, Color color, String label) {
+  Widget _buildColorOption(BuildContext context, Color color, String labelKey) {
+    final localizations = AppLocalizations.of(context)!;
     final isSelected = themeProvider.seedColor == color;
     final shouldShowNeonEffect = themeProvider.isNeonMode;
     final lightBackground = isSelected 
-        ? color.withOpacity(shouldShowNeonEffect ? 0.08 : 0.1)
+        ? color.withValues(alpha: shouldShowNeonEffect ? 0.08 : 0.1)
         : Colors.transparent;
     
     return InkWell(
@@ -322,12 +348,12 @@ class ThemeSettings extends StatelessWidget {
           border: Border.all(
             color: isSelected 
                 ? color
-                : Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                : Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
             width: isSelected ? 2 : 1,
           ),
           boxShadow: isSelected && shouldShowNeonEffect ? [
             BoxShadow(
-              color: color.withOpacity(0.3),
+              color: color.withValues(alpha: 0.3),
               blurRadius: 8,
               spreadRadius: 0,
             ),
@@ -344,7 +370,7 @@ class ThemeSettings extends StatelessWidget {
                 shape: BoxShape.circle,
                 boxShadow: shouldShowNeonEffect ? [
                   BoxShadow(
-                    color: color.withOpacity(0.4),
+                    color: color.withValues(alpha: 0.4),
                     blurRadius: 6,
                     spreadRadius: 0,
                   ),
@@ -360,7 +386,7 @@ class ThemeSettings extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              label,
+              _getColorName(localizations, labelKey),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: isSelected 
                     ? color
@@ -380,7 +406,7 @@ class ThemeSettings extends StatelessWidget {
 
   Color _getContrastColor(Color color) {
     // Calculate luminance to determine if we need light or dark text
-    final luminance = (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
+    final luminance = (0.299 * (color.r * 255.0).round() + 0.587 * (color.g * 255.0).round() + 0.114 * (color.b * 255.0).round()) / 255;
     return luminance > 0.5 ? Colors.black : Colors.white;
   }
 }

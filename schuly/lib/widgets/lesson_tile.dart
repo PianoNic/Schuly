@@ -31,11 +31,11 @@ class LessonTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     final surfaceContainer = appColors?.surfaceContainer ??
-        Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3);
+        Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3);
 
     // Use darker background for current lesson
     final backgroundColor = isCurrentLesson
-        ? Theme.of(context).colorScheme.primaryContainer.withOpacity(0.8)
+        ? Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.8)
         : surfaceContainer;
 
     return Container(

@@ -5,12 +5,13 @@ import '../widgets/theme_settings.dart';
 import '../providers/theme_provider.dart';
 import '../providers/api_store.dart';
 import '../services/storage_service.dart';
-import '../services/push_notification_service.dart';
 import '../main.dart';
 import 'notification_config_page.dart';
 import 'release_notes_page.dart';
 import '../services/app_update_service.dart';
 import '../widgets/app_update_dialog.dart';
+import '../l10n/app_localizations.dart';
+import '../providers/language_provider.dart';
 
 class AppSettingsPage extends StatefulWidget {
   final ThemeProvider themeProvider;
@@ -66,18 +67,6 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
     });
   }
 
-  Future<void> _togglePushNotifications(bool value) async {
-    setState(() {
-      _pushNotificationsEnabled = value;
-    });
-    
-    await StorageService.setPushNotificationsEnabled(value);
-    
-    // If disabling push notifications, cancel all notifications
-    if (!value) {
-      await PushNotificationService.cancelAllNotifications();
-    }
-  }
 
   Future<void> _checkForUpdates() async {
     setState(() {
@@ -99,8 +88,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
           // Show "no updates" message
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Sie verwenden bereits die neueste Version'),
+              SnackBar(
+                content: Text(AppLocalizations.of(context)!.latestVersionMessage),
                 backgroundColor: Colors.green,
               ),
             );
@@ -114,7 +103,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Fehler beim Suchen nach Updates: $e'),
+            content: Text(AppLocalizations.of(context)!.errorCheckingUpdatesDetails(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -124,10 +113,12 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Einstellungen',
+          localizations.appSettings,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.normal,
             color: Theme.of(context).colorScheme.onSurface,
@@ -156,7 +147,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'App Einstellungen',
+                      localizations.appSettings,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 16),
@@ -167,8 +158,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         : _buildSettingsTile(
                             context,
                             icon: Icons.notifications_off_outlined,
-                            title: 'Push-Benachrichtigungen',
-                            subtitle: 'Feature wird noch entwickelt',
+                            title: localizations.pushNotifications,
+                            subtitle: localizations.featureInDevelopment,
                             trailing: Switch(
                               value: false,
                               onChanged: null,
@@ -184,8 +175,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         : _buildSettingsTile(
                             context,
                             icon: Icons.settings_outlined,
-                            title: 'Benachrichtigungen konfigurieren',
-                            subtitle: 'Wählen Sie Typen und Timing für Benachrichtigungen',
+                            title: localizations.configureNotifications,
+                            subtitle: localizations.chooseTypesAndTiming,
                             trailing: const Icon(Icons.chevron_right),
                             onTap: _pushNotificationsEnabled ? () {
                               Navigator.push(
@@ -205,17 +196,37 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
 
 
                     // Language Setting
-                    _buildSettingsTile(
-                      context,
-                      icon: Icons.language_outlined,
-                      title: 'Sprache',
-                      subtitle: 'Deutsch',
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Spracheinstellungen - Coming Soon!'),
-                          ),
+                    Builder(
+                      builder: (context) {
+                        final languageProvider = Provider.of<LanguageProvider>(context);
+                        final locale = languageProvider.locale;
+                        String languageName;
+                        switch (locale.languageCode) {
+                          case 'en':
+                            languageName = localizations.english;
+                            break;
+                          case 'de':
+                            languageName = localizations.german;
+                            break;
+                          case 'gsw':
+                            languageName = localizations.swissGerman;
+                            break;
+                          case 'arr':
+                            languageName = localizations.pirate;
+                            break;
+                          case 'kaw':
+                            languageName = localizations.kawaii;
+                            break;
+                          default:
+                            languageName = localizations.german;
+                        }
+                        return _buildSettingsTile(
+                          context,
+                          icon: Icons.language_outlined,
+                          title: localizations.language,
+                          subtitle: languageName,
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () => _showLanguageSelector(context, languageProvider, localizations),
                         );
                       },
                     ),
@@ -226,8 +237,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     _buildSettingsTile(
                       context,
                       icon: Icons.article_outlined,
-                      title: 'Was ist neu',
-                      subtitle: 'Changelog und neue Features',
+                      title: localizations.whatsNew,
+                      subtitle: localizations.changelogAndFeatures,
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {
                         Navigator.push(
@@ -243,8 +254,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     _buildSettingsTile(
                       context,
                       icon: Icons.system_update,
-                      title: 'Nach Updates suchen',
-                      subtitle: 'Auf neue Versionen prüfen',
+                      title: localizations.checkForUpdates,
+                      subtitle: localizations.checkForNewVersions,
                       trailing: _isCheckingUpdates 
                           ? const SizedBox(
                               width: 20,
@@ -261,21 +272,20 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     _buildSettingsTile(
                       context,
                       icon: Icons.info_outlined,
-                      title: 'Über die App',
-                      subtitle: 'Version $_appVersion+$_appBuildNumber',
+                      title: localizations.aboutApp,
+                      subtitle: localizations.versionWithNumber(_appVersion, _appBuildNumber),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {
                         showAboutDialog(
                           context: context,
-                          applicationName: 'Schuly',
-                          applicationVersion: '$_appVersion+$_appBuildNumber',
-                          applicationLegalese: 'Schuly © 2025 PianoNic',
+                          applicationName: localizations.appTitle,
+                          applicationVersion: '${_appVersion}+${_appBuildNumber}',
+                          applicationLegalese: localizations.appLegalese,
                           children: [
                             const SizedBox(height: 16),
-                            const Text(
-                              'Eine custom App für Schüler zur Verwaltung von Schulnetz-Daten. '
-                              'Verwalten Sie Ihren Stundenplan, Noten und wichtige Termine an einem Ort.',
-                              style: TextStyle(fontSize: 14),
+                            Text(
+                              localizations.appDescription,
+                              style: const TextStyle(fontSize: 14),
                             ),
                             const SizedBox(height: 12),
                           ],
@@ -297,7 +307,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'API Endpoint',
+                      localizations.apiEndpoint,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 16),
@@ -305,9 +315,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       builder: (context, apiStore, child) {
                         // Always show the container with debug info
                         final hasAppInfo = apiStore.appInfo != null;
-                        final version = hasAppInfo ? (apiStore.appInfo!['version'] ?? 'unbekannt') : 'Lädt...';
-                        final environment = hasAppInfo ? (apiStore.appInfo!['environment'] ?? 'unbekannt') : 'Lädt...';
-                        final lastError = apiStore.lastApiError ?? 'Kein Fehler';
+                        final version = hasAppInfo ? (apiStore.appInfo!['version'] ?? AppLocalizations.of(context)!.unknown) : AppLocalizations.of(context)!.loading;
+                        final environment = hasAppInfo ? (apiStore.appInfo!['environment'] ?? AppLocalizations.of(context)!.unknown) : AppLocalizations.of(context)!.loading;
+                        final lastError = apiStore.lastApiError ?? AppLocalizations.of(context)!.noError;
                         
                         return Container(
                           width: double.infinity,
@@ -315,31 +325,31 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                           margin: const EdgeInsets.only(bottom: 16),
                           decoration: BoxDecoration(
                             color: hasAppInfo 
-                                ? Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3)
-                                : Colors.orange.withOpacity(0.1),
+                                ? Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3)
+                                : Colors.orange.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
                               color: hasAppInfo 
-                                  ? Theme.of(context).colorScheme.outline.withOpacity(0.2)
-                                  : Colors.orange.withOpacity(0.3),
+                                  ? Theme.of(context).colorScheme.outline.withValues(alpha: 0.2)
+                                  : Colors.orange.withValues(alpha: 0.3),
                             ),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                hasAppInfo ? 'Aktuelle API Info' : 'API Info Status',
+                                hasAppInfo ? localizations.currentApiInfo : localizations.apiInfoStatus,
                                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               const SizedBox(height: 4),
-                              Text('Version: $version'),
-                              Text('Umgebung: $environment'),
+                              Text('${localizations.version}: $version'),
+                              Text('${localizations.environment}: $environment'),
                               if (!hasAppInfo) ...[
                                 const SizedBox(height: 4),
                                 Text(
-                                  'Fehler: $lastError',
+                                  '${localizations.error}: $lastError',
                                   style: TextStyle(
                                     fontSize: 12,
                                     color: Colors.orange[700],
@@ -374,7 +384,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
     bool isEnabled = true,
   }) {
     final theme = Theme.of(context);
-    final disabledColor = theme.colorScheme.onSurface.withOpacity(0.38);
+    final disabledColor = theme.colorScheme.onSurface.withValues(alpha: 0.38);
     
     return ListTile(
       leading: Icon(
@@ -399,6 +409,63 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
       onTap: isEnabled ? onTap : null,
       contentPadding: const EdgeInsets.symmetric(horizontal: 0),
       enabled: isEnabled,
+    );
+  }
+
+  void _showLanguageSelector(BuildContext context, LanguageProvider languageProvider, AppLocalizations localizations) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(localizations.selectLanguage),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildLanguageOption(context, languageProvider, const Locale('de'), localizations.german, 'Deutsch'),
+              _buildLanguageOption(context, languageProvider, const Locale('en'), localizations.english, 'English'),
+              _buildLanguageOption(context, languageProvider, const Locale('gsw'), localizations.swissGerman, 'Schwiizerdüütsch'),
+              _buildLanguageOption(context, languageProvider, const Locale('arr'), localizations.pirate, '🏴‍☠️ Pirate Speak'),
+              _buildLanguageOption(context, languageProvider, const Locale('kaw'), localizations.kawaii, '♡ Kawaii ♪'),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(localizations.cancel),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildLanguageOption(
+    BuildContext context,
+    LanguageProvider languageProvider,
+    Locale locale,
+    String localizedName,
+    String nativeName,
+  ) {
+    final isSelected = languageProvider.locale.languageCode == locale.languageCode;
+    return ListTile(
+      title: Text(nativeName),
+      subtitle: Text(localizedName),
+      leading: Radio<String>(
+        value: locale.languageCode,
+        groupValue: languageProvider.locale.languageCode,
+        onChanged: (value) {
+          if (value != null) {
+            languageProvider.setLocale(locale);
+            Navigator.of(context).pop();
+          }
+        },
+      ),
+      selected: isSelected,
+      onTap: () {
+        languageProvider.setLocale(locale);
+        Navigator.of(context).pop();
+      },
+      contentPadding: EdgeInsets.zero,
     );
   }
 }
@@ -428,14 +495,16 @@ class _ApiUrlFieldState extends State<_ApiUrlField> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
           controller: _controller,
-          decoration: const InputDecoration(
-            labelText: 'API Base URL',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            labelText: localizations.apiBaseUrl,
+            border: const OutlineInputBorder(),
           ),
           onChanged: (value) {
             setState(() {
@@ -456,16 +525,18 @@ class _ApiUrlFieldState extends State<_ApiUrlField> {
                     if (_currentUrl != null && _currentUrl!.isNotEmpty) {
                       await setApiBaseUrl(_currentUrl!);
                       setState(() {});
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('API URL geändert: $_currentUrl'), backgroundColor: seedColor),
-                      );
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(localizations.apiUrlChanged(_currentUrl!)), backgroundColor: seedColor),
+                        );
+                      }
                     }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: seedColor,
                     foregroundColor: Colors.white,
                   ),
-                  child: const Text('Speichern'),
+                  child: Text(localizations.save),
                 );
               },
             ),

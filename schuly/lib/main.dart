@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'l10n/app_localizations.dart';
 import 'pages/start_page.dart';
 import 'pages/agenda_page.dart';
 import 'pages/notes_page.dart';
@@ -10,6 +12,7 @@ import 'pages/student_card_page.dart';
 import 'providers/theme_provider.dart';
 import 'providers/api_store.dart';
 import 'providers/homepage_config_provider.dart';
+import 'providers/language_provider.dart';
 import 'services/storage_service.dart';
 import 'services/push_notification_service.dart';
 import 'services/update_service.dart';
@@ -18,8 +21,10 @@ import 'widgets/release_notes_dialog.dart';
 import 'widgets/app_update_dialog.dart';
 import 'package:schuly/api/lib/api.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'l10n/pirate_material_localizations.dart';
+import 'l10n/kawaii_material_localizations.dart';
 
-String apiBaseUrl = 'https://schulware.pianonic.ch';
+String apiBaseUrl = 'https://schlwr.pianonic.ch';
 
 Future<void> loadApiBaseUrl() async {
   final storedUrl = await StorageService.getApiUrl();
@@ -43,13 +48,16 @@ void main() async {
 
   await loadApiBaseUrl();
   final apiStore = ApiStore();
+  final languageProvider = LanguageProvider();
   defaultApiClient = ApiClient(basePath: apiBaseUrl);
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => apiStore),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => HomepageConfigProvider()),
+        ChangeNotifierProvider.value(value: languageProvider),
       ],
       child: const SchulyApp(),
     ),
@@ -74,9 +82,8 @@ class _SchulyAppState extends State<SchulyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    return Consumer<ApiStore>(
-      builder: (context, apiStore, _) {
+    return Consumer3<ThemeProvider, LanguageProvider, ApiStore>(
+      builder: (context, themeProvider, languageProvider, apiStore, _) {
         // Show splash screen during initialization
         if (_showSplashScreen) {
           return DynamicColorBuilder(
@@ -85,6 +92,22 @@ class _SchulyAppState extends State<SchulyApp> {
                 theme: themeProvider.lightTheme(lightDynamic),
                 darkTheme: themeProvider.darkTheme(darkDynamic),
                 themeMode: themeProvider.themeMode,
+                locale: languageProvider.locale,
+                localizationsDelegates: [
+                  if (languageProvider.locale?.languageCode == 'arr') PirateMaterialLocalizations.delegate,
+                  if (languageProvider.locale?.languageCode == 'kaw') KawaiiMaterialLocalizations.delegate,
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: const [
+                  Locale('en'),
+                  Locale('de'),
+                  Locale('gsw'),
+                  Locale('arr'),
+                  Locale('kaw'),
+                ],
                 home: SplashScreen(onComplete: _onSplashScreenComplete),
               );
             },
@@ -99,6 +122,22 @@ class _SchulyAppState extends State<SchulyApp> {
                 theme: themeProvider.lightTheme(lightDynamic),
                 darkTheme: themeProvider.darkTheme(darkDynamic),
                 themeMode: themeProvider.themeMode,
+                locale: languageProvider.locale,
+                localizationsDelegates: [
+                  if (languageProvider.locale?.languageCode == 'arr') PirateMaterialLocalizations.delegate,
+                  if (languageProvider.locale?.languageCode == 'kaw') KawaiiMaterialLocalizations.delegate,
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: const [
+                  Locale('en'),
+                  Locale('de'),
+                  Locale('gsw'),
+                  Locale('arr'),
+                  Locale('kaw'),
+                ],
                 home: LoginPage(
                   onApiBaseUrlChanged: (url) async {
                     await setApiBaseUrl(url);
@@ -116,6 +155,22 @@ class _SchulyAppState extends State<SchulyApp> {
               theme: themeProvider.lightTheme(lightDynamic),
               darkTheme: themeProvider.darkTheme(darkDynamic),
               themeMode: themeProvider.themeMode,
+              locale: languageProvider.locale,
+              localizationsDelegates: [
+                if (languageProvider.locale?.languageCode == 'arr') PirateMaterialLocalizations.delegate,
+                if (languageProvider.locale?.languageCode == 'kaw') KawaiiMaterialLocalizations.delegate,
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en'),
+                Locale('de'),
+                Locale('gsw'),
+                Locale('arr'),
+                Locale('kaw'),
+              ],
               home: MyHomePage(title: 'Schuly', themeProvider: themeProvider),
             );
           },
@@ -193,6 +248,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     // 4. A list of pages is created to be indexed
     final List<Widget> pages = [
       StartPage(onNavigateToAbsenzen: () => navigateToPage(3)),
@@ -204,11 +261,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Page titles for the header
     final List<String> pageTitles = [
-      'Start',
-      'Agenda',
-      'Noten',
-      'Absenzen',
-      'Account',
+      localizations.start,
+      localizations.agenda,
+      localizations.grades,
+      localizations.absences,
+      localizations.account,
     ];
 
     return Scaffold(
@@ -232,7 +289,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Icons.tune,
               color: Theme.of(context).colorScheme.onSurface,
             ),
-            tooltip: 'Start-Seite anpassen',
+            tooltip: AppLocalizations.of(context)!.customizeHomepageTooltip,
           ),
           IconButton(
             onPressed: () {
@@ -245,7 +302,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Icons.badge_outlined,
               color: Theme.of(context).colorScheme.onSurface,
             ),
-            tooltip: 'Schülerausweis',
+            tooltip: AppLocalizations.of(context)!.studentIdCardTooltip,
           ),
         ] : _selectedIndex != 4 ? [
           IconButton(
@@ -259,7 +316,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Icons.badge_outlined,
               color: Theme.of(context).colorScheme.onSurface,
             ),
-            tooltip: 'Schülerausweis',
+            tooltip: AppLocalizations.of(context)!.studentIdCardTooltip,
           ),
         ] : null,
       ),
@@ -298,34 +355,34 @@ class _MyHomePageState extends State<MyHomePage> {
             animationDuration: const Duration(milliseconds: 300),
             destinations: [
               NavigationDestination(
-                icon: Icon(Icons.home_outlined, 
+                icon: Icon(Icons.home_outlined,
                   color: _selectedIndex == 0 ? seedColor : null),
                 selectedIcon: Icon(Icons.home, color: seedColor),
-                label: 'Start',
+                label: localizations.start,
               ),
               NavigationDestination(
                 icon: Icon(Icons.calendar_today_outlined,
                   color: _selectedIndex == 1 ? seedColor : null),
                 selectedIcon: Icon(Icons.calendar_today, color: seedColor),
-                label: 'Agenda',
+                label: localizations.agenda,
               ),
               NavigationDestination(
                 icon: Icon(Icons.grade_outlined,
                   color: _selectedIndex == 2 ? seedColor : null),
                 selectedIcon: Icon(Icons.grade, color: seedColor),
-                label: 'Noten',
+                label: localizations.grades,
               ),
               NavigationDestination(
                 icon: Icon(Icons.list_alt_outlined,
                   color: _selectedIndex == 3 ? seedColor : null),
                 selectedIcon: Icon(Icons.list_alt, color: seedColor),
-                label: 'Absenzen',
+                label: localizations.absences,
               ),
               NavigationDestination(
                 icon: Icon(Icons.person_outline,
                   color: _selectedIndex == 4 ? seedColor : null),
                 selectedIcon: Icon(Icons.person, color: seedColor),
-                label: 'Account',
+                label: localizations.account,
               ),
             ],
           );
@@ -345,15 +402,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  int _currentStep = 1;
-  String _currentStepText = 'App-Informationen abrufen...';
+  String _currentStepText = '';
   bool _isAuthenticated = false;
-  bool _initializationComplete = false;
+  bool _hasStartedInit = false;
 
   @override
   void initState() {
     super.initState();
-    _initializeApp();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_hasStartedInit) {
+      _hasStartedInit = true;
+      _initializeApp();
+    }
   }
 
   Future<void> _initializeApp() async {
@@ -362,8 +426,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Step 1: App info and authentication
     if (mounted) {
       setState(() {
-        _currentStep = 1;
-        _currentStepText = 'App-Informationen abrufen...';
+        _currentStepText = AppLocalizations.of(context)!.fetchingAppInfo;
       });
     }
 
@@ -380,8 +443,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Step 2: Check for updates
     if (mounted) {
       setState(() {
-        _currentStep = 2;
-        _currentStepText = 'Updates überprüfen...';
+        _currentStepText = AppLocalizations.of(context)!.checkingUpdatesInitialization;
       });
     }
 
@@ -400,8 +462,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Step 3: Load user data
     if (mounted) {
       setState(() {
-        _currentStep = 3;
-        _currentStepText = 'Daten laden...';
+        _currentStepText = AppLocalizations.of(context)!.loadingData;
       });
     }
 
@@ -423,8 +484,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Step 4: Finalizing
     if (mounted) {
       setState(() {
-        _currentStep = 4;
-        _currentStepText = 'Initialisierung abschließen...';
+        _currentStepText = AppLocalizations.of(context)!.finalizingInitialization;
       });
     }
 
@@ -432,9 +492,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // Mark initialization as complete
     if (mounted) {
-      setState(() {
-        _initializationComplete = true;
-      });
 
       // Call the completion callback after a brief delay
       Future.delayed(const Duration(milliseconds: 100), () {

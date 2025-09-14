@@ -4,12 +4,14 @@ import '../widgets/grade_tile.dart';
 import '../providers/api_store.dart';
 import '../utils/grade_utils.dart';
 import 'package:schuly/api/lib/api.dart';
+import '../l10n/app_localizations.dart';
 
 class NotesPage extends StatelessWidget {
   const NotesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Consumer<ApiStore>(
       builder: (context, apiStore, _) {
         final grades = apiStore.grades;
@@ -17,7 +19,7 @@ class NotesPage extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         if (grades.isEmpty) {
-          return const Center(child: Text('Keine Noten gefunden.'));
+          return Center(child: Text(localizations.noGradesFound));
         }
         // Group grades by subject
         final Map<String, List<GradeDto>> gradesBySubject = {};

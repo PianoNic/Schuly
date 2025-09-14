@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import '../l10n/app_localizations.dart';
 import '../models/release_note.dart';
 import '../services/release_notes_service.dart';
 import '../pages/release_notes_page.dart';
@@ -17,7 +18,7 @@ class ReleaseNotesDialog extends StatelessWidget {
     if (!shouldShow || !context.mounted) return;
 
     final newReleaseNotes = await ReleaseNotesService.getNewReleaseNotes();
-    if (newReleaseNotes.isEmpty) return;
+    if (newReleaseNotes.isEmpty || !context.mounted) return;
 
     await showDialog<void>(
       context: context,
@@ -44,11 +45,11 @@ class ReleaseNotesDialog extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Was ist neu!'),
+                Text(AppLocalizations.of(context)!.whatsNew),
                 Text(
-                  'Version ${latestNote.version}',
+                  AppLocalizations.of(context)!.versionWithNumber(latestNote.version, ''),
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.7),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
                 ),
               ],
@@ -78,7 +79,7 @@ class ReleaseNotesDialog extends StatelessWidget {
                 selectable: true,
                 styleSheet: MarkdownStyleSheet.fromTheme(theme).copyWith(
                   p: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.8),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
                   ),
                   h1: theme.textTheme.titleLarge?.copyWith(
                     color: theme.colorScheme.primary,
@@ -118,7 +119,7 @@ class ReleaseNotesDialog extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text('Alle anzeigen'),
+                  child: Text(AppLocalizations.of(context)!.showAll),
                 ),
               ),
             if (releaseNotes.length > 1) const SizedBox(width: 8),
@@ -130,7 +131,7 @@ class ReleaseNotesDialog extends StatelessWidget {
                     Navigator.of(context).pop();
                   }
                 },
-                child: const Text('Verstanden'),
+                child: Text(AppLocalizations.of(context)!.confirm),
               ),
             ),
           ],

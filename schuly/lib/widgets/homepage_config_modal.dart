@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/homepage_config_provider.dart';
+import '../l10n/app_localizations.dart';
 
 class HomepageConfigModal extends StatelessWidget {
   const HomepageConfigModal({super.key});
@@ -34,7 +35,7 @@ class HomepageConfigModal extends StatelessWidget {
                   height: 4,
                   margin: const EdgeInsets.only(bottom: 16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.4),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -45,7 +46,7 @@ class HomepageConfigModal extends StatelessWidget {
                     // Removed the icon next to the title
                     Expanded(
                       child: Text(
-                        'Start-Seite anpassen',
+                        AppLocalizations.of(context)!.customizeHomepage,
                         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -90,11 +91,11 @@ class HomepageConfigModal extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             border: section.isVisible
-                ? Border.all(color: seedColor.withOpacity(0.3), width: 2)
-                : Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.2)),
+                ? Border.all(color: seedColor.withValues(alpha: 0.3), width: 2)
+                : Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2)),
             color: section.isVisible
-                ? seedColor.withOpacity(0.05)
-                : Theme.of(context).colorScheme.surface.withOpacity(0.5),
+                ? seedColor.withValues(alpha: 0.05)
+                : Theme.of(context).colorScheme.surface.withValues(alpha: 0.5),
           ),
           child: Row(
             children: [
@@ -126,11 +127,11 @@ class HomepageConfigModal extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      section.isVisible ? 'Sichtbar' : 'Ausgeblendet',
+                      section.isVisible ? AppLocalizations.of(context)!.visible : AppLocalizations.of(context)!.hidden,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: section.isVisible
                             ? seedColor
-                            : Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.7),
+                            : Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
                         fontWeight: FontWeight.w500,
                       ),
                     ),

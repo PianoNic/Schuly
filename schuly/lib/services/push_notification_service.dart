@@ -6,6 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'storage_service.dart';
+import '../l10n/app_localizations.dart';
 
 class PushNotificationService {
   static final FlutterLocalNotificationsPlugin _notifications =
@@ -154,6 +155,7 @@ class PushNotificationService {
     required String room,
     required String teacher,
     required DateTime startTime,
+    AppLocalizations? localizations,
   }) async {
     if (!_initialized) await initialize();
     
@@ -244,8 +246,8 @@ class PushNotificationService {
 
         await scheduleAgendaNotification(
           id: notificationId++,
-          subject: item.text ?? 'Unbekannt',
-          room: item.roomToken ?? 'Unbekannt',
+          subject: item.text ?? 'Unknown',
+          room: item.roomToken ?? 'Unknown',
           teacher: '', // Teacher field doesn't exist in AgendaDto
           startTime: startDateTime,
         );

@@ -10,6 +10,7 @@ class StorageService {
   static const String _pushNotificationsKey = 'push_notifications_enabled';
   static const String _notificationAdvanceMinutesKey = 'notification_advance_minutes';
   static const String _notificationTypePrefix = 'notification_enabled_';
+  static const String _languageKey = 'selected_language';
 
   // Cache keys for API data
   static const String _cachePrefix = 'cache_';
@@ -97,6 +98,15 @@ class StorageService {
 
   static Future<String?> getString(String key) async {
     return await _storage.read(key: key);
+  }
+
+  // Language settings
+  static Future<void> setLanguage(String languageCode) async {
+    await _storage.write(key: _languageKey, value: languageCode);
+  }
+
+  static Future<String?> getLanguage() async {
+    return await _storage.read(key: _languageKey);
   }
 
   static Future<void> clearAll() async {

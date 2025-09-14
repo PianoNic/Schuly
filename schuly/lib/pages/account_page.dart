@@ -8,18 +8,17 @@ import '../providers/theme_provider.dart';
 import '../providers/api_store.dart';
 import 'app_settings_page.dart';
 import 'student_card_page.dart';
+import '../l10n/app_localizations.dart';
 
 class AccountPage extends StatelessWidget {
   final ThemeProvider themeProvider;
 
-  const AccountPage({
-    super.key,
-    required this.themeProvider,
-  });
+  const AccountPage({super.key, required this.themeProvider});
 
   @override
   Widget build(BuildContext context) {
     final apiStore = Provider.of<ApiStore>(context);
+    final localizations = AppLocalizations.of(context)!;
     final userEmails = apiStore.userEmails;
     final activeUserEmail = apiStore.activeUserEmail;
     final userInfo = apiStore.userInfo;
@@ -35,17 +34,22 @@ class AccountPage extends StatelessWidget {
             children: [
               const Icon(Icons.person_off, size: 64, color: Colors.grey),
               const SizedBox(height: 24),
-              const Text(
-                'Noch kein Account hinzugefügt.',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Text(
+                localizations.noAccountAdded,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
               OutlinedButton.icon(
                 onPressed: () => _showAddAccountDialog(context, apiStore),
                 icon: const Icon(Icons.add),
-                label: const Text('Account hinzufügen'),
-                style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 16)),
+                label: Text(localizations.addAccount),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
               ),
             ],
           ),
@@ -64,17 +68,22 @@ class AccountPage extends StatelessWidget {
             children: [
               const Icon(Icons.person_search, size: 64, color: Colors.grey),
               const SizedBox(height: 24),
-              const Text(
-                'Kein aktiver Account ausgewählt.',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Text(
+                localizations.noActiveAccount,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
               OutlinedButton.icon(
                 onPressed: () => _showAccountSwitcher(context),
                 icon: const Icon(Icons.swap_horiz),
-                label: const Text('Account auswählen'),
-                style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 16)),
+                label: Text(localizations.selectAccount),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
               ),
             ],
           ),
@@ -109,21 +118,54 @@ class AccountPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Persönliche Angaben',
+                        localizations.personalInformation,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 16),
-                      InfoRow(label: 'Name', value: '${userInfo.firstName} ${userInfo.lastName}'),
-                      InfoRow(label: 'Strasse', value: userInfo.street),
-                      InfoRow(label: 'PLZ Ort', value: '${userInfo.zip} ${userInfo.city}'),
-                      InfoRow(label: 'Geburtsdatum', value: userInfo.birthday),
-                      InfoRow(label: 'Telefon', value: userInfo.phone),
-                      InfoRow(label: 'E-Mail', value: userInfo.email),
-                      InfoRow(label: 'Nationalität', value: userInfo.nationality),
-                      InfoRow(label: 'Heimatort', value: userInfo.hometown),
-                      InfoRow(label: 'Handy', value: userInfo.mobile),
-                      InfoRow(label: 'Profil 1', value: userInfo.profil1),
-                      InfoRow(label: 'Profil 2', value: userInfo.profil2),
+                      InfoRow(
+                        label: localizations.name,
+                        value: '${userInfo.firstName} ${userInfo.lastName}',
+                      ),
+                      InfoRow(
+                        label: localizations.street,
+                        value: userInfo.street,
+                      ),
+                      InfoRow(
+                        label: localizations.zipCity,
+                        value: '${userInfo.zip} ${userInfo.city}',
+                      ),
+                      InfoRow(
+                        label: localizations.birthDate,
+                        value: userInfo.birthday,
+                      ),
+                      InfoRow(
+                        label: localizations.phone,
+                        value: userInfo.phone,
+                      ),
+                      InfoRow(
+                        label: localizations.email,
+                        value: userInfo.email,
+                      ),
+                      InfoRow(
+                        label: localizations.nationality,
+                        value: userInfo.nationality,
+                      ),
+                      InfoRow(
+                        label: localizations.hometown,
+                        value: userInfo.hometown,
+                      ),
+                      InfoRow(
+                        label: localizations.mobile,
+                        value: userInfo.mobile,
+                      ),
+                      InfoRow(
+                        label: localizations.profile1,
+                        value: userInfo.profil1,
+                      ),
+                      InfoRow(
+                        label: localizations.profile2,
+                        value: userInfo.profil2,
+                      ),
                     ],
                   ),
                 ),
@@ -138,21 +180,20 @@ class AccountPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Schnellaktionen',
+                      localizations.quickActions,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 16),
                     ListTile(
                       leading: const Icon(Icons.settings),
-                      title: const Text('App Einstellungen'),
-                      subtitle: const Text('Design und Einstellungen anpassen'),
+                      title: Text(localizations.appSettings),
+                      subtitle: Text(localizations.designAndSettings),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AppSettingsPage(
-                              themeProvider: themeProvider,
-                            ),
+                            builder: (context) =>
+                                AppSettingsPage(themeProvider: themeProvider),
                           ),
                         );
                       },
@@ -160,15 +201,17 @@ class AccountPage extends StatelessWidget {
                     const Divider(),
                     ListTile(
                       leading: const Icon(Icons.help_outline),
-                      title: const Text('Hilfe & Support'),
-                      subtitle: const Text('Häufige Fragen und Kontakt'),
+                      title: Text(localizations.helpAndSupport),
+                      subtitle: Text(localizations.getHelpAndSupport),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
                           shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20),
+                            ),
                           ),
                           builder: (context) => const HelpSupportModal(),
                         );
@@ -177,8 +220,8 @@ class AccountPage extends StatelessWidget {
                     const Divider(),
                     ListTile(
                       leading: const Icon(Icons.logout),
-                      title: const Text('Abmelden'),
-                      subtitle: const Text('Von der App abmelden'),
+                      title: Text(localizations.logout),
+                      subtitle: Text(localizations.signOutFromApp),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {
                         _showLogoutDialog(context);
@@ -187,28 +230,40 @@ class AccountPage extends StatelessWidget {
                     const Divider(),
                     ListTile(
                       leading: const Icon(Icons.refresh),
-                      title: const Text('Get new token'),
-                      subtitle: const Text('Hole ein neues Token für den aktiven Account'),
+                      title: Text(localizations.getNewToken),
+                      subtitle: Text(localizations.getNewTokenSubtitle),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () async {
-                        final apiStore = Provider.of<ApiStore>(context, listen: false);
+                        final apiStore = Provider.of<ApiStore>(
+                          context,
+                          listen: false,
+                        );
                         final email = apiStore.activeUserEmail;
                         final user = apiStore.activeUser;
                         if (email != null && user != null) {
-                          final ok = await apiStore.addUser(email, user['password']);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(ok ?? 'Token aktualisiert!'),
-                              backgroundColor: ok == null ? Colors.green : Colors.red,
-                            ),
+                          final ok = await apiStore.addUser(
+                            email,
+                            user['password'],
                           );
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(ok ?? localizations.tokenUpdated),
+                                backgroundColor: ok == null
+                                    ? Colors.green
+                                    : Colors.red,
+                              ),
+                            );
+                          }
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Kein aktiver Account!'),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(localizations.noActiveAccountSnack),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
                         }
                       },
                     ),
@@ -223,11 +278,9 @@ class AccountPage extends StatelessWidget {
   }
 
   void _showStudentCard(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const StudentCardPage(),
-      ),
-    );
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const StudentCardPage()));
   }
 
   void _showAccountSwitcher(BuildContext context) {
@@ -254,62 +307,93 @@ class AccountPage extends StatelessWidget {
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setState) {
+            final localizations = AppLocalizations.of(context)!;
             return PopScope(
               canPop: !isLoading,
               child: AlertDialog(
-                title: const Text('Account hinzufügen'),
+                title: Text(localizations.addAccountTitle),
                 content: Form(
                   key: formKey,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       TextFormField(
-                      controller: emailController,
-                      decoration: const InputDecoration(labelText: 'E-Mail'),
-                      validator: (v) => v == null || v.isEmpty ? 'E-Mail eingeben' : null,
-                    ),
-                    TextFormField(
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        labelText: 'Passwort',
-                        suffixIcon: IconButton(
-                          icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
-                          onPressed: () => setState(() => showPassword = !showPassword),
+                        controller: emailController,
+                        decoration: InputDecoration(
+                          labelText: localizations.emailLabel,
                         ),
+                        validator: (v) => v == null || v.isEmpty
+                            ? localizations.enterEmail
+                            : null,
                       ),
-                      obscureText: !showPassword,
-                      validator: (v) => v == null || v.isEmpty ? 'Passwort eingeben' : null,
-                    ),
-                  ],
+                      TextFormField(
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                          labelText: localizations.passwordLabel,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              showPassword
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            onPressed: () =>
+                                setState(() => showPassword = !showPassword),
+                          ),
+                        ),
+                        obscureText: !showPassword,
+                        validator: (v) => v == null || v.isEmpty
+                            ? localizations.enterPassword
+                            : null,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Abbrechen'),
-                ),
-                ElevatedButton(
-                  onPressed: isLoading
-                      ? null
-                      : () async {
-                          if (!formKey.currentState!.validate()) return;
-                          setState(() => isLoading = true);
-                          final ok = await apiStore.addUser(emailController.text.trim(), passwordController.text);
-                          setState(() => isLoading = false);
-                          if (ok == null) {
-                            Navigator.of(context).pop();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Account hinzugefügt!'), backgroundColor: Colors.green),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(localizations.cancel),
+                  ),
+                  ElevatedButton(
+                    onPressed: isLoading
+                        ? null
+                        : () async {
+                            if (!formKey.currentState!.validate()) return;
+                            setState(() => isLoading = true);
+                            final ok = await apiStore.addUser(
+                              emailController.text.trim(),
+                              passwordController.text,
                             );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(ok), backgroundColor: Colors.red),
-                            );
-                          }
-                        },
-                  child: isLoading ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)) : const Text('Hinzufügen'),
-                ),
-              ],
+                            setState(() => isLoading = false);
+                            if (ok == null) {
+                              if (context.mounted) {
+                                Navigator.of(context).pop();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(localizations.accountAdded),
+                                    backgroundColor: Colors.green,
+                                  ),
+                                );
+                              }
+                            } else {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(ok),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                    child: isLoading
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : Text(localizations.add),
+                  ),
+                ],
               ),
             );
           },
@@ -324,33 +408,34 @@ class AccountPage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final localizations = AppLocalizations.of(context)!;
         return AlertDialog(
-          title: const Text('Abmelden'),
-          content: const Text(
-            'Sind Sie sicher, dass Sie sich abmelden möchten?',
-          ),
+          title: Text(localizations.logoutTitle),
+          content: Text(localizations.logoutConfirm),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Abbrechen'),
+              child: Text(localizations.cancel),
             ),
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop();
                 await apiStore.clearAll();
                 await themeProvider.clearThemePrefs();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Abgemeldet!'),
-                    backgroundColor: Colors.orange,
-                  ),
-                );
-                // Pop to root/login
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(localizations.loggedOut),
+                      backgroundColor: Colors.orange,
+                    ),
+                  );
+                  // Pop to root/login
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                }
               },
-              child: const Text('Abmelden'),
+              child: Text(localizations.logout),
             ),
           ],
         );

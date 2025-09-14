@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import '../l10n/app_localizations.dart';
 import '../services/update_service.dart';
 
 class AppUpdateDialog extends StatefulWidget {
@@ -30,7 +31,7 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
   bool _isInstalling = false;
   double _downloadProgress = 0.0;
   String? _downloadedFilePath;
-  String _buttonText = 'Installieren';
+  String? _buttonText;
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +50,11 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Update verfügbar!'),
+                Text(AppLocalizations.of(context)!.updateAvailable),
                 Text(
                   'Version ${widget.updateInfo.latestVersion}',
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.7),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
                 ),
               ],
@@ -70,9 +71,9 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Current: ${widget.updateInfo.currentVersion}'),
+                  Text(AppLocalizations.of(context)!.currentVersion(widget.updateInfo.currentVersion)),
                   Text(
-                    'Latest: ${widget.updateInfo.latestVersion}',
+                    AppLocalizations.of(context)!.latestVersion(widget.updateInfo.latestVersion),
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
@@ -97,7 +98,7 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
                     const SizedBox(height: 16),
                   ],
                   if (_isDownloading) ...[
-                    const Text('Update wird heruntergeladen...'),
+                    Text(AppLocalizations.of(context)!.downloadingUpdate),
                     const SizedBox(height: 8),
                     LinearProgressIndicator(
                       value: _downloadProgress,
@@ -107,7 +108,7 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
                     Text('${(_downloadProgress * 100).toStringAsFixed(1)}%'),
                   ],
                   if (_isInstalling) ...[
-                    const Text('Update wird installiert...'),
+                    Text(AppLocalizations.of(context)!.installingUpdate),
                     const SizedBox(height: 8),
                     const LinearProgressIndicator(),
                   ],
@@ -121,7 +122,7 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
         if (!_isDownloading && !_isInstalling)
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Später'),
+            child: Text(AppLocalizations.of(context)!.later),
           ),
         OutlinedButton(
           onPressed: _isDownloading || _isInstalling
@@ -129,7 +130,7 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
               : _downloadedFilePath != null
                   ? _installUpdate
                   : _downloadUpdate,
-          child: Text(_buttonText),
+          child: Text(_buttonText ?? AppLocalizations.of(context)!.install),
         ),
       ],
     );
@@ -138,7 +139,7 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
   Future<void> _downloadUpdate() async {
     setState(() {
       _isDownloading = true;
-      _buttonText = 'Wird heruntergeladen...';
+      _buttonText = AppLocalizations.of(context)!.downloading;
     });
 
     try {
@@ -156,28 +157,28 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
         setState(() {
           _downloadedFilePath = filePath;
           _isDownloading = false;
-          _buttonText = 'Installieren';
+          _buttonText = AppLocalizations.of(context)!.install;
         });
       } else {
         setState(() {
           _isDownloading = false;
-          _buttonText = 'Installieren';
+          _buttonText = AppLocalizations.of(context)!.install;
         });
-        _showErrorDialog('Fehler beim Herunterladen des Updates');
+        _showErrorDialog(AppLocalizations.of(context)!.downloadError);
       }
     } catch (e) {
       setState(() {
         _isDownloading = false;
-        _buttonText = 'Installieren';
+        _buttonText = AppLocalizations.of(context)!.install;
       });
-      _showErrorDialog('Download Fehler: $e');
+      _showErrorDialog(AppLocalizations.of(context)!.downloadErrorDetails(e.toString()));
     }
   }
 
   Future<void> _installUpdate() async {
     setState(() {
       _isInstalling = true;
-      _buttonText = 'Wird installiert...';
+      _buttonText = AppLocalizations.of(context)!.installing;
     });
 
     try {
@@ -186,9 +187,9 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
       if (!hasPermission) {
         setState(() {
           _isInstalling = false;
-          _buttonText = 'Installieren';
+          _buttonText = AppLocalizations.of(context)!.install;
         });
-        _showErrorDialog('Installation nicht erlaubt');
+        _showErrorDialog(AppLocalizations.of(context)!.installationNotAllowed);
         return;
       }
 
@@ -200,8 +201,8 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
         if (mounted) {
           Navigator.of(context).pop();
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Update Installation gestartet'),
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.updateInstallationStarted),
               duration: Duration(seconds: 3),
             ),
           );
@@ -209,16 +210,16 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
       } else {
         setState(() {
           _isInstalling = false;
-          _buttonText = 'Installieren';
+          _buttonText = AppLocalizations.of(context)!.install;
         });
-        _showErrorDialog('Fehler bei der Installation');
+        _showErrorDialog(AppLocalizations.of(context)!.installationError);
       }
     } catch (e) {
       setState(() {
         _isInstalling = false;
-        _buttonText = 'Installieren';
+        _buttonText = AppLocalizations.of(context)!.install;
       });
-      _showErrorDialog('Installation Fehler: $e');
+      _showErrorDialog(AppLocalizations.of(context)!.installationErrorDetails(e.toString()));
     }
   }
 
@@ -227,12 +228,12 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Fehler'),
+          title: Text(AppLocalizations.of(context)!.error),
           content: Text(message),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('OK'),
+              child: Text(AppLocalizations.of(context)!.ok),
             ),
           ],
         ),

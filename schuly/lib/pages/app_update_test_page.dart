@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../services/app_update_service.dart';
 import '../widgets/app_update_dialog.dart';
 
@@ -10,14 +11,14 @@ class AppUpdateTestPage extends StatefulWidget {
 }
 
 class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
-  String _status = 'Ready to test';
+  String _status = '';
   bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('App Update Test'),
+        title: Text(AppLocalizations.of(context)!.appUpdateTest),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -31,12 +32,12 @@ class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Update System Test',
+                      AppLocalizations.of(context)!.updateSystemTest,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Status: $_status',
+                      AppLocalizations.of(context)!.statusLabel(_status.isNotEmpty ? _status : AppLocalizations.of(context)!.readyToTest),
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -47,30 +48,30 @@ class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
             ElevatedButton(
               onPressed: _isLoading ? null : _checkForUpdates,
               child: _isLoading
-                  ? const Row(
+                  ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 16,
                           height: 16,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         ),
-                        SizedBox(width: 8),
-                        Text('Checking...'),
+                        const SizedBox(width: 8),
+                        Text(AppLocalizations.of(context)!.checking),
                       ],
                     )
-                  : const Text('Check for Updates'),
+                  : Text(AppLocalizations.of(context)!.checkForUpdates),
             ),
             const SizedBox(height: 8),
             ElevatedButton(
               onPressed: _isLoading ? null : _showUpdateDialog,
-              child: const Text('Force Show Update Dialog'),
+              child: Text(AppLocalizations.of(context)!.forceShowUpdateDialog),
             ),
             const SizedBox(height: 8),
             ElevatedButton(
               onPressed: _isLoading ? null : _clearDismissed,
-              child: const Text('Clear Dismissed Updates'),
+              child: Text(AppLocalizations.of(context)!.clearDismissedUpdates),
             ),
             const SizedBox(height: 24),
             Card(
@@ -80,14 +81,14 @@ class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'How it works:',
+                      AppLocalizations.of(context)!.howItWorks,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
-                    const Text('1. Checks GitHub releases for newer versions'),
-                    const Text('2. Downloads APK from GitHub release assets'),
-                    const Text('3. Opens Android installer automatically'),
-                    const Text('4. Remembers dismissed updates until app restart'),
+                    Text(AppLocalizations.of(context)!.updateStep1),
+                    Text(AppLocalizations.of(context)!.updateStep2),
+                    Text(AppLocalizations.of(context)!.updateStep3),
+                    Text(AppLocalizations.of(context)!.updateStep4),
                   ],
                 ),
               ),
@@ -101,7 +102,7 @@ class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
   Future<void> _checkForUpdates() async {
     setState(() {
       _isLoading = true;
-      _status = 'Checking for updates...';
+      _status = AppLocalizations.of(context)!.checkingForUpdates;
     });
 
     try {
@@ -110,9 +111,9 @@ class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
       setState(() {
         _isLoading = false;
         if (updateRelease != null) {
-          _status = 'Update available: v${updateRelease.version}';
+          _status = AppLocalizations.of(context)!.updateAvailableVersion(updateRelease.version);
         } else {
-          _status = 'No updates available or update dismissed';
+          _status = AppLocalizations.of(context)!.noUpdatesAvailable;
         }
       });
 
@@ -122,7 +123,7 @@ class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
     } catch (e) {
       setState(() {
         _isLoading = false;
-        _status = 'Error checking for updates: $e';
+        _status = AppLocalizations.of(context)!.errorCheckingUpdates(e.toString());
       });
     }
   }
@@ -130,19 +131,19 @@ class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
   Future<void> _showUpdateDialog() async {
     setState(() {
       _isLoading = true;
-      _status = 'Showing update dialog...';
+      _status = AppLocalizations.of(context)!.showingUpdateDialog;
     });
 
     try {
       await AppUpdateDialog.showIfAvailable(context);
       setState(() {
         _isLoading = false;
-        _status = 'Update dialog shown';
+        _status = AppLocalizations.of(context)!.updateDialogShown;
       });
     } catch (e) {
       setState(() {
         _isLoading = false;
-        _status = 'Error showing dialog: $e';
+        _status = AppLocalizations.of(context)!.errorShowingDialog(e.toString());
       });
     }
   }
@@ -150,19 +151,19 @@ class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
   Future<void> _clearDismissed() async {
     setState(() {
       _isLoading = true;
-      _status = 'Clearing dismissed updates...';
+      _status = AppLocalizations.of(context)!.clearingDismissedUpdates;
     });
 
     try {
       await AppUpdateService.clearDismissedVersion();
       setState(() {
         _isLoading = false;
-        _status = 'Dismissed updates cleared';
+        _status = AppLocalizations.of(context)!.dismissedUpdatesCleared;
       });
     } catch (e) {
       setState(() {
         _isLoading = false;
-        _status = 'Error clearing dismissed: $e';
+        _status = AppLocalizations.of(context)!.errorClearingDismissed(e.toString());
       });
     }
   }

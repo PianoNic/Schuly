@@ -9,7 +9,6 @@ import 'package:open_file/open_file.dart';
 
 class UpdateService {
   static const String _repoUrl = 'https://api.github.com/repos/PianoNic/Schuly/releases/latest';
-  static const String _repoName = 'PianoNic/Schuly';
 
   /// Check if there's a newer version available
   static Future<UpdateInfo?> checkForUpdates() async {

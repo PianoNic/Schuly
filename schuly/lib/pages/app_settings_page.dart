@@ -162,22 +162,18 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     const SizedBox(height: 16),
 
                     // Notifications Toggle
-                    _isLoading 
+                    _isLoading
                         ? const Center(child: CircularProgressIndicator())
                         : _buildSettingsTile(
                             context,
-                            icon: _pushNotificationsEnabled 
-                                ? Icons.notifications_outlined
-                                : Icons.notifications_off_outlined,
+                            icon: Icons.notifications_off_outlined,
                             title: 'Push-Benachrichtigungen',
-                            subtitle: _pushNotificationsEnabled 
-                                ? 'Benachrichtigungen sind aktiviert'
-                                : 'Benachrichtigungen sind deaktiviert',
+                            subtitle: 'Feature wird noch entwickelt',
                             trailing: Switch(
-                              value: _pushNotificationsEnabled,
-                              onChanged: _togglePushNotifications,
+                              value: false,
+                              onChanged: null,
                             ),
-                            isEnabled: true,
+                            isEnabled: false,
                           ),
 
                     const Divider(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import '../services/update_service.dart';
 
 class AppUpdateDialog extends StatefulWidget {
@@ -60,58 +61,61 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
           ),
         ],
       ),
-      content: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 350, maxHeight: 400),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Current: ${widget.updateInfo.currentVersion}'),
-            Text(
-              'Latest: ${widget.updateInfo.latestVersion}',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            if (widget.updateInfo.releaseNotes.isNotEmpty) ...[
-              Text(
-                'What\'s new:',
-                style: theme.textTheme.titleSmall,
-              ),
-              const SizedBox(height: 8),
-              Container(
-                height: 100,
-                width: double.maxFinite,
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceVariant,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: SingleChildScrollView(
-                  child: Text(
-                    widget.updateInfo.releaseNotes,
-                    style: theme.textTheme.bodySmall,
+      content: LayoutBuilder(
+        builder: (context, constraints) {
+          return ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 500, maxHeight: 600),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Current: ${widget.updateInfo.currentVersion}'),
+                  Text(
+                    'Latest: ${widget.updateInfo.latestVersion}',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                ),
+                  const SizedBox(height: 16),
+                  if (widget.updateInfo.releaseNotes.isNotEmpty) ...[
+                    const SizedBox(height: 8),
+                    MarkdownBody(
+                      data: widget.updateInfo.releaseNotes,
+                      selectable: true,
+                      styleSheet: MarkdownStyleSheet.fromTheme(theme).copyWith(
+                        p: theme.textTheme.bodySmall?.copyWith(fontSize: 11),
+                        h1: theme.textTheme.bodySmall?.copyWith(fontSize: 12, fontWeight: FontWeight.bold),
+                        h2: theme.textTheme.bodySmall?.copyWith(fontSize: 12, fontWeight: FontWeight.bold),
+                        h3: theme.textTheme.bodySmall?.copyWith(fontSize: 11, fontWeight: FontWeight.bold),
+                        listBullet: theme.textTheme.bodySmall?.copyWith(fontSize: 11),
+                        code: theme.textTheme.bodySmall?.copyWith(fontSize: 11, fontFamily: 'monospace'),
+                        blockquote: theme.textTheme.bodySmall?.copyWith(fontSize: 11, fontStyle: FontStyle.italic),
+                        em: theme.textTheme.bodySmall?.copyWith(fontSize: 11, fontStyle: FontStyle.italic),
+                        strong: theme.textTheme.bodySmall?.copyWith(fontSize: 11, fontWeight: FontWeight.bold),
+                        a: theme.textTheme.bodySmall?.copyWith(fontSize: 11, color: theme.colorScheme.primary),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                  if (_isDownloading) ...[
+                    const Text('Update wird heruntergeladen...'),
+                    const SizedBox(height: 8),
+                    LinearProgressIndicator(
+                      value: _downloadProgress,
+                      backgroundColor: theme.colorScheme.surfaceVariant,
+                    ),
+                    const SizedBox(height: 4),
+                    Text('${(_downloadProgress * 100).toStringAsFixed(1)}%'),
+                  ],
+                  if (_isInstalling) ...[
+                    const Text('Update wird installiert...'),
+                    const SizedBox(height: 8),
+                    const LinearProgressIndicator(),
+                  ],
+                ],
               ),
-              const SizedBox(height: 16),
-            ],
-            if (_isDownloading) ...[
-              const Text('Update wird heruntergeladen...'),
-              const SizedBox(height: 8),
-              LinearProgressIndicator(
-                value: _downloadProgress,
-                backgroundColor: theme.colorScheme.surfaceVariant,
-              ),
-              const SizedBox(height: 4),
-              Text('${(_downloadProgress * 100).toStringAsFixed(1)}%'),
-            ],
-            if (_isInstalling) ...[
-              const Text('Update wird installiert...'),
-              const SizedBox(height: 8),
-              const LinearProgressIndicator(),
-            ],
-          ],
-        ),
+            ),
+          );
+        },
       ),
       actions: [
         if (!_isDownloading && !_isInstalling)
@@ -119,7 +123,7 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
             onPressed: () => Navigator.of(context).pop(),
             child: const Text('Später'),
           ),
-        ElevatedButton(
+        OutlinedButton(
           onPressed: _isDownloading || _isInstalling
               ? null
               : _downloadedFilePath != null

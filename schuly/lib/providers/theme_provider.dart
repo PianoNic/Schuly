@@ -180,6 +180,28 @@ class ThemeProvider extends ChangeNotifier {
     return Color.fromARGB(255, r, g, b);
   }
 
+  // Calculate navigation bar color based on background
+  Color _calculateNavigationBarColor(Color backgroundColor, bool isLight) {
+    // Extract RGB values
+    int r = backgroundColor.red;
+    int g = backgroundColor.green;
+    int b = backgroundColor.blue;
+
+    if (isLight) {
+      // For light theme: darken the background more significantly
+      r = (r - 15).clamp(0, 255);
+      g = (g - 15).clamp(0, 255);
+      b = (b - 15).clamp(0, 255);
+    } else {
+      // For dark theme: lighten the background more significantly
+      r = (r + 15).clamp(0, 255);
+      g = (g + 15).clamp(0, 255);
+      b = (b + 15).clamp(0, 255);
+    }
+
+    return Color.fromARGB(255, r, g, b);
+  }
+
   Future<void> clearThemePrefs() async {
     await _storage.delete(key: _themeModeKey);
     await _storage.delete(key: _seedColorKey);
@@ -219,7 +241,7 @@ class ThemeProvider extends ChangeNotifier {
             : (isNeonColor
                 ? effectiveSeedColor.withOpacity(0.15)
                 : effectiveSeedColor.withOpacity(0.2)),
-        backgroundColor: _useMaterialYou ? null : Colors.white, // Let Material You handle color
+        backgroundColor: _calculateNavigationBarColor(actualColorScheme.surface, true),
         shadowColor: isNeonColor && !_useMaterialYou
             ? effectiveSeedColor.withOpacity(0.1)
             : null,
@@ -295,7 +317,7 @@ class ThemeProvider extends ChangeNotifier {
             : (isNeonColor
                 ? effectiveSeedColor.withOpacity(0.25)
                 : effectiveSeedColor.withOpacity(0.3)),
-        backgroundColor: _useMaterialYou ? null : const Color(0xFF1C1B1F), // Let Material You handle color
+        backgroundColor: _calculateNavigationBarColor(actualColorScheme.surface, false),
         shadowColor: isNeonColor && !_useMaterialYou
             ? effectiveSeedColor.withOpacity(0.2)
             : null,

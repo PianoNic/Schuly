@@ -116,25 +116,6 @@ jobs:
             android-build/schuly-${{ github.ref_name }}.apk
             android-build/schuly-${{ github.ref_name }}.aab
             ios-build/schuly-${{ github.ref_name }}.ipa
-          name: "Schuly ${{ github.ref_name }}"
-          draft: false
-          prerelease: false
-          generate_release_notes: true
-          body: |
-            ## 🚀 Schuly ${{ github.ref_name }}
-            
-            This release was automatically generated from the latest changes.
-            
-            ### 📦 What's included:
-            - Android APK (for sideloading)
-            - Android AAB (for Google Play Store)
-            - iOS IPA (unsigned, for development)
-            
-            ### 📋 How to install:
-            1. **Android**: Download the APK file and install it on your device
-            2. **iOS**: Requires development provisioning profile
-            
-            **Build Number**: ${{ github.run_number }}
-            **Previous Version**: Check the commit history for changes
+          append_body: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

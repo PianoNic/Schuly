@@ -101,7 +101,7 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
                     const SizedBox(height: 8),
                     LinearProgressIndicator(
                       value: _downloadProgress,
-                      backgroundColor: theme.colorScheme.surfaceVariant,
+                      backgroundColor: theme.colorScheme.surfaceContainerHighest,
                     ),
                     const SizedBox(height: 4),
                     Text('${(_downloadProgress * 100).toStringAsFixed(1)}%'),

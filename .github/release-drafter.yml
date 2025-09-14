@@ -45,11 +45,6 @@ template: |
 
   $CHANGES
 
-  ## 📱 Download
-
-  - **Android APK**: [schuly.apk](https://github.com/$OWNER/$REPOSITORY/releases/download/v$RESOLVED_VERSION/schuly.apk)
-  - **iOS**: [schuly.ipa](https://github.com/$OWNER/$REPOSITORY/releases/download/v$RESOLVED_VERSION/schuly.ipa)
-
   **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
 
 exclude-labels:

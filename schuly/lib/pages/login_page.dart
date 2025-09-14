@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/api_store.dart';
 import '../main.dart';
 
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Unerwarteter Fehler: $e'),
+            content: Text(AppLocalizations.of(context)!.unexpectedError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -86,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'Anmelden',
+                      AppLocalizations.of(context)!.login,
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                       controller: _apiBaseUrlController,
                       decoration: InputDecoration(
-                        labelText: 'API Base URL',
+                        labelText: AppLocalizations.of(context)!.apiBaseUrl,
                         prefixIcon: const Icon(Icons.cloud_outlined),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -104,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       keyboardType: TextInputType.url,
                       textInputAction: TextInputAction.next,
-                      validator: (v) => v == null || v.isEmpty ? 'API Endpoint eingeben' : null,
+                      validator: (v) => v == null || v.isEmpty ? AppLocalizations.of(context)!.enterApiEndpoint : null,
                       onChanged: (value) async {
                         await setApiBaseUrl(value.trim());
                         if (widget.onApiBaseUrlChanged != null) {
@@ -116,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
-                        labelText: 'E-Mail-Adresse',
+                        labelText: AppLocalizations.of(context)!.emailAddress,
                         prefixIcon: const Icon(Icons.email_outlined),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -126,10 +127,10 @@ class _LoginPageState extends State<LoginPage> {
                       textInputAction: TextInputAction.next,
                       validator: (v) {
                         if (v == null || v.isEmpty) {
-                          return 'Bitte geben Sie eine E-Mail-Adresse ein';
+                          return AppLocalizations.of(context)!.enterEmailAddress;
                         }
                         if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(v)) {
-                          return 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+                          return AppLocalizations.of(context)!.enterValidEmail;
                         }
                         return null;
                       },
@@ -138,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                       controller: _passwordController,
                       decoration: InputDecoration(
-                        labelText: 'Passwort',
+                        labelText: AppLocalizations.of(context)!.password,
                         prefixIcon: const Icon(Icons.lock_outlined),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -150,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       obscureText: !_showPassword,
                       textInputAction: TextInputAction.done,
-                      validator: (v) => v == null || v.isEmpty ? 'Bitte geben Sie Ihr Passwort ein' : null,
+                      validator: (v) => v == null || v.isEmpty ? AppLocalizations.of(context)!.enterPassword : null,
                       onFieldSubmitted: (_) {
                         if (!_isLoading && _formKey.currentState!.validate()) {
                           _performLogin();
@@ -174,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 20, 
                                 child: CircularProgressIndicator(strokeWidth: 2),
                               )
-                            : const Text('Anmelden'),
+                            : Text(AppLocalizations.of(context)!.login),
                       ),
                     ),
                   ],

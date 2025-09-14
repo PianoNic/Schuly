@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/push_notification_service.dart';
 import '../services/storage_service.dart';
+import '../l10n/app_localizations.dart';
 
 class NotificationConfigPage extends StatefulWidget {
   const NotificationConfigPage({super.key});
@@ -63,10 +64,11 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Benachrichtigungen konfigurieren',
+          localizations.configureNotifications,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.normal,
             color: Theme.of(context).colorScheme.onSurface,
@@ -92,14 +94,14 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Benachrichtigungstypen',
+                            localizations.notificationTypes,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Wählen Sie aus, für welche Bereiche Sie Benachrichtigungen erhalten möchten.',
+                            localizations.chooseTypesAndTiming,
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                             ),
                           ),
                           const SizedBox(height: 16),
@@ -107,8 +109,8 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                           // Agenda Notifications
                           _buildNotificationTile(
                             icon: Icons.schedule_outlined,
-                            title: 'Stundenplan',
-                            subtitle: 'Benachrichtigungen vor Unterrichtsstunden',
+                            title: localizations.timetable,
+                            subtitle: localizations.agendaNotificationSubtitle,
                             value: _agendaNotificationsEnabled,
                             onChanged: (value) {
                               setState(() {
@@ -123,8 +125,8 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                           // Grade Notifications
                           _buildNotificationTile(
                             icon: Icons.grade_outlined,
-                            title: 'Noten',
-                            subtitle: 'Benachrichtigungen bei neuen Noten',
+                            title: localizations.grades,
+                            subtitle: localizations.gradeNotificationSubtitle,
                             value: _gradeNotificationsEnabled,
                             onChanged: (value) {
                               setState(() {
@@ -139,8 +141,8 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                           // Absence Notifications
                           _buildNotificationTile(
                             icon: Icons.event_busy_outlined,
-                            title: 'Abwesenheiten',
-                            subtitle: 'Benachrichtigungen bei Abwesenheitsänderungen',
+                            title: localizations.absences,
+                            subtitle: localizations.absenceNotificationSubtitle,
                             value: _absenceNotificationsEnabled,
                             onChanged: (value) {
                               setState(() {
@@ -155,8 +157,8 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                           // General Notifications
                           _buildNotificationTile(
                             icon: Icons.notifications_outlined,
-                            title: 'Allgemeine Mitteilungen',
-                            subtitle: 'Wichtige Schulinformationen und Updates',
+                            title: localizations.generalNotifications,
+                            subtitle: localizations.generalNotificationSubtitle,
                             value: _generalNotificationsEnabled,
                             onChanged: (value) {
                               setState(() {
@@ -181,14 +183,14 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Benachrichtigungszeit',
+                              localizations.notificationTime,
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Wie viele Minuten vor Unterrichtsbeginn möchten Sie benachrichtigt werden?',
+                              localizations.notificationAdvanceQuestion,
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                               ),
                             ),
                             const SizedBox(height: 16),
@@ -200,7 +202,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                               children: _advanceTimeOptions.map((minutes) {
                                 final isSelected = _advanceMinutes == minutes;
                                 return FilterChip(
-                                  label: Text('$minutes Min'),
+                                  label: Text(localizations.minutesBeforeClass(minutes)),
                                   selected: isSelected,
                                   onSelected: (selected) {
                                     if (selected) {
@@ -219,10 +221,10 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                                color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(
-                                  color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
                                 ),
                               ),
                               child: Row(
@@ -235,7 +237,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                                   const SizedBox(width: 8),
                                   Expanded(
                                     child: Text(
-                                      'Aktuelle Einstellung: $_advanceMinutes Minuten vor Unterrichtsbeginn',
+                                      localizations.currentAdvanceSetting(_advanceMinutes),
                                       style: Theme.of(context).textTheme.bodyMedium,
                                     ),
                                   ),
@@ -259,15 +261,15 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Test',
+                              localizations.test,
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                             const SizedBox(height: 16),
                             
                             ListTile(
                               leading: const Icon(Icons.send_outlined),
-                              title: const Text('Test-Benachrichtigung senden'),
-                              subtitle: const Text('Prüfen Sie, ob Benachrichtigungen funktionieren'),
+                              title: Text(localizations.sendTestNotification),
+                              subtitle: Text(localizations.checkNotificationsWork),
                               trailing: const Icon(Icons.chevron_right),
                               onTap: () async {
                                 try {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../utils/url_launcher_helper.dart';
+import '../l10n/app_localizations.dart';
 
 class HelpSupportModal extends StatelessWidget {
   const HelpSupportModal({super.key});
@@ -24,7 +25,7 @@ class HelpSupportModal extends StatelessWidget {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.4),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -32,13 +33,13 @@ class HelpSupportModal extends StatelessWidget {
             const SizedBox(height: 16),
 
             Text(
-              'Hilfe & Support',
+              AppLocalizations.of(context)!.helpAndSupport,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 8),
             
             Text(
-              'Brauchst du Hilfe oder hast Feedback? Wähle eine der folgenden Optionen:',
+              AppLocalizations.of(context)!.getHelpAndSupport,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 20),
@@ -63,12 +64,12 @@ class HelpSupportModal extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'E-Mail Support',
+                              AppLocalizations.of(context)!.emailSupport,
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             const SizedBox(height: 4),
-            Text(
-                              'Kontaktiere mich direkt per E-Mail',
+                            Text(
+                              AppLocalizations.of(context)!.contactByEmail,
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                             const SizedBox(height: 2),
@@ -114,12 +115,12 @@ class HelpSupportModal extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Bug Report / Feature Request',
+                              AppLocalizations.of(context)!.bugReport,
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Melde Bugs oder schlage neue Features vor',
+                              AppLocalizations.of(context)!.reportBugsOrRequestFeatures,
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                             const SizedBox(height: 2),
@@ -150,7 +151,7 @@ class HelpSupportModal extends StatelessWidget {
               width: double.infinity,
               child: OutlinedButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Schließen'),
+                child: Text(AppLocalizations.of(context)!.close),
               ),
             ),
             const SizedBox(height: 20),
@@ -177,7 +178,7 @@ class HelpSupportModal extends StatelessWidget {
       } else if (context.mounted) {
         _showErrorDialog(
           context, 
-          'E-Mail-App konnte nicht geöffnet werden. Bitte kontaktieren Sie uns manuell unter: $email',
+          AppLocalizations.of(context)!.emailAppError(email),
           copyText: email,
         );
       }
@@ -185,7 +186,7 @@ class HelpSupportModal extends StatelessWidget {
       if (context.mounted) {
         _showErrorDialog(
           context, 
-          'Fehler beim Öffnen der E-Mail-App. Bitte kontaktieren Sie uns manuell unter: $email',
+          AppLocalizations.of(context)!.emailAppError(email),
           copyText: email,
         );
       }
@@ -203,7 +204,7 @@ class HelpSupportModal extends StatelessWidget {
       } else if (context.mounted) {
         _showErrorDialog(
           context, 
-          'Browser konnte nicht geöffnet werden. Bitte besuchen Sie manuell: $url',
+          AppLocalizations.of(context)!.browserError(url),
           copyText: url,
         );
       }
@@ -211,7 +212,7 @@ class HelpSupportModal extends StatelessWidget {
       if (context.mounted) {
         _showErrorDialog(
           context, 
-          'Fehler beim Öffnen des Browsers. Bitte besuchen Sie manuell: $url',
+          AppLocalizations.of(context)!.browserError(url),
           copyText: url,
         );
       }
@@ -223,7 +224,7 @@ class HelpSupportModal extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Fehler'),
+          title: Text(AppLocalizations.of(context)!.error),
           content: Text(message),
           actions: [
             if (copyText != null)
@@ -232,17 +233,17 @@ class HelpSupportModal extends StatelessWidget {
                   Clipboard.setData(ClipboardData(text: copyText));
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('In Zwischenablage kopiert'),
-                      duration: Duration(seconds: 2),
+                    SnackBar(
+                      content: Text(AppLocalizations.of(context)!.copiedToClipboard),
+                      duration: const Duration(seconds: 2),
                     ),
                   );
                 },
-                child: const Text('Kopieren'),
+                child: Text(AppLocalizations.of(context)!.copy),
               ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('OK'),
+              child: Text(AppLocalizations.of(context)!.ok),
             ),
           ],
         );

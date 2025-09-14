@@ -96,7 +96,7 @@ class ThemeProvider extends ChangeNotifier {
 
   void setSeedColor(Color color) {
     _seedColor = color;
-    _storage.write(key: _seedColorKey, value: color.value.toString());
+    _storage.write(key: _seedColorKey, value: color.toARGB32.toString());
     
     // Disable Material You when manually selecting a color
     if (_useMaterialYou) {
@@ -120,10 +120,10 @@ class ThemeProvider extends ChangeNotifier {
     // Switch to appropriate default color when toggling modes
     if (isNeon && _classicColors.contains(_seedColor)) {
       _seedColor = _neonColors[0]; // Default to neon violet
-      _storage.write(key: _seedColorKey, value: _seedColor.value.toString());
+      _storage.write(key: _seedColorKey, value: _seedColor.toARGB32.toString());
     } else if (!isNeon && _neonColors.contains(_seedColor)) {
       _seedColor = _classicColors[0]; // Default to classic blue
-      _storage.write(key: _seedColorKey, value: _seedColor.value.toString());
+      _storage.write(key: _seedColorKey, value: _seedColor.toARGB32.toString());
     }
     
     notifyListeners();
@@ -145,7 +145,13 @@ class ThemeProvider extends ChangeNotifier {
       _themeMode = ThemeMode.values.firstWhere((e) => e.name == mode, orElse: () => ThemeMode.system);
     }
     if (color != null) {
-      _seedColor = Color(int.parse(color));
+      try {
+        // Accepts both int and hex string (e.g. '0xff123456')
+        _seedColor = Color(color.startsWith('0x') ? int.parse(color) : int.parse(color, radix: 16));
+      } catch (e) {
+        // Fallback to default if parsing fails
+        _seedColor = Colors.blue;
+      }
     }
     if (neonMode != null) {
       _isNeonMode = neonMode == 'true';
@@ -159,9 +165,9 @@ class ThemeProvider extends ChangeNotifier {
   // Calculate card color based on background with proper contrast
   Color _calculateCardColor(Color backgroundColor, bool isLight) {
     // Extract RGB values
-    int r = backgroundColor.red;
-    int g = backgroundColor.green;
-    int b = backgroundColor.blue;
+    int r = (backgroundColor.r * 255.0).round() & 0xff;
+    int g = (backgroundColor.g * 255.0).round() & 0xff;
+    int b = (backgroundColor.b * 255.0).round() & 0xff;
 
     if (isLight) {
       // For light theme: darken the background slightly
@@ -183,9 +189,9 @@ class ThemeProvider extends ChangeNotifier {
   // Calculate navigation bar color based on background
   Color _calculateNavigationBarColor(Color backgroundColor, bool isLight) {
     // Extract RGB values
-    int r = backgroundColor.red;
-    int g = backgroundColor.green;
-    int b = backgroundColor.blue;
+    int r = (backgroundColor.r * 255.0).round() & 0xff;
+    int g = (backgroundColor.g * 255.0).round() & 0xff;
+    int b = (backgroundColor.b * 255.0).round() & 0xff;
 
     if (isLight) {
       // For light theme: darken the background more significantly
@@ -236,14 +242,22 @@ class ThemeProvider extends ChangeNotifier {
     
     return baseTheme.copyWith(
       navigationBarTheme: NavigationBarThemeData(
+        labelTextStyle: WidgetStateProperty.all(
+          const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            overflow: TextOverflow.ellipsis,
+            height: 1.2,
+          ),
+        ),
         indicatorColor: _useMaterialYou
             ? null // Let Material You handle indicator color
             : (isNeonColor
-                ? effectiveSeedColor.withOpacity(0.15)
-                : effectiveSeedColor.withOpacity(0.2)),
+                ? effectiveSeedColor.withValues(alpha: 0.15)
+                : effectiveSeedColor.withValues(alpha: 0.2)),
         backgroundColor: _calculateNavigationBarColor(actualColorScheme.surface, true),
         shadowColor: isNeonColor && !_useMaterialYou
-            ? effectiveSeedColor.withOpacity(0.1)
+            ? effectiveSeedColor.withValues(alpha: 0.1)
             : null,
       ),
       cardTheme: CardThemeData(
@@ -253,7 +267,7 @@ class ThemeProvider extends ChangeNotifier {
             ? _calculateCardColor(actualColorScheme.surface, true)
             : null,
         shadowColor: _useMaterialYou && lightDynamicColorScheme != null
-            ? actualColorScheme.shadow.withOpacity(0.2)
+            ? actualColorScheme.shadow.withValues(alpha: 0.2)
             : null,
       ),
       appBarTheme: AppBarTheme(
@@ -271,7 +285,7 @@ class ThemeProvider extends ChangeNotifier {
         }),
         trackColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
-            return effectiveSeedColor.withOpacity(0.5);
+            return effectiveSeedColor.withValues(alpha: 0.5);
           }
           return null;
         }),
@@ -283,8 +297,8 @@ class ThemeProvider extends ChangeNotifier {
       extensions: <ThemeExtension<dynamic>>[
         AppColors(
           seedColor: effectiveSeedColor,
-          lightBackground: effectiveSeedColor.withOpacity(0.1),
-          surfaceContainer: effectiveSeedColor.withOpacity(0.05),
+          lightBackground: effectiveSeedColor.withValues(alpha: 0.1),
+          surfaceContainer: effectiveSeedColor.withValues(alpha: 0.05),
         ),
       ],
     );
@@ -312,14 +326,22 @@ class ThemeProvider extends ChangeNotifier {
     
     return baseTheme.copyWith(
       navigationBarTheme: NavigationBarThemeData(
+        labelTextStyle: WidgetStateProperty.all(
+          const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            overflow: TextOverflow.ellipsis,
+            height: 1.2,
+          ),
+        ),
         indicatorColor: _useMaterialYou
             ? null // Let Material You handle indicator color
             : (isNeonColor
-                ? effectiveSeedColor.withOpacity(0.25)
-                : effectiveSeedColor.withOpacity(0.3)),
+                ? effectiveSeedColor.withValues(alpha: 0.25)
+                : effectiveSeedColor.withValues(alpha: 0.3)),
         backgroundColor: _calculateNavigationBarColor(actualColorScheme.surface, false),
         shadowColor: isNeonColor && !_useMaterialYou
-            ? effectiveSeedColor.withOpacity(0.2)
+            ? effectiveSeedColor.withValues(alpha: 0.2)
             : null,
       ),
       cardTheme: CardThemeData(
@@ -329,7 +351,7 @@ class ThemeProvider extends ChangeNotifier {
             ? _calculateCardColor(actualColorScheme.surface, false)
             : null,
         shadowColor: _useMaterialYou && darkDynamicColorScheme != null
-            ? actualColorScheme.shadow.withOpacity(0.3)
+            ? actualColorScheme.shadow.withValues(alpha: 0.3)
             : null,
       ),
       appBarTheme: AppBarTheme(
@@ -347,7 +369,7 @@ class ThemeProvider extends ChangeNotifier {
         }),
         trackColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
-            return effectiveSeedColor.withOpacity(0.5);
+            return effectiveSeedColor.withValues(alpha: 0.5);
           }
           return null;
         }),
@@ -359,8 +381,8 @@ class ThemeProvider extends ChangeNotifier {
       extensions: <ThemeExtension<dynamic>>[
         AppColors(
           seedColor: effectiveSeedColor,
-          lightBackground: effectiveSeedColor.withOpacity(0.15),
-          surfaceContainer: effectiveSeedColor.withOpacity(0.1),
+          lightBackground: effectiveSeedColor.withValues(alpha: 0.15),
+          surfaceContainer: effectiveSeedColor.withValues(alpha: 0.1),
         ),
       ],
     );

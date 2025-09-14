@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String name;
@@ -69,7 +70,7 @@ class ProfileHeader extends StatelessWidget {
               Text(
                 email,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -84,7 +85,7 @@ class ProfileHeader extends StatelessWidget {
                     child: OutlinedButton.icon(
                       onPressed: onStudentCardPressed,
                       icon: const Icon(Icons.badge_outlined),
-                      label: const Text('Schülerausweis'),
+                      label: Text(AppLocalizations.of(context)!.studentIdCard),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
@@ -99,7 +100,7 @@ class ProfileHeader extends StatelessWidget {
                     child: OutlinedButton.icon(
                       onPressed: onSwitchAccountPressed,
                       icon: const Icon(Icons.swap_horiz),
-                      label: const Text('Account wechseln'),
+                      label: Text(AppLocalizations.of(context)!.switchAccountButton),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(

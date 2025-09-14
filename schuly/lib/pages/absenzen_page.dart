@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/api_store.dart';
 import '../providers/theme_provider.dart';
 import 'package:schuly/api/lib/api.dart';
+import '../l10n/app_localizations.dart';
 
 class AbsenzenPage extends StatefulWidget {
   const AbsenzenPage({super.key});
@@ -97,6 +98,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(48.0), // Reduced from default ~56
@@ -106,11 +108,11 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
           toolbarHeight: 0, // Remove toolbar space completely
           bottom: TabBar(
             controller: _tabController,
-            tabs: const [
-              Tab(text: 'Alle Absenzen'),
-              Tab(text: 'Verspätungen'),
-              Tab(text: 'Absenzen'),
-              Tab(text: 'Meldungen'),
+            tabs: [
+              Tab(text: localizations.absencesTabAll), // TODO: Add absencesTabAll to ARB
+              Tab(text: localizations.absencesTabLateness), // TODO: Add absencesTabLateness to ARB
+              Tab(text: localizations.absencesTabAbsences), // TODO: Add absencesTabAbsences to ARB
+              Tab(text: localizations.absencesTabNotices), // TODO: Add absencesTabNotices to ARB
             ],
           ),
         ),
@@ -118,16 +120,16 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
       body: TabBarView(
         controller: _tabController,
         children: [
-          _buildAllAbsencesTab(),
-          _buildLatenessTab(),
-          _buildAbsencesTab(),
-          _buildAbsenceNoticesTab(),
+          _buildAllAbsencesTab(localizations),
+          _buildLatenessTab(localizations),
+          _buildAbsencesTab(localizations),
+          _buildAbsenceNoticesTab(localizations),
         ],
       ),
     );
   }
 
-  Widget _buildAllAbsencesTab() {
+  Widget _buildAllAbsencesTab(AppLocalizations localizations) {
     return RefreshIndicator(
       onRefresh: () async {
         final apiStore = Provider.of<ApiStore>(context, listen: false);
@@ -152,7 +154,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
             return const Center(child: CircularProgressIndicator());
           }
           if (isEmpty) {
-            return const Center(child: Text('Keine Absenzen gefunden.'));
+            return Center(child: Text(localizations.noAbsencesFound));
           }
           
           return SingleChildScrollView(
@@ -163,7 +165,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
               children: [
                 // Absences section
                 if (absences.isNotEmpty) ...[
-                  Text('Absenzen', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                  Text(localizations.absencesSection, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)), // TODO: Add absencesSection to ARB
                   const SizedBox(height: 8),
                   ...(() {
                     final List absRaw = absences;
@@ -183,6 +185,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
                         excuseUntil: _formatDateTime(absence.dateEAB, null),
                         status: absence.statusEAB,
                         reason: absence.reason,
+                        localizations: localizations,
                       );
                     }).toList();
                   })(),
@@ -191,17 +194,17 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
                 
                 // Lateness section
                 if (lateness.isNotEmpty) ...[
-                  Text('Verspätungen', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                  Text(localizations.latenessSection, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)), // TODO: Add latenessSection to ARB
                   const SizedBox(height: 8),
-                  ..._buildLatenessItems(lateness),
+                  ..._buildLatenessItems(lateness, localizations),
                   const SizedBox(height: 16),
                 ],
                 
                 // Absence notices section
                 if (absenceNotices.isNotEmpty) ...[
-                  Text('Meldungen', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                  Text(localizations.noticesSection, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)), // TODO: Add noticesSection to ARB
                   const SizedBox(height: 8),
-                  ..._buildGenericItems(absenceNotices, 'Meldung'),
+                  ..._buildGenericItems(absenceNotices, localizations.noticeItem, localizations), // TODO: Add noticeItem to ARB
                 ],
               ],
             ),
@@ -211,20 +214,21 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
     );
   }
 
-  List<Widget> _buildLatenessItems(List<LatenessDto> latenessItems) {
+  List<Widget> _buildLatenessItems(List<LatenessDto> latenessItems, AppLocalizations localizations) {
     return latenessItems.map((lateness) {
       return LatenessItem(
         date: lateness.date,
         duration: lateness.duration,
-        reason: lateness.reason ?? 'Kein Grund angegeben',
+        reason: lateness.reason ?? localizations.noReasonGiven, // TODO: Add noReasonGiven to ARB
         excused: lateness.excused,
-        comment: lateness.comment ?? 'Kein Kommentar angegeben',
+        comment: lateness.comment ?? localizations.noCommentGiven, // TODO: Add noCommentGiven to ARB
         courseToken: lateness.courseToken,
+        localizations: localizations,
       );
     }).toList();
   }
 
-  List<Widget> _buildGenericItems(List<Object> items, String itemType) {
+  List<Widget> _buildGenericItems(List<Object> items, String itemType, AppLocalizations localizations) {
     return items.map((item) {
       Map<String, dynamic> itemData = {};
       if (item is Map<String, dynamic>) {
@@ -233,13 +237,13 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
         try {
           itemData = {'data': item.toString()};
         } catch (_) {
-          itemData = {'data': 'Unbekannte Daten'};
+          itemData = {'data': localizations.unknownData}; // TODO: Add unknownData to ARB
         }
       }
 
       final appColors = Theme.of(context).extension<AppColors>();
       final surfaceContainer = appColors?.surfaceContainer ??
-          Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3);
+          Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3);
 
       return Container(
         margin: const EdgeInsets.symmetric(vertical: 8),
@@ -294,7 +298,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
     }).toList();
   }
 
-  Widget _buildLatenessTab() {
+  Widget _buildLatenessTab(AppLocalizations localizations) {
     return RefreshIndicator(
       onRefresh: () async {
         await Provider.of<ApiStore>(context, listen: false).fetchLateness();
@@ -306,14 +310,14 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
             return const Center(child: CircularProgressIndicator());
           }
           if (lateness.isEmpty) {
-            return const Center(child: Text('Keine Verspätungen gefunden.'));
+            return Center(child: Text(localizations.noLatenessFound)); // TODO: Add noLatenessFound to ARB
           }
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: _buildLatenessItems(lateness),
+              children: _buildLatenessItems(lateness, localizations),
             ),
           );
         },
@@ -321,7 +325,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
     );
   }
 
-  Widget _buildAbsencesTab() {
+  Widget _buildAbsencesTab(AppLocalizations localizations) {
     return RefreshIndicator(
       onRefresh: () async {
         await Provider.of<ApiStore>(context, listen: false).fetchAbsences();
@@ -333,7 +337,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
             return const Center(child: CircularProgressIndicator());
           }
           if (absences.isEmpty) {
-            return const Center(child: Text('Keine Absenzen gefunden.'));
+            return Center(child: Text(localizations.noAbsencesFound));
           }
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -359,6 +363,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
                       excuseUntil: _formatDateTime(absence.dateEAB, null),
                       status: absence.statusEAB,
                       reason: absence.reason,
+                      localizations: localizations,
                     );
                   }).toList();
                 })(),
@@ -370,7 +375,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
     );
   }
 
-  Widget _buildAbsenceNoticesTab() {
+  Widget _buildAbsenceNoticesTab(AppLocalizations localizations) {
     return RefreshIndicator(
       onRefresh: () async {
         await Provider.of<ApiStore>(context, listen: false).fetchAbsenceNotices();
@@ -382,14 +387,14 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
             return const Center(child: CircularProgressIndicator());
           }
           if (absenceNotices.isEmpty) {
-            return const Center(child: Text('Keine Meldungen gefunden.'));
+            return Center(child: Text(localizations.noNoticesFound)); // TODO: Add noNoticesFound to ARB
           }
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: _buildGenericItems(absenceNotices, 'Meldung'),
+              children: _buildGenericItems(absenceNotices, localizations.noticeItem, localizations),
             ),
           );
         },
@@ -406,6 +411,7 @@ class LatenessItem extends StatelessWidget {
   final bool excused;
   final String comment;
   final String courseToken;
+  final AppLocalizations localizations;
 
   const LatenessItem({
     super.key,
@@ -415,6 +421,7 @@ class LatenessItem extends StatelessWidget {
     required this.excused,
     required this.comment,
     required this.courseToken,
+    required this.localizations,
   });
 
   String _formatDate(DateTime date) {
@@ -426,14 +433,14 @@ class LatenessItem extends StatelessWidget {
     try {
       final minutes = int.parse(duration);
       if (minutes < 60) {
-        return '$minutes Min.';
+        return '$minutes ${localizations.minutes}'; // TODO: Add minutes to ARB
       } else {
         final hours = minutes ~/ 60;
         final remainingMinutes = minutes % 60;
         if (remainingMinutes == 0) {
-          return '$hours Std.';
+          return '$hours ${localizations.hours}'; // TODO: Add hours to ARB
         } else {
-          return '$hours Std. $remainingMinutes Min.';
+          return '$hours ${localizations.hours} $remainingMinutes ${localizations.minutes}';
         }
       }
     } catch (_) {
@@ -445,7 +452,7 @@ class LatenessItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     final surfaceContainer = appColors?.surfaceContainer ??
-        Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3);
+        Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3);
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -458,15 +465,15 @@ class LatenessItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Verspätung vom ${_formatDate(date)}',
+              '${localizations.latenessFrom} ${_formatDate(date)}', // TODO: Add latenessFrom to ARB
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
-            _buildDetailRow('Dauer:', _formatDuration(duration)),
-            _buildDetailRow('Kurs:', courseToken),
-            _buildDetailRow('Grund:', reason),
-            _buildDetailRow('Kommentar:', comment),
-            _buildDetailRowWithStatus('Status:', excused),
+            _buildDetailRow('${localizations.duration}:', _formatDuration(duration)), // TODO: Add duration to ARB
+            _buildDetailRow('${localizations.course}:', courseToken), // TODO: Add course to ARB
+            _buildDetailRow('${localizations.reason}:', reason), // TODO: Add reason to ARB
+            _buildDetailRow('${localizations.comment}:', comment), // TODO: Add comment to ARB
+            _buildDetailRowWithStatus('${localizations.status}:', excused), // TODO: Add status to ARB
           ],
       ),
     );
@@ -505,11 +512,11 @@ class LatenessItem extends StatelessWidget {
     if (excusedStatus) {
       icon = Icons.check_circle;
       color = Colors.green;
-      displayText = 'Entschuldigt';
+      displayText = localizations.excused; // TODO: Add excused to ARB
     } else {
       icon = Icons.cancel;
       color = Colors.red;
-      displayText = 'Nicht entschuldigt';
+      displayText = localizations.notExcused; // TODO: Add notExcused to ARB
     }
 
     return Padding(
@@ -550,6 +557,7 @@ class CompactAbsenceItem extends StatelessWidget {
   final String excuseUntil;
   final String status;
   final String reason;
+  final AppLocalizations localizations;
 
   const CompactAbsenceItem({
     super.key,
@@ -558,13 +566,14 @@ class CompactAbsenceItem extends StatelessWidget {
     required this.excuseUntil,
     required this.status,
     required this.reason,
+    required this.localizations,
   });
 
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     final surfaceContainer = appColors?.surfaceContainer ??
-        Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3);
+        Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3);
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -581,10 +590,10 @@ class CompactAbsenceItem extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
-            _buildDetailRow('Von:', absentFrom),
-            _buildDetailRow('Bis:', absentTo),
-            _buildDetailRow('Entschuldigen bis:', excuseUntil),
-            _buildDetailRowWithStatusText('Status:', status),
+            _buildDetailRow('${localizations.from}:', absentFrom), // TODO: Add from to ARB
+            _buildDetailRow('${localizations.to}:', absentTo), // TODO: Add to to ARB
+            _buildDetailRow('${localizations.excuseUntil}:', excuseUntil), // TODO: Add excuseUntil to ARB
+            _buildDetailRowWithStatusText('${localizations.status}:', status), // TODO: Add status to ARB
           ],
       ),
     );
@@ -685,13 +694,16 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
   TimeOfDay? _toTime;
   final _commentController = TextEditingController();
 
-  final List<String> _reasons = [
-    'Krankheit',
-    'Unfall',
-    'Militär',
-    'gültiges Arztzeugnis für Sport',
-    'Andere Absenz',
-  ];
+  List<String> _getReasons(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    return [
+      localizations.illness,
+      localizations.accident,
+      localizations.military,
+      localizations.medicalCertificateForSport,
+      localizations.otherAbsence,
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -715,7 +727,7 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                   decoration: BoxDecoration(
                     color: Theme.of(
                       context,
-                    ).colorScheme.onSurfaceVariant.withOpacity(0.4),
+                    ).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -723,19 +735,19 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
               const SizedBox(height: 16),
 
               Text(
-                'Neue Absenz erfassen',
+                AppLocalizations.of(context)!.createNewAbsence,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 20),
 
               // Reason Dropdown
               DropdownButtonFormField<String>(
-                decoration: const InputDecoration(
-                  labelText: 'Grund *',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.reasonRequired,
+                  border: const OutlineInputBorder(),
                 ),
                 initialValue: _selectedReason.isEmpty ? null : _selectedReason,
-                items: _reasons.map((reason) {
+                items: _getReasons(context).map((reason) {
                   return DropdownMenuItem(value: reason, child: Text(reason));
                 }).toList(),
                 onChanged: (value) {
@@ -745,7 +757,7 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Bitte wählen Sie einen Grund aus';
+                    return AppLocalizations.of(context)!.selectReason;
                   }
                   return null;
                 },
@@ -759,7 +771,7 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                     child: TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
-                        labelText: 'Abwesend von *',
+                        labelText: AppLocalizations.of(context)!.absentFrom,
                         border: const OutlineInputBorder(),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.calendar_today),
@@ -789,7 +801,7 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                       ),
                       validator: (value) {
                         if (_fromDate == null) {
-                          return 'Bitte wählen Sie ein Datum aus';
+                          return AppLocalizations.of(context)!.selectDate;
                         }
                         return null;
                       },
@@ -800,7 +812,7 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                     child: TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
-                        labelText: 'Abwesend bis *',
+                        labelText: AppLocalizations.of(context)!.absentTo,
                         border: const OutlineInputBorder(),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.calendar_today),
@@ -832,11 +844,11 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                       ),
                       validator: (value) {
                         if (_toDate == null) {
-                          return 'Bitte wählen Sie ein Datum aus';
+                          return AppLocalizations.of(context)!.selectDate;
                         }
                         if (_fromDate != null &&
                             _toDate!.isBefore(_fromDate!)) {
-                          return 'Bis-Datum muss nach Von-Datum liegen';
+                          return AppLocalizations.of(context)!.toDateMustBeAfterFromDate;
                         }
                         return null;
                       },
@@ -853,7 +865,7 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                     child: TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
-                        labelText: 'Abwesend ab (Uhrzeit)',
+                        labelText: AppLocalizations.of(context)!.absentFromTime,
                         border: const OutlineInputBorder(),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.access_time),
@@ -882,7 +894,7 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                     child: TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
-                        labelText: 'Abwesend bis (Uhrzeit)',
+                        labelText: AppLocalizations.of(context)!.absentToTime,
                         border: const OutlineInputBorder(),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.access_time),
@@ -914,9 +926,9 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
               TextFormField(
                 controller: _commentController,
                 maxLines: 3,
-                decoration: const InputDecoration(
-                  labelText: 'Kommentar',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.comment,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 24),
@@ -927,7 +939,7 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: const Text('Abbrechen'),
+                      child: Text(AppLocalizations.of(context)!.cancel),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -937,8 +949,8 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                         if (_formKey.currentState!.validate()) {
                           Navigator.of(context).pop();
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Absenz erfolgreich erfasst!'),
+                            SnackBar(
+                              content: Text(AppLocalizations.of(context)!.absenceCreatedSuccessfully),
                               backgroundColor: Colors.green,
                             ),
                           );
@@ -950,7 +962,7 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                           context,
                         ).colorScheme.onPrimary,
                       ),
-                      child: const Text('Erfassen'),
+                      child: Text(AppLocalizations.of(context)!.create),
                     ),
                   ),
                 ],

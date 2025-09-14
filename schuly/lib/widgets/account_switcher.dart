@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/api_store.dart';
+import '../l10n/app_localizations.dart';
 
 class AccountSwitcher extends StatefulWidget {
   const AccountSwitcher({super.key});
@@ -38,7 +39,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.4),
+                color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -49,7 +50,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
               children: [
                 Expanded(
                   child: Text(
-                    'Account wechseln',
+                    AppLocalizations.of(context)!.switchAccount,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -63,7 +64,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      '${users.length} Accounts',
+                      AppLocalizations.of(context)!.accountCount(users.length),
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: Theme.of(context).colorScheme.onPrimaryContainer,
                         fontWeight: FontWeight.w500,
@@ -98,7 +99,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
               child: FilledButton.icon(
                 onPressed: () => _showAddAccountDialog(context, apiStore),
                 icon: const Icon(Icons.add),
-                label: const Text('Neuen Account hinzufügen'),
+                label: Text(AppLocalizations.of(context)!.addAccount),
                 style: FilledButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
@@ -123,20 +124,20 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
           Icon(
             Icons.person_add_outlined,
             size: 64,
-            color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.6),
+            color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
           ),
           const SizedBox(height: 16),
           Text(
-            'Noch keine Accounts',
+            AppLocalizations.of(context)!.noAccounts,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
               color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            'Fügen Sie Ihren ersten Account hinzu, um zu beginnen.',
+            AppLocalizations.of(context)!.addFirstAccount,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.8),
+              color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.8),
             ),
             textAlign: TextAlign.center,
           ),
@@ -153,7 +154,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
     return Material(
       borderRadius: BorderRadius.circular(16),
       color: isActive 
-          ? Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3)
+          ? Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3)
           : Theme.of(context).colorScheme.surface,
       child: InkWell(
         onTap: isActive || isSwitching || isRemoving ? null : () => _switchAccount(apiStore, email),
@@ -163,8 +164,8 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: isActive 
-                  ? Theme.of(context).colorScheme.primary.withOpacity(0.3)
-                  : Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                  ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.3)
+                  : Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
               width: isActive ? 2 : 1,
             ),
           ),
@@ -245,7 +246,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
-                            'Aktiv',
+                            AppLocalizations.of(context)!.active,
                             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                               color: Theme.of(context).colorScheme.onPrimary,
                               fontSize: 10,
@@ -255,7 +256,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                         )
                       else
                         Text(
-                          'Verfügbar',
+                          AppLocalizations.of(context)!.available,
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
@@ -303,7 +304,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                     IconButton(
                       onPressed: () => _showRemoveAccountDialog(context, apiStore, email),
                       icon: const Icon(Icons.delete_outline),
-                      tooltip: 'Account entfernen',
+                      tooltip: AppLocalizations.of(context)!.removeAccount,
                       style: IconButton.styleFrom(
                         foregroundColor: Theme.of(context).colorScheme.error,
                         padding: const EdgeInsets.all(8),
@@ -340,7 +341,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Account gewechselt zu $email'),
+            content: Text(AppLocalizations.of(context)!.switchedAccount(email)),
             backgroundColor: Colors.green,
           ),
         );
@@ -349,7 +350,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Fehler beim Wechseln: $e'),
+            content: Text(AppLocalizations.of(context)!.switchAccountError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -374,7 +375,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Account entfernt: $email'),
+            content: Text(AppLocalizations.of(context)!.removedAccount(email)),
             backgroundColor: Colors.orange,
           ),
         );
@@ -383,7 +384,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Fehler beim Entfernen: $e'),
+            content: Text(AppLocalizations.of(context)!.removeAccountError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -401,12 +402,12 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Account entfernen'),
-        content: Text('Möchten Sie den Account "$email" wirklich entfernen?'),
+        title: Text(AppLocalizations.of(context)!.removeAccount),
+        content: Text(AppLocalizations.of(context)!.confirmRemoveAccount(email)),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Abbrechen'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           FilledButton(
             onPressed: () {
@@ -417,7 +418,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
               backgroundColor: Theme.of(context).colorScheme.error,
               foregroundColor: Theme.of(context).colorScheme.onError,
             ),
-            child: const Text('Entfernen'),
+            child: Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -449,7 +450,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                   Icon(Icons.person_add, 
                       color: Theme.of(context).colorScheme.primary),
                   const SizedBox(width: 8),
-                  const Text('Account hinzufügen'),
+                  Text(AppLocalizations.of(context)!.addAccount),
                 ],
               ),
               content: Form(
@@ -460,7 +461,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                     TextFormField(
                       controller: emailController,
                       decoration: InputDecoration(
-                        labelText: 'E-Mail-Adresse',
+                        labelText: AppLocalizations.of(context)!.emailAddress,
                         prefixIcon: const Icon(Icons.email_outlined),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -470,10 +471,10 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                       textInputAction: TextInputAction.next,
                       validator: (v) {
                         if (v == null || v.isEmpty) {
-                          return 'Bitte geben Sie eine E-Mail-Adresse ein';
+                          return AppLocalizations.of(context)!.enterEmailAddress;
                         }
                         if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(v)) {
-                          return 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+                          return AppLocalizations.of(context)!.enterValidEmail;
                         }
                         return null;
                       },
@@ -482,7 +483,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                     TextFormField(
                       controller: passwordController,
                       decoration: InputDecoration(
-                        labelText: 'Passwort',
+                        labelText: AppLocalizations.of(context)!.password,
                         prefixIcon: const Icon(Icons.lock_outlined),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -494,7 +495,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                       ),
                       obscureText: !showPassword,
                       textInputAction: TextInputAction.done,
-                      validator: (v) => v == null || v.isEmpty ? 'Bitte geben Sie Ihr Passwort ein' : null,
+                      validator: (v) => v == null || v.isEmpty ? AppLocalizations.of(context)!.enterPassword : null,
                       onFieldSubmitted: (_) {
                         if (!isLoading && formKey.currentState!.validate()) {
                           _addAccount(setState, apiStore, emailController.text.trim(), passwordController.text, formKey, setLoading);
@@ -507,7 +508,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
               actions: [
                 TextButton(
                   onPressed: isLoading ? null : () => Navigator.of(context).pop(),
-                  child: const Text('Abbrechen'),
+                  child: Text(AppLocalizations.of(context)!.cancel),
                 ),
                 FilledButton(
                   onPressed: isLoading
@@ -519,7 +520,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                           height: 20,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : const Text('Hinzufügen'),
+                      : Text(AppLocalizations.of(context)!.add),
                 ),
               ],
               ),
@@ -545,8 +546,8 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
           Navigator.of(context).pop(); // Close account switcher
           
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Account erfolgreich hinzugefügt!'),
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.accountAdded),
               backgroundColor: Colors.green,
             ),
           );
@@ -569,7 +570,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
         
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Unerwarteter Fehler: $e'),
+            content: Text(AppLocalizations.of(context)!.unexpectedError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );

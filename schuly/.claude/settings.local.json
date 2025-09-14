@@ -7,7 +7,9 @@
       "Bash(flutter clean:*)",
       "Bash(adb logcat:*)",
       "Read(//f/**)",
-      "Bash(flutter:*)"
+      "Bash(flutter:*)",
+      "WebSearch",
+      "Bash(sed:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,5 +1,6 @@
 // widgets/absence_item.dart
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 
 class AbsenceItem extends StatelessWidget {
   final String absentFrom;
@@ -21,6 +22,7 @@ class AbsenceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     Color statusColor;
     IconData statusIcon;
     
@@ -122,91 +124,91 @@ class AbsenceItem extends StatelessWidget {
             margin: EdgeInsets.zero,
             child: Padding(
               padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Details',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const SizedBox(height: 8),
-                          _buildDetailRow('Grund:', reason),
-                          _buildDetailRow('Von:', absentFrom),
-                          _buildDetailRow('Bis:', absentTo),
-                          _buildDetailRow('Entschuldigen bis:', excuseUntil),
-                          _buildDetailRow('Status:', status),
-                        ],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              localizations.details,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            const SizedBox(height: 8),
+                            _buildDetailRow('${localizations.reason}:', reason),
+                            _buildDetailRow('${localizations.from}:', absentFrom),
+                            _buildDetailRow('${localizations.to}:', absentTo),
+                            _buildDetailRow('${localizations.excuseUntil}:', excuseUntil),
+                            _buildDetailRow('${localizations.status}:', status),
+                          ],
+                        ),
                       ),
-                    ),
-                    if (isOpen) ...[
-                      const SizedBox(width: 16),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            width: 120,
-                            child: OutlinedButton.icon(
-                              onPressed: () {
-                                // TODO: Implement excuse functionality
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Entschuldigung - Coming Soon!'),
+                      if (isOpen) ...[
+                        const SizedBox(width: 16),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(
+                              width: 120,
+                              child: OutlinedButton.icon(
+                                onPressed: () {
+                                  // TODO: Implement excuse functionality
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(localizations.excuseComingSoon),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.edit, size: 16),
+                                label: Text(
+                                  localizations.excuse,
+                                  style: const TextStyle(fontSize: 12),
+                                ),
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.green,
+                                  side: const BorderSide(color: Colors.green),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
                                   ),
-                                );
-                              },
-                              icon: const Icon(Icons.edit, size: 16),
-                              label: const Text(
-                                'Entschuldigen',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.green,
-                                side: const BorderSide(color: Colors.green),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 4,
                                 ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                          SizedBox(
-                            width: 120,
-                            child: OutlinedButton.icon(
-                              onPressed: () {
-                                _showDeleteDialog(context);
-                              },
-                              icon: const Icon(Icons.delete, size: 16),
-                              label: const Text(
-                                'Löschen',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.red,
-                                side: const BorderSide(color: Colors.red),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 4,
+                            const SizedBox(height: 8),
+                            SizedBox(
+                              width: 120,
+                              child: OutlinedButton.icon(
+                                onPressed: () {
+                                  _showDeleteDialog(context);
+                                },
+                                icon: const Icon(Icons.delete, size: 16),
+                                label: Text(
+                                  localizations.delete,
+                                  style: const TextStyle(fontSize: 12),
+                                ),
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.red,
+                                  side: const BorderSide(color: Colors.red),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                      ],
                     ],
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
         ],
       ),
     );
@@ -238,31 +240,30 @@ class AbsenceItem extends StatelessWidget {
   }
 
   void _showDeleteDialog(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Absenz löschen'),
-          content: const Text(
-            'Sind Sie sicher, dass Sie diese Absenz löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.',
-          ),
+          title: Text(localizations.deleteAbsenceTitle),
+          content: Text(localizations.deleteAbsenceConfirm),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Abbrechen'),
+              child: Text(localizations.cancel),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Absenz gelöscht!'),
+                  SnackBar(
+                    content: Text(localizations.absenceDeleted),
                     backgroundColor: Colors.red,
                   ),
                 );
               },
               style: TextButton.styleFrom(foregroundColor: Colors.red),
-              child: const Text('Löschen'),
+              child: Text(localizations.delete),
             ),
           ],
         );

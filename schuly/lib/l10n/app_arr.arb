@@ -1,0 +1,479 @@
+{
+  "@@locale": "arr",
+
+  "appTitle": "Schuly",
+
+  "noAccountAdded": "No crew member aboard yet, matey!",
+
+  "addAccount": "Add Crew Member",
+
+  "noActiveAccount": "No active pirate selected, ye scurvy dog!",
+
+  "selectAccount": "Choose Yer Pirate",
+
+  "personalInformation": "Pirate's Logbook",
+
+  "quickActions": "Captain's Orders",
+
+  "appSettings": "Ship's Configuration",
+
+  "designAndSettings": "Customize yer vessel's appearance",
+
+  "helpAndSupport": "Parley & Support",
+
+  "getHelpAndSupport": "Seek wisdom from the crew",
+
+  "addAnotherAccount": "Recruit Another Pirate",
+
+  "addMultipleAccounts": "Assemble yer crew",
+
+  "logout": "Abandon Ship",
+
+  "signOutFromApp": "Walk the plank outta here",
+
+  "name": "Pirate Name",
+
+  "street": "Harbor Street",
+
+  "zipCity": "Port & Cove",
+
+  "birthDate": "Day of Birth",
+
+  "phone": "Crow's Call",
+
+  "email": "Message in Bottle",
+
+  "nationality": "Sailing Flag",
+
+  "hometown": "Home Port",
+
+  "mobile": "Ship's Horn",
+
+  "profile1": "First Mate",
+
+  "profile2": "Second Mate",
+
+  "start": "Crow's Nest",
+
+  "agenda": "Ship's Log",
+
+  "grades": "Treasure Map",
+
+  "absences": "Shore Leave",
+
+  "account": "Captain's Quarters",
+
+  "language": "Tongue",
+
+  "selectLanguage": "Choose Yer Tongue",
+
+  "english": "King's English",
+
+  "german": "Kraut Speak",
+
+  "swissGerman": "Mountain Folk",
+
+  "pirate": "Pirate Speak",
+
+  "kawaii": "Kawaii Speak",
+
+  "cancel": "Belay That!",
+
+  "confirm": "Aye Aye, Captain!",
+
+  "pushNotifications": "Crow's Messages",
+
+  "featureInDevelopment": "Still being forged in the smithy",
+
+  "configureNotifications": "Set Up Ship's Signals",
+
+  "chooseTypesAndTiming": "Choose what signals ye want to hear",
+
+  "whatsNew": "Fresh Plunder",
+
+  "changelogAndFeatures": "New treasures and adventures",
+
+  "checkForUpdates": "Scout for New Maps",
+
+  "checkForNewVersions": "Search for newer treasure charts",
+
+  "aboutApp": "About This Vessel",
+
+  "version": "Ship's Version",
+
+  "delete": "Scuttle",
+
+  "close": "Batten Down",
+
+  "add": "Recruit",
+
+  "loading": "Hoisting sails...",
+
+  "noEventsForThisDay": "No adventures scheduled for this day",
+
+  "nextLessons": "Next Watch Duties",
+
+  "nextHolidays": "Next Shore Leave",
+
+  "studentIdCard": "Pirate's Papers",
+
+  "enterValidEmail": "Enter a proper ship's message address, ye scallywag",
+
+  "areYouSure": "Are ye certain, matey?",
+
+  "updateAvailable": "New treasure map available!",
+
+  "later": "Later, ye landlubber",
+
+  "yes": "Aye",
+
+  "no": "Nay",
+
+  "confirmed": "Verified by the Captain",
+
+  "lateness": "Tardiness at Sea",
+
+  "noLatenessFound": "No reports of tardiness found",
+
+  "selectReason": "Choose yer excuse, ye scurvy dog",
+
+  "selectDate": "Pick a day from the ship's log",
+
+  "emailAddress": "Ship's Message Address",
+
+  "password": "Secret Code",
+
+  "login": "Board the Ship",
+
+  "enterEmailAddress": "Enter yer ship's message address, ye scallywag",
+
+  "getNewToken": "Fetch new booty token",
+  "getNewTokenSubtitle": "Fetch a new token for the active pirate",
+  "tokenUpdated": "Token fetched, matey!",
+  "noActiveAccountSnack": "No active pirate!",
+  "addAccountTitle": "Recruit Pirate",
+  "emailLabel": "Message in Bottle",
+  "enterEmail": "Enter yer message address",
+  "passwordLabel": "Secret Code",
+  "enterPassword": "Enter yer secret code",
+  "accountAdded": "Pirate recruited!",
+  "logoutTitle": "Abandon Ship",
+  "logoutConfirm": "Are ye sure ye want to abandon ship?",
+  "loggedOut": "Ye be logged out!",
+
+  "designSettings": "Ship's Design Settings",
+  "appearance": "Look o' the Ship",
+  "automatic": "By the stars",
+  "light": "Daylight",
+  "dark": "Nightfall",
+  "colorStyle": "Color o' the Ship",
+  "materialYou": "Material\nYou",
+  "classic": "Old School",
+  "neon": "Neon",
+  "neonAccentColor": "Neon Accent",
+  "classicAccentColor": "Classic Accent",
+  "materialYouActive": "Material You hoisted",
+  "materialYouInfo": "Colors be taken from the King's system",
+  "neonViolet": "Neon Violet",
+  "neonCyan": "Neon Cyan",
+  "neonGreen": "Neon Green",
+  "neonPink": "Neon Pink",
+  "neonOrange": "Neon Orange",
+  "neonBlue": "Neon Blue",
+  "neonRed": "Neon Red",
+  "neonYellow": "Neon Yellow",
+  "neonMint": "Neon Mint",
+  "blue": "Blue",
+  "teal": "Teal",
+  "green": "Green",
+  "pink": "Pink",
+  "orange": "Orange",
+  "indigo": "Indigo",
+  "red": "Red",
+  "yellow": "Yellow",
+  "purple": "Purple",
+  "reloadPage": "Reload the map",
+  "loadingStudentIdCard": "Pirate's papers be loading...",
+
+  "previousLessonsDay": "Previous day with duties",
+  "nextLessonsDay": "Next day with duties",
+  "noLessonsFound": "No watch duties found.",
+  "noLessonsForDay": "No duties for {day}.{month}.{year}",
+  "noHolidaysFound": "No shore leave found.",
+  "latestGrades": "Latest treasures",
+  "noGradesFound": "No treasures found.",
+  "openAbsences": "Open shore leaves",
+  "showAll": "Show all",
+  "@showAll": {"description": "Button text to show all release notes"},
+  "noAbsencesFound": "No shore leaves found.",
+  "noOpenAbsences": "No open shore leaves.",
+  "noReleaseNotes": "No ship's log available",
+  "releaseNotesInfo": "Updates and new adventures will be shown here",
+
+  "notificationTypes": "Signal types",
+  "timetable": "Watch Schedule",
+  "agendaNotificationSubtitle": "Signals before yer duties",
+  "gradeNotificationSubtitle": "Signals for new treasures",
+  "absenceNotificationSubtitle": "Signals for shore leave changes",
+  "generalNotifications": "General ship signals",
+  "generalNotificationSubtitle": "Important ship info and updates",
+  "notificationTime": "Signal time",
+  "notificationAdvanceQuestion": "How many minutes before yer duty do ye want to be signaled?",
+  "minutesBeforeClass": "{minutes} min",
+  "currentAdvanceSetting": "Current setting: {minutes} minutes before duty",
+  "test": "Test",
+  "sendTestNotification": "Send test signal",
+  "checkNotificationsWork": "Check if signals work",
+
+  "gradeDetails": "Treasure Details",
+  "basicInformation": "Basic Pirate Info",
+  "titleLabel": "Title",
+  "subjectLabel": "Subject",
+  "courseLabel": "Course",
+  "dateLabel": "Date",
+  "confirmedLabel": "Verified",
+  "gradeLabel": "Treasure",
+  "pointsLabel": "Doubloons",
+  "weightLabel": "Weight",
+  "courseGradeLabel": "Course Treasure",
+  "classAverage": "Crew Average",
+  "examGroupLabel": "Exam Crew",
+  "classAverageLabel": "Crew Average",
+  "groupWeightLabel": "Crew Weight",
+  "commentLabel": "Captain's Note",
+
+  "latestVersionMessage": "Ye be usin' the latest version, matey!",
+  "versionWithNumber": "Version {version}+{build}",
+  "@versionWithNumber": {"description": "Version string with version and build number.", "placeholders": {"version": {}, "build": {}}},
+  "appLegalese": "Schuly © 2025 PianoNic",
+  "appDescription": "A custom app fer pirates to manage yer loot and crew. Keep yer log, treasure, and important dates in one place.",
+  "apiEndpoint": "API Dock",
+
+  "enterApiEndpoint": "Set yer API Dock coordinates",
+  "@enterApiEndpoint": {"description": "Validation message for empty API endpoint"},
+  "currentApiInfo": "Current API Scroll",
+  "apiInfoStatus": "API Scroll Status",
+  "environment": "Sea State",
+  "error": "Blunder",
+  "apiBaseUrl": "API Main Deck",
+  "save": "Stow",
+  "apiUrlChanged": "API URL be changed: {url}",
+  "@apiUrlChanged": {"description": "Snackbar message when API URL is changed", "placeholders": {"url": {}}},
+  "changelogAndFeatures": "New loot and features",
+  "checkForNewVersions": "Scout for new charts",
+  "aboutApp": "About This Ship",
+  "featureInDevelopment": "Still being forged in the smithy",
+  "@getColorName": {"description": "Returns the pirate color name for a given key."},
+
+  "switchAccount": "Change Yer Pirate",
+  "@switchAccount": {"description": "Header/title for the account switcher modal"},
+
+  "accountCount": "{count, plural, =1{1 pirate} other{{count} pirates}}",
+  "@accountCount": {"description": "Shows the number of accounts", "placeholders": {"count": {}}},
+
+  "noAccounts": "No pirates aboard.",
+  "@noAccounts": {"description": "Message when there are no accounts to switch"},
+
+  "addFirstAccount": "Recruit yer first pirate to set sail!",
+  "@addFirstAccount": {"description": "Subtitle encouraging the user to add their first account"},
+
+  "active": "On Deck",
+  "@active": {"description": "Label for the active account"},
+
+  "available": "Below Deck",
+  "@available": {"description": "Label for available (not active) accounts"},
+
+  "removeAccount": "Throw Overboard",
+  "@removeAccount": {"description": "Button/dialog title for removing an account"},
+
+  "confirmRemoveAccount": "Throw {email} overboard?",
+  "@confirmRemoveAccount": {"description": "Confirmation for removing an account", "placeholders": {"email": {}}},
+
+  "remove": "Overboard!",
+  "@remove": {"description": "Button text for confirming removal"},
+
+  "switchedAccount": "Now sailing as {email}",
+  "@switchedAccount": {"description": "Snackbar message when switching account", "placeholders": {"email": {}}},
+
+  "switchAccountError": "Couldn't change pirate: {error}",
+  "@switchAccountError": {"description": "Error message when switching account fails", "placeholders": {"error": {}}},
+
+  "removedAccount": "{email} thrown overboard!",
+  "@removedAccount": {"description": "Snackbar message when removing account", "placeholders": {"email": {}}},
+
+  "removeAccountError": "Couldn't throw overboard: {error}",
+  "@removeAccountError": {"description": "Error message when removing account fails", "placeholders": {"error": {}}},
+
+  "unexpectedError": "A kraken appeared: {error}",
+  "@unexpectedError": {"description": "Generic error message", "placeholders": {"error": {}}},
+
+  "weekdayMon": "Mon",
+  "@weekdayMon": {"description": "Abbreviation for Monday"},
+  "weekdayTue": "Tue",
+  "@weekdayTue": {"description": "Abbreviation for Tuesday"},
+  "weekdayWed": "Wed",
+  "@weekdayWed": {"description": "Abbreviation for Wednesday"},
+  "weekdayThu": "Thu",
+  "@weekdayThu": {"description": "Abbreviation for Thursday"},
+  "weekdayFri": "Fri",
+  "@weekdayFri": {"description": "Abbreviation for Friday"},
+  "weekdaySat": "Sat",
+  "@weekdaySat": {"description": "Abbreviation for Saturday"},
+  "weekdaySun": "Sun",
+  "@weekdaySun": {"description": "Abbreviation for Sunday"},
+
+  "absencesTabAll": "All Shore Leaves",
+  "absencesTabLateness": "Late to Deck",
+  "absencesTabAbsences": "Shore Leaves",
+  "absencesTabNotices": "Messages",
+  "absencesSection": "Shore Leaves",
+  "latenessSection": "Late to Deck",
+  "noticesSection": "Messages",
+  "noticeItem": "Message",
+  "noReasonGiven": "No reason given, matey!",
+  "noCommentGiven": "No comment scribbled",
+  "unknownData": "Unknown booty",
+  "noNoticesFound": "No messages in a bottle found.",
+  "noLatenessFound": "No late arrivals found.",
+  "minutes": "min",
+  "hours": "hr",
+  "latenessFrom": "Late to deck on",
+  "duration": "How long",
+  "course": "Course",
+  "reason": "Why",
+  "comment": "Captain's Note",
+  "status": "Status",
+  "excused": "Forgiven",
+  "notExcused": "Not forgiven",
+  "from": "From",
+  "to": "To",
+  "excuseUntil": "Forgive until",
+  "agendaForDate": "Ship's log for {day}.{month}.{year}",
+  "noAgendaForDay": "No adventures today, matey!",
+
+  "details": "Details",
+  "excuse": "Forgive",
+  "excuseComingSoon": "Forgiveness - Coming Soon!",
+  "deleteAbsenceTitle": "Scuttle Shore Leave",
+  "deleteAbsenceConfirm": "Are ye sure ye want to scuttle this shore leave? This can't be undone, matey!",
+  "absenceDeleted": "Shore leave scuttled!",
+
+  "emailSupport": "Parley by Email",
+  "@emailSupport": {"description": "Title for email support card"},
+  "contactByEmail": "Send yer message in a bottle",
+  "@contactByEmail": {"description": "Subtitle for email support card"},
+  "bugReport": "Bug Report / Feature Request",
+  "@bugReport": {"description": "Title for bug report card"},
+  "reportBugsOrRequestFeatures": "Report bugs or request new adventures",
+  "@reportBugsOrRequestFeatures": {"description": "Subtitle for bug report card"},
+  "copy": "Copy",
+  "@copy": {"description": "Button text to copy to clipboard"},
+  "copiedToClipboard": "Copied to yer clipboard",
+  "@copiedToClipboard": {"description": "Snackbar message when copied to clipboard"},
+  "ok": "Aye",
+  "@ok": {"description": "OK button text"},
+  "error": "Blunder",
+  "@error": {"description": "Dialog title for errors"},
+  "emailAppError": "Couldn't open yer mail app. Contact us at: {email}",
+  "@emailAppError": {"description": "Error message when email app cannot be opened", "placeholders": {"email": {}}},
+  "browserError": "Couldn't open yer browser. Visit manually: {url}",
+  "@browserError": {"description": "Error message when browser cannot be opened", "placeholders": {"url": {}}},
+
+  "appUpdateTest": "Ship Update Test",
+  "readyToTest": "Ready to test the waters",
+  "updateSystemTest": "Update System Test",
+  "statusLabel": "Status: {status}",
+  "checking": "Scannin' the horizon...",
+  "forceShowUpdateDialog": "Force Show Update Message",
+  "clearDismissedUpdates": "Clear Dismissed Updates",
+  "howItWorks": "How this ship works:",
+  "updateStep1": "1. Checks GitHub releases fer newer charts",
+  "updateStep2": "2. Downloads APK from GitHub treasure chest",
+  "updateStep3": "3. Opens Android installer automatically",
+  "updateStep4": "4. Remembers dismissed updates 'til ship restarts",
+  "checkingForUpdates": "Scannin' fer updates...",
+  "updateAvailableVersion": "New charts available: v{version}",
+  "noUpdatesAvailable": "No new charts or update dismissed",
+  "errorCheckingUpdates": "Blunder checkin' fer updates: {error}",
+  "showingUpdateDialog": "Showin' update message...",
+  "updateDialogShown": "Update message shown",
+  "errorShowingDialog": "Blunder showin' message: {error}",
+  "clearingDismissedUpdates": "Clearin' dismissed updates...",
+  "dismissedUpdatesCleared": "Dismissed updates cleared",
+  "errorClearingDismissed": "Blunder clearin' dismissed: {error}",
+
+  "illness": "Scurvy",
+  "accident": "Mishap",
+  "military": "Navy service",
+  "medicalCertificateForSport": "Ship's doctor certificate for training",
+  "otherAbsence": "Other shore leave",
+  "createNewAbsence": "Log new shore leave",
+  "reasonRequired": "Reason *",
+  "create": "Log",
+
+  "noError": "All clear",
+  "unknown": "Unknown waters",
+
+  "currentVersion": "Current: {version}",
+  "latestVersion": "Latest: {version}",
+  "downloadingUpdate": "Downloadin' new ship parts...",
+  "installingUpdate": "Installin' new ship parts...",
+  "install": "Install",
+  "downloading": "Downloadin'...",
+  "installing": "Installin'...",
+  "downloadError": "Blunder downloadin' ship upgrade",
+  "downloadErrorDetails": "Download blunder: {error}",
+  "installationNotAllowed": "Installation not allowed on this ship",
+  "installationError": "Blunder installin' ship upgrade",
+  "installationErrorDetails": "Installation blunder: {error}",
+  "updateInstallationStarted": "Ship upgrade installation started",
+
+  "selectReason": "Please choose yer reason",
+  "selectDate": "Please pick a date",
+  "absentFrom": "Away from *",
+  "absentTo": "Away until *",
+  "toDateMustBeAfterFromDate": "Return date must be after departure",
+  "absentFromTime": "Away from (time)",
+  "absentToTime": "Away until (time)",
+  "absenceCreatedSuccessfully": "Shore leave logged successfully!",
+  "customizeHomepage": "Customize ship's deck",
+  "visible": "Visible",
+  "hidden": "Hidden",
+  "pushAssistNotifications": "Ship's Bell Notifications",
+  "notificationsBeforeClasses": "Warnings before ship duties",
+  "testNotifications": "Test Ship Signals",
+  "testNotificationDescription": "Test signal for ship's bell",
+  "nextClass": "Next duty: {subject}",
+  "roomAndTeacher": "Deck: {room}{teacher}",
+  "teacher": " • Captain: {teacher}",
+  "vibrationTest": "🔔 Ship's Bell Vibration Test",
+  "vibrationTestMessage": "This signal should shake yer ship! Check yer rigging if it doesn't.",
+  "monday": "Mon",
+  "tuesday": "Tue",
+  "wednesday": "Wed",
+  "thursday": "Thu",
+  "friday": "Fri",
+  "saturday": "Sat",
+  "sunday": "Sun",
+  "january": "January",
+  "february": "February",
+  "march": "March",
+  "april": "April",
+  "may": "May",
+  "june": "June",
+  "july": "July",
+  "august": "August",
+  "september": "September",
+  "october": "October",
+  "november": "November",
+  "december": "December",
+
+  "studentIdCardTooltip": "Crew identification",
+  "customizeHomepageTooltip": "Customize ship's deck",
+  "switchAccountButton": "Switch crew member",
+  "fetchingAppInfo": "Gatherin' ship information...",
+  "checkingUpdatesInitialization": "Checkin' for new charts...",
+  "loadingData": "Loadin' treasure...",
+  "finalizingInitialization": "Preparin' to set sail...",
+  "errorCheckingUpdatesDetails": "Blunder checkin' fer updates: {error}"
+}

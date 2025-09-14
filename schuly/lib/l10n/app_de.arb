@@ -1,0 +1,473 @@
+{
+  "@@locale": "de",
+
+  "appTitle": "Schuly",
+
+  "noAccountAdded": "Noch kein Account hinzugefügt.",
+
+  "addAccount": "Account hinzufügen",
+
+  "noActiveAccount": "Kein aktiver Account ausgewählt.",
+
+  "selectAccount": "Account auswählen",
+
+  "personalInformation": "Persönliche Angaben",
+
+  "quickActions": "Schnellaktionen",
+
+  "appSettings": "App Einstellungen",
+
+  "designAndSettings": "Design und Einstellungen anpassen",
+
+  "helpAndSupport": "Hilfe & Support",
+
+  "getHelpAndSupport": "Hilfe und Support erhalten",
+
+  "addAnotherAccount": "Weiteren Account hinzufügen",
+
+  "addMultipleAccounts": "Mehrere Accounts hinzufügen",
+
+  "logout": "Abmelden",
+
+  "signOutFromApp": "Aus der App abmelden",
+
+  "name": "Name",
+
+  "street": "Strasse",
+
+  "zipCity": "PLZ Ort",
+
+  "birthDate": "Geburtsdatum",
+
+  "phone": "Telefon",
+
+  "email": "E-Mail",
+
+  "nationality": "Nationalität",
+
+  "hometown": "Heimatort",
+
+  "mobile": "Handy",
+
+  "profile1": "Profil 1",
+
+  "profile2": "Profil 2",
+
+  "start": "Start",
+
+  "agenda": "Agenda",
+
+  "grades": "Noten",
+
+  "absences": "Absenzen",
+
+  "account": "Account",
+
+  "language": "Sprache",
+
+  "selectLanguage": "Sprache auswählen",
+
+  "english": "Englisch",
+
+  "german": "Deutsch",
+
+  "swissGerman": "Schwiizerdüütsch",
+
+  "pirate": "Piraten-Sprache",
+
+  "kawaii": "Kawaii",
+
+  "cancel": "Abbrechen",
+
+  "confirm": "Bestätigen",
+
+  "pushNotifications": "Push-Benachrichtigungen",
+
+  "featureInDevelopment": "Feature wird noch entwickelt",
+
+  "configureNotifications": "Benachrichtigungen konfigurieren",
+
+  "chooseTypesAndTiming": "Wählen Sie Typen und Timing für Benachrichtigungen",
+
+  "whatsNew": "Was ist neu",
+
+  "changelogAndFeatures": "Changelog und neue Features",
+
+  "checkForUpdates": "Nach Updates suchen",
+
+  "checkForNewVersions": "Auf neue Versionen prüfen",
+
+  "aboutApp": "Über die App",
+
+  "version": "Version",
+
+  "delete": "Löschen",
+
+  "close": "Schließen",
+
+  "add": "Hinzufügen",
+
+  "loading": "Lädt...",
+
+  "noEventsForThisDay": "Keine Termine für diesen Tag",
+
+  "agendaForDate": "Termine für {day}.{month}.{year}",
+  "noAgendaForDay": "Keine Termine für diesen Tag.",
+
+  "nextLessons": "Nächste Lektionen",
+
+  "nextHolidays": "Nächste Ferien",
+
+  "studentIdCard": "Schülerausweis",
+
+  "enterValidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+
+  "areYouSure": "Sind Sie sicher?",
+
+  "updateAvailable": "Update verfügbar!",
+
+  "later": "Später",
+
+  "yes": "Ja",
+
+  "no": "Nein",
+
+  "confirmed": "Bestätigt",
+
+  "lateness": "Verspätungen",
+
+  "noLatenessFound": "Keine Verspätungen gefunden",
+
+  "selectReason": "Bitte wählen Sie einen Grund aus",
+
+  "selectDate": "Bitte wählen Sie ein Datum aus",
+
+  "emailAddress": "E-Mail-Adresse",
+
+  "password": "Passwort",
+
+  "login": "Anmelden",
+
+  "enterEmailAddress": "Bitte geben Sie eine E-Mail-Adresse ein",
+
+  "getNewToken": "Neues Token holen",
+  "getNewTokenSubtitle": "Hole ein neues Token für den aktiven Account",
+  "tokenUpdated": "Token aktualisiert!",
+  "noActiveAccountSnack": "Kein aktiver Account!",
+  "addAccountTitle": "Account hinzufügen",
+  "emailLabel": "E-Mail",
+  "enterEmail": "E-Mail eingeben",
+  "passwordLabel": "Passwort",
+  "enterPassword": "Passwort eingeben",
+  "accountAdded": "Account hinzugefügt!",
+  "logoutTitle": "Abmelden",
+  "logoutConfirm": "Sind Sie sicher, dass Sie sich abmelden möchten?",
+  "loggedOut": "Abgemeldet!",
+
+  "designSettings": "Design Einstellungen",
+  "appearance": "Darstellung",
+  "automatic": "Automatisch",
+  "light": "Hell",
+  "dark": "Dunkel",
+  "colorStyle": "Farbstil",
+  "materialYou": "Material\nYou",
+  "classic": "Klassisch",
+  "neon": "Neon",
+  "neonAccentColor": "Neon Akzentfarbe",
+  "classicAccentColor": "Klassische Akzentfarbe",
+  "materialYouActive": "Material You aktiv",
+  "materialYouInfo": "Farben werden automatisch vom Systemdesign übernommen",
+
+  "neonViolet": "Neon Violett",
+  "neonCyan": "Neon Cyan",
+  "neonGreen": "Neon Grün",
+  "neonPink": "Neon Pink",
+  "neonOrange": "Neon Orange",
+  "neonBlue": "Neon Blau",
+  "neonRed": "Neon Rot",
+  "neonYellow": "Neon Gelb",
+  "neonMint": "Neon Mint",
+  "blue": "Blau",
+  "teal": "Türkis",
+  "green": "Grün",
+  "pink": "Pink",
+  "orange": "Orange",
+  "indigo": "Indigo",
+  "red": "Rot",
+  "yellow": "Gelb",
+  "purple": "Lila",
+  "reloadPage": "Seite neu laden",
+  "loadingStudentIdCard": "Schülerausweis wird geladen...",
+  "previousLessonsDay": "Vorheriger Tag mit Lektionen",
+  "nextLessonsDay": "Nächster Tag mit Lektionen",
+  "noLessonsFound": "Keine Lektionen gefunden.",
+  "noLessonsForDay": "Keine Lektionen für {day}.{month}.{year}",
+  "noHolidaysFound": "Keine Ferien gefunden.",
+  "latestGrades": "Letzte Noten",
+  "noGradesFound": "Keine Noten gefunden.",
+  "openAbsences": "Offene Absenzen",
+  "showAll": "Alle anzeigen",
+  "@showAll": {"description": "Button text to show all release notes"},
+  "noAbsencesFound": "Keine Absenzen gefunden.",
+  "noOpenAbsences": "Keine offenen Absenzen.",
+  "noReleaseNotes": "Keine Release Notes verfügbar",
+  "releaseNotesInfo": "Updates und neue Features werden hier angezeigt",
+  "notificationTypes": "Benachrichtigungstypen",
+  "timetable": "Stundenplan",
+  "agendaNotificationSubtitle": "Benachrichtigungen vor Unterrichtsstunden",
+  "gradeNotificationSubtitle": "Benachrichtigungen bei neuen Noten",
+  "absenceNotificationSubtitle": "Benachrichtigungen bei Abwesenheitsänderungen",
+  "generalNotifications": "Allgemeine Mitteilungen",
+  "generalNotificationSubtitle": "Wichtige Schulinformationen und Updates",
+  "notificationTime": "Benachrichtigungszeit",
+  "notificationAdvanceQuestion": "Wie viele Minuten vor Unterrichtsbeginn möchten Sie benachrichtigt werden?",
+  "minutesBeforeClass": "{minutes} Min",
+  "currentAdvanceSetting": "Aktuelle Einstellung: {minutes} Minuten vor Unterrichtsbeginn",
+  "test": "Test",
+  "sendTestNotification": "Test-Benachrichtigung senden",
+  "checkNotificationsWork": "Prüfen Sie, ob Benachrichtigungen funktionieren",
+  "gradeDetails": "Notendetails",
+  "basicInformation": "Grundinformationen",
+  "titleLabel": "Titel",
+  "subjectLabel": "Fach",
+  "courseLabel": "Kurs",
+  "dateLabel": "Datum",
+  "confirmedLabel": "Bestätigt",
+  "gradeLabel": "Note",
+  "pointsLabel": "Punkte",
+  "weightLabel": "Gewichtung",
+  "courseGradeLabel": "Kursnote",
+  "classAverage": "Klassenschnitt",
+  "examGroupLabel": "Prüfungsgruppe",
+  "classAverageLabel": "Klassenschnitt",
+  "groupWeightLabel": "Gruppengewichtung",
+  "commentLabel": "Kommentar",
+  "latestVersionMessage": "Sie verwenden bereits die neueste Version.",
+  "versionWithNumber": "Version {version}+{build}",
+  "@versionWithNumber": {"description": "Versionsstring mit Versions- und Buildnummer.", "placeholders": {"version": {}, "build": {}}},
+  "appLegalese": "Schuly © 2025 PianoNic",
+  "appDescription": "Eine custom App für Schüler zur Verwaltung von Schulnetz-Daten. Verwalten Sie Ihren Stundenplan, Noten und wichtige Termine an einem Ort.",
+  "apiEndpoint": "API Endpoint",
+
+  "enterApiEndpoint": "Bitte geben Sie den API Endpoint ein",
+  "@enterApiEndpoint": {"description": "Validierungsmeldung für leeren API Endpoint"},
+  "currentApiInfo": "Aktuelle API Info",
+  "apiInfoStatus": "API Info Status",
+  "environment": "Umgebung",
+  "error": "Fehler",
+  "apiBaseUrl": "API Basis-URL",
+  "save": "Speichern",
+  "apiUrlChanged": "API URL geändert: {url}",
+  "@apiUrlChanged": {"description": "Snackbar-Nachricht, wenn die API-URL geändert wurde", "placeholders": {"url": {}}},
+  "@getColorName": {"description": "Gibt den lokalisierten Farbnamen für einen Schlüssel zurück."},
+
+  "switchAccount": "Account wechseln",
+  "@switchAccount": {"description": "Header/title for the account switcher modal"},
+
+  "accountCount": "{count, plural, =1{1 Account} other{{count} Accounts}}",
+  "@accountCount": {"description": "Shows the number of accounts", "placeholders": {"count": {}}},
+
+  "noAccounts": "Keine Accounts verfügbar.",
+  "@noAccounts": {"description": "Message when there are no accounts to switch"},
+
+  "addFirstAccount": "Fügen Sie Ihren ersten Account hinzu!",
+  "@addFirstAccount": {"description": "Subtitle encouraging the user to add their first account"},
+
+  "active": "Aktiv",
+  "@active": {"description": "Label for the active account"},
+
+  "available": "Verfügbar",
+  "@available": {"description": "Label for available (not active) accounts"},
+
+  "removeAccount": "Account entfernen",
+  "@removeAccount": {"description": "Button/dialog title for removing an account"},
+
+  "confirmRemoveAccount": "Account {email} entfernen?",
+  "@confirmRemoveAccount": {"description": "Confirmation for removing an account", "placeholders": {"email": {}}},
+
+  "remove": "Entfernen",
+  "@remove": {"description": "Button text for confirming removal"},
+
+  "switchedAccount": "Zu {email} gewechselt",
+  "@switchedAccount": {"description": "Snackbar message when switching account", "placeholders": {"email": {}}},
+
+  "switchAccountError": "Accountwechsel fehlgeschlagen: {error}",
+  "@switchAccountError": {"description": "Error message when switching account fails", "placeholders": {"error": {}}},
+
+  "removedAccount": "Account {email} entfernt",
+  "@removedAccount": {"description": "Snackbar message when removing account", "placeholders": {"email": {}}},
+
+  "removeAccountError": "Account konnte nicht entfernt werden: {error}",
+  "@removeAccountError": {"description": "Error message when removing account fails", "placeholders": {"error": {}}},
+
+  "unexpectedError": "Unerwarteter Fehler: {error}",
+  "@unexpectedError": {"description": "Generic error message", "placeholders": {"error": {}}},
+
+  "weekdayMon": "Mo",
+  "@weekdayMon": {"description": "Abkürzung für Montag"},
+  "weekdayTue": "Di",
+  "@weekdayTue": {"description": "Abkürzung für Dienstag"},
+  "weekdayWed": "Mi",
+  "@weekdayWed": {"description": "Abkürzung für Mittwoch"},
+  "weekdayThu": "Do",
+  "@weekdayThu": {"description": "Abkürzung für Donnerstag"},
+  "weekdayFri": "Fr",
+  "@weekdayFri": {"description": "Abkürzung für Freitag"},
+  "weekdaySat": "Sa",
+  "@weekdaySat": {"description": "Abkürzung für Samstag"},
+  "weekdaySun": "So",
+  "@weekdaySun": {"description": "Abkürzung für Sonntag"},
+
+  "absencesTabAll": "Alle Absenzen",
+  "absencesTabLateness": "Verspätungen",
+  "absencesTabAbsences": "Absenzen",
+  "absencesTabNotices": "Meldungen",
+  "absencesSection": "Absenzen",
+  "latenessSection": "Verspätungen",
+  "noticesSection": "Meldungen",
+  "noticeItem": "Meldung",
+  "noReasonGiven": "Kein Grund angegeben",
+  "noCommentGiven": "Kein Kommentar angegeben",
+  "unknownData": "Unbekannte Daten",
+  "noNoticesFound": "Keine Meldungen gefunden.",
+  "noLatenessFound": "Keine Verspätungen gefunden.",
+  "minutes": "Min.",
+  "hours": "Std.",
+  "latenessFrom": "Verspätung vom",
+  "duration": "Dauer",
+  "course": "Kurs",
+  "reason": "Grund",
+  "comment": "Kommentar",
+  "status": "Status",
+  "excused": "Entschuldigt",
+  "notExcused": "Nicht entschuldigt",
+  "from": "Von",
+  "to": "Bis",
+  "excuseUntil": "Entschuldigen bis",
+
+  "details": "Details",
+  "excuse": "Entschuldigen",
+  "excuseComingSoon": "Entschuldigung - Kommt bald!",
+  "deleteAbsenceTitle": "Absenz löschen",
+  "deleteAbsenceConfirm": "Sind Sie sicher, dass Sie diese Absenz löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+  "absenceDeleted": "Absenz gelöscht!",
+
+  "emailSupport": "E-Mail Support",
+  "@emailSupport": {"description": "Titel für E-Mail Support Karte"},
+  "contactByEmail": "Kontaktiere mich direkt per E-Mail",
+  "@contactByEmail": {"description": "Untertitel für E-Mail Support Karte"},
+  "bugReport": "Bug Report / Feature Request",
+  "@bugReport": {"description": "Titel für Bug Report Karte"},
+  "reportBugsOrRequestFeatures": "Melde Bugs oder schlage neue Features vor",
+  "@reportBugsOrRequestFeatures": {"description": "Untertitel für Bug Report Karte"},
+  "copy": "Kopieren",
+  "@copy": {"description": "Buttontext zum Kopieren"},
+  "copiedToClipboard": "In Zwischenablage kopiert",
+  "@copiedToClipboard": {"description": "Snackbar-Nachricht beim Kopieren"},
+  "ok": "OK",
+  "@ok": {"description": "OK Buttontext"},
+  "error": "Fehler",
+  "@error": {"description": "Dialogtitel für Fehler"},
+  "emailAppError": "E-Mail-App konnte nicht geöffnet werden. Bitte kontaktieren Sie uns manuell unter: {email}",
+  "@emailAppError": {"description": "Fehlermeldung, wenn E-Mail-App nicht geöffnet werden kann", "placeholders": {"email": {}}},
+  "browserError": "Browser konnte nicht geöffnet werden. Bitte besuchen Sie manuell: {url}",
+  "@browserError": {"description": "Fehlermeldung, wenn Browser nicht geöffnet werden kann", "placeholders": {"url": {}}},
+
+  "appUpdateTest": "App Update Test",
+  "readyToTest": "Bereit zum Testen",
+  "updateSystemTest": "Update System Test",
+  "statusLabel": "Status: {status}",
+  "checking": "Überprüfe...",
+  "forceShowUpdateDialog": "Update-Dialog erzwingen",
+  "clearDismissedUpdates": "Verworfene Updates löschen",
+  "howItWorks": "So funktioniert es:",
+  "updateStep1": "1. Überprüft GitHub Releases auf neuere Versionen",
+  "updateStep2": "2. Lädt APK von GitHub Release Assets herunter",
+  "updateStep3": "3. Öffnet Android Installer automatisch",
+  "updateStep4": "4. Merkt sich verworfene Updates bis zum App-Neustart",
+  "checkingForUpdates": "Suche nach Updates...",
+  "updateAvailableVersion": "Update verfügbar: v{version}",
+  "noUpdatesAvailable": "Keine Updates verfügbar oder Update verworfen",
+  "errorCheckingUpdates": "Fehler beim Suchen nach Updates: {error}",
+  "showingUpdateDialog": "Zeige Update-Dialog...",
+  "updateDialogShown": "Update-Dialog angezeigt",
+  "errorShowingDialog": "Fehler beim Anzeigen des Dialogs: {error}",
+  "clearingDismissedUpdates": "Lösche verworfene Updates...",
+  "dismissedUpdatesCleared": "Verworfene Updates gelöscht",
+  "errorClearingDismissed": "Fehler beim Löschen verworfener Updates: {error}",
+
+  "illness": "Krankheit",
+  "accident": "Unfall",
+  "military": "Militär",
+  "medicalCertificateForSport": "Gültiges Arztzeugnis für Sport",
+  "otherAbsence": "Andere Absenz",
+  "createNewAbsence": "Neue Absenz erfassen",
+  "reasonRequired": "Grund *",
+  "create": "Erfassen",
+
+  "noError": "Kein Fehler",
+  "unknown": "Unbekannt",
+
+  "currentVersion": "Aktuell: {version}",
+  "latestVersion": "Neueste: {version}",
+  "downloadingUpdate": "Update wird heruntergeladen...",
+  "installingUpdate": "Update wird installiert...",
+  "install": "Installieren",
+  "downloading": "Wird heruntergeladen...",
+  "installing": "Wird installiert...",
+  "downloadError": "Fehler beim Herunterladen des Updates",
+  "downloadErrorDetails": "Download Fehler: {error}",
+  "installationNotAllowed": "Installation nicht erlaubt",
+  "installationError": "Fehler bei der Installation",
+  "installationErrorDetails": "Installation Fehler: {error}",
+  "updateInstallationStarted": "Update Installation gestartet",
+
+  "selectReason": "Bitte wählen Sie einen Grund aus",
+  "selectDate": "Bitte wählen Sie ein Datum aus",
+  "absentFrom": "Abwesend von *",
+  "absentTo": "Abwesend bis *",
+  "toDateMustBeAfterFromDate": "Bis-Datum muss nach Von-Datum liegen",
+  "absentFromTime": "Abwesend ab (Uhrzeit)",
+  "absentToTime": "Abwesend bis (Uhrzeit)",
+  "absenceCreatedSuccessfully": "Absenz erfolgreich erfasst!",
+  "customizeHomepage": "Start-Seite anpassen",
+  "visible": "Sichtbar",
+  "hidden": "Ausgeblendet",
+  "pushAssistNotifications": "PushAssist Benachrichtigungen",
+  "notificationsBeforeClasses": "Benachrichtigungen vor Schulstunden",
+  "testNotifications": "Test Benachrichtigungen",
+  "testNotificationDescription": "Test Benachrichtigung für PushAssist",
+  "nextClass": "Nächste Stunde: {subject}",
+  "roomAndTeacher": "Raum: {room}{teacher}",
+  "teacher": " • Lehrer: {teacher}",
+  "vibrationTest": "🔔 PushAssist Vibration Test",
+  "vibrationTestMessage": "Diese Benachrichtigung sollte vibrieren! Prüfen Sie Ihre Geräteeinstellungen falls nicht.",
+  "monday": "Mo",
+  "tuesday": "Di",
+  "wednesday": "Mi",
+  "thursday": "Do",
+  "friday": "Fr",
+  "saturday": "Sa",
+  "sunday": "So",
+  "january": "Januar",
+  "february": "Februar",
+  "march": "März",
+  "april": "April",
+  "may": "Mai",
+  "june": "Juni",
+  "july": "Juli",
+  "august": "August",
+  "september": "September",
+  "october": "Oktober",
+  "november": "November",
+  "december": "Dezember",
+
+  "studentIdCardTooltip": "Schülerausweis",
+  "customizeHomepageTooltip": "Start-Seite anpassen",
+  "switchAccountButton": "Account wechseln",
+  "fetchingAppInfo": "App-Informationen abrufen...",
+  "checkingUpdatesInitialization": "Updates überprüfen...",
+  "loadingData": "Daten laden...",
+  "finalizingInitialization": "Initialisierung abschließen...",
+  "errorCheckingUpdatesDetails": "Fehler beim Suchen nach Updates: {error}"
+}

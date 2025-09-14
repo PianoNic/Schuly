@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../providers/theme_provider.dart';
+import '../l10n/app_localizations.dart';
 
 class CustomCalendar extends StatefulWidget {
   final DateTime selectedDate;
@@ -102,7 +103,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             icon: Icon(Icons.chevron_left, color: seedColor),
           ),
           Text(
-            '${_getMonthName(_currentMonth.month)} ${_currentMonth.year}',
+            '${_getMonthName(_currentMonth.month, context)} ${_currentMonth.year}',
             style: Theme.of(context).textTheme.titleLarge,
           ),
           IconButton(
@@ -126,7 +127,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
-            children: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map((day) =>
+            children: _getWeekdayAbbreviations(context).map((day) =>
               Expanded(
                 child: Center(
                   child: Text(
@@ -237,7 +238,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                       ? Theme.of(context).colorScheme.onPrimary
                       : isCurrentMonth
                           ? Theme.of(context).colorScheme.onSurface
-                          : Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+                          : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
                   fontWeight: isToday ? FontWeight.bold : null,
                 ),
               ),
@@ -263,11 +264,41 @@ class _CustomCalendarState extends State<CustomCalendar> {
     );
   }
 
-  String _getMonthName(int month) {
-    const months = [
-      'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
-      'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
+  List<String> _getWeekdayAbbreviations(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    return [
+      localizations.monday,
+      localizations.tuesday,
+      localizations.wednesday,
+      localizations.thursday,
+      localizations.friday,
+      localizations.saturday,
+      localizations.sunday,
     ];
-    return months[month - 1];
+  }
+
+  String _getMonthName(int month, BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    const months = [
+      'january', 'february', 'march', 'april', 'may', 'june',
+      'july', 'august', 'september', 'october', 'november', 'december'
+    ];
+
+    // Use reflection or a switch to get the right getter
+    switch(months[month - 1]) {
+      case 'january': return localizations.january;
+      case 'february': return localizations.february;
+      case 'march': return localizations.march;
+      case 'april': return localizations.april;
+      case 'may': return localizations.may;
+      case 'june': return localizations.june;
+      case 'july': return localizations.july;
+      case 'august': return localizations.august;
+      case 'september': return localizations.september;
+      case 'october': return localizations.october;
+      case 'november': return localizations.november;
+      case 'december': return localizations.december;
+      default: return 'Unknown';
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:provider/provider.dart';
 import '../providers/api_store.dart';
+import '../l10n/app_localizations.dart';
 
 class StudentCardPage extends StatefulWidget {
   const StudentCardPage({super.key});
@@ -57,10 +58,11 @@ class _StudentCardPageState extends State<StudentCardPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Schülerausweis',
+          localizations.studentIdCard,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.onSurface,
@@ -79,7 +81,7 @@ class _StudentCardPageState extends State<StudentCardPage> {
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadStudentCard,
-            tooltip: 'Seite neu laden',
+            tooltip: localizations.reloadPage,
           ),
         ],
       ),
@@ -98,9 +100,9 @@ class _StudentCardPageState extends State<StudentCardPage> {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Schülerausweis wird geladen...',
+                      localizations.loadingStudentIdCard,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                       ),
                     ),
                   ],

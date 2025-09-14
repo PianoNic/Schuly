@@ -3,6 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:intl/intl.dart';
 import '../models/release_note.dart';
 import '../services/release_notes_service.dart';
+import '../l10n/app_localizations.dart';
 
 class ReleaseNotesPage extends StatefulWidget {
   const ReleaseNotesPage({super.key});
@@ -43,10 +44,11 @@ class _ReleaseNotesPageState extends State<ReleaseNotesPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Was ist neu',
+          localizations.whatsNew,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.normal,
             color: Theme.of(context).colorScheme.onSurface,
@@ -61,12 +63,12 @@ class _ReleaseNotesPageState extends State<ReleaseNotesPage> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _releaseNotes.isEmpty
-              ? _buildEmptyState()
+              ? _buildEmptyState(localizations)
               : _buildReleaseNotesList(),
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(AppLocalizations localizations) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -74,20 +76,20 @@ class _ReleaseNotesPageState extends State<ReleaseNotesPage> {
           Icon(
             Icons.article_outlined,
             size: 80,
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
           ),
           const SizedBox(height: 16),
           Text(
-            'Keine Release Notes verfügbar',
+            localizations.noReleaseNotes,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            'Updates und neue Features werden hier angezeigt',
+            localizations.releaseNotesInfo,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
             ),
             textAlign: TextAlign.center,
           ),
@@ -143,7 +145,7 @@ class _ReleaseNotesPageState extends State<ReleaseNotesPage> {
                 Text(
                   dateFormatter.format(note.releaseDate),
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.6),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
                 ),
               ],
@@ -165,7 +167,7 @@ class _ReleaseNotesPageState extends State<ReleaseNotesPage> {
               selectable: true,
               styleSheet: MarkdownStyleSheet.fromTheme(theme).copyWith(
                 p: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.8),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
                 ),
                 h1: theme.textTheme.titleLarge?.copyWith(
                   color: theme.colorScheme.primary,
@@ -183,7 +185,7 @@ class _ReleaseNotesPageState extends State<ReleaseNotesPage> {
                   color: theme.colorScheme.primary,
                 ),
                 blockquote: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.7),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                   fontStyle: FontStyle.italic,
                 ),
                 code: theme.textTheme.bodySmall?.copyWith(

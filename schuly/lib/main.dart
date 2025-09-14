@@ -12,6 +12,7 @@ import 'providers/api_store.dart';
 import 'providers/homepage_config_provider.dart';
 import 'services/storage_service.dart';
 import 'services/push_notification_service.dart';
+import 'services/update_service.dart';
 import 'widgets/homepage_config_modal.dart';
 import 'widgets/release_notes_dialog.dart';
 import 'widgets/app_update_dialog.dart';
@@ -63,13 +64,11 @@ class SchulyApp extends StatefulWidget {
 }
 
 class _SchulyAppState extends State<SchulyApp> {
-  @override
-  void initState() {
-    super.initState();
-    // Initialize the ApiStore asynchronously
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final apiStore = Provider.of<ApiStore>(context, listen: false);
-      apiStore.initialize();
+  bool _showSplashScreen = true;
+
+  void _onSplashScreenComplete() {
+    setState(() {
+      _showSplashScreen = false;
     });
   }
 
@@ -79,14 +78,14 @@ class _SchulyAppState extends State<SchulyApp> {
     return Consumer<ApiStore>(
       builder: (context, apiStore, _) {
         // Show splash screen during initialization
-        if (!apiStore.isInitialized) {
+        if (_showSplashScreen) {
           return DynamicColorBuilder(
             builder: (lightDynamic, darkDynamic) {
               return MaterialApp(
                 theme: themeProvider.lightTheme(lightDynamic),
                 darkTheme: themeProvider.darkTheme(darkDynamic),
                 themeMode: themeProvider.themeMode,
-                home: const SplashScreen(),
+                home: SplashScreen(onComplete: _onSplashScreenComplete),
               );
             },
           );
@@ -336,8 +335,115 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  final VoidCallback? onComplete;
+
+  const SplashScreen({super.key, this.onComplete});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  int _currentStep = 1;
+  String _currentStepText = 'App-Informationen abrufen...';
+  bool _isAuthenticated = false;
+  bool _initializationComplete = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeApp();
+  }
+
+  Future<void> _initializeApp() async {
+    final apiStore = Provider.of<ApiStore>(context, listen: false);
+
+    // Step 1: App info and authentication
+    if (mounted) {
+      setState(() {
+        _currentStep = 1;
+        _currentStepText = 'App-Informationen abrufen...';
+      });
+    }
+
+    await Future.delayed(const Duration(milliseconds: 100));
+    if (!mounted) return;
+
+    // Check if user is authenticated
+    await apiStore.initialize();
+    _isAuthenticated = apiStore.userEmails.isNotEmpty;
+
+    await Future.delayed(const Duration(milliseconds: 100));
+    if (!mounted) return;
+
+    // Step 2: Check for updates
+    if (mounted) {
+      setState(() {
+        _currentStep = 2;
+        _currentStepText = 'Updates überprüfen...';
+      });
+    }
+
+    await Future.delayed(const Duration(milliseconds: 100));
+    if (!mounted) return;
+
+    try {
+      await UpdateService.checkForUpdates();
+    } catch (e) {
+      // Ignore errors, continue to next step
+    }
+
+    await Future.delayed(const Duration(milliseconds: 100));
+    if (!mounted) return;
+
+    // Step 3: Load user data
+    if (mounted) {
+      setState(() {
+        _currentStep = 3;
+        _currentStepText = 'Daten laden...';
+      });
+    }
+
+    await Future.delayed(const Duration(milliseconds: 100));
+    if (!mounted) return;
+
+    // Trigger fetchAll if user is authenticated
+    if (_isAuthenticated && apiStore.activeUserEmail != null) {
+      try {
+        await apiStore.fetchAll();
+      } catch (e) {
+        // Ignore errors, continue to next step
+      }
+    }
+
+    await Future.delayed(const Duration(milliseconds: 100));
+    if (!mounted) return;
+
+    // Step 4: Finalizing
+    if (mounted) {
+      setState(() {
+        _currentStep = 4;
+        _currentStepText = 'Initialisierung abschließen...';
+      });
+    }
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    // Mark initialization as complete
+    if (mounted) {
+      setState(() {
+        _initializationComplete = true;
+      });
+
+      // Call the completion callback after a brief delay
+      Future.delayed(const Duration(milliseconds: 100), () {
+        if (mounted && widget.onComplete != null) {
+          widget.onComplete!();
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -366,6 +472,7 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
+
             SizedBox(
               width: 32,
               height: 32,
@@ -377,10 +484,16 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Text(
-              'Initialisiere...',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+
+            // Current step text
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Text(
+                _currentStepText,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                ),
               ),
             ),
           ],
@@ -388,4 +501,5 @@ class SplashScreen extends StatelessWidget {
       ),
     );
   }
+
 }

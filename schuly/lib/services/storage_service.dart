@@ -11,6 +11,11 @@ class StorageService {
   static const String _notificationAdvanceMinutesKey = 'notification_advance_minutes';
   static const String _notificationTypePrefix = 'notification_enabled_';
 
+  // Cache keys for API data
+  static const String _cachePrefix = 'cache_';
+  static const String _cacheTimestampPrefix = 'cache_timestamp_';
+  static const Duration _cacheValidDuration = Duration(hours: 1);
+
   static Future<void> saveUser(String email, Map<String, dynamic> userData) async {
     final users = await getUsers();
     users[email] = userData;
@@ -96,5 +101,112 @@ class StorageService {
 
   static Future<void> clearAll() async {
     await _storage.deleteAll();
+  }
+
+  // Cache management methods
+  static Future<void> cacheData(String key, dynamic data) async {
+    final cacheKey = '$_cachePrefix$key';
+    final timestampKey = '$_cacheTimestampPrefix$key';
+
+    await _storage.write(key: cacheKey, value: jsonEncode(data));
+    await _storage.write(key: timestampKey, value: DateTime.now().millisecondsSinceEpoch.toString());
+  }
+
+  static Future<T?> getCachedData<T>(String key, T? Function(Map<String, dynamic>) fromJson) async {
+    final cacheKey = '$_cachePrefix$key';
+    final timestampKey = '$_cacheTimestampPrefix$key';
+
+    final cachedData = await _storage.read(key: cacheKey);
+    final timestampStr = await _storage.read(key: timestampKey);
+
+    if (cachedData == null || timestampStr == null) return null;
+
+    final timestamp = int.tryParse(timestampStr);
+    if (timestamp == null) return null;
+
+    final cacheAge = DateTime.now().millisecondsSinceEpoch - timestamp;
+    if (cacheAge > _cacheValidDuration.inMilliseconds) {
+      // Cache expired, remove it
+      await _storage.delete(key: cacheKey);
+      await _storage.delete(key: timestampKey);
+      return null;
+    }
+
+    try {
+      final decoded = jsonDecode(cachedData);
+      if (decoded is Map<String, dynamic>) {
+        return fromJson(decoded);
+      }
+      return decoded as T?;
+    } catch (e) {
+      // Invalid cache data, remove it
+      await _storage.delete(key: cacheKey);
+      await _storage.delete(key: timestampKey);
+      return null;
+    }
+  }
+
+  static Future<List<T>?> getCachedListData<T>(String key, T? Function(Map<String, dynamic>) fromJson) async {
+    final cacheKey = '$_cachePrefix$key';
+    final timestampKey = '$_cacheTimestampPrefix$key';
+
+    final cachedData = await _storage.read(key: cacheKey);
+    final timestampStr = await _storage.read(key: timestampKey);
+
+    if (cachedData == null || timestampStr == null) return null;
+
+    final timestamp = int.tryParse(timestampStr);
+    if (timestamp == null) return null;
+
+    final cacheAge = DateTime.now().millisecondsSinceEpoch - timestamp;
+    if (cacheAge > _cacheValidDuration.inMilliseconds) {
+      // Cache expired, remove it
+      await _storage.delete(key: cacheKey);
+      await _storage.delete(key: timestampKey);
+      return null;
+    }
+
+    try {
+      final decoded = jsonDecode(cachedData);
+      if (decoded is List) {
+        final result = <T>[];
+        for (final item in decoded) {
+          final parsed = fromJson(item as Map<String, dynamic>);
+          if (parsed != null) {
+            result.add(parsed);
+          }
+        }
+        return result.isEmpty ? null : result;
+      }
+      return null;
+    } catch (e) {
+      // Invalid cache data, remove it
+      await _storage.delete(key: cacheKey);
+      await _storage.delete(key: timestampKey);
+      return null;
+    }
+  }
+
+  static Future<bool> isCacheValid(String key) async {
+    final timestampKey = '$_cacheTimestampPrefix$key';
+    final timestampStr = await _storage.read(key: timestampKey);
+
+    if (timestampStr == null) return false;
+
+    final timestamp = int.tryParse(timestampStr);
+    if (timestamp == null) return false;
+
+    final cacheAge = DateTime.now().millisecondsSinceEpoch - timestamp;
+    return cacheAge <= _cacheValidDuration.inMilliseconds;
+  }
+
+  static Future<void> clearCache() async {
+    final allKeys = await _storage.readAll();
+    final cacheKeys = allKeys.keys.where((key) =>
+      key.startsWith(_cachePrefix) || key.startsWith(_cacheTimestampPrefix));
+
+    for (final key in cacheKeys) {
+      await _storage.delete(key: key);
+    }
   }
 }

@@ -25,8 +25,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   bool _pushNotificationsEnabled = false;
   bool _isLoading = true;
   bool _isCheckingUpdates = false;
-  String _appVersion = '1.0.0';
-  String _appBuildNumber = '1';
+  String _appVersion = 'DEV';
+  String _appBuildNumber = '0';
 
   @override
   void initState() {

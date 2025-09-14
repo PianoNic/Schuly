@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import '../models/release_note.dart';
-import '../services/app_update_service.dart';
+import '../services/update_service.dart';
 
 class AppUpdateDialog extends StatefulWidget {
-  final ReleaseNote updateRelease;
+  final UpdateInfo updateInfo;
 
   const AppUpdateDialog({
     super.key,
-    required this.updateRelease,
+    required this.updateInfo,
   });
 
   static Future<void> showIfAvailable(BuildContext context) async {
-    final updateRelease = await AppUpdateService.checkForUpdates();
-    if (updateRelease != null && context.mounted) {
+    final updateInfo = await UpdateService.checkForUpdates();
+    if (updateInfo != null && context.mounted) {
       await showDialog<void>(
         context: context,
         barrierDismissible: false,
-        builder: (context) => AppUpdateDialog(updateRelease: updateRelease),
+        builder: (context) => AppUpdateDialog(updateInfo: updateInfo),
       );
     }
   }
@@ -28,7 +26,10 @@ class AppUpdateDialog extends StatefulWidget {
 
 class _AppUpdateDialogState extends State<AppUpdateDialog> {
   bool _isDownloading = false;
+  bool _isInstalling = false;
   double _downloadProgress = 0.0;
+  String? _downloadedFilePath;
+  String _buttonText = 'Installieren';
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +48,9 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Update verfügbar!'),
+                const Text('Update verfügbar!'),
                 Text(
-                  'Version ${widget.updateRelease.version}',
+                  'Version ${widget.updateInfo.latestVersion}',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurface.withOpacity(0.7),
                   ),
@@ -63,157 +64,175 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
         constraints: const BoxConstraints(maxWidth: 350, maxHeight: 400),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Release title
+            Text('Current: ${widget.updateInfo.currentVersion}'),
             Text(
-              widget.updateRelease.title,
-              style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              'Latest: ${widget.updateInfo.latestVersion}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 12),
-            
-            // Markdown content in scrollable area
-            Flexible(
-              child: SingleChildScrollView(
-                child: MarkdownBody(
-                  data: widget.updateRelease.description,
-                  selectable: true,
-                  styleSheet: MarkdownStyleSheet.fromTheme(theme).copyWith(
-                    p: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.8),
-                    ),
-                    h1: theme.textTheme.titleMedium?.copyWith(
-                      color: theme.colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    h2: theme.textTheme.titleSmall?.copyWith(
-                      color: theme.colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    h3: theme.textTheme.titleSmall?.copyWith(
-                      color: theme.colorScheme.secondary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    listBullet: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.primary,
-                    ),
+            const SizedBox(height: 16),
+            if (widget.updateInfo.releaseNotes.isNotEmpty) ...[
+              Text(
+                'What\'s new:',
+                style: theme.textTheme.titleSmall,
+              ),
+              const SizedBox(height: 8),
+              Container(
+                height: 100,
+                width: double.maxFinite,
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surfaceVariant,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: SingleChildScrollView(
+                  child: Text(
+                    widget.updateInfo.releaseNotes,
+                    style: theme.textTheme.bodySmall,
                   ),
                 ),
               ),
-            ),
-            
-            // Download progress indicator
-            if (_isDownloading) ...[
               const SizedBox(height: 16),
-              Column(
-                children: [
-                  Text(
-                    'Update wird heruntergeladen...',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  const SizedBox(height: 8),
-                  LinearProgressIndicator(
-                    value: _downloadProgress > 0 ? _downloadProgress : null,
-                  ),
-                ],
+            ],
+            if (_isDownloading) ...[
+              const Text('Update wird heruntergeladen...'),
+              const SizedBox(height: 8),
+              LinearProgressIndicator(
+                value: _downloadProgress,
+                backgroundColor: theme.colorScheme.surfaceVariant,
               ),
+              const SizedBox(height: 4),
+              Text('${(_downloadProgress * 100).toStringAsFixed(1)}%'),
+            ],
+            if (_isInstalling) ...[
+              const Text('Update wird installiert...'),
+              const SizedBox(height: 8),
+              const LinearProgressIndicator(),
             ],
           ],
         ),
       ),
       actions: [
-        if (!_isDownloading)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: TextButton(
-                  onPressed: () async {
-                    await AppUpdateService.dismissUpdate(widget.updateRelease.version);
-                    if (context.mounted) {
-                      Navigator.of(context).pop();
-                    }
-                  },
-                  child: const Text('Später'),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: FilledButton(
-                  onPressed: _downloadAndInstall,
-                  child: const Text('Installieren'),
-                ),
-              ),
-            ],
+        if (!_isDownloading && !_isInstalling)
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Später'),
           ),
-        if (_isDownloading)
-          const Center(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('Bitte warten...'),
-            ),
-          ),
+        ElevatedButton(
+          onPressed: _isDownloading || _isInstalling
+              ? null
+              : _downloadedFilePath != null
+                  ? _installUpdate
+                  : _downloadUpdate,
+          child: Text(_buttonText),
+        ),
       ],
     );
   }
 
-  Future<void> _downloadAndInstall() async {
+  Future<void> _downloadUpdate() async {
     setState(() {
       _isDownloading = true;
-      _downloadProgress = 0.0;
+      _buttonText = 'Wird heruntergeladen...';
     });
 
     try {
-      // Simulate progress updates (you can implement real progress tracking with Dio)
-      for (int i = 0; i <= 100; i += 10) {
-        if (mounted) {
+      final filePath = await UpdateService.downloadApk(
+        widget.updateInfo.downloadUrl,
+        widget.updateInfo.latestVersion,
+        (progress) {
           setState(() {
-            _downloadProgress = i / 100.0;
+            _downloadProgress = progress;
           });
-          await Future.delayed(const Duration(milliseconds: 100));
-        }
-      }
+        },
+      );
 
-      final success = await AppUpdateService.downloadAndInstallUpdate(widget.updateRelease);
-      
-      if (mounted) {
-        if (success) {
-          // Show success message and close dialog
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Update heruntergeladen! Installation wird gestartet...'),
-              backgroundColor: Colors.green,
-            ),
-          );
-          Navigator.of(context).pop();
-        } else {
-          // Show error message
-          setState(() {
-            _isDownloading = false;
-            _downloadProgress = 0.0;
-          });
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Fehler beim Herunterladen des Updates'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-      }
-    } catch (e) {
-      if (mounted) {
+      if (filePath != null) {
+        setState(() {
+          _downloadedFilePath = filePath;
+          _isDownloading = false;
+          _buttonText = 'Installieren';
+        });
+      } else {
         setState(() {
           _isDownloading = false;
-          _downloadProgress = 0.0;
+          _buttonText = 'Installieren';
         });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Fehler: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        _showErrorDialog('Fehler beim Herunterladen des Updates');
       }
+    } catch (e) {
+      setState(() {
+        _isDownloading = false;
+        _buttonText = 'Installieren';
+      });
+      _showErrorDialog('Download Fehler: $e');
+    }
+  }
+
+  Future<void> _installUpdate() async {
+    setState(() {
+      _isInstalling = true;
+      _buttonText = 'Wird installiert...';
+    });
+
+    try {
+      // Check install permission first
+      final hasPermission = await UpdateService.checkInstallPermission();
+      if (!hasPermission) {
+        setState(() {
+          _isInstalling = false;
+          _buttonText = 'Installieren';
+        });
+        _showErrorDialog('Installation nicht erlaubt');
+        return;
+      }
+
+      // Install the APK
+      final success = await UpdateService.installApk(_downloadedFilePath!);
+
+      if (success) {
+        // Installation started successfully
+        if (mounted) {
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Update Installation gestartet'),
+              duration: Duration(seconds: 3),
+            ),
+          );
+        }
+      } else {
+        setState(() {
+          _isInstalling = false;
+          _buttonText = 'Installieren';
+        });
+        _showErrorDialog('Fehler bei der Installation');
+      }
+    } catch (e) {
+      setState(() {
+        _isInstalling = false;
+        _buttonText = 'Installieren';
+      });
+      _showErrorDialog('Installation Fehler: $e');
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    if (mounted) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Fehler'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
     }
   }
 }

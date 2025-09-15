@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/storage_service.dart';
 
 class LanguageProvider extends ChangeNotifier {
-  Locale _locale = const Locale('de'); // Default to German
+  Locale _locale = const Locale('en'); // Default to English
 
   Locale get locale => _locale;
 
@@ -43,7 +43,7 @@ class LanguageProvider extends ChangeNotifier {
       case 'kaw':
         return const Locale('kaw');
       default:
-        return const Locale('de'); // Default to German
+        return const Locale('en'); // Default to English
     }
   }
 }

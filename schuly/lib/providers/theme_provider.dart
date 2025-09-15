@@ -55,6 +55,21 @@ class ThemeProvider extends ChangeNotifier {
     _loadThemePrefs();
   }
 
+  // Helper method to convert Color to hex string
+  String _colorToHexString(Color color) {
+    final a = (color.a * 255.0).round() & 0xff;
+    final r = (color.r * 255.0).round() & 0xff;
+    final g = (color.g * 255.0).round() & 0xff;
+    final b = (color.b * 255.0).round() & 0xff;
+
+    final hexA = a.toRadixString(16).padLeft(2, '0');
+    final hexR = r.toRadixString(16).padLeft(2, '0');
+    final hexG = g.toRadixString(16).padLeft(2, '0');
+    final hexB = b.toRadixString(16).padLeft(2, '0');
+
+    return '0x$hexA$hexR$hexG$hexB';
+  }
+
   ThemeMode get themeMode => _themeMode;
   Color get seedColor => _seedColor;
   bool get isNeonMode => _isNeonMode;
@@ -96,7 +111,8 @@ class ThemeProvider extends ChangeNotifier {
 
   void setSeedColor(Color color) {
     _seedColor = color;
-    _storage.write(key: _seedColorKey, value: color.toARGB32.toString());
+    final hexColor = _colorToHexString(color);
+    _storage.write(key: _seedColorKey, value: hexColor);
     
     // Disable Material You when manually selecting a color
     if (_useMaterialYou) {
@@ -120,10 +136,12 @@ class ThemeProvider extends ChangeNotifier {
     // Switch to appropriate default color when toggling modes
     if (isNeon && _classicColors.contains(_seedColor)) {
       _seedColor = _neonColors[0]; // Default to neon violet
-      _storage.write(key: _seedColorKey, value: _seedColor.toARGB32.toString());
+      final hexColor = _colorToHexString(_seedColor);
+      _storage.write(key: _seedColorKey, value: hexColor);
     } else if (!isNeon && _neonColors.contains(_seedColor)) {
       _seedColor = _classicColors[0]; // Default to classic blue
-      _storage.write(key: _seedColorKey, value: _seedColor.toARGB32.toString());
+      final hexColor = _colorToHexString(_seedColor);
+      _storage.write(key: _seedColorKey, value: hexColor);
     }
     
     notifyListeners();
@@ -146,11 +164,11 @@ class ThemeProvider extends ChangeNotifier {
     }
     if (color != null) {
       try {
-        // Parse as decimal int (toARGB32 format) or hex string
+        // Parse as hex string (0xAARRGGBB format)
         if (color.startsWith('0x')) {
-          _seedColor = Color(int.parse(color));
+          _seedColor = Color(int.parse(color.substring(2), radix: 16));
         } else {
-          // Try parsing as decimal first (normal toARGB32 format)
+          // Try parsing as decimal for backward compatibility
           _seedColor = Color(int.parse(color));
         }
       } catch (e) {

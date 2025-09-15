@@ -85,6 +85,14 @@
 
   "featureInDevelopment": "Feature wird noch entwickelt",
 
+  "getNotified": "Vor dem Unterricht benachrichtigt werden",
+
+  "enableNotifications": "Aktivieren, um Benachrichtigungen zu erhalten",
+
+  "notificationsEnabled": "Benachrichtigungen erfolgreich aktiviert",
+
+  "notificationPermissionDenied": "Benachrichtigungsberechtigung verweigert. Bitte in den Einstellungen aktivieren.",
+
   "configureNotifications": "Benachrichtigungen konfigurieren",
 
   "chooseTypesAndTiming": "Wählen Sie Typen und Timing für Benachrichtigungen",
@@ -226,6 +234,22 @@
   "test": "Test",
   "sendTestNotification": "Test-Benachrichtigung senden",
   "checkNotificationsWork": "Prüfen Sie, ob Benachrichtigungen funktionieren",
+
+  "scheduleTestNotification": "Test-Benachrichtigung planen",
+
+  "testScheduledNotificationDesc": "Erhalte eine Benachrichtigung in 15 Sekunden (funktioniert bei geschlossener App)",
+
+  "notificationScheduledIn15Seconds": "Benachrichtigung geplant! App schließen zum Testen - erscheint in 15 Sekunden",
+
+  "errorSchedulingNotification": "Fehler beim Planen der Benachrichtigung",
+
+  "testNotificationSent": "Test-Benachrichtigung gesendet!",
+
+  "exactAlarmPermissionRequired": "Berechtigung für exakte Alarme erforderlich. Bitte in den Einstellungen aktivieren.",
+
+  "openSettings": "Einstellungen öffnen",
+
+  "getColorName": "Farbname abrufen",
   "gradeDetails": "Notendetails",
   "basicInformation": "Grundinformationen",
   "titleLabel": "Titel",

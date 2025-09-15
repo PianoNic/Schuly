@@ -416,6 +416,30 @@ abstract class AppLocalizations {
   /// **'Feature in development'**
   String get featureInDevelopment;
 
+  /// Subtitle when notifications are enabled
+  ///
+  /// In en, this message translates to:
+  /// **'Get notified before classes'**
+  String get getNotified;
+
+  /// Subtitle when notifications are disabled
+  ///
+  /// In en, this message translates to:
+  /// **'Enable to receive notifications'**
+  String get enableNotifications;
+
+  /// Success message when notifications are enabled
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications enabled successfully'**
+  String get notificationsEnabled;
+
+  /// Error message when notification permission is denied
+  ///
+  /// In en, this message translates to:
+  /// **'Notification permission denied. Please enable in settings.'**
+  String get notificationPermissionDenied;
+
   /// Menu item for notification configuration
   ///
   /// In en, this message translates to:
@@ -1052,6 +1076,48 @@ abstract class AppLocalizations {
   /// **'Check if notifications work'**
   String get checkNotificationsWork;
 
+  /// Button to schedule a test notification
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule test notification'**
+  String get scheduleTestNotification;
+
+  /// Description for scheduled test notification
+  ///
+  /// In en, this message translates to:
+  /// **'Receive a notification in 15 seconds (works when app is closed)'**
+  String get testScheduledNotificationDesc;
+
+  /// Success message when test notification is scheduled
+  ///
+  /// In en, this message translates to:
+  /// **'Notification scheduled! Close the app to test - appears in 15 seconds'**
+  String get notificationScheduledIn15Seconds;
+
+  /// Error message when notification scheduling fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to schedule notification'**
+  String get errorSchedulingNotification;
+
+  /// Success message when test notification is sent
+  ///
+  /// In en, this message translates to:
+  /// **'Test notification sent!'**
+  String get testNotificationSent;
+
+  /// Error message when exact alarm permission is required
+  ///
+  /// In en, this message translates to:
+  /// **'Exact alarm permission required. Please enable in settings.'**
+  String get exactAlarmPermissionRequired;
+
+  /// Button to open app settings
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get openSettings;
+
   /// No description provided for @gradeDetails.
   ///
   /// In en, this message translates to:
@@ -1219,6 +1285,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'API URL changed: {url}'**
   String apiUrlChanged(Object url);
+
+  /// Returns the localized color name for a given key.
+  ///
+  /// In en, this message translates to:
+  /// **'Get color name'**
+  String get getColorName;
 
   /// Header/title for the account switcher modal
   ///

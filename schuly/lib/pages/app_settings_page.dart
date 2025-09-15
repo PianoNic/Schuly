@@ -12,6 +12,7 @@ import '../services/app_update_service.dart';
 import '../widgets/app_update_dialog.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/language_provider.dart';
+import '../services/push_notification_service.dart';
 
 class AppSettingsPage extends StatefulWidget {
   final ThemeProvider themeProvider;
@@ -67,6 +68,50 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
     });
   }
 
+
+  Future<void> _handleNotificationToggle(bool? value) async {
+    if (value == null) return;
+
+    // If enabling notifications, request permissions first
+    if (value) {
+      final granted = await PushNotificationService.requestPermissions();
+
+      if (granted) {
+        // Permission granted - enable notifications
+        await StorageService.setPushNotificationsEnabled(true);
+        await PushNotificationService.setPushAssistEnabled(true);
+        setState(() {
+          _pushNotificationsEnabled = true;
+        });
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.notificationsEnabled),
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
+      } else {
+        // Permission denied - keep toggle off
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.notificationPermissionDenied),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } else {
+      // Disabling notifications
+      await StorageService.setPushNotificationsEnabled(false);
+      await PushNotificationService.setPushAssistEnabled(false);
+      setState(() {
+        _pushNotificationsEnabled = false;
+      });
+    }
+  }
 
   Future<void> _checkForUpdates() async {
     setState(() {
@@ -157,14 +202,18 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         ? const Center(child: CircularProgressIndicator())
                         : _buildSettingsTile(
                             context,
-                            icon: Icons.notifications_off_outlined,
+                            icon: _pushNotificationsEnabled
+                                ? Icons.notifications_active_outlined
+                                : Icons.notifications_off_outlined,
                             title: localizations.pushNotifications,
-                            subtitle: localizations.featureInDevelopment,
+                            subtitle: _pushNotificationsEnabled
+                                ? localizations.getNotified
+                                : localizations.enableNotifications,
                             trailing: Switch(
-                              value: false,
-                              onChanged: null,
+                              value: _pushNotificationsEnabled,
+                              onChanged: _handleNotificationToggle,
                             ),
-                            isEnabled: false,
+                            isEnabled: true,
                           ),
 
                     const Divider(),

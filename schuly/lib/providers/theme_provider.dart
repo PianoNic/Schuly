@@ -146,8 +146,13 @@ class ThemeProvider extends ChangeNotifier {
     }
     if (color != null) {
       try {
-        // Accepts both int and hex string (e.g. '0xff123456')
-        _seedColor = Color(color.startsWith('0x') ? int.parse(color) : int.parse(color, radix: 16));
+        // Parse as decimal int (toARGB32 format) or hex string
+        if (color.startsWith('0x')) {
+          _seedColor = Color(int.parse(color));
+        } else {
+          // Try parsing as decimal first (normal toARGB32 format)
+          _seedColor = Color(int.parse(color));
+        }
       } catch (e) {
         // Fallback to default if parsing fails
         _seedColor = Colors.blue;

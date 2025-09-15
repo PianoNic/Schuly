@@ -22,7 +22,9 @@ import 'widgets/app_update_dialog.dart';
 import 'package:schuly/api/lib/api.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'l10n/pirate_material_localizations.dart';
+import 'l10n/pirate_cupertino_localizations.dart';
 import 'l10n/kawaii_material_localizations.dart';
+import 'l10n/kawaii_cupertino_localizations.dart';
 
 String apiBaseUrl = 'https://schlwr.pianonic.ch';
 
@@ -94,12 +96,18 @@ class _SchulyAppState extends State<SchulyApp> {
                 themeMode: themeProvider.themeMode,
                 locale: languageProvider.locale,
                 localizationsDelegates: [
-                  if (languageProvider.locale?.languageCode == 'arr') PirateMaterialLocalizations.delegate,
-                  if (languageProvider.locale?.languageCode == 'kaw') KawaiiMaterialLocalizations.delegate,
                   AppLocalizations.delegate,
+                  if (languageProvider.locale.languageCode == 'arr') ...[
+                    PirateMaterialLocalizations.delegate,
+                    PirateCupertinoLocalizations.delegate,
+                  ] else if (languageProvider.locale.languageCode == 'kaw') ...[
+                    KawaiiMaterialLocalizations.delegate,
+                    KawaiiCupertinoLocalizations.delegate,
+                  ] else ...[
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: const [
                   Locale('en'),
@@ -124,12 +132,18 @@ class _SchulyAppState extends State<SchulyApp> {
                 themeMode: themeProvider.themeMode,
                 locale: languageProvider.locale,
                 localizationsDelegates: [
-                  if (languageProvider.locale?.languageCode == 'arr') PirateMaterialLocalizations.delegate,
-                  if (languageProvider.locale?.languageCode == 'kaw') KawaiiMaterialLocalizations.delegate,
                   AppLocalizations.delegate,
+                  if (languageProvider.locale.languageCode == 'arr') ...[
+                    PirateMaterialLocalizations.delegate,
+                    PirateCupertinoLocalizations.delegate,
+                  ] else if (languageProvider.locale.languageCode == 'kaw') ...[
+                    KawaiiMaterialLocalizations.delegate,
+                    KawaiiCupertinoLocalizations.delegate,
+                  ] else ...[
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: const [
                   Locale('en'),
@@ -157,12 +171,18 @@ class _SchulyAppState extends State<SchulyApp> {
               themeMode: themeProvider.themeMode,
               locale: languageProvider.locale,
               localizationsDelegates: [
-                if (languageProvider.locale?.languageCode == 'arr') PirateMaterialLocalizations.delegate,
-                if (languageProvider.locale?.languageCode == 'kaw') KawaiiMaterialLocalizations.delegate,
                 AppLocalizations.delegate,
+                if (languageProvider.locale.languageCode == 'arr') ...[
+                  PirateMaterialLocalizations.delegate,
+                  PirateCupertinoLocalizations.delegate,
+                ] else if (languageProvider.locale.languageCode == 'kaw') ...[
+                  KawaiiMaterialLocalizations.delegate,
+                  KawaiiCupertinoLocalizations.delegate,
+                ] else ...[
+                  GlobalCupertinoLocalizations.delegate,
+                ],
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
               ],
               supportedLocales: const [
                 Locale('en'),
@@ -549,7 +569,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 _currentStepText,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
               ),
             ),

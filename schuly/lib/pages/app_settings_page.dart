@@ -279,7 +279,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         showAboutDialog(
                           context: context,
                           applicationName: localizations.appTitle,
-                          applicationVersion: '${_appVersion}+${_appBuildNumber}',
+                          applicationVersion: '$_appVersion+$_appBuildNumber',
                           applicationLegalese: localizations.appLegalese,
                           children: [
                             const SizedBox(height: 16),

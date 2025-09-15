@@ -25,6 +25,25 @@ jobs:
           channel: 'stable'
           cache: true
 
+      - name: Create release keystore
+        working-directory: ./schuly/android
+        run: |
+          echo "Creating release keystore for consistent signing..."
+          keytool -genkey -v -keystore app-release.jks -keyalg RSA -keysize 2048 -validity 10000 -alias release \
+            -dname "CN=Schuly App, OU=Development, O=Schuly, L=Rüebliland, S=Aargau, C=CH" \
+            -storepass "${{ secrets.KEYSTORE_PASSWORD }}" -keypass "${{ secrets.KEY_PASSWORD }}" -noprompt
+
+      - name: Create key.properties
+        working-directory: ./schuly/android
+        run: |
+          echo "Creating key.properties file..."
+          cat > key.properties << EOF
+          storePassword=${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword=${{ secrets.KEY_PASSWORD }}
+          keyAlias=release
+          storeFile=app-release.jks
+          EOF
+
       - name: Get dependencies
         working-directory: ./schuly
         run: flutter pub get

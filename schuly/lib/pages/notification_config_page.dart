@@ -17,7 +17,6 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
   bool _generalNotificationsEnabled = false;
   
   int _advanceMinutes = 2;
-  final List<int> _advanceTimeOptions = [2, 5, 10, 20, 30, 50];
   
   bool _isLoading = true;
 
@@ -54,10 +53,17 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
   }
 
   Future<void> _saveAdvanceTime(int minutes) async {
+    print('💾 Saving notification advance time: $minutes minutes to storage');
     await StorageService.setNotificationAdvanceMinutes(minutes);
     setState(() {
       _advanceMinutes = minutes;
     });
+    print('✅ Notification time saved successfully');
+  }
+
+  Future<void> _scheduleTestNotification() async {
+    // Schedule a test notification using the dedicated test method
+    await PushNotificationService.scheduleTestNotification();
   }
 
   Future<void> _scheduleTestNotification() async {
@@ -183,53 +189,88 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                                 color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                               ),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 24),
 
-                            // Advance Time Selection
-                            Wrap(
-                              spacing: 8.0,
-                              runSpacing: 8.0,
-                              children: _advanceTimeOptions.map((minutes) {
-                                final isSelected = _advanceMinutes == minutes;
-                                return FilterChip(
-                                  label: Text(localizations.minutesBeforeClass(minutes)),
-                                  selected: isSelected,
-                                  onSelected: (selected) {
-                                    if (selected) {
-                                      _saveAdvanceTime(minutes);
-                                    }
-                                  },
-                                  selectedColor: Theme.of(context).colorScheme.primaryContainer,
-                                  checkmarkColor: Theme.of(context).colorScheme.onPrimaryContainer,
-                                );
-                              }).toList(),
-                            ),
-
-                            const SizedBox(height: 16),
-
-                            // Current Selection Display
+                            // Visual Time Display
                             Container(
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
-                                ),
+                                color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3),
+                                borderRadius: BorderRadius.circular(16),
                               ),
-                              child: Row(
+                              child: Column(
                                 children: [
-                                  Icon(
-                                    Icons.access_time_outlined,
-                                    size: 20,
-                                    color: Theme.of(context).colorScheme.primary,
+                                  // Clock icon with time
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.alarm,
+                                        size: 48,
+                                        color: Theme.of(context).colorScheme.primary,
+                                      ),
+                                      const SizedBox(width: 16),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            _advanceMinutes == 1
+                                              ? '1 ${localizations.minute}'
+                                              : '$_advanceMinutes ${localizations.minutes}',
+                                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                              color: Theme.of(context).colorScheme.primary,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            localizations.beforeClass,
+                                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                              color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                    child: Text(
-                                      localizations.currentAdvanceSetting(_advanceMinutes),
-                                      style: Theme.of(context).textTheme.bodyMedium,
-                                    ),
+                                  const SizedBox(height: 24),
+
+                                  // Slider
+                                  Column(
+                                    children: [
+                                      Slider(
+                                        value: _advanceMinutes.toDouble(),
+                                        min: 1,
+                                        max: 60,
+                                        divisions: 59,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _advanceMinutes = value.round();
+                                          });
+                                        },
+                                        onChangeEnd: (value) {
+                                          final minutes = value.round();
+                                          print('📱 Slider released - Saving notification time: $minutes minutes');
+                                          _saveAdvanceTime(minutes);
+                                        },
+                                      ),
+                                      // Slider labels
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '1 min',
+                                              style: Theme.of(context).textTheme.bodySmall,
+                                            ),
+                                            Text(
+                                              '60 min',
+                                              style: Theme.of(context).textTheme.bodySmall,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

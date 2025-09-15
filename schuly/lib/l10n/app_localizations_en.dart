@@ -749,7 +749,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noNoticesFound => 'No notices found.';
 
   @override
-  String get minutes => 'min';
+  String get minutes => 'minutes';
 
   @override
   String get hours => 'hr';
@@ -1103,4 +1103,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String errorCheckingUpdatesDetails(Object error) {
     return 'Error checking for updates: $error';
   }
+
+  @override
+  String get minute => 'minute';
+
+  @override
+  String get beforeClass => 'before class';
 }

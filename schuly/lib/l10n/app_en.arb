@@ -1434,5 +1434,20 @@
     "placeholders": {
       "error": {}
     }
+  },
+
+  "minute": "minute",
+  "@minute": {
+    "description": "Singular form of minute"
+  },
+
+  "minutes": "minutes",
+  "@minutes": {
+    "description": "Plural form of minutes"
+  },
+
+  "beforeClass": "before class",
+  "@beforeClass": {
+    "description": "Text shown under the time display"
   }
 }

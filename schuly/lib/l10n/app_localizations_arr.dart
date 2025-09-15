@@ -1103,4 +1103,10 @@ class AppLocalizationsArr extends AppLocalizations {
   String errorCheckingUpdatesDetails(Object error) {
     return 'Blunder checkin\' fer updates: $error';
   }
+
+  @override
+  String get minute => 'minute';
+
+  @override
+  String get beforeClass => 'before class';
 }

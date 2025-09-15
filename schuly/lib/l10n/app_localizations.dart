@@ -1490,10 +1490,10 @@ abstract class AppLocalizations {
   /// **'No notices found.'**
   String get noNoticesFound;
 
-  /// No description provided for @minutes.
+  /// Plural form of minutes
   ///
   /// In en, this message translates to:
-  /// **'min'**
+  /// **'minutes'**
   String get minutes;
 
   /// No description provided for @hours.
@@ -2143,6 +2143,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error checking for updates: {error}'**
   String errorCheckingUpdatesDetails(Object error);
+
+  /// Singular form of minute
+  ///
+  /// In en, this message translates to:
+  /// **'minute'**
+  String get minute;
+
+  /// Text shown under the time display
+  ///
+  /// In en, this message translates to:
+  /// **'before class'**
+  String get beforeClass;
 }
 
 class _AppLocalizationsDelegate

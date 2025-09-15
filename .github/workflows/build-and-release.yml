@@ -26,7 +26,7 @@ jobs:
           cache: true
 
       - name: Setup release keystore
-        working-directory: ./schuly/android/app
+        working-directory: ./schuly/android
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -54,7 +54,7 @@ jobs:
           storePassword=$KEYSTORE_PASSWORD
           keyPassword=$KEY_PASSWORD
           keyAlias=release
-          storeFile=app/app-release.jks
+          storeFile=../app-release.jks
           EOF
 
       - name: Get dependencies

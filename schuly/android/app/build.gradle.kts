@@ -56,6 +56,17 @@ android {
             } else {
                 signingConfigs.getByName("debug")
             }
+
+            // Disable R8/ProGuard minification for release builds
+            // This fixes notification scheduling issues
+            isMinifyEnabled = false
+            isShrinkResources = false
+
+            // Keep ProGuard rules just in case
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 }

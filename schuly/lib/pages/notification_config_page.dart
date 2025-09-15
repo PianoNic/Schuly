@@ -60,6 +60,11 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
     });
   }
 
+  Future<void> _scheduleTestNotification() async {
+    // Schedule a test notification using the dedicated test method
+    await PushNotificationService.scheduleTestNotification();
+  }
+
 
 
   @override
@@ -122,50 +127,35 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
 
                           const Divider(),
 
-                          // Grade Notifications
+                          // Grade Notifications (Disabled - coming soon)
                           _buildNotificationTile(
                             icon: Icons.grade_outlined,
                             title: localizations.grades,
                             subtitle: localizations.gradeNotificationSubtitle,
                             value: _gradeNotificationsEnabled,
-                            onChanged: (value) {
-                              setState(() {
-                                _gradeNotificationsEnabled = value;
-                              });
-                              _saveNotificationSetting('grades', value);
-                            },
+                            onChanged: null, // Disabled
                           ),
 
                           const Divider(),
 
-                          // Absence Notifications
+                          // Absence Notifications (Disabled - coming soon)
                           _buildNotificationTile(
                             icon: Icons.event_busy_outlined,
                             title: localizations.absences,
                             subtitle: localizations.absenceNotificationSubtitle,
                             value: _absenceNotificationsEnabled,
-                            onChanged: (value) {
-                              setState(() {
-                                _absenceNotificationsEnabled = value;
-                              });
-                              _saveNotificationSetting('absences', value);
-                            },
+                            onChanged: null, // Disabled
                           ),
 
                           const Divider(),
 
-                          // General Notifications
+                          // General Notifications (Disabled - coming soon)
                           _buildNotificationTile(
                             icon: Icons.notifications_outlined,
                             title: localizations.generalNotifications,
                             subtitle: localizations.generalNotificationSubtitle,
                             value: _generalNotificationsEnabled,
-                            onChanged: (value) {
-                              setState(() {
-                                _generalNotificationsEnabled = value;
-                              });
-                              _saveNotificationSetting('general', value);
-                            },
+                            onChanged: null, // Disabled
                           ),
                         ],
                       ),
@@ -266,6 +256,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                             ),
                             const SizedBox(height: 16),
                             
+                            // Instant test notification
                             ListTile(
                               leading: const Icon(Icons.send_outlined),
                               title: Text(localizations.sendTestNotification),
@@ -274,8 +265,62 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                               onTap: () async {
                                 try {
                                   await PushNotificationService.showTestNotification();
+                                  if (mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(localizations.testNotificationSent),
+                                        backgroundColor: Colors.green,
+                                      ),
+                                    );
+                                  }
                                 } catch (e) {
                                   // Silently handle errors
+                                }
+                              },
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                            ),
+
+                            const Divider(),
+
+                            // Scheduled test notification (5 seconds)
+                            ListTile(
+                              leading: const Icon(Icons.schedule_outlined),
+                              title: Text(localizations.scheduleTestNotification),
+                              subtitle: Text(localizations.testScheduledNotificationDesc),
+                              trailing: const Icon(Icons.chevron_right),
+                              onTap: () async {
+                                try {
+                                  await _scheduleTestNotification();
+                                  if (mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(localizations.notificationScheduledIn15Seconds),
+                                        backgroundColor: Colors.blue,
+                                      ),
+                                    );
+                                  }
+                                } catch (e) {
+                                  if (mounted) {
+                                    String errorMessage = localizations.errorSchedulingNotification;
+                                    if (e.toString().contains('exact_alarms_not_permitted')) {
+                                      errorMessage = localizations.exactAlarmPermissionRequired;
+                                    }
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(errorMessage),
+                                        backgroundColor: Colors.red,
+                                        action: e.toString().contains('exact_alarms_not_permitted')
+                                            ? SnackBarAction(
+                                                label: localizations.openSettings,
+                                                textColor: Colors.white,
+                                                onPressed: () async {
+                                                  await PushNotificationService.requestExactAlarmPermission();
+                                                },
+                                              )
+                                            : null,
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                               contentPadding: const EdgeInsets.symmetric(horizontal: 0),
@@ -297,14 +342,25 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
     required String title,
     required String subtitle,
     required bool value,
-    required ValueChanged<bool> onChanged,
+    required ValueChanged<bool>? onChanged,
   }) {
+    final isEnabled = onChanged != null;
     return ListTile(
-      leading: Icon(icon),
-      title: Text(title),
+      leading: Icon(
+        icon,
+        color: isEnabled ? null : Theme.of(context).colorScheme.onSurface.withOpacity(0.38),
+      ),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: isEnabled ? null : Theme.of(context).colorScheme.onSurface.withOpacity(0.38),
+        ),
+      ),
       subtitle: Text(
-        subtitle,
-        style: Theme.of(context).textTheme.bodySmall,
+        isEnabled ? subtitle : '$subtitle (Coming soon)',
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+          color: isEnabled ? null : Theme.of(context).colorScheme.onSurface.withOpacity(0.38),
+        ),
       ),
       trailing: Switch(
         value: value,

@@ -267,6 +267,26 @@
     "description": "Subtitle for features not yet available"
   },
 
+  "getNotified": "Get notified before classes",
+  "@getNotified": {
+    "description": "Subtitle when notifications are enabled"
+  },
+
+  "enableNotifications": "Enable to receive notifications",
+  "@enableNotifications": {
+    "description": "Subtitle when notifications are disabled"
+  },
+
+  "notificationsEnabled": "Notifications enabled successfully",
+  "@notificationsEnabled": {
+    "description": "Success message when notifications are enabled"
+  },
+
+  "notificationPermissionDenied": "Notification permission denied. Please enable in settings.",
+  "@notificationPermissionDenied": {
+    "description": "Error message when notification permission is denied"
+  },
+
   "configureNotifications": "Configure Notifications",
   "@configureNotifications": {
     "description": "Menu item for notification configuration"
@@ -694,6 +714,41 @@
   "test": "Test",
   "sendTestNotification": "Send test notification",
   "checkNotificationsWork": "Check if notifications work",
+
+  "scheduleTestNotification": "Schedule test notification",
+  "@scheduleTestNotification": {
+    "description": "Button to schedule a test notification"
+  },
+
+  "testScheduledNotificationDesc": "Receive a notification in 15 seconds (works when app is closed)",
+  "@testScheduledNotificationDesc": {
+    "description": "Description for scheduled test notification"
+  },
+
+  "notificationScheduledIn15Seconds": "Notification scheduled! Close the app to test - appears in 15 seconds",
+  "@notificationScheduledIn15Seconds": {
+    "description": "Success message when test notification is scheduled"
+  },
+
+  "errorSchedulingNotification": "Failed to schedule notification",
+  "@errorSchedulingNotification": {
+    "description": "Error message when notification scheduling fails"
+  },
+
+  "testNotificationSent": "Test notification sent!",
+  "@testNotificationSent": {
+    "description": "Success message when test notification is sent"
+  },
+
+  "exactAlarmPermissionRequired": "Exact alarm permission required. Please enable in settings.",
+  "@exactAlarmPermissionRequired": {
+    "description": "Error message when exact alarm permission is required"
+  },
+
+  "openSettings": "Open Settings",
+  "@openSettings": {
+    "description": "Button to open app settings"
+  },
   "gradeDetails": "Grade Details",
   "basicInformation": "Basic Information",
   "titleLabel": "Title",
@@ -740,6 +795,7 @@
       "url": {}
     }
   },
+  "getColorName": "Get color name",
   "@getColorName": {
     "description": "Returns the localized color name for a given key."
   },

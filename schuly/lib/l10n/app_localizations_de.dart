@@ -170,6 +170,20 @@ class AppLocalizationsDe extends AppLocalizations {
   String get featureInDevelopment => 'Feature wird noch entwickelt';
 
   @override
+  String get getNotified => 'Vor dem Unterricht benachrichtigt werden';
+
+  @override
+  String get enableNotifications =>
+      'Aktivieren, um Benachrichtigungen zu erhalten';
+
+  @override
+  String get notificationsEnabled => 'Benachrichtigungen erfolgreich aktiviert';
+
+  @override
+  String get notificationPermissionDenied =>
+      'Benachrichtigungsberechtigung verweigert. Bitte in den Einstellungen aktivieren.';
+
+  @override
   String get configureNotifications => 'Benachrichtigungen konfigurieren';
 
   @override
@@ -507,6 +521,31 @@ class AppLocalizationsDe extends AppLocalizations {
       'Prüfen Sie, ob Benachrichtigungen funktionieren';
 
   @override
+  String get scheduleTestNotification => 'Test-Benachrichtigung planen';
+
+  @override
+  String get testScheduledNotificationDesc =>
+      'Erhalte eine Benachrichtigung in 15 Sekunden (funktioniert bei geschlossener App)';
+
+  @override
+  String get notificationScheduledIn15Seconds =>
+      'Benachrichtigung geplant! App schließen zum Testen - erscheint in 15 Sekunden';
+
+  @override
+  String get errorSchedulingNotification =>
+      'Fehler beim Planen der Benachrichtigung';
+
+  @override
+  String get testNotificationSent => 'Test-Benachrichtigung gesendet!';
+
+  @override
+  String get exactAlarmPermissionRequired =>
+      'Berechtigung für exakte Alarme erforderlich. Bitte in den Einstellungen aktivieren.';
+
+  @override
+  String get openSettings => 'Einstellungen öffnen';
+
+  @override
   String get gradeDetails => 'Notendetails';
 
   @override
@@ -595,6 +634,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String apiUrlChanged(Object url) {
     return 'API URL geändert: $url';
   }
+
+  @override
+  String get getColorName => 'Farbname abrufen';
 
   @override
   String get switchAccount => 'Account wechseln';

@@ -170,6 +170,19 @@ class AppLocalizationsGsw extends AppLocalizations {
   String get featureInDevelopment => 'Feature wird no entwicklet';
 
   @override
+  String get getNotified => 'Get notified before classes';
+
+  @override
+  String get enableNotifications => 'Enable to receive notifications';
+
+  @override
+  String get notificationsEnabled => 'Notifications enabled successfully';
+
+  @override
+  String get notificationPermissionDenied =>
+      'Notification permission denied. Please enable in settings.';
+
+  @override
   String get configureNotifications => 'Benachrichtigige konfiguriere';
 
   @override
@@ -501,6 +514,30 @@ class AppLocalizationsGsw extends AppLocalizations {
       'Lueg, ob d\'Benachrichtigige funktioniere';
 
   @override
+  String get scheduleTestNotification => 'Schedule test notification';
+
+  @override
+  String get testScheduledNotificationDesc =>
+      'Receive a notification in 15 seconds (works when app is closed)';
+
+  @override
+  String get notificationScheduledIn15Seconds =>
+      'Notification scheduled! Close the app to test - appears in 15 seconds';
+
+  @override
+  String get errorSchedulingNotification => 'Failed to schedule notification';
+
+  @override
+  String get testNotificationSent => 'Test notification sent!';
+
+  @override
+  String get exactAlarmPermissionRequired =>
+      'Exact alarm permission required. Please enable in settings.';
+
+  @override
+  String get openSettings => 'Open Settings';
+
+  @override
   String get gradeDetails => 'Notedetail';
 
   @override
@@ -588,6 +625,9 @@ class AppLocalizationsGsw extends AppLocalizations {
   String apiUrlChanged(Object url) {
     return 'API URL gänderet: $url';
   }
+
+  @override
+  String get getColorName => 'Get color name';
 
   @override
   String get switchAccount => 'Account uswähle';

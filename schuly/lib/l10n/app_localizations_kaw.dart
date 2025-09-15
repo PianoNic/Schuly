@@ -1100,4 +1100,10 @@ class AppLocalizationsKaw extends AppLocalizations {
   String errorCheckingUpdatesDetails(Object error) {
     return 'Ouchie! Ewwow checking fow updates: $error';
   }
+
+  @override
+  String get minute => 'minute';
+
+  @override
+  String get beforeClass => 'before class';
 }

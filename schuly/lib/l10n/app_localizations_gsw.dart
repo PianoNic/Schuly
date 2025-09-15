@@ -1105,4 +1105,10 @@ class AppLocalizationsGsw extends AppLocalizations {
   String errorCheckingUpdatesDetails(Object error) {
     return 'Fähler bim Sueche nach Updates: $error';
   }
+
+  @override
+  String get minute => 'minute';
+
+  @override
+  String get beforeClass => 'before class';
 }

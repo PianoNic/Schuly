@@ -493,5 +493,9 @@
   "checkingUpdatesInitialization": "Updates überprüfen...",
   "loadingData": "Daten laden...",
   "finalizingInitialization": "Initialisierung abschließen...",
-  "errorCheckingUpdatesDetails": "Fehler beim Suchen nach Updates: {error}"
+  "errorCheckingUpdatesDetails": "Fehler beim Suchen nach Updates: {error}",
+
+  "minute": "Minute",
+  "minutes": "Minuten",
+  "beforeClass": "vor dem Unterricht"
 }

@@ -497,5 +497,21 @@
 
   "minute": "Minute",
   "minutes": "Minuten",
-  "beforeClass": "vor dem Unterricht"
+  "beforeClass": "vor dem Unterricht",
+
+  "notificationPermissions": "Benachrichtigungsberechtigungen",
+  "notificationPermissionsDescription": "Um rechtzeitig Benachrichtigungen über Ihren Unterricht zu erhalten, erteilen Sie bitte die folgenden Berechtigungen:",
+  "notificationPermission": "Benachrichtigungen",
+  "notificationPermissionDesc": "Schuly erlauben, Ihnen Benachrichtigungen zu senden",
+  "exactAlarmPermission": "Exakte Alarme",
+  "exactAlarmPermissionDesc": "Erforderlich für präzise Benachrichtigungszeiten",
+  "batteryOptimization": "Akkuoptimierung",
+  "batteryOptimizationDesc": "Akkuoptimierung deaktivieren für zuverlässige Benachrichtigungen",
+  "grant": "Erteilen",
+  "allPermissionsGranted": "Alle Berechtigungen erteilt! Benachrichtigungen funktionieren zuverlässig.",
+  "somePermissionsMissing": "Einige Berechtigungen fehlen. Benachrichtigungen funktionieren möglicherweise nicht wie erwartet.",
+  "remindLater": "Später erinnern",
+  "continueAnyway": "Trotzdem fortfahren",
+  "done": "Fertig",
+  "checkPermissions": "Berechtigungen prüfen"
 }

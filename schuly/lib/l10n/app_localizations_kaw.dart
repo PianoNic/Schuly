@@ -1106,4 +1106,55 @@ class AppLocalizationsKaw extends AppLocalizations {
 
   @override
   String get beforeClass => 'before class';
+
+  @override
+  String get notificationPermissions => 'Notification Permissions';
+
+  @override
+  String get notificationPermissionsDescription =>
+      'To receive timely notifications about your classes, please grant the following permissions:';
+
+  @override
+  String get notificationPermission => 'Notifications';
+
+  @override
+  String get notificationPermissionDesc =>
+      'Allow Schuly to send you notifications';
+
+  @override
+  String get exactAlarmPermission => 'Exact Alarms';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Required for precise notification timing';
+
+  @override
+  String get batteryOptimization => 'Battery Optimization';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Disable battery optimization for reliable notifications';
+
+  @override
+  String get grant => 'Grant';
+
+  @override
+  String get allPermissionsGranted =>
+      'All permissions granted! Notifications will work reliably.';
+
+  @override
+  String get somePermissionsMissing =>
+      'Some permissions are missing. Notifications may not work as expected.';
+
+  @override
+  String get remindLater => 'Remind Later';
+
+  @override
+  String get continueAnyway => 'Continue Anyway';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get checkPermissions => 'Check Permissions';
 }

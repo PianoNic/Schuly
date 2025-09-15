@@ -1449,5 +1449,80 @@
   "beforeClass": "before class",
   "@beforeClass": {
     "description": "Text shown under the time display"
+  },
+
+  "notificationPermissions": "Notification Permissions",
+  "@notificationPermissions": {
+    "description": "Title for notification permissions dialog"
+  },
+
+  "notificationPermissionsDescription": "To receive timely notifications about your classes, please grant the following permissions:",
+  "@notificationPermissionsDescription": {
+    "description": "Description for notification permissions dialog"
+  },
+
+  "notificationPermission": "Notifications",
+  "@notificationPermission": {
+    "description": "Basic notification permission"
+  },
+
+  "notificationPermissionDesc": "Allow Schuly to send you notifications",
+  "@notificationPermissionDesc": {
+    "description": "Description for notification permission"
+  },
+
+  "exactAlarmPermission": "Exact Alarms",
+  "@exactAlarmPermission": {
+    "description": "Exact alarm permission"
+  },
+
+  "exactAlarmPermissionDesc": "Required for precise notification timing",
+  "@exactAlarmPermissionDesc": {
+    "description": "Description for exact alarm permission"
+  },
+
+  "batteryOptimization": "Battery Optimization",
+  "@batteryOptimization": {
+    "description": "Battery optimization permission"
+  },
+
+  "batteryOptimizationDesc": "Disable battery optimization for reliable notifications",
+  "@batteryOptimizationDesc": {
+    "description": "Description for battery optimization"
+  },
+
+  "grant": "Grant",
+  "@grant": {
+    "description": "Button to grant permission"
+  },
+
+  "allPermissionsGranted": "All permissions granted! Notifications will work reliably.",
+  "@allPermissionsGranted": {
+    "description": "Message when all permissions are granted"
+  },
+
+  "somePermissionsMissing": "Some permissions are missing. Notifications may not work as expected.",
+  "@somePermissionsMissing": {
+    "description": "Message when some permissions are missing"
+  },
+
+  "remindLater": "Remind Later",
+  "@remindLater": {
+    "description": "Button to dismiss permission dialog"
+  },
+
+  "continueAnyway": "Continue Anyway",
+  "@continueAnyway": {
+    "description": "Button to continue without all permissions"
+  },
+
+  "done": "Done",
+  "@done": {
+    "description": "Done button"
+  },
+
+  "checkPermissions": "Check Permissions",
+  "@checkPermissions": {
+    "description": "Button to check notification permissions"
   }
 }

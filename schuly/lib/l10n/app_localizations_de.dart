@@ -1122,4 +1122,55 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get beforeClass => 'vor dem Unterricht';
+
+  @override
+  String get notificationPermissions => 'Benachrichtigungsberechtigungen';
+
+  @override
+  String get notificationPermissionsDescription =>
+      'Um rechtzeitig Benachrichtigungen über Ihren Unterricht zu erhalten, erteilen Sie bitte die folgenden Berechtigungen:';
+
+  @override
+  String get notificationPermission => 'Benachrichtigungen';
+
+  @override
+  String get notificationPermissionDesc =>
+      'Schuly erlauben, Ihnen Benachrichtigungen zu senden';
+
+  @override
+  String get exactAlarmPermission => 'Exakte Alarme';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Erforderlich für präzise Benachrichtigungszeiten';
+
+  @override
+  String get batteryOptimization => 'Akkuoptimierung';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Akkuoptimierung deaktivieren für zuverlässige Benachrichtigungen';
+
+  @override
+  String get grant => 'Erteilen';
+
+  @override
+  String get allPermissionsGranted =>
+      'Alle Berechtigungen erteilt! Benachrichtigungen funktionieren zuverlässig.';
+
+  @override
+  String get somePermissionsMissing =>
+      'Einige Berechtigungen fehlen. Benachrichtigungen funktionieren möglicherweise nicht wie erwartet.';
+
+  @override
+  String get remindLater => 'Später erinnern';
+
+  @override
+  String get continueAnyway => 'Trotzdem fortfahren';
+
+  @override
+  String get done => 'Fertig';
+
+  @override
+  String get checkPermissions => 'Berechtigungen prüfen';
 }

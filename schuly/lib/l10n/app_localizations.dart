@@ -2155,6 +2155,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'before class'**
   String get beforeClass;
+
+  /// Title for notification permissions dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Permissions'**
+  String get notificationPermissions;
+
+  /// Description for notification permissions dialog
+  ///
+  /// In en, this message translates to:
+  /// **'To receive timely notifications about your classes, please grant the following permissions:'**
+  String get notificationPermissionsDescription;
+
+  /// Basic notification permission
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationPermission;
+
+  /// Description for notification permission
+  ///
+  /// In en, this message translates to:
+  /// **'Allow Schuly to send you notifications'**
+  String get notificationPermissionDesc;
+
+  /// Exact alarm permission
+  ///
+  /// In en, this message translates to:
+  /// **'Exact Alarms'**
+  String get exactAlarmPermission;
+
+  /// Description for exact alarm permission
+  ///
+  /// In en, this message translates to:
+  /// **'Required for precise notification timing'**
+  String get exactAlarmPermissionDesc;
+
+  /// Battery optimization permission
+  ///
+  /// In en, this message translates to:
+  /// **'Battery Optimization'**
+  String get batteryOptimization;
+
+  /// Description for battery optimization
+  ///
+  /// In en, this message translates to:
+  /// **'Disable battery optimization for reliable notifications'**
+  String get batteryOptimizationDesc;
+
+  /// Button to grant permission
+  ///
+  /// In en, this message translates to:
+  /// **'Grant'**
+  String get grant;
+
+  /// Message when all permissions are granted
+  ///
+  /// In en, this message translates to:
+  /// **'All permissions granted! Notifications will work reliably.'**
+  String get allPermissionsGranted;
+
+  /// Message when some permissions are missing
+  ///
+  /// In en, this message translates to:
+  /// **'Some permissions are missing. Notifications may not work as expected.'**
+  String get somePermissionsMissing;
+
+  /// Button to dismiss permission dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Remind Later'**
+  String get remindLater;
+
+  /// Button to continue without all permissions
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Anyway'**
+  String get continueAnyway;
+
+  /// Done button
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// Button to check notification permissions
+  ///
+  /// In en, this message translates to:
+  /// **'Check Permissions'**
+  String get checkPermissions;
 }
 
 class _AppLocalizationsDelegate

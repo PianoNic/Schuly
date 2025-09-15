@@ -219,4 +219,16 @@ class StorageService {
       await _storage.delete(key: key);
     }
   }
+
+  // Permission dialog tracking
+  static const String _hasShownPermissionDialogKey = 'has_shown_permission_dialog';
+
+  static Future<bool> getHasShownPermissionDialog() async {
+    final value = await _storage.read(key: _hasShownPermissionDialogKey);
+    return value == 'true';
+  }
+
+  static Future<void> setHasShownPermissionDialog(bool shown) async {
+    await _storage.write(key: _hasShownPermissionDialogKey, value: shown.toString());
+  }
 }

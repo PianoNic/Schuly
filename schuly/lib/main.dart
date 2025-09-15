@@ -19,6 +19,7 @@ import 'services/update_service.dart';
 import 'widgets/homepage_config_modal.dart';
 import 'widgets/release_notes_dialog.dart';
 import 'widgets/app_update_dialog.dart';
+import 'widgets/notification_permission_dialog.dart';
 import 'package:schuly/api/lib/api.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'l10n/pirate_material_localizations.dart';
@@ -225,14 +226,29 @@ class _MyHomePageState extends State<MyHomePage> {
       apiStore.fetchAll();
     }
     
-    // Show app update dialog and release notes dialog if needed
+    // Show app update dialog, release notes dialog, and notification permission dialog if needed
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Check for app updates first (higher priority)
       await AppUpdateDialog.showIfAvailable(context);
-      
+
       // Then check for release notes
       if (mounted) {
         await ReleaseNotesDialog.showIfNeeded(context);
+      }
+
+      // Finally check notification permissions
+      if (mounted) {
+        final hasShownBefore = await StorageService.getHasShownPermissionDialog();
+        final notificationsEnabled = await StorageService.getPushNotificationsEnabled();
+
+        // Show dialog if notifications are enabled but dialog hasn't been shown before
+        // Or if user hasn't seen it yet and might want to enable notifications
+        if (!hasShownBefore || (notificationsEnabled && !hasShownBefore)) {
+          if (mounted) {
+            showNotificationPermissionDialog(context, isStartupCheck: true);
+            await StorageService.setHasShownPermissionDialog(true);
+          }
+        }
       }
     });
   }

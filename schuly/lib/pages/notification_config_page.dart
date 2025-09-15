@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/push_notification_service.dart';
 import '../services/storage_service.dart';
 import '../l10n/app_localizations.dart';
+import '../widgets/notification_permission_dialog.dart';
 
 class NotificationConfigPage extends StatefulWidget {
   const NotificationConfigPage({super.key});
@@ -66,11 +67,6 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
     await PushNotificationService.scheduleTestNotification();
   }
 
-  Future<void> _scheduleTestNotification() async {
-    // Schedule a test notification using the dedicated test method
-    await PushNotificationService.scheduleTestNotification();
-  }
-
 
 
   @override
@@ -97,6 +93,23 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
+                  // Permission Check Button
+                  Card(
+                    child: ListTile(
+                      leading: const Icon(Icons.security),
+                      title: Text(localizations.checkPermissions),
+                      subtitle: Text(
+                        'View and manage notification permissions',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () {
+                        showNotificationPermissionDialog(context);
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
                   // Notification Types Card
                   Card(
                     child: Padding(
@@ -389,18 +402,18 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
     return ListTile(
       leading: Icon(
         icon,
-        color: isEnabled ? null : Theme.of(context).colorScheme.onSurface.withOpacity(0.38),
+        color: isEnabled ? null : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.38),
       ),
       title: Text(
         title,
         style: TextStyle(
-          color: isEnabled ? null : Theme.of(context).colorScheme.onSurface.withOpacity(0.38),
+          color: isEnabled ? null : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.38),
         ),
       ),
       subtitle: Text(
         isEnabled ? subtitle : '$subtitle (Coming soon)',
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: isEnabled ? null : Theme.of(context).colorScheme.onSurface.withOpacity(0.38),
+          color: isEnabled ? null : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.38),
         ),
       ),
       trailing: Switch(

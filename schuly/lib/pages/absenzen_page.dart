@@ -32,7 +32,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
     final datePart = date.length > 10 ? date.substring(0, 10) : date;
     final dateFormatted = datePart.split('-').reversed.join('.');
     if (time == null || time.isEmpty) {
-      // Try to extract time from date if present
+      // Try to extract time from date if present 
       if (date.length > 10) {
         final timePart = date.substring(11, 16);
         return '$dateFormatted $timePart';

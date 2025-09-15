@@ -30,7 +30,7 @@ jobs:
         run: |
           echo "Creating release keystore for consistent signing..."
           keytool -genkey -v -keystore app-release.jks -keyalg RSA -keysize 2048 -validity 10000 -alias release \
-            -dname "CN=Schuly App, OU=Development, O=Schuly, L=Rüebliland, S=Aargau, C=CH" \
+            -dname "CN=Schuly App, OU=Development, O=Schuly, L=Ruebliland, S=Aargau, C=CH" \
             -storepass "${{ secrets.KEYSTORE_PASSWORD }}" -keypass "${{ secrets.KEY_PASSWORD }}" -noprompt
 
       - name: Create key.properties

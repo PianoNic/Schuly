@@ -12,7 +12,7 @@
   <a href="#-installation"><img src="https://img.shields.io/badge/Selfhost-Instructions-3da8ff.svg"/></a>
 </p>
 
-A modern mobile app for Schulnetz with better UI and multi-user support. Connects to **[SchulwareAPI](https://github.com/PianoNic/SchulwareAPI)** for data access.
+A modern mobile app that provides a superior alternative to the official Schulnetz client. Features an intuitive interface, multi-user support, and seamless access to grades, schedules, and student information. Connects to **[SchulwareAPI](https://github.com/PianoNic/SchulwareAPI)** for reliable data access across different Schulnetz systems.
 
 ## Features
 

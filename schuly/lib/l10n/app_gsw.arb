@@ -120,7 +120,7 @@
   "reloadPage": "Syte neu lade",
   "loadingStudentIdCard": "Schüeluswys wird glade...",
 
-  "enterValidEmail": "Bitte gäbid e gültigi E-Mail-Adrässe ii",
+  "enterValidEmail": "Bitte gäb e gültigi E-Mail-Adrässe ii",
 
   "areYouSure": "Sind Si sicher?",
 
@@ -138,9 +138,6 @@
 
   "noLatenessFound": "Kei Verspätige gfunde",
 
-  "selectReason": "Bitte wähled en Grund us",
-
-  "selectDate": "Bitte wähled es Datum us",
 
   "emailAddress": "E-Mail-Adrässe",
 
@@ -148,7 +145,7 @@
 
   "login": "Amälde",
 
-  "enterEmailAddress": "Bitte gäbid e E-Mail-Adrässe ii",
+  "enterEmailAddress": "Bitte gäb e E-Mail-Adrässe ii",
 
   "getNewToken": "Nöis Token hole",
   "getNewTokenSubtitle": "Hol es nöis Token für de aktive Account",
@@ -214,7 +211,7 @@
   "noReleaseNotes": "Kei Release Notes verfügbar",
   "releaseNotesInfo": "Updates und nöii Features werde da aazeigt",
 
-  "notificationTypes": "Benachrichtigigstyp",
+  "notificationTypes": "Benachrichtigigstype",
   "timetable": "Stundeplan",
   "agendaNotificationSubtitle": "Benachrichtigige vor de Lektione",
   "gradeNotificationSubtitle": "Benachrichtigige bi nöie Note",
@@ -253,7 +250,7 @@
   "appDescription": "E Spezial-App für Schüeler zum Verwalte vo Schulnetz-Däte. Verwalte din Stundenplan, d Note und wichtigi Termine an einem Ort.",
   "apiEndpoint": "API Endpoint",
 
-  "enterApiEndpoint": "Bitte API Endpoint igäh",
+  "enterApiEndpoint": "Bitte gäb API Endpoint ii",
   "@enterApiEndpoint": {"description": "Validierigsmäldig für läre API Endpoint"},
   "currentApiInfo": "Aktuelli API Info",
   "apiInfoStatus": "API Info Status",
@@ -265,7 +262,7 @@
   "@apiUrlChanged": {"description": "Snackbar-Nachricht, wenn d API-URL gänderet wird", "placeholders": {"url": {}}},
   "@getColorName": {"description": "Gibt de lokalisiert Farbnamen für e Schlüssel zrugg."},
 
-  "switchAccount": "Account uswähle",
+  "switchAccount": "Account wächsle",
   "@switchAccount": {"description": "Header/title for the account switcher modal"},
 
   "accountCount": "{count, plural, =1{1 Account} other{{count} Accounts}}",
@@ -295,16 +292,16 @@
   "switchedAccount": "Zu {email} gwechsellet",
   "@switchedAccount": {"description": "Snackbar message when switching account", "placeholders": {"email": {}}},
 
-  "switchAccountError": "Accountwechsel isch fehlgschlage: {error}",
+  "switchAccountError": "Accountwechsel het Fähler: {error}",
   "@switchAccountError": {"description": "Error message when switching account fails", "placeholders": {"error": {}}},
 
   "removedAccount": "Account {email} entfernet",
   "@removedAccount": {"description": "Snackbar message when removing account", "placeholders": {"email": {}}},
 
-  "removeAccountError": "Account chönnt nöd entfernet werde: {error}",
+  "removeAccountError": "Account cha nöd entfernet werde: {error}",
   "@removeAccountError": {"description": "Error message when removing account fails", "placeholders": {"error": {}}},
 
-  "unexpectedError": "Unerwartete Fehler: {error}",
+  "unexpectedError": "Unerwartete Fähler: {error}",
   "@unexpectedError": {"description": "Generic error message", "placeholders": {"error": {}}},
 
   "weekdayMon": "Mä",
@@ -371,9 +368,9 @@
   "@ok": {"description": "OK Buttontext"},
   "error": "Fähler",
   "@error": {"description": "Dialogtitel für Fehler"},
-  "emailAppError": "E-Mail-App het nöd chönne öppnet werde. Bitte kontaktier üs manuell unter: {email}",
+  "emailAppError": "E-Mail-App cha nöd öppnet werde. Bitte kontaktier üs manuell under: {email}",
   "@emailAppError": {"description": "Fehlermeldig, wenn E-Mail-App nöd öppnet werde cha", "placeholders": {"email": {}}},
-  "browserError": "Browser het nöd chönne öppnet werde. Bitte bsuech d Site manuell: {url}",
+  "browserError": "Browser cha nöd öppnet werde. Bitte bsuech d Site manuell: {url}",
   "@browserError": {"description": "Fehlermeldig, wenn Browser nöd öppnet werde cha", "placeholders": {"url": {}}},
 
   "appUpdateTest": "App Update Test",
@@ -472,5 +469,95 @@
   "checkingUpdatesInitialization": "Updates prüefe...",
   "loadingData": "Date lade...",
   "finalizingInitialization": "Initialisierig abschliesse...",
-  "errorCheckingUpdatesDetails": "Fähler bim Sueche nach Updates: {error}"
+  "errorCheckingUpdatesDetails": "Fähler bim Sueche nach Updates: {error}",
+
+  "minute": "Minut",
+  "@minute": {
+    "description": "Singular form of minute"
+  },
+
+  "minutes": "Minute",
+  "@minutes": {
+    "description": "Plural form of minutes"
+  },
+
+  "beforeClass": "vor de Lektion",
+  "@beforeClass": {
+    "description": "Text shown under the time display"
+  },
+
+  "notificationPermissions": "Benachrichtigigs-Berechtigunge",
+  "@notificationPermissions": {
+    "description": "Title for notification permissions dialog"
+  },
+
+  "notificationPermissionsDescription": "Um rechtziitig Benachrichtigunge über dini Lektione z'becho, bitte erteile die folgend Berechtigunge:",
+  "@notificationPermissionsDescription": {
+    "description": "Description for notification permissions dialog"
+  },
+
+  "notificationPermission": "Benachrichtigunge",
+  "@notificationPermission": {
+    "description": "Basic notification permission"
+  },
+
+  "notificationPermissionDesc": "Schuly erlaube, dir Benachrichtigunge z'schicke",
+  "@notificationPermissionDesc": {
+    "description": "Description for notification permission"
+  },
+
+  "exactAlarmPermission": "Exakti Alarme",
+  "@exactAlarmPermission": {
+    "description": "Exact alarm permission"
+  },
+
+  "exactAlarmPermissionDesc": "Brucht für präzisi Benachrichtigigs-Ziite",
+  "@exactAlarmPermissionDesc": {
+    "description": "Description for exact alarm permission"
+  },
+
+  "batteryOptimization": "Akku-Optimierig",
+  "@batteryOptimization": {
+    "description": "Battery optimization permission"
+  },
+
+  "batteryOptimizationDesc": "Akku-Optimierig deaktiviere für zuverlässigi Benachrichtigunge",
+  "@batteryOptimizationDesc": {
+    "description": "Description for battery optimization"
+  },
+
+  "grant": "Erteile",
+  "@grant": {
+    "description": "Button to grant permission"
+  },
+
+  "allPermissionsGranted": "Alli Berechtigunge erteilt! Benachrichtigunge funktioniere zuverlässig.",
+  "@allPermissionsGranted": {
+    "description": "Message when all permissions are granted"
+  },
+
+  "somePermissionsMissing": "Einigi Berechtigunge fähle. Benachrichtigunge funktioniere vilicht nöd wie erwartet.",
+  "@somePermissionsMissing": {
+    "description": "Message when some permissions are missing"
+  },
+
+  "remindLater": "Spöter erinnere",
+  "@remindLater": {
+    "description": "Button to dismiss permission dialog"
+  },
+
+  "continueAnyway": "Trotzdem fortsetzje",
+  "@continueAnyway": {
+    "description": "Button to continue without all permissions"
+  },
+
+  "done": "Fertig",
+  "@done": {
+    "description": "Done button"
+  },
+
+  "checkPermissions": "Berechtigunge prüefe",
+  "@checkPermissions": {
+    "description": "Button to check notification permissions"
+  }
 }

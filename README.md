@@ -39,3 +39,6 @@ Requires **[SchulwareAPI](https://github.com/PianoNic/SchulwareAPI)** backend (h
 
 ---
 <p align="center">Made with ❤️ by <a href="https://github.com/Pianonic">Pianonic</a></p>
+<p align="center">
+  <a href="https://buymeacoffee.com/pianonic"><img src="https://img.shields.io/badge/-buy_me_a%C2%A0coffee-gray?logo=buy-me-a-coffee" alt="Buy Me A Coffee"/></a>
+</p>

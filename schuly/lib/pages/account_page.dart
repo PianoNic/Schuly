@@ -6,6 +6,7 @@ import '../widgets/help_support_modal.dart';
 import '../widgets/account_switcher.dart';
 import '../providers/theme_provider.dart';
 import '../providers/api_store.dart';
+import '../utils/url_launcher_helper.dart';
 import 'app_settings_page.dart';
 import 'student_card_page.dart';
 import '../l10n/app_localizations.dart';
@@ -219,6 +220,16 @@ class AccountPage extends StatelessWidget {
                     ),
                     const Divider(),
                     ListTile(
+                      leading: Icon(Icons.coffee, color: Colors.amber.shade600),
+                      title: const Text('Buy me a coffee'),
+                      subtitle: const Text('Support the development'),
+                      trailing: const Icon(Icons.open_in_new),
+                      onTap: () {
+                        _launchBuyMeACoffee(context);
+                      },
+                    ),
+                    const Divider(),
+                    ListTile(
                       leading: const Icon(Icons.logout),
                       title: Text(localizations.logout),
                       subtitle: Text(localizations.signOutFromApp),
@@ -281,6 +292,18 @@ class AccountPage extends StatelessWidget {
     Navigator.of(
       context,
     ).push(MaterialPageRoute(builder: (context) => const StudentCardPage()));
+  }
+
+  void _launchBuyMeACoffee(BuildContext context) async {
+    final success = await UrlLauncherHelper.launchUrl('https://buymeacoffee.com/pianonic');
+    if (!success && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Could not open Buy Me a Coffee page'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   void _showAccountSwitcher(BuildContext context) {

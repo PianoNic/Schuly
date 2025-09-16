@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../services/storage_service.dart';
 import '../l10n/app_localizations.dart';
 
 class NotificationPermissionDialog extends StatefulWidget {

@@ -566,6 +566,15 @@
   "@checkPermissions": {
     "description": "Button to check notification pewmissions UwU"
   },
+  "lessonBreak": "Snuggle Time ✨",
+  "lunchBreak": "Nom Nom Time 🍱",
+  "showBreaks": "Show snuggle time between wessons UwU",
+  "cardSettings": "Cawd Settings ✨",
+  "tapToCustomize": "Tap to make it cutew UwU",
+  "numberOfDaysToShow": "Days to show (◕‿◕)",
+  "numberOfGradesToShow": "Gwades to dispway ✨",
+  "showOnlyOpenAbsences": "Show onwy open absences owo",
+  "noConfigurationAvailable": "No settings to customize hewe UwU",
 
   "getNotified": "Get cute notifs! ✨",
   "@getNotified": {

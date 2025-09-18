@@ -95,6 +95,8 @@ class SectionConfig {
 }
 
 class HomepageConfigProvider extends ChangeNotifier {
+  bool _showBreaks = true;
+
   List<SectionConfig> _sections = [
     SectionConfig(
       id: 'lessons',
@@ -129,7 +131,8 @@ class HomepageConfigProvider extends ChangeNotifier {
   }
 
   List<SectionConfig> get sections => List.unmodifiable(_sections);
-  
+  bool get showBreaks => _showBreaks;
+
   bool get isLoaded => _isLoaded;
 
   void reorder(int oldIndex, int newIndex) {
@@ -149,11 +152,18 @@ class HomepageConfigProvider extends ChangeNotifier {
     }
   }
 
+  void toggleShowBreaks() {
+    _showBreaks = !_showBreaks;
+    _save();
+    notifyListeners();
+  }
+
   Future<void> _save() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final jsonList = _sections.map((s) => s.toJson()).toList();
       await prefs.setString('homepage_sections', jsonEncode(jsonList));
+      await prefs.setBool('homepage_show_breaks', _showBreaks);
     } catch (e) {
       print('Error saving homepage config: $e');
     }
@@ -167,6 +177,7 @@ class HomepageConfigProvider extends ChangeNotifier {
         final List decoded = jsonDecode(jsonString);
         _sections = decoded.map((e) => SectionConfig.fromJson(e)).toList();
       }
+      _showBreaks = prefs.getBool('homepage_show_breaks') ?? true;
       _isLoaded = true;
       notifyListeners();
     } catch (e) {

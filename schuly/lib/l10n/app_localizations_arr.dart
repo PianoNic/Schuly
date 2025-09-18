@@ -629,6 +629,33 @@ class AppLocalizationsArr extends AppLocalizations {
   String get getColorName => 'Reveal yer flag\'s color';
 
   @override
+  String get lessonBreak => 'Shore Leave';
+
+  @override
+  String get lunchBreak => 'Grub Time';
+
+  @override
+  String get showBreaks => 'Show shore leave between sailings';
+
+  @override
+  String get cardSettings => 'Chart Settings';
+
+  @override
+  String get tapToCustomize => 'Tap to adjust yer settings';
+
+  @override
+  String get numberOfDaysToShow => 'Days on the horizon';
+
+  @override
+  String get numberOfGradesToShow => 'Marks to display';
+
+  @override
+  String get showOnlyOpenAbsences => 'Show only unexcused desertions';
+
+  @override
+  String get noConfigurationAvailable => 'No chart settings to adjust, matey';
+
+  @override
   String get switchAccount => 'Change Yer Pirate';
 
   @override

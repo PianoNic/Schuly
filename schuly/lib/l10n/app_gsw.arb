@@ -560,6 +560,15 @@
   "@checkPermissions": {
     "description": "Button to check notification permissions"
   },
+  "lessonBreak": "Pause",
+  "lunchBreak": "Mittagspause",
+  "showBreaks": "Pause zwüsche Lektione azeige",
+  "cardSettings": "Charte-Iistellige",
+  "tapToCustomize": "Zum Apasse tippe",
+  "numberOfDaysToShow": "Azahl vo Täg zum azeige",
+  "numberOfGradesToShow": "Azahl vo Note zum azeige",
+  "showOnlyOpenAbsences": "Nur offni Absenze azeige",
+  "noConfigurationAvailable": "Kei Konfigurationsiistellige verfüegbar",
 
   "getNotified": "Vor de Stunde benachrichtiget werde",
   "@getNotified": {

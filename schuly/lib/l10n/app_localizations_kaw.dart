@@ -625,6 +625,33 @@ class AppLocalizationsKaw extends AppLocalizations {
   String get getColorName => 'Get cowow name ✨';
 
   @override
+  String get lessonBreak => 'Snuggle Time ✨';
+
+  @override
+  String get lunchBreak => 'Nom Nom Time 🍱';
+
+  @override
+  String get showBreaks => 'Show snuggle time between wessons UwU';
+
+  @override
+  String get cardSettings => 'Cawd Settings ✨';
+
+  @override
+  String get tapToCustomize => 'Tap to make it cutew UwU';
+
+  @override
+  String get numberOfDaysToShow => 'Days to show (◕‿◕)';
+
+  @override
+  String get numberOfGradesToShow => 'Gwades to dispway ✨';
+
+  @override
+  String get showOnlyOpenAbsences => 'Show onwy open absences owo';
+
+  @override
+  String get noConfigurationAvailable => 'No settings to customize hewe UwU';
+
+  @override
   String get switchAccount => 'Switch Account';
 
   @override

@@ -170,17 +170,17 @@ class AppLocalizationsGsw extends AppLocalizations {
   String get featureInDevelopment => 'Feature wird no entwicklet';
 
   @override
-  String get getNotified => 'Get notified before classes';
+  String get getNotified => 'Vor de Stunde benachrichtiget werde';
 
   @override
-  String get enableNotifications => 'Enable to receive notifications';
+  String get enableNotifications => 'Aktiviere zum Benachrichtigunge übercho';
 
   @override
-  String get notificationsEnabled => 'Notifications enabled successfully';
+  String get notificationsEnabled => 'Benachrichtigunge erfolgrich aktiviert';
 
   @override
   String get notificationPermissionDenied =>
-      'Notification permission denied. Please enable in settings.';
+      'Benachrichtigungsberechtigung verweigeret. Bitte i de Iistellige aktiviere.';
 
   @override
   String get configureNotifications => 'Benachrichtigige konfiguriere';
@@ -514,28 +514,29 @@ class AppLocalizationsGsw extends AppLocalizations {
       'Lueg, ob d\'Benachrichtigige funktioniere';
 
   @override
-  String get scheduleTestNotification => 'Schedule test notification';
+  String get scheduleTestNotification => 'Test-Benachrichtigung plane';
 
   @override
   String get testScheduledNotificationDesc =>
-      'Receive a notification in 15 seconds (works when app is closed)';
+      'Du überchunnsch i 15 Sekunde e Benachrichtigung (funktioniert au wenn d\'App gschlosse isch)';
 
   @override
   String get notificationScheduledIn15Seconds =>
-      'Notification scheduled! Close the app to test - appears in 15 seconds';
+      'Benachrichtigung plant! Schliess d\'App zum teste - chunt i 15 Sekunde';
 
   @override
-  String get errorSchedulingNotification => 'Failed to schedule notification';
+  String get errorSchedulingNotification =>
+      'Benachrichtigung het nöd chöne plant werde';
 
   @override
-  String get testNotificationSent => 'Test notification sent!';
+  String get testNotificationSent => 'Test-Benachrichtigung gsendet!';
 
   @override
   String get exactAlarmPermissionRequired =>
-      'Exact alarm permission required. Please enable in settings.';
+      'Genaui Alarm-Berechtigung bruuchts. Bitte i de Iistellige aktiviere.';
 
   @override
-  String get openSettings => 'Open Settings';
+  String get openSettings => 'Iistellige öffne';
 
   @override
   String get gradeDetails => 'Notedetail';
@@ -627,7 +628,7 @@ class AppLocalizationsGsw extends AppLocalizations {
   }
 
   @override
-  String get getColorName => 'Get color name';
+  String get getColorName => 'Farb bestimme';
 
   @override
   String get lessonBreak => 'Pause';

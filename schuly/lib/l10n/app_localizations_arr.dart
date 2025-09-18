@@ -170,17 +170,17 @@ class AppLocalizationsArr extends AppLocalizations {
   String get featureInDevelopment => 'Still being forged in the smithy';
 
   @override
-  String get getNotified => 'Get notified before classes';
+  String get getNotified => 'Sound the bell before yer lessons';
 
   @override
-  String get enableNotifications => 'Enable to receive notifications';
+  String get enableNotifications => 'Hoist the signal flags for alerts';
 
   @override
-  String get notificationsEnabled => 'Notifications enabled successfully';
+  String get notificationsEnabled => 'Signal flags be hoisted, cap\'n!';
 
   @override
   String get notificationPermissionDenied =>
-      'Notification permission denied. Please enable in settings.';
+      'The crow\'s nest be blocked! Check yer ship\'s settings.';
 
   @override
   String get configureNotifications => 'Set Up Ship\'s Signals';
@@ -512,28 +512,29 @@ class AppLocalizationsArr extends AppLocalizations {
   String get checkNotificationsWork => 'Check if signals work';
 
   @override
-  String get scheduleTestNotification => 'Schedule test notification';
+  String get scheduleTestNotification => 'Test the ship\'s bell';
 
   @override
   String get testScheduledNotificationDesc =>
-      'Receive a notification in 15 seconds (works when app is closed)';
+      'The bell will ring in 15 ticks (even when ye abandon ship)';
 
   @override
   String get notificationScheduledIn15Seconds =>
-      'Notification scheduled! Close the app to test - appears in 15 seconds';
+      'Bell be set! Abandon ship to test - rings in 15 ticks';
 
   @override
-  String get errorSchedulingNotification => 'Failed to schedule notification';
+  String get errorSchedulingNotification =>
+      'Blimey! Can\'t set the ship\'s bell';
 
   @override
-  String get testNotificationSent => 'Test notification sent!';
+  String get testNotificationSent => 'Test bell be rung, matey!';
 
   @override
   String get exactAlarmPermissionRequired =>
-      'Exact alarm permission required. Please enable in settings.';
+      'Need permission fer precise bell timing. Check yer settings!';
 
   @override
-  String get openSettings => 'Open Settings';
+  String get openSettings => 'Navigate to settings';
 
   @override
   String get gradeDetails => 'Treasure Details';
@@ -625,7 +626,7 @@ class AppLocalizationsArr extends AppLocalizations {
   }
 
   @override
-  String get getColorName => 'Get color name';
+  String get getColorName => 'Reveal yer flag\'s color';
 
   @override
   String get lessonBreak => 'Shore Leave';

@@ -565,5 +565,65 @@
   "checkPermissions": "Check Ship Permissions",
   "@checkPermissions": {
     "description": "Button to check notification permissions"
+  },
+
+  "getNotified": "Sound the bell before yer lessons",
+  "@getNotified": {
+    "description": "Get notification before classes"
+  },
+
+  "enableNotifications": "Hoist the signal flags for alerts",
+  "@enableNotifications": {
+    "description": "Enable to receive notifications"
+  },
+
+  "notificationsEnabled": "Signal flags be hoisted, cap'n!",
+  "@notificationsEnabled": {
+    "description": "Notifications enabled successfully"
+  },
+
+  "notificationPermissionDenied": "The crow's nest be blocked! Check yer ship's settings.",
+  "@notificationPermissionDenied": {
+    "description": "Notification permission denied"
+  },
+
+  "scheduleTestNotification": "Test the ship's bell",
+  "@scheduleTestNotification": {
+    "description": "Schedule test notification"
+  },
+
+  "testScheduledNotificationDesc": "The bell will ring in 15 ticks (even when ye abandon ship)",
+  "@testScheduledNotificationDesc": {
+    "description": "Test notification in 15 seconds"
+  },
+
+  "notificationScheduledIn15Seconds": "Bell be set! Abandon ship to test - rings in 15 ticks",
+  "@notificationScheduledIn15Seconds": {
+    "description": "Notification scheduled for 15 seconds"
+  },
+
+  "errorSchedulingNotification": "Blimey! Can't set the ship's bell",
+  "@errorSchedulingNotification": {
+    "description": "Failed to schedule notification"
+  },
+
+  "testNotificationSent": "Test bell be rung, matey!",
+  "@testNotificationSent": {
+    "description": "Test notification sent"
+  },
+
+  "exactAlarmPermissionRequired": "Need permission fer precise bell timing. Check yer settings!",
+  "@exactAlarmPermissionRequired": {
+    "description": "Exact alarm permission required"
+  },
+
+  "openSettings": "Navigate to settings",
+  "@openSettings": {
+    "description": "Open Settings"
+  },
+
+  "getColorName": "Reveal yer flag's color",
+  "@getColorName": {
+    "description": "Reveals the color of the pirate's flag"
   }
 }

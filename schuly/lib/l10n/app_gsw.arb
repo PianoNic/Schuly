@@ -559,5 +559,65 @@
   "checkPermissions": "Berechtigunge prüefe",
   "@checkPermissions": {
     "description": "Button to check notification permissions"
+  },
+
+  "getNotified": "Vor de Stunde benachrichtiget werde",
+  "@getNotified": {
+    "description": "Get notification before classes"
+  },
+
+  "enableNotifications": "Aktiviere zum Benachrichtigunge übercho",
+  "@enableNotifications": {
+    "description": "Enable to receive notifications"
+  },
+
+  "notificationsEnabled": "Benachrichtigunge erfolgrich aktiviert",
+  "@notificationsEnabled": {
+    "description": "Notifications enabled successfully"
+  },
+
+  "notificationPermissionDenied": "Benachrichtigungsberechtigung verweigeret. Bitte i de Iistellige aktiviere.",
+  "@notificationPermissionDenied": {
+    "description": "Notification permission denied"
+  },
+
+  "scheduleTestNotification": "Test-Benachrichtigung plane",
+  "@scheduleTestNotification": {
+    "description": "Schedule test notification"
+  },
+
+  "testScheduledNotificationDesc": "Du überchunnsch i 15 Sekunde e Benachrichtigung (funktioniert au wenn d'App gschlosse isch)",
+  "@testScheduledNotificationDesc": {
+    "description": "Test notification in 15 seconds"
+  },
+
+  "notificationScheduledIn15Seconds": "Benachrichtigung plant! Schliess d'App zum teste - chunt i 15 Sekunde",
+  "@notificationScheduledIn15Seconds": {
+    "description": "Notification scheduled for 15 seconds"
+  },
+
+  "errorSchedulingNotification": "Benachrichtigung het nöd chöne plant werde",
+  "@errorSchedulingNotification": {
+    "description": "Failed to schedule notification"
+  },
+
+  "testNotificationSent": "Test-Benachrichtigung gsendet!",
+  "@testNotificationSent": {
+    "description": "Test notification sent"
+  },
+
+  "exactAlarmPermissionRequired": "Genaui Alarm-Berechtigung bruuchts. Bitte i de Iistellige aktiviere.",
+  "@exactAlarmPermissionRequired": {
+    "description": "Exact alarm permission required"
+  },
+
+  "openSettings": "Iistellige öffne",
+  "@openSettings": {
+    "description": "Open Settings"
+  },
+
+  "getColorName": "Farb bestimme",
+  "@getColorName": {
+    "description": "Get color name"
   }
 }

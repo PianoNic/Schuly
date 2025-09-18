@@ -169,17 +169,17 @@ class AppLocalizationsKaw extends AppLocalizations {
   String get featureInDevelopment => 'Stiww being made cutew!';
 
   @override
-  String get getNotified => 'Get notified before classes';
+  String get getNotified => 'Get cute notifs! ✨';
 
   @override
-  String get enableNotifications => 'Enable to receive notifications';
+  String get enableNotifications => 'Enabwe notifications pwease! (◕‿◕)';
 
   @override
-  String get notificationsEnabled => 'Notifications enabled successfully';
+  String get notificationsEnabled => 'Notifications enabwed! ヽ(♡‿♡)ノ';
 
   @override
   String get notificationPermissionDenied =>
-      'Notification permission denied. Please enable in settings.';
+      'Notification pewmission denied (╥﹏╥)';
 
   @override
   String get configureNotifications => 'Configuwre notifs pwease';
@@ -508,28 +508,29 @@ class AppLocalizationsKaw extends AppLocalizations {
   String get checkNotificationsWork => 'Check if notifs wowk!';
 
   @override
-  String get scheduleTestNotification => 'Schedule test notification';
+  String get scheduleTestNotification => 'Scheduwle test notif! ✨';
 
   @override
   String get testScheduledNotificationDesc =>
-      'Receive a notification in 15 seconds (works when app is closed)';
+      'A test notif wiww appeaw soon UwU';
 
   @override
   String get notificationScheduledIn15Seconds =>
-      'Notification scheduled! Close the app to test - appears in 15 seconds';
+      'Notif scheduwed in 15 seconds! (ﾉ◕ヮ◕)ﾉ';
 
   @override
-  String get errorSchedulingNotification => 'Failed to schedule notification';
+  String get errorSchedulingNotification =>
+      'Ewwow scheduwing notification (>_<)';
 
   @override
-  String get testNotificationSent => 'Test notification sent!';
+  String get testNotificationSent => 'Test notif sent! ✨(๑•ᴗ•๑)✨';
 
   @override
   String get exactAlarmPermissionRequired =>
-      'Exact alarm permission required. Please enable in settings.';
+      'Exact awawm pewmission wequiwed! (◔◡◔)';
 
   @override
-  String get openSettings => 'Open Settings';
+  String get openSettings => 'Open Settings UwU';
 
   @override
   String get gradeDetails => 'Gwade detaiws';
@@ -621,7 +622,7 @@ class AppLocalizationsKaw extends AppLocalizations {
   }
 
   @override
-  String get getColorName => 'Get color name';
+  String get getColorName => 'Get cowow name ✨';
 
   @override
   String get switchAccount => 'Switch Account';

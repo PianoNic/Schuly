@@ -565,5 +565,65 @@
   "checkPermissions": "Check Pewmissions",
   "@checkPermissions": {
     "description": "Button to check notification pewmissions UwU"
+  },
+
+  "getNotified": "Get cute notifs! ✨",
+  "@getNotified": {
+    "description": "Notification settings titwe UwU"
+  },
+
+  "enableNotifications": "Enabwe notifications pwease! (◕‿◕)",
+  "@enableNotifications": {
+    "description": "Enabwe notifications button text"
+  },
+
+  "notificationsEnabled": "Notifications enabwed! ヽ(♡‿♡)ノ",
+  "@notificationsEnabled": {
+    "description": "Status when notifications awe enabwed"
+  },
+
+  "notificationPermissionDenied": "Notification pewmission denied (╥﹏╥)",
+  "@notificationPermissionDenied": {
+    "description": "Message when notification pewmission is denied"
+  },
+
+  "scheduleTestNotification": "Scheduwle test notif! ✨",
+  "@scheduleTestNotification": {
+    "description": "Button to scheduwle a test notification"
+  },
+
+  "testScheduledNotificationDesc": "A test notif wiww appeaw soon UwU",
+  "@testScheduledNotificationDesc": {
+    "description": "Descwiption fow test notification"
+  },
+
+  "notificationScheduledIn15Seconds": "Notif scheduwed in 15 seconds! (ﾉ◕ヮ◕)ﾉ",
+  "@notificationScheduledIn15Seconds": {
+    "description": "Message when test notification is scheduwed"
+  },
+
+  "errorSchedulingNotification": "Ewwow scheduwing notification (>_<)",
+  "@errorSchedulingNotification": {
+    "description": "Ewwow message when scheduwing faiws"
+  },
+
+  "testNotificationSent": "Test notif sent! ✨(๑•ᴗ•๑)✨",
+  "@testNotificationSent": {
+    "description": "Confiwmation message when test notification is sent"
+  },
+
+  "exactAlarmPermissionRequired": "Exact awawm pewmission wequiwed! (◔◡◔)",
+  "@exactAlarmPermissionRequired": {
+    "description": "Message when exact awawm pewmission is needed"
+  },
+
+  "openSettings": "Open Settings UwU",
+  "@openSettings": {
+    "description": "Button to open app settings"
+  },
+
+  "getColorName": "Get cowow name ✨",
+  "@getColorName": {
+    "description": "Get the name of a cowow"
   }
 }

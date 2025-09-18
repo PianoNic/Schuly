@@ -1560,5 +1560,40 @@
   "checkPermissions": "Check Permissions",
   "@checkPermissions": {
     "description": "Button to check notification permissions"
+  },
+
+  "relatedNotices": "Related Notices",
+  "@relatedNotices": {
+    "description": "Header for absence notices related to an absence"
+  },
+
+  "exam": "Exam",
+  "@exam": {
+    "description": "Label for exam lessons"
+  },
+
+  "date": "Date",
+  "@date": {
+    "description": "Date label"
+  },
+
+  "time": "Time",
+  "@time": {
+    "description": "Time label"
+  },
+
+  "studentReason": "Student Reason",
+  "@studentReason": {
+    "description": "Label for student's reason for absence"
+  },
+
+  "trainerComment": "Trainer Comment",
+  "@trainerComment": {
+    "description": "Label for trainer's comment on absence"
+  },
+
+  "unexcusedAbsences": "Unexcused Absences",
+  "@unexcusedAbsences": {
+    "description": "Header for unexcused absences section"
   }
 }

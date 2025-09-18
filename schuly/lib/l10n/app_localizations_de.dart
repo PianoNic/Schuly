@@ -1201,4 +1201,25 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkPermissions => 'Berechtigungen prüfen';
+
+  @override
+  String get relatedNotices => 'Zugehörige Meldungen';
+
+  @override
+  String get exam => 'Prüfung';
+
+  @override
+  String get date => 'Datum';
+
+  @override
+  String get time => 'Zeit';
+
+  @override
+  String get studentReason => 'Begründung des Schülers';
+
+  @override
+  String get trainerComment => 'Kommentar des Lehrers';
+
+  @override
+  String get unexcusedAbsences => 'Unentschuldigte Absenzen';
 }

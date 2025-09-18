@@ -1185,4 +1185,25 @@ class AppLocalizationsKaw extends AppLocalizations {
 
   @override
   String get checkPermissions => 'Check Pewmissions';
+
+  @override
+  String get relatedNotices => 'Wewated Notices UwU';
+
+  @override
+  String get exam => 'Exam owo';
+
+  @override
+  String get date => 'Date (๑•ᴗ•๑)';
+
+  @override
+  String get time => 'Time ⏰';
+
+  @override
+  String get studentReason => 'Student Weason (´･ω･`)';
+
+  @override
+  String get trainerComment => 'Twainew Comment ✨';
+
+  @override
+  String get unexcusedAbsences => 'Unexcused Absences (｡•́︿•̀｡)';
 }

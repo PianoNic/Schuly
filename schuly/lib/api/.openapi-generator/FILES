@@ -3,6 +3,7 @@
 README.md
 analysis_options.yaml
 doc/AbsenceDto.md
+doc/AbsenceNoticeDto.md
 doc/AbsenceNoticeStatusDto.md
 doc/AgendaDto.md
 doc/AppApi.md
@@ -35,6 +36,7 @@ lib/auth/http_basic_auth.dart
 lib/auth/http_bearer_auth.dart
 lib/auth/oauth.dart
 lib/model/absence_dto.dart
+lib/model/absence_notice_dto.dart
 lib/model/absence_notice_status_dto.dart
 lib/model/agenda_dto.dart
 lib/model/app_info_dto.dart
@@ -49,5 +51,3 @@ lib/model/student_id_card_dto.dart
 lib/model/user_info_dto.dart
 lib/model/validation_error.dart
 pubspec.yaml
-test/app_info_dto_test.dart
-test/lateness_dto_test.dart

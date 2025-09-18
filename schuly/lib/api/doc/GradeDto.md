@@ -16,11 +16,11 @@ Name | Type | Description | Notes
 **subjectToken** | **String** |  | 
 **title** | **String** |  | 
 **date** | **String** |  | 
-**mark** | **String** |  | 
+**mark** | **String** |  | [optional] 
 **points** | **String** |  | [optional] 
 **weight** | **String** |  | 
 **isConfirmed** | **bool** |  | 
-**courseGrade** | **String** |  | 
+**courseGrade** | **String** |  | [optional] 
 **examinationGroups** | [**ExaminationGroupsDto**](ExaminationGroupsDto.md) |  | 
 **studentId** | **String** |  | [optional] 
 **studentName** | **String** |  | [optional] 

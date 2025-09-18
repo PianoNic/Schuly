@@ -18,13 +18,101 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  List<AbsenceNoticeDto> _getNoticesForAbsence(AbsenceDto absence, List<dynamic> notices) {
+    final List<AbsenceNoticeDto> validNotices = [];
+
+    for (final notice in notices) {
+      AbsenceNoticeDto? noticeDto;
+      if (notice is AbsenceNoticeDto) {
+        noticeDto = notice;
+      } else if (notice is Map<String, dynamic>) {
+        try {
+          noticeDto = AbsenceNoticeDto.fromJson(notice);
+        } catch (_) {
+          continue;
+        }
+      }
+
+      if (noticeDto != null) {
+        // Check if notice date falls within absence period
+        if (_isNoticeWithinAbsence(absence, noticeDto)) {
+          validNotices.add(noticeDto);
+        }
+      }
+    }
+
+    return validNotices;
+  }
+
+  bool _isNoticeWithinAbsence(AbsenceDto absence, AbsenceNoticeDto notice) {
+    try {
+      // Parse absence dates
+      final absenceFromDate = DateTime.parse(absence.dateFrom);
+      final absenceToDate = DateTime.parse(absence.dateTo);
+
+      // Parse notice date
+      final noticeDate = DateTime.parse(notice.date);
+
+      // Check if notice date is within absence date range
+      if (noticeDate.isAfter(absenceFromDate.subtract(const Duration(days: 1))) &&
+          noticeDate.isBefore(absenceToDate.add(const Duration(days: 1)))) {
+
+        // If we have time information, check time overlap too
+        if (absence.hourFrom.isNotEmpty && absence.hourTo.isNotEmpty &&
+            notice.hourFrom.isNotEmpty && notice.hourTo.isNotEmpty) {
+
+          // For same day, check time overlap
+          if (absenceFromDate.year == absenceToDate.year &&
+              absenceFromDate.month == absenceToDate.month &&
+              absenceFromDate.day == absenceToDate.day &&
+              noticeDate.year == absenceFromDate.year &&
+              noticeDate.month == absenceFromDate.month &&
+              noticeDate.day == absenceFromDate.day) {
+
+            final absenceFromTime = _parseTime(absence.hourFrom);
+            final absenceToTime = _parseTime(absence.hourTo);
+            final noticeFromTime = _parseTime(notice.hourFrom);
+            final noticeToTime = _parseTime(notice.hourTo);
+
+            // Check if times overlap
+            return _doTimesOverlap(
+              absenceFromTime, absenceToTime,
+              noticeFromTime, noticeToTime
+            );
+          }
+        }
+
+        return true; // Date matches, no time check needed or multi-day absence
+      }
+    } catch (e) {
+      // If date parsing fails, don't match
+      return false;
+    }
+
+    return false;
+  }
+
+  int _parseTime(String time) {
+    try {
+      final parts = time.split(':');
+      if (parts.length >= 2) {
+        return int.parse(parts[0]) * 60 + int.parse(parts[1]);
+      }
+    } catch (_) {}
+    return 0;
+  }
+
+  bool _doTimesOverlap(int start1, int end1, int start2, int end2) {
+    return start1 < end2 && start2 < end1;
   }
 
   String _formatDateTime(String date, String? time) {
@@ -43,59 +131,6 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
     return '$dateFormatted $timeShort';
   }
 
-
-  Widget _buildGenericDetailRowWithStatus(String label, String statusText) {
-    IconData icon;
-    Color color;
-
-    final statusLower = statusText.toLowerCase();
-    if (statusLower.contains('entschuldigt') || statusLower.contains('excused')) {
-      icon = Icons.check_circle;
-      color = Colors.green;
-    } else if (statusLower.contains('offen') || statusLower.contains('open') || statusLower.contains('pending')) {
-      icon = Icons.schedule;
-      color = Colors.orange;
-    } else if (statusLower.contains('confirmed') || statusLower.contains('bestätigt')) {
-      icon = Icons.verified;
-      color = Colors.blue;
-    } else if (statusLower.contains('abgelehnt') || statusLower.contains('rejected') || statusLower.contains('denied')) {
-      icon = Icons.cancel;
-      color = Colors.red;
-    } else {
-      icon = Icons.info;
-      color = Colors.grey;
-    }
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 100,
-            child: Text(
-              label,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-            ),
-          ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Icon(icon, color: color, size: 16),
-                const SizedBox(width: 6),
-                Text(
-                  statusText,
-                  style: TextStyle(color: color, fontWeight: FontWeight.w500, fontSize: 12),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -112,7 +147,6 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
               Tab(text: localizations.absencesTabAll), // TODO: Add absencesTabAll to ARB
               Tab(text: localizations.absencesTabLateness), // TODO: Add absencesTabLateness to ARB
               Tab(text: localizations.absencesTabAbsences), // TODO: Add absencesTabAbsences to ARB
-              Tab(text: localizations.absencesTabNotices), // TODO: Add absencesTabNotices to ARB
             ],
           ),
         ),
@@ -123,7 +157,6 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
           _buildAllAbsencesTab(localizations),
           _buildLatenessTab(localizations),
           _buildAbsencesTab(localizations),
-          _buildAbsenceNoticesTab(localizations),
         ],
       ),
     );
@@ -179,13 +212,28 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
                     }).whereType<AbsenceDto>().toList();
 
                     return validAbsences.map((absence) {
+                      // Filter notices for this absence
+                      final relatedNotices = _getNoticesForAbsence(absence, absenceNotices ?? []);
+                      final selectedAbsenceId = apiStore.selectedAbsenceId;
+                      final shouldExpand = selectedAbsenceId != null && absence.id == selectedAbsenceId;
+
+                      // Clear selected absence after use
+                      if (shouldExpand) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          apiStore.setSelectedAbsenceId(null);
+                        });
+                      }
+
                       return CompactAbsenceItem(
+                        absence: absence,
                         absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
                         absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
                         excuseUntil: _formatDateTime(absence.dateEAB, null),
                         status: absence.statusEAB,
                         reason: absence.reason,
+                        relatedNotices: relatedNotices,
                         localizations: localizations,
+                        initiallyExpanded: shouldExpand,
                       );
                     }).toList();
                   })(),
@@ -200,12 +248,6 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
                   const SizedBox(height: 16),
                 ],
                 
-                // Absence notices section
-                if (absenceNotices.isNotEmpty) ...[
-                  Text(localizations.noticesSection, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)), // TODO: Add noticesSection to ARB
-                  const SizedBox(height: 8),
-                  ..._buildGenericItems(absenceNotices, localizations.noticeItem, localizations), // TODO: Add noticeItem to ARB
-                ],
               ],
             ),
           );
@@ -228,75 +270,6 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
     }).toList();
   }
 
-  List<Widget> _buildGenericItems(List<Object> items, String itemType, AppLocalizations localizations) {
-    return items.map((item) {
-      Map<String, dynamic> itemData = {};
-      if (item is Map<String, dynamic>) {
-        itemData = item;
-      } else {
-        try {
-          itemData = {'data': item.toString()};
-        } catch (_) {
-          itemData = {'data': localizations.unknownData}; // TODO: Add unknownData to ARB
-        }
-      }
-
-      final appColors = Theme.of(context).extension<AppColors>();
-      final surfaceContainer = appColors?.surfaceContainer ??
-          Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3);
-
-      return Container(
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: surfaceContainer,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              itemType,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 12),
-            ...itemData.entries.map((entry) {
-              final isStatusField = entry.key.toLowerCase().contains('status') ||
-                                   entry.key.toLowerCase().contains('excused') ||
-                                   entry.key.toLowerCase().contains('entschuldigt');
-
-              if (isStatusField) {
-                return _buildGenericDetailRowWithStatus('${entry.key}:', entry.value?.toString() ?? 'N/A');
-              } else {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 100,
-                        child: Text(
-                          '${entry.key}:',
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          entry.value?.toString() ?? 'N/A',
-                          textAlign: TextAlign.right,
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-            }),
-          ],
-        ),
-      );
-    }).toList();
-  }
 
   Widget _buildLatenessTab(AppLocalizations localizations) {
     return RefreshIndicator(
@@ -357,13 +330,29 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
                   }).whereType<AbsenceDto>().toList();
 
                   return validAbsences.map((absence) {
+                    // Fetch notices here too
+                    final absenceNotices = apiStore.absenceNotices ?? [];
+                    final relatedNotices = _getNoticesForAbsence(absence, absenceNotices);
+                    final selectedAbsenceId = apiStore.selectedAbsenceId;
+                    final shouldExpand = selectedAbsenceId != null && absence.id == selectedAbsenceId;
+
+                    // Clear selected absence after use
+                    if (shouldExpand) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        apiStore.setSelectedAbsenceId(null);
+                      });
+                    }
+
                     return CompactAbsenceItem(
+                      absence: absence,
                       absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
                       absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
                       excuseUntil: _formatDateTime(absence.dateEAB, null),
                       status: absence.statusEAB,
                       reason: absence.reason,
+                      relatedNotices: relatedNotices,
                       localizations: localizations,
+                      initiallyExpanded: shouldExpand,
                     );
                   }).toList();
                 })(),
@@ -375,32 +364,6 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
     );
   }
 
-  Widget _buildAbsenceNoticesTab(AppLocalizations localizations) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        await Provider.of<ApiStore>(context, listen: false).fetchAbsenceNotices();
-      },
-      child: Consumer<ApiStore>(
-        builder: (context, apiStore, _) {
-          final absenceNotices = apiStore.absenceNotices;
-          if (absenceNotices == null) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (absenceNotices.isEmpty) {
-            return Center(child: Text(localizations.noNoticesFound)); // TODO: Add noNoticesFound to ARB
-          }
-          return SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: _buildGenericItems(absenceNotices, localizations.noticeItem, localizations),
-            ),
-          );
-        },
-      ),
-    );
-  }
 }
 
 // Lateness Item Widget
@@ -551,23 +514,42 @@ class LatenessItem extends StatelessWidget {
 }
 
 // Compact version of AbsenceItem
-class CompactAbsenceItem extends StatelessWidget {
+class CompactAbsenceItem extends StatefulWidget {
+  final AbsenceDto? absence;
   final String absentFrom;
   final String absentTo;
   final String excuseUntil;
   final String status;
   final String reason;
+  final List<AbsenceNoticeDto>? relatedNotices;
   final AppLocalizations localizations;
+  final bool initiallyExpanded;
 
   const CompactAbsenceItem({
     super.key,
+    this.absence,
     required this.absentFrom,
     required this.absentTo,
     required this.excuseUntil,
     required this.status,
     required this.reason,
+    this.relatedNotices,
     required this.localizations,
+    this.initiallyExpanded = false,
   });
+
+  @override
+  State<CompactAbsenceItem> createState() => _CompactAbsenceItemState();
+}
+
+class _CompactAbsenceItemState extends State<CompactAbsenceItem> {
+  late bool _isExpanded;
+
+  @override
+  void initState() {
+    super.initState();
+    _isExpanded = widget.initiallyExpanded;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -575,26 +557,104 @@ class CompactAbsenceItem extends StatelessWidget {
     final surfaceContainer = appColors?.surfaceContainer ??
         Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3);
 
+    final hasNotices = widget.relatedNotices != null && widget.relatedNotices!.isNotEmpty;
+    final noticeCount = widget.relatedNotices?.length ?? 0;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: surfaceContainer,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            reason,
-              style: Theme.of(context).textTheme.titleMedium,
+          InkWell(
+            onTap: hasNotices ? () {
+              setState(() {
+                _isExpanded = !_isExpanded;
+              });
+            } : null,
+            borderRadius: BorderRadius.circular(8),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.reason,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
+                      if (hasNotices) ...[
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.assignment,
+                                size: 13,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              const SizedBox(width: 3),
+                              Text(
+                                '$noticeCount',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        Icon(
+                          _isExpanded ? Icons.expand_less : Icons.expand_more,
+                          size: 20,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ],
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  _buildDetailRow('${widget.localizations.from}:', widget.absentFrom), // TODO: Add from to ARB
+                  _buildDetailRow('${widget.localizations.to}:', widget.absentTo), // TODO: Add to to ARB
+                  _buildDetailRow('${widget.localizations.excuseUntil}:', widget.excuseUntil), // TODO: Add excuseUntil to ARB
+                  _buildDetailRowWithExcusedStatus('${widget.localizations.status}:', widget.absence?.isExcused ?? false), // TODO: Add status to ARB
+                ],
+              ),
             ),
-            const SizedBox(height: 12),
-            _buildDetailRow('${localizations.from}:', absentFrom), // TODO: Add from to ARB
-            _buildDetailRow('${localizations.to}:', absentTo), // TODO: Add to to ARB
-            _buildDetailRow('${localizations.excuseUntil}:', excuseUntil), // TODO: Add excuseUntil to ARB
-            _buildDetailRowWithStatusText('${localizations.status}:', status), // TODO: Add status to ARB
+          ),
+          if (_isExpanded && hasNotices) ...[
+            const Divider(height: 1),
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.localizations.relatedNotices ?? 'Related Notices', // TODO: Add relatedNotices to ARB
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  ...widget.relatedNotices!.map((notice) => _buildNoticeCard(notice)),
+                ],
+              ),
+            ),
           ],
+        ],
       ),
     );
   }
@@ -624,11 +684,290 @@ class CompactAbsenceItem extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailRowWithStatusText(String label, String statusText) {
+  String _formatTime(String time) {
+    // Remove seconds from time format (HH:mm:ss -> HH:mm)
+    if (time.length >= 5) {
+      return time.substring(0, 5);
+    }
+    return time;
+  }
+
+  String _calculateDuration(String startTime, String endTime) {
+    try {
+      // Parse times
+      final startParts = startTime.split(':');
+      final endParts = endTime.split(':');
+
+      if (startParts.length >= 2 && endParts.length >= 2) {
+        final startMinutes = int.parse(startParts[0]) * 60 + int.parse(startParts[1]);
+        final endMinutes = int.parse(endParts[0]) * 60 + int.parse(endParts[1]);
+
+        var durationMinutes = endMinutes - startMinutes;
+        if (durationMinutes < 0) {
+          durationMinutes += 24 * 60; // Handle day wrap
+        }
+
+        final hours = durationMinutes ~/ 60;
+        final minutes = durationMinutes % 60;
+
+        if (hours > 0 && minutes > 0) {
+          return '${hours}h ${minutes}min';
+        } else if (hours > 0) {
+          return '${hours}h';
+        } else {
+          return '${minutes}min';
+        }
+      }
+    } catch (_) {}
+
+    return '-';
+  }
+
+  Widget _buildNoticeCard(AbsenceNoticeDto notice) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                notice.isExamLesson ? Icons.school : Icons.class_,
+                size: 15,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  notice.course,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13,
+                  ),
+                ),
+              ),
+              if (notice.isExamLesson)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                  decoration: BoxDecoration(
+                    color: Colors.orange.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    widget.localizations.exam ?? 'Exam', // TODO: Add exam to ARB
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orange,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          _buildNoticeDateTimeDurationRow(
+            widget.localizations.date ?? 'Date',
+            notice.date.split('T')[0].split('-').reversed.join('.'),
+            widget.localizations.time ?? 'Time',
+            '${_formatTime(notice.hourFrom)} - ${_formatTime(notice.hourTo)}',
+            widget.localizations.duration ?? 'Duration',
+            _calculateDuration(notice.hourFrom, notice.hourTo)
+          ),
+          if (notice.studentReason != null && notice.studentReason!.isNotEmpty)
+            _buildNoticeDetailRow(widget.localizations.studentReason ?? 'Student Reason', notice.studentReason!), // TODO: Add studentReason to ARB
+          if (notice.trainerComment != null && notice.trainerComment!.isNotEmpty)
+            _buildNoticeDetailRow(widget.localizations.trainerComment ?? 'Trainer Comment', notice.trainerComment!), // TODO: Add trainerComment to ARB
+          if (notice.comment != null && notice.comment!.isNotEmpty)
+            _buildNoticeDetailRow(widget.localizations.comment ?? 'Comment', notice.comment!), // TODO: Add comment to ARB
+          const SizedBox(height: 4),
+          _buildNoticeStatusRow(notice.status, notice.statusLong),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNoticeDateTimeDurationRow(String dateLabel, String dateValue, String timeLabel, String timeValue, String durationLabel, String durationValue) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 1),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // Calculate approximate widths needed for each section
+          final dateWidth = _calculateTextWidth('$dateLabel: $dateValue', const TextStyle(fontSize: 11));
+          final timeWidth = _calculateTextWidth('$timeLabel: $timeValue', const TextStyle(fontSize: 11));
+          final durationWidth = _calculateTextWidth('$durationLabel: $durationValue', const TextStyle(fontSize: 11));
+
+          // Add spacing between elements (16px each)
+          final totalWidth = dateWidth + timeWidth + durationWidth + 32;
+
+          // Use Row if everything fits, otherwise use Wrap
+          if (totalWidth <= constraints.maxWidth) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      '$dateLabel:',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      dateValue,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      '$timeLabel:',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      timeValue,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      '$durationLabel:',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      durationValue,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          } else {
+            return Wrap(
+              spacing: 16,
+              runSpacing: 4,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      '$dateLabel:',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      dateValue,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      '$timeLabel:',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      timeValue,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      '$durationLabel:',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      durationValue,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  double _calculateTextWidth(String text, TextStyle style) {
+    final textPainter = TextPainter(
+      text: TextSpan(text: text, style: style),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    return textPainter.width;
+  }
+
+  Widget _buildNoticeDetailRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 1),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '$label:',
+            style: TextStyle(
+              fontSize: 11,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(width: 4),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(fontSize: 11),
+              softWrap: true,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNoticeStatusRow(String status, String statusLong) {
     IconData icon;
     Color color;
 
-    final statusLower = statusText.toLowerCase();
+    final statusLower = status.toLowerCase();
     if (statusLower.contains('entschuldigt') || statusLower.contains('excused')) {
       icon = Icons.check_circle;
       color = Colors.green;
@@ -638,12 +977,40 @@ class CompactAbsenceItem extends StatelessWidget {
     } else if (statusLower.contains('confirmed') || statusLower.contains('bestätigt')) {
       icon = Icons.verified;
       color = Colors.blue;
-    } else if (statusLower.contains('abgelehnt') || statusLower.contains('rejected') || statusLower.contains('denied')) {
-      icon = Icons.cancel;
-      color = Colors.red;
     } else {
       icon = Icons.info;
       color = Colors.grey;
+    }
+
+    return Row(
+      children: [
+        Icon(icon, size: 13, color: color),
+        const SizedBox(width: 3),
+        Text(
+          statusLong,
+          style: TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w500,
+            color: color,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDetailRowWithExcusedStatus(String label, bool isExcused) {
+    IconData icon;
+    Color color;
+    String statusText;
+
+    if (isExcused) {
+      icon = Icons.check_circle;
+      color = Colors.green;
+      statusText = widget.localizations.excused ?? 'Excused';
+    } else {
+      icon = Icons.cancel;
+      color = Colors.red;
+      statusText = widget.localizations.notExcused ?? 'Not Excused';
     }
 
     return Padding(

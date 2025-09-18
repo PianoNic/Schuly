@@ -361,7 +361,7 @@ class _StartPageState extends State<StartPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  localizations.openAbsences,
+                  localizations.unexcusedAbsences ?? localizations.openAbsences,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 12),
@@ -378,38 +378,38 @@ class _StartPageState extends State<StartPage> {
                         return null;
                       }
                     }).whereType<AbsenceDto>().toList();
-                    final openStatuses = {'offen', 'open', 'ofage', 'unexcused', 'pending'};
-                    final openAbsences = absList.where((absence) {
-                      final status = absence.statusEAB;
-                      return openStatuses.contains(status.toLowerCase());
+                    // Filter for unexcused absences only
+                    final unexcusedAbsences = absList.where((absence) {
+                      return !absence.isExcused;
                     }).toList();
-                    if (openAbsences.isEmpty) {
+                    if (unexcusedAbsences.isEmpty) {
                       if (absList.isEmpty) {
                         return [Center(child: Text(localizations.noAbsencesFound))];
                       } else {
-                        final fallbackAbsences = absList.take(3).map((absence) {
-                          return CompactAbsenceItem(
-                            absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
-                            absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
-                            excuseUntil: _formatDateTime(absence.dateEAB, null),
-                            status: absence.statusEAB,
-                            reason: absence.reason,
-                            localizations: localizations,
-                          );
-                        }).toList();
-                        return [
-                          Center(child: Text(localizations.noOpenAbsences)), ...fallbackAbsences
-                        ];
+                        // Don't show any absences if all are excused
+                        return [Center(child: Text(localizations.noOpenAbsences))];
                       }
                     }
-                    return openAbsences.take(3).map((absence) {
-                      return CompactAbsenceItem(
-                        absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
-                        absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
-                        excuseUntil: _formatDateTime(absence.dateEAB, null),
-                        status: absence.statusEAB,
-                        reason: absence.reason,
-                        localizations: localizations,
+                    return unexcusedAbsences.take(3).map((absence) {
+                      return GestureDetector(
+                        onTap: () {
+                          // Navigate to absences page and pass the absence ID
+                          if (widget.onNavigateToAbsenzen != null) {
+                            // Store the selected absence ID in ApiStore for retrieval
+                            apiStore.setSelectedAbsenceId(absence.id);
+                            widget.onNavigateToAbsenzen!();
+                          }
+                        },
+                        child: CompactAbsenceItem(
+                          absence: absence,
+                          absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
+                          absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
+                          excuseUntil: _formatDateTime(absence.dateEAB, null),
+                          status: absence.statusEAB,
+                          reason: absence.reason,
+                          relatedNotices: [], // No notices needed on start page
+                          localizations: localizations,
+                        ),
                       );
                     }).toList();
                   })(),

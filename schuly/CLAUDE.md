@@ -29,7 +29,7 @@ Schuly is a Flutter mobile application that serves as a client for a school mana
 ### State Management
 - **Provider pattern** for global state management
 - Key providers:
-  - `ApiStore` (`lib/providers/api_store.dart`): Manages API authentication, user sessions, and data fetching
+  - `ApiStore` (`lib/providers/api_store.dart`): Manages API authentication, user sessions, data fetching, and navigation state (e.g., selected absence ID)
   - `ThemeProvider` (`lib/providers/theme_provider.dart`): Handles theme mode and seed color preferences
 
 ### Authentication & Storage
@@ -59,6 +59,8 @@ Schuly is a Flutter mobile application that serves as a client for a school mana
 - **Offline capability**: Data cached via ApiStore
 - **Student ID card**: Integrated student identification
 - **Theme customization**: Light/dark mode with custom colors
+- **Absence management**: Expandable absence cards with integrated notices
+- **Smart navigation**: Auto-expansion when navigating from start page to specific absences
 
 ### Code Organization
 ```

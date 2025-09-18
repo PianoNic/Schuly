@@ -1188,4 +1188,25 @@ class AppLocalizationsArr extends AppLocalizations {
 
   @override
   String get checkPermissions => 'Check Ship Permissions';
+
+  @override
+  String get relatedNotices => 'Related Ship\'s Messages';
+
+  @override
+  String get exam => 'Battle Test';
+
+  @override
+  String get date => 'Day on the Calendar';
+
+  @override
+  String get time => 'Ship\'s Bell';
+
+  @override
+  String get studentReason => 'Buccaneer\'s Excuse';
+
+  @override
+  String get trainerComment => 'Captain\'s Remark';
+
+  @override
+  String get unexcusedAbsences => 'Unforgiven Shore Leaves';
 }

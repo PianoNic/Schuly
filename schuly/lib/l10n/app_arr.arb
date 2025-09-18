@@ -634,5 +634,14 @@
   "getColorName": "Reveal yer flag's color",
   "@getColorName": {
     "description": "Reveals the color of the pirate's flag"
-  }
+  },
+
+  "relatedNotices": "Related Ship's Messages",
+  "exam": "Battle Test",
+  "date": "Day on the Calendar",
+  "time": "Ship's Bell",
+  "studentReason": "Buccaneer's Excuse",
+  "trainerComment": "Captain's Remark",
+
+  "unexcusedAbsences": "Unforgiven Shore Leaves"
 }

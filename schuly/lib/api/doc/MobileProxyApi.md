@@ -24,7 +24,7 @@ Method | HTTP request | Description
 
 
 # **mobileAbsencenotices**
-> List<Object> mobileAbsencenotices()
+> List<AbsenceNoticeDto> mobileAbsencenotices()
 
 Get Mobile Absence Notices
 
@@ -53,7 +53,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List<Object>**](Object.md)
+[**List<AbsenceNoticeDto>**](AbsenceNoticeDto.md)
 
 ### Authorization
 

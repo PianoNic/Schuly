@@ -522,5 +522,14 @@
   "remindLater": "Später erinnern",
   "continueAnyway": "Trotzdem fortfahren",
   "done": "Fertig",
-  "checkPermissions": "Berechtigungen prüfen"
+  "checkPermissions": "Berechtigungen prüfen",
+
+  "relatedNotices": "Zugehörige Meldungen",
+  "exam": "Prüfung",
+  "date": "Datum",
+  "time": "Zeit",
+  "studentReason": "Begründung des Schülers",
+  "trainerComment": "Kommentar des Lehrers",
+
+  "unexcusedAbsences": "Unentschuldigte Absenzen"
 }

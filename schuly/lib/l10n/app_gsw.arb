@@ -628,5 +628,14 @@
   "getColorName": "Farb bestimme",
   "@getColorName": {
     "description": "Get color name"
-  }
+  },
+
+  "relatedNotices": "Zugehörigi Meldig",
+  "exam": "Prüefig",
+  "date": "Datum",
+  "time": "Ziit",
+  "studentReason": "Begründig vom Schüeler",
+  "trainerComment": "Kommentar vom Lehrer",
+
+  "unexcusedAbsences": "Unentschuldigti Absänze"
 }

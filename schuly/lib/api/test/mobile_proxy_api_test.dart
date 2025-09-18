@@ -19,7 +19,7 @@ void main() {
   group('tests for MobileProxyApi', () {
     // Get Mobile Absence Notices
     //
-    //Future<List<Object>> mobileAbsencenotices() async
+    //Future<List<AbsenceNoticeDto>> mobileAbsencenotices() async
     test('test mobileAbsencenotices', () async {
       // TODO
     });
@@ -61,7 +61,7 @@ void main() {
 
     // Get Mobile Lateness
     //
-    //Future<List<Object>> mobileLateness() async
+    //Future<List<LatenessDto>> mobileLateness() async
     test('test mobileLateness', () async {
       // TODO
     });

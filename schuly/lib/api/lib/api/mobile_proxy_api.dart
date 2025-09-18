@@ -45,7 +45,7 @@ class MobileProxyApi {
   }
 
   /// Get Mobile Absence Notices
-  Future<List<Object>?> mobileAbsencenotices() async {
+  Future<List<AbsenceNoticeDto>?> mobileAbsencenotices() async {
     final response = await mobileAbsencenoticesWithHttpInfo();
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -55,8 +55,8 @@ class MobileProxyApi {
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       final responseBody = await _decodeBodyBytes(response);
-      return (await apiClient.deserializeAsync(responseBody, 'List<Object>') as List)
-        .cast<Object>()
+      return (await apiClient.deserializeAsync(responseBody, 'List<AbsenceNoticeDto>') as List)
+        .cast<AbsenceNoticeDto>()
         .toList(growable: false);
 
     }

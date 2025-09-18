@@ -9,7 +9,7 @@ class LogsViewerPage extends StatefulWidget {
   @override
   State<LogsViewerPage> createState() => _LogsViewerPageState();
 }
-
+ 
 class _LogsViewerPageState extends State<LogsViewerPage> {
   LogLevel? _selectedLevel;
   String _searchQuery = '';

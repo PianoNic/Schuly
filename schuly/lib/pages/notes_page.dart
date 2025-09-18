@@ -40,7 +40,7 @@ class NotesPage extends StatelessWidget {
                   final subjectAverage = GradeUtils.calculateWeightedAverage(entry.value);
                   
                   return Card(
-                    margin: const EdgeInsets.only(bottom: 16),
+                    margin: const EdgeInsets.only(bottom: 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

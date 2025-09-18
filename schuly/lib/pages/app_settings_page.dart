@@ -182,10 +182,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
             // Theme Settings Card
             ThemeSettings(themeProvider: widget.themeProvider),
 
-            const SizedBox(height: 16),
-
             // Additional App Settings Card
             Card(
+              margin: const EdgeInsets.only(bottom: 8),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -195,7 +194,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       localizations.appSettings,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
 
                     // Notifications Toggle
                     _isLoading
@@ -346,8 +345,6 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
               ),
             ),
 
-            const SizedBox(height: 16),
-
             // API Endpoint Settings Card
             Card(
               child: Padding(
@@ -359,7 +356,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       localizations.apiEndpoint,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
                     Consumer<ApiStore>(
                       builder: (context, apiStore, child) {
                         // Always show the container with debug info

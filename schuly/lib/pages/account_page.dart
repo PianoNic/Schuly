@@ -29,7 +29,7 @@ class AccountPage extends StatelessWidget {
     if (userEmails.isEmpty) {
       return Center(
         child: Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -63,7 +63,7 @@ class AccountPage extends StatelessWidget {
     if (activeUserEmail == null) {
       return Center(
         child: Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -111,9 +111,9 @@ class AccountPage extends StatelessWidget {
               ),
             if (userInfo != null) ...[
               const SizedBox(height: 8),
-              const SizedBox(height: 16),
               // Personal Information
               Card(
+                margin: const EdgeInsets.only(bottom: 8),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -123,7 +123,7 @@ class AccountPage extends StatelessWidget {
                         localizations.personalInformation,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 12),
                       InfoRow(
                         label: localizations.name,
                         value: '${userInfo.firstName} ${userInfo.lastName}',
@@ -172,7 +172,6 @@ class AccountPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
             ],
             // Quick Actions Card (always shown if user is logged in)
             Card(
@@ -185,7 +184,7 @@ class AccountPage extends StatelessWidget {
                       localizations.quickActions,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
                     ListTile(
                       leading: const Icon(Icons.settings),
                       title: Text(localizations.appSettings),

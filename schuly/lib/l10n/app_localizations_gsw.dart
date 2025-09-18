@@ -630,6 +630,34 @@ class AppLocalizationsGsw extends AppLocalizations {
   String get getColorName => 'Get color name';
 
   @override
+  String get lessonBreak => 'Pause';
+
+  @override
+  String get lunchBreak => 'Mittagspause';
+
+  @override
+  String get showBreaks => 'Pause zwüsche Lektione azeige';
+
+  @override
+  String get cardSettings => 'Charte-Iistellige';
+
+  @override
+  String get tapToCustomize => 'Zum Apasse tippe';
+
+  @override
+  String get numberOfDaysToShow => 'Azahl vo Täg zum azeige';
+
+  @override
+  String get numberOfGradesToShow => 'Azahl vo Note zum azeige';
+
+  @override
+  String get showOnlyOpenAbsences => 'Nur offni Absenze azeige';
+
+  @override
+  String get noConfigurationAvailable =>
+      'Kei Konfigurationsiistellige verfüegbar';
+
+  @override
   String get switchAccount => 'Account wächsle';
 
   @override

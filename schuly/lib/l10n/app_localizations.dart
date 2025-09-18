@@ -1292,6 +1292,60 @@ abstract class AppLocalizations {
   /// **'Get color name'**
   String get getColorName;
 
+  /// Label for break between lessons
+  ///
+  /// In en, this message translates to:
+  /// **'Break'**
+  String get lessonBreak;
+
+  /// Label for lunch break
+  ///
+  /// In en, this message translates to:
+  /// **'Lunch Break'**
+  String get lunchBreak;
+
+  /// Setting to show/hide breaks between lessons
+  ///
+  /// In en, this message translates to:
+  /// **'Show breaks between lessons'**
+  String get showBreaks;
+
+  /// Title for card-specific settings
+  ///
+  /// In en, this message translates to:
+  /// **'Card Settings'**
+  String get cardSettings;
+
+  /// Hint text for tappable cards
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to customize'**
+  String get tapToCustomize;
+
+  /// Setting for how many days to display
+  ///
+  /// In en, this message translates to:
+  /// **'Number of days to show'**
+  String get numberOfDaysToShow;
+
+  /// Setting for how many grades to display
+  ///
+  /// In en, this message translates to:
+  /// **'Number of grades to show'**
+  String get numberOfGradesToShow;
+
+  /// Setting to filter absences
+  ///
+  /// In en, this message translates to:
+  /// **'Show only open absences'**
+  String get showOnlyOpenAbsences;
+
+  /// Message shown when a card has no configurable settings
+  ///
+  /// In en, this message translates to:
+  /// **'No configuration settings available'**
+  String get noConfigurationAvailable;
+
   /// Header/title for the account switcher modal
   ///
   /// In en, this message translates to:

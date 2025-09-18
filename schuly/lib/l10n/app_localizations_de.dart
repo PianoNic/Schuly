@@ -639,6 +639,34 @@ class AppLocalizationsDe extends AppLocalizations {
   String get getColorName => 'Farbname abrufen';
 
   @override
+  String get lessonBreak => 'Pause';
+
+  @override
+  String get lunchBreak => 'Mittagspause';
+
+  @override
+  String get showBreaks => 'Pausen zwischen Lektionen anzeigen';
+
+  @override
+  String get cardSettings => 'Karten-Einstellungen';
+
+  @override
+  String get tapToCustomize => 'Zum Anpassen tippen';
+
+  @override
+  String get numberOfDaysToShow => 'Anzahl der anzuzeigenden Tage';
+
+  @override
+  String get numberOfGradesToShow => 'Anzahl der anzuzeigenden Noten';
+
+  @override
+  String get showOnlyOpenAbsences => 'Nur offene Absenzen anzeigen';
+
+  @override
+  String get noConfigurationAvailable =>
+      'Keine Konfigurationseinstellungen verfügbar';
+
+  @override
   String get switchAccount => 'Account wechseln';
 
   @override

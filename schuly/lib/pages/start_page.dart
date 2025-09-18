@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/lesson_tile.dart';
 import '../widgets/holiday_tile.dart';
+import '../widgets/break_card.dart';
 import '../widgets/grade_tile.dart';
 import '../providers/api_store.dart';
 import '../providers/homepage_config_provider.dart';
@@ -105,7 +106,7 @@ class _StartPageState extends State<StartPage> {
               children: [
                 for (final section in sections)
                   if (section.isVisible)
-                    _buildSection(context, section.id, agenda, grades, absences, apiStore, widget.onNavigateToAbsenzen),
+                    _buildSection(context, section.id, agenda, grades, absences, apiStore, widget.onNavigateToAbsenzen, homepageConfig),
               ],
             ),
           ),
@@ -114,7 +115,7 @@ class _StartPageState extends State<StartPage> {
     );
   }
 
-  Widget _buildSection(BuildContext context, String sectionId, dynamic agenda, dynamic grades, dynamic absences, ApiStore apiStore, VoidCallback? onNavigateToAbsenzen) {
+  Widget _buildSection(BuildContext context, String sectionId, dynamic agenda, dynamic grades, dynamic absences, ApiStore apiStore, VoidCallback? onNavigateToAbsenzen, HomepageConfigProvider homepageConfig) {
     final localizations = AppLocalizations.of(context)!;
     switch (sectionId) {
       case 'lessons':
@@ -277,29 +278,7 @@ class _StartPageState extends State<StartPage> {
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: ListView(
-                                children: sameDayLessons.map<Widget>((item) {
-                              final start = DateTime.tryParse(item.startDate);
-                              final end = DateTime.tryParse(item.endDate);
-                              final dayStr = start != null ?
-                                  '${_weekdayShort(start.weekday)} ${start.day.toString().padLeft(2, '0')}.${start.month.toString().padLeft(2, '0')}' :
-                                  '';
-                              final timeStr = (start != null && end != null)
-                                  ? '${start.hour.toString().padLeft(2, '0')}:${start.minute.toString().padLeft(2, '0')} - '
-                                      '${end.hour.toString().padLeft(2, '0')}:${end.minute.toString().padLeft(2, '0')}'
-                                  : '';
-                              final subject = item.text;
-                              final room = item.roomToken;
-                              final teacher = item.teachers.isNotEmpty ? item.teachers.join(', ') : '';
-                              return LessonTile(
-                                day: dayStr,
-                                time: timeStr,
-                                subject: subject,
-                                room: room,
-                                teacher: teacher,
-                                startTime: start,
-                                endTime: end,
-                              );
-                              }).toList(),
+                              children: _buildLessonsWithBreaks(sameDayLessons, homepageConfig.showBreaks),
                             ),
                           );
                         },
@@ -480,5 +459,58 @@ class _StartPageState extends State<StartPage> {
     }
     final timeShort = time.length >= 5 ? time.substring(0, 5) : time;
     return '$dateFormatted $timeShort';
+  }
+
+  List<Widget> _buildLessonsWithBreaks(List<AgendaDto> lessons, bool showBreaks) {
+    final List<Widget> widgets = [];
+
+    for (int i = 0; i < lessons.length; i++) {
+      final item = lessons[i];
+      final start = DateTime.tryParse(item.startDate);
+      final end = DateTime.tryParse(item.endDate);
+
+      // Add the lesson tile
+      final dayStr = start != null ?
+          '${_weekdayShort(start.weekday)} ${start.day.toString().padLeft(2, '0')}.${start.month.toString().padLeft(2, '0')}' :
+          '';
+      final timeStr = (start != null && end != null)
+          ? '${start.hour.toString().padLeft(2, '0')}:${start.minute.toString().padLeft(2, '0')} - '
+              '${end.hour.toString().padLeft(2, '0')}:${end.minute.toString().padLeft(2, '0')}'
+          : '';
+      final subject = item.text;
+      final room = item.roomToken;
+      final teacher = item.teachers.isNotEmpty ? item.teachers.join(', ') : '';
+
+      widgets.add(LessonTile(
+        day: dayStr,
+        time: timeStr,
+        subject: subject,
+        room: room,
+        teacher: teacher,
+        startTime: start,
+        endTime: end,
+      ));
+
+      // Add break card if there's a gap before the next lesson and showBreaks is true
+      if (showBreaks && i < lessons.length - 1 && end != null) {
+        final nextItem = lessons[i + 1];
+        final nextStart = DateTime.tryParse(nextItem.startDate);
+
+        if (nextStart != null) {
+          final breakDuration = nextStart.difference(end).inMinutes;
+
+          // Only show breaks that are between 5 and 120 minutes
+          if (breakDuration >= 5 && breakDuration <= 120) {
+            widgets.add(BreakCard(
+              duration: breakDuration,
+              startTime: end,
+              endTime: nextStart,
+            ));
+          }
+        }
+      }
+    }
+
+    return widgets;
   }
 }

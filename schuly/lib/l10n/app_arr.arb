@@ -565,5 +565,14 @@
   "checkPermissions": "Check Ship Permissions",
   "@checkPermissions": {
     "description": "Button to check notification permissions"
-  }
+  },
+  "lessonBreak": "Shore Leave",
+  "lunchBreak": "Grub Time",
+  "showBreaks": "Show shore leave between sailings",
+  "cardSettings": "Chart Settings",
+  "tapToCustomize": "Tap to adjust yer settings",
+  "numberOfDaysToShow": "Days on the horizon",
+  "numberOfGradesToShow": "Marks to display",
+  "showOnlyOpenAbsences": "Show only unexcused desertions",
+  "noConfigurationAvailable": "No chart settings to adjust, matey"
 }

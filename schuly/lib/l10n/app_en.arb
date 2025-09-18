@@ -799,6 +799,42 @@
   "@getColorName": {
     "description": "Returns the localized color name for a given key."
   },
+  "lessonBreak": "Break",
+  "@lessonBreak": {
+    "description": "Label for break between lessons"
+  },
+  "lunchBreak": "Lunch Break",
+  "@lunchBreak": {
+    "description": "Label for lunch break"
+  },
+  "showBreaks": "Show breaks between lessons",
+  "@showBreaks": {
+    "description": "Setting to show/hide breaks between lessons"
+  },
+  "cardSettings": "Card Settings",
+  "@cardSettings": {
+    "description": "Title for card-specific settings"
+  },
+  "tapToCustomize": "Tap to customize",
+  "@tapToCustomize": {
+    "description": "Hint text for tappable cards"
+  },
+  "numberOfDaysToShow": "Number of days to show",
+  "@numberOfDaysToShow": {
+    "description": "Setting for how many days to display"
+  },
+  "numberOfGradesToShow": "Number of grades to show",
+  "@numberOfGradesToShow": {
+    "description": "Setting for how many grades to display"
+  },
+  "showOnlyOpenAbsences": "Show only open absences",
+  "@showOnlyOpenAbsences": {
+    "description": "Setting to filter absences"
+  },
+  "noConfigurationAvailable": "No configuration settings available",
+  "@noConfigurationAvailable": {
+    "description": "Message shown when a card has no configurable settings"
+  },
   "switchAccount": "Switch Account",
   "@switchAccount": {
     "description": "Header/title for the account switcher modal"

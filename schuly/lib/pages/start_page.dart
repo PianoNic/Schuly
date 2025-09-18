@@ -214,7 +214,12 @@ class _StartPageState extends State<StartPage> {
                                   _selectedDay = bestDate!;
                                   _hasInitializedSelectedDay = true;
                                 });
-                                _pageController = PageController(initialPage: bestIndex);
+                                // Jump to the page after the widget is built
+                                WidgetsBinding.instance.addPostFrameCallback((_) {
+                                  if (_pageController.hasClients) {
+                                    _pageController.jumpToPage(bestIndex);
+                                  }
+                                });
                               }
                             });
                           } else {

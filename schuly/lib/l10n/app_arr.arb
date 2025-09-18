@@ -574,8 +574,7 @@
   "numberOfDaysToShow": "Days on the horizon",
   "numberOfGradesToShow": "Marks to display",
   "showOnlyOpenAbsences": "Show only unexcused desertions",
-  "noConfigurationAvailable": "No chart settings to adjust, matey"
-  },
+  "noConfigurationAvailable": "No chart settings to adjust, matey",
 
   "getNotified": "Sound the bell before yer lessons",
   "@getNotified": {

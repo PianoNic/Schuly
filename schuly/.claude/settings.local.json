@@ -13,7 +13,9 @@
       "Bash(grep:*)",
       "Bash(python:*)",
       "Bash(nc localhost 58177)",
-      "Bash(/dev/null)"
+      "Bash(/dev/null)",
+      "Bash(git commit:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

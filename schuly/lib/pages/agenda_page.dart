@@ -44,6 +44,7 @@ class _AgendaPageState extends State<AgendaPage> {
             child: Column(
               children: [
                 Card(
+                  margin: const EdgeInsets.only(bottom: 8),
                   child: CustomCalendar(
                     selectedDate: _selectedDay,
                     firstDate: DateTime.now().subtract(const Duration(days: 365)),
@@ -56,7 +57,6 @@ class _AgendaPageState extends State<AgendaPage> {
                     },
                   ),
                 ),
-                const SizedBox(height: 16),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -68,7 +68,7 @@ class _AgendaPageState extends State<AgendaPage> {
                           localizations.agendaForDate(_selectedDay.day, _selectedDay.month, _selectedDay.year), // TODO: Add agendaForDate to ARB
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 12),
                         if (agenda == null)
                           const Center(child: CircularProgressIndicator())
                         else ...[

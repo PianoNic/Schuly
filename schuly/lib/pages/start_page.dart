@@ -120,6 +120,7 @@ class _StartPageState extends State<StartPage> {
     switch (sectionId) {
       case 'lessons':
         return Card(
+          margin: const EdgeInsets.only(bottom: 8),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -292,6 +293,7 @@ class _StartPageState extends State<StartPage> {
         );
       case 'holidays':
         return Card(
+          margin: const EdgeInsets.only(bottom: 8),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -326,6 +328,7 @@ class _StartPageState extends State<StartPage> {
         );
       case 'grades':
         return Card(
+          margin: const EdgeInsets.only(bottom: 8),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -355,6 +358,7 @@ class _StartPageState extends State<StartPage> {
         );
       case 'absences':
         return Card(
+          margin: const EdgeInsets.only(bottom: 8),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(

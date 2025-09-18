@@ -1131,6 +1131,15 @@ class AppLocalizationsGsw extends AppLocalizations {
   String get finalizingInitialization => 'Initialisierig abschliesse...';
 
   @override
+  String get checkingConnection => 'Checking connection...';
+
+  @override
+  String get offlineModeDetected => 'Offline mode - using cached data';
+
+  @override
+  String get loadingCachedData => 'Loading cached data...';
+
+  @override
   String errorCheckingUpdatesDetails(Object error) {
     return 'Fähler bim Sueche nach Updates: $error';
   }

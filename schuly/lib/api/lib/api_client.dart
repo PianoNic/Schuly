@@ -192,6 +192,10 @@ class ApiClient {
           return AgendaDto.fromJson(value);
         case 'AppInfoDto':
           return AppInfoDto.fromJson(value);
+        case 'AuthenticateMobileResponseDto':
+          return AuthenticateMobileResponseDto.fromJson(value);
+        case 'AuthenticateRequestDto':
+          return AuthenticateRequestDto.fromJson(value);
         case 'ClassInfoDto':
           return ClassInfoDto.fromJson(value);
         case 'ExamDto':
@@ -204,6 +208,12 @@ class ApiClient {
           return HTTPValidationError.fromJson(value);
         case 'LatenessDto':
           return LatenessDto.fromJson(value);
+        case 'MobileCallbackRequestDto':
+          return MobileCallbackRequestDto.fromJson(value);
+        case 'MobileCallbackResponseDto':
+          return MobileCallbackResponseDto.fromJson(value);
+        case 'MobileOAuthUrlResponseDto':
+          return MobileOAuthUrlResponseDto.fromJson(value);
         case 'SettingDto':
           return SettingDto.fromJson(value);
         case 'StudentIdCardDto':
@@ -212,6 +222,10 @@ class ApiClient {
           return UserInfoDto.fromJson(value);
         case 'ValidationError':
           return ValidationError.fromJson(value);
+        case 'WebCallbackRequestDto':
+          return WebCallbackRequestDto.fromJson(value);
+        case 'WebCallbackResponseDto':
+          return WebCallbackResponseDto.fromJson(value);
         default:
           dynamic match;
           if (value is List && (match = _regList.firstMatch(targetType)?.group(1)) != null) {

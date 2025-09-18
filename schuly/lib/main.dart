@@ -9,6 +9,7 @@ import 'pages/absenzen_page.dart';
 import 'pages/account_page.dart';
 import 'pages/login_page.dart';
 import 'pages/student_card_page.dart';
+import 'pages/microsoft_auth_page.dart';
 import 'providers/theme_provider.dart';
 import 'providers/api_store.dart';
 import 'providers/homepage_config_provider.dart';
@@ -244,6 +245,42 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Show app update dialog, release notes dialog, and notification permission dialog if needed
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // Check if Microsoft re-authentication is needed (highest priority)
+      final apiStore = Provider.of<ApiStore>(context, listen: false);
+      if (apiStore.needsMicrosoftReAuth && apiStore.activeUserEmail != null) {
+        final email = apiStore.activeUserEmail!;
+        logInfo('Opening Microsoft re-authentication for expired token', source: 'MyHomePage');
+
+        if (mounted) {
+          final result = await Navigator.of(context).push<bool>(
+            MaterialPageRoute(
+              builder: (ctx) => MicrosoftAuthPage(
+                apiBaseUrl: apiBaseUrl,
+                existingUserEmail: email,
+                onAuthSuccess: (accessToken, refreshToken, userEmail) async {
+                  // Update the user's tokens
+                  await apiStore.updateMicrosoftUserTokens(accessToken, refreshToken);
+
+                  // Fetch all data after successful re-authentication
+                  await apiStore.fetchAll(forceRefresh: true);
+                },
+              ),
+            ),
+          );
+
+          if (result != true && mounted) {
+            // User cancelled re-authentication
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Re-authentication cancelled. Some features may not work.'),
+                duration: Duration(seconds: 3),
+              ),
+            );
+          }
+        }
+        return; // Exit early after handling re-authentication
+      }
+
       // Check for app updates first (higher priority)
       await AppUpdateDialog.showIfAvailable(context);
 
@@ -301,6 +338,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
+    final apiStore = Provider.of<ApiStore>(context);
 
     // 4. A list of pages is created to be indexed
     final List<Widget> pages = [
@@ -373,7 +411,43 @@ class _MyHomePageState extends State<MyHomePage> {
         ] : null,
       ),
       // 5. PageView is replaced with animated page transitions
-      body: AnimatedSwitcher(
+      body: Column(
+        children: [
+          // Offline mode indicator
+          if (apiStore.isOfflineMode)
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.orange.withValues(alpha: 0.1),
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.orange.withValues(alpha: 0.3),
+                    width: 1,
+                  ),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.cloud_off,
+                    size: 16,
+                    color: Colors.orange[700],
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Offline Mode - Using cached data',
+                    style: TextStyle(
+                      color: Colors.orange[700],
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          Expanded(
+            child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 200),
         switchInCurve: Curves.easeIn,
         switchOutCurve: Curves.easeOut,
@@ -395,6 +469,9 @@ class _MyHomePageState extends State<MyHomePage> {
           key: ValueKey(_selectedIndex),
           child: pages[_selectedIndex],
         ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: Builder(
         builder: (context) {
@@ -458,6 +535,8 @@ class _SplashScreenState extends State<SplashScreen> {
   bool _isAuthenticated = false;
   bool _hasStartedInit = false;
 
+  bool _isOfflineMode = false;
+
   @override
   void initState() {
     super.initState();
@@ -474,69 +553,66 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _initializeApp() async {
     final apiStore = Provider.of<ApiStore>(context, listen: false);
+    final localizations = AppLocalizations.of(context)!;
 
-    // Step 1: App info and authentication
+    // Step 1: Check connection and initialize
     if (mounted) {
       setState(() {
-        _currentStepText = AppLocalizations.of(context)!.fetchingAppInfo;
+        _currentStepText = localizations.checkingConnection;
       });
     }
 
     await Future.delayed(const Duration(milliseconds: 100));
     if (!mounted) return;
 
-    // Check if user is authenticated
+    // Initialize will check connectivity and load data accordingly
     await apiStore.initialize();
     _isAuthenticated = apiStore.userEmails.isNotEmpty;
+    _isOfflineMode = apiStore.isOfflineMode;
 
-    await Future.delayed(const Duration(milliseconds: 100));
-    if (!mounted) return;
-
-    // Step 2: Check for updates
-    if (mounted) {
+    // Show offline mode message if detected
+    if (_isOfflineMode && mounted) {
       setState(() {
-        _currentStepText = AppLocalizations.of(context)!.checkingUpdatesInitialization;
+        _currentStepText = localizations.offlineModeDetected;
       });
+      await Future.delayed(const Duration(milliseconds: 800));
+      if (!mounted) return;
     }
 
-    await Future.delayed(const Duration(milliseconds: 100));
-    if (!mounted) return;
+    // Step 2: Skip update check if offline
+    if (!_isOfflineMode) {
+      if (mounted) {
+        setState(() {
+          _currentStepText = localizations.checkingUpdatesInitialization;
+        });
+      }
 
-    try {
-      await UpdateService.checkForUpdates();
-    } catch (e) {
-      // Ignore errors, continue to next step
-    }
+      await Future.delayed(const Duration(milliseconds: 100));
+      if (!mounted) return;
 
-    await Future.delayed(const Duration(milliseconds: 100));
-    if (!mounted) return;
-
-    // Step 3: Load user data
-    if (mounted) {
-      setState(() {
-        _currentStepText = AppLocalizations.of(context)!.loadingData;
-      });
-    }
-
-    await Future.delayed(const Duration(milliseconds: 100));
-    if (!mounted) return;
-
-    // Trigger fetchAll if user is authenticated
-    if (_isAuthenticated && apiStore.activeUserEmail != null) {
       try {
-        await apiStore.fetchAll();
+        await UpdateService.checkForUpdates();
       } catch (e) {
         // Ignore errors, continue to next step
       }
     }
 
-    await Future.delayed(const Duration(milliseconds: 100));
+    // Step 3: Show appropriate loading message
+    if (mounted) {
+      setState(() {
+        _currentStepText = _isOfflineMode
+            ? localizations.loadingCachedData
+            : localizations.loadingData;
+      });
+    }
+
+    await Future.delayed(const Duration(milliseconds: 300));
     if (!mounted) return;
 
     // Step 4: Finalizing
     if (mounted) {
       setState(() {
-        _currentStepText = AppLocalizations.of(context)!.finalizingInitialization;
+        _currentStepText = localizations.finalizingInitialization;
       });
     }
 
@@ -544,7 +620,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // Mark initialization as complete
     if (mounted) {
-
       // Call the completion callback after a brief delay
       Future.delayed(const Duration(milliseconds: 100), () {
         if (mounted && widget.onComplete != null) {
@@ -582,27 +657,51 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 24),
 
-            SizedBox(
-              width: 32,
-              height: 32,
-              child: CircularProgressIndicator(
-                strokeWidth: 3,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  Theme.of(context).colorScheme.primary,
+            // Show offline indicator or loading spinner
+            if (_isOfflineMode)
+              Icon(
+                Icons.cloud_off,
+                size: 32,
+                color: Colors.orange[700],
+              )
+            else
+              SizedBox(
+                width: 32,
+                height: 32,
+                child: CircularProgressIndicator(
+                  strokeWidth: 3,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ),
-            ),
             const SizedBox(height: 16),
 
             // Current step text
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Text(
-                _currentStepText,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
-                ),
+              child: Column(
+                children: [
+                  Text(
+                    _currentStepText,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: _isOfflineMode
+                          ? Colors.orange[700]
+                          : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                    ),
+                  ),
+                  if (_isOfflineMode) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      'No internet connection',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Colors.orange[600],
+                      ),
+                    ),
+                  ],
+                ],
               ),
             ),
           ],

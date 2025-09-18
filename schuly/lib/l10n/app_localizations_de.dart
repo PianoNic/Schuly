@@ -1141,6 +1141,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get finalizingInitialization => 'Initialisierung abschließen...';
 
   @override
+  String get checkingConnection => 'Checking connection...';
+
+  @override
+  String get offlineModeDetected => 'Offline mode - using cached data';
+
+  @override
+  String get loadingCachedData => 'Loading cached data...';
+
+  @override
   String errorCheckingUpdatesDetails(Object error) {
     return 'Fehler beim Suchen nach Updates: $error';
   }

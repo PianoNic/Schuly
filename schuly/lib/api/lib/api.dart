@@ -38,16 +38,23 @@ part 'model/absence_notice_dto.dart';
 part 'model/absence_notice_status_dto.dart';
 part 'model/agenda_dto.dart';
 part 'model/app_info_dto.dart';
+part 'model/authenticate_mobile_response_dto.dart';
+part 'model/authenticate_request_dto.dart';
 part 'model/class_info_dto.dart';
 part 'model/exam_dto.dart';
 part 'model/examination_groups_dto.dart';
 part 'model/grade_dto.dart';
 part 'model/http_validation_error.dart';
 part 'model/lateness_dto.dart';
+part 'model/mobile_callback_request_dto.dart';
+part 'model/mobile_callback_response_dto.dart';
+part 'model/mobile_o_auth_url_response_dto.dart';
 part 'model/setting_dto.dart';
 part 'model/student_id_card_dto.dart';
 part 'model/user_info_dto.dart';
 part 'model/validation_error.dart';
+part 'model/web_callback_request_dto.dart';
+part 'model/web_callback_response_dto.dart';
 
 
 /// An [ApiClient] instance that uses the default values obtained from

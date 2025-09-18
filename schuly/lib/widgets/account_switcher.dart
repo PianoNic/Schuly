@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/api_store.dart';
+import '../pages/microsoft_auth_page.dart';
+import '../main.dart';
 import '../l10n/app_localizations.dart';
 
 class AccountSwitcher extends StatefulWidget {
@@ -20,96 +22,96 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
     final users = apiStore.userEmails;
     final activeEmail = apiStore.activeUserEmail;
 
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.85,
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: 20,
-          right: 20,
-          top: 20,
-          bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+    return SafeArea(
+      child: Container(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.85,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Handle indicator
-            Container(
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // Header
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    AppLocalizations.of(context)!.switchAccount,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Handle indicator
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+                  borderRadius: BorderRadius.circular(2),
                 ),
-                if (users.length > 1)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+              ),
+              const SizedBox(height: 16),
+
+              // Header
+              Row(
+                children: [
+                  Expanded(
                     child: Text(
-                      AppLocalizations.of(context)!.accountCount(users.length),
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                        fontWeight: FontWeight.w500,
+                      AppLocalizations.of(context)!.switchAccount,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            // Account list
-            if (users.isEmpty)
-              _buildEmptyState()
-            else
-              Flexible(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: users.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: 12),
-                  itemBuilder: (context, index) {
-                    final email = users[index];
-                    return _buildAccountCard(context, apiStore, email, activeEmail);
-                  },
-                ),
+                  if (users.length > 1)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        AppLocalizations.of(context)!.accountCount(users.length),
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimaryContainer,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                ],
               ),
+              const SizedBox(height: 20),
 
-            const SizedBox(height: 20),
+              // Account list
+              if (users.isEmpty)
+                _buildEmptyState()
+              else
+                Flexible(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: users.length,
+                    separatorBuilder: (context, index) => const SizedBox(height: 12),
+                    itemBuilder: (context, index) {
+                      final email = users[index];
+                      return _buildAccountCard(context, apiStore, email, activeEmail);
+                    },
+                  ),
+                ),
 
-            // Add account button
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton.icon(
-                onPressed: () => _showAddAccountDialog(context, apiStore),
-                icon: const Icon(Icons.add),
-                label: Text(AppLocalizations.of(context)!.addAccount),
-                style: FilledButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+              const SizedBox(height: 20),
+
+              // Add account button
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  onPressed: () => _showAddAccountDialog(context, apiStore),
+                  icon: const Icon(Icons.add),
+                  label: Text(AppLocalizations.of(context)!.addAccount),
+                  style: FilledButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 8),
-          ],
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
@@ -150,6 +152,10 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
     final isActive = email == activeEmail;
     final isSwitching = _switchingToEmail == email;
     final isRemoving = _removingEmail == email;
+
+    // Get user data to check authentication type
+    final userData = apiStore.users[email];
+    final isMicrosoftAuth = userData?['is_microsoft_auth'] == true;
 
     return Material(
       borderRadius: BorderRadius.circular(16),
@@ -261,6 +267,42 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                             color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
+                      const SizedBox(width: 8),
+                      // Authentication type badge
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: isMicrosoftAuth
+                            ? Colors.blue.withValues(alpha: 0.2)
+                            : Colors.grey.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(
+                            color: isMicrosoftAuth
+                              ? Colors.blue.withValues(alpha: 0.5)
+                              : Colors.grey.withValues(alpha: 0.5),
+                            width: 1,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              isMicrosoftAuth ? Icons.verified_user : Icons.key,
+                              size: 12,
+                              color: isMicrosoftAuth ? Colors.blue : Colors.grey,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              isMicrosoftAuth ? 'Microsoft' : 'Password',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: isMicrosoftAuth ? Colors.blue : Colors.grey,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -501,6 +543,66 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                           _addAccount(setState, apiStore, emailController.text.trim(), passwordController.text, formKey, setLoading);
                         }
                       },
+                    ),
+                    const SizedBox(height: 16),
+                    const Row(
+                      children: [
+                        Expanded(child: Divider()),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text('OR'),
+                        ),
+                        Expanded(child: Divider()),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton.icon(
+                        onPressed: isLoading ? null : () async {
+                          // Navigate to Microsoft auth page
+                          if (context.mounted) {
+                            final result = await Navigator.of(context).push<bool>(
+                              MaterialPageRoute(
+                                builder: (ctx) => MicrosoftAuthPage(
+                                  apiBaseUrl: apiBaseUrl,
+                                  existingUserEmail: null, // New account
+                                  onAuthSuccess: (token, refreshToken, email) async {
+                                    // Add the Microsoft user with tokens
+                                    final error = await apiStore.addMicrosoftUser(token, refreshToken);
+
+                                    // Fetch user data
+                                    await apiStore.fetchAll();
+                                  },
+                                ),
+                              ),
+                            );
+
+                            if (result == true && context.mounted) {
+                              Navigator.of(context).pop();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(AppLocalizations.of(context)!.accountAdded),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        icon: Image.network(
+                          'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
+                          width: 20,
+                          height: 20,
+                          errorBuilder: (context, error, stackTrace) => const Icon(Icons.business, size: 20),
+                        ),
+                        label: const Text('Sign in with Microsoft'),
+                      ),
                     ),
                   ],
                 ),

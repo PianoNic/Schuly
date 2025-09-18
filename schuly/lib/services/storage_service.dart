@@ -11,6 +11,7 @@ class StorageService {
   static const String _notificationAdvanceMinutesKey = 'notification_advance_minutes';
   static const String _notificationTypePrefix = 'notification_enabled_';
   static const String _languageKey = 'selected_language';
+  static const String _userCookiesPrefix = 'user_cookies_';
 
   // Cache keys for API data
   static const String _cachePrefix = 'cache_';
@@ -230,5 +231,28 @@ class StorageService {
 
   static Future<void> setHasShownPermissionDialog(bool shown) async {
     await _storage.write(key: _hasShownPermissionDialogKey, value: shown.toString());
+  }
+
+  // Cookie management for Microsoft OAuth sessions
+  static Future<void> saveUserCookies(String email, List<Map<String, dynamic>> cookies) async {
+    final key = '$_userCookiesPrefix$email';
+    await _storage.write(key: key, value: jsonEncode(cookies));
+  }
+
+  static Future<List<Map<String, dynamic>>?> getUserCookies(String email) async {
+    final key = '$_userCookiesPrefix$email';
+    final cookiesJson = await _storage.read(key: key);
+    if (cookiesJson != null) {
+      final decoded = jsonDecode(cookiesJson);
+      if (decoded is List) {
+        return decoded.cast<Map<String, dynamic>>();
+      }
+    }
+    return null;
+  }
+
+  static Future<void> clearUserCookies(String email) async {
+    final key = '$_userCookiesPrefix$email';
+    await _storage.delete(key: key);
   }
 }

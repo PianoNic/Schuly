@@ -62,6 +62,10 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AppApi* | [**appAppInfo**](doc//AppApi.md#appappinfo) | **GET** /api/app/app-info | App Info
 *AuthApi* | [**authenticateMobile**](doc//AuthApi.md#authenticatemobile) | **POST** /api/authenticate/mobile | Authenticate Mobile Api
+*AuthApi* | [**authenticateOauthMobileCallback**](doc//AuthApi.md#authenticateoauthmobilecallback) | **POST** /api/authenticate/oauth/mobile/callback | Mobile Oauth Callback
+*AuthApi* | [**authenticateOauthMobileUrl**](doc//AuthApi.md#authenticateoauthmobileurl) | **GET** /api/authenticate/oauth/mobile/url | Generate Mobile Oauth Url
+*AuthApi* | [**authenticateOauthWebCallback**](doc//AuthApi.md#authenticateoauthwebcallback) | **POST** /api/authenticate/oauth/web/callback | Web Oauth Callback
+*AuthApi* | [**authenticateOauthWebUrl**](doc//AuthApi.md#authenticateoauthweburl) | **GET** /api/authenticate/oauth/web/url | Generate Web Oauth Url
 *AuthApi* | [**authenticateUnified**](doc//AuthApi.md#authenticateunified) | **POST** /api/authenticate/unified | Authenticate Unified Api
 *AuthApi* | [**authenticateWeb**](doc//AuthApi.md#authenticateweb) | **POST** /api/authenticate/web | Authenticate Web Interface
 *MobileProxyApi* | [**mobileAbsencenotices**](doc//MobileProxyApi.md#mobileabsencenotices) | **GET** /api/mobile/absencenotices | Get Mobile Absence Notices
@@ -90,16 +94,23 @@ Class | Method | HTTP request | Description
  - [AbsenceNoticeStatusDto](doc//AbsenceNoticeStatusDto.md)
  - [AgendaDto](doc//AgendaDto.md)
  - [AppInfoDto](doc//AppInfoDto.md)
+ - [AuthenticateMobileResponseDto](doc//AuthenticateMobileResponseDto.md)
+ - [AuthenticateRequestDto](doc//AuthenticateRequestDto.md)
  - [ClassInfoDto](doc//ClassInfoDto.md)
  - [ExamDto](doc//ExamDto.md)
  - [ExaminationGroupsDto](doc//ExaminationGroupsDto.md)
  - [GradeDto](doc//GradeDto.md)
  - [HTTPValidationError](doc//HTTPValidationError.md)
  - [LatenessDto](doc//LatenessDto.md)
+ - [MobileCallbackRequestDto](doc//MobileCallbackRequestDto.md)
+ - [MobileCallbackResponseDto](doc//MobileCallbackResponseDto.md)
+ - [MobileOAuthUrlResponseDto](doc//MobileOAuthUrlResponseDto.md)
  - [SettingDto](doc//SettingDto.md)
  - [StudentIdCardDto](doc//StudentIdCardDto.md)
  - [UserInfoDto](doc//UserInfoDto.md)
  - [ValidationError](doc//ValidationError.md)
+ - [WebCallbackRequestDto](doc//WebCallbackRequestDto.md)
+ - [WebCallbackResponseDto](doc//WebCallbackResponseDto.md)
 
 
 ## Documentation For Authorization

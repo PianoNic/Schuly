@@ -1187,4 +1187,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get checkPermissions => 'Check Permissions';
+
+  @override
+  String get relatedNotices => 'Related Notices';
+
+  @override
+  String get exam => 'Exam';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get studentReason => 'Student Reason';
+
+  @override
+  String get trainerComment => 'Trainer Comment';
+
+  @override
+  String get unexcusedAbsences => 'Unexcused Absences';
 }

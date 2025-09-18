@@ -34,6 +34,7 @@ part 'api/mobile_proxy_api.dart';
 part 'api/web_api_api.dart';
 
 part 'model/absence_dto.dart';
+part 'model/absence_notice_dto.dart';
 part 'model/absence_notice_status_dto.dart';
 part 'model/agenda_dto.dart';
 part 'model/app_info_dto.dart';

@@ -184,6 +184,8 @@ class ApiClient {
           return value is DateTime ? value : DateTime.tryParse(value);
         case 'AbsenceDto':
           return AbsenceDto.fromJson(value);
+        case 'AbsenceNoticeDto':
+          return AbsenceNoticeDto.fromJson(value);
         case 'AbsenceNoticeStatusDto':
           return AbsenceNoticeStatusDto.fromJson(value);
         case 'AgendaDto':

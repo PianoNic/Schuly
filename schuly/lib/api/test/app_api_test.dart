@@ -19,7 +19,7 @@ void main() {
   group('tests for AppApi', () {
     // App Info
     //
-    //Future<Object> appAppInfo() async
+    //Future<AppInfoDto> appAppInfo() async
     test('test appAppInfo', () async {
       // TODO
     });

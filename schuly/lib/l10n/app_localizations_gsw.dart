@@ -1191,4 +1191,25 @@ class AppLocalizationsGsw extends AppLocalizations {
 
   @override
   String get checkPermissions => 'Berechtigunge prüefe';
+
+  @override
+  String get relatedNotices => 'Zugehörigi Meldig';
+
+  @override
+  String get exam => 'Prüefig';
+
+  @override
+  String get date => 'Datum';
+
+  @override
+  String get time => 'Ziit';
+
+  @override
+  String get studentReason => 'Begründig vom Schüeler';
+
+  @override
+  String get trainerComment => 'Kommentar vom Lehrer';
+
+  @override
+  String get unexcusedAbsences => 'Unentschuldigti Absänze';
 }

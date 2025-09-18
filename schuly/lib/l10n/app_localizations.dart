@@ -2299,6 +2299,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check Permissions'**
   String get checkPermissions;
+
+  /// Header for absence notices related to an absence
+  ///
+  /// In en, this message translates to:
+  /// **'Related Notices'**
+  String get relatedNotices;
+
+  /// Label for exam lessons
+  ///
+  /// In en, this message translates to:
+  /// **'Exam'**
+  String get exam;
+
+  /// Date label
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// Time label
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// Label for student's reason for absence
+  ///
+  /// In en, this message translates to:
+  /// **'Student Reason'**
+  String get studentReason;
+
+  /// Label for trainer's comment on absence
+  ///
+  /// In en, this message translates to:
+  /// **'Trainer Comment'**
+  String get trainerComment;
+
+  /// Header for unexcused absences section
+  ///
+  /// In en, this message translates to:
+  /// **'Unexcused Absences'**
+  String get unexcusedAbsences;
 }
 
 class _AppLocalizationsDelegate

@@ -634,5 +634,14 @@
   "getColorName": "Get cowow name ✨",
   "@getColorName": {
     "description": "Get the name of a cowow"
-  }
+  },
+
+  "relatedNotices": "Wewated Notices UwU",
+  "exam": "Exam owo",
+  "date": "Date (๑•ᴗ•๑)",
+  "time": "Time ⏰",
+  "studentReason": "Student Weason (´･ω･`)",
+  "trainerComment": "Twainew Comment ✨",
+
+  "unexcusedAbsences": "Unexcused Absences (｡•́︿•̀｡)"
 }

@@ -21,11 +21,11 @@ class GradeDto {
     required this.subjectToken,
     required this.title,
     required this.date,
-    required this.mark,
+    this.mark,
     this.points,
     required this.weight,
     required this.isConfirmed,
-    required this.courseGrade,
+    this.courseGrade,
     required this.examinationGroups,
     this.studentId,
     this.studentName,
@@ -53,7 +53,7 @@ class GradeDto {
 
   String? points;
 
-  String? weight;
+  String weight;
 
   bool isConfirmed;
 
@@ -101,11 +101,11 @@ class GradeDto {
     (subjectToken.hashCode) +
     (title.hashCode) +
     (date.hashCode) +
-    (mark.hashCode) +
+    (mark == null ? 0 : mark!.hashCode) +
     (points == null ? 0 : points!.hashCode) +
     (weight.hashCode) +
     (isConfirmed.hashCode) +
-    (courseGrade.hashCode) +
+    (courseGrade == null ? 0 : courseGrade!.hashCode) +
     (examinationGroups.hashCode) +
     (studentId == null ? 0 : studentId!.hashCode) +
     (studentName == null ? 0 : studentName!.hashCode) +
@@ -125,7 +125,11 @@ class GradeDto {
       json[r'subjectToken'] = this.subjectToken;
       json[r'title'] = this.title;
       json[r'date'] = this.date;
+    if (this.mark != null) {
       json[r'mark'] = this.mark;
+    } else {
+      json[r'mark'] = null;
+    }
     if (this.points != null) {
       json[r'points'] = this.points;
     } else {
@@ -133,7 +137,11 @@ class GradeDto {
     }
       json[r'weight'] = this.weight;
       json[r'isConfirmed'] = this.isConfirmed;
+    if (this.courseGrade != null) {
       json[r'courseGrade'] = this.courseGrade;
+    } else {
+      json[r'courseGrade'] = null;
+    }
       json[r'examinationGroups'] = this.examinationGroups;
     if (this.studentId != null) {
       json[r'studentId'] = this.studentId;
@@ -181,11 +189,11 @@ class GradeDto {
         subjectToken: mapValueOfType<String>(json, r'subjectToken')!,
         title: mapValueOfType<String>(json, r'title')!,
         date: mapValueOfType<String>(json, r'date')!,
-        mark: mapValueOfType<String>(json, r'mark') ?? '',
+        mark: mapValueOfType<String>(json, r'mark'),
         points: mapValueOfType<String>(json, r'points'),
-        weight: mapValueOfType<String>(json, r'weight') ?? '1',
+        weight: mapValueOfType<String>(json, r'weight')!,
         isConfirmed: mapValueOfType<bool>(json, r'isConfirmed')!,
-        courseGrade: mapValueOfType<String>(json, r'courseGrade') ?? '',
+        courseGrade: mapValueOfType<String>(json, r'courseGrade'),
         examinationGroups: ExaminationGroupsDto.fromJson(json[r'examinationGroups'])!,
         studentId: mapValueOfType<String>(json, r'studentId'),
         studentName: mapValueOfType<String>(json, r'studentName'),
@@ -246,10 +254,8 @@ class GradeDto {
     'subjectToken',
     'title',
     'date',
-    // 'mark', // Made optional as temporary fix
-    // 'weight', // Made optional as temporary fix
+    'weight',
     'isConfirmed',
-    // 'courseGrade', // Made optional as temporary fix
     'examinationGroups',
     'inputType',
   };

@@ -42,6 +42,20 @@ class ApiStore extends ChangeNotifier {
   UserInfoDto? userInfo;
   Map<String, dynamic>? appInfo;
 
+  // Selected absence ID for navigation
+  String? _selectedAbsenceId;
+  String? get selectedAbsenceId => _selectedAbsenceId;
+
+  void setSelectedAbsenceId(String? id) {
+    _selectedAbsenceId = id;
+    notifyListeners();
+  }
+
+  void clearSelectedAbsenceId() {
+    _selectedAbsenceId = null;
+    notifyListeners();
+  }
+
   // In-memory user map: email -> {email, password, access_token, refresh_token, expires_at}
   Map<String, Map<String, dynamic>> _users = {};
   String? _activeUserEmail;

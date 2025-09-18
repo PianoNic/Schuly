@@ -222,10 +222,6 @@ class ApiClient {
           return UserInfoDto.fromJson(value);
         case 'ValidationError':
           return ValidationError.fromJson(value);
-        case 'WebCallbackRequestDto':
-          return WebCallbackRequestDto.fromJson(value);
-        case 'WebCallbackResponseDto':
-          return WebCallbackResponseDto.fromJson(value);
         default:
           dynamic match;
           if (value is List && (match = _regList.firstMatch(targetType)?.group(1)) != null) {

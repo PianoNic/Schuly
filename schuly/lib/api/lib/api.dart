@@ -53,8 +53,6 @@ part 'model/setting_dto.dart';
 part 'model/student_id_card_dto.dart';
 part 'model/user_info_dto.dart';
 part 'model/validation_error.dart';
-part 'model/web_callback_request_dto.dart';
-part 'model/web_callback_response_dto.dart';
 
 
 /// An [ApiClient] instance that uses the default values obtained from

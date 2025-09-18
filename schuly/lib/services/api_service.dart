@@ -6,11 +6,19 @@ class ApiService {
   MobileProxyApi get _mobileApi => MobileProxyApi();
 
   Future<http.Response> authenticateWithResponse(String email, String password) {
-    return _authApi.authenticateMobileWithHttpInfo(email, password).timeout(Duration(minutes: 1));
+    final request = AuthenticateRequestDto(
+      email: email,
+      password: password,
+    );
+    return _authApi.authenticateMobileWithHttpInfo(request).timeout(Duration(minutes: 1));
   }
 
-  Future<Object?> authenticate(String email, String password) {
-    return _authApi.authenticateMobile(email, password);
+  Future<AuthenticateMobileResponseDto?> authenticate(String email, String password) {
+    final request = AuthenticateRequestDto(
+      email: email,
+      password: password,
+    );
+    return _authApi.authenticateMobile(request);
   }
 
   Future<List<AbsenceDto>?> getAbsences() {

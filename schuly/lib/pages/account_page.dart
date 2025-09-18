@@ -10,6 +10,8 @@ import '../utils/url_launcher_helper.dart';
 import 'app_settings_page.dart';
 import 'student_card_page.dart';
 import 'logs_viewer_page.dart';
+import 'microsoft_auth_page.dart';
+import '../main.dart';
 import '../l10n/app_localizations.dart';
 
 class AccountPage extends StatelessWidget {
@@ -95,7 +97,7 @@ class AccountPage extends StatelessWidget {
 
     return RefreshIndicator(
       onRefresh: () async {
-        await apiStore.fetchUserInfo();
+        await apiStore.fetchUserInfo(forceRefresh: true);
       },
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -106,6 +108,7 @@ class AccountPage extends StatelessWidget {
               ProfileHeader(
                 name: '${userInfo.firstName} ${userInfo.lastName}',
                 email: userInfo.email,
+                isMicrosoftAuth: apiStore.activeUser?['is_microsoft_auth'] == true,
                 onStudentCardPressed: () => _showStudentCard(context),
                 onSwitchAccountPressed: () => _showAccountSwitcher(context),
               ),
@@ -256,19 +259,46 @@ class AccountPage extends StatelessWidget {
                         final email = apiStore.activeUserEmail;
                         final user = apiStore.activeUser;
                         if (email != null && user != null) {
-                          final ok = await apiStore.addUser(
-                            email,
-                            user['password'],
-                          );
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(ok ?? localizations.tokenUpdated),
-                                backgroundColor: ok == null
-                                    ? Colors.green
-                                    : Colors.red,
+                          // Check if this is a Microsoft-authenticated user
+                          if (user['is_microsoft_auth'] == true) {
+                            // Re-authenticate with Microsoft using the fixed cookie storage
+                            final result = await Navigator.of(context).push<bool>(
+                              MaterialPageRoute(
+                                builder: (ctx) => MicrosoftAuthPage(
+                                  apiBaseUrl: apiBaseUrl,
+                                  existingUserEmail: email, // This will restore cookies
+                                  onAuthSuccess: (token, refreshToken, userEmail) async {
+                                    // Update the user's tokens
+                                    await apiStore.addMicrosoftUser(token, refreshToken, email);
+                                    await apiStore.fetchAll();
+                                  },
+                                ),
                               ),
                             );
+                            if (result == true && context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(localizations.tokenUpdated),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                            }
+                          } else {
+                            // Traditional email/password re-authentication
+                            final ok = await apiStore.addUser(
+                              email,
+                              user['password'],
+                            );
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(ok ?? localizations.tokenUpdated),
+                                  backgroundColor: ok == null
+                                      ? Colors.green
+                                      : Colors.red,
+                                ),
+                              );
+                            }
                           }
                         } else {
                           if (context.mounted) {
@@ -381,6 +411,61 @@ class AccountPage extends StatelessWidget {
                         validator: (v) => v == null || v.isEmpty
                             ? localizations.enterPassword
                             : null,
+                      ),
+                      const SizedBox(height: 16),
+                      const Row(
+                        children: [
+                          Expanded(child: Divider()),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text('OR'),
+                          ),
+                          Expanded(child: Divider()),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton.icon(
+                          onPressed: isLoading ? null : () async {
+
+                            // Navigate to Microsoft auth page
+                            if (context.mounted) {
+                              final result = await Navigator.of(context).push<bool>(
+                                MaterialPageRoute(
+                                  builder: (ctx) => MicrosoftAuthPage(
+                                    apiBaseUrl: apiBaseUrl,
+                                    existingUserEmail: null, // New account
+                                    onAuthSuccess: (token, refreshToken, email) async {
+                                      // Add the Microsoft user with tokens
+                                      final error = await apiStore.addMicrosoftUser(token, refreshToken);
+
+                                      // Fetch user data
+                                      await apiStore.fetchAll();
+                                    },
+                                  ),
+                                ),
+                              );
+
+                              if (result == true && context.mounted) {
+                                Navigator.of(context).pop();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(localizations.accountAdded),
+                                    backgroundColor: Colors.green,
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                          icon: Image.network(
+                            'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
+                            width: 20,
+                            height: 20,
+                            errorBuilder: (context, error, stackTrace) => const Icon(Icons.business, size: 20),
+                          ),
+                          label: const Text('Sign in with Microsoft'),
+                        ),
                       ),
                     ],
                   ),

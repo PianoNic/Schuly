@@ -309,7 +309,12 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
 
                 return ListView.builder(
                   controller: _scrollController,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.only(
+                    top: 8,
+                    bottom: MediaQuery.of(context).padding.bottom + 8,
+                    left: 0,
+                    right: 0,
+                  ),
                   itemCount: filteredLogs.length,
                   itemBuilder: (context, index) {
                     final log = filteredLogs[index];

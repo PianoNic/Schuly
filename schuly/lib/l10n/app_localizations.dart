@@ -2192,6 +2192,24 @@ abstract class AppLocalizations {
   /// **'Finalizing initialization...'**
   String get finalizingInitialization;
 
+  /// Message shown when checking API connection
+  ///
+  /// In en, this message translates to:
+  /// **'Checking connection...'**
+  String get checkingConnection;
+
+  /// Message shown when offline mode is detected
+  ///
+  /// In en, this message translates to:
+  /// **'Offline mode - using cached data'**
+  String get offlineModeDetected;
+
+  /// Message shown when loading cached data in offline mode
+  ///
+  /// In en, this message translates to:
+  /// **'Loading cached data...'**
+  String get loadingCachedData;
+
   /// Detailed error message for update check failure
   ///
   /// In en, this message translates to:

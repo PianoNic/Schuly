@@ -28,7 +28,7 @@ class NotesPage extends StatelessWidget {
         }
         return RefreshIndicator(
           onRefresh: () async {
-            await apiStore.fetchGrades();
+            await apiStore.fetchGrades(forceRefresh: true);
           },
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),

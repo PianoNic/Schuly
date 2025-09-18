@@ -1125,6 +1125,15 @@ class AppLocalizationsKaw extends AppLocalizations {
       'Finalizing initialization... ✨(๑•ᴗ•๑)✨';
 
   @override
+  String get checkingConnection => 'Checking connection...';
+
+  @override
+  String get offlineModeDetected => 'Offline mode - using cached data';
+
+  @override
+  String get loadingCachedData => 'Loading cached data...';
+
+  @override
   String errorCheckingUpdatesDetails(Object error) {
     return 'Ouchie! Ewwow checking fow updates: $error';
   }

@@ -1,1 +1,25 @@
-{}
+{
+  "arr": [
+    "checkingConnection",
+    "offlineModeDetected",
+    "loadingCachedData"
+  ],
+
+  "de": [
+    "checkingConnection",
+    "offlineModeDetected",
+    "loadingCachedData"
+  ],
+
+  "gsw": [
+    "checkingConnection",
+    "offlineModeDetected",
+    "loadingCachedData"
+  ],
+
+  "kaw": [
+    "checkingConnection",
+    "offlineModeDetected",
+    "loadingCachedData"
+  ]
+}

@@ -1464,6 +1464,21 @@
     "description": "Loading message during app startup finalization"
   },
 
+  "checkingConnection": "Checking connection...",
+  "@checkingConnection": {
+    "description": "Message shown when checking API connection"
+  },
+
+  "offlineModeDetected": "Offline mode - using cached data",
+  "@offlineModeDetected": {
+    "description": "Message shown when offline mode is detected"
+  },
+
+  "loadingCachedData": "Loading cached data...",
+  "@loadingCachedData": {
+    "description": "Message shown when loading cached data in offline mode"
+  },
+
   "errorCheckingUpdatesDetails": "Error checking for updates: {error}",
   "@errorCheckingUpdatesDetails": {
     "description": "Detailed error message for update check failure",

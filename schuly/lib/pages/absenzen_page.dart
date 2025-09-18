@@ -167,9 +167,9 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
       onRefresh: () async {
         final apiStore = Provider.of<ApiStore>(context, listen: false);
         await Future.wait([
-          apiStore.fetchAbsences(),
-          apiStore.fetchLateness(),
-          apiStore.fetchAbsenceNotices(),
+          apiStore.fetchAbsences(forceRefresh: true),
+          apiStore.fetchLateness(forceRefresh: true),
+          apiStore.fetchAbsenceNotices(forceRefresh: true),
         ]);
       },
       child: Consumer<ApiStore>(
@@ -274,7 +274,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
   Widget _buildLatenessTab(AppLocalizations localizations) {
     return RefreshIndicator(
       onRefresh: () async {
-        await Provider.of<ApiStore>(context, listen: false).fetchLateness();
+        await Provider.of<ApiStore>(context, listen: false).fetchLateness(forceRefresh: true);
       },
       child: Consumer<ApiStore>(
         builder: (context, apiStore, _) {
@@ -301,7 +301,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
   Widget _buildAbsencesTab(AppLocalizations localizations) {
     return RefreshIndicator(
       onRefresh: () async {
-        await Provider.of<ApiStore>(context, listen: false).fetchAbsences();
+        await Provider.of<ApiStore>(context, listen: false).fetchAbsences(forceRefresh: true);
       },
       child: Consumer<ApiStore>(
         builder: (context, apiStore, _) {

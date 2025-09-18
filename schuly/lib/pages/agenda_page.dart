@@ -36,7 +36,7 @@ class _AgendaPageState extends State<AgendaPage> {
         final agenda = apiStore.agenda;
         return RefreshIndicator(
           onRefresh: () async {
-            await apiStore.fetchAgenda();
+            await apiStore.fetchAgenda(forceRefresh: true);
           },
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),

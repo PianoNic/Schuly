@@ -6,6 +6,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:open_file/open_file.dart';
+import '../utils/logger.dart';
 
 class UpdateService {
   static const String _repoUrl = 'https://api.github.com/repos/PianoNic/Schuly/releases/latest';
@@ -48,7 +49,7 @@ class UpdateService {
         }
       }
     } catch (e) {
-      print('Error checking for updates: $e');
+      logError('Error checking for updates', source: 'UpdateService', error: e);
     }
     return null;
   }
@@ -101,7 +102,7 @@ class UpdateService {
 
       return filePath;
     } catch (e) {
-      print('Error downloading APK: $e');
+      logError('Error downloading APK', source: 'UpdateService', error: e);
       return null;
     }
   }
@@ -130,7 +131,7 @@ class UpdateService {
         return result.type == ResultType.done;
       }
     } catch (e) {
-      print('Error installing APK: $e');
+      logError('Error installing APK', source: 'UpdateService', error: e);
     }
     return false;
   }

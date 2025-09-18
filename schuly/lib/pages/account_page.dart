@@ -9,6 +9,7 @@ import '../providers/api_store.dart';
 import '../utils/url_launcher_helper.dart';
 import 'app_settings_page.dart';
 import 'student_card_page.dart';
+import 'logs_viewer_page.dart';
 import '../l10n/app_localizations.dart';
 
 class AccountPage extends StatelessWidget {
@@ -201,6 +202,20 @@ class AccountPage extends StatelessWidget {
                     ),
                     const Divider(),
                     ListTile(
+                      leading: const Icon(Icons.terminal),
+                      title: const Text('Console Logs'),
+                      subtitle: const Text('View app debug logs'),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const LogsViewerPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    const Divider(),
+                    ListTile(
                       leading: const Icon(Icons.help_outline),
                       title: Text(localizations.helpAndSupport),
                       subtitle: Text(localizations.getHelpAndSupport),
@@ -216,16 +231,6 @@ class AccountPage extends StatelessWidget {
                           ),
                           builder: (context) => const HelpSupportModal(),
                         );
-                      },
-                    ),
-                    const Divider(),
-                    ListTile(
-                      leading: Icon(Icons.coffee, color: Colors.amber.shade600),
-                      title: const Text('Buy me a coffee'),
-                      subtitle: const Text('Support the development'),
-                      trailing: const Icon(Icons.open_in_new),
-                      onTap: () {
-                        _launchBuyMeACoffee(context);
                       },
                     ),
                     const Divider(),
@@ -276,6 +281,16 @@ class AccountPage extends StatelessWidget {
                             );
                           }
                         }
+                      },
+                    ),
+                    const Divider(),
+                    ListTile(
+                      leading: Icon(Icons.coffee, color: Colors.amber.shade600),
+                      title: const Text('Buy me a coffee'),
+                      subtitle: const Text('Support the development'),
+                      trailing: const Icon(Icons.open_in_new),
+                      onTap: () {
+                        _launchBuyMeACoffee(context);
                       },
                     ),
                   ],

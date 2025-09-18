@@ -488,7 +488,7 @@ class PushNotificationService {
         for (final channel in channels) {
           debugPrint('📱 Channel: ${channel.id}');
           debugPrint('   - Name: ${channel.name}');
-          debugPrint('   - Importance: ${channel.importance?.name}');
+          debugPrint('   - Importance: ${channel.importance.name}');
           debugPrint('   - Sound: ${channel.sound?.sound}');
           debugPrint('   - Enable vibration: ${channel.enableVibration}');
           debugPrint('   - Show badge: ${channel.showBadge}');

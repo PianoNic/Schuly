@@ -1,0 +1,46 @@
+{
+  "arr": [
+    "getNotified",
+    "enableNotifications",
+    "notificationsEnabled",
+    "notificationPermissionDenied",
+    "scheduleTestNotification",
+    "testScheduledNotificationDesc",
+    "notificationScheduledIn15Seconds",
+    "errorSchedulingNotification",
+    "testNotificationSent",
+    "exactAlarmPermissionRequired",
+    "openSettings",
+    "getColorName"
+  ],
+
+  "gsw": [
+    "getNotified",
+    "enableNotifications",
+    "notificationsEnabled",
+    "notificationPermissionDenied",
+    "scheduleTestNotification",
+    "testScheduledNotificationDesc",
+    "notificationScheduledIn15Seconds",
+    "errorSchedulingNotification",
+    "testNotificationSent",
+    "exactAlarmPermissionRequired",
+    "openSettings",
+    "getColorName"
+  ],
+
+  "kaw": [
+    "getNotified",
+    "enableNotifications",
+    "notificationsEnabled",
+    "notificationPermissionDenied",
+    "scheduleTestNotification",
+    "testScheduledNotificationDesc",
+    "notificationScheduledIn15Seconds",
+    "errorSchedulingNotification",
+    "testNotificationSent",
+    "exactAlarmPermissionRequired",
+    "openSettings",
+    "getColorName"
+  ]
+}

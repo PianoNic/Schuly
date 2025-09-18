@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../services/storage_service.dart';
 import '../l10n/app_localizations.dart';
 
 class NotificationPermissionDialog extends StatefulWidget {
@@ -161,15 +160,15 @@ class _NotificationPermissionDialogState extends State<NotificationPermissionDia
               const SizedBox(height: 24),
 
               // Action buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              Wrap(
+                alignment: WrapAlignment.end,
+                spacing: 8,
                 children: [
                   if (!allGranted && widget.isStartupCheck)
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
                       child: Text(localizations.remindLater),
                     ),
-                  const SizedBox(width: 8),
                   FilledButton(
                     onPressed: () => Navigator.of(context).pop(),
                     child: Text(allGranted ? localizations.done : localizations.continueAnyway),

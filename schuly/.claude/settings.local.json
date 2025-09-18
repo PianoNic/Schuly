@@ -12,7 +12,8 @@
       "Bash(sed:*)",
       "Bash(grep:*)",
       "Bash(python:*)",
-      "Bash(nc localhost 58177)"
+      "Bash(nc localhost 58177)",
+      "Bash(/dev/null)"
     ],
     "deny": [],
     "ask": []

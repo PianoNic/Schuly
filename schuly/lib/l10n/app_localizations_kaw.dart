@@ -9,7 +9,7 @@ class AppLocalizationsKaw extends AppLocalizations {
   AppLocalizationsKaw([String locale = 'kaw']) : super(locale);
 
   @override
-  String get appTitle => 'Schuwly';
+  String get appTitle => 'Schuly';
 
   @override
   String get noAccountAdded => 'Nu fwiends added yet';
@@ -743,7 +743,7 @@ class AppLocalizationsKaw extends AppLocalizations {
   String get noNoticesFound => 'Nu notices found!';
 
   @override
-  String get minutes => 'min';
+  String get minutes => 'minutes UwU';
 
   @override
   String get hours => 'hr';
@@ -1102,59 +1102,59 @@ class AppLocalizationsKaw extends AppLocalizations {
   }
 
   @override
-  String get minute => 'minute';
+  String get minute => 'minute (>﹏<)';
 
   @override
-  String get beforeClass => 'before class';
+  String get beforeClass => 'befowe cwass ✨';
 
   @override
-  String get notificationPermissions => 'Notification Permissions';
+  String get notificationPermissions => 'Notif Pewmissions UwU';
 
   @override
   String get notificationPermissionsDescription =>
-      'To receive timely notifications about your classes, please grant the following permissions:';
+      'To weceive timely notifs about youw cwasses, pwease gwant the fowwowing pewmissions:';
 
   @override
-  String get notificationPermission => 'Notifications';
+  String get notificationPermission => 'Notifications ✨';
 
   @override
   String get notificationPermissionDesc =>
-      'Allow Schuly to send you notifications';
+      'Awwow Schuwly to send yu cute notifications';
 
   @override
-  String get exactAlarmPermission => 'Exact Alarms';
+  String get exactAlarmPermission => 'Exact Awarms';
 
   @override
   String get exactAlarmPermissionDesc =>
-      'Required for precise notification timing';
+      'Wequiwed fow pwecise notification timing owo';
 
   @override
   String get batteryOptimization => 'Battery Optimization';
 
   @override
   String get batteryOptimizationDesc =>
-      'Disable battery optimization for reliable notifications';
+      'Disabwe battwy optimization fow wewiabwe notifications ✧*。٩(ˊᗜˋ*)و✧*。';
 
   @override
-  String get grant => 'Grant';
+  String get grant => 'Gwant (◕‿◕)';
 
   @override
   String get allPermissionsGranted =>
-      'All permissions granted! Notifications will work reliably.';
+      'Aww pewmissions gwanted! Notifications wiww wowk wewiably ♡(˃͈ દ ˂͈ ༶ )';
 
   @override
   String get somePermissionsMissing =>
-      'Some permissions are missing. Notifications may not work as expected.';
+      'Some pewmissions awe missing. Notifications may not wowk as expected (>_<)';
 
   @override
-  String get remindLater => 'Remind Later';
+  String get remindLater => 'Wemind Watew';
 
   @override
-  String get continueAnyway => 'Continue Anyway';
+  String get continueAnyway => 'Continue Anyway UwU';
 
   @override
-  String get done => 'Done';
+  String get done => 'Done! ✨(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧';
 
   @override
-  String get checkPermissions => 'Check Permissions';
+  String get checkPermissions => 'Check Pewmissions';
 }

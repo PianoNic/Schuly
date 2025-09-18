@@ -68,12 +68,12 @@ class AppLocalizationsGsw extends AppLocalizations {
 
   @override
   String emailAppError(Object email) {
-    return 'E-Mail-App het nöd chönne öppnet werde. Bitte kontaktier üs manuell unter: $email';
+    return 'E-Mail-App cha nöd öppnet werde. Bitte kontaktier üs manuell under: $email';
   }
 
   @override
   String browserError(Object url) {
-    return 'Browser het nöd chönne öppnet werde. Bitte bsuech d Site manuell: $url';
+    return 'Browser cha nöd öppnet werde. Bitte bsuech d Site manuell: $url';
   }
 
   @override
@@ -246,7 +246,7 @@ class AppLocalizationsGsw extends AppLocalizations {
   String get loadingStudentIdCard => 'Schüeluswys wird glade...';
 
   @override
-  String get enterValidEmail => 'Bitte gäbid e gültigi E-Mail-Adrässe ii';
+  String get enterValidEmail => 'Bitte gäb e gültigi E-Mail-Adrässe ii';
 
   @override
   String get areYouSure => 'Sind Si sicher?';
@@ -288,7 +288,7 @@ class AppLocalizationsGsw extends AppLocalizations {
   String get login => 'Amälde';
 
   @override
-  String get enterEmailAddress => 'Bitte gäbid e E-Mail-Adrässe ii';
+  String get enterEmailAddress => 'Bitte gäb e E-Mail-Adrässe ii';
 
   @override
   String get getNewToken => 'Nöis Token hole';
@@ -464,7 +464,7 @@ class AppLocalizationsGsw extends AppLocalizations {
   String get releaseNotesInfo => 'Updates und nöii Features werde da aazeigt';
 
   @override
-  String get notificationTypes => 'Benachrichtigigstyp';
+  String get notificationTypes => 'Benachrichtigigstype';
 
   @override
   String get timetable => 'Stundeplan';
@@ -604,7 +604,7 @@ class AppLocalizationsGsw extends AppLocalizations {
   String get apiEndpoint => 'API Endpoint';
 
   @override
-  String get enterApiEndpoint => 'Bitte API Endpoint igäh';
+  String get enterApiEndpoint => 'Bitte gäb API Endpoint ii';
 
   @override
   String get currentApiInfo => 'Aktuelli API Info';
@@ -630,7 +630,7 @@ class AppLocalizationsGsw extends AppLocalizations {
   String get getColorName => 'Get color name';
 
   @override
-  String get switchAccount => 'Account uswähle';
+  String get switchAccount => 'Account wächsle';
 
   @override
   String accountCount(num count) {
@@ -673,7 +673,7 @@ class AppLocalizationsGsw extends AppLocalizations {
 
   @override
   String switchAccountError(Object error) {
-    return 'Accountwechsel isch fehlgschlage: $error';
+    return 'Accountwechsel het Fähler: $error';
   }
 
   @override
@@ -683,12 +683,12 @@ class AppLocalizationsGsw extends AppLocalizations {
 
   @override
   String removeAccountError(Object error) {
-    return 'Account chönnt nöd entfernet werde: $error';
+    return 'Account cha nöd entfernet werde: $error';
   }
 
   @override
   String unexpectedError(Object error) {
-    return 'Unerwartete Fehler: $error';
+    return 'Unerwartete Fähler: $error';
   }
 
   @override
@@ -749,7 +749,7 @@ class AppLocalizationsGsw extends AppLocalizations {
   String get noNoticesFound => 'Kei Meldigä gfunde.';
 
   @override
-  String get minutes => 'Min.';
+  String get minutes => 'Minute';
 
   @override
   String get hours => 'Std.';
@@ -1107,59 +1107,59 @@ class AppLocalizationsGsw extends AppLocalizations {
   }
 
   @override
-  String get minute => 'minute';
+  String get minute => 'Minut';
 
   @override
-  String get beforeClass => 'before class';
+  String get beforeClass => 'vor de Lektion';
 
   @override
-  String get notificationPermissions => 'Notification Permissions';
+  String get notificationPermissions => 'Benachrichtigigs-Berechtigunge';
 
   @override
   String get notificationPermissionsDescription =>
-      'To receive timely notifications about your classes, please grant the following permissions:';
+      'Um rechtziitig Benachrichtigunge über dini Lektione z\'becho, bitte erteile die folgend Berechtigunge:';
 
   @override
-  String get notificationPermission => 'Notifications';
+  String get notificationPermission => 'Benachrichtigunge';
 
   @override
   String get notificationPermissionDesc =>
-      'Allow Schuly to send you notifications';
+      'Schuly erlaube, dir Benachrichtigunge z\'schicke';
 
   @override
-  String get exactAlarmPermission => 'Exact Alarms';
+  String get exactAlarmPermission => 'Exakti Alarme';
 
   @override
   String get exactAlarmPermissionDesc =>
-      'Required for precise notification timing';
+      'Brucht für präzisi Benachrichtigigs-Ziite';
 
   @override
-  String get batteryOptimization => 'Battery Optimization';
+  String get batteryOptimization => 'Akku-Optimierig';
 
   @override
   String get batteryOptimizationDesc =>
-      'Disable battery optimization for reliable notifications';
+      'Akku-Optimierig deaktiviere für zuverlässigi Benachrichtigunge';
 
   @override
-  String get grant => 'Grant';
+  String get grant => 'Erteile';
 
   @override
   String get allPermissionsGranted =>
-      'All permissions granted! Notifications will work reliably.';
+      'Alli Berechtigunge erteilt! Benachrichtigunge funktioniere zuverlässig.';
 
   @override
   String get somePermissionsMissing =>
-      'Some permissions are missing. Notifications may not work as expected.';
+      'Einigi Berechtigunge fähle. Benachrichtigunge funktioniere vilicht nöd wie erwartet.';
 
   @override
-  String get remindLater => 'Remind Later';
+  String get remindLater => 'Spöter erinnere';
 
   @override
-  String get continueAnyway => 'Continue Anyway';
+  String get continueAnyway => 'Trotzdem fortsetzje';
 
   @override
-  String get done => 'Done';
+  String get done => 'Fertig';
 
   @override
-  String get checkPermissions => 'Check Permissions';
+  String get checkPermissions => 'Berechtigunge prüefe';
 }

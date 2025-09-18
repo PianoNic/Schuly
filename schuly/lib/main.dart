@@ -13,6 +13,7 @@ import 'providers/theme_provider.dart';
 import 'providers/api_store.dart';
 import 'providers/homepage_config_provider.dart';
 import 'providers/language_provider.dart';
+import 'providers/logging_service.dart';
 import 'services/storage_service.dart';
 import 'services/push_notification_service.dart';
 import 'services/update_service.dart';
@@ -26,6 +27,7 @@ import 'l10n/pirate_material_localizations.dart';
 import 'l10n/pirate_cupertino_localizations.dart';
 import 'l10n/kawaii_material_localizations.dart';
 import 'l10n/kawaii_cupertino_localizations.dart';
+import 'utils/logger.dart';
 
 String apiBaseUrl = 'https://schlwr.pianonic.ch';
 
@@ -52,7 +54,12 @@ void main() async {
   await loadApiBaseUrl();
   final apiStore = ApiStore();
   final languageProvider = LanguageProvider();
+  final loggingService = LoggingService();
   defaultApiClient = ApiClient(basePath: apiBaseUrl);
+
+  // Log app startup
+  loggingService.info('Schuly app started', source: 'main');
+  loggingService.info('API base URL: $apiBaseUrl', source: 'main');
 
   runApp(
     MultiProvider(
@@ -61,6 +68,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => HomepageConfigProvider()),
         ChangeNotifierProvider.value(value: languageProvider),
+        ChangeNotifierProvider.value(value: loggingService),
       ],
       child: const SchulyApp(),
     ),
@@ -221,11 +229,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+
+    // Initialize logger with context
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Logger.init(context);
+      final loggingService = Provider.of<LoggingService>(context, listen: false);
+      loggingService.info('HomePage initialized', source: 'MyHomePage');
+    });
+
     final apiStore = Provider.of<ApiStore>(context, listen: false);
     if (apiStore.userEmails.isNotEmpty && apiStore.activeUserEmail != null) {
       apiStore.fetchAll();
     }
-    
+
     // Show app update dialog, release notes dialog, and notification permission dialog if needed
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Check for app updates first (higher priority)

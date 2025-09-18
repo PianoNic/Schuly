@@ -64,7 +64,7 @@ class GradeTile extends StatelessWidget {
           children: [
             // Grade display - just the number
             Text(
-              grade.mark,
+              grade.mark ?? '-',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.primary,
@@ -184,7 +184,7 @@ class GradeDetailsDialog extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Text(
-                    grade.mark,
+                    grade.mark ?? '-',
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -220,11 +220,11 @@ class GradeDetailsDialog extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              _buildDetailRow('${localizations.gradeLabel}:', grade.mark, context),
+              _buildDetailRow('${localizations.gradeLabel}:', grade.mark ?? '-', context),
               if (grade.points != null)
                 _buildDetailRow('${localizations.pointsLabel}:', grade.points, context),
-              _buildDetailRow('${localizations.weightLabel}:', grade.weight, context),
-              _buildDetailRow('${localizations.courseGradeLabel}:', grade.courseGrade, context),
+              _buildDetailRow('${localizations.weightLabel}:', grade.weight ?? '1', context),
+              _buildDetailRow('${localizations.courseGradeLabel}:', grade.courseGrade ?? '-', context),
 
               if (grade.examinationGroups.averageExamGroup != null) ...[
                 const SizedBox(height: 16),

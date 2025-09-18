@@ -49,15 +49,15 @@ class GradeDto {
 
   String date;
 
-  String mark;
+  String? mark;
 
   String? points;
 
-  String weight;
+  String? weight;
 
   bool isConfirmed;
 
-  String courseGrade;
+  String? courseGrade;
 
   ExaminationGroupsDto examinationGroups;
 
@@ -181,11 +181,11 @@ class GradeDto {
         subjectToken: mapValueOfType<String>(json, r'subjectToken')!,
         title: mapValueOfType<String>(json, r'title')!,
         date: mapValueOfType<String>(json, r'date')!,
-        mark: mapValueOfType<String>(json, r'mark')!,
+        mark: mapValueOfType<String>(json, r'mark') ?? '',
         points: mapValueOfType<String>(json, r'points'),
-        weight: mapValueOfType<String>(json, r'weight')!,
+        weight: mapValueOfType<String>(json, r'weight') ?? '1',
         isConfirmed: mapValueOfType<bool>(json, r'isConfirmed')!,
-        courseGrade: mapValueOfType<String>(json, r'courseGrade')!,
+        courseGrade: mapValueOfType<String>(json, r'courseGrade') ?? '',
         examinationGroups: ExaminationGroupsDto.fromJson(json[r'examinationGroups'])!,
         studentId: mapValueOfType<String>(json, r'studentId'),
         studentName: mapValueOfType<String>(json, r'studentName'),
@@ -246,10 +246,10 @@ class GradeDto {
     'subjectToken',
     'title',
     'date',
-    'mark',
-    'weight',
+    // 'mark', // Made optional as temporary fix
+    // 'weight', // Made optional as temporary fix
     'isConfirmed',
-    'courseGrade',
+    // 'courseGrade', // Made optional as temporary fix
     'examinationGroups',
     'inputType',
   };

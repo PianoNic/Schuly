@@ -189,8 +189,12 @@ class ReleaseNotesService {
   }
 
   static bool _isVersionNewer(String version1, String version2) {
-    final v1Parts = version1.split('.').map(int.parse).toList();
-    final v2Parts = version2.split('.').map(int.parse).toList();
+    // Remove 'v' prefix if present
+    final cleanVersion1 = version1.startsWith('v') ? version1.substring(1) : version1;
+    final cleanVersion2 = version2.startsWith('v') ? version2.substring(1) : version2;
+
+    final v1Parts = cleanVersion1.split('.').map(int.parse).toList();
+    final v2Parts = cleanVersion2.split('.').map(int.parse).toList();
     
     // Pad shorter version with zeros
     while (v1Parts.length < 3) {

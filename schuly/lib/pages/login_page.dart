@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/api_store.dart';
 import '../main.dart';
@@ -21,11 +22,26 @@ class _LoginPageState extends State<LoginPage> {
   final _apiBaseUrlController = TextEditingController();
   bool _isLoading = false;
   bool _showPassword = false;
+  String _appVersion = '';
 
   @override
   void initState() {
     super.initState();
     _apiBaseUrlController.text = widget.initialApiBaseUrl ?? apiBaseUrl;
+    _loadAppVersion();
+  }
+
+  Future<void> _loadAppVersion() async {
+    try {
+      final packageInfo = await PackageInfo.fromPlatform();
+      if (mounted) {
+        setState(() {
+          _appVersion = 'v${packageInfo.version}';
+        });
+      }
+    } catch (e) {
+      // Keep empty string if package info fails
+    }
   }
 
   Future<void> _performLogin() async {
@@ -74,19 +90,21 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      body: Stack(
+        children: [
+          Center(
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
+              padding: const EdgeInsets.all(32.0),
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
                     Text(
                       AppLocalizations.of(context)!.login,
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -253,6 +271,28 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-    );
+      // Version display at the bottom
+      Positioned(
+        bottom: 20,
+        left: 0,
+        right: 0,
+        child: Center(
+          child: AnimatedOpacity(
+            opacity: _appVersion.isNotEmpty ? 1.0 : 0.0,
+            duration: const Duration(milliseconds: 500),
+            child: Text(
+              _appVersion,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                fontSize: 12,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+);
   }
 }

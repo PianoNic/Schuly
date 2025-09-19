@@ -15,6 +15,7 @@ import '../widgets/app_update_dialog.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/language_provider.dart';
 import '../services/push_notification_service.dart';
+import '../utils/error_handler.dart';
 
 class AppSettingsPage extends StatefulWidget {
   final ThemeProvider themeProvider;
@@ -31,6 +32,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   bool _isCheckingUpdates = false;
   String _appVersion = 'DEV';
   String _appBuildNumber = '0';
+  bool _isTestingError = false;
+  DateTime? _lastErrorTest;
 
   @override
   void initState() {
@@ -63,11 +66,77 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
 
   Future<void> _loadSettings() async {
     final pushNotificationsEnabled = await StorageService.getPushNotificationsEnabled();
-    
+
     setState(() {
       _pushNotificationsEnabled = pushNotificationsEnabled;
       _isLoading = false;
     });
+  }
+
+  bool get _canTestError {
+    if (_lastErrorTest == null) return true;
+    final now = DateTime.now();
+    final difference = now.difference(_lastErrorTest!);
+    return difference.inSeconds >= 30;
+  }
+
+  int get _remainingSeconds {
+    if (_lastErrorTest == null) return 0;
+    final now = DateTime.now();
+    final difference = now.difference(_lastErrorTest!);
+    final remaining = 30 - difference.inSeconds;
+    return remaining > 0 ? remaining : 0;
+  }
+
+  Future<void> _triggerTestError() async {
+    if (!_canTestError || _isTestingError) return;
+
+    setState(() {
+      _isTestingError = true;
+      _lastErrorTest = DateTime.now();
+    });
+
+    try {
+      // Create a test error with context
+      throw Exception('Test error from Settings - Error tracking verification at ${DateTime.now().toIso8601String()}');
+    } catch (e, stackTrace) {
+      await ErrorHandler.captureException(
+        e,
+        stackTrace: stackTrace,
+        userMessage: 'Test error triggered from settings',
+        context: context,
+        extra: {
+          'test_type': 'manual_settings_trigger',
+          'app_version': _appVersion,
+          'build_number': _appBuildNumber,
+        },
+        showSnackbar: true,
+      );
+    }
+
+    setState(() {
+      _isTestingError = false;
+    });
+
+    // Start a timer to update the UI every second for the countdown
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_remainingSeconds <= 0) {
+        timer.cancel();
+        if (mounted) setState(() {});
+      } else {
+        if (mounted) setState(() {});
+      }
+    });
+
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Test error sent to GlitchTip'),
+          backgroundColor: Colors.orange[700],
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    }
   }
 
 
@@ -324,7 +393,46 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       icon: Icons.info_outlined,
                       title: localizations.aboutApp,
                       subtitle: localizations.versionWithNumber(_appVersion, _appBuildNumber),
-                      trailing: const Icon(Icons.chevron_right),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Error tracking status badge
+                          if (ErrorHandler.isSentryEnabled) ...[
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.green.withValues(alpha: 0.15),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: Colors.green.withValues(alpha: 0.3),
+                                  width: 1,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.shield_outlined,
+                                    size: 14,
+                                    color: Colors.green[700],
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    'Error Tracking',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: Colors.green[700],
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                          ],
+                          const Icon(Icons.chevron_right),
+                        ],
+                      ),
                       onTap: () {
                         showAboutDialog(
                           context: context,
@@ -338,10 +446,88 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                               style: const TextStyle(fontSize: 14),
                             ),
                             const SizedBox(height: 12),
+                            // Show error tracking status
+                            if (ErrorHandler.isSentryEnabled) ...[
+                              const Divider(),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.check_circle,
+                                    color: Colors.green[700],
+                                    size: 16,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  const Text(
+                                    'Error tracking enabled',
+                                    style: TextStyle(fontSize: 13),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              const Text(
+                                'App errors are automatically reported for improved stability.',
+                                style: TextStyle(fontSize: 12, color: Colors.grey),
+                              ),
+                            ],
                           ],
                         );
                       },
                     ),
+
+                    // Test Error Tracking (only show if Sentry is enabled)
+                    if (ErrorHandler.isSentryEnabled) ...[
+                      const Divider(),
+                      _buildSettingsTile(
+                        context,
+                        icon: Icons.bug_report_outlined,
+                        title: 'Test Error Tracking',
+                        subtitle: _canTestError
+                            ? 'Send a test error to GlitchTip'
+                            : 'Wait $_remainingSeconds seconds',
+                        trailing: _isTestingError
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(strokeWidth: 2),
+                              )
+                            : Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: _canTestError
+                                      ? Colors.orange.withValues(alpha: 0.15)
+                                      : Colors.grey.withValues(alpha: 0.15),
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                    color: _canTestError
+                                        ? Colors.orange.withValues(alpha: 0.3)
+                                        : Colors.grey.withValues(alpha: 0.3),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.send,
+                                      size: 14,
+                                      color: _canTestError ? Colors.orange[700] : Colors.grey,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      _canTestError ? 'Send Test' : '$_remainingSeconds s',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: _canTestError ? Colors.orange[700] : Colors.grey,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                        onTap: _canTestError && !_isTestingError ? _triggerTestError : null,
+                        isEnabled: _canTestError && !_isTestingError,
+                      ),
+                    ],
                   ],
                 ),
               ),

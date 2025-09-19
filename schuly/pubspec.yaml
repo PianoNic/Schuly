@@ -51,6 +51,7 @@ dependencies:
   dio: ^5.7.0
   open_file: ^3.5.7
   dynamic_color: ^1.7.0
+  sentry_flutter: ^9.6.0
 
 dev_dependencies:
   flutter_test:

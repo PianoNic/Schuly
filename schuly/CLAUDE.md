@@ -6,6 +6,44 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Schuly is a Flutter mobile application that serves as a client for a school management system. It provides students with access to grades, absences, agenda/schedule, and account management through a mobile-friendly interface.
 
+## Error Tracking
+
+### GlitchTip/Sentry Integration
+The app is integrated with GlitchTip for error tracking and monitoring:
+- **DSN**: Configured via GitHub Actions repository variable `SENTRY_URL`
+- **Automatic error capture**: All unhandled Flutter and Dart errors are captured
+- **User context**: Tracks user email and authentication type
+- **API error handling**: Specific handling for network and API errors
+- **Breadcrumbs**: Navigation and action tracking for better debugging
+- **Status Badge**: Shows in app settings when error tracking is active
+
+### CI/CD Configuration
+The GlitchTip DSN is automatically injected during release builds:
+- GitHub repository variable: `SENTRY_URL`
+- Applied in `build-and-release.yml` workflow
+- Release version automatically set from git tag
+- Environment set to "production" for releases
+
+### Local Development
+For local development with error tracking:
+```bash
+# Set environment variable first
+export SENTRY_DSN="your_dsn_here"
+
+# Then run Flutter
+flutter run --dart-define=SENTRY_DSN="$SENTRY_DSN" --dart-define=SENTRY_RELEASE="dev" --dart-define=SENTRY_ENVIRONMENT="development"
+```
+
+### Testing Error Tracking
+1. **In-App Test Button**: Settings → About App → Test Error Tracking
+   - Only visible when error tracking is enabled
+   - Can be triggered once every 30 seconds
+   - Shows countdown timer during cooldown period
+   - Sends a test exception directly to GlitchTip
+
+2. **Programmatic Testing**: Use `TestErrors.triggerTestException()` in code
+3. **Status Badge**: Green "Error Tracking" badge appears in Settings → About App when enabled
+
 ## Development Commands
 
 ### Flutter Commands

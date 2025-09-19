@@ -67,11 +67,27 @@ jobs:
 
       - name: Build Android APK
         working-directory: ./schuly
-        run: flutter build apk --release --build-name="${{ github.ref_name }}" --build-number="${{ github.run_number }}"
+        env:
+          SENTRY_DSN: ${{ vars.SENTRY_URL }}
+        run: |
+          flutter build apk --release \
+            --build-name="${{ github.ref_name }}" \
+            --build-number="${{ github.run_number }}" \
+            --dart-define=SENTRY_DSN="$SENTRY_DSN" \
+            --dart-define=SENTRY_RELEASE="${{ github.ref_name }}" \
+            --dart-define=SENTRY_ENVIRONMENT="production"
 
       - name: Build Android AAB (App Bundle)
         working-directory: ./schuly
-        run: flutter build appbundle --release --build-name="${{ github.ref_name }}" --build-number="${{ github.run_number }}"
+        env:
+          SENTRY_DSN: ${{ vars.SENTRY_URL }}
+        run: |
+          flutter build appbundle --release \
+            --build-name="${{ github.ref_name }}" \
+            --build-number="${{ github.run_number }}" \
+            --dart-define=SENTRY_DSN="$SENTRY_DSN" \
+            --dart-define=SENTRY_RELEASE="${{ github.ref_name }}" \
+            --dart-define=SENTRY_ENVIRONMENT="production"
 
       - name: Prepare artifacts
         working-directory: ./schuly
@@ -109,7 +125,15 @@ jobs:
 
       - name: Build iOS (unsigned)
         working-directory: ./schuly
-        run: flutter build ios --release --no-codesign --build-name="${{ github.ref_name }}" --build-number="${{ github.run_number }}"
+        env:
+          SENTRY_DSN: ${{ vars.SENTRY_URL }}
+        run: |
+          flutter build ios --release --no-codesign \
+            --build-name="${{ github.ref_name }}" \
+            --build-number="${{ github.run_number }}" \
+            --dart-define=SENTRY_DSN="$SENTRY_DSN" \
+            --dart-define=SENTRY_RELEASE="${{ github.ref_name }}" \
+            --dart-define=SENTRY_ENVIRONMENT="production"
 
       - name: Create iOS Archive
         working-directory: ./schuly

@@ -16,7 +16,8 @@
       "Bash(/dev/null)",
       "Bash(git commit:*)",
       "Bash(git add:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(dart:*)"
     ],
     "deny": [],
     "ask": []

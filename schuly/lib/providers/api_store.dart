@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:schuly/api/lib/api.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import '../services/api_service.dart';
 import '../services/storage_service.dart';
 import '../services/push_notification_service.dart';
@@ -215,6 +216,13 @@ class ApiStore extends ChangeNotifier {
   // Add a Microsoft OAuth user
   Future<String?> addMicrosoftUser(String accessToken, String refreshToken, [String? knownEmail]) async {
     print('[addMicrosoftUser] Storing Microsoft OAuth tokens');
+
+    final transaction = Sentry.startTransaction(
+      'authenticate.microsoft.store',
+      'app.auth',
+    );
+    transaction.setData('description', 'Store Microsoft user tokens');
+
     try {
       // Set the bearer token first
       bearerToken = accessToken;
@@ -251,17 +259,26 @@ class ApiStore extends ChangeNotifier {
         await StorageService.setActiveUser(email);
         await _setAuthFromUser(_users[email]!);
         print('[addMicrosoftUser] Microsoft user persisted and auth set.');
+
+        transaction.status = const SpanStatus.ok();
       } catch (storageError, stack) {
         print('[addMicrosoftUser] Error persisting user: $storageError');
         print(stack);
+        transaction.status = const SpanStatus.internalError();
+        transaction.throwable = storageError;
+        await transaction.finish();
         return 'Login succeeded but failed to persist user: $storageError';
       }
 
+      await transaction.finish();
       notifyListeners();
       return null; // Success
     } catch (e, stack) {
       print('[addMicrosoftUser] Exception: $e');
       print(stack);
+      transaction.status = const SpanStatus.internalError();
+      transaction.throwable = e;
+      await transaction.finish();
       return 'Microsoft login error: $e';
     }
   }

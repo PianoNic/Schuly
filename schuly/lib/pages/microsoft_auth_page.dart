@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 import 'package:schuly/api/lib/api.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import '../utils/logger.dart';
 
 class MicrosoftAuthPage extends StatefulWidget {
@@ -36,6 +37,12 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
 
 
   Future<void> _initializeAuth() async {
+    final transaction = Sentry.startTransaction(
+      'authenticate.microsoft.init',
+      'http.client',
+    );
+    transaction.setData('description', 'Initialize Microsoft OAuth');
+
     try {
       setState(() {
         _statusMessage = 'Fetching Microsoft OAuth URL...';
@@ -45,7 +52,13 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
       final authApi = AuthApi(apiClient);
 
       logDebug('Calling authenticateOauthMobileUrl endpoint', source: 'MicrosoftAuthPage');
+
+      final oauthSpan = transaction.startChild(
+        'oauth.get_url',
+        description: 'Get OAuth URL from server',
+      );
       final response = await authApi.authenticateOauthMobileUrl();
+      await oauthSpan.finish();
 
       if (response == null) {
         throw Exception('Failed to get OAuth URL from server');
@@ -63,7 +76,12 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
       });
 
       // Initialize WebView with fresh session
+      final webViewSpan = transaction.startChild(
+        'webview.init',
+        description: 'Initialize WebView',
+      );
       await _initializeWebView();
+      await webViewSpan.finish();
 
       // Mark WebView as ready and update UI
       if (mounted) {
@@ -74,7 +92,10 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
         });
       }
 
+      transaction.status = const SpanStatus.ok();
     } catch (e) {
+      transaction.status = const SpanStatus.internalError();
+      transaction.throwable = e;
       logError('Failed to initialize OAuth', source: 'MicrosoftAuthPage', error: e);
       setState(() {
         _isLoading = false;
@@ -89,6 +110,8 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
           ),
         );
       }
+    } finally {
+      await transaction.finish();
     }
   }
 
@@ -194,6 +217,12 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
   Future<void> _handleAuthorizationCode(String code, String? state) async {
     logInfo('Handling authorization code', source: 'MicrosoftAuthPage');
 
+    final transaction = Sentry.startTransaction(
+      'authenticate.microsoft.callback',
+      'http.client',
+    );
+    transaction.setData('description', 'Microsoft OAuth callback');
+
     setState(() {
       _isLoading = true;
       _statusMessage = 'Processing authentication...';
@@ -213,7 +242,12 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
       logDebug('Calling authenticateOauthMobileCallback', source: 'MicrosoftAuthPage');
       logDebug('Code verifier length: ${_codeVerifier?.length}', source: 'MicrosoftAuthPage');
 
+      final callbackSpan = transaction.startChild(
+        'oauth.exchange_code',
+        description: 'Exchange authorization code for tokens',
+      );
       final response = await authApi.authenticateOauthMobileCallback(callbackRequest);
+      await callbackSpan.finish();
 
       if (response != null) {
         logInfo('Authentication successful', source: 'MicrosoftAuthPage');
@@ -233,11 +267,16 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
         if (mounted) {
           Navigator.of(context).pop(true);
         }
+
+        transaction.status = const SpanStatus.ok();
       } else {
         throw Exception('No response from authentication callback');
       }
 
     } catch (e) {
+      transaction.status = const SpanStatus.internalError();
+      transaction.throwable = e;
+
       logError('Failed to complete OAuth callback', source: 'MicrosoftAuthPage', error: e);
       setState(() {
         _isLoading = false;
@@ -252,6 +291,8 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
           ),
         );
       }
+    } finally {
+      await transaction.finish();
     }
   }
 

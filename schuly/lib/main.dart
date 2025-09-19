@@ -88,8 +88,8 @@ void main() async {
               defaultValue: 'production',
             );
 
-            // Performance monitoring sample rate (1% of events)
-            options.tracesSampleRate = 0.01;
+            // Performance monitoring sample rate (10% of events)
+            options.tracesSampleRate = 0.10;
 
             // Disable auto session tracking as recommended by GlitchTip
             options.enableAutoSessionTracking = false;

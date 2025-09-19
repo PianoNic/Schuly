@@ -68,7 +68,7 @@ class ProfileHeader extends StatelessWidget {
               
               const SizedBox(height: 4),
               
-              // User Email with Microsoft badge if applicable
+              // User Email with authentication badge
               Column(
                 children: [
                   // Email text that can wrap if needed
@@ -84,40 +84,41 @@ class ProfileHeader extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  // Microsoft badge on a separate line if authenticated with Microsoft
-                  if (isMicrosoftAuth) ...[
-                    const SizedBox(height: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: Colors.blue.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: Colors.blue.withValues(alpha: 0.5),
-                          width: 1,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // Use Icon instead of network image for reliability
-                          const Icon(
-                            Icons.verified_user,
-                            size: 12,
-                            color: Colors.blue,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            'Microsoft',
-                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
+                  // Authentication badge on a separate line
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: isMicrosoftAuth
+                        ? Colors.blue.withValues(alpha: 0.2)
+                        : Colors.grey.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: isMicrosoftAuth
+                          ? Colors.blue.withValues(alpha: 0.5)
+                          : Colors.grey.withValues(alpha: 0.5),
+                        width: 1,
                       ),
                     ),
-                  ],
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          isMicrosoftAuth ? Icons.verified_user : Icons.key,
+                          size: 12,
+                          color: isMicrosoftAuth ? Colors.blue : Colors.grey,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          isMicrosoftAuth ? 'Microsoft' : 'Password',
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: isMicrosoftAuth ? Colors.blue : Colors.grey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               

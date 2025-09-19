@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:schuly/api/lib/api.dart';
-import 'dart:async';
+import 'dart:async' show TimeoutException;
 import '../widgets/theme_settings.dart';
 import '../providers/theme_provider.dart';
 import '../providers/api_store.dart';
@@ -32,8 +32,6 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   bool _isCheckingUpdates = false;
   String _appVersion = 'DEV';
   String _appBuildNumber = '0';
-  bool _isTestingError = false;
-  DateTime? _lastErrorTest;
 
   @override
   void initState() {
@@ -71,72 +69,6 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
       _pushNotificationsEnabled = pushNotificationsEnabled;
       _isLoading = false;
     });
-  }
-
-  bool get _canTestError {
-    if (_lastErrorTest == null) return true;
-    final now = DateTime.now();
-    final difference = now.difference(_lastErrorTest!);
-    return difference.inSeconds >= 30;
-  }
-
-  int get _remainingSeconds {
-    if (_lastErrorTest == null) return 0;
-    final now = DateTime.now();
-    final difference = now.difference(_lastErrorTest!);
-    final remaining = 30 - difference.inSeconds;
-    return remaining > 0 ? remaining : 0;
-  }
-
-  Future<void> _triggerTestError() async {
-    if (!_canTestError || _isTestingError) return;
-
-    setState(() {
-      _isTestingError = true;
-      _lastErrorTest = DateTime.now();
-    });
-
-    try {
-      // Create a test error with context
-      throw Exception('Test error from Settings - Error tracking verification at ${DateTime.now().toIso8601String()}');
-    } catch (e, stackTrace) {
-      await ErrorHandler.captureException(
-        e,
-        stackTrace: stackTrace,
-        userMessage: 'Test error triggered from settings',
-        context: context,
-        extra: {
-          'test_type': 'manual_settings_trigger',
-          'app_version': _appVersion,
-          'build_number': _appBuildNumber,
-        },
-        showSnackbar: true,
-      );
-    }
-
-    setState(() {
-      _isTestingError = false;
-    });
-
-    // Start a timer to update the UI every second for the countdown
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (_remainingSeconds <= 0) {
-        timer.cancel();
-        if (mounted) setState(() {});
-      } else {
-        if (mounted) setState(() {});
-      }
-    });
-
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Test error sent to GlitchTip'),
-          backgroundColor: Colors.orange[700],
-          duration: const Duration(seconds: 3),
-        ),
-      );
-    }
   }
 
 
@@ -473,61 +405,6 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         );
                       },
                     ),
-
-                    // Test Error Tracking (only show if Sentry is enabled)
-                    if (ErrorHandler.isSentryEnabled) ...[
-                      const Divider(),
-                      _buildSettingsTile(
-                        context,
-                        icon: Icons.bug_report_outlined,
-                        title: 'Test Error Tracking',
-                        subtitle: _canTestError
-                            ? 'Send a test error to GlitchTip'
-                            : 'Wait $_remainingSeconds seconds',
-                        trailing: _isTestingError
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(strokeWidth: 2),
-                              )
-                            : Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                decoration: BoxDecoration(
-                                  color: _canTestError
-                                      ? Colors.orange.withValues(alpha: 0.15)
-                                      : Colors.grey.withValues(alpha: 0.15),
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(
-                                    color: _canTestError
-                                        ? Colors.orange.withValues(alpha: 0.3)
-                                        : Colors.grey.withValues(alpha: 0.3),
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.send,
-                                      size: 14,
-                                      color: _canTestError ? Colors.orange[700] : Colors.grey,
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      _canTestError ? 'Send Test' : '$_remainingSeconds s',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: _canTestError ? Colors.orange[700] : Colors.grey,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                        onTap: _canTestError && !_isTestingError ? _triggerTestError : null,
-                        isEnabled: _canTestError && !_isTestingError,
-                      ),
-                    ],
                   ],
                 ),
               ),

@@ -22,7 +22,7 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   DateTime _selectedDay = DateTime.now();
   bool _hasInitializedSelectedDay = false;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   List<DateTime> _availableDates = [];
 
   List<DateTime> _getAvailableDates(List<dynamic> agenda) {
@@ -408,7 +408,7 @@ class _StartPageState extends State<StartPage> {
                           absence: absence,
                           absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
                           absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
-                          excuseUntil: _formatDateTime(absence.dateEAB, null),
+                          excuseUntil: absence.dateEAB != null ? _formatDateTime(absence.dateEAB!, null) : '',
                           status: absence.statusEAB,
                           reason: absence.reason,
                           relatedNotices: [], // No notices needed on start page

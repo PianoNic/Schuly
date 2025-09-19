@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 **email** | **String** |  | 
 **emailPrivate** | **String** |  | 
 **profil1** | **String** |  | 
-**profil2** | **String** |  | 
+**profil2** | **String** |  | [optional] 
 **entryDate** | **String** |  | 
 **exitDate** | **String** |  | 
 **regularClasses** | [**List<ClassInfoDto>**](ClassInfoDto.md) |  | [optional] [default to const []]

@@ -167,10 +167,11 @@ class AccountPage extends StatelessWidget {
                         label: localizations.profile1,
                         value: userInfo.profil1,
                       ),
-                      InfoRow(
-                        label: localizations.profile2,
-                        value: userInfo.profil2,
-                      ),
+                      if (userInfo.profil2 != null)
+                        InfoRow(
+                          label: localizations.profile2,
+                          value: userInfo.profil2!,
+                        ),
                     ],
                   ),
                 ),

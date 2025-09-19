@@ -17,8 +17,8 @@ class AbsenceDto {
     required this.studentId,
     required this.dateFrom,
     required this.dateTo,
-    required this.hourFrom,
-    required this.hourTo,
+    this.hourFrom,
+    this.hourTo,
     this.subject,
     this.subjectId,
     required this.profile,
@@ -33,11 +33,11 @@ class AbsenceDto {
     this.excusedDate,
     required this.additionalPeriod,
     required this.statusEAE,
-    required this.dateEAE,
+    this.dateEAE,
     required this.statusEAB,
-    required this.dateEAB,
+    this.dateEAB,
     this.commentEAB,
-    required this.studentTimestamp,
+    this.studentTimestamp,
   });
 
   String id;
@@ -48,9 +48,9 @@ class AbsenceDto {
 
   String dateTo;
 
-  String hourFrom;
+  String? hourFrom;
 
-  String hourTo;
+  String? hourTo;
 
   String? subject;
 
@@ -80,15 +80,15 @@ class AbsenceDto {
 
   String statusEAE;
 
-  String dateEAE;
+  String? dateEAE;
 
   String statusEAB;
 
-  String dateEAB;
+  String? dateEAB;
 
   String? commentEAB;
 
-  String studentTimestamp;
+  String? studentTimestamp;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is AbsenceDto &&
@@ -125,8 +125,8 @@ class AbsenceDto {
     (studentId.hashCode) +
     (dateFrom.hashCode) +
     (dateTo.hashCode) +
-    (hourFrom.hashCode) +
-    (hourTo.hashCode) +
+    (hourFrom == null ? 0 : hourFrom!.hashCode) +
+    (hourTo == null ? 0 : hourTo!.hashCode) +
     (subject == null ? 0 : subject!.hashCode) +
     (subjectId == null ? 0 : subjectId!.hashCode) +
     (profile.hashCode) +
@@ -141,11 +141,11 @@ class AbsenceDto {
     (excusedDate == null ? 0 : excusedDate!.hashCode) +
     (additionalPeriod.hashCode) +
     (statusEAE.hashCode) +
-    (dateEAE.hashCode) +
+    (dateEAE == null ? 0 : dateEAE!.hashCode) +
     (statusEAB.hashCode) +
-    (dateEAB.hashCode) +
+    (dateEAB == null ? 0 : dateEAB!.hashCode) +
     (commentEAB == null ? 0 : commentEAB!.hashCode) +
-    (studentTimestamp.hashCode);
+    (studentTimestamp == null ? 0 : studentTimestamp!.hashCode);
 
   @override
   String toString() => 'AbsenceDto[id=$id, studentId=$studentId, dateFrom=$dateFrom, dateTo=$dateTo, hourFrom=$hourFrom, hourTo=$hourTo, subject=$subject, subjectId=$subjectId, profile=$profile, profileId=$profileId, lessons=$lessons, reason=$reason, category=$category, comment=$comment, remark=$remark, isAcknowledged=$isAcknowledged, isExcused=$isExcused, excusedDate=$excusedDate, additionalPeriod=$additionalPeriod, statusEAE=$statusEAE, dateEAE=$dateEAE, statusEAB=$statusEAB, dateEAB=$dateEAB, commentEAB=$commentEAB, studentTimestamp=$studentTimestamp]';
@@ -156,8 +156,16 @@ class AbsenceDto {
       json[r'studentId'] = this.studentId;
       json[r'dateFrom'] = this.dateFrom;
       json[r'dateTo'] = this.dateTo;
+    if (this.hourFrom != null) {
       json[r'hourFrom'] = this.hourFrom;
+    } else {
+      json[r'hourFrom'] = null;
+    }
+    if (this.hourTo != null) {
       json[r'hourTo'] = this.hourTo;
+    } else {
+      json[r'hourTo'] = null;
+    }
     if (this.subject != null) {
       json[r'subject'] = this.subject;
     } else {
@@ -188,15 +196,27 @@ class AbsenceDto {
     }
       json[r'additionalPeriod'] = this.additionalPeriod;
       json[r'statusEAE'] = this.statusEAE;
+    if (this.dateEAE != null) {
       json[r'dateEAE'] = this.dateEAE;
+    } else {
+      json[r'dateEAE'] = null;
+    }
       json[r'statusEAB'] = this.statusEAB;
+    if (this.dateEAB != null) {
       json[r'dateEAB'] = this.dateEAB;
+    } else {
+      json[r'dateEAB'] = null;
+    }
     if (this.commentEAB != null) {
       json[r'commentEAB'] = this.commentEAB;
     } else {
       json[r'commentEAB'] = null;
     }
+    if (this.studentTimestamp != null) {
       json[r'studentTimestamp'] = this.studentTimestamp;
+    } else {
+      json[r'studentTimestamp'] = null;
+    }
     return json;
   }
 
@@ -223,8 +243,8 @@ class AbsenceDto {
         studentId: mapValueOfType<String>(json, r'studentId')!,
         dateFrom: mapValueOfType<String>(json, r'dateFrom')!,
         dateTo: mapValueOfType<String>(json, r'dateTo')!,
-        hourFrom: mapValueOfType<String>(json, r'hourFrom')!,
-        hourTo: mapValueOfType<String>(json, r'hourTo')!,
+        hourFrom: mapValueOfType<String>(json, r'hourFrom'),
+        hourTo: mapValueOfType<String>(json, r'hourTo'),
         subject: mapValueOfType<String>(json, r'subject'),
         subjectId: mapValueOfType<String>(json, r'subjectId'),
         profile: mapValueOfType<String>(json, r'profile')!,
@@ -239,11 +259,11 @@ class AbsenceDto {
         excusedDate: mapValueOfType<String>(json, r'excusedDate'),
         additionalPeriod: mapValueOfType<int>(json, r'additionalPeriod')!,
         statusEAE: mapValueOfType<String>(json, r'statusEAE')!,
-        dateEAE: mapValueOfType<String>(json, r'dateEAE')!,
+        dateEAE: mapValueOfType<String>(json, r'dateEAE'),
         statusEAB: mapValueOfType<String>(json, r'statusEAB')!,
-        dateEAB: mapValueOfType<String>(json, r'dateEAB')!,
+        dateEAB: mapValueOfType<String>(json, r'dateEAB'),
         commentEAB: mapValueOfType<String>(json, r'commentEAB'),
-        studentTimestamp: mapValueOfType<String>(json, r'studentTimestamp')!,
+        studentTimestamp: mapValueOfType<String>(json, r'studentTimestamp'),
       );
     }
     return null;
@@ -295,8 +315,6 @@ class AbsenceDto {
     'studentId',
     'dateFrom',
     'dateTo',
-    'hourFrom',
-    'hourTo',
     'profile',
     'profileId',
     'lessons',
@@ -307,10 +325,7 @@ class AbsenceDto {
     'isExcused',
     'additionalPeriod',
     'statusEAE',
-    'dateEAE',
     'statusEAB',
-    'dateEAB',
-    'studentTimestamp',
   };
 }
 

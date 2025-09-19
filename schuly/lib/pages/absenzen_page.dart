@@ -67,7 +67,8 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
           noticeDate.isBefore(absenceToDate.add(const Duration(days: 1)))) {
 
         // If we have time information, check time overlap too
-        if (absence.hourFrom.isNotEmpty && absence.hourTo.isNotEmpty &&
+        if (absence.hourFrom != null && absence.hourFrom!.isNotEmpty &&
+            absence.hourTo != null && absence.hourTo!.isNotEmpty &&
             notice.hourFrom.isNotEmpty && notice.hourTo.isNotEmpty) {
 
           // For same day, check time overlap
@@ -78,8 +79,8 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
               noticeDate.month == absenceFromDate.month &&
               noticeDate.day == absenceFromDate.day) {
 
-            final absenceFromTime = _parseTime(absence.hourFrom);
-            final absenceToTime = _parseTime(absence.hourTo);
+            final absenceFromTime = _parseTime(absence.hourFrom!);
+            final absenceToTime = _parseTime(absence.hourTo!);
             final noticeFromTime = _parseTime(notice.hourFrom);
             final noticeToTime = _parseTime(notice.hourTo);
 
@@ -101,7 +102,8 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
     return false;
   }
 
-  int _parseTime(String time) {
+  int _parseTime(String? time) {
+    if (time == null || time.isEmpty) return 0;
     try {
       final parts = time.split(':');
       if (parts.length >= 2) {
@@ -228,7 +230,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
                         absence: absence,
                         absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
                         absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
-                        excuseUntil: _formatDateTime(absence.dateEAB, null),
+                        excuseUntil: absence.dateEAB != null ? _formatDateTime(absence.dateEAB!, null) : '',
                         status: absence.statusEAB,
                         reason: absence.reason,
                         relatedNotices: relatedNotices,
@@ -347,7 +349,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
                       absence: absence,
                       absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
                       absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
-                      excuseUntil: _formatDateTime(absence.dateEAB, null),
+                      excuseUntil: absence.dateEAB != null ? _formatDateTime(absence.dateEAB!, null) : '',
                       status: absence.statusEAB,
                       reason: absence.reason,
                       relatedNotices: relatedNotices,

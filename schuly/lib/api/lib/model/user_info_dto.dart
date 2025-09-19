@@ -33,7 +33,7 @@ class UserInfoDto {
     required this.email,
     required this.emailPrivate,
     required this.profil1,
-    required this.profil2,
+    this.profil2,
     required this.entryDate,
     required this.exitDate,
     this.regularClasses = const [],
@@ -80,7 +80,7 @@ class UserInfoDto {
 
   String profil1;
 
-  String profil2;
+  String? profil2;
 
   String entryDate;
 
@@ -141,7 +141,7 @@ class UserInfoDto {
     (email.hashCode) +
     (emailPrivate.hashCode) +
     (profil1.hashCode) +
-    (profil2.hashCode) +
+    (profil2 == null ? 0 : profil2!.hashCode) +
     (entryDate.hashCode) +
     (exitDate.hashCode) +
     (regularClasses.hashCode) +
@@ -180,7 +180,11 @@ class UserInfoDto {
       json[r'email'] = this.email;
       json[r'emailPrivate'] = this.emailPrivate;
       json[r'profil1'] = this.profil1;
+    if (this.profil2 != null) {
       json[r'profil2'] = this.profil2;
+    } else {
+      json[r'profil2'] = null;
+    }
       json[r'entryDate'] = this.entryDate;
       json[r'exitDate'] = this.exitDate;
       json[r'regularClasses'] = this.regularClasses;
@@ -227,7 +231,7 @@ class UserInfoDto {
         email: mapValueOfType<String>(json, r'email')!,
         emailPrivate: mapValueOfType<String>(json, r'emailPrivate')!,
         profil1: mapValueOfType<String>(json, r'profil1')!,
-        profil2: mapValueOfType<String>(json, r'profil2')!,
+        profil2: mapValueOfType<String>(json, r'profil2'),
         entryDate: mapValueOfType<String>(json, r'entryDate')!,
         exitDate: mapValueOfType<String>(json, r'exitDate')!,
         regularClasses: ClassInfoDto.listFromJson(json[r'regularClasses']),
@@ -297,7 +301,6 @@ class UserInfoDto {
     'email',
     'emailPrivate',
     'profil1',
-    'profil2',
     'entryDate',
     'exitDate',
   };

@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **studentId** | **String** |  | 
 **dateFrom** | **String** |  | 
 **dateTo** | **String** |  | 
-**hourFrom** | **String** |  | 
-**hourTo** | **String** |  | 
+**hourFrom** | **String** |  | [optional] 
+**hourTo** | **String** |  | [optional] 
 **subject** | **String** |  | [optional] 
 **subjectId** | **String** |  | [optional] 
 **profile** | **String** |  | 
@@ -28,11 +28,11 @@ Name | Type | Description | Notes
 **excusedDate** | **String** |  | [optional] 
 **additionalPeriod** | **int** |  | 
 **statusEAE** | **String** |  | 
-**dateEAE** | **String** |  | 
+**dateEAE** | **String** |  | [optional] 
 **statusEAB** | **String** |  | 
-**dateEAB** | **String** |  | 
+**dateEAB** | **String** |  | [optional] 
 **commentEAB** | **String** |  | [optional] 
-**studentTimestamp** | **String** |  | 
+**studentTimestamp** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

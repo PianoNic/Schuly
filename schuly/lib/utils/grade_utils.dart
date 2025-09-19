@@ -32,7 +32,7 @@ class GradeUtils {
       logDebug('Processing grade: mark=${grade.mark}, weight=${grade.weight}, confirmed=${grade.isConfirmed}', source: 'GradeUtils');
       
       final gradeValue = grade.mark != null ? double.tryParse(grade.mark!) : null;
-      final weightValue = grade.weight != null ? double.tryParse(grade.weight!) : 1.0;
+      final weightValue = double.tryParse(grade.weight!);
       
       logDebug('Parsed values: gradeValue=$gradeValue, weightValue=$weightValue', source: 'GradeUtils');
       

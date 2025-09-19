@@ -79,6 +79,22 @@ class HomepageConfigModal extends StatelessWidget {
     );
   }
 
+  String _getSectionTitle(BuildContext context, String sectionId) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (sectionId) {
+      case 'lessons':
+        return localizations.nextLessons;
+      case 'holidays':
+        return localizations.nextHolidays;
+      case 'grades':
+        return localizations.latestGrades;
+      case 'absences':
+        return localizations.openAbsences;
+      default:
+        return sectionId;
+    }
+  }
+
   Widget _buildSectionCard(BuildContext context, SectionConfig section, HomepageConfigProvider config) {
     final seedColor = Theme.of(context).colorScheme.primary;
     return Container(
@@ -86,7 +102,10 @@ class HomepageConfigModal extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 6),
       child: Card(
         elevation: section.isVisible ? 2 : 1,
-        child: Container(
+        child: InkWell(
+          onTap: section.isVisible ? () => _showSectionSettings(context, section, config) : null,
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
@@ -117,7 +136,7 @@ class HomepageConfigModal extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      section.title,
+                      _getSectionTitle(context, section.id),
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: section.isVisible ? FontWeight.w600 : FontWeight.w400,
                         color: section.isVisible
@@ -127,7 +146,9 @@ class HomepageConfigModal extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      section.isVisible ? AppLocalizations.of(context)!.visible : AppLocalizations.of(context)!.hidden,
+                      section.isVisible
+                          ? '${AppLocalizations.of(context)!.visible} • ${AppLocalizations.of(context)!.tapToCustomize}'
+                          : AppLocalizations.of(context)!.hidden,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: section.isVisible
                             ? seedColor
@@ -138,6 +159,16 @@ class HomepageConfigModal extends StatelessWidget {
                   ],
                 ),
               ),
+              // Settings indicator for visible cards
+              if (section.isVisible)
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Icon(
+                    Icons.chevron_right,
+                    size: 20,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
               // Visibility indicator (eye icon as IconButton)
               IconButton(
                 icon: section.isVisible
@@ -150,7 +181,75 @@ class HomepageConfigModal extends StatelessWidget {
             ],
           ),
         ),
+        ),
       ),
     );
+  }
+
+  void _showSectionSettings(BuildContext context, SectionConfig section, HomepageConfigProvider config) {
+    final localizations = AppLocalizations.of(context)!;
+
+    showDialog(
+      context: context,
+      builder: (context) => Consumer<HomepageConfigProvider>(
+        builder: (context, config, _) => AlertDialog(
+          title: Text('${_getSectionTitle(context, section.id)} ${localizations.cardSettings}'),
+          content: _buildSettingsContent(context, section, config),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(localizations.close),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSettingsContent(BuildContext context, SectionConfig section, HomepageConfigProvider config) {
+    final localizations = AppLocalizations.of(context)!;
+
+    switch (section.id) {
+      case 'lessons':
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SwitchListTile(
+              title: Text(localizations.showBreaks),
+              value: config.showBreaks,
+              onChanged: (_) => config.toggleShowBreaks(),
+              contentPadding: EdgeInsets.zero,
+            ),
+          ],
+        );
+
+      case 'holidays':
+      case 'grades':
+      case 'absences':
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Row(
+            children: [
+              Icon(
+                Icons.info_outline,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 20,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  localizations.noConfigurationAvailable,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+
+      default:
+        return Text(localizations.noConfigurationAvailable);
+    }
   }
 }

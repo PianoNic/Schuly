@@ -184,12 +184,18 @@ class ApiClient {
           return value is DateTime ? value : DateTime.tryParse(value);
         case 'AbsenceDto':
           return AbsenceDto.fromJson(value);
+        case 'AbsenceNoticeDto':
+          return AbsenceNoticeDto.fromJson(value);
         case 'AbsenceNoticeStatusDto':
           return AbsenceNoticeStatusDto.fromJson(value);
         case 'AgendaDto':
           return AgendaDto.fromJson(value);
         case 'AppInfoDto':
           return AppInfoDto.fromJson(value);
+        case 'AuthenticateMobileResponseDto':
+          return AuthenticateMobileResponseDto.fromJson(value);
+        case 'AuthenticateRequestDto':
+          return AuthenticateRequestDto.fromJson(value);
         case 'ClassInfoDto':
           return ClassInfoDto.fromJson(value);
         case 'ExamDto':
@@ -202,6 +208,12 @@ class ApiClient {
           return HTTPValidationError.fromJson(value);
         case 'LatenessDto':
           return LatenessDto.fromJson(value);
+        case 'MobileCallbackRequestDto':
+          return MobileCallbackRequestDto.fromJson(value);
+        case 'MobileCallbackResponseDto':
+          return MobileCallbackResponseDto.fromJson(value);
+        case 'MobileOAuthUrlResponseDto':
+          return MobileOAuthUrlResponseDto.fromJson(value);
         case 'SettingDto':
           return SettingDto.fromJson(value);
         case 'StudentIdCardDto':

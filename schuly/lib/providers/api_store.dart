@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:schuly/api/lib/api.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../services/api_service.dart';
 import '../services/storage_service.dart';
 import '../services/push_notification_service.dart';
+import '../utils/logger.dart';
 import 'dart:convert';
+import 'dart:async';
 
 class ApiStore extends ChangeNotifier {
   // Initialization state
   bool _isInitialized = false;
   bool get isInitialized => _isInitialized;
+  bool _isOfflineMode = false;
+  bool get isOfflineMode => _isOfflineMode;
 
   // Auth
   String? _bearerToken;
@@ -42,6 +47,105 @@ class ApiStore extends ChangeNotifier {
   UserInfoDto? userInfo;
   Map<String, dynamic>? appInfo;
 
+  // Selected absence ID for navigation
+  String? _selectedAbsenceId;
+  String? get selectedAbsenceId => _selectedAbsenceId;
+
+  void setSelectedAbsenceId(String? id) {
+    _selectedAbsenceId = id;
+    notifyListeners();
+  }
+
+  void clearSelectedAbsenceId() {
+    _selectedAbsenceId = null;
+    notifyListeners();
+  }
+
+  // Microsoft re-authentication needed flag
+  bool _needsMicrosoftReAuth = false;
+  bool get needsMicrosoftReAuth => _needsMicrosoftReAuth;
+
+  void clearMicrosoftReAuthFlag() {
+    _needsMicrosoftReAuth = false;
+    notifyListeners();
+  }
+
+  // Update Microsoft user after re-authentication
+  Future<void> updateMicrosoftUserTokens(String accessToken, String refreshToken) async {
+    if (_activeUserEmail == null) return;
+
+    final user = _users[_activeUserEmail];
+    if (user == null || user['is_microsoft_auth'] != true) return;
+
+    // Update tokens and expiry
+    final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    user['access_token'] = accessToken;
+    user['refresh_token'] = refreshToken;
+    user['expires_at'] = now + 3600; // 1 hour expiry
+
+    // Save and update auth
+    await StorageService.saveUser(_activeUserEmail!, user);
+    await _setAuthFromUser(user);
+
+    // Clear the re-auth flag
+    _needsMicrosoftReAuth = false;
+
+    logInfo('Microsoft user tokens updated successfully', source: 'ApiStore');
+    notifyListeners();
+  }
+
+  // Check if API endpoint is reachable
+  Future<bool> _checkApiConnectivity() async {
+    try {
+      // Try to fetch app info with a short timeout
+      logDebug('Checking API connectivity by fetching app info', source: 'ApiStore');
+
+      final appApi = AppApi(defaultApiClient);
+
+      // Try to get app info with a 5 second timeout
+      final response = await appApi.appAppInfoWithHttpInfo().timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          logWarning('API connectivity check timed out after 5 seconds', source: 'ApiStore');
+          throw TimeoutException('API connectivity check timed out');
+        },
+      );
+
+      // Consider API reachable if we get a successful response
+      final isReachable = response.statusCode >= 200 && response.statusCode < 300;
+      logDebug('API connectivity check result: $isReachable (status: ${response.statusCode})', source: 'ApiStore');
+
+      // If reachable and successful, also cache the app info
+      if (isReachable && response.body.isNotEmpty && response.statusCode != 204) {
+        try {
+          final appInfoDto = await defaultApiClient.deserializeAsync(
+            response.body,
+            'AppInfoDto',
+          ) as AppInfoDto?;
+
+          if (appInfoDto != null) {
+            // Store the app info
+            appInfo = {
+              'version': appInfoDto.version,
+              'environment': appInfoDto.environment,
+            };
+
+            // Cache it
+            await _cacheAppInfo(appInfo!);
+            notifyListeners();
+          }
+        } catch (e) {
+          logDebug('Failed to parse app info during connectivity check', source: 'ApiStore');
+        }
+      }
+
+      return isReachable;
+    } catch (e) {
+      logWarning('API connectivity check failed: $e', source: 'ApiStore');
+      return false;
+    }
+  }
+
   // In-memory user map: email -> {email, password, access_token, refresh_token, expires_at}
   Map<String, Map<String, dynamic>> _users = {};
   String? _activeUserEmail;
@@ -49,6 +153,7 @@ class ApiStore extends ChangeNotifier {
   String? get activeUserEmail => _activeUserEmail;
   List<String> get userEmails => _users.keys.toList();
   Map<String, dynamic>? get activeUser => _activeUserEmail != null ? _users[_activeUserEmail] : null;
+  Map<String, Map<String, dynamic>> get users => _users;
 
   // On startup, load users from secure storage
   Future<void> loadUsers() async {
@@ -64,24 +169,100 @@ class ApiStore extends ChangeNotifier {
   // Initialize the app (load users and authenticate)
   Future<void> initialize() async {
     try {
+      // Load users first
       await loadUsers();
-      if (_activeUserEmail != null && _users[_activeUserEmail] != null) {
+
+      // Check if API is reachable (with 5 second timeout)
+      final isApiReachable = await _checkApiConnectivity();
+
+      if (isApiReachable) {
+        // API is reachable - online mode
+        _isOfflineMode = false;
+
         // Load cached data first for instant UI
-        await loadAllFromCache();
+        if (_activeUserEmail != null && _users[_activeUserEmail] != null) {
+          await _loadCachedDataOnly();
+        }
+
+        // Then authenticate and fetch fresh data in background
+        await autoLoginIfNeeded();
+        if (_activeUserEmail != null && _users[_activeUserEmail] != null) {
+          fetchAll(forceRefresh: true).catchError((e) {
+            logDebug('[initialize] Background fetch error: $e', source: 'ApiStore');
+          });
+        }
+      } else {
+        // API is not reachable - offline mode
+        _isOfflineMode = true;
+        logInfo('API not reachable, using offline mode with cached data', source: 'ApiStore');
+
+        // Load only cached data
+        if (_activeUserEmail != null && _users[_activeUserEmail] != null) {
+          await _loadCachedDataOnly();
+        }
       }
-      await autoLoginIfNeeded();
-      if (_activeUserEmail != null && _users[_activeUserEmail] != null) {
-        // Then fetch fresh data in background (non-blocking)
-        fetchAll(forceRefresh: true).catchError((e) {
-          print('[initialize] Background fetch error: $e');
-        });
-      }
+
       _isInitialized = true;
     } catch (e) {
-      print('[initialize] Error during initialization: $e');
+      logError('[initialize] Error during initialization: $e', source: 'ApiStore');
+      _isOfflineMode = true; // Assume offline if there's an error
       _isInitialized = true; // Still mark as initialized to show the app
     }
     notifyListeners();
+  }
+
+  // Add a Microsoft OAuth user
+  Future<String?> addMicrosoftUser(String accessToken, String refreshToken, [String? knownEmail]) async {
+    print('[addMicrosoftUser] Storing Microsoft OAuth tokens');
+    try {
+      // Set the bearer token first
+      bearerToken = accessToken;
+
+      String email;
+      if (knownEmail != null && knownEmail.isNotEmpty) {
+        email = knownEmail;
+      } else {
+        // Try to fetch user info to get email
+        await fetchUserInfo();
+
+        if (userInfo == null || userInfo!.email.isEmpty) {
+          return 'Failed to get user information from Microsoft token';
+        }
+        email = userInfo!.email;
+      }
+      final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+
+      // Store user with Microsoft auth flag
+      _users[email] = {
+        'email': email,
+        'password': '', // No password for OAuth users
+        'access_token': accessToken,
+        'refresh_token': refreshToken,
+        'token_type': 'Bearer',
+        'expires_at': now + 3600, // Default 1 hour expiry
+        'is_microsoft_auth': true, // Flag to indicate Microsoft auth
+      };
+
+      _activeUserEmail = email;
+
+      try {
+        await StorageService.saveUser(email, _users[email]!);
+        await StorageService.setActiveUser(email);
+        await _setAuthFromUser(_users[email]!);
+        print('[addMicrosoftUser] Microsoft user persisted and auth set.');
+      } catch (storageError, stack) {
+        print('[addMicrosoftUser] Error persisting user: $storageError');
+        print(stack);
+        return 'Login succeeded but failed to persist user: $storageError';
+      }
+
+      notifyListeners();
+      return null; // Success
+    } catch (e, stack) {
+      print('[addMicrosoftUser] Exception: $e');
+      print(stack);
+      return 'Microsoft login error: $e';
+    }
   }
 
   // Add a user (login and store)
@@ -170,10 +351,20 @@ class ApiStore extends ChangeNotifier {
 
   // Remove a user
   Future<void> removeUser(String email) async {
+    // Check if this is a Microsoft user before removing
+    final user = _users[email];
+    final isMicrosoftUser = user?['is_microsoft_auth'] == true;
+
     _users.remove(email);
     await StorageService.removeUser(email);
-    
+
     if (_activeUserEmail == email) {
+      // If removing a Microsoft user and no other users, clear WebView cookies
+      if (isMicrosoftUser && _users.isEmpty) {
+        logInfo('Clearing WebView cookies after removing last Microsoft user', source: 'ApiStore');
+        await WebViewCookieManager().clearCookies();
+      }
+
       _activeUserEmail = _users.keys.isNotEmpty ? _users.keys.first : null;
       await StorageService.setActiveUser(_activeUserEmail);
       if (_activeUserEmail != null) {
@@ -192,8 +383,18 @@ class ApiStore extends ChangeNotifier {
     if (user == null) return;
     final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     if ((user['expires_at'] ?? 0) < now) {
-      // Token expired, re-login
-      await addUser(user['email'], user['password']);
+      // Token expired
+      if (user['is_microsoft_auth'] == true) {
+        // Microsoft user - set flag for re-authentication
+        logInfo('Microsoft user token expired, needs re-authentication', source: 'ApiStore');
+        _needsMicrosoftReAuth = true;
+        notifyListeners();
+        // Still set the expired token so the user can be identified
+        await _setAuthFromUser(user);
+      } else {
+        // Regular user - re-login with password
+        await addUser(user['email'], user['password']);
+      }
     } else {
       await _setAuthFromUser(user);
     }
@@ -343,8 +544,8 @@ class ApiStore extends ChangeNotifier {
   Future<bool> loginMobile(String email, String password) async {
     try {
       final result = await _apiService.authenticate(email, password);
-      if (result is Map && result['access_token'] != null) {
-        bearerToken = result['access_token'] as String;
+      if (result != null && result.accessToken != null) {
+        bearerToken = result.accessToken;
         return true;
       }
     } catch (e) {
@@ -364,6 +565,48 @@ class ApiStore extends ChangeNotifier {
       fetchUserInfo(forceRefresh: false),
       fetchAppInfo(forceRefresh: false),
     ]);
+  }
+
+  // Load only cached data without any API calls
+  Future<void> _loadCachedDataOnly() async {
+    // Load cached data directly without going through fetch methods
+    // This avoids any potential API calls
+    final futures = <Future>[];
+
+    futures.add(_loadCachedAbsences().then((data) {
+      if (data != null) absences = data;
+    }));
+
+    futures.add(_loadCachedGrades().then((data) {
+      if (data != null) grades = data;
+    }));
+
+    futures.add(_loadCachedAgenda().then((data) {
+      if (data != null) agenda = data;
+    }));
+
+    futures.add(_loadCachedLateness().then((data) {
+      if (data != null) lateness = data;
+    }));
+
+    futures.add(_loadCachedUserInfo().then((data) {
+      if (data != null) userInfo = data;
+    }));
+
+    futures.add(_loadCachedStudentIdCard().then((data) {
+      if (data != null) studentIdCard = data;
+    }));
+
+    futures.add(_loadCachedSettings().then((data) {
+      if (data != null) settings = data;
+    }));
+
+    futures.add(_loadCachedAppInfo().then((data) {
+      if (data != null) appInfo = data;
+    }));
+
+    await Future.wait(futures);
+    notifyListeners();
   }
 
   // Fetch all data methods (with optional force refresh)
@@ -719,12 +962,23 @@ class ApiStore extends ChangeNotifier {
         notifyListeners();
         return;
       }
+      // If no cached data and not forcing refresh, don't try to fetch from API
+      // This prevents blocking when loading cache during offline mode
+      if (_isOfflineMode) {
+        notifyListeners();
+        return;
+      }
     }
 
     try {
       final appApi = AppApi();
       // Get the raw HTTP response instead of trying to deserialize
-      final httpResponse = await appApi.appAppInfoWithHttpInfo().timeout(Duration(seconds: 5));
+      final httpResponse = await appApi.appAppInfoWithHttpInfo().timeout(
+        const Duration(seconds: 2),
+        onTimeout: () {
+          throw TimeoutException('App info fetch timed out');
+        },
+      );
 
       if (httpResponse.statusCode == 200) {
         // Manually parse the JSON response
@@ -772,11 +1026,21 @@ class ApiStore extends ChangeNotifier {
 
   // Clear all user data and tokens (logout)
   Future<void> clearAll() async {
+    // Check if any Microsoft users exist before clearing
+    final hasMicrosoftUsers = _users.values.any((user) => user['is_microsoft_auth'] == true);
+
     _users.clear();
     _activeUserEmail = null;
     bearerToken = null;
     _clearCurrentData();
     await StorageService.clearAll();
+
+    // Clear WebView cookies if there were any Microsoft users
+    if (hasMicrosoftUsers) {
+      logInfo('Clearing WebView cookies on logout', source: 'ApiStore');
+      await WebViewCookieManager().clearCookies();
+    }
+
     notifyListeners();
   }
 

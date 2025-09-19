@@ -38,9 +38,13 @@ class AuthApi {
 
     const contentTypes = <String>['application/x-www-form-urlencoded'];
 
-    formParams[r'email'] = parameterToString(email);
+    if (email != null) {
+      formParams[r'email'] = parameterToString(email);
+    }
+    if (password != null) {
       formParams[r'password'] = parameterToString(password);
-  
+    }
+
     return apiClient.invokeAPI(
       path,
       'POST',
@@ -59,7 +63,7 @@ class AuthApi {
   /// * [String] email (required):
   ///
   /// * [String] password (required):
-  Future<Object?> authenticateMobile(String email, String password,) async {
+  Future<AuthenticateMobileResponseDto?> authenticateMobile(String email, String password,) async {
     final response = await authenticateMobileWithHttpInfo(email, password,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -68,37 +72,33 @@ class AuthApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Object',) as Object;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'AuthenticateMobileResponseDto',) as AuthenticateMobileResponseDto;
     
     }
     return null;
   }
 
-  /// Authenticate Unified Api
+  /// Mobile Oauth Callback
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
-  /// * [String] email (required):
-  ///
-  /// * [String] password (required):
-  Future<Response> authenticateUnifiedWithHttpInfo(String email, String password,) async {
+  /// * [MobileCallbackRequestDto] mobileCallbackRequestDto (required):
+  Future<Response> authenticateOauthMobileCallbackWithHttpInfo(MobileCallbackRequestDto mobileCallbackRequestDto,) async {
     // ignore: prefer_const_declarations
-    final path = r'/api/authenticate/unified';
+    final path = r'/api/authenticate/oauth/mobile/callback';
 
     // ignore: prefer_final_locals
-    Object? postBody;
+    Object? postBody = mobileCallbackRequestDto;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    const contentTypes = <String>['application/x-www-form-urlencoded'];
+    const contentTypes = <String>['application/json'];
 
-    formParams[r'email'] = parameterToString(email);
-      formParams[r'password'] = parameterToString(password);
-  
+
     return apiClient.invokeAPI(
       path,
       'POST',
@@ -110,15 +110,13 @@ class AuthApi {
     );
   }
 
-  /// Authenticate Unified Api
+  /// Mobile Oauth Callback
   ///
   /// Parameters:
   ///
-  /// * [String] email (required):
-  ///
-  /// * [String] password (required):
-  Future<Object?> authenticateUnified(String email, String password,) async {
-    final response = await authenticateUnifiedWithHttpInfo(email, password,);
+  /// * [MobileCallbackRequestDto] mobileCallbackRequestDto (required):
+  Future<MobileCallbackResponseDto?> authenticateOauthMobileCallback(MobileCallbackRequestDto mobileCallbackRequestDto,) async {
+    final response = await authenticateOauthMobileCallbackWithHttpInfo(mobileCallbackRequestDto,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -126,7 +124,103 @@ class AuthApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Object',) as Object;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'MobileCallbackResponseDto',) as MobileCallbackResponseDto;
+    
+    }
+    return null;
+  }
+
+  /// Generate Mobile Oauth Url
+  ///
+  /// Note: This method returns the HTTP [Response].
+  Future<Response> authenticateOauthMobileUrlWithHttpInfo() async {
+    // ignore: prefer_const_declarations
+    final path = r'/api/authenticate/oauth/mobile/url';
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Generate Mobile Oauth Url
+  Future<MobileOAuthUrlResponseDto?> authenticateOauthMobileUrl() async {
+    final response = await authenticateOauthMobileUrlWithHttpInfo();
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'MobileOAuthUrlResponseDto',) as MobileOAuthUrlResponseDto;
+    
+    }
+    return null;
+  }
+
+  /// Authenticate Unified Api
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [AuthenticateRequestDto] authenticateRequestDto (required):
+  Future<Response> authenticateUnifiedWithHttpInfo(AuthenticateRequestDto authenticateRequestDto,) async {
+    // ignore: prefer_const_declarations
+    final path = r'/api/authenticate/unified';
+
+    // ignore: prefer_final_locals
+    Object? postBody = authenticateRequestDto;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>['application/json'];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Authenticate Unified Api
+  ///
+  /// Parameters:
+  ///
+  /// * [AuthenticateRequestDto] authenticateRequestDto (required):
+  Future<AuthenticateMobileResponseDto?> authenticateUnified(AuthenticateRequestDto authenticateRequestDto,) async {
+    final response = await authenticateUnifiedWithHttpInfo(authenticateRequestDto,);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'AuthenticateMobileResponseDto',) as AuthenticateMobileResponseDto;
     
     }
     return null;
@@ -138,25 +232,21 @@ class AuthApi {
   ///
   /// Parameters:
   ///
-  /// * [String] email (required):
-  ///
-  /// * [String] password (required):
-  Future<Response> authenticateWebWithHttpInfo(String email, String password,) async {
+  /// * [AuthenticateRequestDto] authenticateRequestDto (required):
+  Future<Response> authenticateWebWithHttpInfo(AuthenticateRequestDto authenticateRequestDto,) async {
     // ignore: prefer_const_declarations
     final path = r'/api/authenticate/web';
 
     // ignore: prefer_final_locals
-    Object? postBody;
+    Object? postBody = authenticateRequestDto;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    const contentTypes = <String>['application/x-www-form-urlencoded'];
+    const contentTypes = <String>['application/json'];
 
-    formParams[r'email'] = parameterToString(email);
-      formParams[r'password'] = parameterToString(password);
-  
+
     return apiClient.invokeAPI(
       path,
       'POST',
@@ -172,11 +262,9 @@ class AuthApi {
   ///
   /// Parameters:
   ///
-  /// * [String] email (required):
-  ///
-  /// * [String] password (required):
-  Future<Object?> authenticateWeb(String email, String password,) async {
-    final response = await authenticateWebWithHttpInfo(email, password,);
+  /// * [AuthenticateRequestDto] authenticateRequestDto (required):
+  Future<Object?> authenticateWeb(AuthenticateRequestDto authenticateRequestDto,) async {
+    final response = await authenticateWebWithHttpInfo(authenticateRequestDto,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }

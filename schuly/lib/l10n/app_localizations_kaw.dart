@@ -9,7 +9,7 @@ class AppLocalizationsKaw extends AppLocalizations {
   AppLocalizationsKaw([String locale = 'kaw']) : super(locale);
 
   @override
-  String get appTitle => 'Schuwly';
+  String get appTitle => 'Schuly';
 
   @override
   String get noAccountAdded => 'Nu fwiends added yet';
@@ -169,17 +169,17 @@ class AppLocalizationsKaw extends AppLocalizations {
   String get featureInDevelopment => 'Stiww being made cutew!';
 
   @override
-  String get getNotified => 'Get notified before classes';
+  String get getNotified => 'Get cute notifs! ✨';
 
   @override
-  String get enableNotifications => 'Enable to receive notifications';
+  String get enableNotifications => 'Enabwe notifications pwease! (◕‿◕)';
 
   @override
-  String get notificationsEnabled => 'Notifications enabled successfully';
+  String get notificationsEnabled => 'Notifications enabwed! ヽ(♡‿♡)ノ';
 
   @override
   String get notificationPermissionDenied =>
-      'Notification permission denied. Please enable in settings.';
+      'Notification pewmission denied (╥﹏╥)';
 
   @override
   String get configureNotifications => 'Configuwre notifs pwease';
@@ -508,28 +508,29 @@ class AppLocalizationsKaw extends AppLocalizations {
   String get checkNotificationsWork => 'Check if notifs wowk!';
 
   @override
-  String get scheduleTestNotification => 'Schedule test notification';
+  String get scheduleTestNotification => 'Scheduwle test notif! ✨';
 
   @override
   String get testScheduledNotificationDesc =>
-      'Receive a notification in 15 seconds (works when app is closed)';
+      'A test notif wiww appeaw soon UwU';
 
   @override
   String get notificationScheduledIn15Seconds =>
-      'Notification scheduled! Close the app to test - appears in 15 seconds';
+      'Notif scheduwed in 15 seconds! (ﾉ◕ヮ◕)ﾉ';
 
   @override
-  String get errorSchedulingNotification => 'Failed to schedule notification';
+  String get errorSchedulingNotification =>
+      'Ewwow scheduwing notification (>_<)';
 
   @override
-  String get testNotificationSent => 'Test notification sent!';
+  String get testNotificationSent => 'Test notif sent! ✨(๑•ᴗ•๑)✨';
 
   @override
   String get exactAlarmPermissionRequired =>
-      'Exact alarm permission required. Please enable in settings.';
+      'Exact awawm pewmission wequiwed! (◔◡◔)';
 
   @override
-  String get openSettings => 'Open Settings';
+  String get openSettings => 'Open Settings UwU';
 
   @override
   String get gradeDetails => 'Gwade detaiws';
@@ -621,7 +622,34 @@ class AppLocalizationsKaw extends AppLocalizations {
   }
 
   @override
-  String get getColorName => 'Get color name';
+  String get getColorName => 'Get cowow name ✨';
+
+  @override
+  String get lessonBreak => 'Snuggle Time ✨';
+
+  @override
+  String get lunchBreak => 'Nom Nom Time 🍱';
+
+  @override
+  String get showBreaks => 'Show snuggle time between wessons UwU';
+
+  @override
+  String get cardSettings => 'Cawd Settings ✨';
+
+  @override
+  String get tapToCustomize => 'Tap to make it cutew UwU';
+
+  @override
+  String get numberOfDaysToShow => 'Days to show (◕‿◕)';
+
+  @override
+  String get numberOfGradesToShow => 'Gwades to dispway ✨';
+
+  @override
+  String get showOnlyOpenAbsences => 'Show onwy open absences owo';
+
+  @override
+  String get noConfigurationAvailable => 'No settings to customize hewe UwU';
 
   @override
   String get switchAccount => 'Switch Account';
@@ -743,7 +771,7 @@ class AppLocalizationsKaw extends AppLocalizations {
   String get noNoticesFound => 'Nu notices found!';
 
   @override
-  String get minutes => 'min';
+  String get minutes => 'minutes UwU';
 
   @override
   String get hours => 'hr';
@@ -1097,64 +1125,94 @@ class AppLocalizationsKaw extends AppLocalizations {
       'Finalizing initialization... ✨(๑•ᴗ•๑)✨';
 
   @override
+  String get checkingConnection => 'Checking connection...';
+
+  @override
+  String get offlineModeDetected => 'Offline mode - using cached data';
+
+  @override
+  String get loadingCachedData => 'Loading cached data...';
+
+  @override
   String errorCheckingUpdatesDetails(Object error) {
     return 'Ouchie! Ewwow checking fow updates: $error';
   }
 
   @override
-  String get minute => 'minute';
+  String get minute => 'minute (>﹏<)';
 
   @override
-  String get beforeClass => 'before class';
+  String get beforeClass => 'befowe cwass ✨';
 
   @override
-  String get notificationPermissions => 'Notification Permissions';
+  String get notificationPermissions => 'Notif Pewmissions UwU';
 
   @override
   String get notificationPermissionsDescription =>
-      'To receive timely notifications about your classes, please grant the following permissions:';
+      'To weceive timely notifs about youw cwasses, pwease gwant the fowwowing pewmissions:';
 
   @override
-  String get notificationPermission => 'Notifications';
+  String get notificationPermission => 'Notifications ✨';
 
   @override
   String get notificationPermissionDesc =>
-      'Allow Schuly to send you notifications';
+      'Awwow Schuwly to send yu cute notifications';
 
   @override
-  String get exactAlarmPermission => 'Exact Alarms';
+  String get exactAlarmPermission => 'Exact Awarms';
 
   @override
   String get exactAlarmPermissionDesc =>
-      'Required for precise notification timing';
+      'Wequiwed fow pwecise notification timing owo';
 
   @override
   String get batteryOptimization => 'Battery Optimization';
 
   @override
   String get batteryOptimizationDesc =>
-      'Disable battery optimization for reliable notifications';
+      'Disabwe battwy optimization fow wewiabwe notifications ✧*。٩(ˊᗜˋ*)و✧*。';
 
   @override
-  String get grant => 'Grant';
+  String get grant => 'Gwant (◕‿◕)';
 
   @override
   String get allPermissionsGranted =>
-      'All permissions granted! Notifications will work reliably.';
+      'Aww pewmissions gwanted! Notifications wiww wowk wewiably ♡(˃͈ દ ˂͈ ༶ )';
 
   @override
   String get somePermissionsMissing =>
-      'Some permissions are missing. Notifications may not work as expected.';
+      'Some pewmissions awe missing. Notifications may not wowk as expected (>_<)';
 
   @override
-  String get remindLater => 'Remind Later';
+  String get remindLater => 'Wemind Watew';
 
   @override
-  String get continueAnyway => 'Continue Anyway';
+  String get continueAnyway => 'Continue Anyway UwU';
 
   @override
-  String get done => 'Done';
+  String get done => 'Done! ✨(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧';
 
   @override
-  String get checkPermissions => 'Check Permissions';
+  String get checkPermissions => 'Check Pewmissions';
+
+  @override
+  String get relatedNotices => 'Wewated Notices UwU';
+
+  @override
+  String get exam => 'Exam owo';
+
+  @override
+  String get date => 'Date (๑•ᴗ•๑)';
+
+  @override
+  String get time => 'Time ⏰';
+
+  @override
+  String get studentReason => 'Student Weason (´･ω･`)';
+
+  @override
+  String get trainerComment => 'Twainew Comment ✨';
+
+  @override
+  String get unexcusedAbsences => 'Unexcused Absences (｡•́︿•̀｡)';
 }

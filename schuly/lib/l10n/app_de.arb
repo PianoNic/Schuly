@@ -250,6 +250,15 @@
   "openSettings": "Einstellungen öffnen",
 
   "getColorName": "Farbname abrufen",
+  "lessonBreak": "Pause",
+  "lunchBreak": "Mittagspause",
+  "showBreaks": "Pausen zwischen Lektionen anzeigen",
+  "cardSettings": "Karten-Einstellungen",
+  "tapToCustomize": "Zum Anpassen tippen",
+  "numberOfDaysToShow": "Anzahl der anzuzeigenden Tage",
+  "numberOfGradesToShow": "Anzahl der anzuzeigenden Noten",
+  "showOnlyOpenAbsences": "Nur offene Absenzen anzeigen",
+  "noConfigurationAvailable": "Keine Konfigurationseinstellungen verfügbar",
   "gradeDetails": "Notendetails",
   "basicInformation": "Grundinformationen",
   "titleLabel": "Titel",
@@ -513,5 +522,14 @@
   "remindLater": "Später erinnern",
   "continueAnyway": "Trotzdem fortfahren",
   "done": "Fertig",
-  "checkPermissions": "Berechtigungen prüfen"
+  "checkPermissions": "Berechtigungen prüfen",
+
+  "relatedNotices": "Zugehörige Meldungen",
+  "exam": "Prüfung",
+  "date": "Datum",
+  "time": "Zeit",
+  "studentReason": "Begründung des Schülers",
+  "trainerComment": "Kommentar des Lehrers",
+
+  "unexcusedAbsences": "Unentschuldigte Absenzen"
 }

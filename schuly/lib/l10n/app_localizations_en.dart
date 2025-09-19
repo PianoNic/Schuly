@@ -630,6 +630,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get getColorName => 'Get color name';
 
   @override
+  String get lessonBreak => 'Break';
+
+  @override
+  String get lunchBreak => 'Lunch Break';
+
+  @override
+  String get showBreaks => 'Show breaks between lessons';
+
+  @override
+  String get cardSettings => 'Card Settings';
+
+  @override
+  String get tapToCustomize => 'Tap to customize';
+
+  @override
+  String get numberOfDaysToShow => 'Number of days to show';
+
+  @override
+  String get numberOfGradesToShow => 'Number of grades to show';
+
+  @override
+  String get showOnlyOpenAbsences => 'Show only open absences';
+
+  @override
+  String get noConfigurationAvailable => 'No configuration settings available';
+
+  @override
   String get switchAccount => 'Switch Account';
 
   @override
@@ -1100,6 +1127,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get finalizingInitialization => 'Finalizing initialization...';
 
   @override
+  String get checkingConnection => 'Checking connection...';
+
+  @override
+  String get offlineModeDetected => 'Offline mode - using cached data';
+
+  @override
+  String get loadingCachedData => 'Loading cached data...';
+
+  @override
   String errorCheckingUpdatesDetails(Object error) {
     return 'Error checking for updates: $error';
   }
@@ -1160,4 +1196,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get checkPermissions => 'Check Permissions';
+
+  @override
+  String get relatedNotices => 'Related Notices';
+
+  @override
+  String get exam => 'Exam';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get studentReason => 'Student Reason';
+
+  @override
+  String get trainerComment => 'Trainer Comment';
+
+  @override
+  String get unexcusedAbsences => 'Unexcused Absences';
 }

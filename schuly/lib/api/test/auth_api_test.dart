@@ -19,21 +19,35 @@ void main() {
   group('tests for AuthApi', () {
     // Authenticate Mobile Api
     //
-    //Future<Object> authenticateMobile(String email, String password) async
+    //Future<AuthenticateMobileResponseDto> authenticateMobile(String email, String password) async
     test('test authenticateMobile', () async {
+      // TODO
+    });
+
+    // Mobile Oauth Callback
+    //
+    //Future<MobileCallbackResponseDto> authenticateOauthMobileCallback(MobileCallbackRequestDto mobileCallbackRequestDto) async
+    test('test authenticateOauthMobileCallback', () async {
+      // TODO
+    });
+
+    // Generate Mobile Oauth Url
+    //
+    //Future<MobileOAuthUrlResponseDto> authenticateOauthMobileUrl() async
+    test('test authenticateOauthMobileUrl', () async {
       // TODO
     });
 
     // Authenticate Unified Api
     //
-    //Future<Object> authenticateUnified(String email, String password) async
+    //Future<AuthenticateMobileResponseDto> authenticateUnified(AuthenticateRequestDto authenticateRequestDto) async
     test('test authenticateUnified', () async {
       // TODO
     });
 
     // Authenticate Web Interface
     //
-    //Future<Object> authenticateWeb(String email, String password) async
+    //Future<Object> authenticateWeb(AuthenticateRequestDto authenticateRequestDto) async
     test('test authenticateWeb', () async {
       // TODO
     });

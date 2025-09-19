@@ -1292,6 +1292,60 @@ abstract class AppLocalizations {
   /// **'Get color name'**
   String get getColorName;
 
+  /// Label for break between lessons
+  ///
+  /// In en, this message translates to:
+  /// **'Break'**
+  String get lessonBreak;
+
+  /// Label for lunch break
+  ///
+  /// In en, this message translates to:
+  /// **'Lunch Break'**
+  String get lunchBreak;
+
+  /// Setting to show/hide breaks between lessons
+  ///
+  /// In en, this message translates to:
+  /// **'Show breaks between lessons'**
+  String get showBreaks;
+
+  /// Title for card-specific settings
+  ///
+  /// In en, this message translates to:
+  /// **'Card Settings'**
+  String get cardSettings;
+
+  /// Hint text for tappable cards
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to customize'**
+  String get tapToCustomize;
+
+  /// Setting for how many days to display
+  ///
+  /// In en, this message translates to:
+  /// **'Number of days to show'**
+  String get numberOfDaysToShow;
+
+  /// Setting for how many grades to display
+  ///
+  /// In en, this message translates to:
+  /// **'Number of grades to show'**
+  String get numberOfGradesToShow;
+
+  /// Setting to filter absences
+  ///
+  /// In en, this message translates to:
+  /// **'Show only open absences'**
+  String get showOnlyOpenAbsences;
+
+  /// Message shown when a card has no configurable settings
+  ///
+  /// In en, this message translates to:
+  /// **'No configuration settings available'**
+  String get noConfigurationAvailable;
+
   /// Header/title for the account switcher modal
   ///
   /// In en, this message translates to:
@@ -2138,6 +2192,24 @@ abstract class AppLocalizations {
   /// **'Finalizing initialization...'**
   String get finalizingInitialization;
 
+  /// Message shown when checking API connection
+  ///
+  /// In en, this message translates to:
+  /// **'Checking connection...'**
+  String get checkingConnection;
+
+  /// Message shown when offline mode is detected
+  ///
+  /// In en, this message translates to:
+  /// **'Offline mode - using cached data'**
+  String get offlineModeDetected;
+
+  /// Message shown when loading cached data in offline mode
+  ///
+  /// In en, this message translates to:
+  /// **'Loading cached data...'**
+  String get loadingCachedData;
+
   /// Detailed error message for update check failure
   ///
   /// In en, this message translates to:
@@ -2245,6 +2317,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check Permissions'**
   String get checkPermissions;
+
+  /// Header for absence notices related to an absence
+  ///
+  /// In en, this message translates to:
+  /// **'Related Notices'**
+  String get relatedNotices;
+
+  /// Label for exam lessons
+  ///
+  /// In en, this message translates to:
+  /// **'Exam'**
+  String get exam;
+
+  /// Date label
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// Time label
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// Label for student's reason for absence
+  ///
+  /// In en, this message translates to:
+  /// **'Student Reason'**
+  String get studentReason;
+
+  /// Label for trainer's comment on absence
+  ///
+  /// In en, this message translates to:
+  /// **'Trainer Comment'**
+  String get trainerComment;
+
+  /// Header for unexcused absences section
+  ///
+  /// In en, this message translates to:
+  /// **'Unexcused Absences'**
+  String get unexcusedAbsences;
 }
 
 class _AppLocalizationsDelegate

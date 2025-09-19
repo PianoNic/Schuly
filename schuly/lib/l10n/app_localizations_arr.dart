@@ -55,25 +55,25 @@ class AppLocalizationsArr extends AppLocalizations {
       'Report bugs or request new adventures';
 
   @override
-  String get copy => 'Copy';
+  String get copy => 'Parrot that message!';
 
   @override
-  String get copiedToClipboard => 'Copied to yer clipboard';
+  String get copiedToClipboard => 'Message captured in me bottle!';
 
   @override
-  String get ok => 'Aye';
+  String get ok => 'Savvy!';
 
   @override
-  String get error => 'Blunder';
+  String get error => 'Shiver me timbers!';
 
   @override
   String emailAppError(Object email) {
-    return 'Couldn\'t open yer mail app. Contact us at: $email';
+    return 'Blast! Can\'t open the message bottle. Send word to: $email';
   }
 
   @override
   String browserError(Object url) {
-    return 'Couldn\'t open yer browser. Visit manually: $url';
+    return 'Shiver me timbers! Can\'t chart the course. Sail to: $url';
   }
 
   @override
@@ -158,10 +158,10 @@ class AppLocalizationsArr extends AppLocalizations {
   String get kawaii => 'Kawaii Speak';
 
   @override
-  String get cancel => 'Belay That!';
+  String get cancel => 'Avast! Cancel that order!';
 
   @override
-  String get confirm => 'Aye Aye, Captain!';
+  String get confirm => 'Make it so, ye scurvy dog!';
 
   @override
   String get pushNotifications => 'Crow\'s Messages';
@@ -170,17 +170,17 @@ class AppLocalizationsArr extends AppLocalizations {
   String get featureInDevelopment => 'Still being forged in the smithy';
 
   @override
-  String get getNotified => 'Get notified before classes';
+  String get getNotified => 'Sound the bell before yer lessons';
 
   @override
-  String get enableNotifications => 'Enable to receive notifications';
+  String get enableNotifications => 'Hoist the signal flags for alerts';
 
   @override
-  String get notificationsEnabled => 'Notifications enabled successfully';
+  String get notificationsEnabled => 'Signal flags be hoisted, cap\'n!';
 
   @override
   String get notificationPermissionDenied =>
-      'Notification permission denied. Please enable in settings.';
+      'The crow\'s nest be blocked! Check yer ship\'s settings.';
 
   @override
   String get configureNotifications => 'Set Up Ship\'s Signals';
@@ -195,7 +195,7 @@ class AppLocalizationsArr extends AppLocalizations {
   String get changelogAndFeatures => 'New loot and features';
 
   @override
-  String get checkForUpdates => 'Scout for New Maps';
+  String get checkForUpdates => 'Hunt for buried treasure!';
 
   @override
   String get checkForNewVersions => 'Scout for new charts';
@@ -204,19 +204,19 @@ class AppLocalizationsArr extends AppLocalizations {
   String get aboutApp => 'About This Ship';
 
   @override
-  String get version => 'Ship\'s Version';
+  String get version => 'Ship\'s Registry';
 
   @override
-  String get delete => 'Scuttle';
+  String get delete => 'Send to Davy Jones\' Locker';
 
   @override
-  String get close => 'Batten Down';
+  String get close => 'Batten down the hatches!';
 
   @override
-  String get add => 'Recruit';
+  String get add => 'Press gang into service!';
 
   @override
-  String get loading => 'Hoisting sails...';
+  String get loading => 'Weighin\' anchor, ye landlubbers!';
 
   @override
   String get noEventsForThisDay => 'No adventures scheduled for this day';
@@ -239,29 +239,29 @@ class AppLocalizationsArr extends AppLocalizations {
   String get studentIdCard => 'Pirate\'s Papers';
 
   @override
-  String get reloadPage => 'Reload the map';
+  String get reloadPage => 'Chart the course again!';
 
   @override
-  String get loadingStudentIdCard => 'Pirate\'s papers be loading...';
+  String get loadingStudentIdCard => 'Diggin\' up yer sea papers, matey...';
 
   @override
   String get enterValidEmail =>
-      'Enter a proper ship\'s message address, ye scallywag';
+      'That ain\'t proper ship coordinates, ye landlubber!';
 
   @override
   String get areYouSure => 'Are ye certain, matey?';
 
   @override
-  String get updateAvailable => 'New treasure map available!';
+  String get updateAvailable => 'Blimey! New treasure chart spotted!';
 
   @override
-  String get later => 'Later, ye landlubber';
+  String get later => 'Not now, ye bilge rat!';
 
   @override
-  String get yes => 'Aye';
+  String get yes => 'Aye aye, Captain!';
 
   @override
-  String get no => 'Nay';
+  String get no => 'Over me dead body!';
 
   @override
   String get confirmed => 'Verified by the Captain';
@@ -285,11 +285,10 @@ class AppLocalizationsArr extends AppLocalizations {
   String get password => 'Secret Code';
 
   @override
-  String get login => 'Board the Ship';
+  String get login => 'All Aboard!';
 
   @override
-  String get enterEmailAddress =>
-      'Enter yer ship\'s message address, ye scallywag';
+  String get enterEmailAddress => 'Scribble yer coordinates, ye sea dog!';
 
   @override
   String get getNewToken => 'Fetch new booty token';
@@ -337,13 +336,13 @@ class AppLocalizationsArr extends AppLocalizations {
   String get appearance => 'Look o\' the Ship';
 
   @override
-  String get automatic => 'By the stars';
+  String get automatic => 'By Neptune\'s beard!';
 
   @override
-  String get light => 'Daylight';
+  String get light => 'Sun\'s blazin\' bright';
 
   @override
-  String get dark => 'Nightfall';
+  String get dark => 'Black as the depths';
 
   @override
   String get colorStyle => 'Color o\' the Ship';
@@ -397,13 +396,13 @@ class AppLocalizationsArr extends AppLocalizations {
   String get neonMint => 'Neon Mint';
 
   @override
-  String get blue => 'Blue';
+  String get blue => 'Ocean blue';
 
   @override
   String get teal => 'Teal';
 
   @override
-  String get green => 'Green';
+  String get green => 'Sea foam green';
 
   @override
   String get pink => 'Pink';
@@ -415,10 +414,10 @@ class AppLocalizationsArr extends AppLocalizations {
   String get indigo => 'Indigo';
 
   @override
-  String get red => 'Red';
+  String get red => 'Blood red';
 
   @override
-  String get yellow => 'Yellow';
+  String get yellow => 'Gold doubloon';
 
   @override
   String get purple => 'Purple';
@@ -504,7 +503,7 @@ class AppLocalizationsArr extends AppLocalizations {
   }
 
   @override
-  String get test => 'Test';
+  String get test => 'Fire a warning shot!';
 
   @override
   String get sendTestNotification => 'Send test signal';
@@ -513,28 +512,29 @@ class AppLocalizationsArr extends AppLocalizations {
   String get checkNotificationsWork => 'Check if signals work';
 
   @override
-  String get scheduleTestNotification => 'Schedule test notification';
+  String get scheduleTestNotification => 'Test the ship\'s bell';
 
   @override
   String get testScheduledNotificationDesc =>
-      'Receive a notification in 15 seconds (works when app is closed)';
+      'The bell will ring in 15 ticks (even when ye abandon ship)';
 
   @override
   String get notificationScheduledIn15Seconds =>
-      'Notification scheduled! Close the app to test - appears in 15 seconds';
+      'Bell be set! Abandon ship to test - rings in 15 ticks';
 
   @override
-  String get errorSchedulingNotification => 'Failed to schedule notification';
+  String get errorSchedulingNotification =>
+      'Blimey! Can\'t set the ship\'s bell';
 
   @override
-  String get testNotificationSent => 'Test notification sent!';
+  String get testNotificationSent => 'Test bell be rung, matey!';
 
   @override
   String get exactAlarmPermissionRequired =>
-      'Exact alarm permission required. Please enable in settings.';
+      'Need permission fer precise bell timing. Check yer settings!';
 
   @override
-  String get openSettings => 'Open Settings';
+  String get openSettings => 'Navigate to settings';
 
   @override
   String get gradeDetails => 'Treasure Details';
@@ -618,7 +618,7 @@ class AppLocalizationsArr extends AppLocalizations {
   String get apiBaseUrl => 'API Main Deck';
 
   @override
-  String get save => 'Stow';
+  String get save => 'Stash the booty!';
 
   @override
   String apiUrlChanged(Object url) {
@@ -626,7 +626,34 @@ class AppLocalizationsArr extends AppLocalizations {
   }
 
   @override
-  String get getColorName => 'Get color name';
+  String get getColorName => 'Reveal yer flag\'s color';
+
+  @override
+  String get lessonBreak => 'Shore Leave';
+
+  @override
+  String get lunchBreak => 'Grub Time';
+
+  @override
+  String get showBreaks => 'Show shore leave between sailings';
+
+  @override
+  String get cardSettings => 'Chart Settings';
+
+  @override
+  String get tapToCustomize => 'Tap to adjust yer settings';
+
+  @override
+  String get numberOfDaysToShow => 'Days on the horizon';
+
+  @override
+  String get numberOfGradesToShow => 'Marks to display';
+
+  @override
+  String get showOnlyOpenAbsences => 'Show only unexcused desertions';
+
+  @override
+  String get noConfigurationAvailable => 'No chart settings to adjust, matey';
 
   @override
   String get switchAccount => 'Change Yer Pirate';
@@ -663,7 +690,7 @@ class AppLocalizationsArr extends AppLocalizations {
   }
 
   @override
-  String get remove => 'Overboard!';
+  String get remove => 'Walk the plank!';
 
   @override
   String switchedAccount(Object email) {
@@ -672,7 +699,7 @@ class AppLocalizationsArr extends AppLocalizations {
 
   @override
   String switchAccountError(Object error) {
-    return 'Couldn\'t change pirate: $error';
+    return 'Blast! Can\'t switch buccaneers: $error';
   }
 
   @override
@@ -682,12 +709,12 @@ class AppLocalizationsArr extends AppLocalizations {
 
   @override
   String removeAccountError(Object error) {
-    return 'Couldn\'t throw overboard: $error';
+    return 'Arrr! Can\'t make \'em walk the plank: $error';
   }
 
   @override
   String unexpectedError(Object error) {
-    return 'A kraken appeared: $error';
+    return 'Batten down the hatches! A kraken attacked: $error';
   }
 
   @override
@@ -748,7 +775,7 @@ class AppLocalizationsArr extends AppLocalizations {
   String get noNoticesFound => 'No messages in a bottle found.';
 
   @override
-  String get minutes => 'min';
+  String get minutes => 'minutes';
 
   @override
   String get hours => 'hr';
@@ -806,10 +833,10 @@ class AppLocalizationsArr extends AppLocalizations {
   String get absenceDeleted => 'Shore leave scuttled!';
 
   @override
-  String get appUpdateTest => 'Ship Update Test';
+  String get appUpdateTest => 'Testin\' the Ship\'s New Riggin\'';
 
   @override
-  String get readyToTest => 'Ready to test the waters';
+  String get readyToTest => 'Batten down! Ready to test these waters!';
 
   @override
   String get updateSystemTest => 'Update System Test';
@@ -820,13 +847,13 @@ class AppLocalizationsArr extends AppLocalizations {
   }
 
   @override
-  String get checking => 'Scannin\' the horizon...';
+  String get checking => 'Spyglass to the horizon, matey!';
 
   @override
-  String get forceShowUpdateDialog => 'Force Show Update Message';
+  String get forceShowUpdateDialog => 'Blow the conch! Show that message!';
 
   @override
-  String get clearDismissedUpdates => 'Clear Dismissed Updates';
+  String get clearDismissedUpdates => 'Clear the deck of old messages!';
 
   @override
   String get howItWorks => 'How this ship works:';
@@ -905,60 +932,62 @@ class AppLocalizationsArr extends AppLocalizations {
   String get reasonRequired => 'Reason *';
 
   @override
-  String get create => 'Log';
+  String get create => 'Chart the course!';
 
   @override
-  String get noError => 'All clear';
+  String get noError => 'Smooth sailin\', captain!';
 
   @override
-  String get unknown => 'Unknown waters';
+  String get unknown => 'Uncharted waters, captain!';
 
   @override
   String currentVersion(Object version) {
-    return 'Current: $version';
+    return 'Ship\'s current registry: $version';
   }
 
   @override
   String latestVersion(Object version) {
-    return 'Latest: $version';
+    return 'Newest treasure map: $version';
   }
 
   @override
-  String get downloadingUpdate => 'Downloadin\' new ship parts...';
+  String get downloadingUpdate => 'Haulin\' in fresh ship parts from port...';
 
   @override
-  String get installingUpdate => 'Installin\' new ship parts...';
+  String get installingUpdate =>
+      'All hands! Fixin\' up the ship with new parts!';
 
   @override
-  String get install => 'Install';
+  String get install => 'Hoist the Colors!';
 
   @override
-  String get downloading => 'Downloadin\'...';
+  String get downloading => 'Plunderin\' the treasure...';
 
   @override
-  String get installing => 'Installin\'...';
+  String get installing => 'Riggin\' the ship...';
 
   @override
-  String get downloadError => 'Blunder downloadin\' ship upgrade';
+  String get downloadError => 'Blast! The kraken ate our treasure!';
 
   @override
   String downloadErrorDetails(Object error) {
-    return 'Download blunder: $error';
+    return 'Blast! Treasure hunt failed: $error';
   }
 
   @override
-  String get installationNotAllowed => 'Installation not allowed on this ship';
+  String get installationNotAllowed => 'The captain forbids this upgrade!';
 
   @override
-  String get installationError => 'Blunder installin\' ship upgrade';
+  String get installationError => 'Arrr! The ship won\'t take the upgrade!';
 
   @override
   String installationErrorDetails(Object error) {
-    return 'Installation blunder: $error';
+    return 'Arrr! Ship upgrade cursed: $error';
   }
 
   @override
-  String get updateInstallationStarted => 'Ship upgrade installation started';
+  String get updateInstallationStarted =>
+      'All hands on deck! Upgradin\' the vessel!';
 
   @override
   String get absentFrom => 'Away from *';
@@ -1100,6 +1129,15 @@ class AppLocalizationsArr extends AppLocalizations {
   String get finalizingInitialization => 'Preparin\' to set sail...';
 
   @override
+  String get checkingConnection => 'Checking connection...';
+
+  @override
+  String get offlineModeDetected => 'Offline mode - using cached data';
+
+  @override
+  String get loadingCachedData => 'Loading cached data...';
+
+  @override
   String errorCheckingUpdatesDetails(Object error) {
     return 'Blunder checkin\' fer updates: $error';
   }
@@ -1108,56 +1146,76 @@ class AppLocalizationsArr extends AppLocalizations {
   String get minute => 'minute';
 
   @override
-  String get beforeClass => 'before class';
+  String get beforeClass => 'before duty';
 
   @override
-  String get notificationPermissions => 'Notification Permissions';
+  String get notificationPermissions => 'Signal Permissions';
 
   @override
   String get notificationPermissionsDescription =>
-      'To receive timely notifications about your classes, please grant the following permissions:';
+      'To receive timely signals about yer ship duties, please grant the followin\' permissions:';
 
   @override
-  String get notificationPermission => 'Notifications';
+  String get notificationPermission => 'Ship Signals';
 
   @override
   String get notificationPermissionDesc =>
-      'Allow Schuly to send you notifications';
+      'Allow Schuly to send ye ship signals';
 
   @override
-  String get exactAlarmPermission => 'Exact Alarms';
+  String get exactAlarmPermission => 'Precise Ship\'s Bell';
 
   @override
-  String get exactAlarmPermissionDesc =>
-      'Required for precise notification timing';
+  String get exactAlarmPermissionDesc => 'Required fer precise signal timin\'';
 
   @override
-  String get batteryOptimization => 'Battery Optimization';
+  String get batteryOptimization => 'Ship\'s Power Management';
 
   @override
   String get batteryOptimizationDesc =>
-      'Disable battery optimization for reliable notifications';
+      'Disable ship\'s power savin\' fer reliable signals';
 
   @override
-  String get grant => 'Grant';
+  String get grant => 'Give \'em permission to board!';
 
   @override
   String get allPermissionsGranted =>
-      'All permissions granted! Notifications will work reliably.';
+      'All permissions granted! Ship signals will work reliably, matey!';
 
   @override
   String get somePermissionsMissing =>
-      'Some permissions are missing. Notifications may not work as expected.';
+      'Some permissions be missin\'. Signals may not work as expected, ye scallywag!';
 
   @override
-  String get remindLater => 'Remind Later';
+  String get remindLater => 'Remind this old sea dog later!';
 
   @override
-  String get continueAnyway => 'Continue Anyway';
+  String get continueAnyway => 'Full speed ahead anyway!';
 
   @override
-  String get done => 'Done';
+  String get done => 'Ship shape and Bristol fashion!';
 
   @override
-  String get checkPermissions => 'Check Permissions';
+  String get checkPermissions => 'Check Ship Permissions';
+
+  @override
+  String get relatedNotices => 'Related Ship\'s Messages';
+
+  @override
+  String get exam => 'Battle Test';
+
+  @override
+  String get date => 'Day on the Calendar';
+
+  @override
+  String get time => 'Ship\'s Bell';
+
+  @override
+  String get studentReason => 'Buccaneer\'s Excuse';
+
+  @override
+  String get trainerComment => 'Captain\'s Remark';
+
+  @override
+  String get unexcusedAbsences => 'Unforgiven Shore Leaves';
 }

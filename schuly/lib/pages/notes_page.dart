@@ -28,7 +28,7 @@ class NotesPage extends StatelessWidget {
         }
         return RefreshIndicator(
           onRefresh: () async {
-            await apiStore.fetchGrades();
+            await apiStore.fetchGrades(forceRefresh: true);
           },
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -40,7 +40,7 @@ class NotesPage extends StatelessWidget {
                   final subjectAverage = GradeUtils.calculateWeightedAverage(entry.value);
                   
                   return Card(
-                    margin: const EdgeInsets.only(bottom: 16),
+                    margin: const EdgeInsets.only(bottom: 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

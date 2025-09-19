@@ -9,7 +9,7 @@ class ApiService {
     return _authApi.authenticateMobileWithHttpInfo(email, password).timeout(Duration(minutes: 1));
   }
 
-  Future<Object?> authenticate(String email, String password) {
+  Future<AuthenticateMobileResponseDto?> authenticate(String email, String password) {
     return _authApi.authenticateMobile(email, password);
   }
 

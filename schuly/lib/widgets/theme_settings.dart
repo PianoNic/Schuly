@@ -45,6 +45,7 @@ class ThemeSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Card(
+      margin: const EdgeInsets.only(bottom: 8),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -54,8 +55,8 @@ class ThemeSettings extends StatelessWidget {
               localizations.designSettings,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 16),
-            
+            const SizedBox(height: 12),
+
             // Theme Mode Selection
             Text(
               localizations.appearance,
@@ -71,9 +72,9 @@ class ThemeSettings extends StatelessWidget {
                 Expanded(child: _buildThemeModeOption(context, ThemeMode.dark, localizations.dark, Icons.dark_mode, enabled: !themeProvider.useMaterialYou)),
               ],
             ),
-            
-            const SizedBox(height: 24),
-            
+
+            const SizedBox(height: 16),
+
             // Color Mode Toggle
             Text(
               localizations.colorStyle,
@@ -90,9 +91,9 @@ class ThemeSettings extends StatelessWidget {
                 Expanded(child: _buildColorStyleOption(context, 'neon', localizations.neon, Icons.auto_awesome)),
               ],
             ),
-            
-            const SizedBox(height: 24),
-            
+
+            const SizedBox(height: 16),
+
             // Color Selection (only shown when not using Material You)
             if (!themeProvider.useMaterialYou) ...[
               Text(

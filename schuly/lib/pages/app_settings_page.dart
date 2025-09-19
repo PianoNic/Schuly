@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:schuly/api/lib/api.dart';
+import 'dart:async';
 import '../widgets/theme_settings.dart';
 import '../providers/theme_provider.dart';
 import '../providers/api_store.dart';
@@ -182,10 +184,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
             // Theme Settings Card
             ThemeSettings(themeProvider: widget.themeProvider),
 
-            const SizedBox(height: 16),
-
             // Additional App Settings Card
             Card(
+              margin: const EdgeInsets.only(bottom: 8),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -195,7 +196,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       localizations.appSettings,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
 
                     // Notifications Toggle
                     _isLoading
@@ -346,8 +347,6 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
               ),
             ),
 
-            const SizedBox(height: 16),
-
             // API Endpoint Settings Card
             Card(
               child: Padding(
@@ -359,7 +358,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       localizations.apiEndpoint,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
                     Consumer<ApiStore>(
                       builder: (context, apiStore, child) {
                         // Always show the container with debug info
@@ -527,6 +526,7 @@ class _ApiUrlField extends StatefulWidget {
 class _ApiUrlFieldState extends State<_ApiUrlField> {
   late TextEditingController _controller;
   String? _currentUrl;
+  bool _isTestingEndpoint = false;
 
   @override
   void initState() {
@@ -541,6 +541,86 @@ class _ApiUrlFieldState extends State<_ApiUrlField> {
     super.dispose();
   }
 
+  Future<void> _testEndpoint(String url) async {
+    setState(() {
+      _isTestingEndpoint = true;
+    });
+
+    try {
+      // Try to fetch app info from the endpoint
+      final apiClient = ApiClient(basePath: url);
+      final appApi = AppApi(apiClient);
+
+      final response = await appApi.appAppInfoWithHttpInfo().timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          throw TimeoutException('Connection timeout after 5 seconds');
+        },
+      );
+
+      if (!mounted) return;
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        // Success - endpoint is reachable
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.check_circle, color: Colors.white),
+                const SizedBox(width: 12),
+                Text('Endpoint reachable (${response.statusCode})'),
+              ],
+            ),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        // Server returned an error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.error, color: Colors.white),
+                const SizedBox(width: 12),
+                Expanded(child: Text('Server error: ${response.statusCode}')),
+              ],
+            ),
+            backgroundColor: Colors.orange,
+          ),
+        );
+      }
+    } catch (e) {
+      if (!mounted) return;
+
+      String errorMessage;
+      if (e is TimeoutException) {
+        errorMessage = 'Timeout: Could not connect within 5 seconds';
+      } else if (e.toString().contains('SocketException')) {
+        errorMessage = 'Network error: Cannot reach endpoint';
+      } else {
+        errorMessage = 'Error: ${e.toString()}';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(Icons.error_outline, color: Colors.white),
+              const SizedBox(width: 12),
+              Expanded(child: Text(errorMessage)),
+            ],
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isTestingEndpoint = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -568,7 +648,7 @@ class _ApiUrlFieldState extends State<_ApiUrlField> {
               builder: (context) {
                 final appColors = Theme.of(context).extension<AppColors>();
                 final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
-                
+
                 return ElevatedButton(
                   onPressed: () async {
                     if (_currentUrl != null && _currentUrl!.isNotEmpty) {
@@ -588,6 +668,25 @@ class _ApiUrlFieldState extends State<_ApiUrlField> {
                   child: Text(localizations.save),
                 );
               },
+            ),
+            const SizedBox(width: 12),
+            OutlinedButton.icon(
+              onPressed: _isTestingEndpoint ? null : () async {
+                if (_currentUrl != null && _currentUrl!.isNotEmpty) {
+                  await _testEndpoint(_currentUrl!);
+                }
+              },
+              icon: _isTestingEndpoint
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.network_check),
+              label: Text(_isTestingEndpoint ? 'Testing...' : 'Test Endpoint'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ],
         ),

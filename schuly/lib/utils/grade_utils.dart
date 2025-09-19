@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schuly/api/lib/api.dart';
+import 'logger.dart';
 
 class GradeUtils {
   static Color getGradeColor(double grade) {
@@ -11,15 +12,15 @@ class GradeUtils {
   /// Calculate weighted average for a list of grades
   static double? calculateWeightedAverage(List<GradeDto> grades) {
     if (grades.isEmpty) {
-      print('No grades provided');
+      logDebug('No grades provided', source: 'GradeUtils');
       return null;
     }
     
-    print('Total grades: ${grades.length}');
+    logDebug('Total grades: ${grades.length}', source: 'GradeUtils');
     
     // Filter only confirmed grades
     final confirmedGrades = grades.where((grade) => grade.isConfirmed).toList();
-    print('Confirmed grades: ${confirmedGrades.length}');
+    logDebug('Confirmed grades: ${confirmedGrades.length}', source: 'GradeUtils');
     
     // If no confirmed grades, try with all grades as fallback
     final gradesToUse = confirmedGrades.isNotEmpty ? confirmedGrades : grades;
@@ -28,27 +29,27 @@ class GradeUtils {
     double totalWeight = 0.0;
     
     for (final grade in gradesToUse) {
-      print('Processing grade: mark=${grade.mark}, weight=${grade.weight}, confirmed=${grade.isConfirmed}');
+      logDebug('Processing grade: mark=${grade.mark}, weight=${grade.weight}, confirmed=${grade.isConfirmed}', source: 'GradeUtils');
       
-      final gradeValue = double.tryParse(grade.mark);
-      final weightValue = double.tryParse(grade.weight);
+      final gradeValue = grade.mark != null ? double.tryParse(grade.mark!) : null;
+      final weightValue = grade.weight != null ? double.tryParse(grade.weight!) : 1.0;
       
-      print('Parsed values: gradeValue=$gradeValue, weightValue=$weightValue');
+      logDebug('Parsed values: gradeValue=$gradeValue, weightValue=$weightValue', source: 'GradeUtils');
       
       if (gradeValue != null && weightValue != null && weightValue > 0) {
         totalWeightedGrades += gradeValue * weightValue;
         totalWeight += weightValue;
-        print('Added to calculation: totalWeightedGrades=$totalWeightedGrades, totalWeight=$totalWeight');
+        logDebug('Added to calculation: totalWeightedGrades=$totalWeightedGrades, totalWeight=$totalWeight', source: 'GradeUtils');
       }
     }
     
     if (totalWeight == 0) {
-      print('Total weight is 0, returning null');
+      logDebug('Total weight is 0, returning null', source: 'GradeUtils');
       return null;
     }
     
     final result = totalWeightedGrades / totalWeight;
-    print('Final average: $result');
+    logDebug('Final average: $result', source: 'GradeUtils');
     return result;
   }
 

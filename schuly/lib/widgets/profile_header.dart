@@ -5,6 +5,7 @@ class ProfileHeader extends StatelessWidget {
   final String name;
   final String email;
   final String? imagePath;
+  final bool isMicrosoftAuth;
   final VoidCallback onStudentCardPressed;
   final VoidCallback onSwitchAccountPressed;
 
@@ -15,6 +16,7 @@ class ProfileHeader extends StatelessWidget {
     required this.onStudentCardPressed,
     required this.onSwitchAccountPressed,
     this.imagePath,
+    this.isMicrosoftAuth = false,
   });
 
   @override
@@ -66,13 +68,57 @@ class ProfileHeader extends StatelessWidget {
               
               const SizedBox(height: 4),
               
-              // User Email
-              Text(
-                email,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
-                ),
-                textAlign: TextAlign.center,
+              // User Email with Microsoft badge if applicable
+              Column(
+                children: [
+                  // Email text that can wrap if needed
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      email,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  // Microsoft badge on a separate line if authenticated with Microsoft
+                  if (isMicrosoftAuth) ...[
+                    const SizedBox(height: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Colors.blue.withValues(alpha: 0.5),
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Use Icon instead of network image for reliability
+                          const Icon(
+                            Icons.verified_user,
+                            size: 12,
+                            color: Colors.blue,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            'Microsoft',
+                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ],
               ),
               
               const SizedBox(height: 20),

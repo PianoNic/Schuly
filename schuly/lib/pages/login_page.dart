@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/api_store.dart';
 import '../main.dart';
+import 'microsoft_auth_page.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function(String)? onApiBaseUrlChanged;
@@ -176,6 +177,73 @@ class _LoginPageState extends State<LoginPage> {
                                 child: CircularProgressIndicator(strokeWidth: 2),
                               )
                             : Text(AppLocalizations.of(context)!.login),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    const Row(
+                      children: [
+                        Expanded(child: Divider()),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text('OR'),
+                        ),
+                        Expanded(child: Divider()),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton.icon(
+                        onPressed: _isLoading ? null : () async {
+                          print('DEBUG: Microsoft sign-in button pressed');
+
+                          // Navigate to Microsoft auth page
+                          final result = await Navigator.of(context).push<bool>(
+                            MaterialPageRoute(
+                              builder: (context) => MicrosoftAuthPage(
+                                apiBaseUrl: _apiBaseUrlController.text.trim(),
+                                existingUserEmail: null, // New account
+                                onAuthSuccess: (token, refreshToken, email) async {
+                                  print('DEBUG: Microsoft auth successful');
+                                  print('DEBUG: Received token: $token');
+                                  print('DEBUG: Received refresh token: $refreshToken');
+
+                                  // Store the tokens and update the app state
+                                  final apiStore = Provider.of<ApiStore>(context, listen: false);
+
+                                  // Store the API base URL
+                                  if (widget.onApiBaseUrlChanged != null) {
+                                    widget.onApiBaseUrlChanged!(_apiBaseUrlController.text.trim());
+                                  }
+
+                                  // Add the Microsoft user with tokens
+                                  final error = await apiStore.addMicrosoftUser(token, refreshToken);
+
+                                  // Fetch user data
+                                  await apiStore.fetchAll();
+                                },
+                              ),
+                            ),
+                          );
+
+                          if (result == true && mounted) {
+                            print('DEBUG: Microsoft authentication completed successfully');
+                            // Authentication successful - navigation handled by main app
+                          }
+                        },
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        icon: Image.network(
+                          'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
+                          width: 20,
+                          height: 20,
+                          errorBuilder: (context, error, stackTrace) => const Icon(Icons.business, size: 20),
+                        ),
+                        label: const Text('Sign in with Microsoft'),
                       ),
                     ),
                   ],

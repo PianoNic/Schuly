@@ -9,7 +9,14 @@
       "Read(//f/**)",
       "Bash(flutter:*)",
       "WebSearch",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "Bash(grep:*)",
+      "Bash(python:*)",
+      "Bash(nc localhost 58177)",
+      "Bash(/dev/null)",
+      "Bash(git commit:*)",
+      "Bash(git add:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

@@ -244,7 +244,7 @@
 
   "latestVersionMessage": "Yu'we using the watest vewsion!",
   "versionWithNumber": "Vewsion {version}+{build}",
-  "@versionWithNumber": {"description": "Vewsion stwing with vewsion and buiwd numbew UwU", "placeholders": {"version": {}, "build": {}}}
+  "@versionWithNumber": {"description": "Vewsion stwing with vewsion and buiwd numbew UwU", "placeholders": {"version": {}, "build": {}}},
   "appLegalese": "Schuwly © 2025 PianoNic",
   "appDescription": "A cute app to manage youw schoow wife! Keep twack of gwades, scheduwle, and mowe in one pwace!",
   "apiEndpoint": "API Endpoint",
@@ -258,69 +258,69 @@
   "apiBaseUrl": "API Base UWL",
   "save": "Save",
   "apiUrlChanged": "API UWL changed: {url}",
-  "@apiUrlChanged": {"description": "Snackbaw message when API UWL is changed", "placeholders": {"url": {}}}
+  "@apiUrlChanged": {"description": "Snackbaw message when API UWL is changed", "placeholders": {"url": {}}},
   "changelogAndFeatures": "Changewog and featuwes!",
   "checkForNewVersions": "Check fow new vewsions!",
   "aboutApp": "About this cute app!",
   "featureInDevelopment": "Stiww being made cutew!",
-  "@getColorName": {"description": "Wetuwns the cute cowow name fow a given key (♡ω♡)"}
+  "@getColorName": {"description": "Wetuwns the cute cowow name fow a given key (♡ω♡)"},
 
   "switchAccount": "Switch Account",
-  "@switchAccount": {"description": "Headew/titwe fow the account switchew modaw UwU"}
+  "@switchAccount": {"description": "Headew/titwe fow the account switchew modaw UwU"},
 
   "accountCount": "{count, plural, =1{1 fwend} other{{count} fwends}}",
-  "@accountCount": {"description": "Shows the numbew of accounts", "placeholders": {"count": {}}}
+  "@accountCount": {"description": "Shows the numbew of accounts", "placeholders": {"count": {}}},
 
   "noAccounts": "Nu fwends yet!",
-  "@noAccounts": {"description": "Message when thewe awe no accounts to switch (╥﹏╥)"}
+  "@noAccounts": {"description": "Message when thewe awe no accounts to switch (╥﹏╥)"},
 
   "addFirstAccount": "Add youw fiwst fwend!",
-  "@addFirstAccount": {"description": "Subtitwe encouwaging the usew to add theiw fiwst account"}
+  "@addFirstAccount": {"description": "Subtitwe encouwaging the usew to add theiw fiwst account"},
 
   "active": "Active",
-  "@active": {"description": "Wabew fow the active account"}
+  "@active": {"description": "Wabew fow the active account"},
 
   "available": "Avaiwabwe",
-  "@available": {"description": "Wabew fow avaiwabwe accounts owo"}
+  "@available": {"description": "Wabew fow avaiwabwe accounts owo"},
 
   "removeAccount": "Wemove Fwend",
-  "@removeAccount": {"description": "Button/diawog titwe fow wemoving an account (>_<)"}
+  "@removeAccount": {"description": "Button/diawog titwe fow wemoving an account (>_<)"},
 
   "confirmRemoveAccount": "Wemove {email} fwom fwends?",
-  "@confirmRemoveAccount": {"description": "Confiwmation fow wemoving an account (╥‹⁥)", "placeholders": {"email": {}}}
+  "@confirmRemoveAccount": {"description": "Confiwmation fow wemoving an account (╥‹⁥)", "placeholders": {"email": {}}},
 
   "remove": "Wemove",
-  "@remove": {"description": "Button text fow confiwming wemoval (´･ω･｀)"}
+  "@remove": {"description": "Button text fow confiwming wemoval (´･ω･｀)"},
 
   "switchedAccount": "Switched to fwend {email}",
-  "@switchedAccount": {"description": "Snackbaw message when switching account", "placeholders": {"email": {}}}
+  "@switchedAccount": {"description": "Snackbaw message when switching account", "placeholders": {"email": {}}},
 
   "switchAccountError": "Couwdn't switch fwend: {error}",
-  "@switchAccountError": {"description": "Ewwow message when switching account faiws (>_<)", "placeholders": {"error": {}}}
+  "@switchAccountError": {"description": "Ewwow message when switching account faiws (>_<)", "placeholders": {"error": {}}},
 
   "removedAccount": "Wemoved fwend {email}!",
-  "@removedAccount": {"description": "Snackbaw message when wemoving account (•́_•̀)", "placeholders": {"email": {}}}
+  "@removedAccount": {"description": "Snackbaw message when wemoving account (•́_•̀)", "placeholders": {"email": {}}},
 
   "removeAccountError": "Couwdn't wemove fwend: {error}",
-  "@removeAccountError": {"description": "Ewwow message when wemoving account faiws (╥﹏╥)", "placeholders": {"error": {}}}
+  "@removeAccountError": {"description": "Ewwow message when wemoving account faiws (╥﹏╥)", "placeholders": {"error": {}}},
 
   "unexpectedError": "Unexpected ewwow: {error}",
-  "@unexpectedError": {"description": "Genewic ewwow message (╭˚﹏˚)╭", "placeholders": {"error": {}}}
+  "@unexpectedError": {"description": "Genewic ewwow message (╭˚﹏˚)╭", "placeholders": {"error": {}}},
 
   "weekdayMon": "Mon",
-  "@weekdayMon": {"description": "Abbweviation fow Monday UwU"}
+  "@weekdayMon": {"description": "Abbweviation fow Monday UwU"},
   "weekdayTue": "Tue",
-  "@weekdayTue": {"description": "Abbweviation fow Tuesday (◕‿◕)"}
+  "@weekdayTue": {"description": "Abbweviation fow Tuesday (◕‿◕)"},
   "weekdayWed": "Wed",
-  "@weekdayWed": {"description": "Abbweviation fow Wednesday"}
+  "@weekdayWed": {"description": "Abbweviation fow Wednesday"},
   "weekdayThu": "Thu",
-  "@weekdayThu": {"description": "Abbweviation fow Thuwsday (♡ω♡)"}
+  "@weekdayThu": {"description": "Abbweviation fow Thuwsday (♡ω♡)"},
   "weekdayFri": "Fwi",
-  "@weekdayFri": {"description": "Abbweviation fow Fwiday! Yay!"}
+  "@weekdayFri": {"description": "Abbweviation fow Fwiday! Yay!"},
   "weekdaySat": "Sat",
-  "@weekdaySat": {"description": "Abbweviation fow Satuwday (◠‿◠)"}
+  "@weekdaySat": {"description": "Abbweviation fow Satuwday (◠‿◠)"},
   "weekdaySun": "Sun",
-  "@weekdaySun": {"description": "Abbweviation fow Sunday UwU"}
+  "@weekdaySun": {"description": "Abbweviation fow Sunday UwU"},
 
   "absencesTabAll": "Aww Absences",
   "absencesTabLateness": "Wateness",
@@ -359,25 +359,25 @@
   "absenceDeleted": "Absence deweted!",
 
   "emailSupport": "Emaiw Suppowt",
-  "@emailSupport": {"description": "Titwe fow emaiw suppowt cawd (◔◡◔)"}
+  "@emailSupport": {"description": "Titwe fow emaiw suppowt cawd (◔◡◔)"},
   "contactByEmail": "Contact us via emaiw!",
-  "@contactByEmail": {"description": "Subtitwe fow emaiw suppowt cawd"}
+  "@contactByEmail": {"description": "Subtitwe fow emaiw suppowt cawd"},
   "bugReport": "Bug Wepowt / Featuwe Wequest",
-  "@bugReport": {"description": "Titwe fow bug wepowt cawd (´；ω；｀)"}
+  "@bugReport": {"description": "Titwe fow bug wepowt cawd (´；ω；｀)"},
   "reportBugsOrRequestFeatures": "Wepowt bugs ow wequest featuwes!",
-  "@reportBugsOrRequestFeatures": {"description": "Subtitwe fow bug wepowt cawd (≧◡≦)"}
+  "@reportBugsOrRequestFeatures": {"description": "Subtitwe fow bug wepowt cawd (≧◡≦)"},
   "copy": "Copy",
-  "@copy": {"description": "Button text to copy to cwipboawd (◠‿◠)"}
+  "@copy": {"description": "Button text to copy to cwipboawd (◠‿◠)"},
   "copiedToClipboard": "Copied to cwipboawd!",
-  "@copiedToClipboard": {"description": "Snackbaw message when copied to cwipboawd (◠ω◠)"}
+  "@copiedToClipboard": {"description": "Snackbaw message when copied to cwipboawd (◠ω◠)"},
   "ok": "OK",
-  "@ok": {"description": "OK button text (◠‿◠)"}
+  "@ok": {"description": "OK button text (◠‿◠)"},
   "error": "Ewwow",
-  "@error": {"description": "Diawog titwe fow ewwows (>_<)"}
+  "@error": {"description": "Diawog titwe fow ewwows (>_<)"},
   "emailAppError": "Couwdn't open emaiw app. Contact us at: {email}",
-  "@emailAppError": {"description": "Ewwow message when emaiw app cannot be opened (╥﹏╥)", "placeholders": {"email": {}}}
+  "@emailAppError": {"description": "Ewwow message when emaiw app cannot be opened (╥﹏╥)", "placeholders": {"email": {}}},
   "browserError": "Couwdn't open bwowsew. Visit manuawwy: {url}",
-  "@browserError": {"description": "Ewwow message when bwowsew cannot be opened (>_<)", "placeholders": {"url": {}}}
+  "@browserError": {"description": "Ewwow message when bwowsew cannot be opened (>_<)", "placeholders": {"url": {}}},
 
   "appUpdateTest": "App Update Test",
   "readyToTest": "Weady to test~",
@@ -565,5 +565,83 @@
   "checkPermissions": "Check Pewmissions",
   "@checkPermissions": {
     "description": "Button to check notification pewmissions UwU"
-  }
+  },
+  "lessonBreak": "Snuggle Time ✨",
+  "lunchBreak": "Nom Nom Time 🍱",
+  "showBreaks": "Show snuggle time between wessons UwU",
+  "cardSettings": "Cawd Settings ✨",
+  "tapToCustomize": "Tap to make it cutew UwU",
+  "numberOfDaysToShow": "Days to show (◕‿◕)",
+  "numberOfGradesToShow": "Gwades to dispway ✨",
+  "showOnlyOpenAbsences": "Show onwy open absences owo",
+  "noConfigurationAvailable": "No settings to customize hewe UwU",
+
+  "getNotified": "Get cute notifs! ✨",
+  "@getNotified": {
+    "description": "Notification settings titwe UwU"
+  },
+
+  "enableNotifications": "Enabwe notifications pwease! (◕‿◕)",
+  "@enableNotifications": {
+    "description": "Enabwe notifications button text"
+  },
+
+  "notificationsEnabled": "Notifications enabwed! ヽ(♡‿♡)ノ",
+  "@notificationsEnabled": {
+    "description": "Status when notifications awe enabwed"
+  },
+
+  "notificationPermissionDenied": "Notification pewmission denied (╥﹏╥)",
+  "@notificationPermissionDenied": {
+    "description": "Message when notification pewmission is denied"
+  },
+
+  "scheduleTestNotification": "Scheduwle test notif! ✨",
+  "@scheduleTestNotification": {
+    "description": "Button to scheduwle a test notification"
+  },
+
+  "testScheduledNotificationDesc": "A test notif wiww appeaw soon UwU",
+  "@testScheduledNotificationDesc": {
+    "description": "Descwiption fow test notification"
+  },
+
+  "notificationScheduledIn15Seconds": "Notif scheduwed in 15 seconds! (ﾉ◕ヮ◕)ﾉ",
+  "@notificationScheduledIn15Seconds": {
+    "description": "Message when test notification is scheduwed"
+  },
+
+  "errorSchedulingNotification": "Ewwow scheduwing notification (>_<)",
+  "@errorSchedulingNotification": {
+    "description": "Ewwow message when scheduwing faiws"
+  },
+
+  "testNotificationSent": "Test notif sent! ✨(๑•ᴗ•๑)✨",
+  "@testNotificationSent": {
+    "description": "Confiwmation message when test notification is sent"
+  },
+
+  "exactAlarmPermissionRequired": "Exact awawm pewmission wequiwed! (◔◡◔)",
+  "@exactAlarmPermissionRequired": {
+    "description": "Message when exact awawm pewmission is needed"
+  },
+
+  "openSettings": "Open Settings UwU",
+  "@openSettings": {
+    "description": "Button to open app settings"
+  },
+
+  "getColorName": "Get cowow name ✨",
+  "@getColorName": {
+    "description": "Get the name of a cowow"
+  },
+
+  "relatedNotices": "Wewated Notices UwU",
+  "exam": "Exam owo",
+  "date": "Date (๑•ᴗ•๑)",
+  "time": "Time ⏰",
+  "studentReason": "Student Weason (´･ω･`)",
+  "trainerComment": "Twainew Comment ✨",
+
+  "unexcusedAbsences": "Unexcused Absences (｡•́︿•̀｡)"
 }

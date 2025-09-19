@@ -639,6 +639,34 @@ class AppLocalizationsDe extends AppLocalizations {
   String get getColorName => 'Farbname abrufen';
 
   @override
+  String get lessonBreak => 'Pause';
+
+  @override
+  String get lunchBreak => 'Mittagspause';
+
+  @override
+  String get showBreaks => 'Pausen zwischen Lektionen anzeigen';
+
+  @override
+  String get cardSettings => 'Karten-Einstellungen';
+
+  @override
+  String get tapToCustomize => 'Zum Anpassen tippen';
+
+  @override
+  String get numberOfDaysToShow => 'Anzahl der anzuzeigenden Tage';
+
+  @override
+  String get numberOfGradesToShow => 'Anzahl der anzuzeigenden Noten';
+
+  @override
+  String get showOnlyOpenAbsences => 'Nur offene Absenzen anzeigen';
+
+  @override
+  String get noConfigurationAvailable =>
+      'Keine Konfigurationseinstellungen verfügbar';
+
+  @override
   String get switchAccount => 'Account wechseln';
 
   @override
@@ -1113,6 +1141,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get finalizingInitialization => 'Initialisierung abschließen...';
 
   @override
+  String get checkingConnection => 'Checking connection...';
+
+  @override
+  String get offlineModeDetected => 'Offline mode - using cached data';
+
+  @override
+  String get loadingCachedData => 'Loading cached data...';
+
+  @override
   String errorCheckingUpdatesDetails(Object error) {
     return 'Fehler beim Suchen nach Updates: $error';
   }
@@ -1173,4 +1210,25 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkPermissions => 'Berechtigungen prüfen';
+
+  @override
+  String get relatedNotices => 'Zugehörige Meldungen';
+
+  @override
+  String get exam => 'Prüfung';
+
+  @override
+  String get date => 'Datum';
+
+  @override
+  String get time => 'Zeit';
+
+  @override
+  String get studentReason => 'Begründung des Schülers';
+
+  @override
+  String get trainerComment => 'Kommentar des Lehrers';
+
+  @override
+  String get unexcusedAbsences => 'Unentschuldigte Absenzen';
 }

@@ -31,7 +31,7 @@ import 'l10n/pirate_cupertino_localizations.dart';
 import 'l10n/kawaii_material_localizations.dart';
 import 'l10n/kawaii_cupertino_localizations.dart';
 import 'utils/logger.dart';
-
+ 
 String apiBaseUrl = 'https://schlwr.pianonic.ch';
 
 Future<void> loadApiBaseUrl() async {

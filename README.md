@@ -24,6 +24,7 @@ A modern mobile app that provides a superior alternative to the official Schulne
 - Material 3 theming with dark/light mode
 - Push notifications
 - Android, iOS, and Web support
+- Error tracking with GlitchTip (automatic in release builds)
 
 ## Installation
 

@@ -5,6 +5,7 @@ import '../services/api_service.dart';
 import '../services/storage_service.dart';
 import '../services/push_notification_service.dart';
 import '../utils/logger.dart';
+import '../utils/error_handler.dart';
 import 'dart:convert';
 import 'dart:async';
 
@@ -403,6 +404,14 @@ class ApiStore extends ChangeNotifier {
   // Internal: set bearer token from user
   Future<void> _setAuthFromUser(Map<String, dynamic> user) async {
     bearerToken = user['access_token'];
+
+    // Set user context for error tracking
+    ErrorHandler.setUserContext(
+      email: user['email'],
+      extras: {
+        'is_microsoft_auth': user['is_microsoft_auth'] ?? false,
+      },
+    );
   }
 
   // Internal: handle API errors consistently
@@ -611,15 +620,21 @@ class ApiStore extends ChangeNotifier {
 
   // Fetch all data methods (with optional force refresh)
   Future<void> fetchAll({bool forceRefresh = true}) async {
-    await Future.wait([
-      fetchAbsenceNotices(forceRefresh: forceRefresh),
-      fetchAbsences(forceRefresh: forceRefresh),
-      fetchAgenda(forceRefresh: forceRefresh),
-      fetchGrades(forceRefresh: forceRefresh),
-      fetchLateness(forceRefresh: forceRefresh),
-      fetchUserInfo(forceRefresh: forceRefresh),
-      fetchAppInfo(forceRefresh: forceRefresh),
-    ]);
+    await ErrorHandler.handleAsync(
+      () async {
+        await Future.wait([
+          fetchAbsenceNotices(forceRefresh: forceRefresh),
+          fetchAbsences(forceRefresh: forceRefresh),
+          fetchAgenda(forceRefresh: forceRefresh),
+          fetchGrades(forceRefresh: forceRefresh),
+          fetchLateness(forceRefresh: forceRefresh),
+          fetchUserInfo(forceRefresh: forceRefresh),
+          fetchAppInfo(forceRefresh: forceRefresh),
+        ]);
+      },
+      operationName: 'fetchAll',
+      showSnackbar: false, // Don't show snackbar for background fetches
+    );
   }
 
   // Future<void> fetchAbsenceNoticeStatus() async {
@@ -668,8 +683,15 @@ class ApiStore extends ChangeNotifier {
         await _cacheAbsences(absences!);
       }
       lastApiError = null;
-    } on ApiException catch (e) {
+    } on ApiException catch (e, stackTrace) {
       _handleApiError(e);
+      // Send to Sentry/GlitchTip
+      await ErrorHandler.handleApiError(
+        e,
+        stackTrace: stackTrace,
+        endpoint: 'getAbsences',
+        statusCode: e.code,
+      );
       // If API fails and we don't have fresh data, try to load from cache as fallback
       if (absences == null) {
         final cachedData = await _loadCachedAbsences();
@@ -1034,6 +1056,9 @@ class ApiStore extends ChangeNotifier {
     bearerToken = null;
     _clearCurrentData();
     await StorageService.clearAll();
+
+    // Clear user context from error tracking
+    ErrorHandler.clearUserContext();
 
     // Clear WebView cookies if there were any Microsoft users
     if (hasMicrosoftUsers) {

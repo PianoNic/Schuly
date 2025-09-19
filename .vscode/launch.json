@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "schuly",
+            "cwd": "schuly",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "schuly (profile mode)",
+            "cwd": "schuly",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "schuly (release mode)",
+            "cwd": "schuly",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "api",
+            "cwd": "schuly\\lib\\api",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}

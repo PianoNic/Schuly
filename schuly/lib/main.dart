@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
+import 'dart:async';
 import 'l10n/app_localizations.dart';
 import 'pages/start_page.dart';
 import 'pages/agenda_page.dart';
@@ -47,32 +49,107 @@ Future<void> setApiBaseUrl(String url) async {
 }
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // Check if Sentry DSN is provided (needs to be outside runZonedGuarded)
+  const sentryDsn = String.fromEnvironment('SENTRY_DSN', defaultValue: '');
 
-  // Initialize push notifications
-  await PushNotificationService.initialize();
+  // Run app in a guarded zone to catch all errors
+  runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
 
-  await loadApiBaseUrl();
-  final apiStore = ApiStore();
-  final languageProvider = LanguageProvider();
-  final loggingService = LoggingService();
-  defaultApiClient = ApiClient(basePath: apiBaseUrl);
+      // Initialize push notifications
+      await PushNotificationService.initialize();
 
-  // Log app startup
-  loggingService.info('Schuly app started', source: 'main');
-  loggingService.info('API base URL: $apiBaseUrl', source: 'main');
+      await loadApiBaseUrl();
+      final apiStore = ApiStore();
+      final languageProvider = LanguageProvider();
+      final loggingService = LoggingService();
+      defaultApiClient = ApiClient(basePath: apiBaseUrl);
 
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => apiStore),
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => HomepageConfigProvider()),
-        ChangeNotifierProvider.value(value: languageProvider),
-        ChangeNotifierProvider.value(value: loggingService),
-      ],
-      child: const SchulyApp(),
-    ),
+      // Log app startup
+      loggingService.info('Schuly app started', source: 'main');
+      loggingService.info('API base URL: $apiBaseUrl', source: 'main');
+
+      if (sentryDsn.isNotEmpty) {
+        // Initialize Sentry only if DSN is provided
+        await SentryFlutter.init(
+          (options) {
+            options.dsn = sentryDsn;
+
+            // Set release version
+            options.release = const String.fromEnvironment(
+              'SENTRY_RELEASE',
+              defaultValue: '1.0.0',
+            );
+
+            // Set environment
+            options.environment = const String.fromEnvironment(
+              'SENTRY_ENVIRONMENT',
+              defaultValue: 'production',
+            );
+
+            // Performance monitoring sample rate (1% of events)
+            options.tracesSampleRate = 0.01;
+
+            // Disable auto session tracking as recommended by GlitchTip
+            options.enableAutoSessionTracking = false;
+
+            // Enable automatic error capture
+            options.attachStacktrace = true;
+            options.attachThreads = true;
+
+            // Set diagnostic level for debugging (set to none in production)
+            options.diagnosticLevel = SentryLevel.error;
+
+            // Before send callback to filter sensitive data
+            options.beforeSend = (SentryEvent event, Hint hint) async {
+              // Filter out sensitive information
+              if (event.message?.formatted.contains('password') == true ||
+                  event.message?.formatted.contains('token') == true) {
+                return null; // Don't send events with sensitive data
+              }
+              return event;
+            };
+          },
+          appRunner: () => runApp(
+            MultiProvider(
+              providers: [
+                ChangeNotifierProvider(create: (_) => apiStore),
+                ChangeNotifierProvider(create: (_) => ThemeProvider()),
+                ChangeNotifierProvider(create: (_) => HomepageConfigProvider()),
+                ChangeNotifierProvider.value(value: languageProvider),
+                ChangeNotifierProvider.value(value: loggingService),
+              ],
+              child: const SchulyApp(),
+            ),
+          ),
+        );
+      } else {
+        // Run without Sentry if no DSN provided
+        loggingService.info('Running without Sentry/GlitchTip integration (no DSN provided)', source: 'main');
+        runApp(
+          MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) => apiStore),
+              ChangeNotifierProvider(create: (_) => ThemeProvider()),
+              ChangeNotifierProvider(create: (_) => HomepageConfigProvider()),
+              ChangeNotifierProvider.value(value: languageProvider),
+              ChangeNotifierProvider.value(value: loggingService),
+            ],
+            child: const SchulyApp(),
+          ),
+        );
+      }
+    },
+    (error, stackTrace) {
+      // Catch any errors that weren't caught by Flutter or Sentry
+      if (sentryDsn.isNotEmpty) {
+        Sentry.captureException(error, stackTrace: stackTrace);
+      } else {
+        // Just log to console if Sentry is not configured
+        print('Uncaught error: $error\n$stackTrace');
+      }
+    },
   );
 }
 

@@ -8,6 +8,7 @@ class CustomCalendar extends StatefulWidget {
   final DateTime lastDate;
   final ValueChanged<DateTime> onDateChanged;
   final Set<DateTime> datesWithEvents;
+  final Set<DateTime> datesWithTests;
 
   const CustomCalendar({
     super.key,
@@ -16,6 +17,7 @@ class CustomCalendar extends StatefulWidget {
     required this.lastDate,
     required this.onDateChanged,
     this.datesWithEvents = const {},
+    this.datesWithTests = const {},
   });
 
   @override
@@ -51,6 +53,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   bool _hasEvent(DateTime date) {
     return widget.datesWithEvents.any((eventDate) => _isSameDay(eventDate, date));
+  }
+
+  bool _hasTest(DateTime date) {
+    return widget.datesWithTests.any((testDate) => _isSameDay(testDate, date));
   }
 
   @override
@@ -208,6 +214,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
     final isSelected = _isSameDay(date, widget.selectedDate);
     final isToday = _isSameDay(date, DateTime.now());
     final hasEvent = _hasEvent(date);
+    final hasTest = _hasTest(date);
     final appColors = Theme.of(context).extension<AppColors>();
     final seedColor = appColors?.seedColor ?? Theme.of(context).colorScheme.primary;
 
@@ -243,19 +250,39 @@ class _CustomCalendarState extends State<CustomCalendar> {
                 ),
               ),
             ),
-            if (hasEvent && isCurrentMonth)
+            if ((hasEvent || hasTest) && isCurrentMonth)
               Positioned(
                 bottom: 2,
-                right: 2,
-                child: Container(
-                  width: 5,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? Theme.of(context).colorScheme.onPrimary
-                        : seedColor,
-                    shape: BoxShape.circle,
-                  ),
+                left: 0,
+                right: 0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (hasEvent)
+                      Container(
+                        width: 5,
+                        height: 5,
+                        margin: const EdgeInsets.symmetric(horizontal: 1),
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? Theme.of(context).colorScheme.onPrimary
+                              : seedColor,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    if (hasTest)
+                      Container(
+                        width: 5,
+                        height: 5,
+                        margin: const EdgeInsets.symmetric(horizontal: 1),
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? Theme.of(context).colorScheme.onPrimary
+                              : Theme.of(context).colorScheme.error,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                  ],
                 ),
               ),
           ],

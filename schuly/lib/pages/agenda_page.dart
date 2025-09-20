@@ -80,11 +80,23 @@ class _AgendaPageState extends State<AgendaPage> {
                               start.month == _selectedDay.month &&
                               start.day == _selectedDay.day;
                           }).map((item) {
+                            // Parse hex color string to Color
+                            Color itemColor = Theme.of(context).colorScheme.primary;
+                            if (item.color.isNotEmpty && item.color.startsWith('#')) {
+                              try {
+                                final hexColor = item.color.replaceFirst('#', '');
+                                itemColor = Color(int.parse('FF$hexColor', radix: 16));
+                              } catch (e) {
+                                // Keep default color if parsing fails
+                              }
+                            }
+
                             return AgendaItem(
                               time: '${item.startDate.substring(11, 16)} - ${item.endDate.substring(11, 16)}',
                               subject: item.text,
                               room: item.roomToken,
-                              color: Colors.blue, // Optionally parse item.color
+                              teachers: item.teachers,
+                              color: itemColor,
                             );
                           }),
                           if (agenda.where((a) {

@@ -1217,4 +1217,94 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unexcusedAbsences => 'Unexcused Absences';
+
+  @override
+  String get reAuthenticationCancelled =>
+      'Re-authentication cancelled. Some features may not work.';
+
+  @override
+  String get consoleLogs => 'Console Logs';
+
+  @override
+  String get viewAppDebugLogs => 'View app debug logs';
+
+  @override
+  String get buyMeACoffee => 'Buy me a coffee';
+
+  @override
+  String get supportDevelopment => 'Support the development';
+
+  @override
+  String get couldNotOpenBuyMeACoffee => 'Could not open Buy Me a Coffee page';
+
+  @override
+  String get or => 'OR';
+
+  @override
+  String get signInWithMicrosoft => 'Sign in with Microsoft';
+
+  @override
+  String get clearLogs => 'Clear logs';
+
+  @override
+  String get exportLogs => 'Export logs';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get debug => 'Debug';
+
+  @override
+  String get info => 'Info';
+
+  @override
+  String get warning => 'Warning';
+
+  @override
+  String get enableLogging => 'Enable logging';
+
+  @override
+  String get clearFilters => 'Clear filters';
+
+  @override
+  String get logCopiedToClipboard => 'Log copied to clipboard';
+
+  @override
+  String get clearAllLogs => 'Clear all logs?';
+
+  @override
+  String get thisActionCannotBeUndone => 'This action cannot be undone.';
+
+  @override
+  String get logsCleared => 'Logs cleared';
+
+  @override
+  String get clear => 'Clear';
+
+  @override
+  String get logsExportedToClipboard => 'Logs exported to clipboard';
+
+  @override
+  String endpointReachable(Object statusCode) {
+    return 'Endpoint reachable ($statusCode)';
+  }
+
+  @override
+  String serverError(Object statusCode) {
+    return 'Server error: $statusCode';
+  }
+
+  @override
+  String failedToInitializeMicrosoftAuth(Object error) {
+    return 'Failed to initialize Microsoft authentication: $error';
+  }
+
+  @override
+  String authenticationFailed(Object error) {
+    return 'Authentication failed: $error';
+  }
+
+  @override
+  String get noInternetConnection => 'No internet connection';
 }

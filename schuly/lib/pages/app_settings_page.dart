@@ -631,7 +631,7 @@ class _ApiUrlFieldState extends State<_ApiUrlField> {
               children: [
                 const Icon(Icons.check_circle, color: Colors.white),
                 const SizedBox(width: 12),
-                Text('Endpoint reachable (${response.statusCode})'),
+                Text(AppLocalizations.of(context)!.endpointReachable(response.statusCode)),
               ],
             ),
             backgroundColor: Colors.green,
@@ -645,7 +645,7 @@ class _ApiUrlFieldState extends State<_ApiUrlField> {
               children: [
                 const Icon(Icons.error, color: Colors.white),
                 const SizedBox(width: 12),
-                Expanded(child: Text('Server error: ${response.statusCode}')),
+                Expanded(child: Text(AppLocalizations.of(context)!.serverError(response.statusCode))),
               ],
             ),
             backgroundColor: Colors.orange,

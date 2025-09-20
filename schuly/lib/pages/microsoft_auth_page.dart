@@ -3,6 +3,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 import 'package:schuly/api/lib/api.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import '../l10n/app_localizations.dart';
 import '../utils/logger.dart';
 
 class MicrosoftAuthPage extends StatefulWidget {
@@ -105,7 +106,7 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to initialize Microsoft authentication: ${e.toString()}'),
+            content: Text(AppLocalizations.of(context)!.failedToInitializeMicrosoftAuth(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -286,7 +287,7 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Authentication failed: ${e.toString()}'),
+            content: Text(AppLocalizations.of(context)!.authenticationFailed(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -300,7 +301,7 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign in with Microsoft'),
+        title: Text(AppLocalizations.of(context)!.signInWithMicrosoft),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.of(context).pop(false),

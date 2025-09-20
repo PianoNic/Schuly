@@ -643,5 +643,65 @@
   "studentReason": "Buccaneer's Excuse",
   "trainerComment": "Captain's Remark",
 
-  "unexcusedAbsences": "Unforgiven Shore Leaves"
+  "unexcusedAbsences": "Unforgiven Shore Leaves",
+
+  "checkingConnection": "Checkin' the ship's signal...",
+
+  "offlineModeDetected": "Sailin' without wind - usin' the ship's logs",
+
+  "loadingCachedData": "Pullin' from the ship's hold...",
+
+  "reAuthenticationCancelled": "Re-boardin' cancelled. Some treasures may be locked away.",
+
+  "consoleLogs": "Ship's Logbook",
+
+  "viewAppDebugLogs": "Peek at the ship's secret logs",
+
+  "buyMeACoffee": "Buy me a grog",
+
+  "supportDevelopment": "Support the ship's construction",
+
+  "couldNotOpenBuyMeACoffee": "Couldn't open the grog shop page",
+
+  "or": "ARRR",
+
+  "signInWithMicrosoft": "Board with Microsoft's flag",
+
+  "clearLogs": "Clear the logbook",
+
+  "exportLogs": "Export the ship's logs",
+
+  "all": "All hands",
+
+  "debug": "Debug",
+
+  "info": "Info",
+
+  "warning": "Warnin'",
+
+  "enableLogging": "Start recordin' in the logbook",
+
+  "clearFilters": "Clear the spyglass",
+
+  "logCopiedToClipboard": "Log copied to yer treasure map",
+
+  "clearAllLogs": "Clear all the ship's logs?",
+
+  "thisActionCannotBeUndone": "This be permanent, matey - no turnin' back.",
+
+  "logsCleared": "Logbook cleared",
+
+  "clear": "Clear",
+
+  "logsExportedToClipboard": "Logs exported to yer treasure map",
+
+  "endpointReachable": "Port be open ({statusCode})",
+
+  "serverError": "The server be sinkin': {statusCode}",
+
+  "failedToInitializeMicrosoftAuth": "Microsoft's flag be torn: {error}",
+
+  "authenticationFailed": "Boarding failed, ye scurvy dog: {error}",
+
+  "noInternetConnection": "No signal from the crow's nest"
 }

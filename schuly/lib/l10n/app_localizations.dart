@@ -2359,6 +2359,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unexcused Absences'**
   String get unexcusedAbsences;
+
+  /// Message when re-authentication is cancelled
+  ///
+  /// In en, this message translates to:
+  /// **'Re-authentication cancelled. Some features may not work.'**
+  String get reAuthenticationCancelled;
+
+  /// Title for console logs page
+  ///
+  /// In en, this message translates to:
+  /// **'Console Logs'**
+  String get consoleLogs;
+
+  /// Subtitle for console logs menu item
+  ///
+  /// In en, this message translates to:
+  /// **'View app debug logs'**
+  String get viewAppDebugLogs;
+
+  /// Buy me a coffee menu item
+  ///
+  /// In en, this message translates to:
+  /// **'Buy me a coffee'**
+  String get buyMeACoffee;
+
+  /// Subtitle for buy me a coffee item
+  ///
+  /// In en, this message translates to:
+  /// **'Support the development'**
+  String get supportDevelopment;
+
+  /// Error when Buy Me a Coffee page cannot be opened
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open Buy Me a Coffee page'**
+  String get couldNotOpenBuyMeACoffee;
+
+  /// Text shown between login options
+  ///
+  /// In en, this message translates to:
+  /// **'OR'**
+  String get or;
+
+  /// Microsoft sign in button text
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Microsoft'**
+  String get signInWithMicrosoft;
+
+  /// Clear logs button text
+  ///
+  /// In en, this message translates to:
+  /// **'Clear logs'**
+  String get clearLogs;
+
+  /// Export logs button text
+  ///
+  /// In en, this message translates to:
+  /// **'Export logs'**
+  String get exportLogs;
+
+  /// All filter option
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// Debug log level
+  ///
+  /// In en, this message translates to:
+  /// **'Debug'**
+  String get debug;
+
+  /// Info log level
+  ///
+  /// In en, this message translates to:
+  /// **'Info'**
+  String get info;
+
+  /// Warning log level
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get warning;
+
+  /// Enable logging toggle text
+  ///
+  /// In en, this message translates to:
+  /// **'Enable logging'**
+  String get enableLogging;
+
+  /// Clear filters button text
+  ///
+  /// In en, this message translates to:
+  /// **'Clear filters'**
+  String get clearFilters;
+
+  /// Message when log is copied to clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Log copied to clipboard'**
+  String get logCopiedToClipboard;
+
+  /// Clear all logs confirmation dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all logs?'**
+  String get clearAllLogs;
+
+  /// Warning message for irreversible actions
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone.'**
+  String get thisActionCannotBeUndone;
+
+  /// Message when logs are cleared
+  ///
+  /// In en, this message translates to:
+  /// **'Logs cleared'**
+  String get logsCleared;
+
+  /// Clear button text
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clear;
+
+  /// Message when logs are exported to clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Logs exported to clipboard'**
+  String get logsExportedToClipboard;
+
+  /// Message when API endpoint is reachable
+  ///
+  /// In en, this message translates to:
+  /// **'Endpoint reachable ({statusCode})'**
+  String endpointReachable(Object statusCode);
+
+  /// Server error message with status code
+  ///
+  /// In en, this message translates to:
+  /// **'Server error: {statusCode}'**
+  String serverError(Object statusCode);
+
+  /// Error when Microsoft authentication fails to initialize
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to initialize Microsoft authentication: {error}'**
+  String failedToInitializeMicrosoftAuth(Object error);
+
+  /// Generic authentication failure message
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication failed: {error}'**
+  String authenticationFailed(Object error);
+
+  /// Message shown when there is no internet connection
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection'**
+  String get noInternetConnection;
 }
 
 class _AppLocalizationsDelegate

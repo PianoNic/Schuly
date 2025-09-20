@@ -1342,4 +1342,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get numberOfTestsToShow => 'Anzahl der anzuzeigenden Prüfungen';
+
+  @override
+  String get today => 'Heute';
 }

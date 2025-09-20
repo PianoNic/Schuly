@@ -2557,6 +2557,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Number of tests to show'**
   String get numberOfTestsToShow;
+
+  /// Tooltip for home button to return to today
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
 }
 
 class _AppLocalizationsDelegate

@@ -131,53 +131,65 @@ class _StartPageState extends State<StartPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Flexible(
-                      child: Text(
-                        localizations.nextLessons,
-                        style: Theme.of(context).textTheme.titleLarge,
-                        overflow: TextOverflow.visible,
-                        softWrap: true,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            localizations.nextLessons,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          if (_selectedDay != null)
+                            Text(
+                              '${_weekdayShort(_selectedDay.weekday)}, ${_selectedDay.day}. ${_getMonthShort(_selectedDay.month)} ${_selectedDay.year}',
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                        ],
                       ),
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          onPressed: _availableDates.isNotEmpty ? () {
-                            final currentIndex = _availableDates.indexWhere((date) =>
-                              date.year == _selectedDay.year &&
-                              date.month == _selectedDay.month &&
-                              date.day == _selectedDay.day
+                    // Home icon - disabled when on the next school day
+                    if (_availableDates.isNotEmpty && _selectedDay != null)
+                      (() {
+                        final today = DateTime.now();
+                        final todayDate = DateTime(today.year, today.month, today.day);
+
+                        // Find the next school day (today or later)
+                        DateTime? nextSchoolDay;
+                        int nextSchoolDayIndex = 0;
+                        for (int i = 0; i < _availableDates.length; i++) {
+                          if (!_availableDates[i].isBefore(todayDate)) {
+                            nextSchoolDay = _availableDates[i];
+                            nextSchoolDayIndex = i;
+                            break;
+                          }
+                        }
+
+                        // If no future dates, use the last available date
+                        if (nextSchoolDay == null && _availableDates.isNotEmpty) {
+                          nextSchoolDay = _availableDates.last;
+                          nextSchoolDayIndex = _availableDates.length - 1;
+                        }
+
+                        // Check if current selected day is the next school day
+                        final isOnNextSchoolDay = nextSchoolDay != null &&
+                            _selectedDay.year == nextSchoolDay.year &&
+                            _selectedDay.month == nextSchoolDay.month &&
+                            _selectedDay.day == nextSchoolDay.day;
+
+                        return IconButton(
+                          onPressed: isOnNextSchoolDay ? null : () {
+                            _pageController.animateToPage(
+                              nextSchoolDayIndex,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
                             );
-                            if (currentIndex > 0) {
-                              _pageController.previousPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                              );
-                            }
-                          } : null,
-                          icon: const Icon(Icons.chevron_left),
-                          tooltip: localizations.previousLessonsDay,
-                        ),
-                        IconButton(
-                          onPressed: _availableDates.isNotEmpty ? () {
-                            final currentIndex = _availableDates.indexWhere((date) =>
-                              date.year == _selectedDay.year &&
-                              date.month == _selectedDay.month &&
-                              date.day == _selectedDay.day
-                            );
-                            if (currentIndex < _availableDates.length - 1) {
-                              _pageController.nextPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                              );
-                            }
-                          } : null,
-                          icon: const Icon(Icons.chevron_right),
-                          tooltip: localizations.nextLessonsDay,
-                        ),
-                      ],
-                    ),
+                          },
+                          icon: const Icon(Icons.home),
+                          tooltip: localizations.today,
+                        );
+                      })(),
                   ],
                 ),
                 const SizedBox(height: 12),

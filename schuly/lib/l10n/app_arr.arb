@@ -715,5 +715,6 @@
 
   "weight": "Bounty",
 
-  "numberOfTestsToShow": "Number o' battles to show"
+  "numberOfTestsToShow": "Number o' battles to show",
+  "today": "This Day"
 }

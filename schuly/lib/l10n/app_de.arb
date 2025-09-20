@@ -603,5 +603,6 @@
 
   "weight": "Gewichtung",
 
-  "numberOfTestsToShow": "Anzahl der anzuzeigenden Prüfungen"
+  "numberOfTestsToShow": "Anzahl der anzuzeigenden Prüfungen",
+  "today": "Heute"
 }

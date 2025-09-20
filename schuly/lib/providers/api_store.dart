@@ -40,7 +40,7 @@ class ApiStore extends ChangeNotifier {
   List<AbsenceDto>? absences;
   StudentIdCardDto? studentIdCard;
   List<AgendaDto>? agenda;
-  // List<ExamDto>? exams;
+  List<ExamDto>? exams;
   List<GradeDto>? grades;
   List<LatenessDto>? lateness;
   List<Object>? notifications;
@@ -456,6 +456,11 @@ class ApiStore extends ChangeNotifier {
     await StorageService.cacheData('agenda_${_activeUserEmail ?? 'default'}', jsonList);
   }
 
+  Future<void> _cacheExams(List<ExamDto> data) async {
+    final jsonList = data.map((item) => item.toJson()).toList();
+    await StorageService.cacheData('exams_${_activeUserEmail ?? 'default'}', jsonList);
+  }
+
   Future<void> _cacheLateness(List<LatenessDto> data) async {
     final jsonList = data.map((item) => item.toJson()).toList();
     await StorageService.cacheData('lateness_${_activeUserEmail ?? 'default'}', jsonList);
@@ -509,6 +514,13 @@ class ApiStore extends ChangeNotifier {
     return await StorageService.getCachedListData<AgendaDto>(
       'agenda_${_activeUserEmail ?? 'default'}',
       (json) => AgendaDto.fromJson(json),
+    );
+  }
+
+  Future<List<ExamDto>?> _loadCachedExams() async {
+    return await StorageService.getCachedListData<ExamDto>(
+      'exams_${_activeUserEmail ?? 'default'}',
+      (json) => ExamDto.fromJson(json),
     );
   }
 
@@ -611,6 +623,10 @@ class ApiStore extends ChangeNotifier {
       if (data != null) agenda = data;
     }));
 
+    futures.add(_loadCachedExams().then((data) {
+      if (data != null) exams = data;
+    }));
+
     futures.add(_loadCachedLateness().then((data) {
       if (data != null) lateness = data;
     }));
@@ -644,6 +660,7 @@ class ApiStore extends ChangeNotifier {
           fetchAbsences(forceRefresh: forceRefresh),
           fetchAgenda(forceRefresh: forceRefresh),
           fetchGrades(forceRefresh: forceRefresh),
+          fetchExams(forceRefresh: forceRefresh),
           fetchLateness(forceRefresh: forceRefresh),
           fetchUserInfo(forceRefresh: forceRefresh),
           fetchAppInfo(forceRefresh: forceRefresh),
@@ -837,6 +854,44 @@ class ApiStore extends ChangeNotifier {
         final cachedData = await _loadCachedGrades();
         if (cachedData != null) {
           grades = cachedData;
+        }
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> fetchExams({bool forceRefresh = false}) async {
+    // Try to load from cache first if not forcing refresh
+    if (!forceRefresh) {
+      final cachedData = await _loadCachedExams();
+      if (cachedData != null) {
+        exams = cachedData;
+        lastApiError = null;
+        notifyListeners();
+        return;
+      }
+    }
+
+    try {
+      exams = await _apiService.getExams();
+      if (exams != null) {
+        await _cacheExams(exams!);
+      }
+      lastApiError = null;
+    } on ApiException catch (e, stackTrace) {
+      _handleApiError(e);
+      // Send to Sentry/GlitchTip
+      await ErrorHandler.handleApiError(
+        e,
+        stackTrace: stackTrace,
+        endpoint: 'getExams',
+        statusCode: e.code,
+      );
+      // If API fails and we don't have fresh data, try to load from cache as fallback
+      if (exams == null) {
+        final cachedData = await _loadCachedExams();
+        if (cachedData != null) {
+          exams = cachedData;
         }
       }
     }

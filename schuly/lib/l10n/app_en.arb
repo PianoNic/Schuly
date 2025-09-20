@@ -1757,5 +1757,35 @@
   "noInternetConnection": "No internet connection",
   "@noInternetConnection": {
     "description": "Message shown when there is no internet connection"
+  },
+
+  "upcomingTests": "Upcoming Tests",
+  "@upcomingTests": {
+    "description": "Title for upcoming tests card"
+  },
+
+  "noTestsFound": "No tests found",
+  "@noTestsFound": {
+    "description": "Message when no tests are available"
+  },
+
+  "noUpcomingTests": "No upcoming tests",
+  "@noUpcomingTests": {
+    "description": "Message when there are no upcoming tests"
+  },
+
+  "room": "Room",
+  "@room": {
+    "description": "Room label for test location"
+  },
+
+  "weight": "Weight",
+  "@weight": {
+    "description": "Weight label for test importance"
+  },
+
+  "numberOfTestsToShow": "Number of tests to show",
+  "@numberOfTestsToShow": {
+    "description": "Setting label for number of tests to display"
   }
 }

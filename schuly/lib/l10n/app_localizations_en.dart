@@ -1307,4 +1307,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noInternetConnection => 'No internet connection';
+
+  @override
+  String get upcomingTests => 'Upcoming Tests';
+
+  @override
+  String get noTestsFound => 'No tests found';
+
+  @override
+  String get noUpcomingTests => 'No upcoming tests';
+
+  @override
+  String get room => 'Room';
+
+  @override
+  String get weight => 'Weight';
+
+  @override
+  String get numberOfTestsToShow => 'Number of tests to show';
 }

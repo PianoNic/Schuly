@@ -6,6 +6,7 @@ import '../widgets/break_card.dart';
 import '../widgets/grade_tile.dart';
 import '../providers/api_store.dart';
 import '../providers/homepage_config_provider.dart';
+import '../providers/theme_provider.dart';
 import '../pages/absenzen_page.dart';
 import 'package:schuly/api/lib/api.dart';
 import '../l10n/app_localizations.dart';
@@ -94,6 +95,7 @@ class _StartPageState extends State<StartPage> {
         final agenda = apiStore.agenda;
         final grades = apiStore.grades;
         final absences = apiStore.absences;
+        final exams = apiStore.exams;
         final sections = homepageConfig.sections;
         return RefreshIndicator(
           onRefresh: () async {
@@ -106,7 +108,7 @@ class _StartPageState extends State<StartPage> {
               children: [
                 for (final section in sections)
                   if (section.isVisible)
-                    _buildSection(context, section.id, agenda, grades, absences, apiStore, widget.onNavigateToAbsenzen, homepageConfig),
+                    _buildSection(context, section.id, agenda, grades, absences, exams, apiStore, widget.onNavigateToAbsenzen, homepageConfig),
               ],
             ),
           ),
@@ -115,7 +117,7 @@ class _StartPageState extends State<StartPage> {
     );
   }
 
-  Widget _buildSection(BuildContext context, String sectionId, dynamic agenda, dynamic grades, dynamic absences, ApiStore apiStore, VoidCallback? onNavigateToAbsenzen, HomepageConfigProvider homepageConfig) {
+  Widget _buildSection(BuildContext context, String sectionId, dynamic agenda, dynamic grades, dynamic absences, dynamic exams, ApiStore apiStore, VoidCallback? onNavigateToAbsenzen, HomepageConfigProvider homepageConfig) {
     final localizations = AppLocalizations.of(context)!;
     switch (sectionId) {
       case 'lessons':
@@ -422,6 +424,151 @@ class _StartPageState extends State<StartPage> {
             ),
           ),
         );
+      case 'tests':
+        return Card(
+          margin: const EdgeInsets.only(bottom: 8),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  localizations.upcomingTests,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 12),
+                if (exams == null)
+                  const Center(child: CircularProgressIndicator())
+                else if (exams.isEmpty)
+                  Center(child: Text(localizations.noTestsFound))
+                else ...[
+                  ...(() {
+                    final List<ExamDto> examsList = exams.cast<ExamDto>().toList();
+                    // Filter for upcoming exams only
+                    final now = DateTime.now();
+                    final upcomingExams = examsList.where((exam) {
+                      final examDate = DateTime.tryParse(exam.startDate);
+                      return examDate != null && examDate.isAfter(now);
+                    }).toList();
+
+                    // Sort by date
+                    upcomingExams.sort((a, b) => a.startDate.compareTo(b.startDate));
+
+                    if (upcomingExams.isEmpty) {
+                      return [Center(child: Text(localizations.noUpcomingTests))];
+                    }
+
+                    // Get number of tests to show from config
+                    final config = homepageConfig.sections.firstWhere((s) => s.id == 'tests');
+                    final numberOfTests = config.settings['numberOfTests'] ?? 3;
+
+                    return upcomingExams.take(numberOfTests).map((exam) {
+                      final examDate = DateTime.parse(exam.startDate);
+                      final startTime = DateTime.tryParse(exam.startDate);
+                      final endTime = DateTime.tryParse(exam.endDate);
+
+                      final appColors = Theme.of(context).extension<AppColors>();
+                      final surfaceContainer = appColors?.surfaceContainer ??
+                          Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3);
+
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: surfaceContainer,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border(
+                            left: BorderSide(
+                              color: Color(int.parse('0xFF${exam.color.substring(1)}')),
+                              width: 3,
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            // Date display
+                            Column(
+                              children: [
+                                Text(
+                                  '${examDate.day}',
+                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                                Text(
+                                  _getMonthShort(examDate.month),
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 16),
+                            // Exam details
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    exam.courseName,
+                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  if (exam.text.isNotEmpty) ...[
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      exam.text,
+                                      style: Theme.of(context).textTheme.bodyMedium,
+                                    ),
+                                  ],
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      if (startTime != null && endTime != null) ...[
+                                        Icon(
+                                          Icons.access_time,
+                                          size: 14,
+                                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                        ),
+                                        const SizedBox(width: 4),
+                                        Text(
+                                          '${startTime.hour.toString().padLeft(2, '0')}:${startTime.minute.toString().padLeft(2, '0')} - ${endTime.hour.toString().padLeft(2, '0')}:${endTime.minute.toString().padLeft(2, '0')}',
+                                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                      ],
+                                      if (exam.roomToken.isNotEmpty) ...[
+                                        if (startTime != null && endTime != null)
+                                          const SizedBox(width: 12),
+                                        Icon(
+                                          Icons.room,
+                                          size: 14,
+                                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                        ),
+                                        const SizedBox(width: 4),
+                                        Text(
+                                          exam.roomToken,
+                                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                      ],
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList();
+                  })(),
+                ],
+              ],
+            ),
+          ),
+        );
       default:
         return const SizedBox.shrink();
     }
@@ -444,6 +591,38 @@ class _StartPageState extends State<StartPage> {
         return localizations.weekdaySat;
       case 7:
         return localizations.weekdaySun;
+      default:
+        return '';
+    }
+  }
+
+  String _getMonthShort(int month) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (month) {
+      case 1:
+        return localizations.january.substring(0, 3);
+      case 2:
+        return localizations.february.substring(0, 3);
+      case 3:
+        return localizations.march.substring(0, 3);
+      case 4:
+        return localizations.april.substring(0, 3);
+      case 5:
+        return localizations.may.substring(0, 3);
+      case 6:
+        return localizations.june.substring(0, 3);
+      case 7:
+        return localizations.july.substring(0, 3);
+      case 8:
+        return localizations.august.substring(0, 3);
+      case 9:
+        return localizations.september.substring(0, 3);
+      case 10:
+        return localizations.october.substring(0, 3);
+      case 11:
+        return localizations.november.substring(0, 3);
+      case 12:
+        return localizations.december.substring(0, 3);
       default:
         return '';
     }

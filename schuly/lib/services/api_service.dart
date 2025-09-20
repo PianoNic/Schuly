@@ -78,6 +78,14 @@ class ApiService {
     );
   }
 
+  Future<List<ExamDto>?> getExams() {
+    return _withPerformanceMonitoring(
+      operationName: 'api.get_exams',
+      description: 'Fetch exams',
+      operation: () => _mobileApi.mobileExams(),
+    );
+  }
+
   Future<List<Object>?> getNotifications() {
     return _withPerformanceMonitoring(
       operationName: 'api.get_notifications',

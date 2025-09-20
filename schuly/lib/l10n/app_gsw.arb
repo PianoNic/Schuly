@@ -697,5 +697,17 @@
 
   "authenticationFailed": "Authentifizierig fehlgschlage: {error}",
 
-  "noInternetConnection": "Kei Internetverbindig"
+  "noInternetConnection": "Kei Internetverbindig",
+
+  "upcomingTests": "Astehendi Prüefige",
+
+  "noTestsFound": "Kei Prüefige gfunde",
+
+  "noUpcomingTests": "Kei astehendi Prüefige",
+
+  "room": "Ruum",
+
+  "weight": "Gwichtig",
+
+  "numberOfTestsToShow": "Azahl vo de azeigende Prüefige"
 }

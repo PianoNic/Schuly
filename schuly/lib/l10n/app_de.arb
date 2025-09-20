@@ -591,5 +591,17 @@
 
   "authenticationFailed": "Authentifizierung fehlgeschlagen: {error}",
 
-  "noInternetConnection": "Keine Internetverbindung"
+  "noInternetConnection": "Keine Internetverbindung",
+
+  "upcomingTests": "Anstehende Prüfungen",
+
+  "noTestsFound": "Keine Prüfungen gefunden",
+
+  "noUpcomingTests": "Keine anstehenden Prüfungen",
+
+  "room": "Raum",
+
+  "weight": "Gewichtung",
+
+  "numberOfTestsToShow": "Anzahl der anzuzeigenden Prüfungen"
 }

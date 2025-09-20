@@ -468,6 +468,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
   }
 
   void _showAddAccountDialog(BuildContext context, ApiStore apiStore) {
+    final localizations = AppLocalizations.of(context)!;
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final formKey = GlobalKey<FormState>();
@@ -545,14 +546,14 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    const Row(
+                    Row(
                       children: [
-                        Expanded(child: Divider()),
+                        const Expanded(child: Divider()),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text('OR'),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(localizations.or),
                         ),
-                        Expanded(child: Divider()),
+                        const Expanded(child: Divider()),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -601,7 +602,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                           height: 20,
                           errorBuilder: (context, error, stackTrace) => const Icon(Icons.business, size: 20),
                         ),
-                        label: const Text('Sign in with Microsoft'),
+                        label: Text(localizations.signInWithMicrosoft),
                       ),
                     ),
                   ],

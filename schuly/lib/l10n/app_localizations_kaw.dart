@@ -1125,13 +1125,13 @@ class AppLocalizationsKaw extends AppLocalizations {
       'Finalizing initialization... ✨(๑•ᴗ•๑)✨';
 
   @override
-  String get checkingConnection => 'Checking connection...';
+  String get checkingConnection => 'Checking connection... (｡♥‿♥｡)';
 
   @override
-  String get offlineModeDetected => 'Offline mode - using cached data';
+  String get offlineModeDetected => 'Offline mode - using cached data uwu';
 
   @override
-  String get loadingCachedData => 'Loading cached data...';
+  String get loadingCachedData => 'Loading cached data... ✨';
 
   @override
   String errorCheckingUpdatesDetails(Object error) {
@@ -1215,4 +1215,96 @@ class AppLocalizationsKaw extends AppLocalizations {
 
   @override
   String get unexcusedAbsences => 'Unexcused Absences (｡•́︿•̀｡)';
+
+  @override
+  String get reAuthenticationCancelled =>
+      'We-authentication cancelled (╥﹏╥) Some features might not wowk pwopewly.';
+
+  @override
+  String get consoleLogs => 'Console Wogs ✨';
+
+  @override
+  String get viewAppDebugLogs => 'View app debug wogs uwu';
+
+  @override
+  String get buyMeACoffee => 'Buy me a coffee ☕';
+
+  @override
+  String get supportDevelopment => 'Suppowt the devewopment (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧';
+
+  @override
+  String get couldNotOpenBuyMeACoffee =>
+      'Couldn\'t open Buy Me a Coffee page (｡•́︿•̀｡)';
+
+  @override
+  String get or => 'OW';
+
+  @override
+  String get signInWithMicrosoft => 'Sign in with Micwosoft uwu';
+
+  @override
+  String get clearLogs => 'Cweaw wogs';
+
+  @override
+  String get exportLogs => 'Expowt wogs';
+
+  @override
+  String get all => 'Aww';
+
+  @override
+  String get debug => 'Debug owo';
+
+  @override
+  String get info => 'Info (◡ ω ◡)';
+
+  @override
+  String get warning => 'Wawning (°ロ°)!';
+
+  @override
+  String get enableLogging => 'Enabwe wogging ✨';
+
+  @override
+  String get clearFilters => 'Cweaw fiwtews';
+
+  @override
+  String get logCopiedToClipboard => 'Wog copied to cwipboawd! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧';
+
+  @override
+  String get clearAllLogs => 'Cweaw aww wogs? (｡•́︿•̀｡)';
+
+  @override
+  String get thisActionCannotBeUndone => 'This action cannot be undone uwu';
+
+  @override
+  String get logsCleared => 'Wogs cweawed! ✨';
+
+  @override
+  String get clear => 'Cweaw';
+
+  @override
+  String get logsExportedToClipboard =>
+      'Wogs expowted to cwipboawd! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧';
+
+  @override
+  String endpointReachable(Object statusCode) {
+    return 'Endpoint weachable! ($statusCode) ✨';
+  }
+
+  @override
+  String serverError(Object statusCode) {
+    return 'Sewvew ewwow: $statusCode (╥﹏╥)';
+  }
+
+  @override
+  String failedToInitializeMicrosoftAuth(Object error) {
+    return 'Micwosoft authentication failed to initialize: $error (｡•́︿•̀｡)';
+  }
+
+  @override
+  String authenticationFailed(Object error) {
+    return 'Authentication failed: $error uwu';
+  }
+
+  @override
+  String get noInternetConnection => 'No intewnet connection (╥﹏╥)';
 }

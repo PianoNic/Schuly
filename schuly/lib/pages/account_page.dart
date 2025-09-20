@@ -206,8 +206,8 @@ class AccountPage extends StatelessWidget {
                     const Divider(),
                     ListTile(
                       leading: const Icon(Icons.terminal),
-                      title: const Text('Console Logs'),
-                      subtitle: const Text('View app debug logs'),
+                      title: Text(localizations.consoleLogs),
+                      subtitle: Text(localizations.viewAppDebugLogs),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {
                         Navigator.of(context).push(
@@ -316,8 +316,8 @@ class AccountPage extends StatelessWidget {
                     const Divider(),
                     ListTile(
                       leading: Icon(Icons.coffee, color: Colors.amber.shade600),
-                      title: const Text('Buy me a coffee'),
-                      subtitle: const Text('Support the development'),
+                      title: Text(localizations.buyMeACoffee),
+                      subtitle: Text(localizations.supportDevelopment),
                       trailing: const Icon(Icons.open_in_new),
                       onTap: () {
                         _launchBuyMeACoffee(context);
@@ -342,9 +342,10 @@ class AccountPage extends StatelessWidget {
   void _launchBuyMeACoffee(BuildContext context) async {
     final success = await UrlLauncherHelper.launchUrl('https://buymeacoffee.com/pianonic');
     if (!success && context.mounted) {
+      final localizations = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Could not open Buy Me a Coffee page'),
+        SnackBar(
+          content: Text(localizations.couldNotOpenBuyMeACoffee),
           backgroundColor: Colors.red,
         ),
       );
@@ -364,6 +365,7 @@ class AccountPage extends StatelessWidget {
   }
 
   void _showAddAccountDialog(BuildContext context, ApiStore apiStore) {
+    final localizations = AppLocalizations.of(context)!;
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final formKey = GlobalKey<FormState>();
@@ -414,14 +416,14 @@ class AccountPage extends StatelessWidget {
                             : null,
                       ),
                       const SizedBox(height: 16),
-                      const Row(
+                      Row(
                         children: [
-                          Expanded(child: Divider()),
+                          const Expanded(child: Divider()),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text('OR'),
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(localizations.or),
                           ),
-                          Expanded(child: Divider()),
+                          const Expanded(child: Divider()),
                         ],
                       ),
                       const SizedBox(height: 16),
@@ -465,7 +467,7 @@ class AccountPage extends StatelessWidget {
                             height: 20,
                             errorBuilder: (context, error, stackTrace) => const Icon(Icons.business, size: 20),
                           ),
-                          label: const Text('Sign in with Microsoft'),
+                          label: Text(localizations.signInWithMicrosoft),
                         ),
                       ),
                     ],

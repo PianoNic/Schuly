@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/logging_service.dart';
 
 class LogsViewerPage extends StatefulWidget {
@@ -54,7 +55,7 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Console Logs'),
+        title: Text(AppLocalizations.of(context)!.consoleLogs),
         actions: [
           IconButton(
             icon: Icon(_autoScroll ? Icons.vertical_align_bottom : Icons.vertical_align_top),
@@ -89,23 +90,23 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
               }
             },
             itemBuilder: (context) => [
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'clear',
                 child: Row(
                   children: [
-                    Icon(Icons.clear_all, size: 20),
-                    SizedBox(width: 12),
-                    Text('Clear logs'),
+                    const Icon(Icons.clear_all, size: 20),
+                    const SizedBox(width: 12),
+                    Text(AppLocalizations.of(context)!.clearLogs),
                   ],
                 ),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'export',
                 child: Row(
                   children: [
-                    Icon(Icons.download, size: 20),
-                    SizedBox(width: 12),
-                    Text('Export logs'),
+                    const Icon(Icons.download, size: 20),
+                    const SizedBox(width: 12),
+                    Text(AppLocalizations.of(context)!.exportLogs),
                   ],
                 ),
               ),
@@ -176,7 +177,7 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
                   child: Row(
                     children: [
                       FilterChip(
-                        label: const Text('All'),
+                        label: Text(AppLocalizations.of(context)!.all),
                         selected: _selectedLevel == null,
                         onSelected: (selected) {
                           setState(() {
@@ -186,7 +187,7 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
                       ),
                       const SizedBox(width: 8),
                       FilterChip(
-                        label: const Text('Debug'),
+                        label: Text(AppLocalizations.of(context)!.debug),
                         selected: _selectedLevel == LogLevel.debug,
                         avatar: Icon(Icons.bug_report, size: 16, color: _getLogColor(LogLevel.debug)),
                         onSelected: (selected) {
@@ -197,7 +198,7 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
                       ),
                       const SizedBox(width: 8),
                       FilterChip(
-                        label: const Text('Info'),
+                        label: Text(AppLocalizations.of(context)!.info),
                         selected: _selectedLevel == LogLevel.info,
                         avatar: Icon(Icons.info_outline, size: 16, color: _getLogColor(LogLevel.info)),
                         onSelected: (selected) {
@@ -208,7 +209,7 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
                       ),
                       const SizedBox(width: 8),
                       FilterChip(
-                        label: const Text('Warning'),
+                        label: Text(AppLocalizations.of(context)!.warning),
                         selected: _selectedLevel == LogLevel.warning,
                         avatar: Icon(Icons.warning_amber, size: 16, color: _getLogColor(LogLevel.warning)),
                         onSelected: (selected) {
@@ -219,7 +220,7 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
                       ),
                       const SizedBox(width: 8),
                       FilterChip(
-                        label: const Text('Error'),
+                        label: Text(AppLocalizations.of(context)!.error),
                         selected: _selectedLevel == LogLevel.error,
                         avatar: Icon(Icons.error_outline, size: 16, color: _getLogColor(LogLevel.error)),
                         onSelected: (selected) {
@@ -260,7 +261,7 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
                             loggingService.toggleLogging();
                           },
                           icon: const Icon(Icons.play_arrow),
-                          label: const Text('Enable logging'),
+                          label: Text(AppLocalizations.of(context)!.enableLogging),
                         ),
                       ],
                     ),
@@ -290,7 +291,7 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
                                 _selectedLevel = null;
                               });
                             },
-                            child: const Text('Clear filters'),
+                            child: Text(AppLocalizations.of(context)!.clearFilters),
                           ),
                         ],
                       ],
@@ -434,11 +435,11 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
               _copyLogToClipboard(context, log);
               Navigator.of(context).pop();
             },
-            child: const Text('Copy'),
+            child: Text(AppLocalizations.of(context)!.copy),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Close'),
+            child: Text(AppLocalizations.of(context)!.close),
           ),
         ],
       ),
@@ -476,9 +477,9 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
 
     Clipboard.setData(ClipboardData(text: text.toString()));
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Log copied to clipboard'),
-        duration: Duration(seconds: 1),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.logCopiedToClipboard),
+        duration: const Duration(seconds: 1),
       ),
     );
   }
@@ -487,22 +488,22 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Clear all logs?'),
-        content: const Text('This action cannot be undone.'),
+        title: Text(AppLocalizations.of(context)!.clearAllLogs),
+        content: Text(AppLocalizations.of(context)!.thisActionCannotBeUndone),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () {
               loggingService.clearLogs();
               Navigator.of(context).pop();
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Logs cleared')),
+                SnackBar(content: Text(AppLocalizations.of(context)!.logsCleared)),
               );
             },
-            child: const Text('Clear'),
+            child: Text(AppLocalizations.of(context)!.clear),
           ),
         ],
       ),
@@ -513,9 +514,9 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
     final logs = loggingService.exportLogs();
     Clipboard.setData(ClipboardData(text: logs));
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Logs exported to clipboard'),
-        duration: Duration(seconds: 2),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.logsExportedToClipboard),
+        duration: const Duration(seconds: 2),
       ),
     );
   }

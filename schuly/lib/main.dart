@@ -348,9 +348,9 @@ class _MyHomePageState extends State<MyHomePage> {
           if (result != true && mounted) {
             // User cancelled re-authentication
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Re-authentication cancelled. Some features may not work.'),
-                duration: Duration(seconds: 3),
+              SnackBar(
+                content: Text(AppLocalizations.of(context)!.reAuthenticationCancelled),
+                duration: const Duration(seconds: 3),
               ),
             );
           }
@@ -513,7 +513,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Offline Mode - Using cached data',
+                    AppLocalizations.of(context)!.offlineModeDetected,
                     style: TextStyle(
                       color: Colors.orange[700],
                       fontSize: 13,
@@ -771,7 +771,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   if (_isOfflineMode) ...[
                     const SizedBox(height: 8),
                     Text(
-                      'No internet connection',
+                      AppLocalizations.of(context)!.noInternetConnection,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Colors.orange[600],

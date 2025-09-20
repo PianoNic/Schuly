@@ -1129,13 +1129,14 @@ class AppLocalizationsArr extends AppLocalizations {
   String get finalizingInitialization => 'Preparin\' to set sail...';
 
   @override
-  String get checkingConnection => 'Checking connection...';
+  String get checkingConnection => 'Checkin\' the ship\'s signal...';
 
   @override
-  String get offlineModeDetected => 'Offline mode - using cached data';
+  String get offlineModeDetected =>
+      'Sailin\' without wind - usin\' the ship\'s logs';
 
   @override
-  String get loadingCachedData => 'Loading cached data...';
+  String get loadingCachedData => 'Pullin\' from the ship\'s hold...';
 
   @override
   String errorCheckingUpdatesDetails(Object error) {
@@ -1218,4 +1219,95 @@ class AppLocalizationsArr extends AppLocalizations {
 
   @override
   String get unexcusedAbsences => 'Unforgiven Shore Leaves';
+
+  @override
+  String get reAuthenticationCancelled =>
+      'Re-boardin\' cancelled. Some treasures may be locked away.';
+
+  @override
+  String get consoleLogs => 'Ship\'s Logbook';
+
+  @override
+  String get viewAppDebugLogs => 'Peek at the ship\'s secret logs';
+
+  @override
+  String get buyMeACoffee => 'Buy me a grog';
+
+  @override
+  String get supportDevelopment => 'Support the ship\'s construction';
+
+  @override
+  String get couldNotOpenBuyMeACoffee => 'Couldn\'t open the grog shop page';
+
+  @override
+  String get or => 'ARRR';
+
+  @override
+  String get signInWithMicrosoft => 'Board with Microsoft\'s flag';
+
+  @override
+  String get clearLogs => 'Clear the logbook';
+
+  @override
+  String get exportLogs => 'Export the ship\'s logs';
+
+  @override
+  String get all => 'All hands';
+
+  @override
+  String get debug => 'Debug';
+
+  @override
+  String get info => 'Info';
+
+  @override
+  String get warning => 'Warnin\'';
+
+  @override
+  String get enableLogging => 'Start recordin\' in the logbook';
+
+  @override
+  String get clearFilters => 'Clear the spyglass';
+
+  @override
+  String get logCopiedToClipboard => 'Log copied to yer treasure map';
+
+  @override
+  String get clearAllLogs => 'Clear all the ship\'s logs?';
+
+  @override
+  String get thisActionCannotBeUndone =>
+      'This be permanent, matey - no turnin\' back.';
+
+  @override
+  String get logsCleared => 'Logbook cleared';
+
+  @override
+  String get clear => 'Clear';
+
+  @override
+  String get logsExportedToClipboard => 'Logs exported to yer treasure map';
+
+  @override
+  String endpointReachable(Object statusCode) {
+    return 'Port be open ($statusCode)';
+  }
+
+  @override
+  String serverError(Object statusCode) {
+    return 'The server be sinkin\': $statusCode';
+  }
+
+  @override
+  String failedToInitializeMicrosoftAuth(Object error) {
+    return 'Microsoft\'s flag be torn: $error';
+  }
+
+  @override
+  String authenticationFailed(Object error) {
+    return 'Boarding failed, ye scurvy dog: $error';
+  }
+
+  @override
+  String get noInternetConnection => 'No signal from the crow\'s nest';
 }

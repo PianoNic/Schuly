@@ -1610,5 +1610,152 @@
   "unexcusedAbsences": "Unexcused Absences",
   "@unexcusedAbsences": {
     "description": "Header for unexcused absences section"
+  },
+
+  "reAuthenticationCancelled": "Re-authentication cancelled. Some features may not work.",
+  "@reAuthenticationCancelled": {
+    "description": "Message when re-authentication is cancelled"
+  },
+
+  "consoleLogs": "Console Logs",
+  "@consoleLogs": {
+    "description": "Title for console logs page"
+  },
+
+  "viewAppDebugLogs": "View app debug logs",
+  "@viewAppDebugLogs": {
+    "description": "Subtitle for console logs menu item"
+  },
+
+  "buyMeACoffee": "Buy me a coffee",
+  "@buyMeACoffee": {
+    "description": "Buy me a coffee menu item"
+  },
+
+  "supportDevelopment": "Support the development",
+  "@supportDevelopment": {
+    "description": "Subtitle for buy me a coffee item"
+  },
+
+  "couldNotOpenBuyMeACoffee": "Could not open Buy Me a Coffee page",
+  "@couldNotOpenBuyMeACoffee": {
+    "description": "Error when Buy Me a Coffee page cannot be opened"
+  },
+
+  "or": "OR",
+  "@or": {
+    "description": "Text shown between login options"
+  },
+
+  "signInWithMicrosoft": "Sign in with Microsoft",
+  "@signInWithMicrosoft": {
+    "description": "Microsoft sign in button text"
+  },
+
+  "clearLogs": "Clear logs",
+  "@clearLogs": {
+    "description": "Clear logs button text"
+  },
+
+  "exportLogs": "Export logs",
+  "@exportLogs": {
+    "description": "Export logs button text"
+  },
+
+  "all": "All",
+  "@all": {
+    "description": "All filter option"
+  },
+
+  "debug": "Debug",
+  "@debug": {
+    "description": "Debug log level"
+  },
+
+  "info": "Info",
+  "@info": {
+    "description": "Info log level"
+  },
+
+  "warning": "Warning",
+  "@warning": {
+    "description": "Warning log level"
+  },
+
+  "enableLogging": "Enable logging",
+  "@enableLogging": {
+    "description": "Enable logging toggle text"
+  },
+
+  "clearFilters": "Clear filters",
+  "@clearFilters": {
+    "description": "Clear filters button text"
+  },
+
+  "logCopiedToClipboard": "Log copied to clipboard",
+  "@logCopiedToClipboard": {
+    "description": "Message when log is copied to clipboard"
+  },
+
+  "clearAllLogs": "Clear all logs?",
+  "@clearAllLogs": {
+    "description": "Clear all logs confirmation dialog title"
+  },
+
+  "thisActionCannotBeUndone": "This action cannot be undone.",
+  "@thisActionCannotBeUndone": {
+    "description": "Warning message for irreversible actions"
+  },
+
+  "logsCleared": "Logs cleared",
+  "@logsCleared": {
+    "description": "Message when logs are cleared"
+  },
+
+  "clear": "Clear",
+  "@clear": {
+    "description": "Clear button text"
+  },
+
+  "logsExportedToClipboard": "Logs exported to clipboard",
+  "@logsExportedToClipboard": {
+    "description": "Message when logs are exported to clipboard"
+  },
+
+  "endpointReachable": "Endpoint reachable ({statusCode})",
+  "@endpointReachable": {
+    "description": "Message when API endpoint is reachable",
+    "placeholders": {
+      "statusCode": {}
+    }
+  },
+
+  "serverError": "Server error: {statusCode}",
+  "@serverError": {
+    "description": "Server error message with status code",
+    "placeholders": {
+      "statusCode": {}
+    }
+  },
+
+  "failedToInitializeMicrosoftAuth": "Failed to initialize Microsoft authentication: {error}",
+  "@failedToInitializeMicrosoftAuth": {
+    "description": "Error when Microsoft authentication fails to initialize",
+    "placeholders": {
+      "error": {}
+    }
+  },
+
+  "authenticationFailed": "Authentication failed: {error}",
+  "@authenticationFailed": {
+    "description": "Generic authentication failure message",
+    "placeholders": {
+      "error": {}
+    }
+  },
+
+  "noInternetConnection": "No internet connection",
+  "@noInternetConnection": {
+    "description": "Message shown when there is no internet connection"
   }
 }

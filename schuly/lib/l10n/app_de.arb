@@ -531,5 +531,65 @@
   "studentReason": "Begründung des Schülers",
   "trainerComment": "Kommentar des Lehrers",
 
-  "unexcusedAbsences": "Unentschuldigte Absenzen"
+  "unexcusedAbsences": "Unentschuldigte Absenzen",
+
+  "checkingConnection": "Verbindung wird überprüft...",
+
+  "offlineModeDetected": "Offline-Modus - verwende gespeicherte Daten",
+
+  "loadingCachedData": "Lade gespeicherte Daten...",
+
+  "reAuthenticationCancelled": "Erneute Authentifizierung abgebrochen. Einige Funktionen funktionieren möglicherweise nicht.",
+
+  "consoleLogs": "Konsolen-Logs",
+
+  "viewAppDebugLogs": "App-Debug-Logs anzeigen",
+
+  "buyMeACoffee": "Kauf mir einen Kaffee",
+
+  "supportDevelopment": "Unterstütze die Entwicklung",
+
+  "couldNotOpenBuyMeACoffee": "Buy Me a Coffee-Seite konnte nicht geöffnet werden",
+
+  "or": "ODER",
+
+  "signInWithMicrosoft": "Mit Microsoft anmelden",
+
+  "clearLogs": "Logs löschen",
+
+  "exportLogs": "Logs exportieren",
+
+  "all": "Alle",
+
+  "debug": "Debug",
+
+  "info": "Info",
+
+  "warning": "Warnung",
+
+  "enableLogging": "Protokollierung aktivieren",
+
+  "clearFilters": "Filter löschen",
+
+  "logCopiedToClipboard": "Log in Zwischenablage kopiert",
+
+  "clearAllLogs": "Alle Logs löschen?",
+
+  "thisActionCannotBeUndone": "Diese Aktion kann nicht rückgängig gemacht werden.",
+
+  "logsCleared": "Logs gelöscht",
+
+  "clear": "Löschen",
+
+  "logsExportedToClipboard": "Logs in Zwischenablage exportiert",
+
+  "endpointReachable": "Endpunkt erreichbar ({statusCode})",
+
+  "serverError": "Serverfehler: {statusCode}",
+
+  "failedToInitializeMicrosoftAuth": "Microsoft-Authentifizierung konnte nicht initialisiert werden: {error}",
+
+  "authenticationFailed": "Authentifizierung fehlgeschlagen: {error}",
+
+  "noInternetConnection": "Keine Internetverbindung"
 }

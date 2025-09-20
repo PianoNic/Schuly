@@ -1141,13 +1141,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get finalizingInitialization => 'Initialisierung abschließen...';
 
   @override
-  String get checkingConnection => 'Checking connection...';
+  String get checkingConnection => 'Verbindung wird überprüft...';
 
   @override
-  String get offlineModeDetected => 'Offline mode - using cached data';
+  String get offlineModeDetected =>
+      'Offline-Modus - verwende gespeicherte Daten';
 
   @override
-  String get loadingCachedData => 'Loading cached data...';
+  String get loadingCachedData => 'Lade gespeicherte Daten...';
 
   @override
   String errorCheckingUpdatesDetails(Object error) {
@@ -1231,4 +1232,96 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get unexcusedAbsences => 'Unentschuldigte Absenzen';
+
+  @override
+  String get reAuthenticationCancelled =>
+      'Erneute Authentifizierung abgebrochen. Einige Funktionen funktionieren möglicherweise nicht.';
+
+  @override
+  String get consoleLogs => 'Konsolen-Logs';
+
+  @override
+  String get viewAppDebugLogs => 'App-Debug-Logs anzeigen';
+
+  @override
+  String get buyMeACoffee => 'Kauf mir einen Kaffee';
+
+  @override
+  String get supportDevelopment => 'Unterstütze die Entwicklung';
+
+  @override
+  String get couldNotOpenBuyMeACoffee =>
+      'Buy Me a Coffee-Seite konnte nicht geöffnet werden';
+
+  @override
+  String get or => 'ODER';
+
+  @override
+  String get signInWithMicrosoft => 'Mit Microsoft anmelden';
+
+  @override
+  String get clearLogs => 'Logs löschen';
+
+  @override
+  String get exportLogs => 'Logs exportieren';
+
+  @override
+  String get all => 'Alle';
+
+  @override
+  String get debug => 'Debug';
+
+  @override
+  String get info => 'Info';
+
+  @override
+  String get warning => 'Warnung';
+
+  @override
+  String get enableLogging => 'Protokollierung aktivieren';
+
+  @override
+  String get clearFilters => 'Filter löschen';
+
+  @override
+  String get logCopiedToClipboard => 'Log in Zwischenablage kopiert';
+
+  @override
+  String get clearAllLogs => 'Alle Logs löschen?';
+
+  @override
+  String get thisActionCannotBeUndone =>
+      'Diese Aktion kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get logsCleared => 'Logs gelöscht';
+
+  @override
+  String get clear => 'Löschen';
+
+  @override
+  String get logsExportedToClipboard => 'Logs in Zwischenablage exportiert';
+
+  @override
+  String endpointReachable(Object statusCode) {
+    return 'Endpunkt erreichbar ($statusCode)';
+  }
+
+  @override
+  String serverError(Object statusCode) {
+    return 'Serverfehler: $statusCode';
+  }
+
+  @override
+  String failedToInitializeMicrosoftAuth(Object error) {
+    return 'Microsoft-Authentifizierung konnte nicht initialisiert werden: $error';
+  }
+
+  @override
+  String authenticationFailed(Object error) {
+    return 'Authentifizierung fehlgeschlagen: $error';
+  }
+
+  @override
+  String get noInternetConnection => 'Keine Internetverbindung';
 }

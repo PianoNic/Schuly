@@ -637,5 +637,65 @@
   "studentReason": "Begründig vom Schüeler",
   "trainerComment": "Kommentar vom Lehrer",
 
-  "unexcusedAbsences": "Unentschuldigti Absänze"
+  "unexcusedAbsences": "Unentschuldigti Absänze",
+
+  "checkingConnection": "Verbindig wird überprüeft...",
+
+  "offlineModeDetected": "Offline-Modus - bruuche gspeicherti Date",
+
+  "loadingCachedData": "Lade gspeicherti Date...",
+
+  "reAuthenticationCancelled": "Erneuti Authentifizierig abbroche. Einigi Funktione funktioniered vilicht nöd.",
+
+  "consoleLogs": "Konsole-Logs",
+
+  "viewAppDebugLogs": "App-Debug-Logs azeige",
+
+  "buyMeACoffee": "Chauf mer en Kafi",
+
+  "supportDevelopment": "Unterstütz d'Entwicklig",
+
+  "couldNotOpenBuyMeACoffee": "Buy Me a Coffee-Siite het nöd chöne göffnet werde",
+
+  "or": "ODER",
+
+  "signInWithMicrosoft": "Mit Microsoft amelde",
+
+  "clearLogs": "Logs lösche",
+
+  "exportLogs": "Logs exportiere",
+
+  "all": "Alli",
+
+  "debug": "Debug",
+
+  "info": "Info",
+
+  "warning": "Warnig",
+
+  "enableLogging": "Protokollierig aktiviere",
+
+  "clearFilters": "Filter lösche",
+
+  "logCopiedToClipboard": "Log i'd Zwüscheablag kopiert",
+
+  "clearAllLogs": "Alli Logs lösche?",
+
+  "thisActionCannotBeUndone": "Die Aktion cha nöd rückgängig gmacht werde.",
+
+  "logsCleared": "Logs glöscht",
+
+  "clear": "Lösche",
+
+  "logsExportedToClipboard": "Logs i'd Zwüscheablag exportiert",
+
+  "endpointReachable": "Endpunkt erreichbar ({statusCode})",
+
+  "serverError": "Serverfehler: {statusCode}",
+
+  "failedToInitializeMicrosoftAuth": "Microsoft-Authentifizierig het nöd chöne initialisiert werde: {error}",
+
+  "authenticationFailed": "Authentifizierig fehlgschlage: {error}",
+
+  "noInternetConnection": "Kei Internetverbindig"
 }

@@ -643,5 +643,65 @@
   "studentReason": "Student Weason (´･ω･`)",
   "trainerComment": "Twainew Comment ✨",
 
-  "unexcusedAbsences": "Unexcused Absences (｡•́︿•̀｡)"
+  "unexcusedAbsences": "Unexcused Absences (｡•́︿•̀｡)",
+
+  "checkingConnection": "Checking connection... (｡♥‿♥｡)",
+
+  "offlineModeDetected": "Offline mode - using cached data uwu",
+
+  "loadingCachedData": "Loading cached data... ✨",
+
+  "reAuthenticationCancelled": "We-authentication cancelled (╥﹏╥) Some features might not wowk pwopewly.",
+
+  "consoleLogs": "Console Wogs ✨",
+
+  "viewAppDebugLogs": "View app debug wogs uwu",
+
+  "buyMeACoffee": "Buy me a coffee ☕",
+
+  "supportDevelopment": "Suppowt the devewopment (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧",
+
+  "couldNotOpenBuyMeACoffee": "Couldn't open Buy Me a Coffee page (｡•́︿•̀｡)",
+
+  "or": "OW",
+
+  "signInWithMicrosoft": "Sign in with Micwosoft uwu",
+
+  "clearLogs": "Cweaw wogs",
+
+  "exportLogs": "Expowt wogs",
+
+  "all": "Aww",
+
+  "debug": "Debug owo",
+
+  "info": "Info (◡ ω ◡)",
+
+  "warning": "Wawning (°ロ°)!",
+
+  "enableLogging": "Enabwe wogging ✨",
+
+  "clearFilters": "Cweaw fiwtews",
+
+  "logCopiedToClipboard": "Wog copied to cwipboawd! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧",
+
+  "clearAllLogs": "Cweaw aww wogs? (｡•́︿•̀｡)",
+
+  "thisActionCannotBeUndone": "This action cannot be undone uwu",
+
+  "logsCleared": "Wogs cweawed! ✨",
+
+  "clear": "Cweaw",
+
+  "logsExportedToClipboard": "Wogs expowted to cwipboawd! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧",
+
+  "endpointReachable": "Endpoint weachable! ({statusCode}) ✨",
+
+  "serverError": "Sewvew ewwow: {statusCode} (╥﹏╥)",
+
+  "failedToInitializeMicrosoftAuth": "Micwosoft authentication failed to initialize: {error} (｡•́︿•̀｡)",
+
+  "authenticationFailed": "Authentication failed: {error} uwu",
+
+  "noInternetConnection": "No intewnet connection (╥﹏╥)"
 }

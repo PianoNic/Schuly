@@ -1325,4 +1325,7 @@ class AppLocalizationsKaw extends AppLocalizations {
 
   @override
   String get numberOfTestsToShow => 'Number of tests to show ♡';
+
+  @override
+  String get today => 'Today~ ♪';
 }

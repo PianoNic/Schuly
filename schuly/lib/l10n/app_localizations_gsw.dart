@@ -1331,4 +1331,7 @@ class AppLocalizationsGsw extends AppLocalizations {
 
   @override
   String get numberOfTestsToShow => 'Azahl vo de azeigende Prüefige';
+
+  @override
+  String get today => 'Hüt';
 }

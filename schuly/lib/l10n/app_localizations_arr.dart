@@ -1328,4 +1328,7 @@ class AppLocalizationsArr extends AppLocalizations {
 
   @override
   String get numberOfTestsToShow => 'Number o\' battles to show';
+
+  @override
+  String get today => 'This Day';
 }

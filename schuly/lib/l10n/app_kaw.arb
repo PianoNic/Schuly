@@ -703,5 +703,17 @@
 
   "authenticationFailed": "Authentication failed: {error} uwu",
 
-  "noInternetConnection": "No intewnet connection (╥﹏╥)"
+  "noInternetConnection": "No intewnet connection (╥﹏╥)",
+
+  "upcomingTests": "Upcoming Tests (°◡°♡)",
+
+  "noTestsFound": "No tests found uwu",
+
+  "noUpcomingTests": "No upcoming tests ヽ(´▽`)/",
+
+  "room": "Woom ✨",
+
+  "weight": "Weight (⌒‿⌒)",
+
+  "numberOfTestsToShow": "Number of tests to show ♡"
 }

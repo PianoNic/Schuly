@@ -1313,4 +1313,22 @@ class AppLocalizationsGsw extends AppLocalizations {
 
   @override
   String get noInternetConnection => 'Kei Internetverbindig';
+
+  @override
+  String get upcomingTests => 'Astehendi Prüefige';
+
+  @override
+  String get noTestsFound => 'Kei Prüefige gfunde';
+
+  @override
+  String get noUpcomingTests => 'Kei astehendi Prüefige';
+
+  @override
+  String get room => 'Ruum';
+
+  @override
+  String get weight => 'Gwichtig';
+
+  @override
+  String get numberOfTestsToShow => 'Azahl vo de azeigende Prüefige';
 }

@@ -7,25 +7,29 @@ class SectionConfig {
   final String title;
   final IconData icon;
   bool isVisible;
+  Map<String, dynamic> settings;
 
   SectionConfig({
     required this.id,
     required this.title,
     required this.icon,
     required this.isVisible,
-  });
+    Map<String, dynamic>? settings,
+  }) : settings = settings ?? {};
 
   SectionConfig copyWith({
     String? id,
     String? title,
     IconData? icon,
     bool? isVisible,
+    Map<String, dynamic>? settings,
   }) {
     return SectionConfig(
       id: id ?? this.id,
       title: title ?? this.title,
       icon: icon ?? this.icon,
       isVisible: isVisible ?? this.isVisible,
+      settings: settings ?? this.settings,
     );
   }
 
@@ -35,6 +39,7 @@ class SectionConfig {
     if (iconData == Icons.beach_access) return 'beach_access';
     if (iconData == Icons.grade) return 'grade';
     if (iconData == Icons.list_alt) return 'list_alt';
+    if (iconData == Icons.assignment) return 'assignment';
     return 'schedule'; // fallback
   }
 
@@ -49,6 +54,8 @@ class SectionConfig {
         return Icons.grade;
       case 'list_alt':
         return Icons.list_alt;
+      case 'assignment':
+        return Icons.assignment;
       default:
         return Icons.schedule; // fallback
     }
@@ -60,12 +67,13 @@ class SectionConfig {
       'title': title,
       'icon': _getIconKey(icon),
       'isVisible': isVisible,
+      'settings': settings,
     };
   }
 
   static SectionConfig fromJson(Map<String, dynamic> json) {
     IconData iconData;
-    
+
     // Handle both old format (codePoint) and new format (string key)
     if (json['icon'] is int) {
       // Old format - migrate from codePoint to string key
@@ -74,12 +82,13 @@ class SectionConfig {
       // New format - use string key
       iconData = _getIconFromKey(json['icon']);
     }
-    
+
     return SectionConfig(
       id: json['id'],
       title: json['title'],
       icon: iconData,
       isVisible: json['isVisible'],
+      settings: json['settings'] ?? {},
     );
   }
 
@@ -90,6 +99,7 @@ class SectionConfig {
     if (codePoint == Icons.beach_access.codePoint) return Icons.beach_access;
     if (codePoint == Icons.grade.codePoint) return Icons.grade;
     if (codePoint == Icons.list_alt.codePoint) return Icons.list_alt;
+    if (codePoint == Icons.assignment.codePoint) return Icons.assignment;
     return Icons.schedule; // fallback
   }
 }
@@ -121,6 +131,13 @@ class HomepageConfigProvider extends ChangeNotifier {
       title: 'Offene Absenzen',
       icon: Icons.list_alt,
       isVisible: true,
+    ),
+    SectionConfig(
+      id: 'tests',
+      title: 'Anstehende Prüfungen',
+      icon: Icons.assignment,
+      isVisible: true,
+      settings: {'numberOfTests': 3},
     ),
   ];
 
@@ -156,6 +173,15 @@ class HomepageConfigProvider extends ChangeNotifier {
     _showBreaks = !_showBreaks;
     _save();
     notifyListeners();
+  }
+
+  void updateSectionSettings(String sectionId, Map<String, dynamic> settings) {
+    final idx = _sections.indexWhere((s) => s.id == sectionId);
+    if (idx != -1) {
+      _sections[idx].settings = settings;
+      _save();
+      notifyListeners();
+    }
   }
 
   Future<void> _save() async {

@@ -90,6 +90,8 @@ class HomepageConfigModal extends StatelessWidget {
         return localizations.latestGrades;
       case 'absences':
         return localizations.openAbsences;
+      case 'tests':
+        return localizations.upcomingTests;
       default:
         return sectionId;
     }
@@ -219,6 +221,36 @@ class HomepageConfigModal extends StatelessWidget {
               value: config.showBreaks,
               onChanged: (_) => config.toggleShowBreaks(),
               contentPadding: EdgeInsets.zero,
+            ),
+          ],
+        );
+
+      case 'tests':
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Text(localizations.numberOfTestsToShow),
+                const Spacer(),
+                DropdownButton<int>(
+                  value: section.settings['numberOfTests'] ?? 3,
+                  items: List.generate(10, (index) => index + 1)
+                      .map((num) => DropdownMenuItem(
+                            value: num,
+                            child: Text(num.toString()),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    if (value != null) {
+                      config.updateSectionSettings(
+                        section.id,
+                        {'numberOfTests': value},
+                      );
+                    }
+                  },
+                ),
+              ],
             ),
           ],
         );

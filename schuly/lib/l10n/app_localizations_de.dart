@@ -1324,4 +1324,22 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get noInternetConnection => 'Keine Internetverbindung';
+
+  @override
+  String get upcomingTests => 'Anstehende Prüfungen';
+
+  @override
+  String get noTestsFound => 'Keine Prüfungen gefunden';
+
+  @override
+  String get noUpcomingTests => 'Keine anstehenden Prüfungen';
+
+  @override
+  String get room => 'Raum';
+
+  @override
+  String get weight => 'Gewichtung';
+
+  @override
+  String get numberOfTestsToShow => 'Anzahl der anzuzeigenden Prüfungen';
 }

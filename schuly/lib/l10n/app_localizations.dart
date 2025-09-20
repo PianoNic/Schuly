@@ -2521,6 +2521,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No internet connection'**
   String get noInternetConnection;
+
+  /// Title for upcoming tests card
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming Tests'**
+  String get upcomingTests;
+
+  /// Message when no tests are available
+  ///
+  /// In en, this message translates to:
+  /// **'No tests found'**
+  String get noTestsFound;
+
+  /// Message when there are no upcoming tests
+  ///
+  /// In en, this message translates to:
+  /// **'No upcoming tests'**
+  String get noUpcomingTests;
+
+  /// Room label for test location
+  ///
+  /// In en, this message translates to:
+  /// **'Room'**
+  String get room;
+
+  /// Weight label for test importance
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get weight;
+
+  /// Setting label for number of tests to display
+  ///
+  /// In en, this message translates to:
+  /// **'Number of tests to show'**
+  String get numberOfTestsToShow;
 }
 
 class _AppLocalizationsDelegate

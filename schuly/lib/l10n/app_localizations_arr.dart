@@ -1310,4 +1310,22 @@ class AppLocalizationsArr extends AppLocalizations {
 
   @override
   String get noInternetConnection => 'No signal from the crow\'s nest';
+
+  @override
+  String get upcomingTests => 'Battles Ahead';
+
+  @override
+  String get noTestsFound => 'No battles found';
+
+  @override
+  String get noUpcomingTests => 'No battles on the horizon';
+
+  @override
+  String get room => 'Cabin';
+
+  @override
+  String get weight => 'Bounty';
+
+  @override
+  String get numberOfTestsToShow => 'Number o\' battles to show';
 }

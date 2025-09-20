@@ -1307,4 +1307,22 @@ class AppLocalizationsKaw extends AppLocalizations {
 
   @override
   String get noInternetConnection => 'No intewnet connection (╥﹏╥)';
+
+  @override
+  String get upcomingTests => 'Upcoming Tests (°◡°♡)';
+
+  @override
+  String get noTestsFound => 'No tests found uwu';
+
+  @override
+  String get noUpcomingTests => 'No upcoming tests ヽ(´▽`)/';
+
+  @override
+  String get room => 'Woom ✨';
+
+  @override
+  String get weight => 'Weight (⌒‿⌒)';
+
+  @override
+  String get numberOfTestsToShow => 'Number of tests to show ♡';
 }

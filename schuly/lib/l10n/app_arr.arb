@@ -703,5 +703,17 @@
 
   "authenticationFailed": "Boarding failed, ye scurvy dog: {error}",
 
-  "noInternetConnection": "No signal from the crow's nest"
+  "noInternetConnection": "No signal from the crow's nest",
+
+  "upcomingTests": "Battles Ahead",
+
+  "noTestsFound": "No battles found",
+
+  "noUpcomingTests": "No battles on the horizon",
+
+  "room": "Cabin",
+
+  "weight": "Bounty",
+
+  "numberOfTestsToShow": "Number o' battles to show"
 }

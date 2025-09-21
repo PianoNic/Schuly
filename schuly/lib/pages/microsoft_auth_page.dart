@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+// ignore: depend_on_referenced_packages
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 import 'package:schuly/api/lib/api.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -314,7 +315,7 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
 
           if (_isLoading)
             Container(
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha: 0.9),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -236,9 +236,9 @@ class HomepageConfigModal extends StatelessWidget {
                 DropdownButton<int>(
                   value: section.settings['numberOfTests'] ?? 3,
                   items: List.generate(10, (index) => index + 1)
-                      .map((num) => DropdownMenuItem(
-                            value: num,
-                            child: Text(num.toString()),
+                      .map((number) => DropdownMenuItem(
+                            value: number,
+                            child: Text(number.toString()),
                           ))
                       .toList(),
                   onChanged: (value) {

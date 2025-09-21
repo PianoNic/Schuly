@@ -139,8 +139,7 @@ class _StartPageState extends State<StartPage> {
                             localizations.nextLessons,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
-                          if (_selectedDay != null)
-                            Text(
+                          Text(
                               '${_weekdayShort(_selectedDay.weekday)}, ${_selectedDay.day}. ${_getMonthShort(_selectedDay.month)} ${_selectedDay.year}',
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -150,7 +149,7 @@ class _StartPageState extends State<StartPage> {
                       ),
                     ),
                     // Home icon - disabled when on the next school day
-                    if (_availableDates.isNotEmpty && _selectedDay != null)
+                    if (_availableDates.isNotEmpty)
                       (() {
                         final today = DateTime.now();
                         final todayDate = DateTime(today.year, today.month, today.day);
@@ -379,7 +378,7 @@ class _StartPageState extends State<StartPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  localizations.unexcusedAbsences ?? localizations.openAbsences,
+                  localizations.unexcusedAbsences,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 12),

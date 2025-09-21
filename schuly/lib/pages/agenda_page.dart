@@ -22,7 +22,6 @@ class _AgendaPageState extends State<AgendaPage> {
     required List<ExamDto> exams,
     required Color color,
   }) {
-    final localizations = AppLocalizations.of(context)!;
     final hasTest = exams.isNotEmpty;
 
     return AgendaItemWithTest(

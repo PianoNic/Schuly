@@ -563,13 +563,6 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
       subtitle: Text(localizedName),
       leading: Radio<String>(
         value: locale.languageCode,
-        groupValue: languageProvider.locale.languageCode,
-        onChanged: (value) {
-          if (value != null) {
-            languageProvider.setLocale(locale);
-            Navigator.of(context).pop();
-          }
-        },
       ),
       selected: isSelected,
       onTap: () {

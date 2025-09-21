@@ -47,7 +47,7 @@ class _NotificationPermissionDialogState extends State<NotificationPermissionDia
   }
 
   Future<void> _requestPermission(Permission permission) async {
-    final status = await permission.request();
+    await permission.request();
     _checkPermissions();
   }
 

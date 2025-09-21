@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../utils/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/api_store.dart';
@@ -214,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                       width: double.infinity,
                       child: OutlinedButton.icon(
                         onPressed: _isLoading ? null : () async {
-                          print('DEBUG: Microsoft sign-in button pressed');
+                          logDebug('Microsoft sign-in button pressed', source: 'LoginPage');
 
                           // Navigate to Microsoft auth page
                           final result = await Navigator.of(context).push<bool>(
@@ -223,9 +224,9 @@ class _LoginPageState extends State<LoginPage> {
                                 apiBaseUrl: _apiBaseUrlController.text.trim(),
                                 existingUserEmail: null, // New account
                                 onAuthSuccess: (token, refreshToken, email) async {
-                                  print('DEBUG: Microsoft auth successful');
-                                  print('DEBUG: Received token: $token');
-                                  print('DEBUG: Received refresh token: $refreshToken');
+                                  logDebug('Microsoft auth successful', source: 'LoginPage');
+                                  logDebug('Received token: $token', source: 'LoginPage');
+                                  logDebug('Received refresh token: $refreshToken', source: 'LoginPage');
 
                                   // Store the tokens and update the app state
                                   final apiStore = Provider.of<ApiStore>(context, listen: false);
@@ -236,7 +237,7 @@ class _LoginPageState extends State<LoginPage> {
                                   }
 
                                   // Add the Microsoft user with tokens
-                                  final error = await apiStore.addMicrosoftUser(token, refreshToken);
+                                  await apiStore.addMicrosoftUser(token, refreshToken);
 
                                   // Fetch user data
                                   await apiStore.fetchAll();
@@ -246,7 +247,7 @@ class _LoginPageState extends State<LoginPage> {
                           );
 
                           if (result == true && mounted) {
-                            print('DEBUG: Microsoft authentication completed successfully');
+                            logDebug('Microsoft authentication completed successfully', source: 'LoginPage');
                             // Authentication successful - navigation handled by main app
                           }
                         },

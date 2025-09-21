@@ -165,9 +165,10 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
   }
 
   Future<void> _downloadUpdate() async {
+    final localizations = AppLocalizations.of(context)!;
     setState(() {
       _isDownloading = true;
-      _buttonText = AppLocalizations.of(context)!.downloading;
+      _buttonText = localizations.downloading;
     });
 
     try {
@@ -181,73 +182,79 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
         },
       );
 
+      if (!mounted) return;
+
       if (filePath != null) {
         setState(() {
           _downloadedFilePath = filePath;
           _isDownloading = false;
-          _buttonText = AppLocalizations.of(context)!.install;
+          _buttonText = localizations.install;
         });
       } else {
         setState(() {
           _isDownloading = false;
-          _buttonText = AppLocalizations.of(context)!.install;
+          _buttonText = localizations.install;
         });
-        _showErrorDialog(AppLocalizations.of(context)!.downloadError);
+        _showErrorDialog(localizations.downloadError);
       }
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _isDownloading = false;
-        _buttonText = AppLocalizations.of(context)!.install;
+        _buttonText = localizations.install;
       });
-      _showErrorDialog(AppLocalizations.of(context)!.downloadErrorDetails(e.toString()));
+      _showErrorDialog(localizations.downloadErrorDetails(e.toString()));
     }
   }
 
   Future<void> _installUpdate() async {
+    final localizations = AppLocalizations.of(context)!;
     setState(() {
       _isInstalling = true;
-      _buttonText = AppLocalizations.of(context)!.installing;
+      _buttonText = localizations.installing;
     });
 
     try {
       // Check install permission first
       final hasPermission = await UpdateService.checkInstallPermission();
+      if (!mounted) return;
+
       if (!hasPermission) {
         setState(() {
           _isInstalling = false;
-          _buttonText = AppLocalizations.of(context)!.install;
+          _buttonText = localizations.install;
         });
-        _showErrorDialog(AppLocalizations.of(context)!.installationNotAllowed);
+        _showErrorDialog(localizations.installationNotAllowed);
         return;
       }
 
       // Install the APK
       final success = await UpdateService.installApk(_downloadedFilePath!);
+      if (!mounted) return;
 
       if (success) {
         // Installation started successfully
-        if (mounted) {
-          Navigator.of(context).pop();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(AppLocalizations.of(context)!.updateInstallationStarted),
-              duration: Duration(seconds: 3),
-            ),
-          );
-        }
+        Navigator.of(context).pop();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(localizations.updateInstallationStarted),
+            duration: Duration(seconds: 3),
+          ),
+        );
       } else {
         setState(() {
           _isInstalling = false;
-          _buttonText = AppLocalizations.of(context)!.install;
+          _buttonText = localizations.install;
         });
-        _showErrorDialog(AppLocalizations.of(context)!.installationError);
+        _showErrorDialog(localizations.installationError);
       }
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _isInstalling = false;
-        _buttonText = AppLocalizations.of(context)!.install;
+        _buttonText = localizations.install;
       });
-      _showErrorDialog(AppLocalizations.of(context)!.installationErrorDetails(e.toString()));
+      _showErrorDialog(localizations.installationErrorDetails(e.toString()));
     }
   }
 

@@ -223,7 +223,7 @@ class GradeDetailsDialog extends StatelessWidget {
               _buildDetailRow('${localizations.gradeLabel}:', (grade.mark == null || grade.mark!.isEmpty) ? '?' : grade.mark!, context),
               if (grade.points != null)
                 _buildDetailRow('${localizations.pointsLabel}:', grade.points, context),
-              _buildDetailRow('${localizations.weightLabel}:', grade.weight ?? '1', context),
+              _buildDetailRow('${localizations.weightLabel}:', grade.weight, context),
               _buildDetailRow('${localizations.courseGradeLabel}:', (grade.courseGrade == null || grade.courseGrade!.isEmpty) ? '?' : grade.courseGrade!, context),
 
               if (grade.examinationGroups.averageExamGroup != null) ...[

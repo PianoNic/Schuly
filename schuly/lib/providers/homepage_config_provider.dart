@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import '../utils/logger.dart';
 
 class SectionConfig {
   final String id;
@@ -191,7 +192,7 @@ class HomepageConfigProvider extends ChangeNotifier {
       await prefs.setString('homepage_sections', jsonEncode(jsonList));
       await prefs.setBool('homepage_show_breaks', _showBreaks);
     } catch (e) {
-      print('Error saving homepage config: $e');
+      logError('Error saving homepage config', source: 'HomepageConfigProvider', error: e);
     }
   }
 
@@ -207,7 +208,7 @@ class HomepageConfigProvider extends ChangeNotifier {
       _isLoaded = true;
       notifyListeners();
     } catch (e) {
-      print('Error loading homepage config: $e');
+      logError('Error loading homepage config', source: 'HomepageConfigProvider', error: e);
       _isLoaded = true;
       notifyListeners();
     }

@@ -580,13 +580,13 @@
   "@noLessonsForDay": {
     "placeholders": {
       "day": {
-        "type": "String"
+        "type": "Object"
       },
       "month": {
-        "type": "String"
+        "type": "Object"
       },
       "year": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -649,7 +649,7 @@
   "@minutesBeforeClass": {
     "placeholders": {
       "minutes": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -657,7 +657,7 @@
   "@currentAdvanceSetting": {
     "placeholders": {
       "minutes": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },

@@ -1354,4 +1354,16 @@ class AppLocalizationsMag extends AppLocalizations {
 
   @override
   String get timelineViewDescription => 'Zeigt Lektione im Zeitstrahl';
+
+  @override
+  String get shareYourMaggusLevel => 'Teil dein Maggus-Level, bruddal!';
+
+  @override
+  String myMaggusScore(Object score) {
+    return 'Mein Maggus-Score: $score Punkte, des bedarfs!';
+  }
+
+  @override
+  String get testYourMaggusLevel =>
+      'Teste deinen eigenen Maggus-Level in de Schuly App, bruddal!';
 }

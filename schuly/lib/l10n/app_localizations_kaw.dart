@@ -1348,4 +1348,16 @@ class AppLocalizationsKaw extends AppLocalizations {
   @override
   String get timelineViewDescription =>
       'Compact timeline with time-based layout desu~ ♪';
+
+  @override
+  String get shareYourMaggusLevel => 'Share your Maggus level';
+
+  @override
+  String myMaggusScore(Object score) {
+    return 'My Maggus Score: $score Points!';
+  }
+
+  @override
+  String get testYourMaggusLevel =>
+      'Test your own Maggus level in the Schuly App!';
 }

@@ -22,7 +22,10 @@
       "Bash(del:*)",
       "Bash(dir:*)",
       "Bash(adb shell am force-stop:*)",
-      "Bash(nc localhost 61107)"
+      "Bash(nc localhost 61107)",
+      "Bash(for file in lib/l10n/app_*.arb)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

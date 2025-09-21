@@ -52,6 +52,7 @@ dependencies:
   open_file: ^3.5.7
   dynamic_color: ^1.7.0
   sentry_flutter: ^9.6.0
+  share_plus: ^10.1.3
 
 dev_dependencies:
   flutter_test:

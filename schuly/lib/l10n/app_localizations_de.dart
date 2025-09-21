@@ -1365,4 +1365,16 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get timelineViewDescription =>
       'Kompakte Zeitachse mit zeitbasiertem Layout';
+
+  @override
+  String get shareYourMaggusLevel => 'Teile dein Maggus-Level';
+
+  @override
+  String myMaggusScore(Object score) {
+    return 'Mein Maggus-Score: $score Punkte!';
+  }
+
+  @override
+  String get testYourMaggusLevel =>
+      'Teste deinen eigenen Maggus-Level in der Schuly App!';
 }

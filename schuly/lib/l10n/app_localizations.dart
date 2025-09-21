@@ -2605,6 +2605,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Compact timeline with time-based layout'**
   String get timelineViewDescription;
+
+  /// Button text to share Maggus level result
+  ///
+  /// In en, this message translates to:
+  /// **'Share your Maggus level'**
+  String get shareYourMaggusLevel;
+
+  /// Share text for Maggus score
+  ///
+  /// In en, this message translates to:
+  /// **'My Maggus Score: {score} Points!'**
+  String myMaggusScore(Object score);
+
+  /// Invitation text for sharing Maggus result
+  ///
+  /// In en, this message translates to:
+  /// **'Test your own Maggus level in the Schuly App!'**
+  String get testYourMaggusLevel;
 }
 
 class _AppLocalizationsDelegate

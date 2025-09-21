@@ -1,1 +1,31 @@
-{}
+{
+  "arn": [
+    "shareYourMaggusLevel",
+    "myMaggusScore",
+    "testYourMaggusLevel"
+  ],
+
+  "arr": [
+    "shareYourMaggusLevel",
+    "myMaggusScore",
+    "testYourMaggusLevel"
+  ],
+
+  "gsw": [
+    "shareYourMaggusLevel",
+    "myMaggusScore",
+    "testYourMaggusLevel"
+  ],
+
+  "kaw": [
+    "shareYourMaggusLevel",
+    "myMaggusScore",
+    "testYourMaggusLevel"
+  ],
+
+  "nl": [
+    "shareYourMaggusLevel",
+    "myMaggusScore",
+    "testYourMaggusLevel"
+  ]
+}

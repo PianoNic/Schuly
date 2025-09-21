@@ -52,7 +52,7 @@
   "@emailAppError": {
     "placeholders": {
       "email": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -60,7 +60,7 @@
   "@browserError": {
     "placeholders": {
       "url": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -164,13 +164,13 @@
   "@agendaForDate": {
     "placeholders": {
       "day": {
-        "type": "String"
+        "type": "Object"
       },
       "month": {
-        "type": "String"
+        "type": "Object"
       },
       "year": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -358,13 +358,13 @@
   "@noLessonsForDay": {
     "placeholders": {
       "day": {
-        "type": "String"
+        "type": "Object"
       },
       "month": {
-        "type": "String"
+        "type": "Object"
       },
       "year": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -420,7 +420,7 @@
   "@minutesBeforeClass": {
     "placeholders": {
       "minutes": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -428,7 +428,7 @@
   "@currentAdvanceSetting": {
     "placeholders": {
       "minutes": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -514,10 +514,10 @@
   "@versionWithNumber": {
     "placeholders": {
       "version": {
-        "type": "String"
+        "type": "Object"
       },
       "build": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -599,7 +599,7 @@
   "@confirmRemoveAccount": {
     "placeholders": {
       "email": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -610,7 +610,7 @@
   "@switchedAccount": {
     "placeholders": {
       "email": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -618,7 +618,7 @@
   "@switchAccountError": {
     "placeholders": {
       "error": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -626,7 +626,7 @@
   "@removedAccount": {
     "placeholders": {
       "email": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -634,7 +634,7 @@
   "@removeAccountError": {
     "placeholders": {
       "error": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -642,7 +642,7 @@
   "@unexpectedError": {
     "placeholders": {
       "error": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -758,7 +758,7 @@
   "@statusLabel": {
     "placeholders": {
       "status": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -793,7 +793,7 @@
   "@updateAvailableVersion": {
     "placeholders": {
       "version": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -804,7 +804,7 @@
   "@errorCheckingUpdates": {
     "placeholders": {
       "error": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -818,7 +818,7 @@
   "@errorShowingDialog": {
     "placeholders": {
       "error": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -832,7 +832,7 @@
   "@errorClearingDismissed": {
     "placeholders": {
       "error": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -870,7 +870,7 @@
   "@currentVersion": {
     "placeholders": {
       "version": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -878,7 +878,7 @@
   "@latestVersion": {
     "placeholders": {
       "version": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -898,7 +898,7 @@
   "@downloadErrorDetails": {
     "placeholders": {
       "error": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -912,7 +912,7 @@
   "@installationErrorDetails": {
     "placeholders": {
       "error": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -959,7 +959,7 @@
   "@nextClass": {
     "placeholders": {
       "subject": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -967,10 +967,10 @@
   "@roomAndTeacher": {
     "placeholders": {
       "room": {
-        "type": "String"
+        "type": "Object"
       },
       "teacher": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -990,7 +990,7 @@
   "@errorCheckingUpdatesDetails": {
     "placeholders": {
       "error": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -1112,7 +1112,7 @@
   "@endpointReachable": {
     "placeholders": {
       "statusCode": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -1120,7 +1120,7 @@
   "@serverError": {
     "placeholders": {
       "statusCode": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -1128,7 +1128,7 @@
   "@failedToInitializeMicrosoftAuth": {
     "placeholders": {
       "error": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -1136,7 +1136,7 @@
   "@authenticationFailed": {
     "placeholders": {
       "error": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -2281,7 +2281,7 @@
   "@apiUrlChanged": {
     "placeholders": {
       "url": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },
@@ -2514,6 +2514,21 @@
   "@noticeText": {},
 
   "attachedNotices": "Angehängte Hinweise",
-  "@attachedNotices": {}
+  "@attachedNotices": {},
+
+  "shareYourMaggusLevel": "Teil dein Maggus-Level, bruddal!",
+  "@shareYourMaggusLevel": {},
+
+  "myMaggusScore": "Mein Maggus-Score: {score} Punkte, des bedarfs!",
+  "@myMaggusScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
+
+  "testYourMaggusLevel": "Teste deinen eigenen Maggus-Level in de Schuly App, bruddal!",
+  "@testYourMaggusLevel": {}
 
 }

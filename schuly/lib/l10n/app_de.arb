@@ -611,5 +611,20 @@
   "cardView": "Kartenansicht",
   "cardViewDescription": "Detaillierte Karten mit erweiterbaren Testinformationen",
   "timelineView": "Zeitachsenansicht",
-  "timelineViewDescription": "Kompakte Zeitachse mit zeitbasiertem Layout"
+  "timelineViewDescription": "Kompakte Zeitachse mit zeitbasiertem Layout",
+
+  "shareYourMaggusLevel": "Teile dein Maggus-Level",
+  "@shareYourMaggusLevel": {},
+
+  "myMaggusScore": "Mein Maggus-Score: {score} Punkte!",
+  "@myMaggusScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
+
+  "testYourMaggusLevel": "Teste deinen eigenen Maggus-Level in der Schuly App!",
+  "@testYourMaggusLevel": {}
 }

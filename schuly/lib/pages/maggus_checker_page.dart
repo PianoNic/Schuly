@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import '../utils/markus_ruehl_checker.dart';
 
 class MaggusCheckerPage extends StatefulWidget {
@@ -47,6 +48,19 @@ Schwere Gewichte und hohes Volumen - das ist es!
 Nicht immer lecker, aber das wirkt!
 ''';
     _checkText();
+  }
+
+  void _shareResult() {
+    if (_result == null) return;
+
+    String shareText = '🏋 Mein Maggus-Score: ${_result!.score} Punkte!\n';
+    shareText += '${_result!.level.emoji} Level: ${_result!.level.label}\n';
+    shareText += '\n';
+    shareText += '💪 ${_result!.motivationalQuote}\n';
+    shareText += '\n';
+    shareText += 'Teste deinen eigenen Maggus-Level in der Schuly App!';
+
+    Share.share(shareText);
   }
 
   @override
@@ -253,6 +267,17 @@ Nicht immer lecker, aber das wirkt!
                         ),
                       ],
                     ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton.icon(
+                  onPressed: _shareResult,
+                  icon: const Icon(Icons.share),
+                  label: const Text('Teile dein Maggus-Level'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                    backgroundColor: theme.colorScheme.tertiary,
+                    foregroundColor: theme.colorScheme.onTertiary,
                   ),
                 ),
               ],

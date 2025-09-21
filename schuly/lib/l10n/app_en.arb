@@ -1822,5 +1822,23 @@
   "timelineViewDescription": "Compact timeline with time-based layout",
   "@timelineViewDescription": {
     "description": "Description for timeline view option"
+  },
+
+  "shareYourMaggusLevel": "Share your Maggus level",
+  "@shareYourMaggusLevel": {
+    "description": "Button text to share Maggus level result"
+  },
+
+  "myMaggusScore": "My Maggus Score: {score} Points!",
+  "@myMaggusScore": {
+    "description": "Share text for Maggus score",
+    "placeholders": {
+      "score": {}
+    }
+  },
+
+  "testYourMaggusLevel": "Test your own Maggus level in the Schuly App!",
+  "@testYourMaggusLevel": {
+    "description": "Invitation text for sharing Maggus result"
   }
 }

@@ -1325,4 +1325,16 @@ class AppLocalizationsArn extends AppLocalizations {
 
   @override
   String get timelineViewDescription => 'Display chronological sequence';
+
+  @override
+  String get shareYourMaggusLevel => 'Share your Maggus level';
+
+  @override
+  String myMaggusScore(Object score) {
+    return 'My Maggus Score: $score Points!';
+  }
+
+  @override
+  String get testYourMaggusLevel =>
+      'Test your own Maggus level in the Schuly App!';
 }

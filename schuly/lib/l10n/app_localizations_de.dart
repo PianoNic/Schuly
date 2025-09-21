@@ -974,6 +974,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get downloading => 'Wird heruntergeladen...';
 
   @override
+  String get download => 'Herunterladen';
+
+  @override
   String get installing => 'Wird installiert...';
 
   @override

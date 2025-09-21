@@ -957,6 +957,9 @@ class AppLocalizationsKaw extends AppLocalizations {
   String get downloading => 'Downwoading...';
 
   @override
+  String get download => 'Downwoad';
+
+  @override
   String get installing => 'Instawwing...';
 
   @override

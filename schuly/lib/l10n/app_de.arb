@@ -447,6 +447,7 @@
   "installingUpdate": "Update wird installiert...",
   "install": "Installieren",
   "downloading": "Wird heruntergeladen...",
+  "download": "Herunterladen",
   "installing": "Wird installiert...",
   "downloadError": "Fehler beim Herunterladen des Updates",
   "downloadErrorDetails": "Download Fehler: {error}",

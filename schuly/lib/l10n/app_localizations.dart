@@ -1886,6 +1886,12 @@ abstract class AppLocalizations {
   /// **'Downloading...'**
   String get downloading;
 
+  /// Download button text
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get download;
+
   /// Installing button text
   ///
   /// In en, this message translates to:

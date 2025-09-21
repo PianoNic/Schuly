@@ -1183,6 +1183,11 @@
     "description": "Downloading button text"
   },
 
+  "download": "Download",
+  "@download": {
+    "description": "Download button text"
+  },
+
   "installing": "Installing...",
   "@installing": {
     "description": "Installing button text"

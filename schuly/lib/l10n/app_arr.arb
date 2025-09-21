@@ -420,6 +420,7 @@
   "installingUpdate": "All hands! Fixin' up the ship with new parts!",
   "install": "Hoist the Colors!",
   "downloading": "Plunderin' the treasure...",
+  "download": "Plunder!",
   "installing": "Riggin' the ship...",
   "downloadError": "Blast! The kraken ate our treasure!",
   "downloadErrorDetails": "Blast! Treasure hunt failed: {error}",

@@ -966,6 +966,9 @@ class AppLocalizationsGsw extends AppLocalizations {
   String get downloading => 'Wird abelade...';
 
   @override
+  String get download => 'Abelade';
+
+  @override
   String get installing => 'Wird installiert...';
 
   @override

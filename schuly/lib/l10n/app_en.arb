@@ -1792,5 +1792,25 @@
   "today": "Today",
   "@today": {
     "description": "Tooltip for home button to return to today"
+  },
+
+  "cardView": "Card View",
+  "@cardView": {
+    "description": "Option for card view in agenda settings"
+  },
+
+  "cardViewDescription": "Detailed cards with expandable test info",
+  "@cardViewDescription": {
+    "description": "Description for card view option"
+  },
+
+  "timelineView": "Timeline View",
+  "@timelineView": {
+    "description": "Option for timeline view in agenda settings"
+  },
+
+  "timelineViewDescription": "Compact timeline with time-based layout",
+  "@timelineViewDescription": {
+    "description": "Description for timeline view option"
   }
 }

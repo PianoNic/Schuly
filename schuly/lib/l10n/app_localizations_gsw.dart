@@ -1334,4 +1334,18 @@ class AppLocalizationsGsw extends AppLocalizations {
 
   @override
   String get today => 'Hüt';
+
+  @override
+  String get cardView => 'Charte-Asicht';
+
+  @override
+  String get cardViewDescription =>
+      'Detaillierti Charte mit erwiiterbare Testinfos';
+
+  @override
+  String get timelineView => 'Ziitachse-Asicht';
+
+  @override
+  String get timelineViewDescription =>
+      'Kompakti Ziitachse mit ziitbasiertem Layout';
 }

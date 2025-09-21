@@ -716,5 +716,9 @@
   "weight": "Weight (⌒‿⌒)",
 
   "numberOfTestsToShow": "Number of tests to show ♡",
-  "today": "Today~ ♪"
+  "today": "Today~ ♪",
+  "cardView": "Kawaii Card View~ ✨",
+  "cardViewDescription": "Detailed cards with expandable test info nya~ (◡ ω ◡)",
+  "timelineView": "Timeline View~ ⏰",
+  "timelineViewDescription": "Compact timeline with time-based layout desu~ ♪"
 }

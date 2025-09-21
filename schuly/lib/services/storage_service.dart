@@ -12,6 +12,7 @@ class StorageService {
   static const String _notificationTypePrefix = 'notification_enabled_';
   static const String _languageKey = 'selected_language';
   static const String _userCookiesPrefix = 'user_cookies_';
+  static const String _agendaViewKey = 'agenda_view_preference';
 
   // Cache keys for API data
   static const String _cachePrefix = 'cache_';
@@ -108,6 +109,16 @@ class StorageService {
 
   static Future<String?> getLanguage() async {
     return await _storage.read(key: _languageKey);
+  }
+
+  // Agenda view preference
+  static Future<void> setAgendaViewPreference(bool isListView) async {
+    await _storage.write(key: _agendaViewKey, value: isListView.toString());
+  }
+
+  static Future<bool> getAgendaViewPreference() async {
+    final value = await _storage.read(key: _agendaViewKey);
+    return value?.toLowerCase() == 'true';
   }
 
   static Future<void> clearAll() async {

@@ -1331,4 +1331,17 @@ class AppLocalizationsArr extends AppLocalizations {
 
   @override
   String get today => 'This Day';
+
+  @override
+  String get cardView => 'Scroll View';
+
+  @override
+  String get cardViewDescription =>
+      'Detailed scrolls with expandable battle info';
+
+  @override
+  String get timelineView => 'Ship\'s Log View';
+
+  @override
+  String get timelineViewDescription => 'Compact log with time-based chartin\'';
 }

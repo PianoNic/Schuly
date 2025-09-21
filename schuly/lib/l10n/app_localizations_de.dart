@@ -1345,4 +1345,18 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get today => 'Heute';
+
+  @override
+  String get cardView => 'Kartenansicht';
+
+  @override
+  String get cardViewDescription =>
+      'Detaillierte Karten mit erweiterbaren Testinformationen';
+
+  @override
+  String get timelineView => 'Zeitachsenansicht';
+
+  @override
+  String get timelineViewDescription =>
+      'Kompakte Zeitachse mit zeitbasiertem Layout';
 }

@@ -18,11 +18,22 @@
 
 A modern mobile app that provides a superior alternative to the official Schulnetz client. Features an intuitive interface, multi-user support, and seamless access to grades, schedules, and student information. Connects to **[SchulwareAPI](https://github.com/PianoNic/SchulwareAPI)** for reliable data access across different Schulnetz systems.
 
+## Screenshots
+
+<p align="center">
+  <img src="./assets/showcase (3).png" width="19%" alt="Screenshot 1">
+  <img src="./assets/showcase (2).png" width="19%" alt="Screenshot 2">
+  <img src="./assets/showcase (1).png" width="19%" alt="Screenshot 3">
+  <img src="./assets/showcase (4).png" width="19%" alt="Screenshot 4">
+  <img src="./assets/showcase (5).png" width="19%" alt="Screenshot 5">
+</p>
+
 ## Features
 
 - Grades, agenda, absences, student ID
 - Multi-user account switching
 - Material 3 theming with dark/light mode
+- Tons of customization options
 - Push notifications
 - Android, iOS, and Web support
 - Error tracking with GlitchTip (automatic in release builds)

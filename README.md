@@ -13,10 +13,10 @@
   <a href="#installation"><img src="https://img.shields.io/badge/Selfhost-Instructions-3da8ff.svg" alt="Installation"/></a>
 </p>
 
+A modern mobile app that provides a superior alternative to the official Schulnetz client. Features an intuitive interface, multi-user support, and seamless access to grades, schedules, and student information. Connects to **[SchulwareAPI](https://github.com/PianoNic/SchulwareAPI)** for reliable data access across different Schulnetz systems.
+
 > [!IMPORTANT]
 > This project is **NOT** affiliated with, endorsed by, or connected to Schulnetz or Centerboard AG in any way. This is an independent, unofficial API wrapper that provides a unified interface to interact with their existing systems.
-
-A modern mobile app that provides a superior alternative to the official Schulnetz client. Features an intuitive interface, multi-user support, and seamless access to grades, schedules, and student information. Connects to **[SchulwareAPI](https://github.com/PianoNic/SchulwareAPI)** for reliable data access across different Schulnetz systems.
 
 ## Screenshots
 

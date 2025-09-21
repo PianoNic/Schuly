@@ -7,7 +7,7 @@ import '../widgets/grade_tile.dart';
 import '../providers/api_store.dart';
 import '../providers/homepage_config_provider.dart';
 import '../providers/theme_provider.dart';
-import '../pages/absenzen_page.dart';
+import '../pages/absences_page.dart';
 import 'package:schuly/api/lib/api.dart';
 import '../l10n/app_localizations.dart';
 

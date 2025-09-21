@@ -5,14 +5,14 @@ import '../providers/theme_provider.dart';
 import 'package:schuly/api/lib/api.dart';
 import '../l10n/app_localizations.dart';
 
-class AbsenzenPage extends StatefulWidget {
-  const AbsenzenPage({super.key});
+class AbsencesPage extends StatefulWidget {
+  const AbsencesPage({super.key});
 
   @override
-  State<AbsenzenPage> createState() => _AbsenzenPageState();
+  State<AbsencesPage> createState() => _AbsencesPageState();
 }
 
-class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderStateMixin {
+class _AbsencesPageState extends State<AbsencesPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -179,19 +179,19 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
           final absences = apiStore.absences;
           final lateness = apiStore.lateness;
           final absenceNotices = apiStore.absenceNotices;
-          
+
           bool isLoading = absences == null || lateness == null || absenceNotices == null;
-          bool isEmpty = (absences?.isEmpty ?? true) && 
-                        (lateness?.isEmpty ?? true) && 
+          bool isEmpty = (absences?.isEmpty ?? true) &&
+                        (lateness?.isEmpty ?? true) &&
                         (absenceNotices?.isEmpty ?? true);
-          
+
           if (isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
           if (isEmpty) {
             return Center(child: Text(localizations.noAbsencesFound));
           }
-          
+
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16.0),
@@ -241,7 +241,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
                   })(),
                   const SizedBox(height: 16),
                 ],
-                
+
                 // Lateness section
                 if (lateness.isNotEmpty) ...[
                   Text(localizations.latenessSection, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)), // TODO: Add latenessSection to ARB
@@ -249,7 +249,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
                   ..._buildLatenessItems(lateness, localizations),
                   const SizedBox(height: 16),
                 ],
-                
+
               ],
             ),
           );
@@ -1190,7 +1190,7 @@ class _AbsenceFormModalState extends State<AbsenceFormModal> {
                               context: context,
                               initialDate: _fromDate ?? DateTime.now(),
                               firstDate:
-                                  _fromDate ?? 
+                                  _fromDate ??
                                   DateTime.now().subtract(
                                     const Duration(days: 30),
                                   ),

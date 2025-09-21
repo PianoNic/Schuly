@@ -7,7 +7,7 @@ import 'l10n/app_localizations.dart';
 import 'pages/start_page.dart';
 import 'pages/agenda_page.dart';
 import 'pages/notes_page.dart';
-import 'pages/absenzen_page.dart';
+import 'pages/absences_page.dart';
 import 'pages/account_page.dart';
 import 'pages/login_page.dart';
 import 'pages/student_card_page.dart';
@@ -421,7 +421,7 @@ class _MyHomePageState extends State<MyHomePage> {
       StartPage(onNavigateToAbsenzen: () => navigateToPage(3)),
       const AgendaPage(),
       const NotesPage(),
-      const AbsenzenPage(),
+      const AbsencesPage(),
       AccountPage(themeProvider: widget.themeProvider),
     ];
 

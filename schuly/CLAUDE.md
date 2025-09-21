@@ -88,7 +88,7 @@ flutter run --dart-define=SENTRY_DSN="$SENTRY_DSN" --dart-define=SENTRY_RELEASE=
   1. **Start** (`lib/pages/start_page.dart`): Dashboard/overview
   2. **Agenda** (`lib/pages/agenda_page.dart`): Schedule/calendar
   3. **Noten** (`lib/pages/notes_page.dart`): Grades
-  4. **Absenzen** (`lib/pages/absenzen_page.dart`): Absences
+  4. **Absences** (`lib/pages/absences_page.dart`): Absences
   5. **Account** (`lib/pages/account_page.dart`): User settings and management
 
 ### Key Features

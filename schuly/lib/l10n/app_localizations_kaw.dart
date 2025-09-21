@@ -1328,4 +1328,18 @@ class AppLocalizationsKaw extends AppLocalizations {
 
   @override
   String get today => 'Today~ ♪';
+
+  @override
+  String get cardView => 'Kawaii Card View~ ✨';
+
+  @override
+  String get cardViewDescription =>
+      'Detailed cards with expandable test info nya~ (◡ ω ◡)';
+
+  @override
+  String get timelineView => 'Timeline View~ ⏰';
+
+  @override
+  String get timelineViewDescription =>
+      'Compact timeline with time-based layout desu~ ♪';
 }

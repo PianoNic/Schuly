@@ -716,5 +716,9 @@
   "weight": "Bounty",
 
   "numberOfTestsToShow": "Number o' battles to show",
-  "today": "This Day"
+  "today": "This Day",
+  "cardView": "Scroll View",
+  "cardViewDescription": "Detailed scrolls with expandable battle info",
+  "timelineView": "Ship's Log View",
+  "timelineViewDescription": "Compact log with time-based chartin'"
 }

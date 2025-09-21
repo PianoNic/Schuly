@@ -1328,4 +1328,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get today => 'Today';
+
+  @override
+  String get cardView => 'Card View';
+
+  @override
+  String get cardViewDescription => 'Detailed cards with expandable test info';
+
+  @override
+  String get timelineView => 'Timeline View';
+
+  @override
+  String get timelineViewDescription =>
+      'Compact timeline with time-based layout';
 }

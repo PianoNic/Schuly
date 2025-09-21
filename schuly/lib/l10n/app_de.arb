@@ -604,5 +604,9 @@
   "weight": "Gewichtung",
 
   "numberOfTestsToShow": "Anzahl der anzuzeigenden Prüfungen",
-  "today": "Heute"
+  "today": "Heute",
+  "cardView": "Kartenansicht",
+  "cardViewDescription": "Detaillierte Karten mit erweiterbaren Testinformationen",
+  "timelineView": "Zeitachsenansicht",
+  "timelineViewDescription": "Kompakte Zeitachse mit zeitbasiertem Layout"
 }

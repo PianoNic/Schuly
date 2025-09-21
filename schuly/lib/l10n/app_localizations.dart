@@ -2563,6 +2563,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Today'**
   String get today;
+
+  /// Option for card view in agenda settings
+  ///
+  /// In en, this message translates to:
+  /// **'Card View'**
+  String get cardView;
+
+  /// Description for card view option
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed cards with expandable test info'**
+  String get cardViewDescription;
+
+  /// Option for timeline view in agenda settings
+  ///
+  /// In en, this message translates to:
+  /// **'Timeline View'**
+  String get timelineView;
+
+  /// Description for timeline view option
+  ///
+  /// In en, this message translates to:
+  /// **'Compact timeline with time-based layout'**
+  String get timelineViewDescription;
 }
 
 class _AppLocalizationsDelegate

@@ -410,6 +410,184 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void _showAgendaSettingsModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => SafeArea(
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Modal handle
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 20),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.calendar_month_outlined,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Agenda Display Style',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+            Text(
+              'Choose how to display lessons for the selected day:',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 16),
+            Consumer<ApiStore>(
+              builder: (context, apiStore, _) => Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      apiStore.setAgendaView(false);
+                      Navigator.of(context).pop();
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: !apiStore.isAgendaListView
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).dividerColor,
+                          width: !apiStore.isAgendaListView ? 2 : 1,
+                        ),
+                        color: !apiStore.isAgendaListView
+                          ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1)
+                          : null,
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.calendar_month,
+                            color: !apiStore.isAgendaListView
+                              ? Theme.of(context).colorScheme.primary
+                              : null,
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!.cardView,
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: !apiStore.isAgendaListView ? FontWeight.bold : null,
+                                    color: !apiStore.isAgendaListView
+                                      ? Theme.of(context).colorScheme.primary
+                                      : null,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  AppLocalizations.of(context)!.cardViewDescription,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (!apiStore.isAgendaListView)
+                            Icon(
+                              Icons.check_circle,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  InkWell(
+                    onTap: () {
+                      apiStore.setAgendaView(true);
+                      Navigator.of(context).pop();
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: apiStore.isAgendaListView
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).dividerColor,
+                          width: apiStore.isAgendaListView ? 2 : 1,
+                        ),
+                        color: apiStore.isAgendaListView
+                          ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1)
+                          : null,
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.view_list,
+                            color: apiStore.isAgendaListView
+                              ? Theme.of(context).colorScheme.primary
+                              : null,
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!.timelineView,
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: apiStore.isAgendaListView ? FontWeight.bold : null,
+                                    color: apiStore.isAgendaListView
+                                      ? Theme.of(context).colorScheme.primary
+                                      : null,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  AppLocalizations.of(context)!.timelineViewDescription,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (apiStore.isAgendaListView)
+                            Icon(
+                              Icons.check_circle,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+      ),
+    );
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -456,6 +634,31 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Theme.of(context).colorScheme.onSurface,
             ),
             tooltip: AppLocalizations.of(context)!.customizeHomepageTooltip,
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const StudentCardPage()),
+              );
+            },
+            icon: Icon(
+              Icons.badge_outlined,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            tooltip: AppLocalizations.of(context)!.studentIdCardTooltip,
+          ),
+        ] : _selectedIndex == 1 ? [
+          // Agenda view settings
+          IconButton(
+            onPressed: () {
+              _showAgendaSettingsModal(context);
+            },
+            icon: Icon(
+              Icons.tune,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            tooltip: 'Agenda Settings',
           ),
           IconButton(
             onPressed: () {

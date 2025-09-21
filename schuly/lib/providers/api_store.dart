@@ -63,6 +63,16 @@ class ApiStore extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Agenda view preference
+  bool _isAgendaListView = false;
+  bool get isAgendaListView => _isAgendaListView;
+
+  void setAgendaView(bool isListView) async {
+    _isAgendaListView = isListView;
+    await StorageService.setAgendaViewPreference(isListView);
+    notifyListeners();
+  }
+
   // Microsoft re-authentication needed flag
   bool _needsMicrosoftReAuth = false;
   bool get needsMicrosoftReAuth => _needsMicrosoftReAuth;
@@ -173,6 +183,9 @@ class ApiStore extends ChangeNotifier {
     try {
       // Load users first
       await loadUsers();
+
+      // Load agenda view preference
+      _isAgendaListView = await StorageService.getAgendaViewPreference();
 
       // Check if API is reachable (with 5 second timeout)
       final isApiReachable = await _checkApiConnectivity();

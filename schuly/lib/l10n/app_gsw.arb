@@ -710,5 +710,9 @@
   "weight": "Gwichtig",
 
   "numberOfTestsToShow": "Azahl vo de azeigende Prüefige",
-  "today": "Hüt"
+  "today": "Hüt",
+  "cardView": "Charte-Asicht",
+  "cardViewDescription": "Detaillierti Charte mit erwiiterbare Testinfos",
+  "timelineView": "Ziitachse-Asicht",
+  "timelineViewDescription": "Kompakti Ziitachse mit ziitbasiertem Layout"
 }

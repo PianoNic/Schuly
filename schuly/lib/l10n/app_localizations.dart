@@ -5,11 +5,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_arn.dart';
 import 'app_localizations_arr.dart';
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_gsw.dart';
 import 'app_localizations_kaw.dart';
+import 'app_localizations_mag.dart';
+import 'app_localizations_nl.dart';
 
 // ignore_for_file: type=lint
 
@@ -97,11 +100,14 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('arn'),
     Locale('arr'),
     Locale('de'),
     Locale('en'),
     Locale('gsw'),
     Locale('kaw'),
+    Locale('mag'),
+    Locale('nl'),
   ];
 
   /// The title of the application
@@ -391,6 +397,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Kawaii'**
   String get kawaii;
+
+  /// Arnold Schwarzenegger language option
+  ///
+  /// In en, this message translates to:
+  /// **'Terminator'**
+  String get arnold;
 
   /// Cancel button text
   ///
@@ -2605,8 +2617,16 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['arr', 'de', 'en', 'gsw', 'kaw'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+    'arn',
+    'arr',
+    'de',
+    'en',
+    'gsw',
+    'kaw',
+    'mag',
+    'nl',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -2615,6 +2635,8 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'arn':
+      return AppLocalizationsArn();
     case 'arr':
       return AppLocalizationsArr();
     case 'de':
@@ -2625,6 +2647,10 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsGsw();
     case 'kaw':
       return AppLocalizationsKaw();
+    case 'mag':
+      return AppLocalizationsMag();
+    case 'nl':
+      return AppLocalizationsNl();
   }
 
   throw FlutterError(

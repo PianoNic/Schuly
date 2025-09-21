@@ -158,6 +158,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get kawaii => 'Kawaii';
 
   @override
+  String get arnold => 'Terminator';
+
+  @override
   String get cancel => 'Abbrechen';
 
   @override

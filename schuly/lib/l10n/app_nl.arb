@@ -1,846 +1,841 @@
 {
-  "@@locale": "en",
-
+  "@@locale": "nl",
   "appTitle": "Schuly",
   "@appTitle": {
     "description": "The title of the application"
   },
-
-  "noAccountAdded": "No account added yet.",
+  "noAccountAdded": "Nog geen account toegevoegd.",
   "@noAccountAdded": {
     "description": "Message shown when no accounts are configured"
   },
-
-  "addAccount": "Add Account",
+  "addAccount": "Account toevoegen",
   "@addAccount": {
     "description": "Button text to add a new account"
   },
-
-  "noActiveAccount": "No active account selected.",
+  "noActiveAccount": "Geen actief account geselecteerd.",
   "@noActiveAccount": {
     "description": "Message shown when no account is currently active"
   },
-
-  "selectAccount": "Select Account",
+  "selectAccount": "Account selecteren",
   "@selectAccount": {
     "description": "Button text to select an account"
   },
-
-  "personalInformation": "Personal Information",
+  "personalInformation": "Persoonlijke gegevens",
   "@personalInformation": {
     "description": "Title for personal information section"
   },
-
-  "quickActions": "Quick Actions",
+  "quickActions": "Snelle acties",
   "@quickActions": {
     "description": "Title for quick actions section"
   },
-
-  "appSettings": "App Settings",
+  "appSettings": "App-instellingen",
   "@appSettings": {
     "description": "Menu item for app settings"
   },
-
-  "designAndSettings": "Customize design and settings",
+  "designAndSettings": "Ontwerp en instellingen aanpassen",
   "@designAndSettings": {
     "description": "Subtitle for app settings option"
   },
-
-  "helpAndSupport": "Help & Support",
+  "helpAndSupport": "Hulp & Ondersteuning",
   "@helpAndSupport": {
     "description": "Menu item for help and support"
   },
-
-  "getHelpAndSupport": "Get help and support",
+  "getHelpAndSupport": "Krijg hulp en ondersteuning",
   "@getHelpAndSupport": {
     "description": "Subtitle for help and support option"
   },
-
-  "emailSupport": "Email Support",
+  "emailSupport": "E-mail ondersteuning",
   "@emailSupport": {
     "description": "Title for email support card"
   },
-
-  "contactByEmail": "Contact me directly by email",
+  "contactByEmail": "Neem direct contact met mij op via e-mail",
   "@contactByEmail": {
     "description": "Subtitle for email support card"
   },
-
-  "bugReport": "Bug Report / Feature Request",
+  "bugReport": "Bug rapport / Functieverzoek",
   "@bugReport": {
     "description": "Title for bug report card"
   },
-
-  "reportBugsOrRequestFeatures": "Report bugs or request new features",
+  "reportBugsOrRequestFeatures": "Meld bugs of vraag nieuwe functies aan",
   "@reportBugsOrRequestFeatures": {
     "description": "Subtitle for bug report card"
   },
-
-  "copy": "Copy",
+  "copy": "Kopiëren",
   "@copy": {
     "description": "Button text to copy to clipboard"
   },
-
-  "copiedToClipboard": "Copied to clipboard",
+  "copiedToClipboard": "Gekopieerd naar klembord",
   "@copiedToClipboard": {
     "description": "Snackbar message when copied to clipboard"
   },
-
   "ok": "OK",
   "@ok": {
     "description": "OK button text"
   },
-
-  "error": "Error",
+  "error": "Fout",
   "@error": {
     "description": "Dialog title for errors"
   },
-
-  "emailAppError": "Could not open email app. Please contact us manually at: {email}",
+  "emailAppError": "Kon e-mail app niet openen. Neem handmatig contact met ons op via: {email}",
   "@emailAppError": {
     "description": "Error message when email app cannot be opened",
     "placeholders": {
       "email": {}
+
     }
   },
-
-  "browserError": "Could not open browser. Please visit manually: {url}",
+  "browserError": "Kon browser niet openen. Bezoek handmatig: {url}",
   "@browserError": {
     "description": "Error message when browser cannot be opened",
     "placeholders": {
       "url": {}
+
     }
   },
-
-  "addAnotherAccount": "Add Another Account",
+  "addAnotherAccount": "Ander account toevoegen",
   "@addAnotherAccount": {
     "description": "Menu item to add another account"
   },
-
-  "addMultipleAccounts": "Add multiple accounts",
+  "addMultipleAccounts": "Meerdere accounts toevoegen",
   "@addMultipleAccounts": {
     "description": "Subtitle for add account option"
   },
-
-  "logout": "Logout",
+  "logout": "Uitloggen",
   "@logout": {
     "description": "Menu item to logout"
   },
-
-  "signOutFromApp": "Sign out from the app",
+  "signOutFromApp": "Uitloggen uit de app",
   "@signOutFromApp": {
     "description": "Subtitle for logout option"
   },
-
-  "name": "Name",
+  "name": "Naam",
   "@name": {
     "description": "Label for name field"
   },
-
-  "street": "Street",
+  "street": "Straat",
   "@street": {
     "description": "Label for street field"
   },
-
-  "zipCity": "ZIP City",
+  "zipCity": "Postcode Plaats",
   "@zipCity": {
     "description": "Label for zip code and city field"
   },
-
-  "birthDate": "Birth Date",
+  "birthDate": "Geboortedatum",
   "@birthDate": {
     "description": "Label for birth date field"
   },
-
-  "phone": "Phone",
+  "phone": "Telefoon",
   "@phone": {
     "description": "Label for phone field"
   },
-
-  "email": "Email",
+  "email": "E-mail",
   "@email": {
     "description": "Label for email field"
   },
-
-  "nationality": "Nationality",
+  "nationality": "Nationaliteit",
   "@nationality": {
     "description": "Label for nationality field"
   },
-
-  "hometown": "Hometown",
+  "hometown": "Woonplaats",
   "@hometown": {
     "description": "Label for hometown field"
   },
-
-  "mobile": "Mobile",
+  "mobile": "Mobiel",
   "@mobile": {
     "description": "Label for mobile phone field"
   },
-
-  "profile1": "Profile 1",
+  "profile1": "Profiel 1",
   "@profile1": {
     "description": "Label for profile 1 field"
   },
-
-  "profile2": "Profile 2",
+  "profile2": "Profiel 2",
   "@profile2": {
     "description": "Label for profile 2 field"
   },
-
   "start": "Start",
   "@start": {
     "description": "Navigation tab label for start/home page"
   },
-
   "agenda": "Agenda",
   "@agenda": {
     "description": "Navigation tab label for agenda/schedule page"
   },
-
-  "grades": "Grades",
+  "grades": "Cijfers",
   "@grades": {
     "description": "Navigation tab label for grades page"
   },
-
-  "absences": "Absences",
+  "absences": "Afwezigheden",
   "@absences": {
     "description": "Navigation tab label for absences page"
   },
-
   "account": "Account",
   "@account": {
     "description": "Navigation tab label for account page"
   },
-
-  "language": "Language",
+  "language": "Taal",
   "@language": {
     "description": "Label for language selection"
   },
-
-  "selectLanguage": "Select Language",
+  "selectLanguage": "Selecteer taal",
   "@selectLanguage": {
     "description": "Title for language selection dialog"
   },
-
-  "english": "English",
+  "english": "Engels",
   "@english": {
     "description": "English language option"
   },
-
-  "german": "German",
+  "german": "Duits",
   "@german": {
     "description": "German language option"
   },
-
-  "swissGerman": "Swiss German",
+  "swissGerman": "Zwitsers-Duits",
   "@swissGerman": {
     "description": "Swiss German language option"
   },
-
-  "pirate": "Pirate",
+  "pirate": "Piraat",
   "@pirate": {
     "description": "Pirate language option"
   },
-
   "kawaii": "Kawaii",
   "@kawaii": {
     "description": "Kawaii language option"
   },
-
-  "arnold": "Terminator",
+  "arnold": "Arnold",
   "@arnold": {
-    "description": "Arnold Schwarzenegger language option"
+    "description": "Arnold/Terminator language option"
   },
-
-  "cancel": "Cancel",
+  "maggus": "Maggus",
+  "@maggus": {
+    "description": "Maggus/Markus Rühl language option"
+  },
+  "dutch": "Nederlands",
+  "@dutch": {
+    "description": "Dutch language option"
+  },
+  "cancel": "Annuleren",
   "@cancel": {
     "description": "Cancel button text"
   },
-
-  "confirm": "Confirm",
+  "confirm": "Bevestigen",
   "@confirm": {
     "description": "Confirm button text"
   },
-
-  "pushNotifications": "Push Notifications",
+  "pushNotifications": "Pushmeldingen",
   "@pushNotifications": {
     "description": "Label for push notifications setting"
   },
-
-  "featureInDevelopment": "Feature in development",
+  "featureInDevelopment": "Functie in ontwikkeling",
   "@featureInDevelopment": {
     "description": "Subtitle for features not yet available"
   },
-
-  "getNotified": "Get notified before classes",
+  "getNotified": "Ontvang meldingen voor lessen",
   "@getNotified": {
     "description": "Subtitle when notifications are enabled"
   },
-
-  "enableNotifications": "Enable to receive notifications",
+  "enableNotifications": "Inschakelen om meldingen te ontvangen",
   "@enableNotifications": {
     "description": "Subtitle when notifications are disabled"
   },
-
-  "notificationsEnabled": "Notifications enabled successfully",
+  "notificationsEnabled": "Meldingen succesvol ingeschakeld",
   "@notificationsEnabled": {
     "description": "Success message when notifications are enabled"
   },
-
-  "notificationPermissionDenied": "Notification permission denied. Please enable in settings.",
+  "notificationPermissionDenied": "Melding toestemming geweigerd. Schakel in bij instellingen.",
   "@notificationPermissionDenied": {
     "description": "Error message when notification permission is denied"
   },
-
-  "configureNotifications": "Configure Notifications",
+  "configureNotifications": "Meldingen configureren",
   "@configureNotifications": {
     "description": "Menu item for notification configuration"
   },
-
-  "chooseTypesAndTiming": "Choose types and timing for notifications",
+  "chooseTypesAndTiming": "Kies types en timing voor meldingen",
   "@chooseTypesAndTiming": {
     "description": "Subtitle for notification configuration"
   },
-
-  "whatsNew": "What's New",
+  "whatsNew": "Wat is nieuw",
   "@whatsNew": {
     "description": "Menu item for release notes"
   },
-
-  "changelogAndFeatures": "Changelog and new features",
+  "changelogAndFeatures": "Wijzigingslog en nieuwe functies",
   "@changelogAndFeatures": {
     "description": "Subtitle for what's new option"
   },
-
-  "checkForUpdates": "Check for Updates",
+  "checkForUpdates": "Controleer op updates",
   "@checkForUpdates": {
     "description": "Menu item to check for app updates"
   },
-
-  "checkForNewVersions": "Check for new versions",
+  "checkForNewVersions": "Controleer op nieuwe versies",
   "@checkForNewVersions": {
     "description": "Subtitle for update check option"
   },
-
-  "aboutApp": "About App",
+  "aboutApp": "Over de app",
   "@aboutApp": {
     "description": "Menu item for app information"
   },
-
-  "version": "Version",
+  "version": "Versie",
   "@version": {
     "description": "Version label"
   },
-
-  "delete": "Delete",
+  "delete": "Verwijderen",
   "@delete": {
     "description": "Delete button text"
   },
-
-  "close": "Close",
+  "close": "Sluiten",
   "@close": {
     "description": "Close button text"
   },
-
-  "add": "Add",
+  "add": "Toevoegen",
   "@add": {
     "description": "Add button text"
   },
-
-  "loading": "Loading...",
+  "loading": "Laden...",
   "@loading": {
     "description": "Loading text"
   },
-
-  "noEventsForThisDay": "No events for this day",
+  "noEventsForThisDay": "Geen evenementen voor deze dag",
   "@noEventsForThisDay": {
     "description": "Message when no events are found for selected day"
   },
-
-  "agendaForDate": "Agenda for {day}.{month}.{year}",
+  "agendaForDate": "Agenda voor {day}.{month}.{year}",
   "@agendaForDate": {
     "description": "Agenda section header for a specific date.",
     "placeholders": {
       "day": {},
+
       "month": {},
+
       "year": {}
+
     }
   },
+  "noAgendaForDay": "Geen evenementen voor deze dag.",
+  "@noAgendaForDay": {},
 
-  "noAgendaForDay": "No events for this day.",
-
-  "nextLessons": "Next Lessons",
+  "nextLessons": "Volgende lessen",
   "@nextLessons": {
     "description": "Title for next lessons section"
   },
-
-  "nextHolidays": "Next Holidays",
+  "nextHolidays": "Volgende vakanties",
   "@nextHolidays": {
     "description": "Title for next holidays section"
   },
-
-  "studentIdCard": "Student ID Card",
+  "studentIdCard": "Studentenkaart",
   "@studentIdCard": {
     "description": "Student ID card label"
   },
-
-  "reloadPage": "Reload page",
+  "reloadPage": "Pagina herladen",
   "@reloadPage": {
     "description": "Button text to reload the page"
   },
-
-  "loadingStudentIdCard": "Loading student ID card...",
+  "loadingStudentIdCard": "Studentenkaart laden...",
   "@loadingStudentIdCard": {
     "description": "Message shown when student ID card is loading"
   },
-
-  "enterValidEmail": "Please enter a valid email address",
+  "enterValidEmail": "Voer een geldig e-mailadres in",
   "@enterValidEmail": {
     "description": "Validation message for email input"
   },
-
-  "areYouSure": "Are you sure?",
+  "areYouSure": "Weet je het zeker?",
   "@areYouSure": {
     "description": "Confirmation dialog title"
   },
-
-  "updateAvailable": "Update Available!",
+  "updateAvailable": "Update beschikbaar!",
   "@updateAvailable": {
     "description": "Update dialog title"
   },
-
   "later": "Later",
   "@later": {
     "description": "Later button text"
   },
-
-  "yes": "Yes",
+  "yes": "Ja",
   "@yes": {
     "description": "Yes button text"
   },
-
-  "no": "No",
+  "no": "Nee",
   "@no": {
     "description": "No button text"
   },
-
-  "confirmed": "Confirmed",
+  "confirmed": "Bevestigd",
   "@confirmed": {
     "description": "Status: confirmed"
   },
-
-  "lateness": "Lateness",
+  "lateness": "Vertraging",
   "@lateness": {
     "description": "Lateness/tardiness label"
   },
-
-  "noLatenessFound": "No lateness found",
+  "noLatenessFound": "Geen vertragingen gevonden",
   "@noLatenessFound": {
     "description": "Message when no lateness records found"
   },
-
-  "selectReason": "Please select a reason",
+  "selectReason": "Selecteer een reden",
   "@selectReason": {
     "description": "Validation for reason selection"
   },
-
-  "selectDate": "Please select a date",
+  "selectDate": "Selecteer een datum",
   "@selectDate": {
     "description": "Validation for date selection"
   },
-
-  "emailAddress": "Email Address",
+  "emailAddress": "E-mailadres",
   "@emailAddress": {
     "description": "Email address input label"
   },
-
-  "password": "Password",
+  "password": "Wachtwoord",
   "@password": {
     "description": "Password input label"
   },
-
-  "login": "Login",
+  "login": "Inloggen",
   "@login": {
     "description": "Login button text"
   },
-
-  "enterEmailAddress": "Please enter an email address",
+  "enterEmailAddress": "Voer een e-mailadres in",
   "@enterEmailAddress": {
     "description": "Validation message for empty email"
   },
-
-  "getNewToken": "Get new token",
+  "getNewToken": "Nieuw token ophalen",
   "@getNewToken": {
     "description": "Button text to fetch a new token for the active account"
   },
-
-  "getNewTokenSubtitle": "Fetch a new token for the active account",
+  "getNewTokenSubtitle": "Haal een nieuw token op voor het actieve account",
   "@getNewTokenSubtitle": {
     "description": "Subtitle for fetching a new token"
   },
-
-  "tokenUpdated": "Token updated!",
+  "tokenUpdated": "Token bijgewerkt!",
   "@tokenUpdated": {
     "description": "Message shown when token is successfully updated"
   },
-
-  "noActiveAccountSnack": "No active account!",
+  "noActiveAccountSnack": "Geen actief account!",
   "@noActiveAccountSnack": {
     "description": "Snackbar message when no active account is selected"
   },
-
-  "addAccountTitle": "Add Account",
+  "addAccountTitle": "Account toevoegen",
   "@addAccountTitle": {
     "description": "Title for add account dialog"
   },
-
-  "emailLabel": "Email",
+  "emailLabel": "E-mail",
   "@emailLabel": {
     "description": "Label for email input field"
   },
-
-  "enterEmail": "Enter email",
+  "enterEmail": "Voer e-mail in",
   "@enterEmail": {
     "description": "Placeholder for email input field"
   },
-
-  "passwordLabel": "Password",
+  "passwordLabel": "Wachtwoord",
   "@passwordLabel": {
     "description": "Label for password input field"
   },
-
-  "enterPassword": "Enter password",
+  "enterPassword": "Voer wachtwoord in",
   "@enterPassword": {
     "description": "Placeholder for password input field"
   },
-
-  "accountAdded": "Account added!",
+  "accountAdded": "Account toegevoegd!",
   "@accountAdded": {
     "description": "Message shown when account is successfully added"
   },
-
-  "logoutTitle": "Logout",
+  "logoutTitle": "Uitloggen",
   "@logoutTitle": {
     "description": "Title for logout dialog"
   },
-
-  "logoutConfirm": "Are you sure you want to log out?",
+  "logoutConfirm": "Weet je zeker dat je wilt uitloggen?",
   "@logoutConfirm": {
     "description": "Confirmation message for logout"
   },
-
-  "loggedOut": "Logged out!",
+  "loggedOut": "Uitgelogd!",
   "@loggedOut": {
     "description": "Message shown when user is successfully logged out"
   },
-
-  "designSettings": "Design Settings",
+  "designSettings": "Ontwerp instellingen",
   "@designSettings": {
     "description": "Title for design settings section"
   },
-
-  "appearance": "Appearance",
+  "appearance": "Uiterlijk",
   "@appearance": {
     "description": "Label for appearance settings"
   },
-
-  "automatic": "Automatic",
+  "automatic": "Automatisch",
   "@automatic": {
     "description": "Option for automatic appearance mode"
   },
-
-  "light": "Light",
+  "light": "Licht",
   "@light": {
     "description": "Option for light appearance mode"
   },
-
-  "dark": "Dark",
+  "dark": "Donker",
   "@dark": {
     "description": "Option for dark appearance mode"
   },
-
-  "colorStyle": "Color Style",
+  "colorStyle": "Kleurstijl",
   "@colorStyle": {
     "description": "Label for color style settings"
   },
-
   "materialYou": "Material\nYou",
   "@materialYou": {
     "description": "Option for Material You color style"
   },
-
-  "classic": "Classic",
+  "classic": "Klassiek",
   "@classic": {
     "description": "Option for classic color style"
   },
-
   "neon": "Neon",
   "@neon": {
     "description": "Option for neon color style"
   },
-
-  "neonAccentColor": "Neon Accent Color",
+  "neonAccentColor": "Neon accent kleur",
   "@neonAccentColor": {
     "description": "Label for neon accent color settings"
   },
-
-  "classicAccentColor": "Classic Accent Color",
+  "classicAccentColor": "Klassieke accent kleur",
   "@classicAccentColor": {
     "description": "Label for classic accent color settings"
   },
-
-  "materialYouActive": "Material You active",
+  "materialYouActive": "Material You actief",
   "@materialYouActive": {
     "description": "Message indicating Material You is active"
   },
-
-  "materialYouInfo": "Colors are automatically taken from the system theme.",
+  "materialYouInfo": "Kleuren worden automatisch overgenomen van het systeemthema.",
   "@materialYouInfo": {
     "description": "Information about Material You color style"
   },
-
-  "neonViolet": "Neon Violet",
+  "neonViolet": "Neon violet",
   "@neonViolet": {
     "description": "Neon violet color option"
   },
-
-  "neonCyan": "Neon Cyan",
+  "neonCyan": "Neon cyaan",
   "@neonCyan": {
     "description": "Neon cyan color option"
   },
-
-  "neonGreen": "Neon Green",
+  "neonGreen": "Neon groen",
   "@neonGreen": {
     "description": "Neon green color option"
   },
-
-  "neonPink": "Neon Pink",
+  "neonPink": "Neon roze",
   "@neonPink": {
     "description": "Neon pink color option"
   },
-
-  "neonOrange": "Neon Orange",
+  "neonOrange": "Neon oranje",
   "@neonOrange": {
     "description": "Neon orange color option"
   },
-
-  "neonBlue": "Neon Blue",
+  "neonBlue": "Neon blauw",
   "@neonBlue": {
     "description": "Neon blue color option"
   },
-
-  "neonRed": "Neon Red",
+  "neonRed": "Neon rood",
   "@neonRed": {
     "description": "Neon red color option"
   },
-
-  "neonYellow": "Neon Yellow",
+  "neonYellow": "Neon geel",
   "@neonYellow": {
     "description": "Neon yellow color option"
   },
-
-  "neonMint": "Neon Mint",
+  "neonMint": "Neon mint",
   "@neonMint": {
     "description": "Neon mint color option"
   },
-
-  "blue": "Blue",
+  "blue": "Blauw",
   "@blue": {
     "description": "Blue color option"
   },
-
-  "teal": "Teal",
+  "teal": "Turkoois",
   "@teal": {
     "description": "Teal color option"
   },
-
-  "green": "Green",
+  "green": "Groen",
   "@green": {
     "description": "Green color option"
   },
-
-  "pink": "Pink",
+  "pink": "Roze",
   "@pink": {
     "description": "Pink color option"
   },
-
-  "orange": "Orange",
+  "orange": "Oranje",
   "@orange": {
     "description": "Orange color option"
   },
-
   "indigo": "Indigo",
   "@indigo": {
     "description": "Indigo color option"
   },
-
-  "red": "Red",
+  "red": "Rood",
   "@red": {
     "description": "Red color option"
   },
-
-  "yellow": "Yellow",
+  "yellow": "Geel",
   "@yellow": {
     "description": "Yellow color option"
   },
-
-  "purple": "Purple",
+  "purple": "Paars",
   "@purple": {
     "description": "Purple color option"
   },
+  "previousLessonsDay": "Vorige dag met lessen",
+  "@previousLessonsDay": {},
 
-  "previousLessonsDay": "Previous day with lessons",
-  "nextLessonsDay": "Next day with lessons",
-  "noLessonsFound": "No lessons found.",
-  "noLessonsForDay": "No lessons for {day}.{month}.{year}",
-  "noHolidaysFound": "No holidays found.",
-  "latestGrades": "Latest grades",
-  "noGradesFound": "No grades found.",
-  "openAbsences": "Open absences",
-  "showAll": "Show all",
+  "nextLessonsDay": "Volgende dag met lessen",
+  "@nextLessonsDay": {},
+
+  "noLessonsFound": "Geen lessen gevonden.",
+  "@noLessonsFound": {},
+
+  "noLessonsForDay": "Geen lessen voor {day}.{month}.{year}",
+  "@noLessonsForDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "noHolidaysFound": "Geen vakanties gevonden.",
+  "@noHolidaysFound": {},
+
+  "latestGrades": "Laatste cijfers",
+  "@latestGrades": {},
+
+  "noGradesFound": "Geen cijfers gevonden.",
+  "@noGradesFound": {},
+
+  "openAbsences": "Open afwezigheden",
+  "@openAbsences": {},
+
+  "showAll": "Toon alles",
   "@showAll": {
     "description": "Button text to show all release notes"
   },
-  "noAbsencesFound": "No absences found.",
-  "noOpenAbsences": "No open absences.",
-  "noReleaseNotes": "No release notes available",
-  "releaseNotesInfo": "Updates and new features will be shown here",
-  "notificationTypes": "Notification types",
-  "timetable": "Timetable",
-  "agendaNotificationSubtitle": "Notifications before lessons",
-  "gradeNotificationSubtitle": "Notifications for new grades",
-  "absenceNotificationSubtitle": "Notifications for absence changes",
-  "generalNotifications": "General notifications",
-  "generalNotificationSubtitle": "Important school information and updates",
-  "notificationTime": "Notification time",
-  "notificationAdvanceQuestion": "How many minutes before class do you want to be notified?",
-  "minutesBeforeClass": "{minutes} min",
-  "currentAdvanceSetting": "Current setting: {minutes} minutes before class",
-  "test": "Test",
-  "sendTestNotification": "Send test notification",
-  "checkNotificationsWork": "Check if notifications work",
+  "noAbsencesFound": "Geen afwezigheden gevonden.",
+  "@noAbsencesFound": {},
 
-  "scheduleTestNotification": "Schedule test notification",
+  "noOpenAbsences": "Geen open afwezigheden.",
+  "@noOpenAbsences": {},
+
+  "noReleaseNotes": "Geen release notes beschikbaar",
+  "@noReleaseNotes": {},
+
+  "releaseNotesInfo": "Updates en nieuwe functies worden hier getoond",
+  "@releaseNotesInfo": {},
+
+  "notificationTypes": "Melding types",
+  "@notificationTypes": {},
+
+  "timetable": "Rooster",
+  "@timetable": {},
+
+  "agendaNotificationSubtitle": "Meldingen voor lessen",
+  "@agendaNotificationSubtitle": {},
+
+  "gradeNotificationSubtitle": "Meldingen voor nieuwe cijfers",
+  "@gradeNotificationSubtitle": {},
+
+  "absenceNotificationSubtitle": "Meldingen voor afwezigheidswijzigingen",
+  "@absenceNotificationSubtitle": {},
+
+  "generalNotifications": "Algemene meldingen",
+  "@generalNotifications": {},
+
+  "generalNotificationSubtitle": "Belangrijke schoolinformatie en updates",
+  "@generalNotificationSubtitle": {},
+
+  "notificationTime": "Meldingstijd",
+  "@notificationTime": {},
+
+  "notificationAdvanceQuestion": "Hoeveel minuten voor de les wil je een melding ontvangen?",
+  "@notificationAdvanceQuestion": {},
+
+  "minutesBeforeClass": "{minutes} min",
+  "@minutesBeforeClass": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "currentAdvanceSetting": "Huidige instelling: {minutes} minuten voor de les",
+  "@currentAdvanceSetting": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "test": "Test",
+  "@test": {},
+
+  "sendTestNotification": "Stuur testmelding",
+  "@sendTestNotification": {},
+
+  "checkNotificationsWork": "Controleer of meldingen werken",
+  "@checkNotificationsWork": {},
+
+  "scheduleTestNotification": "Plan testmelding",
   "@scheduleTestNotification": {
     "description": "Button to schedule a test notification"
   },
-
-  "testScheduledNotificationDesc": "Receive a notification in 15 seconds (works when app is closed)",
+  "testScheduledNotificationDesc": "Ontvang een melding over 15 seconden (werkt wanneer app gesloten is)",
   "@testScheduledNotificationDesc": {
     "description": "Description for scheduled test notification"
   },
-
-  "notificationScheduledIn15Seconds": "Notification scheduled! Close the app to test - appears in 15 seconds",
+  "notificationScheduledIn15Seconds": "Melding gepland! Sluit de app om te testen - verschijnt over 15 seconden",
   "@notificationScheduledIn15Seconds": {
     "description": "Success message when test notification is scheduled"
   },
-
-  "errorSchedulingNotification": "Failed to schedule notification",
+  "errorSchedulingNotification": "Melding plannen mislukt",
   "@errorSchedulingNotification": {
     "description": "Error message when notification scheduling fails"
   },
-
-  "testNotificationSent": "Test notification sent!",
+  "testNotificationSent": "Testmelding verzonden!",
   "@testNotificationSent": {
     "description": "Success message when test notification is sent"
   },
-
-  "exactAlarmPermissionRequired": "Exact alarm permission required. Please enable in settings.",
+  "exactAlarmPermissionRequired": "Exacte alarm toestemming vereist. Schakel in bij instellingen.",
   "@exactAlarmPermissionRequired": {
     "description": "Error message when exact alarm permission is required"
   },
-
-  "openSettings": "Open Settings",
+  "openSettings": "Open instellingen",
   "@openSettings": {
     "description": "Button to open app settings"
   },
-  "gradeDetails": "Grade Details",
-  "basicInformation": "Basic Information",
-  "titleLabel": "Title",
-  "subjectLabel": "Subject",
-  "courseLabel": "Course",
-  "dateLabel": "Date",
-  "confirmedLabel": "Confirmed",
-  "gradeLabel": "Grade",
-  "pointsLabel": "Points",
-  "weightLabel": "Weight",
-  "courseGradeLabel": "Course Grade",
-  "classAverage": "Class Average",
-  "examGroupLabel": "Exam Group",
-  "classAverageLabel": "Class Average",
-  "groupWeightLabel": "Group Weight",
-  "commentLabel": "Comment",
-  "latestVersionMessage": "You are already using the latest version.",
-  "versionWithNumber": "Version {version}+{build}",
+  "gradeDetails": "Cijfer details",
+  "@gradeDetails": {},
+
+  "basicInformation": "Basisinformatie",
+  "@basicInformation": {},
+
+  "titleLabel": "Titel",
+  "@titleLabel": {},
+
+  "subjectLabel": "Vak",
+  "@subjectLabel": {},
+
+  "courseLabel": "Cursus",
+  "@courseLabel": {},
+
+  "dateLabel": "Datum",
+  "@dateLabel": {},
+
+  "confirmedLabel": "Bevestigd",
+  "@confirmedLabel": {},
+
+  "gradeLabel": "Cijfer",
+  "@gradeLabel": {},
+
+  "pointsLabel": "Punten",
+  "@pointsLabel": {},
+
+  "weightLabel": "Gewicht",
+  "@weightLabel": {},
+
+  "courseGradeLabel": "Cursuscijfer",
+  "@courseGradeLabel": {},
+
+  "classAverage": "Klasgemiddelde",
+  "@classAverage": {},
+
+  "examGroupLabel": "Examengroep",
+  "@examGroupLabel": {},
+
+  "classAverageLabel": "Klasgemiddelde",
+  "@classAverageLabel": {},
+
+  "groupWeightLabel": "Groepsgewicht",
+  "@groupWeightLabel": {},
+
+  "commentLabel": "Opmerking",
+  "@commentLabel": {},
+
+  "latestVersionMessage": "Je gebruikt al de nieuwste versie.",
+  "@latestVersionMessage": {},
+
+  "versionWithNumber": "Versie {version}+{build}",
   "@versionWithNumber": {
     "description": "Version string with version and build number.",
     "placeholders": {
       "version": {},
+
       "build": {}
+
     }
   },
   "appLegalese": "Schuly © 2025 PianoNic",
-  "appDescription": "A custom app for students to manage Schulnetz data. Manage your timetable, grades, and important dates in one place.",
-  "apiEndpoint": "API Endpoint",
+  "@appLegalese": {},
 
-  "enterApiEndpoint": "Please enter API endpoint",
+  "appDescription": "Een aangepaste app voor studenten om Schulnetz-gegevens te beheren. Beheer je rooster, cijfers en belangrijke data op één plek.",
+  "@appDescription": {},
+
+  "apiEndpoint": "API-eindpunt",
+  "@apiEndpoint": {},
+
+  "enterApiEndpoint": "Voer API-eindpunt in",
   "@enterApiEndpoint": {
     "description": "Validation message for empty API endpoint"
   },
-  "currentApiInfo": "Current API Info",
-  "apiInfoStatus": "API Info Status",
-  "environment": "Environment",
-  "error": "Error",
-  "apiBaseUrl": "API Base URL",
-  "save": "Save",
-  "apiUrlChanged": "API URL changed: {url}",
+  "currentApiInfo": "Huidige API-info",
+  "@currentApiInfo": {},
+
+  "apiInfoStatus": "API-info status",
+  "@apiInfoStatus": {},
+
+  "environment": "Omgeving",
+  "@environment": {},
+
+  "apiBaseUrl": "API basis URL",
+  "@apiBaseUrl": {},
+
+  "save": "Opslaan",
+  "@save": {},
+
+  "apiUrlChanged": "API URL gewijzigd: {url}",
   "@apiUrlChanged": {
     "description": "Snackbar message when API URL is changed",
     "placeholders": {
       "url": {}
+
     }
   },
-  "getColorName": "Get color name",
+  "getColorName": "Krijg kleurnaam",
   "@getColorName": {
     "description": "Returns the localized color name for a given key."
   },
-  "lessonBreak": "Break",
+  "lessonBreak": "Pauze",
   "@lessonBreak": {
     "description": "Label for break between lessons"
   },
-  "lunchBreak": "Lunch Break",
+  "lunchBreak": "Lunchpauze",
   "@lunchBreak": {
     "description": "Label for lunch break"
   },
-  "showBreaks": "Show breaks between lessons",
+  "showBreaks": "Toon pauzes tussen lessen",
   "@showBreaks": {
     "description": "Setting to show/hide breaks between lessons"
   },
-  "cardSettings": "Card Settings",
+  "cardSettings": "Kaartinstellingen",
   "@cardSettings": {
     "description": "Title for card-specific settings"
   },
-  "tapToCustomize": "Tap to customize",
+  "tapToCustomize": "Tik om aan te passen",
   "@tapToCustomize": {
     "description": "Hint text for tappable cards"
   },
-  "numberOfDaysToShow": "Number of days to show",
+  "numberOfDaysToShow": "Aantal dagen om te tonen",
   "@numberOfDaysToShow": {
     "description": "Setting for how many days to display"
   },
-  "numberOfGradesToShow": "Number of grades to show",
+  "numberOfGradesToShow": "Aantal cijfers om te tonen",
   "@numberOfGradesToShow": {
     "description": "Setting for how many grades to display"
   },
-  "showOnlyOpenAbsences": "Show only open absences",
+  "showOnlyOpenAbsences": "Toon alleen open afwezigheden",
   "@showOnlyOpenAbsences": {
     "description": "Setting to filter absences"
   },
-  "noConfigurationAvailable": "No configuration settings available",
+  "noConfigurationAvailable": "Geen configuratie-instellingen beschikbaar",
   "@noConfigurationAvailable": {
     "description": "Message shown when a card has no configurable settings"
   },
-  "switchAccount": "Switch Account",
+  "switchAccount": "Account wisselen",
   "@switchAccount": {
     "description": "Header/title for the account switcher modal"
   },
@@ -849,977 +844,893 @@
     "description": "Shows the number of accounts",
     "placeholders": {
       "count": {}
+
     }
   },
-  "noAccounts": "No accounts available.",
+  "noAccounts": "Geen accounts beschikbaar.",
   "@noAccounts": {
     "description": "Message when there are no accounts to switch"
   },
-  "addFirstAccount": "Add your first account to get started!",
+  "addFirstAccount": "Voeg je eerste account toe om te beginnen!",
   "@addFirstAccount": {
     "description": "Subtitle encouraging the user to add their first account"
   },
-  "active": "Active",
+  "active": "Actief",
   "@active": {
     "description": "Label for the active account"
   },
-  "available": "Available",
+  "available": "Beschikbaar",
   "@available": {
     "description": "Label for available (not active) accounts"
   },
-  "removeAccount": "Remove Account",
+  "removeAccount": "Account verwijderen",
   "@removeAccount": {
     "description": "Button/dialog title for removing an account"
   },
-  "confirmRemoveAccount": "Remove account {email}?",
+  "confirmRemoveAccount": "Account {email} verwijderen?",
   "@confirmRemoveAccount": {
     "description": "Confirmation for removing an account",
     "placeholders": {
       "email": {}
+
     }
   },
-  "remove": "Remove",
+  "remove": "Verwijderen",
   "@remove": {
     "description": "Button text for confirming removal"
   },
-  "switchedAccount": "Switched to {email}",
+  "switchedAccount": "Gewisseld naar {email}",
   "@switchedAccount": {
     "description": "Snackbar message when switching account",
     "placeholders": {
       "email": {}
+
     }
   },
-  "switchAccountError": "Failed to switch account: {error}",
+  "switchAccountError": "Account wisselen mislukt: {error}",
   "@switchAccountError": {
     "description": "Error message when switching account fails",
     "placeholders": {
       "error": {}
+
     }
   },
-  "removedAccount": "Removed account {email}",
+  "removedAccount": "Account {email} verwijderd",
   "@removedAccount": {
     "description": "Snackbar message when removing account",
     "placeholders": {
       "email": {}
+
     }
   },
-  "removeAccountError": "Failed to remove account: {error}",
+  "removeAccountError": "Account verwijderen mislukt: {error}",
   "@removeAccountError": {
     "description": "Error message when removing account fails",
     "placeholders": {
       "error": {}
+
     }
   },
-  "unexpectedError": "Unexpected error: {error}",
+  "unexpectedError": "Onverwachte fout: {error}",
   "@unexpectedError": {
     "description": "Generic error message",
     "placeholders": {
       "error": {}
+
     }
   },
-  "weekdayMon": "Mon",
+  "weekdayMon": "Ma",
   "@weekdayMon": {
     "description": "Abbreviation for Monday"
   },
-  "weekdayTue": "Tue",
+  "weekdayTue": "Di",
   "@weekdayTue": {
     "description": "Abbreviation for Tuesday"
   },
-  "weekdayWed": "Wed",
+  "weekdayWed": "Wo",
   "@weekdayWed": {
     "description": "Abbreviation for Wednesday"
   },
-  "weekdayThu": "Thu",
+  "weekdayThu": "Do",
   "@weekdayThu": {
     "description": "Abbreviation for Thursday"
   },
-  "weekdayFri": "Fri",
+  "weekdayFri": "Vr",
   "@weekdayFri": {
     "description": "Abbreviation for Friday"
   },
-  "weekdaySat": "Sat",
+  "weekdaySat": "Za",
   "@weekdaySat": {
     "description": "Abbreviation for Saturday"
   },
-  "weekdaySun": "Sun",
+  "weekdaySun": "Zo",
   "@weekdaySun": {
     "description": "Abbreviation for Sunday"
   },
-  "absencesTabAll": "All Absences",
-  "absencesTabLateness": "Lateness",
-  "absencesTabAbsences": "Absences",
-  "absencesTabNotices": "Notices",
-  "absencesSection": "Absences",
-  "latenessSection": "Lateness",
-  "noticesSection": "Notices",
-  "noticeItem": "Notice",
-  "noReasonGiven": "No reason given",
-  "noCommentGiven": "No comment given",
-  "unknownData": "Unknown data",
-  "noNoticesFound": "No notices found.",
-  "minutes": "min",
-  "hours": "hr",
-  "latenessFrom": "Lateness from",
-  "duration": "Duration",
-  "course": "Course",
-  "reason": "Reason",
-  "comment": "Comment",
-  "status": "Status",
-  "excused": "Excused",
-  "notExcused": "Not excused",
-  "from": "From",
-  "to": "To",
-  "excuseUntil": "Excuse until",
-  "details": "Details",
-  "excuse": "Excuse",
-  "excuseComingSoon": "Excuse - Coming Soon!",
-  "deleteAbsenceTitle": "Delete Absence",
-  "deleteAbsenceConfirm": "Are you sure you want to delete this absence? This action cannot be undone.",
-  "absenceDeleted": "Absence deleted!",
+  "absencesTabAll": "Alle afwezigheden",
+  "@absencesTabAll": {},
 
-  "appUpdateTest": "App Update Test",
+  "absencesTabLateness": "Vertraging",
+  "@absencesTabLateness": {},
+
+  "absencesTabAbsences": "Afwezigheden",
+  "@absencesTabAbsences": {},
+
+  "absencesTabNotices": "Meldingen",
+  "@absencesTabNotices": {},
+
+  "absencesSection": "Afwezigheden",
+  "@absencesSection": {},
+
+  "latenessSection": "Vertraging",
+  "@latenessSection": {},
+
+  "noticesSection": "Meldingen",
+  "@noticesSection": {},
+
+  "noticeItem": "Melding",
+  "@noticeItem": {},
+
+  "noReasonGiven": "Geen reden opgegeven",
+  "@noReasonGiven": {},
+
+  "noCommentGiven": "Geen opmerking opgegeven",
+  "@noCommentGiven": {},
+
+  "unknownData": "Onbekende gegevens",
+  "@unknownData": {},
+
+  "noNoticesFound": "Geen meldingen gevonden.",
+  "@noNoticesFound": {},
+
+  "minutes": "min",
+  "@minutes": {},
+
+  "hours": "uur",
+  "@hours": {},
+
+  "latenessFrom": "Vertraging vanaf",
+  "@latenessFrom": {},
+
+  "duration": "Duur",
+  "@duration": {},
+
+  "course": "Cursus",
+  "@course": {},
+
+  "reason": "Reden",
+  "@reason": {},
+
+  "comment": "Opmerking",
+  "@comment": {},
+
+  "status": "Status",
+  "@status": {},
+
+  "excused": "Geëxcuseerd",
+  "@excused": {},
+
+  "notExcused": "Niet geëxcuseerd",
+  "@notExcused": {},
+
+  "from": "Van",
+  "@from": {},
+
+  "to": "Tot",
+  "@to": {},
+
+  "excuseUntil": "Excuseren tot",
+  "@excuseUntil": {},
+
+  "details": "Details",
+  "@details": {},
+
+  "excuse": "Excuus",
+  "@excuse": {},
+
+  "excuseComingSoon": "Excuus - Binnenkort!",
+  "@excuseComingSoon": {},
+
+  "deleteAbsenceTitle": "Afwezigheid verwijderen",
+  "@deleteAbsenceTitle": {},
+
+  "deleteAbsenceConfirm": "Weet je zeker dat je deze afwezigheid wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+  "@deleteAbsenceConfirm": {},
+
+  "absenceDeleted": "Afwezigheid verwijderd!",
+  "@absenceDeleted": {},
+
+  "appUpdateTest": "App update test",
   "@appUpdateTest": {
     "description": "Title for app update test page"
   },
-
-  "readyToTest": "Ready to test",
+  "readyToTest": "Klaar om te testen",
   "@readyToTest": {
     "description": "Initial status message for update test"
   },
-
-  "updateSystemTest": "Update System Test",
+  "updateSystemTest": "Update systeem test",
   "@updateSystemTest": {
     "description": "Title for update system test section"
   },
-
   "statusLabel": "Status: {status}",
   "@statusLabel": {
     "description": "Status label with status value",
     "placeholders": {
       "status": {}
+
     }
   },
-
-  "checking": "Checking...",
+  "checking": "Controleren...",
   "@checking": {
     "description": "Progress text when checking for updates"
   },
-
-  "forceShowUpdateDialog": "Force Show Update Dialog",
+  "forceShowUpdateDialog": "Forceer update dialoog",
   "@forceShowUpdateDialog": {
     "description": "Button text to force show update dialog"
   },
-
-  "clearDismissedUpdates": "Clear Dismissed Updates",
+  "clearDismissedUpdates": "Wis afgewezen updates",
   "@clearDismissedUpdates": {
     "description": "Button text to clear dismissed updates"
   },
-
-  "howItWorks": "How it works:",
+  "howItWorks": "Hoe het werkt:",
   "@howItWorks": {
     "description": "Title for explanation section"
   },
-
-  "updateStep1": "1. Checks GitHub releases for newer versions",
+  "updateStep1": "1. Controleert GitHub releases voor nieuwere versies",
   "@updateStep1": {
     "description": "First step of update process"
   },
-
-  "updateStep2": "2. Downloads APK from GitHub release assets",
+  "updateStep2": "2. Download APK van GitHub release assets",
   "@updateStep2": {
     "description": "Second step of update process"
   },
-
-  "updateStep3": "3. Opens Android installer automatically",
+  "updateStep3": "3. Opent Android installer automatisch",
   "@updateStep3": {
     "description": "Third step of update process"
   },
-
-  "updateStep4": "4. Remembers dismissed updates until app restart",
+  "updateStep4": "4. Onthoudt afgewezen updates tot app herstart",
   "@updateStep4": {
     "description": "Fourth step of update process"
   },
-
-  "checkingForUpdates": "Checking for updates...",
+  "checkingForUpdates": "Controleren op updates...",
   "@checkingForUpdates": {
     "description": "Status when checking for updates"
   },
-
-  "updateAvailableVersion": "Update available: v{version}",
+  "updateAvailableVersion": "Update beschikbaar: v{version}",
   "@updateAvailableVersion": {
     "description": "Status when update is available",
     "placeholders": {
       "version": {}
+
     }
   },
-
-  "noUpdatesAvailable": "No updates available or update dismissed",
+  "noUpdatesAvailable": "Geen updates beschikbaar of update afgewezen",
   "@noUpdatesAvailable": {
     "description": "Status when no updates are available"
   },
-
-  "errorCheckingUpdates": "Error checking for updates: {error}",
+  "errorCheckingUpdates": "Fout bij controleren op updates: {error}",
   "@errorCheckingUpdates": {
     "description": "Error message when checking for updates fails",
     "placeholders": {
       "error": {}
+
     }
   },
-
-  "showingUpdateDialog": "Showing update dialog...",
+  "showingUpdateDialog": "Update dialoog tonen...",
   "@showingUpdateDialog": {
     "description": "Status when showing update dialog"
   },
-
-  "updateDialogShown": "Update dialog shown",
+  "updateDialogShown": "Update dialoog getoond",
   "@updateDialogShown": {
     "description": "Status when update dialog is shown"
   },
-
-  "errorShowingDialog": "Error showing dialog: {error}",
+  "errorShowingDialog": "Fout bij tonen dialoog: {error}",
   "@errorShowingDialog": {
     "description": "Error message when showing dialog fails",
     "placeholders": {
       "error": {}
+
     }
   },
-
-  "clearingDismissedUpdates": "Clearing dismissed updates...",
+  "clearingDismissedUpdates": "Afgewezen updates wissen...",
   "@clearingDismissedUpdates": {
     "description": "Status when clearing dismissed updates"
   },
-
-  "dismissedUpdatesCleared": "Dismissed updates cleared",
+  "dismissedUpdatesCleared": "Afgewezen updates gewist",
   "@dismissedUpdatesCleared": {
     "description": "Status when dismissed updates are cleared"
   },
-
-  "errorClearingDismissed": "Error clearing dismissed: {error}",
+  "errorClearingDismissed": "Fout bij wissen afgewezen: {error}",
   "@errorClearingDismissed": {
     "description": "Error message when clearing dismissed updates fails",
     "placeholders": {
       "error": {}
+
     }
   },
-
-  "illness": "Illness",
+  "illness": "Ziekte",
   "@illness": {
     "description": "Absence reason: illness"
   },
-
-  "accident": "Accident",
+  "accident": "Ongeval",
   "@accident": {
     "description": "Absence reason: accident"
   },
-
-  "military": "Military",
+  "military": "Militair",
   "@military": {
     "description": "Absence reason: military"
   },
-
-  "medicalCertificateForSport": "Valid medical certificate for sports",
+  "medicalCertificateForSport": "Geldig medisch attest voor sport",
   "@medicalCertificateForSport": {
     "description": "Absence reason: medical certificate for sports"
   },
-
-  "otherAbsence": "Other absence",
+  "otherAbsence": "Andere afwezigheid",
   "@otherAbsence": {
     "description": "Absence reason: other"
   },
-
-  "createNewAbsence": "Create new absence",
+  "createNewAbsence": "Nieuwe afwezigheid aanmaken",
   "@createNewAbsence": {
     "description": "Title for creating a new absence"
   },
-
-  "reasonRequired": "Reason *",
+  "reasonRequired": "Reden *",
   "@reasonRequired": {
     "description": "Required field label for absence reason"
   },
-
-  "create": "Create",
+  "create": "Aanmaken",
   "@create": {
     "description": "Create button text"
   },
-
-  "noError": "No error",
+  "noError": "Geen fout",
   "@noError": {
     "description": "Message when there are no errors"
   },
-
-  "unknown": "Unknown",
+  "unknown": "Onbekend",
   "@unknown": {
     "description": "Unknown value placeholder"
   },
-
-  "currentVersion": "Current: {version}",
+  "currentVersion": "Huidig: {version}",
   "@currentVersion": {
     "description": "Current version label in update dialog",
     "placeholders": {
       "version": {}
+
     }
   },
-
-  "latestVersion": "Latest: {version}",
+  "latestVersion": "Laatste: {version}",
   "@latestVersion": {
     "description": "Latest version label in update dialog",
     "placeholders": {
       "version": {}
+
     }
   },
-
-  "downloadingUpdate": "Update is being downloaded...",
+  "downloadingUpdate": "Update wordt gedownload...",
   "@downloadingUpdate": {
     "description": "Status message during update download"
   },
-
-  "installingUpdate": "Update is being installed...",
+  "installingUpdate": "Update wordt geïnstalleerd...",
   "@installingUpdate": {
     "description": "Status message during update installation"
   },
-
-  "install": "Install",
+  "install": "Installeren",
   "@install": {
     "description": "Install button text"
   },
-
-  "downloading": "Downloading...",
+  "downloading": "Downloaden...",
   "@downloading": {
     "description": "Downloading button text"
   },
-
-  "download": "Download",
+  "download": "Downloaden",
   "@download": {
     "description": "Download button text"
   },
-
-  "installing": "Installing...",
+  "installing": "Installeren...",
   "@installing": {
     "description": "Installing button text"
   },
-
-  "downloadError": "Error downloading update",
+  "downloadError": "Fout bij downloaden update",
   "@downloadError": {
     "description": "Error message when download fails"
   },
-
-  "downloadErrorDetails": "Download error: {error}",
+  "downloadErrorDetails": "Download fout: {error}",
   "@downloadErrorDetails": {
     "description": "Detailed download error message",
     "placeholders": {
       "error": {}
+
     }
   },
-
-  "installationNotAllowed": "Installation not allowed",
+  "installationNotAllowed": "Installatie niet toegestaan",
   "@installationNotAllowed": {
     "description": "Error when installation permission is denied"
   },
-
-  "installationError": "Installation error",
+  "installationError": "Installatiefout",
   "@installationError": {
     "description": "Generic installation error message"
   },
-
-  "installationErrorDetails": "Installation error: {error}",
+  "installationErrorDetails": "Installatiefout: {error}",
   "@installationErrorDetails": {
     "description": "Detailed installation error message",
     "placeholders": {
       "error": {}
+
     }
   },
-
-  "updateInstallationStarted": "Update installation started",
+  "updateInstallationStarted": "Update installatie gestart",
   "@updateInstallationStarted": {
     "description": "Success message when installation starts"
   },
-
-  "selectReason": "Please select a reason",
-  "@selectReason": {
-    "description": "Validation for reason selection"
-  },
-
-  "selectDate": "Please select a date",
-  "@selectDate": {
-    "description": "Validation for date selection"
-  },
-
-  "absentFrom": "Absent from *",
+  "absentFrom": "Afwezig vanaf *",
   "@absentFrom": {
     "description": "Label for absence start date field"
   },
-
-  "absentTo": "Absent to *",
+  "absentTo": "Afwezig tot *",
   "@absentTo": {
     "description": "Label for absence end date field"
   },
-
-  "toDateMustBeAfterFromDate": "End date must be after start date",
+  "toDateMustBeAfterFromDate": "Einddatum moet na begindatum zijn",
   "@toDateMustBeAfterFromDate": {
     "description": "Validation for date range"
   },
-
-  "absentFromTime": "Absent from (time)",
+  "absentFromTime": "Afwezig vanaf (tijd)",
   "@absentFromTime": {
     "description": "Label for absence start time field"
   },
-
-  "absentToTime": "Absent to (time)",
+  "absentToTime": "Afwezig tot (tijd)",
   "@absentToTime": {
     "description": "Label for absence end time field"
   },
-
-  "absenceCreatedSuccessfully": "Absence created successfully!",
+  "absenceCreatedSuccessfully": "Afwezigheid succesvol aangemaakt!",
   "@absenceCreatedSuccessfully": {
     "description": "Success message for absence creation"
   },
-
-  "customizeHomepage": "Customize homepage",
+  "customizeHomepage": "Homepage aanpassen",
   "@customizeHomepage": {
     "description": "Title for homepage configuration modal"
   },
-
-  "visible": "Visible",
+  "visible": "Zichtbaar",
   "@visible": {
     "description": "Status text for visible sections"
   },
-
-  "hidden": "Hidden",
+  "hidden": "Verborgen",
   "@hidden": {
     "description": "Status text for hidden sections"
   },
-
-  "pushAssistNotifications": "PushAssist Notifications",
+  "pushAssistNotifications": "PushAssist meldingen",
   "@pushAssistNotifications": {
     "description": "Notification channel name"
   },
-
-  "notificationsBeforeClasses": "Notifications before classes",
+  "notificationsBeforeClasses": "Meldingen voor lessen",
   "@notificationsBeforeClasses": {
     "description": "Notification channel description"
   },
-
-  "testNotifications": "Test Notifications",
+  "testNotifications": "Test meldingen",
   "@testNotifications": {
     "description": "Test notification channel name"
   },
-
-  "testNotificationDescription": "Test notification for PushAssist",
+  "testNotificationDescription": "Test melding voor PushAssist",
   "@testNotificationDescription": {
     "description": "Test notification channel description"
   },
-
-  "nextClass": "Next class: {subject}",
+  "nextClass": "Volgende les: {subject}",
   "@nextClass": {
     "description": "Notification title for next class",
     "placeholders": {
       "subject": {}
+
     }
   },
-
-  "roomAndTeacher": "Room: {room}{teacher}",
+  "roomAndTeacher": "Lokaal: {room}{teacher}",
   "@roomAndTeacher": {
     "description": "Notification body with room and teacher",
     "placeholders": {
       "room": {},
+
       "teacher": {}
+
     }
   },
-
-  "teacher": " • Teacher: {teacher}",
+  "teacher": " • Docent: {teacher}",
   "@teacher": {
     "description": "Teacher part of notification",
     "placeholders": {
       "teacher": {}
+
     }
   },
-
-  "vibrationTest": "🔔 PushAssist Vibration Test",
+  "vibrationTest": "🔔 PushAssist triltest",
   "@vibrationTest": {
     "description": "Test notification title"
   },
-
-  "vibrationTestMessage": "This notification should vibrate! Check your device settings if it doesn't.",
+  "vibrationTestMessage": "Deze melding zou moeten trillen! Controleer je apparaatinstellingen als het niet werkt.",
   "@vibrationTestMessage": {
     "description": "Test notification message"
   },
-
-  "monday": "Mon",
+  "monday": "Ma",
   "@monday": {
     "description": "Monday abbreviation"
   },
-
-  "tuesday": "Tue",
+  "tuesday": "Di",
   "@tuesday": {
     "description": "Tuesday abbreviation"
   },
-
-  "wednesday": "Wed",
+  "wednesday": "Wo",
   "@wednesday": {
     "description": "Wednesday abbreviation"
   },
-
-  "thursday": "Thu",
+  "thursday": "Do",
   "@thursday": {
     "description": "Thursday abbreviation"
   },
-
-  "friday": "Fri",
+  "friday": "Vr",
   "@friday": {
     "description": "Friday abbreviation"
   },
-
-  "saturday": "Sat",
+  "saturday": "Za",
   "@saturday": {
     "description": "Saturday abbreviation"
   },
-
-  "sunday": "Sun",
+  "sunday": "Zo",
   "@sunday": {
     "description": "Sunday abbreviation"
   },
-
-  "january": "January",
+  "january": "Januari",
   "@january": {
     "description": "January month name"
   },
-
-  "february": "February",
+  "february": "Februari",
   "@february": {
     "description": "February month name"
   },
-
-  "march": "March",
+  "march": "Maart",
   "@march": {
     "description": "March month name"
   },
-
   "april": "April",
   "@april": {
     "description": "April month name"
   },
-
-  "may": "May",
+  "may": "Mei",
   "@may": {
     "description": "May month name"
   },
-
-  "june": "June",
+  "june": "Juni",
   "@june": {
     "description": "June month name"
   },
-
-  "july": "July",
+  "july": "Juli",
   "@july": {
     "description": "July month name"
   },
-
-  "august": "August",
+  "august": "Augustus",
   "@august": {
     "description": "August month name"
   },
-
   "september": "September",
   "@september": {
     "description": "September month name"
   },
-
-  "october": "October",
+  "october": "Oktober",
   "@october": {
     "description": "October month name"
   },
-
   "november": "November",
   "@november": {
     "description": "November month name"
   },
-
   "december": "December",
   "@december": {
     "description": "December month name"
   },
-
-  "studentIdCardTooltip": "Student ID card",
+  "studentIdCardTooltip": "Studentenkaart",
   "@studentIdCardTooltip": {
     "description": "Tooltip for student ID card button"
   },
-
-  "customizeHomepageTooltip": "Customize homepage",
+  "customizeHomepageTooltip": "Homepage aanpassen",
   "@customizeHomepageTooltip": {
     "description": "Tooltip for homepage customization button"
   },
-
-  "switchAccountButton": "Switch account",
+  "switchAccountButton": "Account wisselen",
   "@switchAccountButton": {
     "description": "Button text to switch account"
   },
-
-  "fetchingAppInfo": "Fetching app information...",
+  "fetchingAppInfo": "App-informatie ophalen...",
   "@fetchingAppInfo": {
     "description": "Loading message during app initialization"
   },
-
-  "checkingUpdatesInitialization": "Checking for updates...",
+  "checkingUpdatesInitialization": "Controleren op updates...",
   "@checkingUpdatesInitialization": {
     "description": "Loading message during update check on startup"
   },
-
-  "loadingData": "Loading data...",
+  "loadingData": "Gegevens laden...",
   "@loadingData": {
     "description": "Loading message during data fetch"
   },
-
-  "finalizingInitialization": "Finalizing initialization...",
+  "finalizingInitialization": "Initialisatie afronden...",
   "@finalizingInitialization": {
     "description": "Loading message during app startup finalization"
   },
-
-  "checkingConnection": "Checking connection...",
+  "checkingConnection": "Verbinding controleren...",
   "@checkingConnection": {
     "description": "Message shown when checking API connection"
   },
-
-  "offlineModeDetected": "Offline mode - using cached data",
+  "offlineModeDetected": "Offline modus - gecachte gegevens gebruiken",
   "@offlineModeDetected": {
     "description": "Message shown when offline mode is detected"
   },
-
-  "loadingCachedData": "Loading cached data...",
+  "loadingCachedData": "Gecachte gegevens laden...",
   "@loadingCachedData": {
     "description": "Message shown when loading cached data in offline mode"
   },
-
-  "errorCheckingUpdatesDetails": "Error checking for updates: {error}",
+  "errorCheckingUpdatesDetails": "Fout bij controleren op updates: {error}",
   "@errorCheckingUpdatesDetails": {
     "description": "Detailed error message for update check failure",
     "placeholders": {
       "error": {}
+
     }
   },
-
-  "minute": "minute",
+  "minute": "minuut",
   "@minute": {
     "description": "Singular form of minute"
   },
-
-  "minutes": "minutes",
-  "@minutes": {
-    "description": "Plural form of minutes"
-  },
-
-  "beforeClass": "before class",
+  "beforeClass": "voor de les",
   "@beforeClass": {
     "description": "Text shown under the time display"
   },
-
-  "notificationPermissions": "Notification Permissions",
+  "notificationPermissions": "Meldingstoestemmingen",
   "@notificationPermissions": {
     "description": "Title for notification permissions dialog"
   },
-
-  "notificationPermissionsDescription": "To receive timely notifications about your classes, please grant the following permissions:",
+  "notificationPermissionsDescription": "Om tijdige meldingen over je lessen te ontvangen, verleen de volgende toestemmingen:",
   "@notificationPermissionsDescription": {
     "description": "Description for notification permissions dialog"
   },
-
-  "notificationPermission": "Notifications",
+  "notificationPermission": "Meldingen",
   "@notificationPermission": {
     "description": "Basic notification permission"
   },
-
-  "notificationPermissionDesc": "Allow Schuly to send you notifications",
+  "notificationPermissionDesc": "Sta Schuly toe om je meldingen te sturen",
   "@notificationPermissionDesc": {
     "description": "Description for notification permission"
   },
-
-  "exactAlarmPermission": "Exact Alarms",
+  "exactAlarmPermission": "Exacte alarmen",
   "@exactAlarmPermission": {
     "description": "Exact alarm permission"
   },
-
-  "exactAlarmPermissionDesc": "Required for precise notification timing",
+  "exactAlarmPermissionDesc": "Vereist voor precieze melding timing",
   "@exactAlarmPermissionDesc": {
     "description": "Description for exact alarm permission"
   },
-
-  "batteryOptimization": "Battery Optimization",
+  "batteryOptimization": "Batterij optimalisatie",
   "@batteryOptimization": {
     "description": "Battery optimization permission"
   },
-
-  "batteryOptimizationDesc": "Disable battery optimization for reliable notifications",
+  "batteryOptimizationDesc": "Schakel batterij optimalisatie uit voor betrouwbare meldingen",
   "@batteryOptimizationDesc": {
     "description": "Description for battery optimization"
   },
-
-  "grant": "Grant",
+  "grant": "Verlenen",
   "@grant": {
     "description": "Button to grant permission"
   },
-
-  "allPermissionsGranted": "All permissions granted! Notifications will work reliably.",
+  "allPermissionsGranted": "Alle toestemmingen verleend! Meldingen werken betrouwbaar.",
   "@allPermissionsGranted": {
     "description": "Message when all permissions are granted"
   },
-
-  "somePermissionsMissing": "Some permissions are missing. Notifications may not work as expected.",
+  "somePermissionsMissing": "Sommige toestemmingen ontbreken. Meldingen werken mogelijk niet zoals verwacht.",
   "@somePermissionsMissing": {
     "description": "Message when some permissions are missing"
   },
-
-  "remindLater": "Remind Later",
+  "remindLater": "Later herinneren",
   "@remindLater": {
     "description": "Button to dismiss permission dialog"
   },
-
-  "continueAnyway": "Continue Anyway",
+  "continueAnyway": "Toch doorgaan",
   "@continueAnyway": {
     "description": "Button to continue without all permissions"
   },
-
-  "done": "Done",
+  "done": "Klaar",
   "@done": {
     "description": "Done button"
   },
-
-  "checkPermissions": "Check Permissions",
+  "checkPermissions": "Controleer toestemmingen",
   "@checkPermissions": {
     "description": "Button to check notification permissions"
   },
-
-  "relatedNotices": "Related Notices",
+  "relatedNotices": "Gerelateerde meldingen",
   "@relatedNotices": {
     "description": "Header for absence notices related to an absence"
   },
-
-  "exam": "Exam",
+  "exam": "Examen",
   "@exam": {
     "description": "Label for exam lessons"
   },
-
-  "date": "Date",
+  "date": "Datum",
   "@date": {
     "description": "Date label"
   },
-
-  "time": "Time",
+  "time": "Tijd",
   "@time": {
     "description": "Time label"
   },
-
-  "studentReason": "Student Reason",
+  "studentReason": "Student reden",
   "@studentReason": {
     "description": "Label for student's reason for absence"
   },
-
-  "trainerComment": "Trainer Comment",
+  "trainerComment": "Trainer opmerking",
   "@trainerComment": {
     "description": "Label for trainer's comment on absence"
   },
-
-  "unexcusedAbsences": "Unexcused Absences",
+  "unexcusedAbsences": "Ongeëxcuseerde afwezigheden",
   "@unexcusedAbsences": {
     "description": "Header for unexcused absences section"
   },
-
-  "reAuthenticationCancelled": "Re-authentication cancelled. Some features may not work.",
+  "reAuthenticationCancelled": "Her-authenticatie geannuleerd. Sommige functies werken mogelijk niet.",
   "@reAuthenticationCancelled": {
     "description": "Message when re-authentication is cancelled"
   },
-
-  "consoleLogs": "Console Logs",
+  "consoleLogs": "Console logs",
   "@consoleLogs": {
     "description": "Title for console logs page"
   },
-
-  "viewAppDebugLogs": "View app debug logs",
+  "viewAppDebugLogs": "Bekijk app debug logs",
   "@viewAppDebugLogs": {
     "description": "Subtitle for console logs menu item"
   },
-
-  "buyMeACoffee": "Buy me a coffee",
+  "buyMeACoffee": "Koop een koffie voor me",
   "@buyMeACoffee": {
     "description": "Buy me a coffee menu item"
   },
-
-  "supportDevelopment": "Support the development",
+  "supportDevelopment": "Ondersteun de ontwikkeling",
   "@supportDevelopment": {
     "description": "Subtitle for buy me a coffee item"
   },
-
-  "couldNotOpenBuyMeACoffee": "Could not open Buy Me a Coffee page",
+  "couldNotOpenBuyMeACoffee": "Kon Buy Me a Coffee pagina niet openen",
   "@couldNotOpenBuyMeACoffee": {
     "description": "Error when Buy Me a Coffee page cannot be opened"
   },
-
-  "or": "OR",
+  "or": "OF",
   "@or": {
     "description": "Text shown between login options"
   },
-
-  "signInWithMicrosoft": "Sign in with Microsoft",
+  "signInWithMicrosoft": "Inloggen met Microsoft",
   "@signInWithMicrosoft": {
     "description": "Microsoft sign in button text"
   },
-
-  "clearLogs": "Clear logs",
+  "clearLogs": "Logs wissen",
   "@clearLogs": {
     "description": "Clear logs button text"
   },
-
-  "exportLogs": "Export logs",
+  "exportLogs": "Logs exporteren",
   "@exportLogs": {
     "description": "Export logs button text"
   },
-
-  "all": "All",
+  "all": "Alles",
   "@all": {
     "description": "All filter option"
   },
-
   "debug": "Debug",
   "@debug": {
     "description": "Debug log level"
   },
-
   "info": "Info",
   "@info": {
     "description": "Info log level"
   },
-
-  "warning": "Warning",
+  "warning": "Waarschuwing",
   "@warning": {
     "description": "Warning log level"
   },
-
-  "enableLogging": "Enable logging",
+  "enableLogging": "Logging inschakelen",
   "@enableLogging": {
     "description": "Enable logging toggle text"
   },
-
-  "clearFilters": "Clear filters",
+  "clearFilters": "Filters wissen",
   "@clearFilters": {
     "description": "Clear filters button text"
   },
-
-  "logCopiedToClipboard": "Log copied to clipboard",
+  "logCopiedToClipboard": "Log gekopieerd naar klembord",
   "@logCopiedToClipboard": {
     "description": "Message when log is copied to clipboard"
   },
-
-  "clearAllLogs": "Clear all logs?",
+  "clearAllLogs": "Alle logs wissen?",
   "@clearAllLogs": {
     "description": "Clear all logs confirmation dialog title"
   },
-
-  "thisActionCannotBeUndone": "This action cannot be undone.",
+  "thisActionCannotBeUndone": "Deze actie kan niet ongedaan worden gemaakt.",
   "@thisActionCannotBeUndone": {
     "description": "Warning message for irreversible actions"
   },
-
-  "logsCleared": "Logs cleared",
+  "logsCleared": "Logs gewist",
   "@logsCleared": {
     "description": "Message when logs are cleared"
   },
-
-  "clear": "Clear",
+  "clear": "Wissen",
   "@clear": {
     "description": "Clear button text"
   },
-
-  "logsExportedToClipboard": "Logs exported to clipboard",
+  "logsExportedToClipboard": "Logs geëxporteerd naar klembord",
   "@logsExportedToClipboard": {
     "description": "Message when logs are exported to clipboard"
   },
-
-  "endpointReachable": "Endpoint reachable ({statusCode})",
+  "endpointReachable": "Eindpunt bereikbaar ({statusCode})",
   "@endpointReachable": {
     "description": "Message when API endpoint is reachable",
     "placeholders": {
       "statusCode": {}
+
     }
   },
-
-  "serverError": "Server error: {statusCode}",
+  "serverError": "Serverfout: {statusCode}",
   "@serverError": {
     "description": "Server error message with status code",
     "placeholders": {
       "statusCode": {}
+
     }
   },
-
-  "failedToInitializeMicrosoftAuth": "Failed to initialize Microsoft authentication: {error}",
+  "failedToInitializeMicrosoftAuth": "Microsoft authenticatie initialisatie mislukt: {error}",
   "@failedToInitializeMicrosoftAuth": {
     "description": "Error when Microsoft authentication fails to initialize",
     "placeholders": {
       "error": {}
+
     }
   },
-
-  "authenticationFailed": "Authentication failed: {error}",
+  "authenticationFailed": "Authenticatie mislukt: {error}",
   "@authenticationFailed": {
     "description": "Generic authentication failure message",
     "placeholders": {
       "error": {}
+
     }
   },
-
-  "noInternetConnection": "No internet connection",
+  "noInternetConnection": "Geen internetverbinding",
   "@noInternetConnection": {
     "description": "Message shown when there is no internet connection"
   },
-
-  "upcomingTests": "Upcoming Tests",
+  "upcomingTests": "Aankomende toetsen",
   "@upcomingTests": {
     "description": "Title for upcoming tests card"
   },
-
-  "noTestsFound": "No tests found",
+  "noTestsFound": "Geen toetsen gevonden",
   "@noTestsFound": {
     "description": "Message when no tests are available"
   },
-
-  "noUpcomingTests": "No upcoming tests",
+  "noUpcomingTests": "Geen aankomende toetsen",
   "@noUpcomingTests": {
     "description": "Message when there are no upcoming tests"
   },
-
-  "room": "Room",
+  "room": "Lokaal",
   "@room": {
     "description": "Room label for test location"
   },
-
-  "weight": "Weight",
+  "weight": "Gewicht",
   "@weight": {
     "description": "Weight label for test importance"
   },
-
-  "numberOfTestsToShow": "Number of tests to show",
+  "numberOfTestsToShow": "Aantal toetsen om te tonen",
   "@numberOfTestsToShow": {
     "description": "Setting label for number of tests to display"
   },
-
-  "today": "Today",
+  "today": "Vandaag",
   "@today": {
     "description": "Tooltip for home button to return to today"
   },
-
-  "cardView": "Card View",
+  "cardView": "Kaartweergave",
   "@cardView": {
     "description": "Option for card view in agenda settings"
   },
-
-  "cardViewDescription": "Detailed cards with expandable test info",
+  "cardViewDescription": "Gedetailleerde kaarten met uitklapbare test info",
   "@cardViewDescription": {
     "description": "Description for card view option"
   },
-
-  "timelineView": "Timeline View",
+  "timelineView": "Tijdlijn weergave",
   "@timelineView": {
     "description": "Option for timeline view in agenda settings"
   },
-
-  "timelineViewDescription": "Compact timeline with time-based layout",
+  "timelineViewDescription": "Compacte tijdlijn met tijd-gebaseerde indeling",
   "@timelineViewDescription": {
     "description": "Description for timeline view option"
   }

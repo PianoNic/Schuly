@@ -18,7 +18,11 @@
       "Bash(git add:*)",
       "Bash(cat:*)",
       "Bash(dart:*)",
-      "Bash(del \"C:\\GithubProjects\\schuly\\schuly\\lib\\pages\\absenzen_page.dart\")"
+      "Bash(del \"C:\\GithubProjects\\schuly\\schuly\\lib\\pages\\absenzen_page.dart\")",
+      "Bash(del:*)",
+      "Bash(dir:*)",
+      "Bash(adb shell am force-stop:*)",
+      "Bash(nc localhost 61107)"
     ],
     "deny": [],
     "ask": []

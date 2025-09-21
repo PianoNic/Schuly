@@ -158,6 +158,9 @@ class AppLocalizationsArr extends AppLocalizations {
   String get kawaii => 'Kawaii Speak';
 
   @override
+  String get arnold => 'Terminator Mode';
+
+  @override
   String get cancel => 'Avast! Cancel that order!';
 
   @override

@@ -16,6 +16,7 @@ import '../l10n/app_localizations.dart';
 import '../providers/language_provider.dart';
 import '../services/push_notification_service.dart';
 import '../utils/error_handler.dart';
+import 'maggus_checker_page.dart';
 
 class AppSettingsPage extends StatefulWidget {
   final ThemeProvider themeProvider;
@@ -32,6 +33,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   bool _isCheckingUpdates = false;
   String _appVersion = 'DEV';
   String _appBuildNumber = '0';
+  int _aboutTapCount = 0;
+  DateTime? _lastTapTime;
 
   @override
   void initState() {
@@ -247,9 +250,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
 
 
                     // Language Setting
-                    Builder(
-                      builder: (context) {
-                        final languageProvider = Provider.of<LanguageProvider>(context);
+                    Consumer<LanguageProvider>(
+                      builder: (context, languageProvider, _) {
                         final locale = languageProvider.locale;
                         String languageName;
                         switch (locale.languageCode) {
@@ -259,6 +261,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                           case 'de':
                             languageName = localizations.german;
                             break;
+                          case 'nl':
+                            languageName = 'Nederlands';
+                            break;
                           case 'gsw':
                             languageName = localizations.swissGerman;
                             break;
@@ -267,6 +272,12 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                             break;
                           case 'kaw':
                             languageName = localizations.kawaii;
+                            break;
+                          case 'arn':
+                            languageName = localizations.arnold;
+                            break;
+                          case 'mag':
+                            languageName = 'Maggus Style 💪';
                             break;
                           default:
                             languageName = localizations.german;
@@ -279,6 +290,36 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                           trailing: const Icon(Icons.chevron_right),
                           onTap: () => _showLanguageSelector(context, languageProvider, localizations),
                         );
+                      },
+                    ),
+
+                    // Only show Maggus Checker when Maggus language is active
+                    Consumer<LanguageProvider>(
+                      builder: (context, langProvider, _) {
+                        if (langProvider.locale.languageCode == 'mag') {
+                          return Column(
+                            children: [
+                              const Divider(),
+                              // Maggus Checker (Easter Egg)
+                              _buildSettingsTile(
+                                context,
+                                icon: Icons.fitness_center,
+                                title: 'Maggus Checker',
+                                subtitle: 'Des bedarfs! 💪',
+                                trailing: const Icon(Icons.chevron_right),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const MaggusCheckerPage(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          );
+                        }
+                        return const SizedBox.shrink();
                       },
                     ),
 
@@ -366,6 +407,29 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         ],
                       ),
                       onTap: () {
+                        // Easter egg: 5 quick taps opens Maggus checker (only when Maggus language is active)
+                        final languageProvider = Provider.of<LanguageProvider>(context, listen: false);
+                        if (languageProvider.locale.languageCode == 'mag') {
+                          final now = DateTime.now();
+                          if (_lastTapTime != null &&
+                              now.difference(_lastTapTime!).inMilliseconds < 500) {
+                            _aboutTapCount++;
+                            if (_aboutTapCount >= 5) {
+                              _aboutTapCount = 0;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MaggusCheckerPage(),
+                                ),
+                              );
+                              return;
+                            }
+                          } else {
+                            _aboutTapCount = 1;
+                          }
+                          _lastTapTime = now;
+                        }
+
                         showAboutDialog(
                           context: context,
                           applicationName: localizations.appTitle,
@@ -529,15 +593,26 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(localizations.selectLanguage),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildLanguageOption(context, languageProvider, const Locale('de'), localizations.german, 'Deutsch'),
-              _buildLanguageOption(context, languageProvider, const Locale('en'), localizations.english, 'English'),
-              _buildLanguageOption(context, languageProvider, const Locale('gsw'), localizations.swissGerman, 'Schwiizerdüütsch'),
-              _buildLanguageOption(context, languageProvider, const Locale('arr'), localizations.pirate, '🏴‍☠️ Pirate Speak'),
-              _buildLanguageOption(context, languageProvider, const Locale('kaw'), localizations.kawaii, '♡ Kawaii ♪'),
-            ],
+          content: Container(
+            width: double.maxFinite,
+            constraints: const BoxConstraints(
+              maxHeight: 400,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildLanguageOption(context, languageProvider, const Locale('de'), localizations.german, 'Deutsch'),
+                  _buildLanguageOption(context, languageProvider, const Locale('en'), localizations.english, 'English'),
+                  _buildLanguageOption(context, languageProvider, const Locale('nl'), 'Nederlands', 'Nederlands'),
+                  _buildLanguageOption(context, languageProvider, const Locale('gsw'), localizations.swissGerman, 'Schwiizerdüütsch'),
+                  _buildLanguageOption(context, languageProvider, const Locale('arr'), localizations.pirate, '🏴‍☠️ Pirate Speak'),
+                  _buildLanguageOption(context, languageProvider, const Locale('kaw'), localizations.kawaii, '♡ Kawaii ♪'),
+                  _buildLanguageOption(context, languageProvider, const Locale('arn'), localizations.arnold, '💪 Terminator'),
+                  _buildLanguageOption(context, languageProvider, const Locale('mag'), 'Maggus Style', '💪 Des bedarfs!'),
+                ],
+              ),
+            ),
           ),
           actions: [
             TextButton(
@@ -561,8 +636,28 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
     return ListTile(
       title: Text(nativeName),
       subtitle: Text(localizedName),
-      leading: Radio<String>(
-        value: locale.languageCode,
+      leading: Container(
+        width: 24,
+        height: 24,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+            width: 2,
+          ),
+        ),
+        child: isSelected
+            ? Center(
+                child: Container(
+                  width: 12,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              )
+            : null,
       ),
       selected: isSelected,
       onTap: () {

@@ -414,6 +414,7 @@
   "installingUpdate": "Update wird installiert...",
   "install": "Installiere",
   "downloading": "Wird abelade...",
+  "download": "Abelade",
   "installing": "Wird installiert...",
   "downloadError": "Fähler bim Abelade vom Update",
   "downloadErrorDetails": "Download Fähler: {error}",

@@ -963,6 +963,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get downloading => 'Downloading...';
 
   @override
+  String get download => 'Download';
+
+  @override
   String get installing => 'Installing...';
 
   @override

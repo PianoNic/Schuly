@@ -964,6 +964,9 @@ class AppLocalizationsArr extends AppLocalizations {
   String get downloading => 'Plunderin\' the treasure...';
 
   @override
+  String get download => 'Plunder!';
+
+  @override
   String get installing => 'Riggin\' the ship...';
 
   @override

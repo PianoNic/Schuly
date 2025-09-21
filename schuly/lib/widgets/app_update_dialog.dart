@@ -36,6 +36,7 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context)!;
 
     return Dialog(
       child: Container(
@@ -46,7 +47,7 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Title section
+            // Header
             Row(
               children: [
                 Icon(
@@ -55,87 +56,134 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
                   size: 24,
                 ),
                 const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.updateAvailable,
-                        style: theme.textTheme.headlineSmall,
-                      ),
-                      Text(
-                        'Version ${widget.updateInfo.latestVersion}',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                        ),
-                      ),
-                    ],
-                  ),
+                Text(
+                  localizations.updateAvailable,
+                  style: theme.textTheme.headlineSmall,
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
             // Content section
-            Flexible(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                  Text(AppLocalizations.of(context)!.currentVersion(widget.updateInfo.currentVersion)),
-                  Text(
-                    AppLocalizations.of(context)!.latestVersion(widget.updateInfo.latestVersion),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 16),
-                  if (widget.updateInfo.releaseNotes.isNotEmpty) ...[
-                    const SizedBox(height: 8),
-                    Container(
-                      height: 200,
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.3)),
-                        borderRadius: BorderRadius.circular(8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                    // Version comparison card
+                    Card(
+                      elevation: 0,
+                      color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              children: [
+                                Text(
+                                  'Current',
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  widget.updateInfo.currentVersion.startsWith('v')
+                                      ? widget.updateInfo.currentVersion
+                                      : 'v${widget.updateInfo.currentVersion}',
+                                  style: theme.textTheme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Icon(
+                              Icons.arrow_forward,
+                              color: theme.colorScheme.primary,
+                              size: 20,
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  'New',
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  widget.updateInfo.latestVersion.startsWith('v')
+                                      ? widget.updateInfo.latestVersion
+                                      : 'v${widget.updateInfo.latestVersion}',
+                                  style: theme.textTheme.bodyLarge?.copyWith(
+                                    color: theme.colorScheme.primary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
+                    ),
+                  const SizedBox(height: 12),
+                  // Release notes section (scrollable)
+                  if (widget.updateInfo.releaseNotes.isNotEmpty)
+                    Expanded(
                       child: SingleChildScrollView(
                         child: MarkdownBody(
                           data: widget.updateInfo.releaseNotes,
                           selectable: true,
-                          shrinkWrap: true,
                           styleSheet: MarkdownStyleSheet.fromTheme(theme).copyWith(
-                            p: theme.textTheme.bodySmall?.copyWith(fontSize: 11),
-                            h1: theme.textTheme.bodySmall?.copyWith(fontSize: 12, fontWeight: FontWeight.bold),
-                            h2: theme.textTheme.bodySmall?.copyWith(fontSize: 12, fontWeight: FontWeight.bold),
-                            h3: theme.textTheme.bodySmall?.copyWith(fontSize: 11, fontWeight: FontWeight.bold),
-                            listBullet: theme.textTheme.bodySmall?.copyWith(fontSize: 11),
-                            code: theme.textTheme.bodySmall?.copyWith(fontSize: 11, fontFamily: 'monospace'),
-                            blockquote: theme.textTheme.bodySmall?.copyWith(fontSize: 11, fontStyle: FontStyle.italic),
-                            em: theme.textTheme.bodySmall?.copyWith(fontSize: 11, fontStyle: FontStyle.italic),
-                            strong: theme.textTheme.bodySmall?.copyWith(fontSize: 11, fontWeight: FontWeight.bold),
-                            a: theme.textTheme.bodySmall?.copyWith(fontSize: 11, color: theme.colorScheme.primary),
+                            p: theme.textTheme.bodyMedium?.copyWith(
+                              color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
+                            ),
+                            h1: theme.textTheme.titleLarge?.copyWith(
+                              color: theme.colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            h2: theme.textTheme.titleMedium?.copyWith(
+                              color: theme.colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            h3: theme.textTheme.titleSmall?.copyWith(
+                              color: theme.colorScheme.secondary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            listBullet: theme.textTheme.bodyMedium?.copyWith(
+                              color: theme.colorScheme.primary,
+                            ),
+                            blockquote: theme.textTheme.bodyMedium?.copyWith(
+                              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                              fontStyle: FontStyle.italic,
+                            ),
+                            code: theme.textTheme.bodySmall?.copyWith(
+                              fontFamily: 'monospace',
+                              backgroundColor: theme.colorScheme.surfaceContainerHighest,
+                            ),
                           ),
                         ),
                       ),
                     ),
+                  // Progress indicators at bottom (always visible)
+                  if (_isDownloading || _isInstalling) ...[
                     const SizedBox(height: 16),
+                    if (_isDownloading) ...[
+                      Text(localizations.downloadingUpdate),
+                      const SizedBox(height: 8),
+                      LinearProgressIndicator(
+                        value: _downloadProgress,
+                        backgroundColor: theme.colorScheme.surfaceContainerHighest,
+                      ),
+                      const SizedBox(height: 4),
+                      Text('${(_downloadProgress * 100).toStringAsFixed(1)}%'),
+                    ],
+                    if (_isInstalling) ...[
+                      Text(localizations.installingUpdate),
+                      const SizedBox(height: 8),
+                      const LinearProgressIndicator(),
+                    ],
                   ],
-                  if (_isDownloading) ...[
-                    Text(AppLocalizations.of(context)!.downloadingUpdate),
-                    const SizedBox(height: 8),
-                    LinearProgressIndicator(
-                      value: _downloadProgress,
-                      backgroundColor: theme.colorScheme.surfaceContainerHighest,
-                    ),
-                    const SizedBox(height: 4),
-                    Text('${(_downloadProgress * 100).toStringAsFixed(1)}%'),
-                  ],
-                  if (_isInstalling) ...[
-                    Text(AppLocalizations.of(context)!.installingUpdate),
-                    const SizedBox(height: 8),
-                    const LinearProgressIndicator(),
-                  ],
-                  ],
-                ),
+                ],
               ),
             ),
             const SizedBox(height: 20),
@@ -143,19 +191,22 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-        if (!_isDownloading && !_isInstalling)
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(AppLocalizations.of(context)!.later),
-          ),
-        OutlinedButton(
-          onPressed: _isDownloading || _isInstalling
-              ? null
-              : _downloadedFilePath != null
-                  ? _installUpdate
-                  : _downloadUpdate,
-          child: Text(_buttonText ?? AppLocalizations.of(context)!.install),
-        ),
+                if (!_isDownloading && !_isInstalling)
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(_downloadedFilePath != null ? localizations.close : localizations.later),
+                  ),
+                const SizedBox(width: 8),
+                _downloadedFilePath != null
+                    ? FilledButton.icon(
+                        onPressed: _isInstalling ? null : _installUpdate,
+                        icon: const Icon(Icons.install_mobile, size: 20),
+                        label: Text(_buttonText ?? localizations.install),
+                      )
+                    : FilledButton(
+                        onPressed: _isDownloading ? null : _downloadUpdate,
+                        child: Text(_buttonText ?? localizations.download),
+                      ),
               ],
             ),
           ],
@@ -215,32 +266,31 @@ class _AppUpdateDialogState extends State<AppUpdateDialog> {
     });
 
     try {
-      // Check install permission first
+      // Check and request install permission if needed
       final hasPermission = await UpdateService.checkInstallPermission();
       if (!mounted) return;
 
       if (!hasPermission) {
+        // Permission denied but keep dialog open for retry
         setState(() {
           _isInstalling = false;
           _buttonText = localizations.install;
         });
-        _showErrorDialog(localizations.installationNotAllowed);
+        // Don't show error dialog, just reset state so user can try again
         return;
       }
 
-      // Install the APK
+      // Proceed with installation
       final success = await UpdateService.installApk(_downloadedFilePath!);
       if (!mounted) return;
 
       if (success) {
-        // Installation started successfully
-        Navigator.of(context).pop();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(localizations.updateInstallationStarted),
-            duration: Duration(seconds: 3),
-          ),
-        );
+        // Installation started successfully but keep dialog open
+        // in case user cancels the system install dialog
+        setState(() {
+          _isInstalling = false;
+          _buttonText = localizations.install;
+        });
       } else {
         setState(() {
           _isInstalling = false;

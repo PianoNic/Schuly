@@ -30,6 +30,10 @@ import 'l10n/pirate_material_localizations.dart';
 import 'l10n/pirate_cupertino_localizations.dart';
 import 'l10n/kawaii_material_localizations.dart';
 import 'l10n/kawaii_cupertino_localizations.dart';
+import 'l10n/arn_material_localizations.dart';
+import 'l10n/arn_cupertino_localizations.dart';
+import 'l10n/maggus_material_localizations.dart';
+import 'l10n/maggus_cupertino_localizations.dart';
 import 'utils/logger.dart';
  
 String apiBaseUrl = 'https://schlwr.pianonic.ch';
@@ -190,6 +194,12 @@ class _SchulyAppState extends State<SchulyApp> {
                   ] else if (languageProvider.locale.languageCode == 'kaw') ...[
                     KawaiiMaterialLocalizations.delegate,
                     KawaiiCupertinoLocalizations.delegate,
+                  ] else if (languageProvider.locale.languageCode == 'arn') ...[
+                    ArnMaterialLocalizations.delegate,
+                    ArnCupertinoLocalizations.delegate,
+                  ] else if (languageProvider.locale.languageCode == 'mag') ...[
+                    MaggusMaterialLocalizations.delegate,
+                    MaggusCupertinoLocalizations.delegate,
                   ] else ...[
                     GlobalCupertinoLocalizations.delegate,
                   ],
@@ -199,9 +209,12 @@ class _SchulyAppState extends State<SchulyApp> {
                 supportedLocales: const [
                   Locale('en'),
                   Locale('de'),
+                  Locale('nl'),
                   Locale('gsw'),
                   Locale('arr'),
                   Locale('kaw'),
+                  Locale('arn'),
+                  Locale('mag'),
                 ],
                 home: SplashScreen(onComplete: _onSplashScreenComplete),
               );
@@ -226,6 +239,12 @@ class _SchulyAppState extends State<SchulyApp> {
                   ] else if (languageProvider.locale.languageCode == 'kaw') ...[
                     KawaiiMaterialLocalizations.delegate,
                     KawaiiCupertinoLocalizations.delegate,
+                  ] else if (languageProvider.locale.languageCode == 'arn') ...[
+                    ArnMaterialLocalizations.delegate,
+                    ArnCupertinoLocalizations.delegate,
+                  ] else if (languageProvider.locale.languageCode == 'mag') ...[
+                    MaggusMaterialLocalizations.delegate,
+                    MaggusCupertinoLocalizations.delegate,
                   ] else ...[
                     GlobalCupertinoLocalizations.delegate,
                   ],
@@ -235,9 +254,12 @@ class _SchulyAppState extends State<SchulyApp> {
                 supportedLocales: const [
                   Locale('en'),
                   Locale('de'),
+                  Locale('nl'),
                   Locale('gsw'),
                   Locale('arr'),
                   Locale('kaw'),
+                  Locale('arn'),
+                  Locale('mag'),
                 ],
                 home: LoginPage(
                   onApiBaseUrlChanged: (url) async {
@@ -265,6 +287,12 @@ class _SchulyAppState extends State<SchulyApp> {
                 ] else if (languageProvider.locale.languageCode == 'kaw') ...[
                   KawaiiMaterialLocalizations.delegate,
                   KawaiiCupertinoLocalizations.delegate,
+                ] else if (languageProvider.locale.languageCode == 'arn') ...[
+                  ArnMaterialLocalizations.delegate,
+                  ArnCupertinoLocalizations.delegate,
+                ] else if (languageProvider.locale.languageCode == 'mag') ...[
+                  MaggusMaterialLocalizations.delegate,
+                  MaggusCupertinoLocalizations.delegate,
                 ] else ...[
                   GlobalCupertinoLocalizations.delegate,
                 ],
@@ -274,9 +302,12 @@ class _SchulyAppState extends State<SchulyApp> {
               supportedLocales: const [
                 Locale('en'),
                 Locale('de'),
+                Locale('nl'),
                 Locale('gsw'),
                 Locale('arr'),
                 Locale('kaw'),
+                Locale('arn'),
+                Locale('mag'),
               ],
               home: MyHomePage(title: 'Schuly', themeProvider: themeProvider),
             );

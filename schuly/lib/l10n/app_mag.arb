@@ -1,0 +1,2519 @@
+{
+  "@@locale": "mag",
+  "appTitle": "Schuly",
+  "@appTitle": {},
+
+  "noAccountAdded": "Noch kein Account, des bedarfs!",
+  "@noAccountAdded": {},
+
+  "addAccount": "Account adde",
+  "@addAccount": {},
+
+  "noActiveAccount": "Kein aktiver Account, bruddal",
+  "@noActiveAccount": {},
+
+  "selectAccount": "Account wähle, des isses",
+  "@selectAccount": {},
+
+  "personalInformation": "Persönliche Infos",
+  "@personalInformation": {},
+
+  "quickActions": "Schnelle Aktione",
+  "@quickActions": {},
+
+  "appSettings": "App Einstellunge",
+  "@appSettings": {},
+
+  "designAndSettings": "Design unn Einstellunge",
+  "@designAndSettings": {},
+
+  "helpAndSupport": "Hilfe unn Support",
+  "@helpAndSupport": {},
+
+  "getHelpAndSupport": "Hilfe hole, des bedarfs",
+  "@getHelpAndSupport": {},
+
+  "emailSupport": "E-Mail Support",
+  "@emailSupport": {},
+
+  "contactByEmail": "Direkt per E-Mail kontaktiere",
+  "@contactByEmail": {},
+
+  "bugReport": "Fehler melde / Feature wünsche",
+  "@bugReport": {},
+
+  "reportBugsOrRequestFeatures": "Fehler melde oder neue Features wünsche, des bedarfs",
+  "@reportBugsOrRequestFeatures": {},
+
+  "copiedToClipboard": "In de Zwischenablage kopiert, bruddal!",
+  "@copiedToClipboard": {},
+
+  "emailAppError": "E-Mail-App geht net uff. Bitte manuell kontaktiere: {email}",
+  "@emailAppError": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "browserError": "Browser geht net uff. Bitte manuell besuche: {url}",
+  "@browserError": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "addAnotherAccount": "Noch en Account adde",
+  "@addAnotherAccount": {},
+
+  "addMultipleAccounts": "Mehrere Accounts, bruddal guud",
+  "@addMultipleAccounts": {},
+
+  "logout": "Abmelde",
+  "@logout": {},
+
+  "signOutFromApp": "Aus de App abmelde",
+  "@signOutFromApp": {},
+
+  "name": "Name",
+  "@name": {},
+
+  "street": "Straße",
+  "@street": {},
+
+  "zipCity": "Stadt",
+  "@zipCity": {},
+
+  "birthDate": "Geburtstag",
+  "@birthDate": {},
+
+  "phone": "Telefon",
+  "@phone": {},
+
+  "email": "E-Mail",
+  "@email": {},
+
+  "nationality": "Nationalität",
+  "@nationality": {},
+
+  "hometown": "Heimatstadt",
+  "@hometown": {},
+
+  "mobile": "Handy",
+  "@mobile": {},
+
+  "profile1": "Profil 1",
+  "@profile1": {},
+
+  "profile2": "Profil 2",
+  "@profile2": {},
+
+  "start": "Start",
+  "@start": {},
+
+  "agenda": "Agenda",
+  "@agenda": {},
+
+  "grades": "Note",
+  "@grades": {},
+
+  "absences": "Absenze",
+  "@absences": {},
+
+  "account": "Account",
+  "@account": {},
+
+  "language": "Sprache",
+  "@language": {},
+
+  "selectLanguage": "Sprache wähle, des bedarfs",
+  "@selectLanguage": {},
+
+  "english": "Englisch",
+  "@english": {},
+
+  "german": "Deutsch",
+  "@german": {},
+
+  "swissGerman": "Schweizerdeutsch",
+  "@swissGerman": {},
+
+  "pirate": "Pirate",
+  "@pirate": {},
+
+  "kawaii": "Kawaii",
+  "@kawaii": {},
+
+  "arnold": "Arnold",
+  "@arnold": {},
+
+  "maggus": "Maggus Style",
+  "@maggus": {},
+
+  "notificationsEnabled": "Benachrichtigunge aktiviert, bruddal guud!",
+  "@notificationsEnabled": {},
+
+  "notificationPermissionDenied": "Benachrichtigungsberechtigung verweigert. Bitte in de Einstellunge aktiviere.",
+  "@notificationPermissionDenied": {},
+
+  "add": "Hinzufüge",
+  "@add": {},
+
+  "agendaForDate": "Agenda fer {day}.{month}.{year}",
+  "@agendaForDate": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "noAgendaForDay": "Keine Events an dem Tag, bruddal",
+  "@noAgendaForDay": {},
+
+  "nextLessons": "Nächste Lektione",
+  "@nextLessons": {},
+
+  "nextHolidays": "Nächste Ferie",
+  "@nextHolidays": {},
+
+  "reloadPage": "Seite neu lade",
+  "@reloadPage": {},
+
+  "loadingStudentIdCard": "Schülerausweis wird gelade...",
+  "@loadingStudentIdCard": {},
+
+  "enterValidEmail": "Bitte gültige E-Mail-Adresse eingebe",
+  "@enterValidEmail": {},
+
+  "later": "Später",
+  "@later": {},
+
+  "confirmed": "Bestätigt, des isses",
+  "@confirmed": {},
+
+  "lateness": "Verspätung",
+  "@lateness": {},
+
+  "noLatenessFound": "Keine Verspätunge gefunde",
+  "@noLatenessFound": {},
+
+  "selectReason": "Bitte en Grund wähle",
+  "@selectReason": {},
+
+  "selectDate": "Bitte en Datum wähle",
+  "@selectDate": {},
+
+  "emailAddress": "E-Mail-Adresse",
+  "@emailAddress": {},
+
+  "enterEmailAddress": "Bitte E-Mail-Adresse eingebe",
+  "@enterEmailAddress": {},
+
+  "getNewToken": "Neues Token hole",
+  "@getNewToken": {},
+
+  "getNewTokenSubtitle": "Neues Token fer de aktive Account hole",
+  "@getNewTokenSubtitle": {},
+
+  "tokenUpdated": "Token aktualisiert, des bedarfs!",
+  "@tokenUpdated": {},
+
+  "noActiveAccountSnack": "Kein aktiver Account, bruddal!",
+  "@noActiveAccountSnack": {},
+
+  "addAccountTitle": "Account hinzufüge",
+  "@addAccountTitle": {},
+
+  "emailLabel": "E-Mail",
+  "@emailLabel": {},
+
+  "enterEmail": "E-Mail eingebe",
+  "@enterEmail": {},
+
+  "passwordLabel": "Passwort",
+  "@passwordLabel": {},
+
+  "enterPassword": "Passwort eingebe",
+  "@enterPassword": {},
+
+  "accountAdded": "Account hinzugefügt, des isses!",
+  "@accountAdded": {},
+
+  "logoutTitle": "Abmelde",
+  "@logoutTitle": {},
+
+  "logoutConfirm": "Bist du sicher, dass du disch abmelde willst?",
+  "@logoutConfirm": {},
+
+  "loggedOut": "Abgemeldet, bruddal!",
+  "@loggedOut": {},
+
+  "designSettings": "Design-Einstellunge",
+  "@designSettings": {},
+
+  "appearance": "Erscheinungsbild",
+  "@appearance": {},
+
+  "automatic": "Automatisch",
+  "@automatic": {},
+
+  "light": "Hell",
+  "@light": {},
+
+  "dark": "Dunkel",
+  "@dark": {},
+
+  "colorStyle": "Farbstil",
+  "@colorStyle": {},
+
+  "materialYou": "Material\nYou",
+  "@materialYou": {},
+
+  "classic": "Klassisch",
+  "@classic": {},
+
+  "neon": "Neon",
+  "@neon": {},
+
+  "neonAccentColor": "Neon Akzentfarbe",
+  "@neonAccentColor": {},
+
+  "classicAccentColor": "Klassische Akzentfarbe",
+  "@classicAccentColor": {},
+
+  "materialYouActive": "Material You aktiv, des bedarfs",
+  "@materialYouActive": {},
+
+  "materialYouInfo": "Farbe werde automatisch aus dem Systemdesign genomme.",
+  "@materialYouInfo": {},
+
+  "neonViolet": "Neon Violett",
+  "@neonViolet": {},
+
+  "neonCyan": "Neon Cyan",
+  "@neonCyan": {},
+
+  "neonGreen": "Neon Grün",
+  "@neonGreen": {},
+
+  "neonPink": "Neon Pink",
+  "@neonPink": {},
+
+  "neonOrange": "Neon Orange",
+  "@neonOrange": {},
+
+  "neonBlue": "Neon Blau",
+  "@neonBlue": {},
+
+  "neonRed": "Neon Rot",
+  "@neonRed": {},
+
+  "neonYellow": "Neon Gelb",
+  "@neonYellow": {},
+
+  "neonMint": "Neon Mint",
+  "@neonMint": {},
+
+  "blue": "Blau",
+  "@blue": {},
+
+  "teal": "Türkis",
+  "@teal": {},
+
+  "green": "Grün",
+  "@green": {},
+
+  "pink": "Pink",
+  "@pink": {},
+
+  "orange": "Orange",
+  "@orange": {},
+
+  "indigo": "Indigo",
+  "@indigo": {},
+
+  "red": "Rot",
+  "@red": {},
+
+  "yellow": "Gelb",
+  "@yellow": {},
+
+  "purple": "Lila",
+  "@purple": {},
+
+  "previousLessonsDay": "Vorheriger Tag mit Lektione",
+  "@previousLessonsDay": {},
+
+  "nextLessonsDay": "Nächster Tag mit Lektione",
+  "@nextLessonsDay": {},
+
+  "noLessonsForDay": "Keine Lektione am {day}.{month}.{year}",
+  "@noLessonsForDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "noHolidaysFound": "Keine Ferie gefunde.",
+  "@noHolidaysFound": {},
+
+  "latestGrades": "Neueste Note",
+  "@latestGrades": {},
+
+  "noGradesFound": "Keine Note gefunde.",
+  "@noGradesFound": {},
+
+  "openAbsences": "Offene Absenze",
+  "@openAbsences": {},
+
+  "showAll": "Alles zeige",
+  "@showAll": {},
+
+  "noOpenAbsences": "Keine offene Absenze.",
+  "@noOpenAbsences": {},
+
+  "noReleaseNotes": "Keine Release-Notize verfügbar",
+  "@noReleaseNotes": {},
+
+  "releaseNotesInfo": "Updates unn neue Features werde hier gezeigt",
+  "@releaseNotesInfo": {},
+
+  "notificationTypes": "Benachrichtigungsarte",
+  "@notificationTypes": {},
+
+  "timetable": "Stundeplan",
+  "@timetable": {},
+
+  "agendaNotificationSubtitle": "Benachrichtigunge vor Lektione",
+  "@agendaNotificationSubtitle": {},
+
+  "gradeNotificationSubtitle": "Benachrichtigunge fer neue Note",
+  "@gradeNotificationSubtitle": {},
+
+  "absenceNotificationSubtitle": "Benachrichtigunge fer Absenzeänderunge",
+  "@absenceNotificationSubtitle": {},
+
+  "generalNotificationSubtitle": "Wichtige Schulinfos unn Updates",
+  "@generalNotificationSubtitle": {},
+
+  "notificationTime": "Benachrichtigungszeit",
+  "@notificationTime": {},
+
+  "notificationAdvanceQuestion": "Wie viele Minute vor de Lektion willst du benachrichtigt werde?",
+  "@notificationAdvanceQuestion": {},
+
+  "minutesBeforeClass": "{minutes} min",
+  "@minutesBeforeClass": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "currentAdvanceSetting": "Aktuelle Einstellung: {minutes} Minute vor de Lektion",
+  "@currentAdvanceSetting": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "test": "Test",
+  "@test": {},
+
+  "sendTestNotification": "Testbenachrichtigung sende",
+  "@sendTestNotification": {},
+
+  "checkNotificationsWork": "Prüfe ob Benachrichtigunge funktioniere",
+  "@checkNotificationsWork": {},
+
+  "scheduleTestNotification": "Testbenachrichtigung plane",
+  "@scheduleTestNotification": {},
+
+  "testScheduledNotificationDesc": "Erhalte en Benachrichtigung in 15 Sekunde (funktioniert wenn App geschlosse is)",
+  "@testScheduledNotificationDesc": {},
+
+  "notificationScheduledIn15Seconds": "Benachrichtigung geplant! App schließe zum Teste - erscheint in 15 Sekunde",
+  "@notificationScheduledIn15Seconds": {},
+
+  "errorSchedulingNotification": "Fehler beim Plane der Benachrichtigung",
+  "@errorSchedulingNotification": {},
+
+  "testNotificationSent": "Testbenachrichtigung gesendet, des bedarfs!",
+  "@testNotificationSent": {},
+
+  "exactAlarmPermissionRequired": "Exakte Alarmberechtigung erforderlich. Bitte in de Einstellunge aktiviere.",
+  "@exactAlarmPermissionRequired": {},
+
+  "openSettings": "Einstellunge öffne",
+  "@openSettings": {},
+
+  "basicInformation": "Basisinformatione",
+  "@basicInformation": {},
+
+  "titleLabel": "Titel",
+  "@titleLabel": {},
+
+  "subjectLabel": "Fach",
+  "@subjectLabel": {},
+
+  "courseLabel": "Kurs",
+  "@courseLabel": {},
+
+  "dateLabel": "Datum",
+  "@dateLabel": {},
+
+  "confirmedLabel": "Bestätigt",
+  "@confirmedLabel": {},
+
+  "gradeLabel": "Note",
+  "@gradeLabel": {},
+
+  "pointsLabel": "Punkte",
+  "@pointsLabel": {},
+
+  "weightLabel": "Gewichtung",
+  "@weightLabel": {},
+
+  "courseGradeLabel": "Kursnote",
+  "@courseGradeLabel": {},
+
+  "classAverage": "Klassendurchschnitt",
+  "@classAverage": {},
+
+  "examGroupLabel": "Prüfungsgruppe",
+  "@examGroupLabel": {},
+
+  "classAverageLabel": "Klassendurchschnitt",
+  "@classAverageLabel": {},
+
+  "groupWeightLabel": "Gruppengewichtung",
+  "@groupWeightLabel": {},
+
+  "commentLabel": "Kommentar",
+  "@commentLabel": {},
+
+  "latestVersionMessage": "Du benutzt bereits die neueste Version, bruddal!",
+  "@latestVersionMessage": {},
+
+  "versionWithNumber": "Version {version}+{build}",
+  "@versionWithNumber": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "build": {
+        "type": "String"
+      }
+    }
+  },
+  "appLegalese": "Schuly © 2025 PianoNic",
+  "@appLegalese": {},
+
+  "appDescription": "En angepasste App fer Schüler zum Verwalte von Schulnetz-Date. Verwalte dein Stundeplan, Note unn wichtige Termine an einem Ort.",
+  "@appDescription": {},
+
+  "apiEndpoint": "API Endpunkt",
+  "@apiEndpoint": {},
+
+  "enterApiEndpoint": "Bitte API Endpunkt eingebe",
+  "@enterApiEndpoint": {},
+
+  "currentApiInfo": "Aktuelle API-Info",
+  "@currentApiInfo": {},
+
+  "apiInfoStatus": "API-Info Status",
+  "@apiInfoStatus": {},
+
+  "environment": "Umgebung",
+  "@environment": {},
+
+  "apiBaseUrl": "API Basis-URL",
+  "@apiBaseUrl": {},
+
+  "getColorName": "Farbname hole",
+  "@getColorName": {},
+
+  "lessonBreak": "Pause",
+  "@lessonBreak": {},
+
+  "lunchBreak": "Mittagspause",
+  "@lunchBreak": {},
+
+  "showBreaks": "Pause zwische Lektione zeige",
+  "@showBreaks": {},
+
+  "cardSettings": "Karteneinstellunge",
+  "@cardSettings": {},
+
+  "tapToCustomize": "Tippe zum Anpasse",
+  "@tapToCustomize": {},
+
+  "numberOfDaysToShow": "Anzahl der Tage zum Zeige",
+  "@numberOfDaysToShow": {},
+
+  "numberOfGradesToShow": "Anzahl der Note zum Zeige",
+  "@numberOfGradesToShow": {},
+
+  "showOnlyOpenAbsences": "Nur offene Absenze zeige",
+  "@showOnlyOpenAbsences": {},
+
+  "noConfigurationAvailable": "Keine Konfigurationseinstellunge verfügbar",
+  "@noConfigurationAvailable": {},
+
+  "accountCount": "{count, plural, =1{1 Account} other{{count} Accounts}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "num"
+      }
+    }
+  },
+  "noAccounts": "Keine Accounts verfügbar.",
+  "@noAccounts": {},
+
+  "addFirstAccount": "Füg dein erste Account hinzu fer loszulege!",
+  "@addFirstAccount": {},
+
+  "active": "Aktiv",
+  "@active": {},
+
+  "available": "Verfügbar",
+  "@available": {},
+
+  "confirmRemoveAccount": "Account {email} entferne?",
+  "@confirmRemoveAccount": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "remove": "Entferne",
+  "@remove": {},
+
+  "switchedAccount": "Gewechselt zu {email}",
+  "@switchedAccount": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "switchAccountError": "Fehler beim Wechsle des Accounts: {error}",
+  "@switchAccountError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "removedAccount": "Account {email} entfernt",
+  "@removedAccount": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "removeAccountError": "Fehler beim Entferne des Accounts: {error}",
+  "@removeAccountError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "unexpectedError": "Unerwarteter Fehler: {error}",
+  "@unexpectedError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "weekdayMon": "Mo",
+  "@weekdayMon": {},
+
+  "weekdayTue": "Di",
+  "@weekdayTue": {},
+
+  "weekdayWed": "Mi",
+  "@weekdayWed": {},
+
+  "weekdayThu": "Do",
+  "@weekdayThu": {},
+
+  "weekdayFri": "Fr",
+  "@weekdayFri": {},
+
+  "weekdaySat": "Sa",
+  "@weekdaySat": {},
+
+  "weekdaySun": "So",
+  "@weekdaySun": {},
+
+  "absencesTabAll": "Alle Absenze",
+  "@absencesTabAll": {},
+
+  "absencesTabLateness": "Verspätunge",
+  "@absencesTabLateness": {},
+
+  "absencesTabAbsences": "Absenze",
+  "@absencesTabAbsences": {},
+
+  "absencesTabNotices": "Hinweise",
+  "@absencesTabNotices": {},
+
+  "absencesSection": "Absenze",
+  "@absencesSection": {},
+
+  "latenessSection": "Verspätunge",
+  "@latenessSection": {},
+
+  "noticesSection": "Hinweise",
+  "@noticesSection": {},
+
+  "noticeItem": "Hinweis",
+  "@noticeItem": {},
+
+  "noReasonGiven": "Kein Grund angegebe",
+  "@noReasonGiven": {},
+
+  "noCommentGiven": "Kein Kommentar angegebe",
+  "@noCommentGiven": {},
+
+  "unknownData": "Unbekannte Date",
+  "@unknownData": {},
+
+  "noNoticesFound": "Keine Hinweise gefunde.",
+  "@noNoticesFound": {},
+
+  "minutes": "Minute",
+  "@minutes": {},
+
+  "hours": "Std",
+  "@hours": {},
+
+  "latenessFrom": "Verspätung von",
+  "@latenessFrom": {},
+
+  "duration": "Dauer",
+  "@duration": {},
+
+  "course": "Kurs",
+  "@course": {},
+
+  "comment": "Kommentar",
+  "@comment": {},
+
+  "status": "Status",
+  "@status": {},
+
+  "notExcused": "Net entschuldigt",
+  "@notExcused": {},
+
+  "excuseUntil": "Entschuldige bis",
+  "@excuseUntil": {},
+
+  "excuse": "Entschuldigung",
+  "@excuse": {},
+
+  "excuseComingSoon": "Entschuldigung - Kommt bald!",
+  "@excuseComingSoon": {},
+
+  "deleteAbsenceTitle": "Absenz lösche",
+  "@deleteAbsenceTitle": {},
+
+  "deleteAbsenceConfirm": "Bist du sicher, dass du die Absenz lösche willst? Des kann net rückgängig gemacht werde.",
+  "@deleteAbsenceConfirm": {},
+
+  "absenceDeleted": "Absenz gelöscht, bruddal!",
+  "@absenceDeleted": {},
+
+  "appUpdateTest": "App-Update-Test",
+  "@appUpdateTest": {},
+
+  "readyToTest": "Bereit zum Teste",
+  "@readyToTest": {},
+
+  "updateSystemTest": "Update-System-Test",
+  "@updateSystemTest": {},
+
+  "statusLabel": "Status: {status}",
+  "@statusLabel": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "checking": "Prüfe...",
+  "@checking": {},
+
+  "forceShowUpdateDialog": "Update-Dialog erzwinge",
+  "@forceShowUpdateDialog": {},
+
+  "clearDismissedUpdates": "Abgelehnte Updates lösche",
+  "@clearDismissedUpdates": {},
+
+  "howItWorks": "Wie es funktioniert:",
+  "@howItWorks": {},
+
+  "updateStep1": "1. Prüft GitHub-Releases uff neuere Versione",
+  "@updateStep1": {},
+
+  "updateStep2": "2. Lädt APK von GitHub-Release-Assets runter",
+  "@updateStep2": {},
+
+  "updateStep3": "3. Öffnet Android-Installer automatisch",
+  "@updateStep3": {},
+
+  "updateStep4": "4. Merkt sich abgelehnte Updates bis zum App-Neustart",
+  "@updateStep4": {},
+
+  "checkingForUpdates": "Prüfe uff Updates...",
+  "@checkingForUpdates": {},
+
+  "updateAvailableVersion": "Update verfügbar: v{version}",
+  "@updateAvailableVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "noUpdatesAvailable": "Keine Updates verfügbar oder Update abgelehnt",
+  "@noUpdatesAvailable": {},
+
+  "errorCheckingUpdates": "Fehler beim Prüfe uff Updates: {error}",
+  "@errorCheckingUpdates": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "showingUpdateDialog": "Zeige Update-Dialog...",
+  "@showingUpdateDialog": {},
+
+  "updateDialogShown": "Update-Dialog gezeigt",
+  "@updateDialogShown": {},
+
+  "errorShowingDialog": "Fehler beim Zeige des Dialogs: {error}",
+  "@errorShowingDialog": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "clearingDismissedUpdates": "Lösche abgelehnte Updates...",
+  "@clearingDismissedUpdates": {},
+
+  "dismissedUpdatesCleared": "Abgelehnte Updates gelöscht",
+  "@dismissedUpdatesCleared": {},
+
+  "errorClearingDismissed": "Fehler beim Lösche: {error}",
+  "@errorClearingDismissed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "illness": "Krankheit",
+  "@illness": {},
+
+  "accident": "Unfall",
+  "@accident": {},
+
+  "military": "Militär",
+  "@military": {},
+
+  "medicalCertificateForSport": "Gültiges Arztzeugnis fer Sport",
+  "@medicalCertificateForSport": {},
+
+  "otherAbsence": "Andere Absenz",
+  "@otherAbsence": {},
+
+  "createNewAbsence": "Neue Absenz erstelle",
+  "@createNewAbsence": {},
+
+  "reasonRequired": "Grund *",
+  "@reasonRequired": {},
+
+  "create": "Erstelle",
+  "@create": {},
+
+  "noError": "Kein Fehler",
+  "@noError": {},
+
+  "unknown": "Unbekannt",
+  "@unknown": {},
+
+  "currentVersion": "Aktuell: {version}",
+  "@currentVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "latestVersion": "Neueste: {version}",
+  "@latestVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "install": "Installiere",
+  "@install": {},
+
+  "downloading": "Lade runter...",
+  "@downloading": {},
+
+  "installing": "Installiere...",
+  "@installing": {},
+
+  "downloadError": "Fehler beim Runterladen des Updates",
+  "@downloadError": {},
+
+  "downloadErrorDetails": "Download-Fehler: {error}",
+  "@downloadErrorDetails": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "installationNotAllowed": "Installation net erlaubt",
+  "@installationNotAllowed": {},
+
+  "installationError": "Installationsfehler",
+  "@installationError": {},
+
+  "installationErrorDetails": "Installationsfehler: {error}",
+  "@installationErrorDetails": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "updateInstallationStarted": "Update-Installation gestartet",
+  "@updateInstallationStarted": {},
+
+  "absentFrom": "Abwesend von *",
+  "@absentFrom": {},
+
+  "absentTo": "Abwesend bis *",
+  "@absentTo": {},
+
+  "toDateMustBeAfterFromDate": "Enddatum muss nach Startdatum sei",
+  "@toDateMustBeAfterFromDate": {},
+
+  "absentFromTime": "Abwesend von (Zeit)",
+  "@absentFromTime": {},
+
+  "absentToTime": "Abwesend bis (Zeit)",
+  "@absentToTime": {},
+
+  "absenceCreatedSuccessfully": "Absenz erfolgreich erstellt, des bedarfs!",
+  "@absenceCreatedSuccessfully": {},
+
+  "visible": "Sichtbar",
+  "@visible": {},
+
+  "hidden": "Versteckt",
+  "@hidden": {},
+
+  "pushAssistNotifications": "PushAssist-Benachrichtigunge",
+  "@pushAssistNotifications": {},
+
+  "notificationsBeforeClasses": "Benachrichtigunge vor Lektione",
+  "@notificationsBeforeClasses": {},
+
+  "testNotifications": "Test-Benachrichtigunge",
+  "@testNotifications": {},
+
+  "testNotificationDescription": "Test-Benachrichtigung fer PushAssist",
+  "@testNotificationDescription": {},
+
+  "nextClass": "Nächste Lektion: {subject}",
+  "@nextClass": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      }
+    }
+  },
+  "roomAndTeacher": "Raum: {room}{teacher}",
+  "@roomAndTeacher": {
+    "placeholders": {
+      "room": {
+        "type": "String"
+      },
+      "teacher": {
+        "type": "String"
+      }
+    }
+  },
+  "vibrationTest": "🔔 PushAssist Vibrationstest",
+  "@vibrationTest": {},
+
+  "vibrationTestMessage": "Die Benachrichtigung sollte vibriere! Prüf deine Geräteeinstellunge, wenn net.",
+  "@vibrationTestMessage": {},
+
+  "switchAccountButton": "Account wechsle",
+  "@switchAccountButton": {},
+
+  "fetchingAppInfo": "App-Informatione hole...",
+  "@fetchingAppInfo": {},
+
+  "errorCheckingUpdatesDetails": "Fehler beim Prüfe uff Updates: {error}",
+  "@errorCheckingUpdatesDetails": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "minute": "Minute",
+  "@minute": {},
+
+  "beforeClass": "vor de Lektion",
+  "@beforeClass": {},
+
+  "notificationPermissions": "Benachrichtigungsberechtigung",
+  "@notificationPermissions": {},
+
+  "notificationPermissionsDescription": "Fer rechtzeitige Benachrichtigunge über deine Lektione, bitte folgende Berechtigunge erteile:",
+  "@notificationPermissionsDescription": {},
+
+  "notificationPermission": "Benachrichtigunge",
+  "@notificationPermission": {},
+
+  "notificationPermissionDesc": "Erlaube Schuly dir Benachrichtigunge zu sende",
+  "@notificationPermissionDesc": {},
+
+  "exactAlarmPermission": "Exakte Alarme",
+  "@exactAlarmPermission": {},
+
+  "exactAlarmPermissionDesc": "Erforderlich fer präzises Benachrichtigungs-Timing",
+  "@exactAlarmPermissionDesc": {},
+
+  "batteryOptimization": "Batterieoptimierung",
+  "@batteryOptimization": {},
+
+  "batteryOptimizationDesc": "Batterieoptimierung deaktiviere fer zuverlässige Benachrichtigunge",
+  "@batteryOptimizationDesc": {},
+
+  "grant": "Erteile",
+  "@grant": {},
+
+  "allPermissionsGranted": "Alle Berechtigung erteilt! Benachrichtigunge werde zuverlässig funktioniere, bruddal!",
+  "@allPermissionsGranted": {},
+
+  "somePermissionsMissing": "Einige Berechtigung fehle. Benachrichtigunge funktioniere möglicherweise net wie erwartet.",
+  "@somePermissionsMissing": {},
+
+  "remindLater": "Später erinnern",
+  "@remindLater": {},
+
+  "continueAnyway": "Trotzdem fortfahre",
+  "@continueAnyway": {},
+
+  "checkPermissions": "Berechtigung prüfe",
+  "@checkPermissions": {},
+
+  "relatedNotices": "Verwandte Hinweise",
+  "@relatedNotices": {},
+
+  "exam": "Prüfung",
+  "@exam": {},
+
+  "studentReason": "Schülergrund",
+  "@studentReason": {},
+
+  "trainerComment": "Lehrerkommentar",
+  "@trainerComment": {},
+
+  "consoleLogs": "Konsole-Logs",
+  "@consoleLogs": {},
+
+  "viewAppDebugLogs": "App-Debug-Logs anzeige",
+  "@viewAppDebugLogs": {},
+
+  "buyMeACoffee": "Kauf mir en Kaffee, bruddal!",
+  "@buyMeACoffee": {},
+
+  "supportDevelopment": "Unterstütz die Entwicklung, des bedarfs!",
+  "@supportDevelopment": {},
+
+  "couldNotOpenBuyMeACoffee": "Konnt die Buy Me a Coffee-Seite net öffne",
+  "@couldNotOpenBuyMeACoffee": {},
+
+  "or": "ODER",
+  "@or": {},
+
+  "signInWithMicrosoft": "Mit Microsoft anmelde",
+  "@signInWithMicrosoft": {},
+
+  "clearLogs": "Logs lösche",
+  "@clearLogs": {},
+
+  "exportLogs": "Logs exportiere",
+  "@exportLogs": {},
+
+  "all": "Alle",
+  "@all": {},
+
+  "debug": "Debug",
+  "@debug": {},
+
+  "enableLogging": "Logging aktiviere",
+  "@enableLogging": {},
+
+  "clearFilters": "Filter lösche",
+  "@clearFilters": {},
+
+  "logCopiedToClipboard": "Log in Zwischenablage kopiert",
+  "@logCopiedToClipboard": {},
+
+  "clearAllLogs": "Alle Logs lösche?",
+  "@clearAllLogs": {},
+
+  "logsCleared": "Logs gelöscht",
+  "@logsCleared": {},
+
+  "clear": "Lösche",
+  "@clear": {},
+
+  "logsExportedToClipboard": "Logs in Zwischenablage exportiert",
+  "@logsExportedToClipboard": {},
+
+  "endpointReachable": "Endpunkt erreichbar ({statusCode})",
+  "@endpointReachable": {
+    "placeholders": {
+      "statusCode": {
+        "type": "String"
+      }
+    }
+  },
+  "serverError": "Serverfehler ({statusCode})",
+  "@serverError": {
+    "placeholders": {
+      "statusCode": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToInitializeMicrosoftAuth": "Microsoft-Authentifizierung konnt net initialisiert werde: {error}",
+  "@failedToInitializeMicrosoftAuth": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "authenticationFailed": "Authentifizierung fehlgeschlage: {error}",
+  "@authenticationFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "upcomingTests": "Kommende Prüfunge",
+  "@upcomingTests": {},
+
+  "noTestsFound": "Keine Prüfunge gefunde",
+  "@noTestsFound": {},
+
+  "noUpcomingTests": "Keine kommende Prüfunge",
+  "@noUpcomingTests": {},
+
+  "numberOfTestsToShow": "Anzahl der Prüfunge zum Zeige",
+  "@numberOfTestsToShow": {},
+
+  "weight": "Gewichtung",
+  "@weight": {},
+
+  "cancel": "Abbräche",
+  "@cancel": {},
+
+  "confirm": "Bestätige",
+  "@confirm": {},
+
+  "pushNotifications": "Push-Benachrichtigunge",
+  "@pushNotifications": {},
+
+  "featureInDevelopment": "Wird noch entwickelt, bruddal",
+  "@featureInDevelopment": {},
+
+  "configureNotifications": "Benachrichtigunge konfiguriere",
+  "@configureNotifications": {},
+
+  "chooseTypesAndTiming": "Wähle Arte unn Timing",
+  "@chooseTypesAndTiming": {},
+
+  "whatsNew": "Was is neu",
+  "@whatsNew": {},
+
+  "changelogAndFeatures": "Änderunge unn neue Features",
+  "@changelogAndFeatures": {},
+
+  "checkForUpdates": "Uff Updates prüfe",
+  "@checkForUpdates": {},
+
+  "checkForNewVersions": "Nach neue Versione suche",
+  "@checkForNewVersions": {},
+
+  "apiUrl": "API URL",
+  "@apiUrl": {},
+
+  "changeApiUrl": "API URL ännere",
+  "@changeApiUrl": {},
+
+  "login": "Einlogge",
+  "@login": {},
+
+  "loginToYourAccount": "In dein Account einlogge",
+  "@loginToYourAccount": {},
+
+  "username": "Benutzername",
+  "@username": {},
+
+  "password": "Passwort",
+  "@password": {},
+
+  "loginWithOauth": "Mit OAuth einlogge",
+  "@loginWithOauth": {},
+
+  "loginWithOauthDescription": "Mit Microsoft einlogge, des isses",
+  "@loginWithOauthDescription": {},
+
+  "loggingIn": "Einlogge...",
+  "@loggingIn": {},
+
+  "loginFailed": "Login fehlgeschlage, bruddal",
+  "@loginFailed": {},
+
+  "checkCredentials": "Prüf deine Anmeldedaten",
+  "@checkCredentials": {},
+
+  "invalidCredentials": "Ungültige Anmeldedaten",
+  "@invalidCredentials": {},
+
+  "connectionError": "Verbindungsfehler",
+  "@connectionError": {},
+
+  "checkInternetConnection": "Internet-Verbindung prüfe",
+  "@checkInternetConnection": {},
+
+  "tryAgainLater": "Später nochmal versuche",
+  "@tryAgainLater": {},
+
+  "unknownError": "Unbekannter Fehler",
+  "@unknownError": {},
+
+  "somethingWentWrong": "Ebbes is schief gelaufe",
+  "@somethingWentWrong": {},
+
+  "success": "Erfolg, des bedarfs!",
+  "@success": {},
+
+  "noGradesAvailable": "Keine Note verfügbar",
+  "@noGradesAvailable": {},
+
+  "noAbsencesFound": "Keine Absenze gefunde",
+  "@noAbsencesFound": {},
+
+  "noAgendaItems": "Keine Agenda-Einträge",
+  "@noAgendaItems": {},
+
+  "today": "Heute",
+  "@today": {},
+
+  "tomorrow": "Morge",
+  "@tomorrow": {},
+
+  "yesterday": "Gestern",
+  "@yesterday": {},
+
+  "noEventsForThisDay": "Keine Events an dem Tag, bruddal",
+  "@noEventsForThisDay": {},
+
+  "noLessonsFound": "Keine Lektione gefunde, des geht net",
+  "@noLessonsFound": {},
+
+  "week": "Woche",
+  "@week": {},
+
+  "month": "Monat",
+  "@month": {},
+
+  "date": "Datum",
+  "@date": {},
+
+  "time": "Zeit",
+  "@time": {},
+
+  "subject": "Fach",
+  "@subject": {},
+
+  "teacher": "Lehrer",
+  "@teacher": {},
+
+  "room": "Raum",
+  "@room": {},
+
+  "description": "Beschreibung",
+  "@description": {},
+
+  "fromDate": "Von",
+  "@fromDate": {},
+
+  "toDate": "Bis",
+  "@toDate": {},
+
+  "reason": "Grund",
+  "@reason": {},
+
+  "excused": "Entschuldigt",
+  "@excused": {},
+
+  "unexcused": "Unentschuldigt",
+  "@unexcused": {},
+
+  "pending": "Ausstehend",
+  "@pending": {},
+
+  "approved": "Genehmigt",
+  "@approved": {},
+
+  "rejected": "Abgelehnt",
+  "@rejected": {},
+
+  "save": "Speichere",
+  "@save": {},
+
+  "delete": "Lösche",
+  "@delete": {},
+
+  "edit": "Bearbeite",
+  "@edit": {},
+
+  "close": "Schließe",
+  "@close": {},
+
+  "refresh": "Aktualisiere",
+  "@refresh": {},
+
+  "loading": "Lade... des bedarfs",
+  "@loading": {},
+
+  "noDataAvailable": "Keine Date verfügbar",
+  "@noDataAvailable": {},
+
+  "errorLoadingData": "Fehler beim Lade, bruddal",
+  "@errorLoadingData": {},
+
+  "retry": "Nochmal versuche",
+  "@retry": {},
+
+  "welcomeBack": "Willkomme zurück, Maggus!",
+  "@welcomeBack": {},
+
+  "goodMorning": "Gude Morge!",
+  "@goodMorning": {},
+
+  "goodAfternoon": "Gude Nachmittag!",
+  "@goodAfternoon": {},
+
+  "goodEvening": "Gude Abend!",
+  "@goodEvening": {},
+
+  "notifications": "Benachrichtigunge",
+  "@notifications": {},
+
+  "settings": "Einstellunge",
+  "@settings": {},
+
+  "about": "Über",
+  "@about": {},
+
+  "version": "Version",
+  "@version": {},
+
+  "appVersion": "App-Version",
+  "@appVersion": {},
+
+  "buildNumber": "Build-Nummer",
+  "@buildNumber": {},
+
+  "darkMode": "Dunkelmodus",
+  "@darkMode": {},
+
+  "lightMode": "Hellmodus",
+  "@lightMode": {},
+
+  "systemMode": "Systemeinstellung",
+  "@systemMode": {},
+
+  "theme": "Theme",
+  "@theme": {},
+
+  "selectTheme": "Theme wähle, des isses",
+  "@selectTheme": {},
+
+  "customizeHomepage": "Startseite anpasse",
+  "@customizeHomepage": {},
+
+  "rearrangeItems": "Elemente umordne",
+  "@rearrangeItems": {},
+
+  "showHideElements": "Elemente zeige/verstecke",
+  "@showHideElements": {},
+
+  "resetToDefault": "Uff Standard zurücksetze",
+  "@resetToDefault": {},
+
+  "areYouSure": "Bist du sicher, bruddal?",
+  "@areYouSure": {},
+
+  "thisActionCannotBeUndone": "Des kann net rückgängig gemacht werde",
+  "@thisActionCannotBeUndone": {},
+
+  "yes": "Ja, des bedarfs",
+  "@yes": {},
+
+  "no": "Nee",
+  "@no": {},
+
+  "ok": "OK, des isses",
+  "@ok": {},
+
+  "error": "Fehler",
+  "@error": {},
+
+  "warning": "Warnung",
+  "@warning": {},
+
+  "info": "Info",
+  "@info": {},
+
+  "searchHint": "Suche...",
+  "@searchHint": {},
+
+  "noResultsFound": "Nix gefunde",
+  "@noResultsFound": {},
+
+  "pullToRefresh": "Ziehe zum Aktualisiere",
+  "@pullToRefresh": {},
+
+  "releaseToRefresh": "Loslasse zum Aktualisiere",
+  "@releaseToRefresh": {},
+
+  "refreshing": "Aktualisiere... bruddal",
+  "@refreshing": {},
+
+  "lastUpdated": "Zuletzt aktualisiert",
+  "@lastUpdated": {},
+
+  "never": "Noch nie",
+  "@never": {},
+
+  "justNow": "Grad ebe",
+  "@justNow": {},
+
+  "minutesAgo": "{count, plural, =1{Vor 1 Minute} other{Vor {count} Minute}}",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "hoursAgo": "{count, plural, =1{Vor 1 Stund} other{Vor {count} Stunde}}",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "daysAgo": "{count, plural, =1{Gestern} other{Vor {count} Tage}}",
+  "@daysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "weeksAgo": "{count, plural, =1{Vor 1 Woch} other{Vor {count} Woche}}",
+  "@weeksAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "monthsAgo": "{count, plural, =1{Vor 1 Monat} other{Vor {count} Monate}}",
+  "@monthsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "yearsAgo": "{count, plural, =1{Vor 1 Jahr} other{Vor {count} Jahre}}",
+  "@yearsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "selectAll": "Alles auswähle",
+  "@selectAll": {},
+
+  "deselectAll": "Alles abwähle",
+  "@deselectAll": {},
+
+  "copy": "Kopiere",
+  "@copy": {},
+
+  "paste": "Einfüge",
+  "@paste": {},
+
+  "cut": "Ausschneide",
+  "@cut": {},
+
+  "share": "Teile",
+  "@share": {},
+
+  "download": "Runterladen",
+  "@download": {},
+
+  "upload": "Hochlade",
+  "@upload": {},
+
+  "print": "Drucke",
+  "@print": {},
+
+  "preview": "Vorschau",
+  "@preview": {},
+
+  "zoomIn": "Vergrößere",
+  "@zoomIn": {},
+
+  "zoomOut": "Verkleinere",
+  "@zoomOut": {},
+
+  "resetZoom": "Zoom zurücksetze",
+  "@resetZoom": {},
+
+  "fullscreen": "Vollbild",
+  "@fullscreen": {},
+
+  "exitFullscreen": "Vollbild verlasse",
+  "@exitFullscreen": {},
+
+  "filter": "Filter",
+  "@filter": {},
+
+  "sort": "Sortiere",
+  "@sort": {},
+
+  "ascending": "Aufsteigend",
+  "@ascending": {},
+
+  "descending": "Absteigend",
+  "@descending": {},
+
+  "groupBy": "Gruppiere nach",
+  "@groupBy": {},
+
+  "expand": "Erweitere",
+  "@expand": {},
+
+  "collapse": "Einklappe",
+  "@collapse": {},
+
+  "more": "Mehr",
+  "@more": {},
+
+  "less": "Weniger",
+  "@less": {},
+
+  "showMore": "Mehr zeige",
+  "@showMore": {},
+
+  "showLess": "Weniger zeige",
+  "@showLess": {},
+
+  "details": "Details",
+  "@details": {},
+
+  "summary": "Zusammenfassung",
+  "@summary": {},
+
+  "statistics": "Statistike",
+  "@statistics": {},
+
+  "chart": "Diagramm",
+  "@chart": {},
+
+  "table": "Tabelle",
+  "@table": {},
+
+  "list": "Liste",
+  "@list": {},
+
+  "grid": "Gitter",
+  "@grid": {},
+
+  "map": "Karte",
+  "@map": {},
+
+  "timeline": "Zeitstrahl",
+  "@timeline": {},
+
+  "calendar": "Kalender",
+  "@calendar": {},
+
+  "day": "Tag",
+  "@day": {},
+
+  "weekView": "Wochenansicht",
+  "@weekView": {},
+
+  "monthView": "Monatsansicht",
+  "@monthView": {},
+
+  "yearView": "Jahresansicht",
+  "@yearView": {},
+
+  "january": "Januar",
+  "@january": {},
+
+  "february": "Februar",
+  "@february": {},
+
+  "march": "März",
+  "@march": {},
+
+  "april": "April",
+  "@april": {},
+
+  "may": "Mai",
+  "@may": {},
+
+  "june": "Juni",
+  "@june": {},
+
+  "july": "Juli",
+  "@july": {},
+
+  "august": "August",
+  "@august": {},
+
+  "september": "September",
+  "@september": {},
+
+  "october": "Oktober",
+  "@october": {},
+
+  "november": "November",
+  "@november": {},
+
+  "december": "Dezember",
+  "@december": {},
+
+  "monday": "Mo",
+  "@monday": {},
+
+  "tuesday": "Di",
+  "@tuesday": {},
+
+  "wednesday": "Mi",
+  "@wednesday": {},
+
+  "thursday": "Do",
+  "@thursday": {},
+
+  "friday": "Fr",
+  "@friday": {},
+
+  "saturday": "Sa",
+  "@saturday": {},
+
+  "sunday": "So",
+  "@sunday": {},
+
+  "loginRequired": "Anmeldung erforderlich, des bedarfs",
+  "@loginRequired": {},
+
+  "sessionExpired": "Sitzung abgelaufe",
+  "@sessionExpired": {},
+
+  "loginAgain": "Bitte nochmal einlogge",
+  "@loginAgain": {},
+
+  "logoutConfirmation": "Willst du disch wirklich abmelde?",
+  "@logoutConfirmation": {},
+
+  "accountSwitched": "Account gewechselt",
+  "@accountSwitched": {},
+
+  "switchAccount": "Account wechsle",
+  "@switchAccount": {},
+
+  "manageAccounts": "Accounts verwalte",
+  "@manageAccounts": {},
+
+  "removeAccount": "Account entferne",
+  "@removeAccount": {},
+
+  "removeAccountConfirmation": "Willst du de Account wirklich entferne?",
+  "@removeAccountConfirmation": {},
+
+  "accountRemoved": "Account entfernt",
+  "@accountRemoved": {},
+
+  "profileUpdated": "Profil aktualisiert, des isses",
+  "@profileUpdated": {},
+
+  "settingsSaved": "Einstellunge gespeichert",
+  "@settingsSaved": {},
+
+  "changesSaved": "Änderunge gespeichert, bruddal",
+  "@changesSaved": {},
+
+  "changesDiscarded": "Änderunge verworfe",
+  "@changesDiscarded": {},
+
+  "unsavedChanges": "Ungespeicherte Änderunge",
+  "@unsavedChanges": {},
+
+  "saveChangesPrompt": "Willst du die Änderunge speichere?",
+  "@saveChangesPrompt": {},
+
+  "discard": "Verwerfe",
+  "@discard": {},
+
+  "saveAndExit": "Speichere unn verlasse",
+  "@saveAndExit": {},
+
+  "exitWithoutSaving": "Ohne Speichere verlasse",
+  "@exitWithoutSaving": {},
+
+  "required": "Erforderlich",
+  "@required": {},
+
+  "optional": "Optional",
+  "@optional": {},
+
+  "pleaseEnter": "Bitte eingebe",
+  "@pleaseEnter": {},
+
+  "pleaseSelect": "Bitte auswähle",
+  "@pleaseSelect": {},
+
+  "invalidInput": "Ungültige Eingabe",
+  "@invalidInput": {},
+
+  "fieldRequired": "Des Feld is erforderlich",
+  "@fieldRequired": {},
+
+  "fieldTooShort": "Zu kurz, bruddal",
+  "@fieldTooShort": {},
+
+  "fieldTooLong": "Zu lang, des geht net",
+  "@fieldTooLong": {},
+
+  "invalidEmail": "Ungültige E-Mail-Adresse",
+  "@invalidEmail": {},
+
+  "invalidPhone": "Ungültige Telefonnummer",
+  "@invalidPhone": {},
+
+  "invalidUrl": "Ungültige URL",
+  "@invalidUrl": {},
+
+  "passwordsDoNotMatch": "Passwörter stimme net überein",
+  "@passwordsDoNotMatch": {},
+
+  "weakPassword": "Zu schwaches Passwort, des bedarfs mehr",
+  "@weakPassword": {},
+
+  "strongPassword": "Starkes Passwort, des isses!",
+  "@strongPassword": {},
+
+  "showPassword": "Passwort zeige",
+  "@showPassword": {},
+
+  "hidePassword": "Passwort verstecke",
+  "@hidePassword": {},
+
+  "forgotPassword": "Passwort vergesse?",
+  "@forgotPassword": {},
+
+  "resetPassword": "Passwort zurücksetze",
+  "@resetPassword": {},
+
+  "changePassword": "Passwort ännere",
+  "@changePassword": {},
+
+  "currentPassword": "Aktuelles Passwort",
+  "@currentPassword": {},
+
+  "newPassword": "Neues Passwort",
+  "@newPassword": {},
+
+  "confirmPassword": "Passwort bestätige",
+  "@confirmPassword": {},
+
+  "enable": "Aktiviere",
+  "@enable": {},
+
+  "disable": "Deaktiviere",
+  "@disable": {},
+
+  "enabled": "Aktiviert, des bedarfs",
+  "@enabled": {},
+
+  "disabled": "Deaktiviert",
+  "@disabled": {},
+
+  "on": "An",
+  "@on": {},
+
+  "off": "Aus",
+  "@off": {},
+
+  "advanced": "Erweitert",
+  "@advanced": {},
+
+  "basic": "Basis",
+  "@basic": {},
+
+  "custom": "Angepasst",
+  "@custom": {},
+
+  "default": "Standard",
+  "@default": {},
+
+  "reset": "Zurücksetze",
+  "@reset": {},
+
+  "apply": "Anwende",
+  "@apply": {},
+
+  "done": "Fertig, bruddal!",
+  "@done": {},
+
+  "continue": "Weiter",
+  "@continue": {},
+
+  "back": "Zurück",
+  "@back": {},
+
+  "next": "Nächster",
+  "@next": {},
+
+  "previous": "Vorheriger",
+  "@previous": {},
+
+  "finish": "Beende",
+  "@finish": {},
+
+  "skip": "Überspringe",
+  "@skip": {},
+
+  "errorOccurred": "En Fehler is aufgetrete",
+  "@errorOccurred": {},
+
+  "pleaseTryAgain": "Bitte nochmal versuche",
+  "@pleaseTryAgain": {},
+
+  "noConnectionTitle": "Keine Verbindung",
+  "@noConnectionTitle": {},
+
+  "noConnectionMessage": "Keine Internetverbindung, des geht net",
+  "@noConnectionMessage": {},
+
+  "offlineModeEnabled": "Offline-Modus aktiviert",
+  "@offlineModeEnabled": {},
+
+  "syncWhenOnline": "Wird synchronisiert, wenn online",
+  "@syncWhenOnline": {},
+
+  "lastSynced": "Zuletzt synchronisiert",
+  "@lastSynced": {},
+
+  "syncNow": "Jetzt synchronisiere",
+  "@syncNow": {},
+
+  "syncing": "Synchronisiere... des bedarfs",
+  "@syncing": {},
+
+  "syncComplete": "Synchronisation abgeschlosse, bruddal!",
+  "@syncComplete": {},
+
+  "syncFailed": "Synchronisation fehlgeschlage",
+  "@syncFailed": {},
+
+  "updateAvailable": "Update verfügbar",
+  "@updateAvailable": {},
+
+  "updateNow": "Jetzt aktualisiere",
+  "@updateNow": {},
+
+  "updateLater": "Später",
+  "@updateLater": {},
+
+  "downloadingUpdate": "Update wird geladen... des bedarfs",
+  "@downloadingUpdate": {},
+
+  "installingUpdate": "Update wird installiert",
+  "@installingUpdate": {},
+
+  "updateInstalled": "Update installiert, des isses!",
+  "@updateInstalled": {},
+
+  "restartRequired": "Neustart erforderlich",
+  "@restartRequired": {},
+
+  "restartNow": "Jetzt neu starte",
+  "@restartNow": {},
+
+  "restartLater": "Später neu starte",
+  "@restartLater": {},
+
+  "rateApp": "App bewerte",
+  "@rateApp": {},
+
+  "rateUsMessage": "Bewerte uns, des bedarfs fer die Motivation!",
+  "@rateUsMessage": {},
+
+  "feedbackTitle": "Feedback",
+  "@feedbackTitle": {},
+
+  "sendFeedback": "Feedback sende",
+  "@sendFeedback": {},
+
+  "reportBug": "Fehler melde",
+  "@reportBug": {},
+
+  "requestFeature": "Feature anfrage",
+  "@requestFeature": {},
+
+  "contactSupport": "Support kontaktiere",
+  "@contactSupport": {},
+
+  "privacyPolicy": "Datenschutz",
+  "@privacyPolicy": {},
+
+  "termsOfService": "Nutzungsbedingunge",
+  "@termsOfService": {},
+
+  "licenses": "Lizenze",
+  "@licenses": {},
+
+  "openSourceLicenses": "Open-Source-Lizenze",
+  "@openSourceLicenses": {},
+
+  "thirdPartyNotices": "Drittanbieter-Hinweise",
+  "@thirdPartyNotices": {},
+
+  "acknowledgements": "Danksagunge",
+  "@acknowledgements": {},
+
+  "specialThanks": "Besonderer Dank",
+  "@specialThanks": {},
+
+  "notificationSettings": "Benachrichtigungseinstellunge",
+  "@notificationSettings": {},
+
+  "soundEnabled": "Ton aktiviert",
+  "@soundEnabled": {},
+
+  "vibrationEnabled": "Vibration aktiviert",
+  "@vibrationEnabled": {},
+
+  "ledEnabled": "LED aktiviert",
+  "@ledEnabled": {},
+
+  "notificationCategories": "Benachrichtigungskategorie",
+  "@notificationCategories": {},
+
+  "gradesNotifications": "Note-Benachrichtigunge",
+  "@gradesNotifications": {},
+
+  "absencesNotifications": "Absenze-Benachrichtigunge",
+  "@absencesNotifications": {},
+
+  "agendaNotifications": "Agenda-Benachrichtigunge",
+  "@agendaNotifications": {},
+
+  "generalNotifications": "Allgemeine Benachrichtigunge",
+  "@generalNotifications": {},
+
+  "notificationFrequency": "Benachrichtigungshäufigkeit",
+  "@notificationFrequency": {},
+
+  "immediately": "Sofort",
+  "@immediately": {},
+
+  "hourly": "Stündlich",
+  "@hourly": {},
+
+  "daily": "Täglich",
+  "@daily": {},
+
+  "weekly": "Wöchentlich",
+  "@weekly": {},
+
+  "doNotDisturb": "Net störe",
+  "@doNotDisturb": {},
+
+  "doNotDisturbSchedule": "Net-störe-Zeitplan",
+  "@doNotDisturbSchedule": {},
+
+  "from": "Von",
+  "@from": {},
+
+  "to": "Bis",
+  "@to": {},
+
+  "activeHours": "Aktive Stunde",
+  "@activeHours": {},
+
+  "quietHours": "Ruhestunde",
+  "@quietHours": {},
+
+  "customSchedule": "Angepasster Zeitplan",
+  "@customSchedule": {},
+
+  "weekdays": "Wochentage",
+  "@weekdays": {},
+
+  "weekends": "Wochenende",
+  "@weekends": {},
+
+  "everyday": "Jeden Tag",
+  "@everyday": {},
+
+  "dataUsage": "Datennutzung",
+  "@dataUsage": {},
+
+  "wifiOnly": "Nur WLAN",
+  "@wifiOnly": {},
+
+  "wifiAndMobile": "WLAN unn Mobilfunk",
+  "@wifiAndMobile": {},
+
+  "reducedDataMode": "Reduzierter Datenmodus",
+  "@reducedDataMode": {},
+
+  "cacheSize": "Cache-Größe",
+  "@cacheSize": {},
+
+  "clearCache": "Cache leere",
+  "@clearCache": {},
+
+  "cacheClearedSuccessfully": "Cache erfolgreich geleert, bruddal!",
+  "@cacheClearedSuccessfully": {},
+
+  "storageFull": "Speicher voll",
+  "@storageFull": {},
+
+  "freeUpSpace": "Speicherplatz freigebe",
+  "@freeUpSpace": {},
+
+  "exportData": "Date exportiere",
+  "@exportData": {},
+
+  "importData": "Date importiere",
+  "@importData": {},
+
+  "backupData": "Date sichere",
+  "@backupData": {},
+
+  "restoreData": "Date wiederherstelle",
+  "@restoreData": {},
+
+  "deleteAllData": "Alle Date lösche",
+  "@deleteAllData": {},
+
+  "deleteAllDataConfirmation": "Bist du sicher, dass du alle Date lösche willst? Des kann net rückgängig gemacht werde!",
+  "@deleteAllDataConfirmation": {},
+
+  "dataDeleted": "Date gelöscht",
+  "@dataDeleted": {},
+
+  "accountSettings": "Account-Einstellunge",
+  "@accountSettings": {},
+
+  "profileSettings": "Profil-Einstellunge",
+  "@profileSettings": {},
+
+  "privacySettings": "Datenschutz-Einstellunge",
+  "@privacySettings": {},
+
+  "securitySettings": "Sicherheitseinstellunge",
+  "@securitySettings": {},
+
+  "appearanceSettings": "Erscheinungsbild",
+  "@appearanceSettings": {},
+
+  "languageSettings": "Spracheinstellunge",
+  "@languageSettings": {},
+
+  "regionSettings": "Regionseinstellunge",
+  "@regionSettings": {},
+
+  "accessibilitySettings": "Barrierefreiheit",
+  "@accessibilitySettings": {},
+
+  "aboutApp": "Über die App",
+  "@aboutApp": {},
+
+  "debugMode": "Debug-Modus",
+  "@debugMode": {},
+
+  "developerOptions": "Entwickleroptione",
+  "@developerOptions": {},
+
+  "experimentalFeatures": "Experimentelle Features",
+  "@experimentalFeatures": {},
+
+  "betaProgram": "Beta-Programm",
+  "@betaProgram": {},
+
+  "joinBeta": "Beta beitrete",
+  "@joinBeta": {},
+
+  "leaveBeta": "Beta verlasse",
+  "@leaveBeta": {},
+
+  "reportingBugs": "Fehler melde",
+  "@reportingBugs": {},
+
+  "helpUsImprove": "Hilf uns, besser zu werde",
+  "@helpUsImprove": {},
+
+  "crashReporting": "Absturzbericht",
+  "@crashReporting": {},
+
+  "analyticsEnabled": "Analyse aktiviert",
+  "@analyticsEnabled": {},
+
+  "shareAnonymousData": "Anonyme Date teile",
+  "@shareAnonymousData": {},
+
+  "studentIdCard": "Schülerausweis",
+  "@studentIdCard": {},
+
+  "viewStudentId": "Schülerausweis anzeige",
+  "@viewStudentId": {},
+
+  "digitalIdCard": "Digitaler Ausweis",
+  "@digitalIdCard": {},
+
+  "scanQrCode": "QR-Code scanne",
+  "@scanQrCode": {},
+
+  "generateQrCode": "QR-Code generiere",
+  "@generateQrCode": {},
+
+  "showBarcode": "Barcode zeige",
+  "@showBarcode": {},
+
+  "idCardDetails": "Ausweisdetails",
+  "@idCardDetails": {},
+
+  "validUntil": "Gültig bis",
+  "@validUntil": {},
+
+  "cardExpired": "Karte abgelaufe",
+  "@cardExpired": {},
+
+  "renewCard": "Karte erneuer",
+  "@renewCard": {},
+
+  "cardNumber": "Kartennummer",
+  "@cardNumber": {},
+
+  "issueDate": "Ausstellungsdatum",
+  "@issueDate": {},
+
+  "expiryDate": "Ablaufdatum",
+  "@expiryDate": {},
+
+  "emergencyContact": "Notfallkontakt",
+  "@emergencyContact": {},
+
+  "bloodType": "Blutgruppe",
+  "@bloodType": {},
+
+  "allergies": "Allergie",
+  "@allergies": {},
+
+  "medications": "Medikamente",
+  "@medications": {},
+
+  "medicalConditions": "Krankheite",
+  "@medicalConditions": {},
+
+  "insuranceInfo": "Versicherungsinfo",
+  "@insuranceInfo": {},
+
+  "photoLibrary": "Fotobibliothek",
+  "@photoLibrary": {},
+
+  "camera": "Kamera",
+  "@camera": {},
+
+  "selectPhoto": "Foto auswähle",
+  "@selectPhoto": {},
+
+  "takePhoto": "Foto mache",
+  "@takePhoto": {},
+
+  "retakePhoto": "Foto erneut mache",
+  "@retakePhoto": {},
+
+  "usePhoto": "Foto verwende",
+  "@usePhoto": {},
+
+  "cropPhoto": "Foto zuschneide",
+  "@cropPhoto": {},
+
+  "rotatePhoto": "Foto drehe",
+  "@rotatePhoto": {},
+
+  "editPhoto": "Foto bearbeite",
+  "@editPhoto": {},
+
+  "deletePhoto": "Foto lösche",
+  "@deletePhoto": {},
+
+  "uploadingPhoto": "Foto wird hochgelade...",
+  "@uploadingPhoto": {},
+
+  "photoUploaded": "Foto hochgelade, des bedarfs!",
+  "@photoUploaded": {},
+
+  "photoUploadFailed": "Foto-Upload fehlgeschlage",
+  "@photoUploadFailed": {},
+
+  "getNotified": "Werde benachrichtigt, bruddal",
+  "@getNotified": {},
+
+  "enableNotifications": "Benachrichtigunge aktiviere, des isses",
+  "@enableNotifications": {},
+
+  "testApiConnection": "API-Verbindung teste",
+  "@testApiConnection": {},
+
+  "connectionSuccessful": "Verbindung erfolgreich, des bedarfs!",
+  "@connectionSuccessful": {},
+
+  "connectionFailed": "Verbindung fehlgeschlage",
+  "@connectionFailed": {},
+
+  "testing": "Teste... bruddal durchziehe",
+  "@testing": {},
+
+  "checkingConnection": "Prüfe Verbindung... des bedarfs",
+  "@checkingConnection": {},
+
+  "checkingUpdatesInitialization": "Prüfe uff Updates...",
+  "@checkingUpdatesInitialization": {},
+
+  "loadingData": "Lade Date... schwere Gewichte",
+  "@loadingData": {},
+
+  "loadingCachedData": "Lade gespeicherte Date...",
+  "@loadingCachedData": {},
+
+  "noInternetConnection": "Keine Internetverbindung",
+  "@noInternetConnection": {},
+
+  "offlineModeDetected": "Offline-Modus erkannt",
+  "@offlineModeDetected": {},
+
+  "finalizingInitialization": "Fast fertig... noch en Satz!",
+  "@finalizingInitialization": {},
+
+  "welcomeMessage": "Willkomme bei Schuly, Maggus!",
+  "@welcomeMessage": {},
+
+  "getStarted": "Los geht's, bruddal!",
+  "@getStarted": {},
+
+  "apiUrlChanged": "API URL geändert zu: {url}",
+  "@apiUrlChanged": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "microsoftLogin": "Microsoft Login",
+  "@microsoftLogin": {},
+
+  "loginWithMicrosoft": "Mit Microsoft einlogge, des isses",
+  "@loginWithMicrosoft": {},
+
+  "microsoftAccountRequired": "Microsoft-Account erforderlich",
+  "@microsoftAccountRequired": {},
+
+  "authenticationInProgress": "Authentifizierung läuft...",
+  "@authenticationInProgress": {},
+
+  "authenticationSuccessful": "Authentifizierung erfolgreich, bruddal!",
+  "@authenticationSuccessful": {},
+
+  "authenticationCancelled": "Authentifizierung abgebroche",
+  "@authenticationCancelled": {},
+
+  "reAuthenticationRequired": "Erneute Anmeldung erforderlich",
+  "@reAuthenticationRequired": {},
+
+  "reAuthenticationCancelled": "Erneute Anmeldung abgebroche",
+  "@reAuthenticationCancelled": {},
+
+  "twoFactorAuthentication": "Zwei-Faktor-Authentifizierung",
+  "@twoFactorAuthentication": {},
+
+  "enterVerificationCode": "Verifizierungscode eingebe",
+  "@enterVerificationCode": {},
+
+  "verificationCodeSent": "Verifizierungscode gesendet",
+  "@verificationCodeSent": {},
+
+  "resendCode": "Code erneut sende",
+  "@resendCode": {},
+
+  "invalidVerificationCode": "Ungültiger Verifizierungscode",
+  "@invalidVerificationCode": {},
+
+  "averageGrade": "Durchschnittsnote",
+  "@averageGrade": {},
+
+  "gradeDistribution": "Notenverteilung",
+  "@gradeDistribution": {},
+
+  "bestGrade": "Beste Note",
+  "@bestGrade": {},
+
+  "worstGrade": "Schlechteste Note",
+  "@worstGrade": {},
+
+  "recentGrades": "Aktuelle Note",
+  "@recentGrades": {},
+
+  "gradeHistory": "Notenverlauf",
+  "@gradeHistory": {},
+
+  "gradeDetails": "Notendetails",
+  "@gradeDetails": {},
+
+  "gradeValue": "Notenwert",
+  "@gradeValue": {},
+
+  "gradeWeight": "Gewichtung",
+  "@gradeWeight": {},
+
+  "gradeDate": "Notendatum",
+  "@gradeDate": {},
+
+  "gradeComment": "Kommentar",
+  "@gradeComment": {},
+
+  "examType": "Prüfungstyp",
+  "@examType": {},
+
+  "oralExam": "Mündliche Prüfung",
+  "@oralExam": {},
+
+  "writtenExam": "Schriftliche Prüfung",
+  "@writtenExam": {},
+
+  "practicalExam": "Praktische Prüfung",
+  "@practicalExam": {},
+
+  "homework": "Hausaufgabe",
+  "@homework": {},
+
+  "presentation": "Präsentation",
+  "@presentation": {},
+
+  "project": "Projekt",
+  "@project": {},
+
+  "participation": "Mitarbeit",
+  "@participation": {},
+
+  "absenceDetails": "Absenzendetails",
+  "@absenceDetails": {},
+
+  "absenceType": "Absenzentyp",
+  "@absenceType": {},
+
+  "absenceReason": "Absenzengrund",
+  "@absenceReason": {},
+
+  "absenceDuration": "Absenzendauer",
+  "@absenceDuration": {},
+
+  "absenceDate": "Absenzendatum",
+  "@absenceDate": {},
+
+  "absenceTime": "Absenzenzeit",
+  "@absenceTime": {},
+
+  "absenceStatus": "Absenzenstatus",
+  "@absenceStatus": {},
+
+  "absenceNote": "Notiz",
+  "@absenceNote": {},
+
+  "excuseAbsence": "Absenz entschuldige",
+  "@excuseAbsence": {},
+
+  "submitExcuse": "Entschuldigung einreiche",
+  "@submitExcuse": {},
+
+  "excuseSubmitted": "Entschuldigung eingereicht",
+  "@excuseSubmitted": {},
+
+  "excuseAccepted": "Entschuldigung akzeptiert",
+  "@excuseAccepted": {},
+
+  "excuseRejected": "Entschuldigung abgelehnt",
+  "@excuseRejected": {},
+
+  "totalAbsences": "Gesamte Absenze",
+  "@totalAbsences": {},
+
+  "excusedAbsences": "Entschuldigte Absenze",
+  "@excusedAbsences": {},
+
+  "unexcusedAbsences": "Unentschuldigte Absenze",
+  "@unexcusedAbsences": {},
+
+  "absenceRate": "Absenzenquote",
+  "@absenceRate": {},
+
+  "attendanceRate": "Anwesenheitsquote",
+  "@attendanceRate": {},
+
+  "lessonDetails": "Unterrichtsdetails",
+  "@lessonDetails": {},
+
+  "lessonTopic": "Unterrichtsthema",
+  "@lessonTopic": {},
+
+  "lessonStringives": "Lernziele",
+  "@lessonStringives": {},
+
+  "lessonMaterials": "Unterrichtsmaterialie",
+  "@lessonMaterials": {},
+
+  "lessonHomework": "Hausaufgabe",
+  "@lessonHomework": {},
+
+  "lessonNotes": "Unterrichtsnotize",
+  "@lessonNotes": {},
+
+  "upcomingLessons": "Kommende Lektione",
+  "@upcomingLessons": {},
+
+  "pastLessons": "Vergangene Lektione",
+  "@pastLessons": {},
+
+  "todaysLessons": "Heutige Lektione",
+  "@todaysLessons": {},
+
+  "tomorrowsLessons": "Morgige Lektione",
+  "@tomorrowsLessons": {},
+
+  "weekSchedule": "Wochenplan",
+  "@weekSchedule": {},
+
+  "customizeHomepageTooltip": "Startseite anpasse, des bedarfs",
+  "@customizeHomepageTooltip": {},
+
+  "studentIdCardTooltip": "Schülerausweis zeige",
+  "@studentIdCardTooltip": {},
+
+  "errorTrackingEnabled": "Fehlerüberwachung aktiviert, bruddal guud!",
+  "@errorTrackingEnabled": {},
+
+  "reportError": "Fehler melde",
+  "@reportError": {},
+
+  "errorReported": "Fehler gemeldet",
+  "@errorReported": {},
+
+  "thankYouForReporting": "Danke fürs Melde!",
+  "@thankYouForReporting": {},
+
+  "errorDetails": "Fehlerdetails",
+  "@errorDetails": {},
+
+  "sendErrorReport": "Fehlerbericht sende",
+  "@sendErrorReport": {},
+
+  "includeSystemInfo": "Systeminfos einschließe",
+  "@includeSystemInfo": {},
+
+  "errorReportSent": "Fehlerbericht gesendet",
+  "@errorReportSent": {},
+
+  "cardView": "Kartenansicht",
+  "@cardView": {},
+
+  "timelineView": "Zeitstrahlansicht",
+  "@timelineView": {},
+
+  "cardViewDescription": "Zeigt Lektione als Karte",
+  "@cardViewDescription": {},
+
+  "timelineViewDescription": "Zeigt Lektione im Zeitstrahl",
+  "@timelineViewDescription": {},
+
+  "noticeText": "Hinweis",
+  "@noticeText": {},
+
+  "attachedNotices": "Angehängte Hinweise",
+  "@attachedNotices": {}
+
+}

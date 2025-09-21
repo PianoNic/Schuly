@@ -36,12 +36,18 @@ class LanguageProvider extends ChangeNotifier {
         return const Locale('en');
       case 'de':
         return const Locale('de');
+      case 'nl':
+        return const Locale('nl');
       case 'gsw':
         return const Locale('gsw');
       case 'arr':
         return const Locale('arr');
       case 'kaw':
         return const Locale('kaw');
+      case 'arn':
+        return const Locale('arn');
+      case 'mag':
+        return const Locale('mag');
       default:
         return const Locale('en'); // Default to English
     }

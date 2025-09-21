@@ -1,0 +1,904 @@
+{
+  "@@locale": "arn",
+
+  "appTitle": "Schuly",
+
+  "noAccountAdded": "No account detected. I'll be back with one!",
+
+  "addAccount": "Come With Me If You Want To Login",
+
+  "noActiveAccount": "No active account. Hasta la vista, baby!",
+
+  "selectAccount": "Choose Your Target",
+
+  "personalInformation": "Personnel File",
+
+  "quickActions": "Mission Objectives",
+
+  "appSettings": "System Configuration",
+
+  "designAndSettings": "Customize your combat gear",
+
+  "helpAndSupport": "Backup & Reinforcements",
+
+  "getHelpAndSupport": "Call for backup",
+
+  "addAnotherAccount": "Get Another Assignment",
+
+  "addMultipleAccounts": "Assemble your strike team",
+
+  "logout": "Terminate Session",
+
+  "signOutFromApp": "I'll be back!",
+
+  "name": "Designation",
+
+  "street": "Drop Zone",
+
+  "zipCity": "Sector & Zone",
+
+  "birthDate": "Manufacturing Date",
+
+  "phone": "Comms Channel",
+
+  "email": "Data Link",
+
+  "nationality": "Origin Model",
+
+  "hometown": "Factory Location",
+
+  "mobile": "Mobile Unit",
+
+  "profile1": "Primary Target",
+
+  "profile2": "Secondary Target",
+
+  "start": "Mission Control",
+
+  "agenda": "Mission Timeline",
+
+  "grades": "Performance Metrics",
+
+  "absences": "Mission Aborted",
+
+  "account": "Command Center",
+
+  "language": "Voice Module",
+
+  "selectLanguage": "Choose Your Voice Module",
+
+  "english": "Standard English",
+
+  "german": "German Model",
+
+  "swissGerman": "Alpine Unit",
+
+  "pirate": "Pirate Mode",
+
+  "kawaii": "Kawaii Mode",
+
+  "arnold": "Terminator Mode",
+
+  "cancel": "Negative. Mission aborted!",
+
+  "confirm": "Affirmative. Let's do this!",
+
+  "pushNotifications": "Tactical Alerts",
+
+  "featureInDevelopment": "Still being engineered",
+
+  "configureNotifications": "Configure Alert System",
+
+  "chooseTypesAndTiming": "Set your tactical parameters",
+
+  "whatsNew": "System Upgrades",
+
+  "changelogAndFeatures": "New weapons and enhancements",
+
+  "checkForUpdates": "Scan for Upgrades",
+
+  "checkForNewVersions": "Detecting newer models",
+
+  "aboutApp": "System Information",
+
+  "appVersion": "Model Version",
+
+  "apiVersion": "Core System",
+
+  "environment": "Operating Theater",
+
+  "apiUrl": "Command Link",
+
+  "userName": "Operative",
+
+  "unknownName": "Unknown Target",
+
+  "noGrades": "No performance data. I need more input!",
+
+  "noAgenda": "No missions scheduled. Consider this a vacation!",
+
+  "noAbsences": "Perfect attendance record. No problemo!",
+
+  "absencesWithNotices": "Missions requiring attention",
+
+  "absencesWithoutNotices": "Standard leave",
+
+  "viewDetails": "Analyze Data",
+
+  "hideDetails": "Conceal Intel",
+
+  "refresh": "Recalibrate",
+
+  "refreshing": "Recalibrating systems...",
+
+  "errorLoadingData": "System malfunction: {error}",
+  "@errorLoadingData": {
+    "placeholders": {
+      "error": {
+        "type": "Object"
+      }
+    }
+  },
+
+  "errorOccurred": "Critical system error",
+
+  "tryAgain": "I'll be back to try again",
+
+  "loading": "Systems initializing...",
+
+  "loggingIn": "Establishing connection...",
+
+  "selectLanguageFull": "Select your voice module",
+
+  "theme": "Combat Display",
+
+  "selectTheme": "Choose your HUD",
+
+  "lightTheme": "Day Operations",
+
+  "darkTheme": "Night Operations",
+
+  "systemTheme": "Auto-tactical",
+
+  "seedColor": "Primary Color Protocol",
+
+  "chooseColor": "Select combat colors",
+
+  "notifications": "Alert Systems",
+
+  "notificationsEnabled": "Alerts armed and ready!",
+
+  "notificationsDisabled": "Stealth mode activated",
+
+  "notificationPermissionDenied": "Permission terminated",
+
+  "leaveReason": "Mission abort reason",
+
+  "from": "Start time",
+
+  "to": "End time",
+
+  "currentLesson": "Current operation",
+
+  "nextLesson": "Next target",
+
+  "teacherShort": "Commander",
+
+  "roomShort": "Location",
+
+  "timeLeft": "T-minus",
+
+  "minutes": "minutes",
+
+  "welcomeBack": "Welcome back, soldier!",
+
+  "goodMorning": "Good morning. Time to gear up!",
+
+  "goodAfternoon": "Afternoon briefing ready!",
+
+  "goodEvening": "Evening status report!",
+
+  "upcomingLessons": "Upcoming Missions",
+
+  "recentGrades": "Recent Performance",
+
+  "pendingAbsences": "Missions Requiring Action",
+
+  "today": "Current Day",
+
+  "tomorrow": "Next Day",
+
+  "noLessonsToday": "No missions today. Chill out!",
+
+  "noLessonsTomorrow": "Tomorrow's clear. No problemo!",
+
+  "viewAll": "Full tactical overview",
+
+  "grade": "Score",
+
+  "weight": "Impact Factor",
+
+  "date": "Mission Date",
+
+  "description": "Intel Report",
+
+  "average": "Average Performance",
+
+  "authenticationType": "Security Protocol",
+
+  "standard": "Standard Protocol",
+
+  "microsoft": "Microsoft Systems",
+
+  "studentIdCard": "ID Badge",
+
+  "viewIdCard": "Display credentials",
+
+  "scanQrCode": "Scan target code",
+
+  "releaseNotes": "System Updates",
+
+  "version": "Model {version}",
+  "@version": {
+    "placeholders": {
+      "version": {
+        "type": "Object"
+      }
+    }
+  },
+
+  "notificationSettings": "Alert Configuration",
+
+  "enableNotifications": "Activate alert systems",
+
+  "disableNotifications": "Deactivate alerts",
+
+  "notificationTypes": "Alert Categories",
+
+  "gradeNotifications": "Performance alerts",
+
+  "absenceNotifications": "Mission status alerts",
+
+  "agendaNotifications": "Schedule updates",
+
+  "generalNotifications": "General intel",
+
+  "notificationTiming": "Alert timing",
+
+  "immediate": "Immediate response",
+
+  "daily": "Daily briefing",
+
+  "weekly": "Weekly report",
+
+  "loginRequired": "Authentication required. Get to the chopper!",
+
+  "loginButton": "Initiate Login Sequence",
+
+  "loggingOut": "Terminating connection...",
+
+  "logoutConfirmation": "Confirm mission abort?",
+
+  "yes": "Affirmative",
+
+  "no": "Negative",
+
+  "errorCheckingUpdates": "Update scan failed",
+
+  "errorCheckingUpdatesDetails": "System error: {error}",
+  "@errorCheckingUpdatesDetails": {
+    "placeholders": {
+      "error": {
+        "type": "Object"
+      }
+    }
+  },
+
+  "updateAvailable": "Upgrade detected!",
+
+  "updateAvailableDescription": "Model {version} ready for deployment",
+  "@updateAvailableDescription": {
+    "placeholders": {
+      "version": {
+        "type": "Object"
+      }
+    }
+  },
+
+  "updateNow": "Deploy immediately!",
+
+  "updateLater": "I'll be back for this",
+
+  "latestVersionMessage": "You have the latest model. No problemo!",
+
+  "downloadingUpdate": "Downloading enhancements...",
+
+  "installingUpdate": "Installing combat upgrades...",
+
+  "updateFailed": "Upgrade terminated unexpectedly",
+
+  "retryUpdate": "Re-initiate upgrade sequence",
+
+  "noInternetConnection": "No network link. Get to the server!",
+
+  "connectionError": "Connection terminated",
+
+  "serverError": "Server malfunction detected",
+
+  "unknownError": "Unknown system failure",
+
+  "refreshToRetry": "Recalibrate to retry",
+
+  "comingSoon": "Under construction. I'll be back!",
+
+  "notImplemented": "Feature still in development",
+
+  "searchPlaceholder": "Scanning database...",
+
+  "noSearchResults": "No targets found. Hasta la vista!",
+
+  "clearSearch": "Terminate search",
+
+  "filter": "Apply tactical filters",
+
+  "sort": "Reorganize data",
+
+  "sortBy": "Sort protocol",
+
+  "filterBy": "Filter parameters",
+
+  "noDataAvailable": "No intel available",
+
+  "pullToRefresh": "Pull to recalibrate",
+
+  "lastUpdated": "Last sync: {time}",
+  "@lastUpdated": {
+    "placeholders": {
+      "time": {
+        "type": "Object"
+      }
+    }
+  },
+
+  "retry": "Retry mission",
+
+  "close": "Terminate window",
+
+  "save": "Store data",
+
+  "delete": "Terminate permanently",
+
+  "edit": "Modify parameters",
+
+  "share": "Transmit data",
+
+  "copy": "Duplicate intel",
+
+  "paste": "Insert data",
+
+  "selectAll": "Target all",
+
+  "moreOptions": "Additional protocols",
+
+  "settings": "System controls",
+
+  "help": "Request backup",
+
+  "about": "System specs",
+
+  "privacyPolicy": "Privacy protocols",
+
+  "termsOfService": "Terms of engagement",
+
+  "contactSupport": "Contact command",
+
+  "reportBug": "Report malfunction",
+
+  "rateApp": "Rate this system",
+
+  "shareApp": "Deploy to allies",
+
+  "openInBrowser": "Launch external viewer",
+
+  "copyLink": "Copy tactical link",
+
+  "linkCopied": "Link secured!",
+
+  "shareLinkVia": "Transmit via",
+
+  "noAppToOpen": "No app detected. Get the right equipment!",
+
+  "fileNotFound": "File terminated",
+
+  "permissionDenied": "Access denied. You lack clearance!",
+
+  "storageError": "Storage malfunction",
+
+  "networkError": "Network link severed",
+
+  "formatError": "Format incompatible",
+
+  "validationError": "Validation failed",
+
+  "loginSuccess": "Authentication complete. Welcome back!",
+
+  "loginFailed": "Authentication terminated",
+
+  "logoutSuccess": "Session terminated. I'll be back!",
+
+  "profileUpdated": "Profile upgraded successfully",
+
+  "settingsSaved": "Configuration stored",
+
+  "changesSaved": "Modifications confirmed",
+
+  "errorSavingChanges": "Save sequence failed",
+
+  "noChangesToSave": "No modifications detected",
+
+  "unsavedChanges": "Unsaved tactical data",
+
+  "unsavedChangesMessage": "Abandon modifications?",
+
+  "discardChanges": "Terminate changes",
+
+  "keepEditing": "Continue modifications",
+
+  "warning": "Tactical alert!",
+
+  "info": "Intelligence report",
+
+  "success": "Mission accomplished!",
+
+  "error": "System failure",
+
+  "monday": "MON",
+
+  "tuesday": "TUE",
+
+  "wednesday": "WED",
+
+  "thursday": "THU",
+
+  "friday": "FRI",
+
+  "saturday": "SAT",
+
+  "sunday": "SUN",
+
+  "january": "January",
+
+  "february": "February",
+
+  "march": "March",
+
+  "april": "April",
+
+  "may": "May",
+
+  "june": "June",
+
+  "july": "July",
+
+  "august": "August",
+
+  "september": "September",
+
+  "october": "October",
+
+  "november": "November",
+
+  "december": "December",
+
+  "emailSupport": "Contact Support Command",
+  "contactByEmail": "Initiate Support Protocol",
+  "bugReport": "System Malfunction Report",
+  "reportBugsOrRequestFeatures": "Report malfunctions or request enhancements",
+  "copiedToClipboard": "Intel copied to memory bank!",
+  "ok": "Roger that!",
+  "emailAppError": "Email system offline",
+  "browserError": "Browser link severed",
+  "getNotified": "Activate alert systems",
+  "add": "Deploy",
+  "noEventsForThisDay": "No operations scheduled for this date",
+  "agendaForDate": "Mission briefing for {date}",
+  "@agendaForDate": {
+    "placeholders": {
+      "date": {
+        "type": "Object"
+      }
+    }
+  },
+  "noAgendaForDay": "No missions for this cycle",
+  "nextLessons": "Upcoming operations",
+  "nextHolidays": "Next leave period",
+  "reloadPage": "Recalibrate display",
+  "loadingStudentIdCard": "Scanning ID credentials...",
+  "enterValidEmail": "Invalid data link format",
+  "areYouSure": "Confirm tactical decision?",
+  "later": "I'll be back later",
+  "confirmed": "Target confirmed",
+  "lateness": "Delayed arrival",
+  "noLatenessFound": "No delays detected",
+  "selectReason": "Select tactical justification",
+  "selectDate": "Target date selection",
+  "emailAddress": "Data link address",
+  "password": "Access code",
+  "login": "Initiate connection",
+  "enterEmailAddress": "Input data link",
+  "getNewToken": "Refresh security clearance",
+  "getNewTokenSubtitle": "Acquire new authentication codes",
+  "tokenUpdated": "Security clearance refreshed!",
+  "noActiveAccountSnack": "No operative selected. Choose your fighter!",
+  "addAccountTitle": "Recruit New Operative",
+  "emailLabel": "Data Link ID",
+  "enterEmail": "Input link coordinates",
+  "passwordLabel": "Security Code",
+  "enterPassword": "Input access sequence",
+  "accountAdded": "Operative recruited successfully!",
+  "logoutTitle": "Terminate Session",
+  "logoutConfirm": "Confirm session termination?",
+  "loggedOut": "Session terminated. I'll be back!",
+  "designSettings": "Combat Display Configuration",
+  "appearance": "Visual Mode",
+  "automatic": "Auto-Tactical",
+  "light": "Day Operations",
+  "dark": "Night Operations",
+  "colorStyle": "Color Protocol",
+  "materialYou": "Adaptive Camouflage",
+  "classic": "Standard Issue",
+  "neon": "Cyber Warfare",
+  "neonAccentColor": "Cyber Color Matrix",
+  "classicAccentColor": "Standard Color Code",
+  "materialYouActive": "Adaptive camo engaged",
+  "materialYouInfo": "Colors adapt to environment automatically",
+  "neonViolet": "Plasma Violet",
+  "neonCyan": "Cryo Cyan",
+  "neonGreen": "Toxic Green",
+  "neonPink": "Shock Pink",
+  "neonOrange": "Inferno Orange",
+  "neonBlue": "Arctic Blue",
+  "neonRed": "Terminator Red",
+  "neonYellow": "Nuclear Yellow",
+  "neonMint": "Mint Condition",
+  "blue": "Tactical Blue",
+  "teal": "Stealth Teal",
+  "green": "Combat Green",
+  "pink": "Strike Pink",
+  "orange": "Alert Orange",
+  "indigo": "Deep Ops Indigo",
+  "red": "Code Red",
+  "yellow": "Warning Yellow",
+  "purple": "Recon Purple",
+  "previousLessonsDay": "Previous mission day",
+  "nextLessonsDay": "Next mission day",
+  "noLessonsFound": "No missions in database",
+  "noLessonsForDay": "No ops scheduled for {day}.{month}.{year}",
+  "@noLessonsForDay": {
+    "placeholders": {
+      "day": {
+        "type": "Object"
+      },
+      "month": {
+        "type": "Object"
+      },
+      "year": {
+        "type": "Object"
+      }
+    }
+  },
+  "noHolidaysFound": "No leave periods detected",
+  "latestGrades": "Recent performance metrics",
+  "noGradesFound": "No performance data available",
+  "openAbsences": "Active leave requests",
+  "showAll": "Display full intel",
+  "noAbsencesFound": "No absences in database",
+  "noOpenAbsences": "All leave requests processed",
+  "noReleaseNotes": "No system updates logged",
+  "releaseNotesInfo": "System enhancements will be displayed here",
+  "timetable": "Mission schedule",
+  "agendaNotificationSubtitle": "Pre-mission alerts",
+  "gradeNotificationSubtitle": "Performance update alerts",
+  "absenceNotificationSubtitle": "Leave status updates",
+  "generalNotificationSubtitle": "Command center bulletins",
+  "notificationTime": "Alert timing protocol",
+  "notificationAdvanceQuestion": "Set pre-mission alert timing?",
+  "minutesBeforeClass": "{minutes} min to deployment",
+  "@minutesBeforeClass": {
+    "placeholders": {
+      "minutes": {
+        "type": "Object"
+      }
+    }
+  },
+  "currentAdvanceSetting": "Alert set: T-minus {minutes} minutes",
+  "@currentAdvanceSetting": {
+    "placeholders": {
+      "minutes": {
+        "type": "Object"
+      }
+    }
+  },
+  "test": "Systems check",
+  "sendTestNotification": "Deploy test alert",
+  "checkNotificationsWork": "Verify alert systems operational",
+  "scheduleTestNotification": "Schedule alert test",
+  "testScheduledNotificationDesc": "Alert incoming in T-minus 15 seconds",
+  "notificationScheduledIn15Seconds": "Test alert armed! Detonation in 15 seconds",
+  "errorSchedulingNotification": "Alert system malfunction",
+  "testNotificationSent": "Test alert deployed successfully!",
+  "exactAlarmPermissionRequired": "Precision timing clearance required",
+  "openSettings": "Access control panel",
+  "gradeDetails": "Performance Analysis",
+  "basicInformation": "Core Intel",
+  "titleLabel": "Mission designation",
+  "subjectLabel": "Operation type",
+  "courseLabel": "Training program",
+  "dateLabel": "Mission date",
+  "confirmedLabel": "Status confirmed",
+  "gradeLabel": "Performance rating",
+  "pointsLabel": "Score achieved",
+  "weightLabel": "Impact factor",
+  "courseGradeLabel": "Program rating",
+  "classAverage": "Squad average",
+  "examGroupLabel": "Test battalion",
+  "classAverageLabel": "Squad performance",
+  "groupWeightLabel": "Battalion impact",
+  "commentLabel": "Field notes",
+  "versionWithNumber": "Model {version}+{build}",
+  "@versionWithNumber": {
+    "placeholders": {
+      "version": {
+        "type": "Object"
+      },
+      "build": {
+        "type": "Object"
+      }
+    }
+  },
+  "appLegalese": "Schuly Systems © 2025 - Cyberdyne Division",
+  "appDescription": "Advanced tactical management system for operatives. Coordinate missions, track performance, and manage operations from a single command center.",
+  "apiEndpoint": "Command Link Terminal",
+  "enterApiEndpoint": "Input command link coordinates",
+  "currentApiInfo": "Active Command Link",
+  "apiInfoStatus": "Link Status Report",
+  "apiBaseUrl": "Primary Command URL",
+  "apiUrlChanged": "Command link updated: {url}",
+  "@apiUrlChanged": {
+    "placeholders": {
+      "url": {
+        "type": "Object"
+      }
+    }
+  },
+  "getColorName": "Identify color protocol",
+  "lessonBreak": "Tactical pause",
+  "lunchBreak": "Refueling window",
+  "showBreaks": "Display downtime",
+  "cardSettings": "Intel card configuration",
+  "tapToCustomize": "Tap to modify parameters",
+  "numberOfDaysToShow": "Mission forecast range",
+  "numberOfGradesToShow": "Performance metrics displayed",
+  "showOnlyOpenAbsences": "Active requests only",
+  "noConfigurationAvailable": "No config data detected",
+  "switchAccount": "Change operative",
+  "accountCount": "{count} operatives registered",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "num"
+      }
+    }
+  },
+  "noAccounts": "No operatives in database",
+  "addFirstAccount": "Recruit first operative",
+  "active": "Combat ready",
+  "available": "Standing by",
+  "removeAccount": "Discharge operative",
+  "confirmRemoveAccount": "Confirm operative discharge?",
+  "remove": "Terminate",
+  "switchedAccount": "Operative switched successfully",
+  "switchAccountError": "Operative switch failed",
+  "removedAccount": "Operative discharged",
+  "removeAccountError": "Discharge sequence failed",
+  "unexpectedError": "System anomaly detected",
+  "weekdayMon": "MON",
+  "weekdayTue": "TUE",
+  "weekdayWed": "WED",
+  "weekdayThu": "THU",
+  "weekdayFri": "FRI",
+  "weekdaySat": "SAT",
+  "weekdaySun": "SUN",
+  "absencesTabAll": "All Records",
+  "absencesTabLateness": "Delays",
+  "absencesTabAbsences": "Leave",
+  "absencesTabNotices": "Notices",
+  "absencesSection": "Leave Records",
+  "latenessSection": "Delay Reports",
+  "noticesSection": "Notice Board",
+  "noticeItem": "Alert #{id}",
+  "@noticeItem": {
+    "placeholders": {
+      "id": {
+        "type": "Object"
+      }
+    }
+  },
+  "noReasonGiven": "Classified reason",
+  "noCommentGiven": "No intel provided",
+  "unknownData": "Data corrupted",
+  "noNoticesFound": "No notices in system",
+  "hours": "hours",
+  "latenessFrom": "Delay initiated",
+  "duration": "Time elapsed",
+  "course": "Training module",
+  "reason": "Tactical justification",
+  "comment": "Field report",
+  "status": "Operational status",
+  "excused": "Authorized",
+  "notExcused": "Unauthorized",
+  "excuseUntil": "Authorization deadline",
+  "details": "Full intel",
+  "excuse": "Authorization",
+  "excuseComingSoon": "Authorization pending",
+  "deleteAbsenceTitle": "Purge Record",
+  "deleteAbsenceConfirm": "Confirm record termination?",
+  "absenceDeleted": "Record terminated successfully",
+  "appUpdateTest": "Update System Test",
+  "readyToTest": "Systems ready for testing",
+  "updateSystemTest": "Initiate update protocol test",
+  "statusLabel": "System status",
+  "checking": "Scanning...",
+  "forceShowUpdateDialog": "Force update alert",
+  "clearDismissedUpdates": "Reset ignored updates",
+  "howItWorks": "Operation manual",
+  "updateStep1": "1. Scan for system upgrades",
+  "updateStep2": "2. Download enhancement package",
+  "updateStep3": "3. Deploy modifications",
+  "updateStep4": "4. Reboot systems",
+  "checkingForUpdates": "Scanning for upgrades...",
+  "updateAvailableVersion": "Version {version} detected",
+  "@updateAvailableVersion": {
+    "placeholders": {
+      "version": {
+        "type": "Object"
+      }
+    }
+  },
+  "noUpdatesAvailable": "System optimal. No upgrades needed",
+  "showingUpdateDialog": "Displaying upgrade interface",
+  "updateDialogShown": "Upgrade alert deployed",
+  "errorShowingDialog": "Alert system malfunction",
+  "clearingDismissedUpdates": "Purging ignored updates",
+  "dismissedUpdatesCleared": "Update cache cleared",
+  "errorClearingDismissed": "Cache purge failed",
+  "illness": "Medical leave",
+  "accident": "Combat injury",
+  "military": "Military duty",
+  "medicalCertificateForSport": "Training medical clearance",
+  "otherAbsence": "Other tactical absence",
+  "createNewAbsence": "File leave request",
+  "reasonRequired": "Justification mandatory",
+  "create": "Deploy request",
+  "noError": "All systems operational",
+  "unknown": "Unknown anomaly",
+  "currentVersion": "Current model",
+  "latestVersion": "Latest model",
+  "install": "Deploy upgrade",
+  "downloading": "Downloading package...",
+  "download": "Acquire data",
+  "installing": "Deploying modifications...",
+  "downloadError": "Download terminated",
+  "downloadErrorDetails": "Transfer protocol failed: {error}",
+  "@downloadErrorDetails": {
+    "placeholders": {
+      "error": {
+        "type": "Object"
+      }
+    }
+  },
+  "installationNotAllowed": "Installation clearance denied",
+  "installationError": "Deployment failed",
+  "installationErrorDetails": "System rejected modifications: {error}",
+  "@installationErrorDetails": {
+    "placeholders": {
+      "error": {
+        "type": "Object"
+      }
+    }
+  },
+  "updateInstallationStarted": "Upgrade sequence initiated",
+  "absentFrom": "Leave start",
+  "absentTo": "Leave end",
+  "toDateMustBeAfterFromDate": "End date must follow start date",
+  "absentFromTime": "Departure time",
+  "absentToTime": "Return time",
+  "absenceCreatedSuccessfully": "Leave request filed successfully",
+  "customizeHomepage": "Configure command center",
+  "visible": "Active",
+  "hidden": "Stealth mode",
+  "pushAssistNotifications": "Tactical alerts",
+  "notificationsBeforeClasses": "Pre-mission warnings",
+  "testNotifications": "Alert system test",
+  "testNotificationDescription": "Verify alert channels operational",
+  "nextClass": "Next operation",
+  "roomAndTeacher": "{room} • {teacher}",
+  "@roomAndTeacher": {
+    "placeholders": {
+      "room": {
+        "type": "Object"
+      },
+      "teacher": {
+        "type": "Object"
+      }
+    }
+  },
+  "teacher": "Instructor",
+  "vibrationTest": "Haptic feedback test",
+  "vibrationTestMessage": "Testing tactile alert system",
+  "studentIdCardTooltip": "Access ID credentials",
+  "customizeHomepageTooltip": "Modify command center layout",
+  "switchAccountButton": "Switch operative",
+  "fetchingAppInfo": "Retrieving system data...",
+  "checkingUpdatesInitialization": "Initializing update scanner...",
+  "loadingData": "Loading tactical data...",
+  "finalizingInitialization": "Finalizing boot sequence...",
+  "checkingConnection": "Testing uplink...",
+  "offlineModeDetected": "Offline mode engaged",
+  "loadingCachedData": "Loading cached intel...",
+  "minute": "minute",
+  "beforeClass": "before deployment",
+  "notificationPermissions": "Alert Clearances",
+  "notificationPermissionsDescription": "Grant system alert access",
+  "notificationPermission": "Alert Access",
+  "notificationPermissionDesc": "Allow tactical notifications",
+  "exactAlarmPermission": "Precision Timing",
+  "exactAlarmPermissionDesc": "Enable exact alert scheduling",
+  "batteryOptimization": "Power Management",
+  "batteryOptimizationDesc": "Disable power restrictions",
+  "grant": "Authorize",
+  "allPermissionsGranted": "All clearances approved",
+  "somePermissionsMissing": "Some clearances pending",
+  "remindLater": "I'll be back",
+  "continueAnyway": "Proceed without clearance",
+  "done": "Mission complete",
+  "checkPermissions": "Verify clearances",
+  "relatedNotices": "Related intel",
+  "exam": "Combat test",
+  "time": "Time coordinate",
+  "studentReason": "Operative justification",
+  "trainerComment": "Instructor notes",
+  "unexcusedAbsences": "Unauthorized absences",
+  "reAuthenticationCancelled": "Re-authentication aborted",
+  "consoleLogs": "System logs",
+  "viewAppDebugLogs": "Access debug matrix",
+  "buyMeACoffee": "Support the resistance",
+  "supportDevelopment": "Fund the development team",
+  "couldNotOpenBuyMeACoffee": "Support link malfunction",
+  "or": "Alternative protocol",
+  "signInWithMicrosoft": "Connect via Microsoft systems",
+  "clearLogs": "Purge logs",
+  "exportLogs": "Extract log data",
+  "all": "Complete dataset",
+  "debug": "Debug mode",
+  "enableLogging": "Activate logging protocol",
+  "clearFilters": "Reset parameters",
+  "logCopiedToClipboard": "Log data copied to buffer",
+  "clearAllLogs": "Purge all records",
+  "thisActionCannotBeUndone": "This termination is permanent",
+  "logsCleared": "Logs terminated successfully",
+  "clear": "Purge",
+  "logsExportedToClipboard": "Logs extracted to buffer",
+  "endpointReachable": "Command link operational",
+  "failedToInitializeMicrosoftAuth": "Microsoft link failed to initialize",
+  "authenticationFailed": "Authentication terminated",
+  "upcomingTests": "Upcoming evaluations",
+  "noTestsFound": "No tests in database",
+  "noUpcomingTests": "No tests scheduled",
+  "room": "Location",
+  "numberOfTestsToShow": "Test display count",
+  "cardView": "Intel cards",
+  "cardViewDescription": "Display data as tactical cards",
+  "timelineView": "Mission timeline",
+  "timelineViewDescription": "Display chronological sequence"
+}

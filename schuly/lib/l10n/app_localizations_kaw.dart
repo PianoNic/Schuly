@@ -157,6 +157,9 @@ class AppLocalizationsKaw extends AppLocalizations {
   String get kawaii => 'Cute speak';
 
   @override
+  String get arnold => 'Tewminatow Mode';
+
+  @override
   String get cancel => 'Cancew';
 
   @override

@@ -42,7 +42,7 @@ class LessonTile extends StatelessWidget {
     // Use primary color for current lesson, otherwise use a subtle accent
     final accentColor = isCurrentLesson
         ? Theme.of(context).colorScheme.primary
-        : Theme.of(context).colorScheme.primary.withOpacity(0.4);
+        : Theme.of(context).colorScheme.primary.withValues(alpha: 0.4);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 8),

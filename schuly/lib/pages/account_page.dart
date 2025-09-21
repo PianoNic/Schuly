@@ -365,7 +365,6 @@ class AccountPage extends StatelessWidget {
   }
 
   void _showAddAccountDialog(BuildContext context, ApiStore apiStore) {
-    final localizations = AppLocalizations.of(context)!;
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final formKey = GlobalKey<FormState>();
@@ -441,7 +440,7 @@ class AccountPage extends StatelessWidget {
                                     existingUserEmail: null, // New account
                                     onAuthSuccess: (token, refreshToken, email) async {
                                       // Add the Microsoft user with tokens
-                                      final error = await apiStore.addMicrosoftUser(token, refreshToken);
+                                      await apiStore.addMicrosoftUser(token, refreshToken);
 
                                       // Fetch user data
                                       await apiStore.fetchAll();

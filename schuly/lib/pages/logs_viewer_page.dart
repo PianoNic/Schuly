@@ -136,7 +136,7 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
           // Filters section
           Container(
             padding: const EdgeInsets.all(8.0),
-            color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
+            color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
             child: Column(
               children: [
                 // Search bar
@@ -352,7 +352,7 @@ class _LogsViewerPageState extends State<LogsViewerPage> {
                                           Container(
                                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                             decoration: BoxDecoration(
-                                              color: color.withOpacity(0.2),
+                                              color: color.withValues(alpha: 0.2),
                                               borderRadius: BorderRadius.circular(4),
                                             ),
                                             child: Text(

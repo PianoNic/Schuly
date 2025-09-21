@@ -67,8 +67,8 @@ void main() async {
       defaultApiClient = ApiClient(basePath: apiBaseUrl);
 
       // Log app startup
-      loggingService.info('Schuly app started', source: 'main');
-      loggingService.info('API base URL: $apiBaseUrl', source: 'main');
+      logInfo('Schuly app started', source: 'main');
+      logInfo('API base URL: $apiBaseUrl', source: 'main');
 
       if (sentryDsn.isNotEmpty) {
         // Initialize Sentry only if DSN is provided
@@ -126,7 +126,7 @@ void main() async {
         );
       } else {
         // Run without Sentry if no DSN provided
-        loggingService.info('Running without Sentry/GlitchTip integration (no DSN provided)', source: 'main');
+        logInfo('Running without Sentry/GlitchTip integration (no DSN provided)', source: 'main');
         runApp(
           MultiProvider(
             providers: [
@@ -147,7 +147,7 @@ void main() async {
         Sentry.captureException(error, stackTrace: stackTrace);
       } else {
         // Just log to console if Sentry is not configured
-        print('Uncaught error: $error\n$stackTrace');
+        logError('Uncaught error', source: 'main', error: error, stackTrace: stackTrace);
       }
     },
   );
@@ -311,8 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Initialize logger with context
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Logger.init(context);
-      final loggingService = Provider.of<LoggingService>(context, listen: false);
-      loggingService.info('HomePage initialized', source: 'MyHomePage');
+      logInfo('HomePage initialized', source: 'MyHomePage');
     });
 
     final apiStore = Provider.of<ApiStore>(context, listen: false);
@@ -609,7 +608,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   String _currentStepText = '';
-  bool _isAuthenticated = false;
   bool _hasStartedInit = false;
 
   bool _isOfflineMode = false;
@@ -644,7 +642,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // Initialize will check connectivity and load data accordingly
     await apiStore.initialize();
-    _isAuthenticated = apiStore.userEmails.isNotEmpty;
     _isOfflineMode = apiStore.isOfflineMode;
 
     // Show offline mode message if detected

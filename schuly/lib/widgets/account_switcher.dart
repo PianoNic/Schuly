@@ -570,7 +570,7 @@ class _AccountSwitcherState extends State<AccountSwitcher> {
                                   existingUserEmail: null, // New account
                                   onAuthSuccess: (token, refreshToken, email) async {
                                     // Add the Microsoft user with tokens
-                                    final error = await apiStore.addMicrosoftUser(token, refreshToken);
+                                    await apiStore.addMicrosoftUser(token, refreshToken);
 
                                     // Fetch user data
                                     await apiStore.fetchAll();

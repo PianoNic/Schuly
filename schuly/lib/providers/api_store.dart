@@ -215,7 +215,7 @@ class ApiStore extends ChangeNotifier {
 
   // Add a Microsoft OAuth user
   Future<String?> addMicrosoftUser(String accessToken, String refreshToken, [String? knownEmail]) async {
-    print('[addMicrosoftUser] Storing Microsoft OAuth tokens');
+    logDebug('Storing Microsoft OAuth tokens', source: 'ApiStore.addMicrosoftUser');
 
     final transaction = Sentry.startTransaction(
       'authenticate.microsoft.store',
@@ -258,12 +258,11 @@ class ApiStore extends ChangeNotifier {
         await StorageService.saveUser(email, _users[email]!);
         await StorageService.setActiveUser(email);
         await _setAuthFromUser(_users[email]!);
-        print('[addMicrosoftUser] Microsoft user persisted and auth set.');
+        logDebug('Microsoft user persisted and auth set', source: 'ApiStore.addMicrosoftUser');
 
         transaction.status = const SpanStatus.ok();
       } catch (storageError, stack) {
-        print('[addMicrosoftUser] Error persisting user: $storageError');
-        print(stack);
+        logError('Error persisting user', source: 'ApiStore.addMicrosoftUser', error: storageError, stackTrace: stack);
         transaction.status = const SpanStatus.internalError();
         transaction.throwable = storageError;
         await transaction.finish();
@@ -274,8 +273,7 @@ class ApiStore extends ChangeNotifier {
       notifyListeners();
       return null; // Success
     } catch (e, stack) {
-      print('[addMicrosoftUser] Exception: $e');
-      print(stack);
+      logError('Exception in addMicrosoftUser', source: 'ApiStore', error: e, stackTrace: stack);
       transaction.status = const SpanStatus.internalError();
       transaction.throwable = e;
       await transaction.finish();
@@ -285,14 +283,14 @@ class ApiStore extends ChangeNotifier {
 
   // Add a user (login and store)
   Future<String?> addUser(String email, String password) async {
-    print('[addUser] Attempting login for: $email');
+    logDebug('Attempting login for: $email', source: 'ApiStore.addUser');
     try {
       final response = await _apiService.authenticateWithResponse(email, password);
-      print('[addUser] API response: statusCode=${response.statusCode}, body=${response.body}');
+      logDebug('API response: statusCode=${response.statusCode}, body=${response.body}', source: 'ApiStore.addUser');
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         try {
           final result = jsonDecode(response.body);
-          print('[addUser] Decoded result: $result');
+          logDebug('Decoded result: $result', source: 'ApiStore.addUser');
           if (result['access_token'] != null) {
             final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
             final expiresIn = result['expires_in'] ?? 3600;
@@ -310,30 +308,27 @@ class ApiStore extends ChangeNotifier {
               await StorageService.saveUser(email, _users[email]!);
               await StorageService.setActiveUser(email);
               await _setAuthFromUser(_users[email]!);
-              print('[addUser] User persisted and auth set.');
+              logDebug('User persisted and auth set', source: 'ApiStore.addUser');
             } catch (storageError, stack) {
-              print('[addUser] Error persisting user: $storageError');
-              print(stack);
+              logError('Error persisting user', source: 'ApiStore.addUser', error: storageError, stackTrace: stack);
               return 'Login succeeded but failed to persist user: $storageError';
             }
             notifyListeners();
             return null; // Success
           } else {
-            print('[addUser] No access_token in response.');
+            logWarning('No access_token in response', source: 'ApiStore.addUser');
             return 'Login failed: No access_token in response. Body: \\${response.body}';
           }
         } catch (jsonError, stack) {
-          print('[addUser] JSON decode error: $jsonError');
-          print(stack);
+          logError('JSON decode error', source: 'ApiStore.addUser', error: jsonError, stackTrace: stack);
           return 'Login failed: JSON decode error: $jsonError';
         }
       } else {
-        print('[addUser] Login failed: statusCode=\\${response.statusCode}, body=\\${response.body}');
+        logWarning('Login failed: statusCode=${response.statusCode}, body=${response.body}', source: 'ApiStore.addUser');
         return 'Login failed: statusCode=\\${response.statusCode}, body=\\${response.body}';
       }
     } catch (e, stack) {
-      print('[addUser] Exception: $e');
-      print(stack);
+      logError('Exception in addUser', source: 'ApiStore', error: e, stackTrace: stack);
       return 'Login error: $e\\n$stack';
     }
   }

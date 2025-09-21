@@ -3,6 +3,7 @@ import '../services/push_notification_service.dart';
 import '../services/storage_service.dart';
 import '../l10n/app_localizations.dart';
 import '../widgets/notification_permission_dialog.dart';
+import '../utils/logger.dart';
 
 class NotificationConfigPage extends StatefulWidget {
   const NotificationConfigPage({super.key});
@@ -54,12 +55,12 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
   }
 
   Future<void> _saveAdvanceTime(int minutes) async {
-    print('💾 Saving notification advance time: $minutes minutes to storage');
+    logDebug('Saving notification advance time: $minutes minutes to storage', source: 'NotificationConfigPage');
     await StorageService.setNotificationAdvanceMinutes(minutes);
     setState(() {
       _advanceMinutes = minutes;
     });
-    print('✅ Notification time saved successfully');
+    logDebug('Notification time saved successfully', source: 'NotificationConfigPage');
   }
 
   Future<void> _scheduleTestNotification() async {
@@ -262,7 +263,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                                         },
                                         onChangeEnd: (value) {
                                           final minutes = value.round();
-                                          print('📱 Slider released - Saving notification time: $minutes minutes');
+                                          logDebug('Slider released - Saving notification time: $minutes minutes', source: 'NotificationConfigPage');
                                           _saveAdvanceTime(minutes);
                                         },
                                       ),
@@ -320,6 +321,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                                 try {
                                   await PushNotificationService.showTestNotification();
                                   if (mounted) {
+                                    // ignore: use_build_context_synchronously
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(localizations.testNotificationSent),
@@ -346,6 +348,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                                 try {
                                   await _scheduleTestNotification();
                                   if (mounted) {
+                                    // ignore: use_build_context_synchronously
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(localizations.notificationScheduledIn15Seconds),
@@ -359,6 +362,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                                     if (e.toString().contains('exact_alarms_not_permitted')) {
                                       errorMessage = localizations.exactAlarmPermissionRequired;
                                     }
+                                    // ignore: use_build_context_synchronously
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(errorMessage),

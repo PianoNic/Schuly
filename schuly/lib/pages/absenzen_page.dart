@@ -215,7 +215,7 @@ class _AbsenzenPageState extends State<AbsenzenPage> with SingleTickerProviderSt
 
                     return validAbsences.map((absence) {
                       // Filter notices for this absence
-                      final relatedNotices = _getNoticesForAbsence(absence, absenceNotices ?? []);
+                      final relatedNotices = _getNoticesForAbsence(absence, absenceNotices);
                       final selectedAbsenceId = apiStore.selectedAbsenceId;
                       final shouldExpand = selectedAbsenceId != null && absence.id == selectedAbsenceId;
 
@@ -644,7 +644,7 @@ class _CompactAbsenceItemState extends State<CompactAbsenceItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.localizations.relatedNotices ?? 'Related Notices', // TODO: Add relatedNotices to ARB
+                    widget.localizations.relatedNotices, // TODO: Add relatedNotices to ARB
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
@@ -764,7 +764,7 @@ class _CompactAbsenceItemState extends State<CompactAbsenceItem> {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
-                    widget.localizations.exam ?? 'Exam', // TODO: Add exam to ARB
+                    widget.localizations.exam, // TODO: Add exam to ARB
                     style: const TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
@@ -776,19 +776,19 @@ class _CompactAbsenceItemState extends State<CompactAbsenceItem> {
           ),
           const SizedBox(height: 6),
           _buildNoticeDateTimeDurationRow(
-            widget.localizations.date ?? 'Date',
+            widget.localizations.date,
             notice.date.split('T')[0].split('-').reversed.join('.'),
-            widget.localizations.time ?? 'Time',
+            widget.localizations.time,
             '${_formatTime(notice.hourFrom)} - ${_formatTime(notice.hourTo)}',
-            widget.localizations.duration ?? 'Duration',
+            widget.localizations.duration,
             _calculateDuration(notice.hourFrom, notice.hourTo)
           ),
           if (notice.studentReason != null && notice.studentReason!.isNotEmpty)
-            _buildNoticeDetailRow(widget.localizations.studentReason ?? 'Student Reason', notice.studentReason!), // TODO: Add studentReason to ARB
+            _buildNoticeDetailRow(widget.localizations.studentReason, notice.studentReason!), // TODO: Add studentReason to ARB
           if (notice.trainerComment != null && notice.trainerComment!.isNotEmpty)
-            _buildNoticeDetailRow(widget.localizations.trainerComment ?? 'Trainer Comment', notice.trainerComment!), // TODO: Add trainerComment to ARB
+            _buildNoticeDetailRow(widget.localizations.trainerComment, notice.trainerComment!), // TODO: Add trainerComment to ARB
           if (notice.comment != null && notice.comment!.isNotEmpty)
-            _buildNoticeDetailRow(widget.localizations.comment ?? 'Comment', notice.comment!), // TODO: Add comment to ARB
+            _buildNoticeDetailRow(widget.localizations.comment, notice.comment!), // TODO: Add comment to ARB
           const SizedBox(height: 4),
           _buildNoticeStatusRow(notice.status, notice.statusLong),
         ],
@@ -1008,11 +1008,11 @@ class _CompactAbsenceItemState extends State<CompactAbsenceItem> {
     if (isExcused) {
       icon = Icons.check_circle;
       color = Colors.green;
-      statusText = widget.localizations.excused ?? 'Excused';
+      statusText = widget.localizations.excused;
     } else {
       icon = Icons.cancel;
       color = Colors.red;
-      statusText = widget.localizations.notExcused ?? 'Not Excused';
+      statusText = widget.localizations.notExcused;
     }
 
     return Padding(

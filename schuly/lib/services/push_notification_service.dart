@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../utils/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
@@ -39,10 +40,10 @@ class PushNotificationService {
       final String timezoneName = 'Europe/Berlin'; // Change this to your timezone
       final location = tz.getLocation(timezoneName);
       tz.setLocalLocation(location);
-      debugPrint('Timezone set to: $timezoneName');
+      logDebug('Timezone set to: $timezoneName', source: 'PushNotificationService');
     } catch (e) {
       // Fallback to UTC if timezone not found
-      debugPrint('Failed to set timezone, using UTC: $e');
+      logDebug('Failed to set timezone, using UTC: $e', source: 'PushNotificationService');
       tz.setLocalLocation(tz.UTC);
     }
 
@@ -76,7 +77,6 @@ class PushNotificationService {
 
   static Future<void> _createNotificationChannels() async {
     // Create new channels with unique IDs to force recreation
-    final timestamp = DateTime.now().millisecondsSinceEpoch;
 
     // Use fresh channel IDs
     const pushAssistChannel = AndroidNotificationChannel(
@@ -110,13 +110,13 @@ class PushNotificationService {
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(testChannel);
 
-    debugPrint('Notification channels recreated with max importance');
+    logDebug('Notification channels recreated with max importance', source: 'PushNotificationService');
   }
 
   @pragma('vm:entry-point')
   static void _onNotificationTapped(NotificationResponse response) {
     // Handle notification tap - could navigate to specific page
-    debugPrint('Notification tapped: ${response.payload}');
+    logDebug('Notification tapped: ${response.payload}', source: 'PushNotificationService');
   }
 
   // Request permissions for notifications
@@ -132,7 +132,7 @@ class PushNotificationService {
       if (await Permission.scheduleExactAlarm.isDenied) {
         final exactAlarmPermission = await Permission.scheduleExactAlarm.request();
         if (!exactAlarmPermission.isGranted) {
-          debugPrint('Exact alarm permission denied - notifications may not work properly');
+          logDebug('Exact alarm permission denied - notifications may not work properly', source: 'PushNotificationService');
         }
       }
 
@@ -207,13 +207,13 @@ class PushNotificationService {
 
     // Check if permissions are granted
     if (!await arePermissionsGranted()) {
-      debugPrint('Permissions not granted for notifications');
+      logDebug('Permissions not granted for notifications', source: 'PushNotificationService');
       return;
     }
 
     // Check exact alarm permission for Android
     if (Platform.isAndroid && !await Permission.scheduleExactAlarm.isGranted) {
-      debugPrint('Exact alarm permission not granted - cannot schedule notification');
+      logDebug('Exact alarm permission not granted - cannot schedule notification', source: 'PushNotificationService');
       return;
     }
 
@@ -267,7 +267,7 @@ class PushNotificationService {
           UILocalNotificationDateInterpretation.absoluteTime,
     );
 
-    debugPrint('Scheduled notification for $subject at ${notificationTime.toString()}');
+    logDebug('Scheduled notification for $subject at ${notificationTime.toString()}', source: 'PushNotificationService');
   }
 
   // Schedule notifications for multiple agenda items
@@ -303,7 +303,7 @@ class PushNotificationService {
           startTime: startDateTime,
         );
       } catch (e) {
-        debugPrint('Error scheduling notification for agenda item: $e');
+        logWarning('Error scheduling notification for agenda item: $e', source: 'PushNotificationService');
       }
     }
   }
@@ -312,7 +312,7 @@ class PushNotificationService {
   static Future<void> cancelAllNotifications() async {
     if (!_initialized) await initialize();
     await _notifications.cancelAll();
-    debugPrint('All notifications cancelled');
+    logDebug('All notifications cancelled', source: 'PushNotificationService');
   }
 
   // Cancel a specific notification
@@ -347,22 +347,22 @@ class PushNotificationService {
       final isIgnored = await Permission.ignoreBatteryOptimizations.isGranted;
 
       if (!isIgnored) {
-        debugPrint('⚠️ Battery optimization is enabled - notifications may not work when app is closed');
-        debugPrint('📱 Requesting battery optimization exemption...');
+        logDebug('Battery optimization is enabled - notifications may not work when app is closed', source: 'PushNotificationService');
+        logDebug('Requesting battery optimization exemption...', source: 'PushNotificationService');
 
         // Request exemption - this will show a system dialog
         final status = await Permission.ignoreBatteryOptimizations.request();
 
         if (status.isGranted) {
-          debugPrint('✅ Battery optimization exemption granted');
+          logDebug('Battery optimization exemption granted', source: 'PushNotificationService');
           return true;
         } else {
-          debugPrint('❌ Battery optimization exemption denied - notifications may be delayed');
+          logDebug('Battery optimization exemption denied - notifications may be delayed', source: 'PushNotificationService');
           return false;
         }
       }
 
-      debugPrint('✅ Battery optimization already disabled for this app');
+      logDebug('Battery optimization already disabled for this app', source: 'PushNotificationService');
       return true;
     }
     return true;
@@ -377,7 +377,7 @@ class PushNotificationService {
 
     // Check and request exact alarm permission first
     if (Platform.isAndroid && !await Permission.scheduleExactAlarm.isGranted) {
-      debugPrint('❌ Exact alarm permission not granted. Requesting...');
+      logDebug('Exact alarm permission not granted. Requesting...', source: 'PushNotificationService');
       final granted = await requestExactAlarmPermission();
       if (!granted) {
         throw PlatformException(
@@ -387,20 +387,20 @@ class PushNotificationService {
       }
     }
 
-    debugPrint('🔔 Scheduling test notification for 15 seconds from now...');
+    logDebug('Scheduling test notification for 15 seconds from now...', source: 'PushNotificationService');
 
     // Also set a timer to show notification if app is still in foreground
     Future.delayed(const Duration(seconds: 15), () async {
-      debugPrint('⏰ Checking if we need to manually show notification...');
+      logDebug('Checking if we need to manually show notification...', source: 'PushNotificationService');
 
       // Check if the scheduled notification is still pending
       final pending = await _notifications.pendingNotificationRequests();
       final stillPending = pending.any((n) => n.id == 999);
 
       if (!stillPending) {
-        debugPrint('✅ Scheduled notification was already shown');
+        logDebug('Scheduled notification was already shown', source: 'PushNotificationService');
       } else {
-        debugPrint('📱 App still in foreground, manually showing notification...');
+        logDebug('App still in foreground, manually showing notification...', source: 'PushNotificationService');
         // The scheduled notification might not show if app is in foreground
         // So we manually show it
         await showTestNotificationNow();
@@ -446,9 +446,9 @@ class PushNotificationService {
       // Create TZDateTime from the scheduled date
       final tz.TZDateTime scheduledTZDate = tz.TZDateTime.from(scheduledDate, tz.local);
 
-      debugPrint('Current time: ${now.toString()}');
-      debugPrint('Scheduled for: ${scheduledDate.toString()}');
-      debugPrint('TZ scheduled: ${scheduledTZDate.toString()}');
+      logDebug('Current time: ${now.toString()}', source: 'PushNotificationService');
+      logDebug('Scheduled for: ${scheduledDate.toString()}', source: 'PushNotificationService');
+      logDebug('TZ scheduled: ${scheduledTZDate.toString()}', source: 'PushNotificationService');
 
       await _notifications.zonedSchedule(
         999,
@@ -461,18 +461,18 @@ class PushNotificationService {
         payload: 'test_notification',
       );
 
-      debugPrint('✅ Test notification scheduled successfully');
+      logDebug('Test notification scheduled successfully', source: 'PushNotificationService');
 
       // Verify it was scheduled
       final pending = await _notifications.pendingNotificationRequests();
       final testNotification = pending.where((n) => n.id == 999).firstOrNull;
       if (testNotification != null) {
-        debugPrint('✅ Verified: Test notification is in pending list');
+        logDebug('Verified: Test notification is in pending list', source: 'PushNotificationService');
       } else {
-        debugPrint('⚠️ Warning: Test notification not found in pending list');
+        logWarning('Test notification not found in pending list', source: 'PushNotificationService');
       }
     } catch (e) {
-      debugPrint('❌ Failed to schedule test notification: $e');
+      logError('Failed to schedule test notification', source: 'PushNotificationService', error: e);
       rethrow;
     }
   }
@@ -486,12 +486,12 @@ class PushNotificationService {
       final channels = await plugin?.getNotificationChannels();
       if (channels != null) {
         for (final channel in channels) {
-          debugPrint('📱 Channel: ${channel.id}');
-          debugPrint('   - Name: ${channel.name}');
-          debugPrint('   - Importance: ${channel.importance.name}');
-          debugPrint('   - Sound: ${channel.sound?.sound}');
-          debugPrint('   - Enable vibration: ${channel.enableVibration}');
-          debugPrint('   - Show badge: ${channel.showBadge}');
+          logDebug('Channel: ${channel.id}', source: 'PushNotificationService');
+          logDebug('   - Name: ${channel.name}', source: 'PushNotificationService');
+          logDebug('   - Importance: ${channel.importance.name}', source: 'PushNotificationService');
+          logDebug('   - Sound: ${channel.sound?.sound}', source: 'PushNotificationService');
+          logDebug('   - Enable vibration: ${channel.enableVibration}', source: 'PushNotificationService');
+          logDebug('   - Show badge: ${channel.showBadge}', source: 'PushNotificationService');
         }
       }
     }
@@ -544,9 +544,9 @@ class PushNotificationService {
       );
       // Cancel the scheduled one since we showed it manually
       await _notifications.cancel(999);
-      debugPrint('✅ Test notification shown manually (app was in foreground)');
+      logDebug('Test notification shown manually (app was in foreground)', source: 'PushNotificationService');
     } catch (e) {
-      debugPrint('❌ Failed to show test notification: $e');
+      logError('Failed to show test notification', source: 'PushNotificationService', error: e);
     }
   }
 
@@ -554,7 +554,7 @@ class PushNotificationService {
   static Future<void> showTestNotification() async {
     if (!_initialized) await initialize();
 
-    debugPrint('🔔 Showing simple test notification...');
+    logDebug('Showing simple test notification...', source: 'PushNotificationService');
 
     // Try the simplest possible notification
     const androidDetails = AndroidNotificationDetails(
@@ -583,7 +583,7 @@ class PushNotificationService {
         'If you see this, notifications are working!',
         notificationDetails,
       );
-      debugPrint('✅ Simple test notification sent');
+      logDebug('Simple test notification sent', source: 'PushNotificationService');
 
       // Also try with the Android system notification API directly
       await _notifications.show(
@@ -599,9 +599,9 @@ class PushNotificationService {
           ),
         ),
       );
-      debugPrint('✅ Second test notification sent');
+      logDebug('Second test notification sent', source: 'PushNotificationService');
     } catch (e) {
-      debugPrint('❌ Failed to show test notification: $e');
+      logError('Failed to show test notification', source: 'PushNotificationService', error: e);
     }
   }
 }

@@ -6,10 +6,11 @@
   <strong>Schuly, the better Schulnetz app</strong>
 </p>
 <p align="center">
-  <a href="https://github.com/PianoNic/Schuly"><img src="https://badgetrack.pianonic.ch/badge?tag=schuly&label=visits&color=3da8ff&style=flat" alt="visits"/></a>
-  <a href="https://github.com/PianoNic/Schuly/blob/main/LICENSE"><img src="https://img.shields.io/github/license/PianoNic/Schuly?color=3da8ff"/></a>
-  <a href="https://github.com/PianoNic/Schuly/releases"><img src="https://img.shields.io/github/v/release/PianoNic/Schuly?include_prereleases&color=3da8ff&label=Latest%20Release"/></a>
-  <a href="#-installation"><img src="https://img.shields.io/badge/Selfhost-Instructions-3da8ff.svg"/></a>
+  <a href="https://github.com/PianoNic/schuly/stargazers"><img src="https://img.shields.io/github/stars/PianoNic/schuly?style=flat&color=3da8ff" alt="GitHub stars"/></a>
+  <a href="https://github.com/PianoNic/schuly"><img src="https://badgetrack.pianonic.ch/badge?tag=schuly&label=visits&color=3da8ff&style=flat" alt="visits"/></a>
+  <a href="https://github.com/PianoNic/schuly/blob/main/LICENSE"><img src="https://img.shields.io/github/license/PianoNic/schuly?color=3da8ff" alt="License"/></a>
+  <a href="https://github.com/PianoNic/schuly/releases"><img src="https://img.shields.io/github/v/release/PianoNic/schuly?include_prereleases&color=3da8ff&label=Latest%20Release" alt="Latest Release"/></a>
+  <a href="#installation"><img src="https://img.shields.io/badge/Selfhost-Instructions-3da8ff.svg" alt="Installation"/></a>
 </p>
 
 > [!IMPORTANT]
@@ -28,7 +29,7 @@ A modern mobile app that provides a superior alternative to the official Schulne
 
 ## Installation
 
-Download from **[Releases](https://github.com/PianoNic/Schuly/releases)**:
+Download from **[Releases](https://github.com/PianoNic/schuly/releases)**:
 - **Android**: `.apk` file
 - **iOS**: `.ipa` file (sideloading required)
 

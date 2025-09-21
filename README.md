@@ -25,7 +25,6 @@ A modern mobile app that provides a superior alternative to the official Schulne
   <img src="./assets/showcase (2).png" width="19%" alt="Screenshot 2">
   <img src="./assets/showcase (1).png" width="19%" alt="Screenshot 3">
   <img src="./assets/showcase (4).png" width="19%" alt="Screenshot 4">
-  <img src="./assets/showcase (5).png" width="19%" alt="Screenshot 5">
 </p>
 
 ## Features

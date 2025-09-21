@@ -21,10 +21,10 @@ A modern mobile app that provides a superior alternative to the official Schulne
 ## Screenshots
 
 <p align="center">
-  <img src="./assets/showcase (3).png" width="25%" alt="Screenshot 1">
-  <img src="./assets/showcase (2).png" width="25%" alt="Screenshot 2">
-  <img src="./assets/showcase (1).png" width="25%" alt="Screenshot 3">
-  <img src="./assets/showcase (4).png" width="25%" alt="Screenshot 4">
+  <img src="./assets/showcase (3).png" width="23%" alt="Screenshot 1">
+  <img src="./assets/showcase (2).png" width="23%" alt="Screenshot 2">
+  <img src="./assets/showcase (1).png" width="23%" alt="Screenshot 3">
+  <img src="./assets/showcase (4).png" width="23%" alt="Screenshot 4">
 </p>
 
 ## Features

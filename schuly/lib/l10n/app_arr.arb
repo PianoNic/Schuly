@@ -760,5 +760,41 @@
   "errorTrackingRestartRequired": "Restart the app for changes to take effect, ye landlubber!",
   "@errorTrackingRestartRequired": {
     "description": "Privacy consent: errorTrackingRestartRequired"
+  },
+  "gradeDisplaySettings": "Grade Display Settings",
+  "@gradeDisplaySettings": {
+    "description": "Grade display settings title"
+  },
+  "chooseGradeDisplay": "Choose how grades are displayed:",
+  "@chooseGradeDisplay": {
+    "description": "Grade display selection prompt"
+  },
+  "exactGrades": "Exact Grades",
+  "@exactGrades": {
+    "description": "Exact grades option"
+  },
+  "exactGradesDesc": "Show precise grade values",
+  "@exactGradesDesc": {
+    "description": "Description for exact grades"
+  },
+  "roundedGrades": "Report Card Grades",
+  "@roundedGrades": {
+    "description": "Rounded grades option"
+  },
+  "roundedGradesDesc": "Rounded to 0.5 (report card grade)",
+  "@roundedGradesDesc": {
+    "description": "Description for rounded grades"
+  },
+  "bothGrades": "Both",
+  "@bothGrades": {
+    "description": "Both grades option"
+  },
+  "bothGradesDesc": "Show exact and rounded grades",
+  "@bothGradesDesc": {
+    "description": "Description for both grades"
+  },
+  "gradeRoundingInfo": "Report card grades are rounded to the nearest 0.5 as they appear on official documents.",
+  "@gradeRoundingInfo": {
+    "description": "Information about grade rounding"
   }
 }

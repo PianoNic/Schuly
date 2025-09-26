@@ -1465,4 +1465,32 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get testYourMaggusLevel =>
       'Test your own Maggus level in the Schuly App!';
+
+  @override
+  String get gradeDisplaySettings => 'Cijferweergave-instellingen';
+
+  @override
+  String get chooseGradeDisplay => 'Kies hoe cijfers worden weergegeven:';
+
+  @override
+  String get exactGrades => 'Exacte cijfers';
+
+  @override
+  String get exactGradesDesc => 'Toon precieze cijferwaarden';
+
+  @override
+  String get roundedGrades => 'Rapportcijfers';
+
+  @override
+  String get roundedGradesDesc => 'Afgerond op 0,5 (rapportcijfer)';
+
+  @override
+  String get bothGrades => 'Beide';
+
+  @override
+  String get bothGradesDesc => 'Toon exacte en afgeronde cijfers';
+
+  @override
+  String get gradeRoundingInfo =>
+      'Rapportcijfers worden afgerond op de dichtstbijzijnde 0,5 zoals ze op officiële documenten verschijnen.';
 }

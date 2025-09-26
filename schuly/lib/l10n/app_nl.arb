@@ -1877,5 +1877,41 @@
   "timelineViewDescription": "Compacte tijdlijn met tijd-gebaseerde indeling",
   "@timelineViewDescription": {
     "description": "Description for timeline view option"
+  },
+  "gradeDisplaySettings": "Cijferweergave-instellingen",
+  "@gradeDisplaySettings": {
+    "description": "Grade display settings title"
+  },
+  "chooseGradeDisplay": "Kies hoe cijfers worden weergegeven:",
+  "@chooseGradeDisplay": {
+    "description": "Grade display selection prompt"
+  },
+  "exactGrades": "Exacte cijfers",
+  "@exactGrades": {
+    "description": "Exact grades option"
+  },
+  "exactGradesDesc": "Toon precieze cijferwaarden",
+  "@exactGradesDesc": {
+    "description": "Description for exact grades"
+  },
+  "roundedGrades": "Rapportcijfers",
+  "@roundedGrades": {
+    "description": "Rounded grades option"
+  },
+  "roundedGradesDesc": "Afgerond op 0,5 (rapportcijfer)",
+  "@roundedGradesDesc": {
+    "description": "Description for rounded grades"
+  },
+  "bothGrades": "Beide",
+  "@bothGrades": {
+    "description": "Both grades option"
+  },
+  "bothGradesDesc": "Toon exacte en afgeronde cijfers",
+  "@bothGradesDesc": {
+    "description": "Description for both grades"
+  },
+  "gradeRoundingInfo": "Rapportcijfers worden afgerond op de dichtstbijzijnde 0,5 zoals ze op officiële documenten verschijnen.",
+  "@gradeRoundingInfo": {
+    "description": "Information about grade rounding"
   }
 }

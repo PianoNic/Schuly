@@ -1466,4 +1466,32 @@ class AppLocalizationsGsw extends AppLocalizations {
   @override
   String get testYourMaggusLevel =>
       'Test your own Maggus level in the Schuly App!';
+
+  @override
+  String get gradeDisplaySettings => 'Note Azeig Iistellige';
+
+  @override
+  String get chooseGradeDisplay => 'Wähl wie Note azeigt wärde:';
+
+  @override
+  String get exactGrades => 'Exakti Note';
+
+  @override
+  String get exactGradesDesc => 'Zeig präzisi Notewärt';
+
+  @override
+  String get roundedGrades => 'Zügnisnote';
+
+  @override
+  String get roundedGradesDesc => 'Grundet uf 0.5 (Zügnisnote)';
+
+  @override
+  String get bothGrades => 'Beids';
+
+  @override
+  String get bothGradesDesc => 'Zeig exakti und grundeti Note';
+
+  @override
+  String get gradeRoundingInfo =>
+      'Zügnisnote wärde uf die nächsti 0.5 grundet, wie sie uf offizielle Dokumänt erschined.';
 }

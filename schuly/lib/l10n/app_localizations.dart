@@ -2797,6 +2797,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Test your own Maggus level in the Schuly App!'**
   String get testYourMaggusLevel;
+
+  /// Title for grade display settings modal
+  ///
+  /// In en, this message translates to:
+  /// **'Grade Display Settings'**
+  String get gradeDisplaySettings;
+
+  /// Instructions for grade display settings
+  ///
+  /// In en, this message translates to:
+  /// **'Choose how grades are displayed:'**
+  String get chooseGradeDisplay;
+
+  /// Option for showing exact grade values
+  ///
+  /// In en, this message translates to:
+  /// **'Exact Grades'**
+  String get exactGrades;
+
+  /// Description for exact grades option
+  ///
+  /// In en, this message translates to:
+  /// **'Show precise grade values'**
+  String get exactGradesDesc;
+
+  /// Option for showing rounded grades as on report cards
+  ///
+  /// In en, this message translates to:
+  /// **'Report Card Grades'**
+  String get roundedGrades;
+
+  /// Description for rounded grades option
+  ///
+  /// In en, this message translates to:
+  /// **'Rounded to nearest 0.5 (Zeugnisnote)'**
+  String get roundedGradesDesc;
+
+  /// Option for showing both exact and rounded grades
+  ///
+  /// In en, this message translates to:
+  /// **'Both'**
+  String get bothGrades;
+
+  /// Description for both grades option
+  ///
+  /// In en, this message translates to:
+  /// **'Show exact and rounded grades'**
+  String get bothGradesDesc;
+
+  /// Information about grade rounding for report cards
+  ///
+  /// In en, this message translates to:
+  /// **'Report card grades are rounded to the nearest 0.5 as they appear on official documents.'**
+  String get gradeRoundingInfo;
 }
 
 class _AppLocalizationsDelegate

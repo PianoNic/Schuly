@@ -71,8 +71,51 @@ class GradeUtils {
     return subjectAverages.reduce((a, b) => a + b) / subjectAverages.length;
   }
 
-  /// Format grade for display (1 decimal place)
+  /// Format grade for display (show raw value with all decimals)
   static String formatGrade(double grade) {
-    return grade.toStringAsFixed(1);
+    // Show the raw grade value as it is
+    String gradeStr = grade.toString();
+    // Remove trailing .0 if it's a whole number
+    if (gradeStr.endsWith('.0')) {
+      gradeStr = gradeStr.substring(0, gradeStr.length - 2);
+    }
+    return gradeStr;
   }
+
+  /// Round grade to nearest 0.5 for Swiss grading system (Zeugnisnote)
+  static double roundToSwissGrade(double grade) {
+    // Swiss grading rounds to nearest 0.5
+    // Examples: 4.24 -> 4.0, 4.25 -> 4.5, 4.74 -> 4.5, 4.75 -> 5.0
+    return (grade * 2).round() / 2;
+  }
+
+  /// Format Swiss rounded grade for display
+  static String formatSwissGrade(double grade) {
+    final rounded = roundToSwissGrade(grade);
+    // If it's a whole number, show without decimal (4, 5, 6)
+    // Otherwise show with .5 (4.5, 5.5)
+    if (rounded == rounded.roundToDouble()) {
+      return rounded.toStringAsFixed(0);
+    }
+    return rounded.toStringAsFixed(1);
+  }
+
+  /// Get display grade based on settings
+  static String getDisplayGrade(double grade, GradeDisplayMode mode) {
+    switch (mode) {
+      case GradeDisplayMode.exact:
+        return formatGrade(grade);
+      case GradeDisplayMode.rounded:
+        return formatSwissGrade(grade);
+      case GradeDisplayMode.both:
+        return '${formatGrade(grade)} (${formatSwissGrade(grade)})';
+    }
+  }
+}
+
+/// Enum for grade display modes
+enum GradeDisplayMode {
+  exact,    // Show exact grade (e.g., 4.7)
+  rounded,  // Show rounded grade (e.g., 4.5)
+  both,     // Show both (e.g., 4.7 (4.5))
 }

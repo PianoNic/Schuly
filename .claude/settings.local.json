@@ -5,7 +5,11 @@
       "WebSearch",
       "Bash(dart analyze:*)",
       "Bash(python:*)",
-      "Bash(del add_privacy_translations.py)"
+      "Bash(del add_privacy_translations.py)",
+      "Bash(for:*)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(tail:*)",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

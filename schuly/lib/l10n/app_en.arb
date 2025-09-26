@@ -1985,5 +1985,50 @@
   "testYourMaggusLevel": "Test your own Maggus level in the Schuly App!",
   "@testYourMaggusLevel": {
     "description": "Invitation text for sharing Maggus result"
+  },
+
+  "gradeDisplaySettings": "Grade Display Settings",
+  "@gradeDisplaySettings": {
+    "description": "Title for grade display settings modal"
+  },
+
+  "chooseGradeDisplay": "Choose how grades are displayed:",
+  "@chooseGradeDisplay": {
+    "description": "Instructions for grade display settings"
+  },
+
+  "exactGrades": "Exact Grades",
+  "@exactGrades": {
+    "description": "Option for showing exact grade values"
+  },
+
+  "exactGradesDesc": "Show precise grade values",
+  "@exactGradesDesc": {
+    "description": "Description for exact grades option"
+  },
+
+  "roundedGrades": "Report Card Grades",
+  "@roundedGrades": {
+    "description": "Option for showing rounded grades as on report cards"
+  },
+
+  "roundedGradesDesc": "Rounded to nearest 0.5 (Zeugnisnote)",
+  "@roundedGradesDesc": {
+    "description": "Description for rounded grades option"
+  },
+
+  "bothGrades": "Both",
+  "@bothGrades": {
+    "description": "Option for showing both exact and rounded grades"
+  },
+
+  "bothGradesDesc": "Show exact and rounded grades",
+  "@bothGradesDesc": {
+    "description": "Description for both grades option"
+  },
+
+  "gradeRoundingInfo": "Report card grades are rounded to the nearest 0.5 as they appear on official documents.",
+  "@gradeRoundingInfo": {
+    "description": "Information about grade rounding for report cards"
   }
 }

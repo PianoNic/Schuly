@@ -1478,4 +1478,32 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get testYourMaggusLevel =>
       'Teste deinen eigenen Maggus-Level in der Schuly App!';
+
+  @override
+  String get gradeDisplaySettings => 'Notenanzeigeeinstellungen';
+
+  @override
+  String get chooseGradeDisplay => 'Wähle wie Noten angezeigt werden:';
+
+  @override
+  String get exactGrades => 'Exakte Noten';
+
+  @override
+  String get exactGradesDesc => 'Zeige präzise Notenwerte';
+
+  @override
+  String get roundedGrades => 'Zeugnisnoten';
+
+  @override
+  String get roundedGradesDesc => 'Gerundet auf 0.5 (Zeugnisnote)';
+
+  @override
+  String get bothGrades => 'Beides';
+
+  @override
+  String get bothGradesDesc => 'Zeige exakte und gerundete Noten';
+
+  @override
+  String get gradeRoundingInfo =>
+      'Zeugnisnoten werden auf die nächste 0.5 gerundet, wie sie auf offiziellen Dokumenten erscheinen.';
 }

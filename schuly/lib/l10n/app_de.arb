@@ -656,5 +656,32 @@
   },
 
   "testYourMaggusLevel": "Teste deinen eigenen Maggus-Level in der Schuly App!",
-  "@testYourMaggusLevel": {}
+  "@testYourMaggusLevel": {},
+
+  "gradeDisplaySettings": "Notenanzeigeeinstellungen",
+  "@gradeDisplaySettings": {},
+
+  "chooseGradeDisplay": "Wähle wie Noten angezeigt werden:",
+  "@chooseGradeDisplay": {},
+
+  "exactGrades": "Exakte Noten",
+  "@exactGrades": {},
+
+  "exactGradesDesc": "Zeige präzise Notenwerte",
+  "@exactGradesDesc": {},
+
+  "roundedGrades": "Zeugnisnoten",
+  "@roundedGrades": {},
+
+  "roundedGradesDesc": "Gerundet auf 0.5 (Zeugnisnote)",
+  "@roundedGradesDesc": {},
+
+  "bothGrades": "Beides",
+  "@bothGrades": {},
+
+  "bothGradesDesc": "Zeige exakte und gerundete Noten",
+  "@bothGradesDesc": {},
+
+  "gradeRoundingInfo": "Zeugnisnoten werden auf die nächste 0.5 gerundet, wie sie auf offiziellen Dokumenten erscheinen.",
+  "@gradeRoundingInfo": {}
 }

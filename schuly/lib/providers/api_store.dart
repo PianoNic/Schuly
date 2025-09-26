@@ -7,6 +7,7 @@ import '../services/storage_service.dart';
 import '../services/push_notification_service.dart';
 import '../utils/logger.dart';
 import '../utils/error_handler.dart';
+import '../utils/grade_utils.dart';
 import 'dart:convert';
 import 'dart:async';
 
@@ -70,6 +71,15 @@ class ApiStore extends ChangeNotifier {
   void setAgendaView(bool isListView) async {
     _isAgendaListView = isListView;
     await StorageService.setAgendaViewPreference(isListView);
+    notifyListeners();
+  }
+
+  // Grade display mode
+  GradeDisplayMode _gradeDisplayMode = GradeDisplayMode.exact;
+  GradeDisplayMode get gradeDisplayMode => _gradeDisplayMode;
+
+  void setGradeDisplayMode(GradeDisplayMode mode) {
+    _gradeDisplayMode = mode;
     notifyListeners();
   }
 
@@ -186,6 +196,19 @@ class ApiStore extends ChangeNotifier {
 
       // Load agenda view preference
       _isAgendaListView = await StorageService.getAgendaViewPreference();
+
+      // Load grade display mode preference
+      final gradeMode = await StorageService.getGradeDisplayMode();
+      switch (gradeMode) {
+        case 'rounded':
+          _gradeDisplayMode = GradeDisplayMode.rounded;
+          break;
+        case 'both':
+          _gradeDisplayMode = GradeDisplayMode.both;
+          break;
+        default:
+          _gradeDisplayMode = GradeDisplayMode.exact;
+      }
 
       // Check if API is reachable (with 5 second timeout)
       final isApiReachable = await _checkApiConnectivity();

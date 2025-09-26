@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
+import '../providers/api_store.dart';
+import '../utils/grade_utils.dart';
 import 'package:schuly/api/lib/api.dart';
 import '../l10n/app_localizations.dart';
 
@@ -50,6 +53,27 @@ class GradeTile extends StatelessWidget {
     final appColors = Theme.of(context).extension<AppColors>();
     final surfaceContainer = appColors?.surfaceContainer ??
         Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3);
+    final apiStore = Provider.of<ApiStore>(context);
+
+    // Parse grade to double if available
+    double? gradeValue;
+    if (grade.mark != null && grade.mark!.isNotEmpty) {
+      gradeValue = double.tryParse(grade.mark!);
+    }
+
+    // Always show raw value for individual grades in tiles
+    String gradeDisplay;
+    if (gradeValue != null) {
+      // Show raw value directly
+      String rawGrade = gradeValue.toString();
+      // Remove trailing .0 if it's a whole number
+      if (rawGrade.endsWith('.0')) {
+        rawGrade = rawGrade.substring(0, rawGrade.length - 2);
+      }
+      gradeDisplay = rawGrade;
+    } else {
+      gradeDisplay = '?';
+    }
 
     return GestureDetector(
       onTap: () => _showGradeDetails(context),
@@ -64,7 +88,7 @@ class GradeTile extends StatelessWidget {
           children: [
             // Grade display - just the number
             Text(
-              (grade.mark == null || grade.mark!.isEmpty) ? '?' : grade.mark!,
+              gradeDisplay,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.primary,
@@ -161,6 +185,22 @@ class GradeDetailsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
+    final apiStore = Provider.of<ApiStore>(context);
+
+    // Parse grade to double if available
+    double? gradeValue;
+    if (grade.mark != null && grade.mark!.isNotEmpty) {
+      gradeValue = double.tryParse(grade.mark!);
+    }
+
+    // Get display text based on mode
+    String gradeDisplay;
+    if (gradeValue != null) {
+      gradeDisplay = GradeUtils.getDisplayGrade(gradeValue, apiStore.gradeDisplayMode);
+    } else {
+      gradeDisplay = '?';
+    }
+
     return AlertDialog(
       title: Text(
         localizations.gradeDetails,
@@ -184,7 +224,7 @@ class GradeDetailsDialog extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Text(
-                    (grade.mark == null || grade.mark!.isEmpty) ? '?' : grade.mark!,
+                    gradeDisplay,
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -220,11 +260,15 @@ class GradeDetailsDialog extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              _buildDetailRow('${localizations.gradeLabel}:', (grade.mark == null || grade.mark!.isEmpty) ? '?' : grade.mark!, context),
+              _buildDetailRow('${localizations.gradeLabel}:', gradeDisplay, context),
               if (grade.points != null)
                 _buildDetailRow('${localizations.pointsLabel}:', grade.points, context),
               _buildDetailRow('${localizations.weightLabel}:', grade.weight, context),
-              _buildDetailRow('${localizations.courseGradeLabel}:', (grade.courseGrade == null || grade.courseGrade!.isEmpty) ? '?' : grade.courseGrade!, context),
+              _buildDetailRow('${localizations.courseGradeLabel}:', grade.courseGrade != null && grade.courseGrade!.isNotEmpty
+                ? (double.tryParse(grade.courseGrade!) != null
+                  ? GradeUtils.getDisplayGrade(double.parse(grade.courseGrade!), apiStore.gradeDisplayMode)
+                  : grade.courseGrade!)
+                : '?', context),
 
               if (grade.examinationGroups.averageExamGroup != null) ...[
                 const SizedBox(height: 16),

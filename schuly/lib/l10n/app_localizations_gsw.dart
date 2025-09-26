@@ -1151,6 +1151,106 @@ class AppLocalizationsGsw extends AppLocalizations {
   }
 
   @override
+  String get privacyAndDataCollection => 'Dateschutz & Date-Sammlig';
+
+  @override
+  String get welcomeToSchuly => 'Willkomme bi Schuly!';
+
+  @override
+  String get privacyConsentIntro =>
+      'Zum dini Erfahrig z\'verbessere und Problem schnell z\'löse, sammle mir Fählerberich wenn d\'App abstürzt oder Problem het.';
+
+  @override
+  String get whatWeCollect => 'Was mir sammle:';
+
+  @override
+  String get whatWeDontCollect => 'Was mir NID sammle:';
+
+  @override
+  String get errorReports => 'Fählerberich';
+
+  @override
+  String get errorReportsDesc =>
+      'Stack-Traces, Fählermäldig und Breadcrumbs zum Bugs z\'fixe';
+
+  @override
+  String get deviceInformation => 'Grät-Informatione';
+
+  @override
+  String get deviceInformationDesc =>
+      'Grätmodell, OS-Version, Bildschirmgrössi, Speicher, Batterie-Stand und App-Version';
+
+  @override
+  String get performanceData => 'Leischtigsdate';
+
+  @override
+  String get performanceDataDesc =>
+      'API-Antwortzite, App-Lifecycle-Events und Speichernutzig';
+
+  @override
+  String get usagePatterns => 'Nutzigsmuschter';
+
+  @override
+  String get usagePatternsDesc =>
+      'Navigations-Breadcrumbs und usgführti API-Operatione (fetchAll, etc.)';
+
+  @override
+  String get userContext => 'Benutzerkontext';
+
+  @override
+  String get userContextDesc =>
+      'Dini E-Mail-Adrässe (zum kontospezifischi Problem z\'identifiziere)';
+
+  @override
+  String get personalData => 'Persönlichi Date';
+
+  @override
+  String get personalDataDesc =>
+      'Dini Note, Stundeplan-Inhält, Notize und persönlichi Nachricht blibe privat';
+
+  @override
+  String get credentials => 'Zugangstdate';
+
+  @override
+  String get credentialsDesc =>
+      'Dini Passwörter, Authentifizierigstoken und sensibli API-Antworte wärde usgfilteret';
+
+  @override
+  String get privacyConsentChangeAnytime =>
+      'Du chasch die Istellig jederziit i de App-Istellige ändere.';
+
+  @override
+  String get privacyConsentHelpMessage =>
+      'Fählerberich enthalte dini E-Mail-Adrässe für Debug-Zwäck. Die Date wärde nur zum Bugs z\'fixe und d\'App-Stabilität z\'verbessere brucht. Mit dinere Zuestimmig hilfsch du, Schuly für alli besser z\'mache.';
+
+  @override
+  String get privacyConsentDecline => 'Ablehne';
+
+  @override
+  String get privacyConsentAccept => 'Akzeptiere & Witer';
+
+  @override
+  String get errorTracking => 'Fählerverfolgig';
+
+  @override
+  String get errorTrackingEnabledDesc =>
+      'Hilf d\'App-Stabilität z\'verbessere, indem du Fählerberich mit Debug-Kontext teilsch';
+
+  @override
+  String get errorTrackingDisabledDesc => 'Fählerverfolgig isch deaktiviert';
+
+  @override
+  String get errorTrackingEnabled => 'Merci! Fählerverfolgig isch aktiviert.';
+
+  @override
+  String get errorTrackingDisabled =>
+      'Fählerverfolgig isch deaktiviert. Bitte starte d\'App neu, damit d\'Änderige wirksam wärde.';
+
+  @override
+  String get errorTrackingRestartRequired =>
+      'Bitte starte d\'App neu, damit d\'Änderige wirksam wärde.';
+
+  @override
   String get minute => 'Minut';
 
   @override

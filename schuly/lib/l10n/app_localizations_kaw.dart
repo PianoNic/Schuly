@@ -1145,6 +1145,106 @@ class AppLocalizationsKaw extends AppLocalizations {
   }
 
   @override
+  String get privacyAndDataCollection => 'Privacy & Data Collection ✨';
+
+  @override
+  String get welcomeToSchuly => 'Welcome to Schuly! (◕‿◕)♡';
+
+  @override
+  String get privacyConsentIntro =>
+      'To help make your experience super kawaii and fix problems quickly, we collect error reports when the app has an oopsie! (╥﹏╥)';
+
+  @override
+  String get whatWeCollect => 'What we collect~ ✨';
+
+  @override
+  String get whatWeDontCollect => 'What we DON\'T collect! ٩(◕‿◕)۶';
+
+  @override
+  String get errorReports => 'Error Reports';
+
+  @override
+  String get errorReportsDesc =>
+      'Stack traces, error messages, and breadcrumbs to help us fix bugs~ (⌒‿⌒)';
+
+  @override
+  String get deviceInformation => 'Device Information';
+
+  @override
+  String get deviceInformationDesc =>
+      'Device model, OS version, screen size, memory, battery level, and app version~ ♪';
+
+  @override
+  String get performanceData => 'Performance Data';
+
+  @override
+  String get performanceDataDesc =>
+      'API response times, app lifecycle events, and memory usage~ (◡‿◡)';
+
+  @override
+  String get usagePatterns => 'Usage Patterns';
+
+  @override
+  String get usagePatternsDesc =>
+      'Navigation breadcrumbs and API operations performed (fetchAll, etc.) ヽ(・∀・)ﾉ';
+
+  @override
+  String get userContext => 'User Context';
+
+  @override
+  String get userContextDesc =>
+      'Your email address (for identifying account-specific issues) (´･ω･`)';
+
+  @override
+  String get personalData => 'Personal Data';
+
+  @override
+  String get personalDataDesc =>
+      'Your grades, schedule content, notes, and personal messages stay private~ (◕‿◕)';
+
+  @override
+  String get credentials => 'Credentials';
+
+  @override
+  String get credentialsDesc =>
+      'Your passwords, authentication tokens, and sensitive API responses are filtered out~ ♡';
+
+  @override
+  String get privacyConsentChangeAnytime =>
+      'You can change this setting anytime in the app settings~ (＾▽＾)';
+
+  @override
+  String get privacyConsentHelpMessage =>
+      'Error reports include your email address for debugging purposes. This data is only used to fix bugs and improve app stability. By consenting, you help make Schuly better for everyone~ ヽ(♡‿♡)ノ';
+
+  @override
+  String get privacyConsentDecline => 'No thanks (´･ω･`)';
+
+  @override
+  String get privacyConsentAccept => 'Accept & Continue~ ✨';
+
+  @override
+  String get errorTracking => 'Error Tracking';
+
+  @override
+  String get errorTrackingEnabledDesc =>
+      'Help improve app stability by sharing error reports with debug context~ (◕‿◕)';
+
+  @override
+  String get errorTrackingDisabledDesc => 'Error tracking is disabled (´･ω･`)';
+
+  @override
+  String get errorTrackingEnabled => 'Yay! Error tracking has been enabled~ ✨';
+
+  @override
+  String get errorTrackingDisabled =>
+      'Error tracking has been disabled. Please restart the app for changes to take effect~ (´･ω･`)';
+
+  @override
+  String get errorTrackingRestartRequired =>
+      'Please restart the app for changes to take effect~ (◕‿◕)';
+
+  @override
   String get minute => 'minute (>﹏<)';
 
   @override

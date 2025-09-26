@@ -2234,6 +2234,180 @@ abstract class AppLocalizations {
   /// **'Error checking for updates: {error}'**
   String errorCheckingUpdatesDetails(Object error);
 
+  /// Title for privacy consent dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy & Data Collection'**
+  String get privacyAndDataCollection;
+
+  /// Welcome message in privacy consent dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Schuly!'**
+  String get welcomeToSchuly;
+
+  /// Introduction text for privacy consent dialog
+  ///
+  /// In en, this message translates to:
+  /// **'To help us improve your experience and fix issues quickly, we collect error reports when the app crashes or encounters problems.'**
+  String get privacyConsentIntro;
+
+  /// Header for data collection list
+  ///
+  /// In en, this message translates to:
+  /// **'What we collect:'**
+  String get whatWeCollect;
+
+  /// Header for data not collected list
+  ///
+  /// In en, this message translates to:
+  /// **'What we DON\'T collect:'**
+  String get whatWeDontCollect;
+
+  /// Title for error reports data type
+  ///
+  /// In en, this message translates to:
+  /// **'Error Reports'**
+  String get errorReports;
+
+  /// Description for error reports data type
+  ///
+  /// In en, this message translates to:
+  /// **'Stack traces, error messages, and breadcrumbs to help us fix bugs'**
+  String get errorReportsDesc;
+
+  /// Title for device information data type
+  ///
+  /// In en, this message translates to:
+  /// **'Device Information'**
+  String get deviceInformation;
+
+  /// Description for device information data type
+  ///
+  /// In en, this message translates to:
+  /// **'Device model, OS version, screen size, memory, battery level, and app version'**
+  String get deviceInformationDesc;
+
+  /// Title for performance data type
+  ///
+  /// In en, this message translates to:
+  /// **'Performance Data'**
+  String get performanceData;
+
+  /// Description for performance data type
+  ///
+  /// In en, this message translates to:
+  /// **'API response times, app lifecycle events, and memory usage'**
+  String get performanceDataDesc;
+
+  /// Title for usage patterns data type
+  ///
+  /// In en, this message translates to:
+  /// **'Usage Patterns'**
+  String get usagePatterns;
+
+  /// Description for usage patterns data type
+  ///
+  /// In en, this message translates to:
+  /// **'Navigation breadcrumbs and API operations performed (fetchAll, etc.)'**
+  String get usagePatternsDesc;
+
+  /// Title for user context data type
+  ///
+  /// In en, this message translates to:
+  /// **'User Context'**
+  String get userContext;
+
+  /// Description for user context data type
+  ///
+  /// In en, this message translates to:
+  /// **'Your email address (for identifying issues specific to your account)'**
+  String get userContextDesc;
+
+  /// Title for personal data type
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Data'**
+  String get personalData;
+
+  /// Description for personal data type
+  ///
+  /// In en, this message translates to:
+  /// **'Your grades, schedule content, notes, and personal messages stay private'**
+  String get personalDataDesc;
+
+  /// Title for credentials data type
+  ///
+  /// In en, this message translates to:
+  /// **'Credentials'**
+  String get credentials;
+
+  /// Description for credentials data type
+  ///
+  /// In en, this message translates to:
+  /// **'Your passwords, authentication tokens, and sensitive API responses are filtered out'**
+  String get credentialsDesc;
+
+  /// Info message about changing privacy settings
+  ///
+  /// In en, this message translates to:
+  /// **'You can change this setting anytime in the app settings.'**
+  String get privacyConsentChangeAnytime;
+
+  /// Help message explaining privacy consent benefits
+  ///
+  /// In en, this message translates to:
+  /// **'Error reports include your email address for debugging purposes. This data is only used to fix bugs and improve app stability. By consenting, you help make Schuly better for everyone.'**
+  String get privacyConsentHelpMessage;
+
+  /// Button text to decline privacy consent
+  ///
+  /// In en, this message translates to:
+  /// **'Decline'**
+  String get privacyConsentDecline;
+
+  /// Button text to accept privacy consent
+  ///
+  /// In en, this message translates to:
+  /// **'Accept & Continue'**
+  String get privacyConsentAccept;
+
+  /// Title for error tracking setting
+  ///
+  /// In en, this message translates to:
+  /// **'Error Tracking'**
+  String get errorTracking;
+
+  /// Description when error tracking is enabled
+  ///
+  /// In en, this message translates to:
+  /// **'Help improve app stability by sharing error reports with debugging context'**
+  String get errorTrackingEnabledDesc;
+
+  /// Description when error tracking is disabled
+  ///
+  /// In en, this message translates to:
+  /// **'Error tracking is disabled'**
+  String get errorTrackingDisabledDesc;
+
+  /// Message shown when error tracking is enabled
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you! Error tracking has been enabled.'**
+  String get errorTrackingEnabled;
+
+  /// Message shown when error tracking is disabled
+  ///
+  /// In en, this message translates to:
+  /// **'Error tracking has been disabled. Please restart the app for changes to take effect.'**
+  String get errorTrackingDisabled;
+
+  /// Message shown when app restart is required for error tracking changes
+  ///
+  /// In en, this message translates to:
+  /// **'Please restart the app for changes to take effect.'**
+  String get errorTrackingRestartRequired;
+
   /// Singular form of minute
   ///
   /// In en, this message translates to:

@@ -24,6 +24,7 @@ import 'widgets/homepage_config_modal.dart';
 import 'widgets/release_notes_dialog.dart';
 import 'widgets/app_update_dialog.dart';
 import 'widgets/notification_permission_dialog.dart';
+import 'widgets/privacy_consent_dialog.dart';
 import 'package:schuly/api/lib/api.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'l10n/pirate_material_localizations.dart';
@@ -74,8 +75,12 @@ void main() async {
       logInfo('Schuly app started', source: 'main');
       logInfo('API base URL: $apiBaseUrl', source: 'main');
 
-      if (sentryDsn.isNotEmpty) {
-        // Initialize Sentry only if DSN is provided
+      // Check user consent for data collection
+      final hasUserConsented = await PrivacyConsentDialog.hasUserConsented();
+
+      if (sentryDsn.isNotEmpty && hasUserConsented) {
+        // Initialize Sentry only if DSN is provided AND user has consented
+        logInfo('Initializing Sentry/GlitchTip with user consent', source: 'main');
         await SentryFlutter.init(
           (options) {
             options.dsn = sentryDsn;
@@ -129,8 +134,12 @@ void main() async {
           ),
         );
       } else {
-        // Run without Sentry if no DSN provided
-        logInfo('Running without Sentry/GlitchTip integration (no DSN provided)', source: 'main');
+        // Run without Sentry if no DSN provided or user hasn't consented
+        if (sentryDsn.isEmpty) {
+          logInfo('Running without Sentry/GlitchTip integration (no DSN provided)', source: 'main');
+        } else if (!hasUserConsented) {
+          logInfo('Sentry/GlitchTip disabled - user has not consented to data collection', source: 'main');
+        }
         runApp(
           MultiProvider(
             providers: [
@@ -145,10 +154,16 @@ void main() async {
         );
       }
     },
-    (error, stackTrace) {
+    (error, stackTrace) async {
       // Catch any errors that weren't caught by Flutter or Sentry
       if (sentryDsn.isNotEmpty) {
-        Sentry.captureException(error, stackTrace: stackTrace);
+        final hasConsented = await PrivacyConsentDialog.hasUserConsented();
+        if (hasConsented) {
+          Sentry.captureException(error, stackTrace: stackTrace);
+        } else {
+          // Just log to console if user hasn't consented
+          logError('Uncaught error', source: 'main', error: error, stackTrace: stackTrace);
+        }
       } else {
         // Just log to console if Sentry is not configured
         logError('Uncaught error', source: 'main', error: error, stackTrace: stackTrace);
@@ -388,8 +403,30 @@ class _MyHomePageState extends State<MyHomePage> {
         return; // Exit early after handling re-authentication
       }
 
+      // Check if we need to show privacy consent dialog (only if Sentry is configured)
+      const sentryDsn = String.fromEnvironment('SENTRY_DSN', defaultValue: '');
+      if (sentryDsn.isNotEmpty && mounted) {
+        final hasConsentDialogBeenShown = await PrivacyConsentDialog.hasConsentDialogBeenShown();
+        if (!hasConsentDialogBeenShown) {
+          if (mounted) {
+            final consented = await PrivacyConsentDialog.show(context);
+            if (consented == true && mounted) {
+              // User consented - restart app to initialize Sentry
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(AppLocalizations.of(context)!.errorTrackingEnabled),
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+            }
+          }
+        }
+      }
+
       // Check for app updates first (higher priority)
-      await AppUpdateDialog.showIfAvailable(context);
+      if (mounted) {
+        await AppUpdateDialog.showIfAvailable(context);
+      }
 
       // Then check for release notes
       if (mounted) {

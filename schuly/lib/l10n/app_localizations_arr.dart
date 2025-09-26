@@ -1150,6 +1150,106 @@ class AppLocalizationsArr extends AppLocalizations {
   }
 
   @override
+  String get privacyAndDataCollection => 'Privacy & Data Plunderin\'';
+
+  @override
+  String get welcomeToSchuly => 'Ahoy, welcome aboard Schuly!';
+
+  @override
+  String get privacyConsentIntro =>
+      'To help improve yer sailin\' experience and fix problems quickly, we be collectin\' error reports when the app crashes or encounters troubles on the high seas.';
+
+  @override
+  String get whatWeCollect => 'What we be plunderin\':';
+
+  @override
+  String get whatWeDontCollect => 'What we NOT be plunderin\':';
+
+  @override
+  String get errorReports => 'Error Reports';
+
+  @override
+  String get errorReportsDesc =>
+      'Stack traces, error messages, and breadcrumbs to help us fix bugs, arrr!';
+
+  @override
+  String get deviceInformation => 'Ship Information';
+
+  @override
+  String get deviceInformationDesc =>
+      'Ship model, OS version, screen size, memory, battery level, and app version';
+
+  @override
+  String get performanceData => 'Performance Data';
+
+  @override
+  String get performanceDataDesc =>
+      'API response times, app lifecycle events, and memory usage';
+
+  @override
+  String get usagePatterns => 'Sailin\' Patterns';
+
+  @override
+  String get usagePatternsDesc =>
+      'Navigation breadcrumbs and API operations performed (fetchAll, etc.)';
+
+  @override
+  String get userContext => 'Pirate Context';
+
+  @override
+  String get userContextDesc =>
+      'Yer email address (for identifyin\' account-specific troubles)';
+
+  @override
+  String get personalData => 'Personal Treasure';
+
+  @override
+  String get personalDataDesc =>
+      'Yer grades, schedule content, notes, and personal messages stay in yer treasure chest';
+
+  @override
+  String get credentials => 'Secret Codes';
+
+  @override
+  String get credentialsDesc =>
+      'Yer passwords, authentication tokens, and sensitive API responses be filtered out';
+
+  @override
+  String get privacyConsentChangeAnytime =>
+      'Ye can change this settin\' anytime in the app settings, matey.';
+
+  @override
+  String get privacyConsentHelpMessage =>
+      'Error reports include yer email address for debuggin\' purposes. This data only be used to fix bugs and improve app stability. By consentín\', ye help make Schuly better for all pirates. Arrr!';
+
+  @override
+  String get privacyConsentDecline => 'Walk the Plank';
+
+  @override
+  String get privacyConsentAccept => 'Aye Aye, Captain!';
+
+  @override
+  String get errorTracking => 'Error Trackin\'';
+
+  @override
+  String get errorTrackingEnabledDesc =>
+      'Help improve app stability by sharin\' error reports with debug context, arrr!';
+
+  @override
+  String get errorTrackingDisabledDesc => 'Error trackin\' be disabled, matey';
+
+  @override
+  String get errorTrackingEnabled => 'Ahoy! Error trackin\' be enabled.';
+
+  @override
+  String get errorTrackingDisabled =>
+      'Error trackin\' be disabled. Restart the app for changes to take effect, arrr!';
+
+  @override
+  String get errorTrackingRestartRequired =>
+      'Restart the app for changes to take effect, ye landlubber!';
+
+  @override
   String get minute => 'minute';
 
   @override

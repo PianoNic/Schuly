@@ -16,6 +16,7 @@ import '../l10n/app_localizations.dart';
 import '../providers/language_provider.dart';
 import '../services/push_notification_service.dart';
 import '../utils/error_handler.dart';
+import '../widgets/privacy_consent_dialog.dart';
 import 'maggus_checker_page.dart';
 
 class AppSettingsPage extends StatefulWidget {
@@ -29,6 +30,7 @@ class AppSettingsPage extends StatefulWidget {
 
 class _AppSettingsPageState extends State<AppSettingsPage> {
   bool _pushNotificationsEnabled = false;
+  bool _privacyConsentEnabled = false;
   bool _isLoading = true;
   bool _isCheckingUpdates = false;
   String _appVersion = 'DEV';
@@ -67,9 +69,11 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
 
   Future<void> _loadSettings() async {
     final pushNotificationsEnabled = await StorageService.getPushNotificationsEnabled();
+    final privacyConsent = await PrivacyConsentDialog.hasUserConsented();
 
     setState(() {
       _pushNotificationsEnabled = pushNotificationsEnabled;
+      _privacyConsentEnabled = privacyConsent;
       _isLoading = false;
     });
   }
@@ -116,6 +120,29 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
       setState(() {
         _pushNotificationsEnabled = false;
       });
+    }
+  }
+
+  Future<void> _handlePrivacyConsentToggle(bool? value) async {
+    if (value == null) return;
+
+    await PrivacyConsentDialog.setUserConsent(value);
+    setState(() {
+      _privacyConsentEnabled = value;
+    });
+
+    if (mounted) {
+      final localizations = AppLocalizations.of(context)!;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            value
+              ? '${localizations.errorTrackingEnabled} ${localizations.errorTrackingRestartRequired}'
+              : localizations.errorTrackingDisabled,
+          ),
+          duration: const Duration(seconds: 3),
+        ),
+      );
     }
   }
 
@@ -224,7 +251,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     const Divider(),
 
                     // PushAssist Configuration
-                    _isLoading 
+                    _isLoading
                         ? const SizedBox.shrink()
                         : _buildSettingsTile(
                             context,
@@ -245,6 +272,28 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                             } : null,
                             isEnabled: _pushNotificationsEnabled,
                           ),
+
+                    // Privacy & Data Collection Toggle (only show if Sentry is configured)
+                    if (const String.fromEnvironment('SENTRY_DSN', defaultValue: '').isNotEmpty) ...[
+                      const Divider(),
+                      _isLoading
+                          ? const SizedBox.shrink()
+                          : _buildSettingsTile(
+                              context,
+                              icon: _privacyConsentEnabled
+                                  ? Icons.shield
+                                  : Icons.shield_outlined,
+                              title: localizations.errorTracking,
+                              subtitle: _privacyConsentEnabled
+                                  ? localizations.errorTrackingEnabledDesc
+                                  : localizations.errorTrackingDisabledDesc,
+                              trailing: Switch(
+                                value: _privacyConsentEnabled,
+                                onChanged: _handlePrivacyConsentToggle,
+                              ),
+                              isEnabled: true,
+                            ),
+                    ],
 
                     const Divider(),
 

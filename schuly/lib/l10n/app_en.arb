@@ -1497,6 +1497,151 @@
     }
   },
 
+  "privacyAndDataCollection": "Privacy & Data Collection",
+  "@privacyAndDataCollection": {
+    "description": "Title for privacy consent dialog"
+  },
+
+  "welcomeToSchuly": "Welcome to Schuly!",
+  "@welcomeToSchuly": {
+    "description": "Welcome message in privacy consent dialog"
+  },
+
+  "privacyConsentIntro": "To help us improve your experience and fix issues quickly, we collect error reports when the app crashes or encounters problems.",
+  "@privacyConsentIntro": {
+    "description": "Introduction text for privacy consent dialog"
+  },
+
+  "whatWeCollect": "What we collect:",
+  "@whatWeCollect": {
+    "description": "Header for data collection list"
+  },
+
+  "whatWeDontCollect": "What we DON'T collect:",
+  "@whatWeDontCollect": {
+    "description": "Header for data not collected list"
+  },
+
+  "errorReports": "Error Reports",
+  "@errorReports": {
+    "description": "Title for error reports data type"
+  },
+
+  "errorReportsDesc": "Stack traces, error messages, and breadcrumbs to help us fix bugs",
+  "@errorReportsDesc": {
+    "description": "Description for error reports data type"
+  },
+
+  "deviceInformation": "Device Information",
+  "@deviceInformation": {
+    "description": "Title for device information data type"
+  },
+
+  "deviceInformationDesc": "Device model, OS version, screen size, memory, battery level, and app version",
+  "@deviceInformationDesc": {
+    "description": "Description for device information data type"
+  },
+
+  "performanceData": "Performance Data",
+  "@performanceData": {
+    "description": "Title for performance data type"
+  },
+
+  "performanceDataDesc": "API response times, app lifecycle events, and memory usage",
+  "@performanceDataDesc": {
+    "description": "Description for performance data type"
+  },
+
+  "usagePatterns": "Usage Patterns",
+  "@usagePatterns": {
+    "description": "Title for usage patterns data type"
+  },
+
+  "usagePatternsDesc": "Navigation breadcrumbs and API operations performed (fetchAll, etc.)",
+
+  "userContext": "User Context",
+  "@userContext": {
+    "description": "Title for user context data type"
+  },
+
+  "userContextDesc": "Your email address (for identifying issues specific to your account)",
+  "@userContextDesc": {
+    "description": "Description for user context data type"
+  },
+  "@usagePatternsDesc": {
+    "description": "Description for usage patterns data type"
+  },
+
+  "personalData": "Personal Data",
+  "@personalData": {
+    "description": "Title for personal data type"
+  },
+
+  "personalDataDesc": "Your grades, schedule content, notes, and personal messages stay private",
+  "@personalDataDesc": {
+    "description": "Description for personal data type"
+  },
+
+  "credentials": "Credentials",
+  "@credentials": {
+    "description": "Title for credentials data type"
+  },
+
+  "credentialsDesc": "Your passwords, authentication tokens, and sensitive API responses are filtered out",
+  "@credentialsDesc": {
+    "description": "Description for credentials data type"
+  },
+
+  "privacyConsentChangeAnytime": "You can change this setting anytime in the app settings.",
+  "@privacyConsentChangeAnytime": {
+    "description": "Info message about changing privacy settings"
+  },
+
+  "privacyConsentHelpMessage": "Error reports include your email address for debugging purposes. This data is only used to fix bugs and improve app stability. By consenting, you help make Schuly better for everyone.",
+  "@privacyConsentHelpMessage": {
+    "description": "Help message explaining privacy consent benefits"
+  },
+
+  "privacyConsentDecline": "Decline",
+  "@privacyConsentDecline": {
+    "description": "Button text to decline privacy consent"
+  },
+
+  "privacyConsentAccept": "Accept & Continue",
+  "@privacyConsentAccept": {
+    "description": "Button text to accept privacy consent"
+  },
+
+  "errorTracking": "Error Tracking",
+  "@errorTracking": {
+    "description": "Title for error tracking setting"
+  },
+
+  "errorTrackingEnabledDesc": "Help improve app stability by sharing error reports with debugging context",
+  "@errorTrackingEnabledDesc": {
+    "description": "Description when error tracking is enabled"
+  },
+
+  "errorTrackingDisabledDesc": "Error tracking is disabled",
+  "@errorTrackingDisabledDesc": {
+    "description": "Description when error tracking is disabled"
+  },
+
+  "errorTrackingEnabled": "Thank you! Error tracking has been enabled.",
+  "@errorTrackingEnabled": {
+    "description": "Message shown when error tracking is enabled"
+  },
+
+  "errorTrackingDisabled": "Error tracking has been disabled. Please restart the app for changes to take effect.",
+  "@errorTrackingDisabled": {
+    "description": "Message shown when error tracking is disabled"
+  },
+
+  "errorTrackingRestartRequired": "Please restart the app for changes to take effect.",
+  "@errorTrackingRestartRequired": {
+    "description": "Message shown when app restart is required for error tracking changes"
+  },
+
   "minute": "minute",
   "@minute": {
     "description": "Singular form of minute"

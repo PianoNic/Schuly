@@ -1162,6 +1162,107 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get privacyAndDataCollection => 'Datenschutz & Datenerfassung';
+
+  @override
+  String get welcomeToSchuly => 'Willkommen bei Schuly!';
+
+  @override
+  String get privacyConsentIntro =>
+      'Um Ihre Erfahrung zu verbessern und Probleme schnell zu beheben, sammeln wir anonyme Fehlerberichte und Nutzungsdaten.';
+
+  @override
+  String get whatWeCollect => 'Was wir sammeln:';
+
+  @override
+  String get whatWeDontCollect => 'Was wir NICHT sammeln:';
+
+  @override
+  String get errorReports => 'Fehlerberichte';
+
+  @override
+  String get errorReportsDesc =>
+      'App-Abstürze und Fehlermeldungen, um uns bei der Fehlerbehebung zu helfen';
+
+  @override
+  String get deviceInformation => 'Geräteinformationen';
+
+  @override
+  String get deviceInformationDesc =>
+      'Gerätetyp, Betriebssystemversion und App-Version';
+
+  @override
+  String get performanceData => 'Leistungsdaten';
+
+  @override
+  String get performanceDataDesc =>
+      'App-Leistungsmetriken zur Verbesserung der Geschwindigkeit und Zuverlässigkeit';
+
+  @override
+  String get usagePatterns => 'Nutzungsmuster';
+
+  @override
+  String get usagePatternsDesc =>
+      'Navigations-Breadcrumbs und durchgeführte API-Operationen (fetchAll, etc.)';
+
+  @override
+  String get userContext => 'Benutzerkontext';
+
+  @override
+  String get userContextDesc =>
+      'Ihre E-Mail-Adresse (zur Identifizierung kontospezifischer Probleme)';
+
+  @override
+  String get personalData => 'Persönliche Daten';
+
+  @override
+  String get personalDataDesc =>
+      'Ihre Noten, Stundenplan und persönlichen Informationen bleiben privat';
+
+  @override
+  String get credentials => 'Zugangsdaten';
+
+  @override
+  String get credentialsDesc =>
+      'Ihre Passwörter und Authentifizierungs-Token werden niemals gesendet';
+
+  @override
+  String get privacyConsentChangeAnytime =>
+      'Sie können diese Einstellung jederzeit in den App-Einstellungen ändern.';
+
+  @override
+  String get privacyConsentHelpMessage =>
+      'Diese Daten helfen uns bei unserem Engagement für Qualität und kontinuierliche Verbesserung. Mit Ihrer Zustimmung helfen Sie, Schuly für alle besser zu machen.';
+
+  @override
+  String get privacyConsentDecline => 'Ablehnen';
+
+  @override
+  String get privacyConsentAccept => 'Akzeptieren & Fortfahren';
+
+  @override
+  String get errorTracking => 'Fehlerverfolgung';
+
+  @override
+  String get errorTrackingEnabledDesc =>
+      'Helfen Sie die App-Stabilität zu verbessern, indem Sie anonyme Fehlerberichte teilen';
+
+  @override
+  String get errorTrackingDisabledDesc => 'Fehlerverfolgung ist deaktiviert';
+
+  @override
+  String get errorTrackingEnabled =>
+      'Danke! Die Fehlerverfolgung wurde aktiviert.';
+
+  @override
+  String get errorTrackingDisabled =>
+      'Die Fehlerverfolgung wurde deaktiviert. Bitte starten Sie die App neu, damit die Änderungen wirksam werden.';
+
+  @override
+  String get errorTrackingRestartRequired =>
+      'Bitte starten Sie die App neu, damit die Änderungen wirksam werden.';
+
+  @override
   String get minute => 'Minute';
 
   @override

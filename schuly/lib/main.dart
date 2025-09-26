@@ -37,7 +37,7 @@ import 'l10n/arn_cupertino_localizations.dart';
 import 'l10n/maggus_material_localizations.dart';
 import 'l10n/maggus_cupertino_localizations.dart';
 import 'utils/logger.dart';
-  
+
 String apiBaseUrl = 'https://schlwr.pianonic.ch';
 
 Future<void> loadApiBaseUrl() async {

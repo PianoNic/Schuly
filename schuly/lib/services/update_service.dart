@@ -56,26 +56,41 @@ class UpdateService {
 
   /// Compare two version strings (e.g., "v0.4.0" vs "v0.3.0")
   static bool _isNewerVersion(String latestVersion, String currentVersion) {
-    // Remove 'v' prefix if present
-    final latest = latestVersion.replaceFirst('v', '');
-    final current = currentVersion.replaceFirst('v', '');
+    try {
+      // Skip update check for development versions
+      if (currentVersion.contains('DEV') || currentVersion.contains('dev')) {
+        logDebug('Skipping update check for development version: $currentVersion', source: 'UpdateService');
+        return false;
+      }
 
-    final latestParts = latest.split('.').map(int.parse).toList();
-    final currentParts = current.split('.').map(int.parse).toList();
+      // Remove 'v' prefix if present
+      final latest = latestVersion.replaceFirst('v', '');
+      final current = currentVersion.replaceFirst('v', '');
 
-    // Ensure both have same number of parts
-    while (latestParts.length < currentParts.length) {
-      latestParts.add(0);
-    }
-    while (currentParts.length < latestParts.length) {
-      currentParts.add(0);
-    }
+      // Handle versions with hyphens (e.g., "0-DEV" -> "0")
+      final cleanLatest = latest.split('-')[0];
+      final cleanCurrent = current.split('-')[0];
 
-    for (int i = 0; i < latestParts.length; i++) {
-      if (latestParts[i] > currentParts[i]) return true;
-      if (latestParts[i] < currentParts[i]) return false;
+      final latestParts = cleanLatest.split('.').map((s) => int.tryParse(s) ?? 0).toList();
+      final currentParts = cleanCurrent.split('.').map((s) => int.tryParse(s) ?? 0).toList();
+
+      // Ensure both have same number of parts
+      while (latestParts.length < currentParts.length) {
+        latestParts.add(0);
+      }
+      while (currentParts.length < latestParts.length) {
+        currentParts.add(0);
+      }
+
+      for (int i = 0; i < latestParts.length; i++) {
+        if (latestParts[i] > currentParts[i]) return true;
+        if (latestParts[i] < currentParts[i]) return false;
+      }
+      return false;
+    } catch (e) {
+      logError('Error comparing versions: $latestVersion vs $currentVersion', source: 'UpdateService', error: e);
+      return false;
     }
-    return false;
   }
 
   /// Download APK with progress callback

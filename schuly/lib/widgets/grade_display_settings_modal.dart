@@ -29,7 +29,6 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
     final useColors = await StorageService.getUseGradeColors();
     final redThreshold = await StorageService.getGradeRedThreshold();
     final yellowThreshold = await StorageService.getGradeYellowThreshold();
-
     setState(() {
       switch (modeString) {
         case 'rounded':
@@ -401,7 +400,6 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
       ],
     );
   }
-
   Widget _buildOption(
     BuildContext context, {
     required String title,

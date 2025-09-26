@@ -161,7 +161,6 @@ class StorageService {
   static Future<void> setGradeYellowThreshold(double threshold) async {
     await _storage.write(key: _gradeYellowThresholdKey, value: threshold.toString());
   }
-
   static Future<void> clearAll() async {
     await _storage.deleteAll();
   }

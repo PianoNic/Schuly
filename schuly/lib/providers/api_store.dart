@@ -102,7 +102,6 @@ class ApiStore extends ChangeNotifier {
     _gradeYellowThreshold = yellowThreshold;
     notifyListeners();
   }
-
   // Microsoft re-authentication needed flag
   bool _needsMicrosoftReAuth = false;
   bool get needsMicrosoftReAuth => _needsMicrosoftReAuth;
@@ -234,7 +233,6 @@ class ApiStore extends ChangeNotifier {
       _useGradeColors = await StorageService.getUseGradeColors();
       _gradeRedThreshold = await StorageService.getGradeRedThreshold();
       _gradeYellowThreshold = await StorageService.getGradeYellowThreshold();
-
       // Check if API is reachable (with 5 second timeout)
       final isApiReachable = await _checkApiConnectivity();
 

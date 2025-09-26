@@ -1,154 +1,79 @@
 {
   "@@locale": "gsw",
-
   "appTitle": "Schuly",
-
   "noAccountAdded": "No kei Account hinzuegfüegt.",
-
   "addAccount": "Account hinzuefüege",
-
   "noActiveAccount": "Kei aktive Account usgwählt.",
-
   "selectAccount": "Account uswähle",
-
   "personalInformation": "Persönlichi Informatione",
-
   "quickActions": "Schnäll Aktione",
-
   "appSettings": "App Iistellige",
-
   "designAndSettings": "Design und Iistellige aapasse",
-
   "helpAndSupport": "Hilf & Support",
-
   "getHelpAndSupport": "Hilf und Support becho",
-
   "addAnotherAccount": "Witere Account hinzuefüege",
-
   "addMultipleAccounts": "Mehreri Accounts hinzuefüege",
-
   "logout": "Abmälde",
-
   "signOutFromApp": "Vo de App abmälde",
-
   "name": "Name",
-
   "street": "Strass",
-
   "zipCity": "PLZ Ort",
-
   "birthDate": "Geburtstag",
-
   "phone": "Telefon",
-
   "email": "E-Mail",
-
   "nationality": "Nationalität",
-
   "hometown": "Haimatort",
-
   "mobile": "Handy",
-
   "profile1": "Profil 1",
-
   "profile2": "Profil 2",
-
   "start": "Start",
-
   "agenda": "Agenda",
-
   "grades": "Note",
-
   "absences": "Absänze",
-
   "account": "Account",
-
   "language": "Sprach",
-
   "selectLanguage": "Sprach uswähle",
-
   "english": "Änglisch",
-
   "german": "Düütsch",
-
   "swissGerman": "Schwiizerdüütsch",
-
   "pirate": "Pirate",
-
   "kawaii": "Kawaii",
-
   "arnold": "Terminator",
-
   "cancel": "Abbräche",
-
   "confirm": "Bestätige",
-
   "pushNotifications": "Push-Benachrichtigige",
-
   "featureInDevelopment": "Feature wird no entwicklet",
-
   "configureNotifications": "Benachrichtigige konfiguriere",
-
   "chooseTypesAndTiming": "Wähl Type und Timing für Benachrichtigige",
-
   "whatsNew": "Was isch nöi",
-
   "changelogAndFeatures": "Changelog und nöii Features",
-
   "checkForUpdates": "Nach Updates sueche",
-
   "checkForNewVersions": "Uf nöii Versione prüefe",
-
   "aboutApp": "Über d App",
-
   "version": "Version",
-
   "delete": "Lösche",
-
   "close": "Zumache",
-
   "add": "Hinzuefüege",
-
   "loading": "Ladet...",
-
   "noEventsForThisDay": "Kei Termin für dä Tag",
-
   "nextLessons": "Nächschti Lektione",
-
   "nextHolidays": "Nächschti Ferie",
-
   "studentIdCard": "Schüeluswys",
-
   "reloadPage": "Syte neu lade",
   "loadingStudentIdCard": "Schüeluswys wird glade...",
-
   "enterValidEmail": "Bitte gäb e gültigi E-Mail-Adrässe ii",
-
   "areYouSure": "Sind Si sicher?",
-
   "updateAvailable": "Update verfüegbar!",
-
   "later": "Spöter",
-
   "yes": "Ja",
-
   "no": "Nei",
-
   "confirmed": "Bestätigt",
-
   "lateness": "Verspätige",
-
-  "noLatenessFound": "Kei Verspätige gfunde",
-
-
+  "noLatenessFound": "Kei Verspötig gfunde.",
   "emailAddress": "E-Mail-Adrässe",
-
   "password": "Passwort",
-
   "login": "Amälde",
-
   "enterEmailAddress": "Bitte gäb e E-Mail-Adrässe ii",
-
   "getNewToken": "Nöis Token hole",
   "getNewTokenSubtitle": "Hol es nöis Token für de aktive Account",
   "tokenUpdated": "Token aktualisiert!",
@@ -162,7 +87,6 @@
   "logoutTitle": "Abmälde",
   "logoutConfirm": "Bisch sicher, dass du dich abmäldsch?",
   "loggedOut": "Abmäldet!",
-
   "designSettings": "Design Iistellige",
   "appearance": "Darstellig",
   "automatic": "Automatisch",
@@ -176,7 +100,6 @@
   "classicAccentColor": "Klassischi Akzentfarb",
   "materialYouActive": "Material You aktiv",
   "materialYouInfo": "Farbe werde automatisch vom System übernoh",
-
   "neonViolet": "Neon Violett",
   "neonCyan": "Neon Cyan",
   "neonGreen": "Neon Grün",
@@ -195,7 +118,6 @@
   "red": "Rot",
   "yellow": "Gelb",
   "purple": "Lila",
-
   "previousLessonsDay": "Vorhärige Tag mit Lektione",
   "nextLessonsDay": "Nächschte Tag mit Lektione",
   "noLessonsFound": "Kei Lektione gfunde.",
@@ -207,12 +129,13 @@
   "noGradesFound": "Kei Note gfunde.",
   "openAbsences": "Offeni Absänze",
   "showAll": "Alli azeige",
-  "@showAll": {"description": "Button text to show all release notes"},
+  "@showAll": {
+    "description": "Button text to show all release notes"
+  },
   "noAbsencesFound": "Kei Absänze gfunde.",
   "noOpenAbsences": "Kei offeni Absänze.",
   "noReleaseNotes": "Kei Release Notes verfügbar",
   "releaseNotesInfo": "Updates und nöii Features werde da aazeigt",
-
   "notificationTypes": "Benachrichtigigstype",
   "timetable": "Stundeplan",
   "agendaNotificationSubtitle": "Benachrichtigige vor de Lektione",
@@ -227,7 +150,6 @@
   "test": "Test",
   "sendTestNotification": "Test-Benachrichtigig schicke",
   "checkNotificationsWork": "Lueg, ob d'Benachrichtigige funktioniere",
-
   "gradeDetails": "Notedetail",
   "basicInformation": "Grundinformatione",
   "titleLabel": "Titel",
@@ -244,16 +166,22 @@
   "classAverageLabel": "Klassedurchschnitt",
   "groupWeightLabel": "Gruppenwicht",
   "commentLabel": "Kommentar",
-
   "latestVersionMessage": "Du hesch scho d neuscht Version.",
   "versionWithNumber": "Version {version}+{build}",
-  "@versionWithNumber": {"description": "Versionsstring mit Versions- und Buildnummer.", "placeholders": {"version": {}, "build": {}}},
+  "@versionWithNumber": {
+    "description": "Versionsstring mit Versions- und Buildnummer.",
+    "placeholders": {
+      "version": {},
+      "build": {}
+    }
+  },
   "appLegalese": "Schuly © 2025 PianoNic",
   "appDescription": "E Spezial-App für Schüeler zum Verwalte vo Schulnetz-Däte. Verwalte din Stundenplan, d Note und wichtigi Termine an einem Ort.",
   "apiEndpoint": "API Endpoint",
-
   "enterApiEndpoint": "Bitte gäb API Endpoint ii",
-  "@enterApiEndpoint": {"description": "Validierigsmäldig für läre API Endpoint"},
+  "@enterApiEndpoint": {
+    "description": "Validierigsmäldig für läre API Endpoint"
+  },
   "currentApiInfo": "Aktuelli API Info",
   "apiInfoStatus": "API Info Status",
   "environment": "Umgebig",
@@ -261,66 +189,120 @@
   "apiBaseUrl": "API Basis-URL",
   "save": "Speichere",
   "apiUrlChanged": "API URL gänderet: {url}",
-  "@apiUrlChanged": {"description": "Snackbar-Nachricht, wenn d API-URL gänderet wird", "placeholders": {"url": {}}},
-  "@getColorName": {"description": "Gibt de lokalisiert Farbnamen für e Schlüssel zrugg."},
-
+  "@apiUrlChanged": {
+    "description": "Snackbar-Nachricht, wenn d API-URL gänderet wird",
+    "placeholders": {
+      "url": {}
+    }
+  },
+  "@getColorName": {
+    "description": "Get color name"
+  },
   "switchAccount": "Account wächsle",
-  "@switchAccount": {"description": "Header/title for the account switcher modal"},
-
+  "@switchAccount": {
+    "description": "Header/title for the account switcher modal"
+  },
   "accountCount": "{count, plural, =1{1 Account} other{{count} Accounts}}",
-  "@accountCount": {"description": "Shows the number of accounts", "placeholders": {"count": {}}},
-
+  "@accountCount": {
+    "description": "Shows the number of accounts",
+    "placeholders": {
+      "count": {}
+    }
+  },
   "noAccounts": "Kei Accounts verfügbar.",
-  "@noAccounts": {"description": "Message when there are no accounts to switch"},
-
+  "@noAccounts": {
+    "description": "Message when there are no accounts to switch"
+  },
   "addFirstAccount": "Füeg din erste Account zue!",
-  "@addFirstAccount": {"description": "Subtitle encouraging the user to add their first account"},
-
+  "@addFirstAccount": {
+    "description": "Subtitle encouraging the user to add their first account"
+  },
   "active": "Aktiv",
-  "@active": {"description": "Label for the active account"},
-
+  "@active": {
+    "description": "Label for the active account"
+  },
   "available": "Verfügbar",
-  "@available": {"description": "Label for available (not active) accounts"},
-
+  "@available": {
+    "description": "Label for available (not active) accounts"
+  },
   "removeAccount": "Account entferne",
-  "@removeAccount": {"description": "Button/dialog title for removing an account"},
-
+  "@removeAccount": {
+    "description": "Button/dialog title for removing an account"
+  },
   "confirmRemoveAccount": "Account {email} entferne?",
-  "@confirmRemoveAccount": {"description": "Confirmation for removing an account", "placeholders": {"email": {}}},
-
+  "@confirmRemoveAccount": {
+    "description": "Confirmation for removing an account",
+    "placeholders": {
+      "email": {}
+    }
+  },
   "remove": "Entferne",
-  "@remove": {"description": "Button text for confirming removal"},
-
+  "@remove": {
+    "description": "Button text for confirming removal"
+  },
   "switchedAccount": "Zu {email} gwechsellet",
-  "@switchedAccount": {"description": "Snackbar message when switching account", "placeholders": {"email": {}}},
-
+  "@switchedAccount": {
+    "description": "Snackbar message when switching account",
+    "placeholders": {
+      "email": {}
+    }
+  },
   "switchAccountError": "Accountwechsel het Fähler: {error}",
-  "@switchAccountError": {"description": "Error message when switching account fails", "placeholders": {"error": {}}},
-
+  "@switchAccountError": {
+    "description": "Error message when switching account fails",
+    "placeholders": {
+      "error": {}
+    }
+  },
   "removedAccount": "Account {email} entfernet",
-  "@removedAccount": {"description": "Snackbar message when removing account", "placeholders": {"email": {}}},
-
+  "@removedAccount": {
+    "description": "Snackbar message when removing account",
+    "placeholders": {
+      "email": {}
+    }
+  },
   "removeAccountError": "Account cha nöd entfernet werde: {error}",
-  "@removeAccountError": {"description": "Error message when removing account fails", "placeholders": {"error": {}}},
-
+  "@removeAccountError": {
+    "description": "Error message when removing account fails",
+    "placeholders": {
+      "error": {}
+    }
+  },
   "unexpectedError": "Unerwartete Fähler: {error}",
-  "@unexpectedError": {"description": "Generic error message", "placeholders": {"error": {}}},
-
+  "@unexpectedError": {
+    "description": "Generic error message",
+    "placeholders": {
+      "error": {}
+    }
+  },
   "weekdayMon": "Mä",
-  "@weekdayMon": {"description": "Abkürzig für Mäntig (Montag)"},
+  "@weekdayMon": {
+    "description": "Abkürzig für Mäntig (Montag)"
+  },
   "weekdayTue": "Di",
-  "@weekdayTue": {"description": "Abkürzig für Zischtig (Dienstag)"},
+  "@weekdayTue": {
+    "description": "Abkürzig für Zischtig (Dienstag)"
+  },
   "weekdayWed": "Mi",
-  "@weekdayWed": {"description": "Abkürzig für Mittwuch (Mittwoch)"},
+  "@weekdayWed": {
+    "description": "Abkürzig für Mittwuch (Mittwoch)"
+  },
   "weekdayThu": "Du",
-  "@weekdayThu": {"description": "Abkürzig für Dunschtig (Donnerstag)"},
+  "@weekdayThu": {
+    "description": "Abkürzig für Dunschtig (Donnerstag)"
+  },
   "weekdayFri": "Fr",
-  "@weekdayFri": {"description": "Abkürzig für Friitig (Freitag)"},
+  "@weekdayFri": {
+    "description": "Abkürzig für Friitig (Freitag)"
+  },
   "weekdaySat": "Sa",
-  "@weekdaySat": {"description": "Abkürzig für Samschtig (Samstag)"},
+  "@weekdaySat": {
+    "description": "Abkürzig für Samschtig (Samstag)"
+  },
   "weekdaySun": "Su",
-  "@weekdaySun": {"description": "Abkürzig für Sunntig (Sonntag)"},
-
+  "@weekdaySun": {
+    "description": "Abkürzig für Sunntig (Sonntag)"
+  },
   "absencesTabAll": "Alli Absänze",
   "absencesTabLateness": "Verspötig",
   "absencesTabAbsences": "Absänze",
@@ -333,8 +315,7 @@
   "noCommentGiven": "Kei Kommentar aagee",
   "unknownData": "Unbekannti Date",
   "noNoticesFound": "Kei Meldigä gfunde.",
-  "noLatenessFound": "Kei Verspötig gfunde.",
-  "minutes": "Min.",
+  "minutes": "Minute",
   "hours": "Std.",
   "latenessFrom": "Verspötig vom",
   "duration": "Duur",
@@ -353,28 +334,51 @@
   "deleteAbsenceTitle": "Absänz lösche",
   "deleteAbsenceConfirm": "Bisch sicher, dass du die Absänz lösche wotsch? Die Aktion cha nöd rückgängig gmacht werde.",
   "absenceDeleted": "Absänz glöscht!",
-
   "emailSupport": "E-Mail Support",
-  "@emailSupport": {"description": "Titel für E-Mail Support Karte"},
+  "@emailSupport": {
+    "description": "Titel für E-Mail Support Karte"
+  },
   "contactByEmail": "Kontaktier mi direkt per E-Mail",
-  "@contactByEmail": {"description": "Untertitel für E-Mail Support Karte"},
+  "@contactByEmail": {
+    "description": "Untertitel für E-Mail Support Karte"
+  },
   "bugReport": "Bug Report / Feature Request",
-  "@bugReport": {"description": "Titel für Bug Report Karte"},
+  "@bugReport": {
+    "description": "Titel für Bug Report Karte"
+  },
   "reportBugsOrRequestFeatures": "Meld Bugs oder schlag nöii Features vor",
-  "@reportBugsOrRequestFeatures": {"description": "Untertitel für Bug Report Karte"},
+  "@reportBugsOrRequestFeatures": {
+    "description": "Untertitel für Bug Report Karte"
+  },
   "copy": "Kopiere",
-  "@copy": {"description": "Buttontext zum Kopiere"},
+  "@copy": {
+    "description": "Buttontext zum Kopiere"
+  },
   "copiedToClipboard": "I d Zwüscheablage kopiert",
-  "@copiedToClipboard": {"description": "Snackbar-Nachricht bim Kopiere"},
+  "@copiedToClipboard": {
+    "description": "Snackbar-Nachricht bim Kopiere"
+  },
   "ok": "OK",
-  "@ok": {"description": "OK Buttontext"},
-  "error": "Fähler",
-  "@error": {"description": "Dialogtitel für Fehler"},
+  "@ok": {
+    "description": "OK Buttontext"
+  },
+  "@error": {
+    "description": "Dialogtitel für Fehler"
+  },
   "emailAppError": "E-Mail-App cha nöd öppnet werde. Bitte kontaktier üs manuell under: {email}",
-  "@emailAppError": {"description": "Fehlermeldig, wenn E-Mail-App nöd öppnet werde cha", "placeholders": {"email": {}}},
+  "@emailAppError": {
+    "description": "Fehlermeldig, wenn E-Mail-App nöd öppnet werde cha",
+    "placeholders": {
+      "email": {}
+    }
+  },
   "browserError": "Browser cha nöd öppnet werde. Bitte bsuech d Site manuell: {url}",
-  "@browserError": {"description": "Fehlermeldig, wenn Browser nöd öppnet werde cha", "placeholders": {"url": {}}},
-
+  "@browserError": {
+    "description": "Fehlermeldig, wenn Browser nöd öppnet werde cha",
+    "placeholders": {
+      "url": {}
+    }
+  },
   "appUpdateTest": "App Update Test",
   "readyToTest": "Bereit zum Teste",
   "updateSystemTest": "Update System Test",
@@ -397,7 +401,6 @@
   "clearingDismissedUpdates": "Lösche verworfeni Updates...",
   "dismissedUpdatesCleared": "Verworfeni Updates glöscht",
   "errorClearingDismissed": "Fähler bim Lösche vo verworfene Updates: {error}",
-
   "illness": "Chranket",
   "accident": "Unfall",
   "military": "Militär",
@@ -406,10 +409,8 @@
   "createNewAbsence": "Nöii Absänz erfasse",
   "reasonRequired": "Grund *",
   "create": "Erfasse",
-
   "noError": "Kei Fähler",
   "unknown": "Unbekannt",
-
   "currentVersion": "Aktuell: {version}",
   "latestVersion": "Nöiste: {version}",
   "downloadingUpdate": "Update wird abelade...",
@@ -424,7 +425,6 @@
   "installationError": "Fähler bi der Installation",
   "installationErrorDetails": "Installation Fähler: {error}",
   "updateInstallationStarted": "Update Installation gstartet",
-
   "selectReason": "Bitte wähl en Grund uus",
   "selectDate": "Bitte wähl es Datum uus",
   "absentFrom": "Abwäsend vo *",
@@ -464,7 +464,6 @@
   "october": "Oktober",
   "november": "November",
   "december": "Dezember",
-
   "studentIdCardTooltip": "Schüeleruuswis",
   "customizeHomepageTooltip": "Start-Siite aapasse",
   "switchAccountButton": "Account wächsle",
@@ -473,92 +472,73 @@
   "loadingData": "Date lade...",
   "finalizingInitialization": "Initialisierig abschliesse...",
   "errorCheckingUpdatesDetails": "Fähler bim Sueche nach Updates: {error}",
-
   "minute": "Minut",
   "@minute": {
     "description": "Singular form of minute"
   },
-
-  "minutes": "Minute",
   "@minutes": {
     "description": "Plural form of minutes"
   },
-
   "beforeClass": "vor de Lektion",
   "@beforeClass": {
     "description": "Text shown under the time display"
   },
-
   "notificationPermissions": "Benachrichtigigs-Berechtigunge",
   "@notificationPermissions": {
     "description": "Title for notification permissions dialog"
   },
-
   "notificationPermissionsDescription": "Um rechtziitig Benachrichtigunge über dini Lektione z'becho, bitte erteile die folgend Berechtigunge:",
   "@notificationPermissionsDescription": {
     "description": "Description for notification permissions dialog"
   },
-
   "notificationPermission": "Benachrichtigunge",
   "@notificationPermission": {
     "description": "Basic notification permission"
   },
-
   "notificationPermissionDesc": "Schuly erlaube, dir Benachrichtigunge z'schicke",
   "@notificationPermissionDesc": {
     "description": "Description for notification permission"
   },
-
   "exactAlarmPermission": "Exakti Alarme",
   "@exactAlarmPermission": {
     "description": "Exact alarm permission"
   },
-
   "exactAlarmPermissionDesc": "Brucht für präzisi Benachrichtigigs-Ziite",
   "@exactAlarmPermissionDesc": {
     "description": "Description for exact alarm permission"
   },
-
   "batteryOptimization": "Akku-Optimierig",
   "@batteryOptimization": {
     "description": "Battery optimization permission"
   },
-
   "batteryOptimizationDesc": "Akku-Optimierig deaktiviere für zuverlässigi Benachrichtigunge",
   "@batteryOptimizationDesc": {
     "description": "Description for battery optimization"
   },
-
   "grant": "Erteile",
   "@grant": {
     "description": "Button to grant permission"
   },
-
   "allPermissionsGranted": "Alli Berechtigunge erteilt! Benachrichtigunge funktioniere zuverlässig.",
   "@allPermissionsGranted": {
     "description": "Message when all permissions are granted"
   },
-
   "somePermissionsMissing": "Einigi Berechtigunge fähle. Benachrichtigunge funktioniere vilicht nöd wie erwartet.",
   "@somePermissionsMissing": {
     "description": "Message when some permissions are missing"
   },
-
   "remindLater": "Spöter erinnere",
   "@remindLater": {
     "description": "Button to dismiss permission dialog"
   },
-
   "continueAnyway": "Trotzdem fortsetzje",
   "@continueAnyway": {
     "description": "Button to continue without all permissions"
   },
-
   "done": "Fertig",
   "@done": {
     "description": "Done button"
   },
-
   "checkPermissions": "Berechtigunge prüefe",
   "@checkPermissions": {
     "description": "Button to check notification permissions"
@@ -572,150 +552,213 @@
   "numberOfGradesToShow": "Azahl vo Note zum azeige",
   "showOnlyOpenAbsences": "Nur offni Absenze azeige",
   "noConfigurationAvailable": "Kei Konfigurationsiistellige verfüegbar",
-
   "getNotified": "Vor de Stunde benachrichtiget werde",
   "@getNotified": {
     "description": "Get notification before classes"
   },
-
   "enableNotifications": "Aktiviere zum Benachrichtigunge übercho",
   "@enableNotifications": {
     "description": "Enable to receive notifications"
   },
-
   "notificationsEnabled": "Benachrichtigunge erfolgrich aktiviert",
   "@notificationsEnabled": {
     "description": "Notifications enabled successfully"
   },
-
   "notificationPermissionDenied": "Benachrichtigungsberechtigung verweigeret. Bitte i de Iistellige aktiviere.",
   "@notificationPermissionDenied": {
     "description": "Notification permission denied"
   },
-
   "scheduleTestNotification": "Test-Benachrichtigung plane",
   "@scheduleTestNotification": {
     "description": "Schedule test notification"
   },
-
   "testScheduledNotificationDesc": "Du überchunnsch i 15 Sekunde e Benachrichtigung (funktioniert au wenn d'App gschlosse isch)",
   "@testScheduledNotificationDesc": {
     "description": "Test notification in 15 seconds"
   },
-
   "notificationScheduledIn15Seconds": "Benachrichtigung plant! Schliess d'App zum teste - chunt i 15 Sekunde",
   "@notificationScheduledIn15Seconds": {
     "description": "Notification scheduled for 15 seconds"
   },
-
   "errorSchedulingNotification": "Benachrichtigung het nöd chöne plant werde",
   "@errorSchedulingNotification": {
     "description": "Failed to schedule notification"
   },
-
   "testNotificationSent": "Test-Benachrichtigung gsendet!",
   "@testNotificationSent": {
     "description": "Test notification sent"
   },
-
   "exactAlarmPermissionRequired": "Genaui Alarm-Berechtigung bruuchts. Bitte i de Iistellige aktiviere.",
   "@exactAlarmPermissionRequired": {
     "description": "Exact alarm permission required"
   },
-
   "openSettings": "Iistellige öffne",
   "@openSettings": {
     "description": "Open Settings"
   },
-
   "getColorName": "Farb bestimme",
-  "@getColorName": {
-    "description": "Get color name"
-  },
-
   "relatedNotices": "Zugehörigi Meldig",
   "exam": "Prüefig",
   "date": "Datum",
   "time": "Ziit",
   "studentReason": "Begründig vom Schüeler",
   "trainerComment": "Kommentar vom Lehrer",
-
   "unexcusedAbsences": "Unentschuldigti Absänze",
-
   "checkingConnection": "Verbindig wird überprüeft...",
-
   "offlineModeDetected": "Offline-Modus - bruuche gspeicherti Date",
-
   "loadingCachedData": "Lade gspeicherti Date...",
-
   "reAuthenticationCancelled": "Erneuti Authentifizierig abbroche. Einigi Funktione funktioniered vilicht nöd.",
-
   "consoleLogs": "Konsole-Logs",
-
   "viewAppDebugLogs": "App-Debug-Logs azeige",
-
   "buyMeACoffee": "Chauf mer en Kafi",
-
   "supportDevelopment": "Unterstütz d'Entwicklig",
-
   "couldNotOpenBuyMeACoffee": "Buy Me a Coffee-Siite het nöd chöne göffnet werde",
-
   "or": "ODER",
-
   "signInWithMicrosoft": "Mit Microsoft amelde",
-
   "clearLogs": "Logs lösche",
-
   "exportLogs": "Logs exportiere",
-
   "all": "Alli",
-
   "debug": "Debug",
-
   "info": "Info",
-
   "warning": "Warnig",
-
   "enableLogging": "Protokollierig aktiviere",
-
   "clearFilters": "Filter lösche",
-
   "logCopiedToClipboard": "Log i'd Zwüscheablag kopiert",
-
   "clearAllLogs": "Alli Logs lösche?",
-
   "thisActionCannotBeUndone": "Die Aktion cha nöd rückgängig gmacht werde.",
-
   "logsCleared": "Logs glöscht",
-
   "clear": "Lösche",
-
   "logsExportedToClipboard": "Logs i'd Zwüscheablag exportiert",
-
   "endpointReachable": "Endpunkt erreichbar ({statusCode})",
-
   "serverError": "Serverfehler: {statusCode}",
-
   "failedToInitializeMicrosoftAuth": "Microsoft-Authentifizierig het nöd chöne initialisiert werde: {error}",
-
   "authenticationFailed": "Authentifizierig fehlgschlage: {error}",
-
   "noInternetConnection": "Kei Internetverbindig",
-
   "upcomingTests": "Astehendi Prüefige",
-
   "noTestsFound": "Kei Prüefige gfunde",
-
   "noUpcomingTests": "Kei astehendi Prüefige",
-
   "room": "Ruum",
-
   "weight": "Gwichtig",
-
   "numberOfTestsToShow": "Azahl vo de azeigende Prüefige",
   "today": "Hüt",
   "cardView": "Charte-Asicht",
   "cardViewDescription": "Detaillierti Charte mit erwiiterbare Testinfos",
   "timelineView": "Ziitachse-Asicht",
-  "timelineViewDescription": "Kompakti Ziitachse mit ziitbasiertem Layout"
+  "timelineViewDescription": "Kompakti Ziitachse mit ziitbasiertem Layout",
+  "privacyAndDataCollection": "Dateschutz & Date-Sammlig",
+  "@privacyAndDataCollection": {
+    "description": "Privacy consent: privacyAndDataCollection"
+  },
+  "welcomeToSchuly": "Willkomme bi Schuly!",
+  "@welcomeToSchuly": {
+    "description": "Privacy consent: welcomeToSchuly"
+  },
+  "privacyConsentIntro": "Zum dini Erfahrig z'verbessere und Problem schnell z'löse, sammle mir Fählerberich wenn d'App abstürzt oder Problem het.",
+  "@privacyConsentIntro": {
+    "description": "Privacy consent: privacyConsentIntro"
+  },
+  "whatWeCollect": "Was mir sammle:",
+  "@whatWeCollect": {
+    "description": "Privacy consent: whatWeCollect"
+  },
+  "whatWeDontCollect": "Was mir NID sammle:",
+  "@whatWeDontCollect": {
+    "description": "Privacy consent: whatWeDontCollect"
+  },
+  "errorReports": "Fählerberich",
+  "@errorReports": {
+    "description": "Privacy consent: errorReports"
+  },
+  "errorReportsDesc": "Stack-Traces, Fählermäldig und Breadcrumbs zum Bugs z'fixe",
+  "@errorReportsDesc": {
+    "description": "Privacy consent: errorReportsDesc"
+  },
+  "deviceInformation": "Grät-Informatione",
+  "@deviceInformation": {
+    "description": "Privacy consent: deviceInformation"
+  },
+  "deviceInformationDesc": "Grätmodell, OS-Version, Bildschirmgrössi, Speicher, Batterie-Stand und App-Version",
+  "@deviceInformationDesc": {
+    "description": "Privacy consent: deviceInformationDesc"
+  },
+  "performanceData": "Leischtigsdate",
+  "@performanceData": {
+    "description": "Privacy consent: performanceData"
+  },
+  "performanceDataDesc": "API-Antwortzite, App-Lifecycle-Events und Speichernutzig",
+  "@performanceDataDesc": {
+    "description": "Privacy consent: performanceDataDesc"
+  },
+  "usagePatterns": "Nutzigsmuschter",
+  "@usagePatterns": {
+    "description": "Privacy consent: usagePatterns"
+  },
+  "usagePatternsDesc": "Navigations-Breadcrumbs und usgführti API-Operatione (fetchAll, etc.)",
+  "@usagePatternsDesc": {
+    "description": "Privacy consent: usagePatternsDesc"
+  },
+  "userContext": "Benutzerkontext",
+  "@userContext": {
+    "description": "Privacy consent: userContext"
+  },
+  "userContextDesc": "Dini E-Mail-Adrässe (zum kontospezifischi Problem z'identifiziere)",
+  "@userContextDesc": {
+    "description": "Privacy consent: userContextDesc"
+  },
+  "personalData": "Persönlichi Date",
+  "@personalData": {
+    "description": "Privacy consent: personalData"
+  },
+  "personalDataDesc": "Dini Note, Stundeplan-Inhält, Notize und persönlichi Nachricht blibe privat",
+  "@personalDataDesc": {
+    "description": "Privacy consent: personalDataDesc"
+  },
+  "credentials": "Zugangstdate",
+  "@credentials": {
+    "description": "Privacy consent: credentials"
+  },
+  "credentialsDesc": "Dini Passwörter, Authentifizierigstoken und sensibli API-Antworte wärde usgfilteret",
+  "@credentialsDesc": {
+    "description": "Privacy consent: credentialsDesc"
+  },
+  "privacyConsentChangeAnytime": "Du chasch die Istellig jederziit i de App-Istellige ändere.",
+  "@privacyConsentChangeAnytime": {
+    "description": "Privacy consent: privacyConsentChangeAnytime"
+  },
+  "privacyConsentHelpMessage": "Fählerberich enthalte dini E-Mail-Adrässe für Debug-Zwäck. Die Date wärde nur zum Bugs z'fixe und d'App-Stabilität z'verbessere brucht. Mit dinere Zuestimmig hilfsch du, Schuly für alli besser z'mache.",
+  "@privacyConsentHelpMessage": {
+    "description": "Privacy consent: privacyConsentHelpMessage"
+  },
+  "privacyConsentDecline": "Ablehne",
+  "@privacyConsentDecline": {
+    "description": "Privacy consent: privacyConsentDecline"
+  },
+  "privacyConsentAccept": "Akzeptiere & Witer",
+  "@privacyConsentAccept": {
+    "description": "Privacy consent: privacyConsentAccept"
+  },
+  "errorTracking": "Fählerverfolgig",
+  "@errorTracking": {
+    "description": "Privacy consent: errorTracking"
+  },
+  "errorTrackingEnabledDesc": "Hilf d'App-Stabilität z'verbessere, indem du Fählerberich mit Debug-Kontext teilsch",
+  "@errorTrackingEnabledDesc": {
+    "description": "Privacy consent: errorTrackingEnabledDesc"
+  },
+  "errorTrackingDisabledDesc": "Fählerverfolgig isch deaktiviert",
+  "@errorTrackingDisabledDesc": {
+    "description": "Privacy consent: errorTrackingDisabledDesc"
+  },
+  "errorTrackingEnabled": "Merci! Fählerverfolgig isch aktiviert.",
+  "@errorTrackingEnabled": {
+    "description": "Privacy consent: errorTrackingEnabled"
+  },
+  "errorTrackingDisabled": "Fählerverfolgig isch deaktiviert. Bitte starte d'App neu, damit d'Änderige wirksam wärde.",
+  "@errorTrackingDisabled": {
+    "description": "Privacy consent: errorTrackingDisabled"
+  },
+  "errorTrackingRestartRequired": "Bitte starte d'App neu, damit d'Änderige wirksam wärde.",
+  "@errorTrackingRestartRequired": {
+    "description": "Privacy consent: errorTrackingRestartRequired"
+  }
 }

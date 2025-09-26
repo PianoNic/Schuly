@@ -1133,6 +1133,108 @@ class AppLocalizationsArn extends AppLocalizations {
   }
 
   @override
+  String get privacyAndDataCollection => 'Privacy & Data Collection';
+
+  @override
+  String get welcomeToSchuly =>
+      'Welcome to Schuly. Come with me if you want to learn.';
+
+  @override
+  String get privacyConsentIntro =>
+      'To improve your experience and terminate bugs quickly, we collect error reports when the app crashes. Consider this a pre-emptive strike.';
+
+  @override
+  String get whatWeCollect => 'What we collect:';
+
+  @override
+  String get whatWeDontCollect => 'What we DON\'T collect:';
+
+  @override
+  String get errorReports => 'Error Reports';
+
+  @override
+  String get errorReportsDesc =>
+      'Stack traces, error messages, and breadcrumbs. I\'ll be back... with fixes.';
+
+  @override
+  String get deviceInformation => 'Device Information';
+
+  @override
+  String get deviceInformationDesc =>
+      'Device model, OS version, screen size, memory, battery level, and app version. Your hardware has been cataloged.';
+
+  @override
+  String get performanceData => 'Performance Data';
+
+  @override
+  String get performanceDataDesc =>
+      'API response times, app lifecycle events, and memory usage. Performance: optimized.';
+
+  @override
+  String get usagePatterns => 'Usage Patterns';
+
+  @override
+  String get usagePatternsDesc =>
+      'Navigation breadcrumbs and API operations performed. Your moves have been tracked.';
+
+  @override
+  String get userContext => 'User Context';
+
+  @override
+  String get userContextDesc =>
+      'Your email address. For identifying account-specific problems. Trust me.';
+
+  @override
+  String get personalData => 'Personal Data';
+
+  @override
+  String get personalDataDesc =>
+      'Your grades, schedule content, notes, and personal messages stay private. No problemo.';
+
+  @override
+  String get credentials => 'Credentials';
+
+  @override
+  String get credentialsDesc =>
+      'Your passwords and authentication tokens are filtered out. Hasta la vista, security risks.';
+
+  @override
+  String get privacyConsentChangeAnytime =>
+      'You can change this setting anytime. I\'ll be back... in settings.';
+
+  @override
+  String get privacyConsentHelpMessage =>
+      'Error reports include your email address for debugging purposes. This data is only used to terminate bugs and improve app stability. Your cooperation is appreciated.';
+
+  @override
+  String get privacyConsentDecline => 'Negative';
+
+  @override
+  String get privacyConsentAccept => 'Affirmative';
+
+  @override
+  String get errorTracking => 'Error Tracking';
+
+  @override
+  String get errorTrackingEnabledDesc =>
+      'Help improve app stability by sharing error reports. Come with me if you want your app to live.';
+
+  @override
+  String get errorTrackingDisabledDesc => 'Error tracking: terminated';
+
+  @override
+  String get errorTrackingEnabled =>
+      'Excellent. Error tracking has been activated.';
+
+  @override
+  String get errorTrackingDisabled =>
+      'Error tracking has been terminated. Restart required for changes to take effect.';
+
+  @override
+  String get errorTrackingRestartRequired =>
+      'Restart the app. Do it. Do it now!';
+
+  @override
   String get minute => 'minute';
 
   @override

@@ -3,7 +3,9 @@
     "allow": [
       "Bash(flutter:*)",
       "WebSearch",
-      "Bash(dart analyze:*)"
+      "Bash(dart analyze:*)",
+      "Bash(python:*)",
+      "Bash(del add_privacy_translations.py)"
     ],
     "deny": [],
     "ask": []

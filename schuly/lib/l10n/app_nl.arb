@@ -1467,8 +1467,152 @@
     "description": "Detailed error message for update check failure",
     "placeholders": {
       "error": {}
-
     }
+  },
+
+  "privacyAndDataCollection": "Privacy & Gegevensverzameling",
+  "@privacyAndDataCollection": {
+    "description": "Title for privacy consent dialog"
+  },
+
+  "welcomeToSchuly": "Welkom bij Schuly!",
+  "@welcomeToSchuly": {
+    "description": "Welcome message in privacy consent dialog"
+  },
+
+  "privacyConsentIntro": "Om uw ervaring te verbeteren en problemen snel op te lossen, verzamelen we foutrapporten wanneer de app crasht of problemen ondervindt.",
+  "@privacyConsentIntro": {
+    "description": "Introduction text for privacy consent dialog"
+  },
+
+  "whatWeCollect": "Wat we verzamelen:",
+  "@whatWeCollect": {
+    "description": "Header for data collection list"
+  },
+
+  "whatWeDontCollect": "Wat we NIET verzamelen:",
+  "@whatWeDontCollect": {
+    "description": "Header for data not collected list"
+  },
+
+  "errorReports": "Foutrapporten",
+  "@errorReports": {
+    "description": "Title for error reports data type"
+  },
+
+  "errorReportsDesc": "Stack traces, foutmeldingen en breadcrumbs om bugs op te lossen",
+  "@errorReportsDesc": {
+    "description": "Description for error reports data type"
+  },
+
+  "deviceInformation": "Apparaatinformatie",
+  "@deviceInformation": {
+    "description": "Title for device information data type"
+  },
+
+  "deviceInformationDesc": "Apparaatmodel, OS-versie, schermgrootte, geheugen, batterijniveau en app-versie",
+  "@deviceInformationDesc": {
+    "description": "Description for device information data type"
+  },
+
+  "performanceData": "Prestatiegegevens",
+  "@performanceData": {
+    "description": "Title for performance data type"
+  },
+
+  "performanceDataDesc": "API-responstijden, app-lifecycle-gebeurtenissen en geheugengebruik",
+  "@performanceDataDesc": {
+    "description": "Description for performance data type"
+  },
+
+  "usagePatterns": "Gebruikspatronen",
+  "@usagePatterns": {
+    "description": "Title for usage patterns data type"
+  },
+
+  "usagePatternsDesc": "Navigatie-breadcrumbs en uitgevoerde API-operaties (fetchAll, enz.)",
+  "@usagePatternsDesc": {
+    "description": "Description for usage patterns data type"
+  },
+
+  "userContext": "Gebruikerscontext",
+  "@userContext": {
+    "description": "Title for user context data type"
+  },
+
+  "userContextDesc": "Uw e-mailadres (voor het identificeren van accountspecifieke problemen)",
+  "@userContextDesc": {
+    "description": "Description for user context data type"
+  },
+
+  "personalData": "Persoonlijke Gegevens",
+  "@personalData": {
+    "description": "Title for personal data type"
+  },
+
+  "personalDataDesc": "Uw cijfers, roosterinhoud, notities en persoonlijke berichten blijven privé",
+  "@personalDataDesc": {
+    "description": "Description for personal data type"
+  },
+
+  "credentials": "Inloggegevens",
+  "@credentials": {
+    "description": "Title for credentials data type"
+  },
+
+  "credentialsDesc": "Uw wachtwoorden, authenticatietokens en gevoelige API-antwoorden worden uitgefilterd",
+  "@credentialsDesc": {
+    "description": "Description for credentials data type"
+  },
+
+  "privacyConsentChangeAnytime": "U kunt deze instelling op elk moment wijzigen in de app-instellingen.",
+  "@privacyConsentChangeAnytime": {
+    "description": "Info message about changing privacy settings"
+  },
+
+  "privacyConsentHelpMessage": "Foutrapporten bevatten uw e-mailadres voor debugdoeleinden. Deze gegevens worden alleen gebruikt om bugs op te lossen en de app-stabiliteit te verbeteren. Door toestemming te geven helpt u Schuly beter te maken voor iedereen.",
+  "@privacyConsentHelpMessage": {
+    "description": "Help message explaining privacy consent benefits"
+  },
+
+  "privacyConsentDecline": "Weigeren",
+  "@privacyConsentDecline": {
+    "description": "Button text to decline privacy consent"
+  },
+
+  "privacyConsentAccept": "Accepteren & Doorgaan",
+  "@privacyConsentAccept": {
+    "description": "Button text to accept privacy consent"
+  },
+
+  "errorTracking": "Foutopsporing",
+  "@errorTracking": {
+    "description": "Title for error tracking setting"
+  },
+
+  "errorTrackingEnabledDesc": "Help de app-stabiliteit te verbeteren door foutrapporten met debug-context te delen",
+  "@errorTrackingEnabledDesc": {
+    "description": "Description when error tracking is enabled"
+  },
+
+  "errorTrackingDisabledDesc": "Foutopsporing is uitgeschakeld",
+  "@errorTrackingDisabledDesc": {
+    "description": "Description when error tracking is disabled"
+  },
+
+  "errorTrackingEnabled": "Bedankt! Foutopsporing is ingeschakeld.",
+  "@errorTrackingEnabled": {
+    "description": "Message shown when error tracking is enabled"
+  },
+
+  "errorTrackingDisabled": "Foutopsporing is uitgeschakeld. Start de app opnieuw op om de wijzigingen door te voeren.",
+  "@errorTrackingDisabled": {
+    "description": "Message shown when error tracking is disabled"
+  },
+
+  "errorTrackingRestartRequired": "Start de app opnieuw op om de wijzigingen door te voeren.",
+  "@errorTrackingRestartRequired": {
+    "description": "Message shown when app restart is required for error tracking changes"
   },
   "minute": "minuut",
   "@minute": {

@@ -1151,6 +1151,106 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
+  String get privacyAndDataCollection => 'Privacy & Gegevensverzameling';
+
+  @override
+  String get welcomeToSchuly => 'Welkom bij Schuly!';
+
+  @override
+  String get privacyConsentIntro =>
+      'Om uw ervaring te verbeteren en problemen snel op te lossen, verzamelen we foutrapporten wanneer de app crasht of problemen ondervindt.';
+
+  @override
+  String get whatWeCollect => 'Wat we verzamelen:';
+
+  @override
+  String get whatWeDontCollect => 'Wat we NIET verzamelen:';
+
+  @override
+  String get errorReports => 'Foutrapporten';
+
+  @override
+  String get errorReportsDesc =>
+      'Stack traces, foutmeldingen en breadcrumbs om bugs op te lossen';
+
+  @override
+  String get deviceInformation => 'Apparaatinformatie';
+
+  @override
+  String get deviceInformationDesc =>
+      'Apparaatmodel, OS-versie, schermgrootte, geheugen, batterijniveau en app-versie';
+
+  @override
+  String get performanceData => 'Prestatiegegevens';
+
+  @override
+  String get performanceDataDesc =>
+      'API-responstijden, app-lifecycle-gebeurtenissen en geheugengebruik';
+
+  @override
+  String get usagePatterns => 'Gebruikspatronen';
+
+  @override
+  String get usagePatternsDesc =>
+      'Navigatie-breadcrumbs en uitgevoerde API-operaties (fetchAll, enz.)';
+
+  @override
+  String get userContext => 'Gebruikerscontext';
+
+  @override
+  String get userContextDesc =>
+      'Uw e-mailadres (voor het identificeren van accountspecifieke problemen)';
+
+  @override
+  String get personalData => 'Persoonlijke Gegevens';
+
+  @override
+  String get personalDataDesc =>
+      'Uw cijfers, roosterinhoud, notities en persoonlijke berichten blijven privé';
+
+  @override
+  String get credentials => 'Inloggegevens';
+
+  @override
+  String get credentialsDesc =>
+      'Uw wachtwoorden, authenticatietokens en gevoelige API-antwoorden worden uitgefilterd';
+
+  @override
+  String get privacyConsentChangeAnytime =>
+      'U kunt deze instelling op elk moment wijzigen in de app-instellingen.';
+
+  @override
+  String get privacyConsentHelpMessage =>
+      'Foutrapporten bevatten uw e-mailadres voor debugdoeleinden. Deze gegevens worden alleen gebruikt om bugs op te lossen en de app-stabiliteit te verbeteren. Door toestemming te geven helpt u Schuly beter te maken voor iedereen.';
+
+  @override
+  String get privacyConsentDecline => 'Weigeren';
+
+  @override
+  String get privacyConsentAccept => 'Accepteren & Doorgaan';
+
+  @override
+  String get errorTracking => 'Foutopsporing';
+
+  @override
+  String get errorTrackingEnabledDesc =>
+      'Help de app-stabiliteit te verbeteren door foutrapporten met debug-context te delen';
+
+  @override
+  String get errorTrackingDisabledDesc => 'Foutopsporing is uitgeschakeld';
+
+  @override
+  String get errorTrackingEnabled => 'Bedankt! Foutopsporing is ingeschakeld.';
+
+  @override
+  String get errorTrackingDisabled =>
+      'Foutopsporing is uitgeschakeld. Start de app opnieuw op om de wijzigingen door te voeren.';
+
+  @override
+  String get errorTrackingRestartRequired =>
+      'Start de app opnieuw op om de wijzigingen door te voeren.';
+
+  @override
   String get minute => 'minuut';
 
   @override

@@ -1,154 +1,79 @@
 {
   "@@locale": "arr",
-
   "appTitle": "Schuly",
-
   "noAccountAdded": "No crew member aboard yet, matey!",
-
   "addAccount": "Add Crew Member",
-
   "noActiveAccount": "No active pirate selected, ye scurvy dog!",
-
   "selectAccount": "Choose Yer Pirate",
-
   "personalInformation": "Pirate's Logbook",
-
   "quickActions": "Captain's Orders",
-
   "appSettings": "Ship's Configuration",
-
   "designAndSettings": "Customize yer vessel's appearance",
-
   "helpAndSupport": "Parley & Support",
-
   "getHelpAndSupport": "Seek wisdom from the crew",
-
   "addAnotherAccount": "Recruit Another Pirate",
-
   "addMultipleAccounts": "Assemble yer crew",
-
   "logout": "Abandon Ship",
-
   "signOutFromApp": "Walk the plank outta here",
-
   "name": "Pirate Name",
-
   "street": "Harbor Street",
-
   "zipCity": "Port & Cove",
-
   "birthDate": "Day of Birth",
-
   "phone": "Crow's Call",
-
   "email": "Message in Bottle",
-
   "nationality": "Sailing Flag",
-
   "hometown": "Home Port",
-
   "mobile": "Ship's Horn",
-
   "profile1": "First Mate",
-
   "profile2": "Second Mate",
-
   "start": "Crow's Nest",
-
   "agenda": "Ship's Log",
-
   "grades": "Treasure Map",
-
   "absences": "Shore Leave",
-
   "account": "Captain's Quarters",
-
   "language": "Tongue",
-
   "selectLanguage": "Choose Yer Tongue",
-
   "english": "King's English",
-
   "german": "Kraut Speak",
-
   "swissGerman": "Mountain Folk",
-
   "pirate": "Pirate Speak",
-
   "kawaii": "Kawaii Speak",
-
   "arnold": "Terminator Mode",
-
   "cancel": "Avast! Cancel that order!",
-
   "confirm": "Make it so, ye scurvy dog!",
-
   "pushNotifications": "Crow's Messages",
-
   "featureInDevelopment": "Still being forged in the smithy",
-
   "configureNotifications": "Set Up Ship's Signals",
-
   "chooseTypesAndTiming": "Choose what signals ye want to hear",
-
   "whatsNew": "Fresh Plunder",
-
-  "changelogAndFeatures": "New treasures and adventures",
-
+  "changelogAndFeatures": "New loot and features",
   "checkForUpdates": "Hunt for buried treasure!",
-
-  "checkForNewVersions": "Search for newer treasure charts",
-
-  "aboutApp": "About This Vessel",
-
+  "checkForNewVersions": "Scout for new charts",
+  "aboutApp": "About This Ship",
   "version": "Ship's Registry",
-
   "delete": "Send to Davy Jones' Locker",
-
   "close": "Batten down the hatches!",
-
   "add": "Press gang into service!",
-
   "loading": "Weighin' anchor, ye landlubbers!",
-
   "noEventsForThisDay": "No adventures scheduled for this day",
-
   "nextLessons": "Next Watch Duties",
-
   "nextHolidays": "Next Shore Leave",
-
   "studentIdCard": "Pirate's Papers",
-
   "enterValidEmail": "That ain't proper ship coordinates, ye landlubber!",
-
   "areYouSure": "Are ye certain, matey?",
-
   "updateAvailable": "Blimey! New treasure chart spotted!",
-
   "later": "Not now, ye bilge rat!",
-
   "yes": "Aye aye, Captain!",
-
   "no": "Over me dead body!",
-
   "confirmed": "Verified by the Captain",
-
   "lateness": "Tardiness at Sea",
-
-  "noLatenessFound": "No reports of tardiness found",
-
-  "selectReason": "Choose yer excuse, ye scurvy dog",
-
-  "selectDate": "Pick a day from the ship's log",
-
+  "noLatenessFound": "No late arrivals found.",
+  "selectReason": "Please choose yer reason",
+  "selectDate": "Please pick a date",
   "emailAddress": "Ship's Message Address",
-
   "password": "Secret Code",
-
   "login": "All Aboard!",
-
   "enterEmailAddress": "Scribble yer coordinates, ye sea dog!",
-
   "getNewToken": "Fetch new booty token",
   "getNewTokenSubtitle": "Fetch a new token for the active pirate",
   "tokenUpdated": "Token fetched, matey!",
@@ -162,7 +87,6 @@
   "logoutTitle": "Abandon Ship",
   "logoutConfirm": "Are ye sure ye want to abandon ship?",
   "loggedOut": "Ye be logged out!",
-
   "designSettings": "Ship's Design Settings",
   "appearance": "Look o' the Ship",
   "automatic": "By Neptune's beard!",
@@ -196,7 +120,6 @@
   "purple": "Purple",
   "reloadPage": "Chart the course again!",
   "loadingStudentIdCard": "Diggin' up yer sea papers, matey...",
-
   "previousLessonsDay": "Previous day with duties",
   "nextLessonsDay": "Next day with duties",
   "noLessonsFound": "No watch duties found.",
@@ -206,12 +129,13 @@
   "noGradesFound": "No treasures found.",
   "openAbsences": "Open shore leaves",
   "showAll": "Show all",
-  "@showAll": {"description": "Button to reveal all ship's chronicles"},
+  "@showAll": {
+    "description": "Button to reveal all ship's chronicles"
+  },
   "noAbsencesFound": "No shore leaves found.",
   "noOpenAbsences": "No open shore leaves.",
   "noReleaseNotes": "No ship's log available",
   "releaseNotesInfo": "Updates and new adventures will be shown here",
-
   "notificationTypes": "Signal types",
   "timetable": "Watch Schedule",
   "agendaNotificationSubtitle": "Signals before yer duties",
@@ -226,7 +150,6 @@
   "test": "Fire a warning shot!",
   "sendTestNotification": "Send test signal",
   "checkNotificationsWork": "Check if signals work",
-
   "gradeDetails": "Treasure Details",
   "basicInformation": "Basic Pirate Info",
   "titleLabel": "Title",
@@ -243,16 +166,22 @@
   "classAverageLabel": "Crew Average",
   "groupWeightLabel": "Crew Weight",
   "commentLabel": "Captain's Note",
-
   "latestVersionMessage": "Ye be usin' the latest version, matey!",
   "versionWithNumber": "Version {version}+{build}",
-  "@versionWithNumber": {"description": "Ship's registry with version and build markings, ye scurvy dog.", "placeholders": {"version": {}, "build": {}}},
+  "@versionWithNumber": {
+    "description": "Ship's registry with version and build markings, ye scurvy dog.",
+    "placeholders": {
+      "version": {},
+      "build": {}
+    }
+  },
   "appLegalese": "Schuly © 2025 PianoNic",
   "appDescription": "A custom app fer pirates to manage yer loot and crew. Keep yer log, treasure, and important dates in one place.",
   "apiEndpoint": "API Dock",
-
   "enterApiEndpoint": "Set yer API Dock coordinates",
-  "@enterApiEndpoint": {"description": "Warning when no port coordinates be entered"},
+  "@enterApiEndpoint": {
+    "description": "Warning when no port coordinates be entered"
+  },
   "currentApiInfo": "Current API Scroll",
   "apiInfoStatus": "API Scroll Status",
   "environment": "Sea State",
@@ -260,70 +189,120 @@
   "apiBaseUrl": "API Main Deck",
   "save": "Stash the booty!",
   "apiUrlChanged": "API URL be changed: {url}",
-  "@apiUrlChanged": {"description": "Message when ship changes course to new port", "placeholders": {"url": {}}},
-  "changelogAndFeatures": "New loot and features",
-  "checkForNewVersions": "Scout for new charts",
-  "aboutApp": "About This Ship",
-  "featureInDevelopment": "Still being forged in the smithy",
-  "@getColorName": {"description": "Reveals the color of the pirate's flag, ye landlubber."},
-
+  "@apiUrlChanged": {
+    "description": "Message when ship changes course to new port",
+    "placeholders": {
+      "url": {}
+    }
+  },
+  "@getColorName": {
+    "description": "Reveals the color of the pirate's flag"
+  },
   "switchAccount": "Change Yer Pirate",
-  "@switchAccount": {"description": "Captain's orders for changin' crew members"},
-
+  "@switchAccount": {
+    "description": "Captain's orders for changin' crew members"
+  },
   "accountCount": "{count, plural, =1{1 pirate} other{{count} pirates}}",
-  "@accountCount": {"description": "Counts how many buccaneers be in the crew", "placeholders": {"count": {}}},
-
+  "@accountCount": {
+    "description": "Counts how many buccaneers be in the crew",
+    "placeholders": {
+      "count": {}
+    }
+  },
   "noAccounts": "No pirates aboard.",
-  "@noAccounts": {"description": "Warning when no pirates be aboard the ship"},
-
+  "@noAccounts": {
+    "description": "Warning when no pirates be aboard the ship"
+  },
   "addFirstAccount": "Recruit yer first pirate to set sail!",
-  "@addFirstAccount": {"description": "Encouragement to recruit yer first crew member"},
-
+  "@addFirstAccount": {
+    "description": "Encouragement to recruit yer first crew member"
+  },
   "active": "On Deck",
-  "@active": {"description": "Mark for the pirate currently on deck"},
-
+  "@active": {
+    "description": "Mark for the pirate currently on deck"
+  },
   "available": "Below Deck",
-  "@available": {"description": "Mark for pirates waitin' below deck"},
-
+  "@available": {
+    "description": "Mark for pirates waitin' below deck"
+  },
   "removeAccount": "Throw Overboard",
-  "@removeAccount": {"description": "Order to make a scallywag walk the plank"},
-
+  "@removeAccount": {
+    "description": "Order to make a scallywag walk the plank"
+  },
   "confirmRemoveAccount": "Throw {email} overboard?",
-  "@confirmRemoveAccount": {"description": "Final warning before throwin' a crew member overboard", "placeholders": {"email": {}}},
-
+  "@confirmRemoveAccount": {
+    "description": "Final warning before throwin' a crew member overboard",
+    "placeholders": {
+      "email": {}
+    }
+  },
   "remove": "Walk the plank!",
-  "@remove": {"description": "Final command to make 'em walk the plank"},
-
+  "@remove": {
+    "description": "Final command to make 'em walk the plank"
+  },
   "switchedAccount": "Now sailing as {email}",
-  "@switchedAccount": {"description": "Announcement of new captain on deck", "placeholders": {"email": {}}},
-
+  "@switchedAccount": {
+    "description": "Announcement of new captain on deck",
+    "placeholders": {
+      "email": {}
+    }
+  },
   "switchAccountError": "Blast! Can't switch buccaneers: {error}",
-  "@switchAccountError": {"description": "Curse when can't change the ship's captain", "placeholders": {"error": {}}},
-
+  "@switchAccountError": {
+    "description": "Curse when can't change the ship's captain",
+    "placeholders": {
+      "error": {}
+    }
+  },
   "removedAccount": "{email} thrown overboard!",
-  "@removedAccount": {"description": "Report of successful keelhauling", "placeholders": {"email": {}}},
-
+  "@removedAccount": {
+    "description": "Report of successful keelhauling",
+    "placeholders": {
+      "email": {}
+    }
+  },
   "removeAccountError": "Arrr! Can't make 'em walk the plank: {error}",
-  "@removeAccountError": {"description": "Frustration when can't throw the scurvy dog overboard", "placeholders": {"error": {}}},
-
+  "@removeAccountError": {
+    "description": "Frustration when can't throw the scurvy dog overboard",
+    "placeholders": {
+      "error": {}
+    }
+  },
   "unexpectedError": "Batten down the hatches! A kraken attacked: {error}",
-  "@unexpectedError": {"description": "Alarm when a sea monster attacks the ship", "placeholders": {"error": {}}},
-
+  "@unexpectedError": {
+    "description": "Alarm when a sea monster attacks the ship",
+    "placeholders": {
+      "error": {}
+    }
+  },
   "weekdayMon": "Mon",
-  "@weekdayMon": {"description": "Start o' the work week, ye landlubber"},
+  "@weekdayMon": {
+    "description": "Start o' the work week, ye landlubber"
+  },
   "weekdayTue": "Tue",
-  "@weekdayTue": {"description": "Second day of toil, ye scurvy dog"},
+  "@weekdayTue": {
+    "description": "Second day of toil, ye scurvy dog"
+  },
   "weekdayWed": "Wed",
-  "@weekdayWed": {"description": "Mid-week madness, matey"},
+  "@weekdayWed": {
+    "description": "Mid-week madness, matey"
+  },
   "weekdayThu": "Thu",
-  "@weekdayThu": {"description": "Almost to shore leave, ye landlubber"},
+  "@weekdayThu": {
+    "description": "Almost to shore leave, ye landlubber"
+  },
   "weekdayFri": "Fri",
-  "@weekdayFri": {"description": "Last day before grog time!"},
+  "@weekdayFri": {
+    "description": "Last day before grog time!"
+  },
   "weekdaySat": "Sat",
-  "@weekdaySat": {"description": "Shore leave begins, ye sea dog!"},
+  "@weekdaySat": {
+    "description": "Shore leave begins, ye sea dog!"
+  },
   "weekdaySun": "Sun",
-  "@weekdaySun": {"description": "Day of rest before returnin' to the sea"},
-
+  "@weekdaySun": {
+    "description": "Day of rest before returnin' to the sea"
+  },
   "absencesTabAll": "All Shore Leaves",
   "absencesTabLateness": "Late to Deck",
   "absencesTabAbsences": "Shore Leaves",
@@ -336,8 +315,7 @@
   "noCommentGiven": "No comment scribbled",
   "unknownData": "Unknown booty",
   "noNoticesFound": "No messages in a bottle found.",
-  "noLatenessFound": "No late arrivals found.",
-  "minutes": "min",
+  "minutes": "minutes",
   "hours": "hr",
   "latenessFrom": "Late to deck on",
   "duration": "How long",
@@ -352,35 +330,57 @@
   "excuseUntil": "Forgive until",
   "agendaForDate": "Ship's log for {day}.{month}.{year}",
   "noAgendaForDay": "No adventures today, matey!",
-
   "details": "Details",
   "excuse": "Forgive",
   "excuseComingSoon": "Forgiveness - Coming Soon!",
   "deleteAbsenceTitle": "Scuttle Shore Leave",
   "deleteAbsenceConfirm": "Are ye sure ye want to scuttle this shore leave? This can't be undone, matey!",
   "absenceDeleted": "Shore leave scuttled!",
-
   "emailSupport": "Parley by Email",
-  "@emailSupport": {"description": "Header for sendin' messages in bottles"},
+  "@emailSupport": {
+    "description": "Header for sendin' messages in bottles"
+  },
   "contactByEmail": "Send yer message in a bottle",
-  "@contactByEmail": {"description": "Instructions for parley via message bottle"},
+  "@contactByEmail": {
+    "description": "Instructions for parley via message bottle"
+  },
   "bugReport": "Bug Report / Feature Request",
-  "@bugReport": {"description": "Title for reportin' ship troubles and wishin' for new adventures"},
+  "@bugReport": {
+    "description": "Title for reportin' ship troubles and wishin' for new adventures"
+  },
   "reportBugsOrRequestFeatures": "Report bugs or request new adventures",
-  "@reportBugsOrRequestFeatures": {"description": "Guide for reportin' kraken attacks or requestin' new treasure maps"},
+  "@reportBugsOrRequestFeatures": {
+    "description": "Guide for reportin' kraken attacks or requestin' new treasure maps"
+  },
   "copy": "Parrot that message!",
-  "@copy": {"description": "Command to make the parrot repeat the message"},
+  "@copy": {
+    "description": "Command to make the parrot repeat the message"
+  },
   "copiedToClipboard": "Message captured in me bottle!",
-  "@copiedToClipboard": {"description": "Confirmation that the message be captured in a bottle"},
+  "@copiedToClipboard": {
+    "description": "Confirmation that the message be captured in a bottle"
+  },
   "ok": "Savvy!",
-  "@ok": {"description": "Pirate acknowledgment, ye savvy"},
-  "error": "Shiver me timbers!",
-  "@error": {"description": "Exclamation when trouble strikes the ship"},
+  "@ok": {
+    "description": "Pirate acknowledgment, ye savvy"
+  },
+  "@error": {
+    "description": "Exclamation when trouble strikes the ship"
+  },
   "emailAppError": "Blast! Can't open the message bottle. Send word to: {email}",
-  "@emailAppError": {"description": "Curse when the message bottle won't open", "placeholders": {"email": {}}},
+  "@emailAppError": {
+    "description": "Curse when the message bottle won't open",
+    "placeholders": {
+      "email": {}
+    }
+  },
   "browserError": "Shiver me timbers! Can't chart the course. Sail to: {url}",
-  "@browserError": {"description": "Frustration when can't chart the course to new waters", "placeholders": {"url": {}}},
-
+  "@browserError": {
+    "description": "Frustration when can't chart the course to new waters",
+    "placeholders": {
+      "url": {}
+    }
+  },
   "appUpdateTest": "Testin' the Ship's New Riggin'",
   "readyToTest": "Batten down! Ready to test these waters!",
   "updateSystemTest": "Update System Test",
@@ -403,7 +403,6 @@
   "clearingDismissedUpdates": "Clearin' dismissed updates...",
   "dismissedUpdatesCleared": "Dismissed updates cleared",
   "errorClearingDismissed": "Blunder clearin' dismissed: {error}",
-
   "illness": "Scurvy",
   "accident": "Mishap",
   "military": "Navy service",
@@ -412,10 +411,8 @@
   "createNewAbsence": "Log new shore leave",
   "reasonRequired": "Reason *",
   "create": "Chart the course!",
-
   "noError": "Smooth sailin', captain!",
   "unknown": "Uncharted waters, captain!",
-
   "currentVersion": "Ship's current registry: {version}",
   "latestVersion": "Newest treasure map: {version}",
   "downloadingUpdate": "Haulin' in fresh ship parts from port...",
@@ -430,9 +427,6 @@
   "installationError": "Arrr! The ship won't take the upgrade!",
   "installationErrorDetails": "Arrr! Ship upgrade cursed: {error}",
   "updateInstallationStarted": "All hands on deck! Upgradin' the vessel!",
-
-  "selectReason": "Please choose yer reason",
-  "selectDate": "Please pick a date",
   "absentFrom": "Away from *",
   "absentTo": "Away until *",
   "toDateMustBeAfterFromDate": "Return date must be after departure",
@@ -470,7 +464,6 @@
   "october": "October",
   "november": "November",
   "december": "December",
-
   "studentIdCardTooltip": "Crew identification",
   "customizeHomepageTooltip": "Customize ship's deck",
   "switchAccountButton": "Switch crew member",
@@ -479,92 +472,73 @@
   "loadingData": "Loadin' treasure...",
   "finalizingInitialization": "Preparin' to set sail...",
   "errorCheckingUpdatesDetails": "Blunder checkin' fer updates: {error}",
-
   "minute": "minute",
   "@minute": {
     "description": "A single tick of the ship's chronometer"
   },
-
-  "minutes": "minutes",
   "@minutes": {
     "description": "Multiple ticks of the ship's timepiece"
   },
-
   "beforeClass": "before duty",
   "@beforeClass": {
     "description": "Warning shown before the next watch duty"
   },
-
   "notificationPermissions": "Signal Permissions",
   "@notificationPermissions": {
     "description": "Header for grantin' ship signal permissions"
   },
-
   "notificationPermissionsDescription": "To receive timely signals about yer ship duties, please grant the followin' permissions:",
   "@notificationPermissionsDescription": {
     "description": "Instructions for givin' the ship permission to send signals"
   },
-
   "notificationPermission": "Ship Signals",
   "@notificationPermission": {
     "description": "Permission for the ship's signal bell"
   },
-
   "notificationPermissionDesc": "Allow Schuly to send ye ship signals",
   "@notificationPermissionDesc": {
     "description": "Explanation for allowin' ship signals"
   },
-
   "exactAlarmPermission": "Precise Ship's Bell",
   "@exactAlarmPermission": {
     "description": "Permission for the ship's precise bell"
   },
-
   "exactAlarmPermissionDesc": "Required fer precise signal timin'",
   "@exactAlarmPermissionDesc": {
     "description": "Why the ship needs precise timin' for signals"
   },
-
   "batteryOptimization": "Ship's Power Management",
   "@batteryOptimization": {
     "description": "Permission for ship's power management"
   },
-
   "batteryOptimizationDesc": "Disable ship's power savin' fer reliable signals",
   "@batteryOptimizationDesc": {
     "description": "Why to disable the ship's power savin' for signals"
   },
-
   "grant": "Give 'em permission to board!",
   "@grant": {
     "description": "Command to give the ship permission to signal"
   },
-
   "allPermissionsGranted": "All permissions granted! Ship signals will work reliably, matey!",
   "@allPermissionsGranted": {
     "description": "Celebration when all ship permissions be granted"
   },
-
   "somePermissionsMissing": "Some permissions be missin'. Signals may not work as expected, ye scallywag!",
   "@somePermissionsMissing": {
     "description": "Warning when some ship permissions be denied"
   },
-
   "remindLater": "Remind this old sea dog later!",
   "@remindLater": {
     "description": "Button to dismiss permission dialog"
   },
-
   "continueAnyway": "Full speed ahead anyway!",
   "@continueAnyway": {
     "description": "Button to continue without all permissions"
   },
-
   "done": "Ship shape and Bristol fashion!",
   "@done": {
     "description": "Done button"
   },
-
   "checkPermissions": "Check Ship Permissions",
   "@checkPermissions": {
     "description": "Button to check notification permissions"
@@ -578,150 +552,213 @@
   "numberOfGradesToShow": "Marks to display",
   "showOnlyOpenAbsences": "Show only unexcused desertions",
   "noConfigurationAvailable": "No chart settings to adjust, matey",
-
   "getNotified": "Sound the bell before yer lessons",
   "@getNotified": {
     "description": "Get notification before classes"
   },
-
   "enableNotifications": "Hoist the signal flags for alerts",
   "@enableNotifications": {
     "description": "Enable to receive notifications"
   },
-
   "notificationsEnabled": "Signal flags be hoisted, cap'n!",
   "@notificationsEnabled": {
     "description": "Notifications enabled successfully"
   },
-
   "notificationPermissionDenied": "The crow's nest be blocked! Check yer ship's settings.",
   "@notificationPermissionDenied": {
     "description": "Notification permission denied"
   },
-
   "scheduleTestNotification": "Test the ship's bell",
   "@scheduleTestNotification": {
     "description": "Schedule test notification"
   },
-
   "testScheduledNotificationDesc": "The bell will ring in 15 ticks (even when ye abandon ship)",
   "@testScheduledNotificationDesc": {
     "description": "Test notification in 15 seconds"
   },
-
   "notificationScheduledIn15Seconds": "Bell be set! Abandon ship to test - rings in 15 ticks",
   "@notificationScheduledIn15Seconds": {
     "description": "Notification scheduled for 15 seconds"
   },
-
   "errorSchedulingNotification": "Blimey! Can't set the ship's bell",
   "@errorSchedulingNotification": {
     "description": "Failed to schedule notification"
   },
-
   "testNotificationSent": "Test bell be rung, matey!",
   "@testNotificationSent": {
     "description": "Test notification sent"
   },
-
   "exactAlarmPermissionRequired": "Need permission fer precise bell timing. Check yer settings!",
   "@exactAlarmPermissionRequired": {
     "description": "Exact alarm permission required"
   },
-
   "openSettings": "Navigate to settings",
   "@openSettings": {
     "description": "Open Settings"
   },
-
   "getColorName": "Reveal yer flag's color",
-  "@getColorName": {
-    "description": "Reveals the color of the pirate's flag"
-  },
-
   "relatedNotices": "Related Ship's Messages",
   "exam": "Battle Test",
   "date": "Day on the Calendar",
   "time": "Ship's Bell",
   "studentReason": "Buccaneer's Excuse",
   "trainerComment": "Captain's Remark",
-
   "unexcusedAbsences": "Unforgiven Shore Leaves",
-
   "checkingConnection": "Checkin' the ship's signal...",
-
   "offlineModeDetected": "Sailin' without wind - usin' the ship's logs",
-
   "loadingCachedData": "Pullin' from the ship's hold...",
-
   "reAuthenticationCancelled": "Re-boardin' cancelled. Some treasures may be locked away.",
-
   "consoleLogs": "Ship's Logbook",
-
   "viewAppDebugLogs": "Peek at the ship's secret logs",
-
   "buyMeACoffee": "Buy me a grog",
-
   "supportDevelopment": "Support the ship's construction",
-
   "couldNotOpenBuyMeACoffee": "Couldn't open the grog shop page",
-
   "or": "ARRR",
-
   "signInWithMicrosoft": "Board with Microsoft's flag",
-
   "clearLogs": "Clear the logbook",
-
   "exportLogs": "Export the ship's logs",
-
   "all": "All hands",
-
   "debug": "Debug",
-
   "info": "Info",
-
   "warning": "Warnin'",
-
   "enableLogging": "Start recordin' in the logbook",
-
   "clearFilters": "Clear the spyglass",
-
   "logCopiedToClipboard": "Log copied to yer treasure map",
-
   "clearAllLogs": "Clear all the ship's logs?",
-
   "thisActionCannotBeUndone": "This be permanent, matey - no turnin' back.",
-
   "logsCleared": "Logbook cleared",
-
   "clear": "Clear",
-
   "logsExportedToClipboard": "Logs exported to yer treasure map",
-
   "endpointReachable": "Port be open ({statusCode})",
-
   "serverError": "The server be sinkin': {statusCode}",
-
   "failedToInitializeMicrosoftAuth": "Microsoft's flag be torn: {error}",
-
   "authenticationFailed": "Boarding failed, ye scurvy dog: {error}",
-
   "noInternetConnection": "No signal from the crow's nest",
-
   "upcomingTests": "Battles Ahead",
-
   "noTestsFound": "No battles found",
-
   "noUpcomingTests": "No battles on the horizon",
-
   "room": "Cabin",
-
   "weight": "Bounty",
-
   "numberOfTestsToShow": "Number o' battles to show",
   "today": "This Day",
   "cardView": "Scroll View",
   "cardViewDescription": "Detailed scrolls with expandable battle info",
   "timelineView": "Ship's Log View",
-  "timelineViewDescription": "Compact log with time-based chartin'"
+  "timelineViewDescription": "Compact log with time-based chartin'",
+  "privacyAndDataCollection": "Privacy & Data Plunderin'",
+  "@privacyAndDataCollection": {
+    "description": "Privacy consent: privacyAndDataCollection"
+  },
+  "welcomeToSchuly": "Ahoy, welcome aboard Schuly!",
+  "@welcomeToSchuly": {
+    "description": "Privacy consent: welcomeToSchuly"
+  },
+  "privacyConsentIntro": "To help improve yer sailin' experience and fix problems quickly, we be collectin' error reports when the app crashes or encounters troubles on the high seas.",
+  "@privacyConsentIntro": {
+    "description": "Privacy consent: privacyConsentIntro"
+  },
+  "whatWeCollect": "What we be plunderin':",
+  "@whatWeCollect": {
+    "description": "Privacy consent: whatWeCollect"
+  },
+  "whatWeDontCollect": "What we NOT be plunderin':",
+  "@whatWeDontCollect": {
+    "description": "Privacy consent: whatWeDontCollect"
+  },
+  "errorReports": "Error Reports",
+  "@errorReports": {
+    "description": "Privacy consent: errorReports"
+  },
+  "errorReportsDesc": "Stack traces, error messages, and breadcrumbs to help us fix bugs, arrr!",
+  "@errorReportsDesc": {
+    "description": "Privacy consent: errorReportsDesc"
+  },
+  "deviceInformation": "Ship Information",
+  "@deviceInformation": {
+    "description": "Privacy consent: deviceInformation"
+  },
+  "deviceInformationDesc": "Ship model, OS version, screen size, memory, battery level, and app version",
+  "@deviceInformationDesc": {
+    "description": "Privacy consent: deviceInformationDesc"
+  },
+  "performanceData": "Performance Data",
+  "@performanceData": {
+    "description": "Privacy consent: performanceData"
+  },
+  "performanceDataDesc": "API response times, app lifecycle events, and memory usage",
+  "@performanceDataDesc": {
+    "description": "Privacy consent: performanceDataDesc"
+  },
+  "usagePatterns": "Sailin' Patterns",
+  "@usagePatterns": {
+    "description": "Privacy consent: usagePatterns"
+  },
+  "usagePatternsDesc": "Navigation breadcrumbs and API operations performed (fetchAll, etc.)",
+  "@usagePatternsDesc": {
+    "description": "Privacy consent: usagePatternsDesc"
+  },
+  "userContext": "Pirate Context",
+  "@userContext": {
+    "description": "Privacy consent: userContext"
+  },
+  "userContextDesc": "Yer email address (for identifyin' account-specific troubles)",
+  "@userContextDesc": {
+    "description": "Privacy consent: userContextDesc"
+  },
+  "personalData": "Personal Treasure",
+  "@personalData": {
+    "description": "Privacy consent: personalData"
+  },
+  "personalDataDesc": "Yer grades, schedule content, notes, and personal messages stay in yer treasure chest",
+  "@personalDataDesc": {
+    "description": "Privacy consent: personalDataDesc"
+  },
+  "credentials": "Secret Codes",
+  "@credentials": {
+    "description": "Privacy consent: credentials"
+  },
+  "credentialsDesc": "Yer passwords, authentication tokens, and sensitive API responses be filtered out",
+  "@credentialsDesc": {
+    "description": "Privacy consent: credentialsDesc"
+  },
+  "privacyConsentChangeAnytime": "Ye can change this settin' anytime in the app settings, matey.",
+  "@privacyConsentChangeAnytime": {
+    "description": "Privacy consent: privacyConsentChangeAnytime"
+  },
+  "privacyConsentHelpMessage": "Error reports include yer email address for debuggin' purposes. This data only be used to fix bugs and improve app stability. By consentín', ye help make Schuly better for all pirates. Arrr!",
+  "@privacyConsentHelpMessage": {
+    "description": "Privacy consent: privacyConsentHelpMessage"
+  },
+  "privacyConsentDecline": "Walk the Plank",
+  "@privacyConsentDecline": {
+    "description": "Privacy consent: privacyConsentDecline"
+  },
+  "privacyConsentAccept": "Aye Aye, Captain!",
+  "@privacyConsentAccept": {
+    "description": "Privacy consent: privacyConsentAccept"
+  },
+  "errorTracking": "Error Trackin'",
+  "@errorTracking": {
+    "description": "Privacy consent: errorTracking"
+  },
+  "errorTrackingEnabledDesc": "Help improve app stability by sharin' error reports with debug context, arrr!",
+  "@errorTrackingEnabledDesc": {
+    "description": "Privacy consent: errorTrackingEnabledDesc"
+  },
+  "errorTrackingDisabledDesc": "Error trackin' be disabled, matey",
+  "@errorTrackingDisabledDesc": {
+    "description": "Privacy consent: errorTrackingDisabledDesc"
+  },
+  "errorTrackingEnabled": "Ahoy! Error trackin' be enabled.",
+  "@errorTrackingEnabled": {
+    "description": "Privacy consent: errorTrackingEnabled"
+  },
+  "errorTrackingDisabled": "Error trackin' be disabled. Restart the app for changes to take effect, arrr!",
+  "@errorTrackingDisabled": {
+    "description": "Privacy consent: errorTrackingDisabled"
+  },
+  "errorTrackingRestartRequired": "Restart the app for changes to take effect, ye landlubber!",
+  "@errorTrackingRestartRequired": {
+    "description": "Privacy consent: errorTrackingRestartRequired"
+  }
 }

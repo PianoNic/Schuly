@@ -1,136 +1,70 @@
 {
   "@@locale": "arn",
-
   "appTitle": "Schuly",
-
   "noAccountAdded": "No account detected. I'll be back with one!",
-
   "addAccount": "Come With Me If You Want To Login",
-
   "noActiveAccount": "No active account. Hasta la vista, baby!",
-
   "selectAccount": "Choose Your Target",
-
   "personalInformation": "Personnel File",
-
   "quickActions": "Mission Objectives",
-
   "appSettings": "System Configuration",
-
   "designAndSettings": "Customize your combat gear",
-
   "helpAndSupport": "Backup & Reinforcements",
-
   "getHelpAndSupport": "Call for backup",
-
   "addAnotherAccount": "Get Another Assignment",
-
   "addMultipleAccounts": "Assemble your strike team",
-
   "logout": "Terminate Session",
-
   "signOutFromApp": "I'll be back!",
-
   "name": "Designation",
-
   "street": "Drop Zone",
-
   "zipCity": "Sector & Zone",
-
   "birthDate": "Manufacturing Date",
-
   "phone": "Comms Channel",
-
   "email": "Data Link",
-
   "nationality": "Origin Model",
-
   "hometown": "Factory Location",
-
   "mobile": "Mobile Unit",
-
   "profile1": "Primary Target",
-
   "profile2": "Secondary Target",
-
   "start": "Mission Control",
-
   "agenda": "Mission Timeline",
-
   "grades": "Performance Metrics",
-
   "absences": "Mission Aborted",
-
   "account": "Command Center",
-
   "language": "Voice Module",
-
   "selectLanguage": "Choose Your Voice Module",
-
   "english": "Standard English",
-
   "german": "German Model",
-
   "swissGerman": "Alpine Unit",
-
   "pirate": "Pirate Mode",
-
   "kawaii": "Kawaii Mode",
-
   "arnold": "Terminator Mode",
-
   "cancel": "Negative. Mission aborted!",
-
   "confirm": "Affirmative. Let's do this!",
-
   "pushNotifications": "Tactical Alerts",
-
   "featureInDevelopment": "Still being engineered",
-
   "configureNotifications": "Configure Alert System",
-
   "chooseTypesAndTiming": "Set your tactical parameters",
-
   "whatsNew": "System Upgrades",
-
   "changelogAndFeatures": "New weapons and enhancements",
-
   "checkForUpdates": "Scan for Upgrades",
-
   "checkForNewVersions": "Detecting newer models",
-
   "aboutApp": "System Information",
-
   "appVersion": "Model Version",
-
   "apiVersion": "Core System",
-
   "environment": "Operating Theater",
-
   "apiUrl": "Command Link",
-
   "userName": "Operative",
-
   "unknownName": "Unknown Target",
-
   "noGrades": "No performance data. I need more input!",
-
   "noAgenda": "No missions scheduled. Consider this a vacation!",
-
   "noAbsences": "Perfect attendance record. No problemo!",
-
   "absencesWithNotices": "Missions requiring attention",
-
   "absencesWithoutNotices": "Standard leave",
-
   "viewDetails": "Analyze Data",
-
   "hideDetails": "Conceal Intel",
-
   "refresh": "Recalibrate",
-
   "refreshing": "Recalibrating systems...",
-
   "errorLoadingData": "System malfunction: {error}",
   "@errorLoadingData": {
     "placeholders": {
@@ -139,105 +73,55 @@
       }
     }
   },
-
   "errorOccurred": "Critical system error",
-
   "tryAgain": "I'll be back to try again",
-
   "loading": "Systems initializing...",
-
   "loggingIn": "Establishing connection...",
-
   "selectLanguageFull": "Select your voice module",
-
   "theme": "Combat Display",
-
   "selectTheme": "Choose your HUD",
-
   "lightTheme": "Day Operations",
-
   "darkTheme": "Night Operations",
-
   "systemTheme": "Auto-tactical",
-
   "seedColor": "Primary Color Protocol",
-
   "chooseColor": "Select combat colors",
-
   "notifications": "Alert Systems",
-
   "notificationsEnabled": "Alerts armed and ready!",
-
   "notificationsDisabled": "Stealth mode activated",
-
   "notificationPermissionDenied": "Permission terminated",
-
   "leaveReason": "Mission abort reason",
-
   "from": "Start time",
-
   "to": "End time",
-
   "currentLesson": "Current operation",
-
   "nextLesson": "Next target",
-
   "teacherShort": "Commander",
-
   "roomShort": "Location",
-
   "timeLeft": "T-minus",
-
   "minutes": "minutes",
-
   "welcomeBack": "Welcome back, soldier!",
-
   "goodMorning": "Good morning. Time to gear up!",
-
   "goodAfternoon": "Afternoon briefing ready!",
-
   "goodEvening": "Evening status report!",
-
   "upcomingLessons": "Upcoming Missions",
-
   "recentGrades": "Recent Performance",
-
   "pendingAbsences": "Missions Requiring Action",
-
   "today": "Current Day",
-
   "tomorrow": "Next Day",
-
   "noLessonsToday": "No missions today. Chill out!",
-
   "noLessonsTomorrow": "Tomorrow's clear. No problemo!",
-
   "viewAll": "Full tactical overview",
-
   "grade": "Score",
-
   "weight": "Impact Factor",
-
   "date": "Mission Date",
-
   "description": "Intel Report",
-
   "average": "Average Performance",
-
   "authenticationType": "Security Protocol",
-
   "standard": "Standard Protocol",
-
   "microsoft": "Microsoft Systems",
-
   "studentIdCard": "ID Badge",
-
   "viewIdCard": "Display credentials",
-
   "scanQrCode": "Scan target code",
-
   "releaseNotes": "System Updates",
-
   "version": "Model {version}",
   "@version": {
     "placeholders": {
@@ -246,45 +130,25 @@
       }
     }
   },
-
   "notificationSettings": "Alert Configuration",
-
   "enableNotifications": "Activate alert systems",
-
   "disableNotifications": "Deactivate alerts",
-
   "notificationTypes": "Alert Categories",
-
   "gradeNotifications": "Performance alerts",
-
   "absenceNotifications": "Mission status alerts",
-
   "agendaNotifications": "Schedule updates",
-
   "generalNotifications": "General intel",
-
   "notificationTiming": "Alert timing",
-
   "immediate": "Immediate response",
-
   "daily": "Daily briefing",
-
   "weekly": "Weekly report",
-
   "loginRequired": "Authentication required. Get to the chopper!",
-
   "loginButton": "Initiate Login Sequence",
-
   "loggingOut": "Terminating connection...",
-
   "logoutConfirmation": "Confirm mission abort?",
-
   "yes": "Affirmative",
-
   "no": "Negative",
-
   "errorCheckingUpdates": "Update scan failed",
-
   "errorCheckingUpdatesDetails": "System error: {error}",
   "@errorCheckingUpdatesDetails": {
     "placeholders": {
@@ -293,9 +157,7 @@
       }
     }
   },
-
   "updateAvailable": "Upgrade detected!",
-
   "updateAvailableDescription": "Model {version} ready for deployment",
   "@updateAvailableDescription": {
     "placeholders": {
@@ -304,53 +166,29 @@
       }
     }
   },
-
   "updateNow": "Deploy immediately!",
-
   "updateLater": "I'll be back for this",
-
   "latestVersionMessage": "You have the latest model. No problemo!",
-
   "downloadingUpdate": "Downloading enhancements...",
-
   "installingUpdate": "Installing combat upgrades...",
-
   "updateFailed": "Upgrade terminated unexpectedly",
-
   "retryUpdate": "Re-initiate upgrade sequence",
-
   "noInternetConnection": "No network link. Get to the server!",
-
   "connectionError": "Connection terminated",
-
   "serverError": "Server malfunction detected",
-
   "unknownError": "Unknown system failure",
-
   "refreshToRetry": "Recalibrate to retry",
-
   "comingSoon": "Under construction. I'll be back!",
-
   "notImplemented": "Feature still in development",
-
   "searchPlaceholder": "Scanning database...",
-
   "noSearchResults": "No targets found. Hasta la vista!",
-
   "clearSearch": "Terminate search",
-
   "filter": "Apply tactical filters",
-
   "sort": "Reorganize data",
-
   "sortBy": "Sort protocol",
-
   "filterBy": "Filter parameters",
-
   "noDataAvailable": "No intel available",
-
   "pullToRefresh": "Pull to recalibrate",
-
   "lastUpdated": "Last sync: {time}",
   "@lastUpdated": {
     "placeholders": {
@@ -359,137 +197,71 @@
       }
     }
   },
-
   "retry": "Retry mission",
-
   "close": "Terminate window",
-
   "save": "Store data",
-
   "delete": "Terminate permanently",
-
   "edit": "Modify parameters",
-
   "share": "Transmit data",
-
   "copy": "Duplicate intel",
-
   "paste": "Insert data",
-
   "selectAll": "Target all",
-
   "moreOptions": "Additional protocols",
-
   "settings": "System controls",
-
   "help": "Request backup",
-
   "about": "System specs",
-
   "privacyPolicy": "Privacy protocols",
-
   "termsOfService": "Terms of engagement",
-
   "contactSupport": "Contact command",
-
   "reportBug": "Report malfunction",
-
   "rateApp": "Rate this system",
-
   "shareApp": "Deploy to allies",
-
   "openInBrowser": "Launch external viewer",
-
   "copyLink": "Copy tactical link",
-
   "linkCopied": "Link secured!",
-
   "shareLinkVia": "Transmit via",
-
   "noAppToOpen": "No app detected. Get the right equipment!",
-
   "fileNotFound": "File terminated",
-
   "permissionDenied": "Access denied. You lack clearance!",
-
   "storageError": "Storage malfunction",
-
   "networkError": "Network link severed",
-
   "formatError": "Format incompatible",
-
   "validationError": "Validation failed",
-
   "loginSuccess": "Authentication complete. Welcome back!",
-
   "loginFailed": "Authentication terminated",
-
   "logoutSuccess": "Session terminated. I'll be back!",
-
   "profileUpdated": "Profile upgraded successfully",
-
   "settingsSaved": "Configuration stored",
-
   "changesSaved": "Modifications confirmed",
-
   "errorSavingChanges": "Save sequence failed",
-
   "noChangesToSave": "No modifications detected",
-
   "unsavedChanges": "Unsaved tactical data",
-
   "unsavedChangesMessage": "Abandon modifications?",
-
   "discardChanges": "Terminate changes",
-
   "keepEditing": "Continue modifications",
-
   "warning": "Tactical alert!",
-
   "info": "Intelligence report",
-
   "success": "Mission accomplished!",
-
   "error": "System failure",
-
   "monday": "MON",
-
   "tuesday": "TUE",
-
   "wednesday": "WED",
-
   "thursday": "THU",
-
   "friday": "FRI",
-
   "saturday": "SAT",
-
   "sunday": "SUN",
-
   "january": "January",
-
   "february": "February",
-
   "march": "March",
-
   "april": "April",
-
   "may": "May",
-
   "june": "June",
-
   "july": "July",
-
   "august": "August",
-
   "september": "September",
-
   "october": "October",
-
   "november": "November",
-
   "december": "December",
-
   "emailSupport": "Contact Support Command",
   "contactByEmail": "Initiate Support Protocol",
   "bugReport": "System Malfunction Report",
@@ -900,5 +672,121 @@
   "cardView": "Intel cards",
   "cardViewDescription": "Display data as tactical cards",
   "timelineView": "Mission timeline",
-  "timelineViewDescription": "Display chronological sequence"
+  "timelineViewDescription": "Display chronological sequence",
+  "privacyAndDataCollection": "Privacy & Data Collection",
+  "@privacyAndDataCollection": {
+    "description": "Privacy consent: privacyAndDataCollection"
+  },
+  "welcomeToSchuly": "Welcome to Schuly. Come with me if you want to learn.",
+  "@welcomeToSchuly": {
+    "description": "Privacy consent: welcomeToSchuly"
+  },
+  "privacyConsentIntro": "To improve your experience and terminate bugs quickly, we collect error reports when the app crashes. Consider this a pre-emptive strike.",
+  "@privacyConsentIntro": {
+    "description": "Privacy consent: privacyConsentIntro"
+  },
+  "whatWeCollect": "What we collect:",
+  "@whatWeCollect": {
+    "description": "Privacy consent: whatWeCollect"
+  },
+  "whatWeDontCollect": "What we DON'T collect:",
+  "@whatWeDontCollect": {
+    "description": "Privacy consent: whatWeDontCollect"
+  },
+  "errorReports": "Error Reports",
+  "@errorReports": {
+    "description": "Privacy consent: errorReports"
+  },
+  "errorReportsDesc": "Stack traces, error messages, and breadcrumbs. I'll be back... with fixes.",
+  "@errorReportsDesc": {
+    "description": "Privacy consent: errorReportsDesc"
+  },
+  "deviceInformation": "Device Information",
+  "@deviceInformation": {
+    "description": "Privacy consent: deviceInformation"
+  },
+  "deviceInformationDesc": "Device model, OS version, screen size, memory, battery level, and app version. Your hardware has been cataloged.",
+  "@deviceInformationDesc": {
+    "description": "Privacy consent: deviceInformationDesc"
+  },
+  "performanceData": "Performance Data",
+  "@performanceData": {
+    "description": "Privacy consent: performanceData"
+  },
+  "performanceDataDesc": "API response times, app lifecycle events, and memory usage. Performance: optimized.",
+  "@performanceDataDesc": {
+    "description": "Privacy consent: performanceDataDesc"
+  },
+  "usagePatterns": "Usage Patterns",
+  "@usagePatterns": {
+    "description": "Privacy consent: usagePatterns"
+  },
+  "usagePatternsDesc": "Navigation breadcrumbs and API operations performed. Your moves have been tracked.",
+  "@usagePatternsDesc": {
+    "description": "Privacy consent: usagePatternsDesc"
+  },
+  "userContext": "User Context",
+  "@userContext": {
+    "description": "Privacy consent: userContext"
+  },
+  "userContextDesc": "Your email address. For identifying account-specific problems. Trust me.",
+  "@userContextDesc": {
+    "description": "Privacy consent: userContextDesc"
+  },
+  "personalData": "Personal Data",
+  "@personalData": {
+    "description": "Privacy consent: personalData"
+  },
+  "personalDataDesc": "Your grades, schedule content, notes, and personal messages stay private. No problemo.",
+  "@personalDataDesc": {
+    "description": "Privacy consent: personalDataDesc"
+  },
+  "credentials": "Credentials",
+  "@credentials": {
+    "description": "Privacy consent: credentials"
+  },
+  "credentialsDesc": "Your passwords and authentication tokens are filtered out. Hasta la vista, security risks.",
+  "@credentialsDesc": {
+    "description": "Privacy consent: credentialsDesc"
+  },
+  "privacyConsentChangeAnytime": "You can change this setting anytime. I'll be back... in settings.",
+  "@privacyConsentChangeAnytime": {
+    "description": "Privacy consent: privacyConsentChangeAnytime"
+  },
+  "privacyConsentHelpMessage": "Error reports include your email address for debugging purposes. This data is only used to terminate bugs and improve app stability. Your cooperation is appreciated.",
+  "@privacyConsentHelpMessage": {
+    "description": "Privacy consent: privacyConsentHelpMessage"
+  },
+  "privacyConsentDecline": "Negative",
+  "@privacyConsentDecline": {
+    "description": "Privacy consent: privacyConsentDecline"
+  },
+  "privacyConsentAccept": "Affirmative",
+  "@privacyConsentAccept": {
+    "description": "Privacy consent: privacyConsentAccept"
+  },
+  "errorTracking": "Error Tracking",
+  "@errorTracking": {
+    "description": "Privacy consent: errorTracking"
+  },
+  "errorTrackingEnabledDesc": "Help improve app stability by sharing error reports. Come with me if you want your app to live.",
+  "@errorTrackingEnabledDesc": {
+    "description": "Privacy consent: errorTrackingEnabledDesc"
+  },
+  "errorTrackingDisabledDesc": "Error tracking: terminated",
+  "@errorTrackingDisabledDesc": {
+    "description": "Privacy consent: errorTrackingDisabledDesc"
+  },
+  "errorTrackingEnabled": "Excellent. Error tracking has been activated.",
+  "@errorTrackingEnabled": {
+    "description": "Privacy consent: errorTrackingEnabled"
+  },
+  "errorTrackingDisabled": "Error tracking has been terminated. Restart required for changes to take effect.",
+  "@errorTrackingDisabled": {
+    "description": "Privacy consent: errorTrackingDisabled"
+  },
+  "errorTrackingRestartRequired": "Restart the app. Do it. Do it now!",
+  "@errorTrackingRestartRequired": {
+    "description": "Privacy consent: errorTrackingRestartRequired"
+  }
 }

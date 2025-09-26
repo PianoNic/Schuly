@@ -1154,6 +1154,107 @@ class AppLocalizationsMag extends AppLocalizations {
   }
 
   @override
+  String get privacyAndDataCollection => 'Dateschutz & Date-Sammlig 💪';
+
+  @override
+  String get welcomeToSchuly => 'Servus bei Schuly, du Maschine!';
+
+  @override
+  String get privacyConsentIntro =>
+      'Damit mir dei Erfahrung verbessern und Probleme schnell behebe kenna, sammeln mir Fehlerberichte wenn d\'App abstürzt. Des ghört dazu! 💪';
+
+  @override
+  String get whatWeCollect => 'Was mir sammeln (des bedarfs!):';
+
+  @override
+  String get whatWeDontCollect => 'Was mir NED sammeln:';
+
+  @override
+  String get errorReports => 'Fehlerberichte';
+
+  @override
+  String get errorReportsDesc =>
+      'Stack-Traces, Fehlermeldungen und Breadcrumbs zum Bugs behebe - STABIL! 💪';
+
+  @override
+  String get deviceInformation => 'Gerät-Infos';
+
+  @override
+  String get deviceInformationDesc =>
+      'Gerätmodell, OS-Version, Bildschirmgröße, Speicher, Akkustand und App-Version - alles wichtig!';
+
+  @override
+  String get performanceData => 'Leistungsdaten';
+
+  @override
+  String get performanceDataDesc =>
+      'API-Antwortzeiten, App-Lifecycle-Events und Speichernutzung - für maximale Performance! 💪';
+
+  @override
+  String get usagePatterns => 'Nutzungsmuster';
+
+  @override
+  String get usagePatternsDesc =>
+      'Navigations-Breadcrumbs und API-Operationen (fetchAll, etc.) - des bedarfs!';
+
+  @override
+  String get userContext => 'Benutzerkontext';
+
+  @override
+  String get userContextDesc =>
+      'Dei E-Mail-Adresse (zum kontospezifische Probleme identifizieren) - WICHTIG!';
+
+  @override
+  String get personalData => 'Persönliche Daten';
+
+  @override
+  String get personalDataDesc =>
+      'Deine Noten, Stundenplan, Notizen und persönliche Nachrichten bleiben privat - des isch klar!';
+
+  @override
+  String get credentials => 'Zugangsdaten';
+
+  @override
+  String get credentialsDesc =>
+      'Deine Passwörter und Auth-Tokens werden rausgfiltert - SICHER! 💪';
+
+  @override
+  String get privacyConsentChangeAnytime =>
+      'Du kannsch des jederzeit in de App-Einstellungen ändern - kei Problem!';
+
+  @override
+  String get privacyConsentHelpMessage =>
+      'Fehlerberichte enthalten dei E-Mail für Debug-Zwecke. Die Daten werden nur zum Bugs fixen und d\'App stabiler mache verwendet. Mit deiner Zustimmung machsch Schuly für alle besser - MAGGUS! 💪';
+
+  @override
+  String get privacyConsentDecline => 'Na, lass mal';
+
+  @override
+  String get privacyConsentAccept => 'Jo, des bedarfs! 💪';
+
+  @override
+  String get errorTracking => 'Fehlerverfolgung';
+
+  @override
+  String get errorTrackingEnabledDesc =>
+      'Hilf die App-Stabilität zu verbessern - SEI STABIL! 💪';
+
+  @override
+  String get errorTrackingDisabledDesc => 'Fehlerverfolgung isch aus';
+
+  @override
+  String get errorTrackingEnabled =>
+      'Fehlerüberwachung aktiviert, bruddal guud!';
+
+  @override
+  String get errorTrackingDisabled =>
+      'Fehlerverfolgung isch deaktiviert. App neu starten für Änderungen - des bedarfs!';
+
+  @override
+  String get errorTrackingRestartRequired =>
+      'App neu starten für Änderungen - MACH HINNE! 💪';
+
+  @override
   String get minute => 'Minute';
 
   @override

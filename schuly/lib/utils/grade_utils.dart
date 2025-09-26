@@ -3,7 +3,24 @@ import 'package:schuly/api/lib/api.dart';
 import 'logger.dart';
 
 class GradeUtils {
-  static Color getGradeColor(double grade) {
+  /// Get color for a grade based on configurable thresholds
+  static Color getGradeColor(double grade, double redThreshold, double yellowThreshold, bool useColors) {
+    if (!useColors) {
+      // Return null/default color if colors are disabled
+      return Colors.transparent;
+    }
+
+    if (grade < redThreshold) {
+      return Colors.red;
+    } else if (grade < yellowThreshold) {
+      return Colors.orange;
+    } else {
+      return Colors.green;
+    }
+  }
+
+  // Legacy method for backward compatibility
+  static Color getGradeColorLegacy(double grade) {
     if (grade > 5.0) return Colors.green[600]!;
     if (grade >= 4.0) return Colors.yellow[700]!;
     return Colors.red[600]!;

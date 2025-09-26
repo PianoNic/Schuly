@@ -14,15 +14,21 @@ class GradeDisplaySettingsModal extends StatefulWidget {
 
 class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
   GradeDisplayMode _selectedMode = GradeDisplayMode.exact;
+  bool _useGradeColors = true;
+  double _redThreshold = 4.0;
+  double _yellowThreshold = 5.0;
 
   @override
   void initState() {
     super.initState();
-    _loadCurrentSetting();
+    _loadCurrentSettings();
   }
 
-  Future<void> _loadCurrentSetting() async {
+  Future<void> _loadCurrentSettings() async {
     final modeString = await StorageService.getGradeDisplayMode();
+    final useColors = await StorageService.getUseGradeColors();
+    final redThreshold = await StorageService.getGradeRedThreshold();
+    final yellowThreshold = await StorageService.getGradeYellowThreshold();
     setState(() {
       switch (modeString) {
         case 'rounded':
@@ -34,6 +40,9 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
         default:
           _selectedMode = GradeDisplayMode.exact;
       }
+      _useGradeColors = useColors;
+      _redThreshold = redThreshold;
+      _yellowThreshold = yellowThreshold;
     });
   }
 
@@ -69,11 +78,15 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
 
     return SafeArea(
       child: Container(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.85, // Increased to 85% since SafeArea handles the boundaries
+        ),
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             // Modal handle
             Center(
               child: Container(
@@ -168,6 +181,120 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
               },
             ),
 
+            const SizedBox(height: 24),
+
+            // Grade Colors Section
+            Divider(color: theme.dividerColor),
+            const SizedBox(height: 16),
+
+            Row(
+              children: [
+                Icon(
+                  Icons.palette_outlined,
+                  color: theme.colorScheme.primary,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  localizations.gradeColors ?? 'Grade Colors',
+                  style: theme.textTheme.titleLarge,
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            // Toggle for using colors
+            SwitchListTile(
+              title: Text(localizations.useGradeColors ?? 'Use Grade Colors'),
+              subtitle: Text(localizations.useGradeColorsDesc ?? 'Color grades based on their value'),
+              value: _useGradeColors,
+              onChanged: (value) async {
+                setState(() {
+                  _useGradeColors = value;
+                });
+                await StorageService.setUseGradeColors(value);
+                if (mounted) {
+                  final apiStore = Provider.of<ApiStore>(context, listen: false);
+                  apiStore.setUseGradeColors(value);
+                }
+              },
+            ),
+
+            if (_useGradeColors) ...[
+              const SizedBox(height: 16),
+
+              // Red threshold
+              _buildThresholdSlider(
+                context,
+                label: localizations.redThreshold ?? 'Red (below)',
+                value: _redThreshold,
+                min: 1.0,
+                max: 6.0,
+                color: Colors.red,
+                onChanged: (value) async {
+                  setState(() {
+                    _redThreshold = value;
+                    // Ensure yellow threshold is higher
+                    if (_yellowThreshold <= _redThreshold) {
+                      _yellowThreshold = _redThreshold + 0.5;
+                    }
+                  });
+                  await StorageService.setGradeRedThreshold(_redThreshold);
+                  await StorageService.setGradeYellowThreshold(_yellowThreshold);
+                  if (mounted) {
+                    final apiStore = Provider.of<ApiStore>(context, listen: false);
+                    apiStore.setGradeColorThresholds(_redThreshold, _yellowThreshold);
+                  }
+                },
+              ),
+
+              // Yellow threshold
+              _buildThresholdSlider(
+                context,
+                label: localizations.yellowThreshold ?? 'Yellow (below)',
+                value: _yellowThreshold,
+                min: 1.0,
+                max: 6.0,
+                color: Colors.orange,
+                onChanged: (value) async {
+                  setState(() {
+                    _yellowThreshold = value;
+                    // Ensure red threshold is lower
+                    if (_redThreshold >= _yellowThreshold) {
+                      _redThreshold = _yellowThreshold - 0.5;
+                    }
+                  });
+                  await StorageService.setGradeRedThreshold(_redThreshold);
+                  await StorageService.setGradeYellowThreshold(_yellowThreshold);
+                  if (mounted) {
+                    final apiStore = Provider.of<ApiStore>(context, listen: false);
+                    apiStore.setGradeColorThresholds(_redThreshold, _yellowThreshold);
+                  }
+                },
+              ),
+
+              // Green info
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      '${localizations.greenThreshold ?? 'Green'}: ≥ ${_yellowThreshold.toStringAsFixed(1)}',
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+
             const SizedBox(height: 20),
 
             // Info card
@@ -200,12 +327,79 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
                 ],
               ),
             ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
+  Color _getGradeColor(double grade) {
+    if (grade < _redThreshold) return Colors.red;
+    if (grade < _yellowThreshold) return Colors.orange;
+    return Colors.green;
+  }
+
+  Widget _buildThresholdSlider(
+    BuildContext context, {
+    required String label,
+    required double value,
+    required double min,
+    required double max,
+    required Color color,
+    required ValueChanged<double> onChanged,
+  }) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(label, style: theme.textTheme.bodyMedium),
+                ],
+              ),
+              Text(
+                value.toStringAsFixed(1),
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            activeTrackColor: color,
+            inactiveTrackColor: color.withValues(alpha: 0.2),
+            thumbColor: color,
+            overlayColor: color.withValues(alpha: 0.2),
+          ),
+          child: Slider(
+            value: value,
+            min: min,
+            max: max,
+            divisions: ((max - min) * 2).round(),
+            onChanged: onChanged,
+          ),
+        ),
+      ],
+    );
+  }
   Widget _buildOption(
     BuildContext context, {
     required String title,

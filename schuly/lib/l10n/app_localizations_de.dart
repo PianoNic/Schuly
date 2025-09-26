@@ -1506,4 +1506,25 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get gradeRoundingInfo =>
       'Zeugnisnoten werden auf die nächste 0.5 gerundet, wie sie auf offiziellen Dokumenten erscheinen.';
+
+  @override
+  String get gradeColors => 'Notenfarben';
+
+  @override
+  String get useGradeColors => 'Notenfarben verwenden';
+
+  @override
+  String get useGradeColorsDesc => 'Noten basierend auf ihrem Wert einfärben';
+
+  @override
+  String get redThreshold => 'Rot (unter)';
+
+  @override
+  String get yellowThreshold => 'Gelb (unter)';
+
+  @override
+  String get greenThreshold => 'Grün';
+
+  @override
+  String get preview => 'Vorschau';
 }

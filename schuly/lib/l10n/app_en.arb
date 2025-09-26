@@ -2030,5 +2030,40 @@
   "gradeRoundingInfo": "Report card grades are rounded to the nearest 0.5 as they appear on official documents.",
   "@gradeRoundingInfo": {
     "description": "Information about grade rounding for report cards"
+  },
+
+  "gradeColors": "Grade Colors",
+  "@gradeColors": {
+    "description": "Title for grade color settings section"
+  },
+
+  "useGradeColors": "Use Grade Colors",
+  "@useGradeColors": {
+    "description": "Toggle label for enabling grade colors"
+  },
+
+  "useGradeColorsDesc": "Color grades based on their value",
+  "@useGradeColorsDesc": {
+    "description": "Description for grade colors toggle"
+  },
+
+  "redThreshold": "Red (below)",
+  "@redThreshold": {
+    "description": "Label for red grade threshold"
+  },
+
+  "yellowThreshold": "Yellow (below)",
+  "@yellowThreshold": {
+    "description": "Label for yellow grade threshold"
+  },
+
+  "greenThreshold": "Green",
+  "@greenThreshold": {
+    "description": "Label for green grades"
+  },
+
+  "preview": "Preview",
+  "@preview": {
+    "description": "Label for preview section"
   }
 }

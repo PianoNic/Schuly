@@ -797,4 +797,26 @@
   "@gradeRoundingInfo": {
     "description": "Information about grade rounding"
   }
+,
+
+  "gradeColors": "Grade Colors",
+  "@gradeColors": {},
+
+  "useGradeColors": "Use Grade Colors",
+  "@useGradeColors": {},
+
+  "useGradeColorsDesc": "Color grades based on their value",
+  "@useGradeColorsDesc": {},
+
+  "redThreshold": "Red (below)",
+  "@redThreshold": {},
+
+  "yellowThreshold": "Yellow (below)",
+  "@yellowThreshold": {},
+
+  "greenThreshold": "Green",
+  "@greenThreshold": {},
+
+  "preview": "Preview",
+  "@preview": {}
 }

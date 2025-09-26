@@ -86,12 +86,14 @@ class GradeTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Grade display - just the number
+            // Grade display - just the number with optional color
             Text(
               gradeDisplay,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
+                color: gradeValue != null && apiStore.useGradeColors
+                  ? GradeUtils.getGradeColor(gradeValue, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true)
+                  : Theme.of(context).colorScheme.primary,
               ),
             ),
             const SizedBox(width: 12),
@@ -220,14 +222,18 @@ class GradeDetailsDialog extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
+                    color: gradeValue != null && apiStore.useGradeColors
+                      ? GradeUtils.getGradeColor(gradeValue, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true).withValues(alpha: 0.15)
+                      : Theme.of(context).colorScheme.primaryContainer,
                     shape: BoxShape.circle,
                   ),
                   child: Text(
                     gradeDisplay,
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      color: gradeValue != null && apiStore.useGradeColors
+                        ? GradeUtils.getGradeColor(gradeValue, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true)
+                        : Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
                   ),
                 ),

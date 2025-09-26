@@ -1493,4 +1493,25 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get gradeRoundingInfo =>
       'Rapportcijfers worden afgerond op de dichtstbijzijnde 0,5 zoals ze op officiële documenten verschijnen.';
+
+  @override
+  String get gradeColors => 'Grade Colors';
+
+  @override
+  String get useGradeColors => 'Use Grade Colors';
+
+  @override
+  String get useGradeColorsDesc => 'Color grades based on their value';
+
+  @override
+  String get redThreshold => 'Red (below)';
+
+  @override
+  String get yellowThreshold => 'Yellow (below)';
+
+  @override
+  String get greenThreshold => 'Green';
+
+  @override
+  String get preview => 'Preview';
 }

@@ -1,0 +1,3 @@
+@echo off
+echo Running Schuly PROD flavor...
+flutter run --flavor prod

@@ -46,14 +46,26 @@ flutter run --dart-define=SENTRY_DSN="$SENTRY_DSN" --dart-define=SENTRY_RELEASE=
 
 ## Development Commands
 
-### Flutter Commands
-- **Run app**: `flutter run` (or `flutter run -d chrome` for web)
-- **Build APK**: `flutter build apk`
-- **Build iOS**: `flutter build ios`
+### Flutter Commands with Flavors
+The app now supports **DEV** and **PROD** flavors with different package names and icons:
+- **DEV flavor**: Package name `com.schuly.app.dev`, app name "Schuly DEV", red-tinted icon
+- **PROD flavor**: Package name `com.schuly.app`, app name "Schuly", standard icon
+
+#### Running the app
+- **Run DEV**: `flutter run --flavor dev` or use `run_dev.bat`
+- **Run PROD**: `flutter run --flavor prod` or use `run_prod.bat`
+- **VS Code**: Use launch configurations "Schuly DEV (Debug)" or "Schuly PROD (Debug)"
+
+#### Building APKs
+- **Build DEV APK**: `flutter build apk --flavor dev --debug` or use `build_dev.bat`
+- **Build PROD APK**: `flutter build apk --flavor prod --release` or use `build_prod.bat`
+- **Build iOS**: `flutter build ios --flavor [dev|prod]`
+
+#### General Commands
 - **Hot reload**: `r` in terminal while running, or save files in IDE
 - **Install dependencies**: `flutter pub get`
 - **Clean build**: `flutter clean`
-- **Analyze code**: `flutter analyze` 
+- **Analyze code**: `flutter analyze`
 - **Run tests**: `flutter test`
 - **Update app icon**: `dart run flutter_launcher_icons`
 

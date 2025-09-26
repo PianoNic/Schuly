@@ -190,25 +190,34 @@ class ReleaseNotesService {
 
   static bool _isVersionNewer(String version1, String version2) {
     // Remove 'v' prefix if present
-    final cleanVersion1 = version1.startsWith('v') ? version1.substring(1) : version1;
-    final cleanVersion2 = version2.startsWith('v') ? version2.substring(1) : version2;
+    var cleanVersion1 = version1.startsWith('v') ? version1.substring(1) : version1;
+    var cleanVersion2 = version2.startsWith('v') ? version2.substring(1) : version2;
 
-    final v1Parts = cleanVersion1.split('.').map(int.parse).toList();
-    final v2Parts = cleanVersion2.split('.').map(int.parse).toList();
-    
-    // Pad shorter version with zeros
-    while (v1Parts.length < 3) {
-      v1Parts.add(0);
+    // Remove any suffixes like -dev, -DEV, -beta, etc.
+    cleanVersion1 = cleanVersion1.split('-')[0];
+    cleanVersion2 = cleanVersion2.split('-')[0];
+
+    try {
+      final v1Parts = cleanVersion1.split('.').map(int.parse).toList();
+      final v2Parts = cleanVersion2.split('.').map(int.parse).toList();
+
+      // Pad shorter version with zeros
+      while (v1Parts.length < 3) {
+        v1Parts.add(0);
+      }
+      while (v2Parts.length < 3) {
+        v2Parts.add(0);
+      }
+
+      for (int i = 0; i < 3; i++) {
+        if (v1Parts[i] > v2Parts[i]) return true;
+        if (v1Parts[i] < v2Parts[i]) return false;
+      }
+
+      return false; // Equal versions
+    } catch (e) {
+      // If parsing fails, consider versions equal to avoid errors
+      return false;
     }
-    while (v2Parts.length < 3) {
-      v2Parts.add(0);
-    }
-    
-    for (int i = 0; i < 3; i++) {
-      if (v1Parts[i] > v2Parts[i]) return true;
-      if (v1Parts[i] < v2Parts[i]) return false;
-    }
-    
-    return false; // Equal versions
   }
 }

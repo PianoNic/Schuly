@@ -1,0 +1,3 @@
+@echo off
+echo Running Schuly DEV flavor...
+flutter run --flavor dev --dart-define=SENTRY_DSN=%SENTRY_DSN% --dart-define=SENTRY_RELEASE=dev --dart-define=SENTRY_ENVIRONMENT=development

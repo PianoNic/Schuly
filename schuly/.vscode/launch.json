@@ -5,21 +5,49 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "schuly",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "schuly (profile mode)",
+            "name": "Schuly DEV (Debug)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "dev",
+                "--dart-define=SENTRY_DSN=${env:SENTRY_DSN}",
+                "--dart-define=SENTRY_RELEASE=dev",
+                "--dart-define=SENTRY_ENVIRONMENT=development"
+            ]
         },
         {
-            "name": "schuly (release mode)",
+            "name": "Schuly PROD (Debug)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "prod"
+            ]
+        },
+        {
+            "name": "Schuly DEV (Profile)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "dev"
+            ]
+        },
+        {
+            "name": "Schuly PROD (Release)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "prod"
+            ]
         },
         {
             "name": "api",

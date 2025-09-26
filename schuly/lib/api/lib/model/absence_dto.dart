@@ -233,7 +233,10 @@ class AbsenceDto {
       assert(() {
         requiredKeys.forEach((key) {
           assert(json.containsKey(key), 'Required key "AbsenceDto[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "AbsenceDto[$key]" has a null value in JSON.');
+          // TEMPORARY FIX: Allow null for reason, category, and comment fields
+          if (key != 'reason' && key != 'category' && key != 'comment') {
+            assert(json[key] != null, 'Required key "AbsenceDto[$key]" has a null value in JSON.');
+          }
         });
         return true;
       }());
@@ -250,9 +253,10 @@ class AbsenceDto {
         profile: mapValueOfType<String>(json, r'profile')!,
         profileId: mapValueOfType<String>(json, r'profileId')!,
         lessons: mapValueOfType<String>(json, r'lessons')!,
-        reason: mapValueOfType<String>(json, r'reason')!,
-        category: mapValueOfType<String>(json, r'category')!,
-        comment: mapValueOfType<String>(json, r'comment')!,
+        // TEMPORARY FIX: API sometimes returns null for these required fields
+        reason: mapValueOfType<String>(json, r'reason') ?? '',
+        category: mapValueOfType<String>(json, r'category') ?? '',
+        comment: mapValueOfType<String>(json, r'comment') ?? '',
         remark: mapValueOfType<String>(json, r'remark'),
         isAcknowledged: mapValueOfType<bool>(json, r'isAcknowledged')!,
         isExcused: mapValueOfType<bool>(json, r'isExcused')!,

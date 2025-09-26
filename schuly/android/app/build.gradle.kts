@@ -17,7 +17,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace = "com.schuly.app"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    // ndkVersion = flutter.ndkVersion // Removed to fix GitHub Actions build hanging
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

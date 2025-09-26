@@ -1494,4 +1494,25 @@ class AppLocalizationsGsw extends AppLocalizations {
   @override
   String get gradeRoundingInfo =>
       'Zügnisnote wärde uf die nächsti 0.5 grundet, wie sie uf offizielle Dokumänt erschined.';
+
+  @override
+  String get gradeColors => 'Notefarbe';
+
+  @override
+  String get useGradeColors => 'Notefarbe verwände';
+
+  @override
+  String get useGradeColorsDesc => 'Note basierend uf ihrem Wert iifärbe';
+
+  @override
+  String get redThreshold => 'Rot (under)';
+
+  @override
+  String get yellowThreshold => 'Gälb (under)';
+
+  @override
+  String get greenThreshold => 'Grüen';
+
+  @override
+  String get preview => 'Vorschau';
 }

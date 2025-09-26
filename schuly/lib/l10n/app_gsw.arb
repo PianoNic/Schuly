@@ -796,5 +796,26 @@
   "gradeRoundingInfo": "Zügnisnote wärde uf die nächsti 0.5 grundet, wie sie uf offizielle Dokumänt erschined.",
   "@gradeRoundingInfo": {
     "description": "Information about grade rounding"
-  }
+  },
+
+  "gradeColors": "Notefarbe",
+  "@gradeColors": {},
+
+  "useGradeColors": "Notefarbe verwände",
+  "@useGradeColors": {},
+
+  "useGradeColorsDesc": "Note basierend uf ihrem Wert iifärbe",
+  "@useGradeColorsDesc": {},
+
+  "redThreshold": "Rot (under)",
+  "@redThreshold": {},
+
+  "yellowThreshold": "Gälb (under)",
+  "@yellowThreshold": {},
+
+  "greenThreshold": "Grüen",
+  "@greenThreshold": {},
+
+  "preview": "Vorschau",
+  "@preview": {}
 }

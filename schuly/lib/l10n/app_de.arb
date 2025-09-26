@@ -683,5 +683,26 @@
   "@bothGradesDesc": {},
 
   "gradeRoundingInfo": "Zeugnisnoten werden auf die nächste 0.5 gerundet, wie sie auf offiziellen Dokumenten erscheinen.",
-  "@gradeRoundingInfo": {}
+  "@gradeRoundingInfo": {},
+
+  "gradeColors": "Notenfarben",
+  "@gradeColors": {},
+
+  "useGradeColors": "Notenfarben verwenden",
+  "@useGradeColors": {},
+
+  "useGradeColorsDesc": "Noten basierend auf ihrem Wert einfärben",
+  "@useGradeColorsDesc": {},
+
+  "redThreshold": "Rot (unter)",
+  "@redThreshold": {},
+
+  "yellowThreshold": "Gelb (unter)",
+  "@yellowThreshold": {},
+
+  "greenThreshold": "Grün",
+  "@greenThreshold": {},
+
+  "preview": "Vorschau",
+  "@preview": {}
 }

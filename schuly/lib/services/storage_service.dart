@@ -14,6 +14,9 @@ class StorageService {
   static const String _userCookiesPrefix = 'user_cookies_';
   static const String _agendaViewKey = 'agenda_view_preference';
   static const String _gradeDisplayModeKey = 'grade_display_mode';
+  static const String _useGradeColorsKey = 'use_grade_colors';
+  static const String _gradeRedThresholdKey = 'grade_red_threshold';
+  static const String _gradeYellowThresholdKey = 'grade_yellow_threshold';
 
   // Cache keys for API data
   static const String _cachePrefix = 'cache_';
@@ -129,6 +132,34 @@ class StorageService {
 
   static Future<void> setGradeDisplayMode(String mode) async {
     await _storage.write(key: _gradeDisplayModeKey, value: mode);
+  }
+
+  // Grade color settings
+  static Future<bool> getUseGradeColors() async {
+    final value = await _storage.read(key: _useGradeColorsKey);
+    return value?.toLowerCase() == 'true' || value == null; // Default to true
+  }
+
+  static Future<void> setUseGradeColors(bool enabled) async {
+    await _storage.write(key: _useGradeColorsKey, value: enabled.toString());
+  }
+
+  static Future<double> getGradeRedThreshold() async {
+    final value = await _storage.read(key: _gradeRedThresholdKey);
+    return value != null ? double.tryParse(value) ?? 4.0 : 4.0; // Default to 4.0
+  }
+
+  static Future<void> setGradeRedThreshold(double threshold) async {
+    await _storage.write(key: _gradeRedThresholdKey, value: threshold.toString());
+  }
+
+  static Future<double> getGradeYellowThreshold() async {
+    final value = await _storage.read(key: _gradeYellowThresholdKey);
+    return value != null ? double.tryParse(value) ?? 5.0 : 5.0; // Default to 5.0
+  }
+
+  static Future<void> setGradeYellowThreshold(double threshold) async {
+    await _storage.write(key: _gradeYellowThresholdKey, value: threshold.toString());
   }
 
   static Future<void> clearAll() async {

@@ -83,6 +83,26 @@ class ApiStore extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Grade color settings
+  bool _useGradeColors = true;
+  double _gradeRedThreshold = 4.0;
+  double _gradeYellowThreshold = 5.0;
+
+  bool get useGradeColors => _useGradeColors;
+  double get gradeRedThreshold => _gradeRedThreshold;
+  double get gradeYellowThreshold => _gradeYellowThreshold;
+
+  void setUseGradeColors(bool enabled) {
+    _useGradeColors = enabled;
+    notifyListeners();
+  }
+
+  void setGradeColorThresholds(double redThreshold, double yellowThreshold) {
+    _gradeRedThreshold = redThreshold;
+    _gradeYellowThreshold = yellowThreshold;
+    notifyListeners();
+  }
+
   // Microsoft re-authentication needed flag
   bool _needsMicrosoftReAuth = false;
   bool get needsMicrosoftReAuth => _needsMicrosoftReAuth;
@@ -209,6 +229,11 @@ class ApiStore extends ChangeNotifier {
         default:
           _gradeDisplayMode = GradeDisplayMode.exact;
       }
+
+      // Load grade color settings
+      _useGradeColors = await StorageService.getUseGradeColors();
+      _gradeRedThreshold = await StorageService.getGradeRedThreshold();
+      _gradeYellowThreshold = await StorageService.getGradeYellowThreshold();
 
       // Check if API is reachable (with 5 second timeout)
       final isApiReachable = await _checkApiConnectivity();

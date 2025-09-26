@@ -2851,6 +2851,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Report card grades are rounded to the nearest 0.5 as they appear on official documents.'**
   String get gradeRoundingInfo;
+
+  /// Title for grade color settings section
+  ///
+  /// In en, this message translates to:
+  /// **'Grade Colors'**
+  String get gradeColors;
+
+  /// Toggle label for enabling grade colors
+  ///
+  /// In en, this message translates to:
+  /// **'Use Grade Colors'**
+  String get useGradeColors;
+
+  /// Description for grade colors toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Color grades based on their value'**
+  String get useGradeColorsDesc;
+
+  /// Label for red grade threshold
+  ///
+  /// In en, this message translates to:
+  /// **'Red (below)'**
+  String get redThreshold;
+
+  /// Label for yellow grade threshold
+  ///
+  /// In en, this message translates to:
+  /// **'Yellow (below)'**
+  String get yellowThreshold;
+
+  /// Label for green grades
+  ///
+  /// In en, this message translates to:
+  /// **'Green'**
+  String get greenThreshold;
+
+  /// Label for preview section
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get preview;
 }
 
 class _AppLocalizationsDelegate

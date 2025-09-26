@@ -60,15 +60,25 @@ class NotesPage extends StatelessWidget {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                 decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.primaryContainer,
+                                  color: subjectAverage != null && apiStore.useGradeColors
+                                    ? GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true).withValues(alpha: 0.15)
+                                    : Theme.of(context).colorScheme.primaryContainer,
                                   borderRadius: BorderRadius.circular(16),
+                                  border: subjectAverage != null && apiStore.useGradeColors
+                                    ? Border.all(
+                                        color: GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true).withValues(alpha: 0.3),
+                                        width: 1,
+                                      )
+                                    : null,
                                 ),
                                 child: Text(
                                   subjectAverage != null
                                       ? GradeUtils.getDisplayGrade(subjectAverage, apiStore.gradeDisplayMode)
                                       : '?',
                                   style: TextStyle(
-                                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                    color: subjectAverage != null && apiStore.useGradeColors
+                                      ? GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true)
+                                      : Theme.of(context).colorScheme.onPrimaryContainer,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14,
                                   ),

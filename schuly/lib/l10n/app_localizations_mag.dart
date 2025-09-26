@@ -1495,4 +1495,25 @@ class AppLocalizationsMag extends AppLocalizations {
   @override
   String get gradeRoundingInfo =>
       'Report card grades are rounded to the nearest 0.5 as they appear on official documents.';
+
+  @override
+  String get gradeColors => 'Grade Colors';
+
+  @override
+  String get useGradeColors => 'Use Grade Colors';
+
+  @override
+  String get useGradeColorsDesc => 'Color grades based on their value';
+
+  @override
+  String get redThreshold => 'Red (below)';
+
+  @override
+  String get yellowThreshold => 'Yellow (below)';
+
+  @override
+  String get greenThreshold => 'Green';
+
+  @override
+  String get preview => 'Preview';
 }

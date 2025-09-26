@@ -13,6 +13,7 @@ class StorageService {
   static const String _languageKey = 'selected_language';
   static const String _userCookiesPrefix = 'user_cookies_';
   static const String _agendaViewKey = 'agenda_view_preference';
+  static const String _gradeDisplayModeKey = 'grade_display_mode';
 
   // Cache keys for API data
   static const String _cachePrefix = 'cache_';
@@ -119,6 +120,15 @@ class StorageService {
   static Future<bool> getAgendaViewPreference() async {
     final value = await _storage.read(key: _agendaViewKey);
     return value?.toLowerCase() == 'true';
+  }
+
+  static Future<String> getGradeDisplayMode() async {
+    final value = await _storage.read(key: _gradeDisplayModeKey);
+    return value ?? 'exact'; // Default to exact display
+  }
+
+  static Future<void> setGradeDisplayMode(String mode) async {
+    await _storage.write(key: _gradeDisplayModeKey, value: mode);
   }
 
   static Future<void> clearAll() async {

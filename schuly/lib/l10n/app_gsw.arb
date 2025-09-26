@@ -760,5 +760,41 @@
   "errorTrackingRestartRequired": "Bitte starte d'App neu, damit d'Änderige wirksam wärde.",
   "@errorTrackingRestartRequired": {
     "description": "Privacy consent: errorTrackingRestartRequired"
+  },
+  "gradeDisplaySettings": "Note Azeig Iistellige",
+  "@gradeDisplaySettings": {
+    "description": "Grade display settings title"
+  },
+  "chooseGradeDisplay": "Wähl wie Note azeigt wärde:",
+  "@chooseGradeDisplay": {
+    "description": "Grade display selection prompt"
+  },
+  "exactGrades": "Exakti Note",
+  "@exactGrades": {
+    "description": "Exact grades option"
+  },
+  "exactGradesDesc": "Zeig präzisi Notewärt",
+  "@exactGradesDesc": {
+    "description": "Description for exact grades"
+  },
+  "roundedGrades": "Zügnisnote",
+  "@roundedGrades": {
+    "description": "Rounded grades option"
+  },
+  "roundedGradesDesc": "Grundet uf 0.5 (Zügnisnote)",
+  "@roundedGradesDesc": {
+    "description": "Description for rounded grades"
+  },
+  "bothGrades": "Beids",
+  "@bothGrades": {
+    "description": "Both grades option"
+  },
+  "bothGradesDesc": "Zeig exakti und grundeti Note",
+  "@bothGradesDesc": {
+    "description": "Description for both grades"
+  },
+  "gradeRoundingInfo": "Zügnisnote wärde uf die nächsti 0.5 grundet, wie sie uf offizielle Dokumänt erschined.",
+  "@gradeRoundingInfo": {
+    "description": "Information about grade rounding"
   }
 }

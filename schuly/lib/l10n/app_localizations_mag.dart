@@ -1467,4 +1467,32 @@ class AppLocalizationsMag extends AppLocalizations {
   @override
   String get testYourMaggusLevel =>
       'Teste deinen eigenen Maggus-Level in de Schuly App, bruddal!';
+
+  @override
+  String get gradeDisplaySettings => 'Grade Display Settings';
+
+  @override
+  String get chooseGradeDisplay => 'Choose how grades are displayed:';
+
+  @override
+  String get exactGrades => 'Exact Grades';
+
+  @override
+  String get exactGradesDesc => 'Show precise grade values';
+
+  @override
+  String get roundedGrades => 'Report Card Grades';
+
+  @override
+  String get roundedGradesDesc => 'Rounded to 0.5 (report card grade)';
+
+  @override
+  String get bothGrades => 'Both';
+
+  @override
+  String get bothGradesDesc => 'Show exact and rounded grades';
+
+  @override
+  String get gradeRoundingInfo =>
+      'Report card grades are rounded to the nearest 0.5 as they appear on official documents.';
 }

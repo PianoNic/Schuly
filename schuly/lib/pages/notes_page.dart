@@ -65,7 +65,7 @@ class NotesPage extends StatelessWidget {
                                 ),
                                 child: Text(
                                   subjectAverage != null
-                                      ? GradeUtils.formatGrade(subjectAverage)
+                                      ? GradeUtils.getDisplayGrade(subjectAverage, apiStore.gradeDisplayMode)
                                       : '?',
                                   style: TextStyle(
                                     color: Theme.of(context).colorScheme.onPrimaryContainer,

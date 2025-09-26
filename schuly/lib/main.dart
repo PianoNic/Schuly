@@ -25,6 +25,7 @@ import 'widgets/release_notes_dialog.dart';
 import 'widgets/app_update_dialog.dart';
 import 'widgets/notification_permission_dialog.dart';
 import 'widgets/privacy_consent_dialog.dart';
+import 'widgets/grade_display_settings_modal.dart';
 import 'package:schuly/api/lib/api.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'l10n/pirate_material_localizations.dart';
@@ -478,6 +479,17 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void _showGradeDisplaySettingsModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => const GradeDisplaySettingsModal(),
+    );
+  }
+
   void _showAgendaSettingsModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -727,6 +739,31 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Theme.of(context).colorScheme.onSurface,
             ),
             tooltip: 'Agenda Settings',
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const StudentCardPage()),
+              );
+            },
+            icon: Icon(
+              Icons.badge_outlined,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            tooltip: AppLocalizations.of(context)!.studentIdCardTooltip,
+          ),
+        ] : _selectedIndex == 2 ? [
+          // Grade display settings
+          IconButton(
+            onPressed: () {
+              _showGradeDisplaySettingsModal(context);
+            },
+            icon: Icon(
+              Icons.tune,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            tooltip: 'Grade Display Settings',
           ),
           IconButton(
             onPressed: () {

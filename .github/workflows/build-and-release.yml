@@ -70,7 +70,7 @@ jobs:
         env:
           SENTRY_DSN: ${{ vars.SENTRY_URL }}
         run: |
-          flutter build apk --release \
+          flutter build apk --release --flavor prod \
             --build-name="${{ github.ref_name }}" \
             --build-number="${{ github.run_number }}" \
             --dart-define=SENTRY_DSN="$SENTRY_DSN" \
@@ -82,7 +82,7 @@ jobs:
         env:
           SENTRY_DSN: ${{ vars.SENTRY_URL }}
         run: |
-          flutter build appbundle --release \
+          flutter build appbundle --release --flavor prod \
             --build-name="${{ github.ref_name }}" \
             --build-number="${{ github.run_number }}" \
             --dart-define=SENTRY_DSN="$SENTRY_DSN" \
@@ -93,8 +93,8 @@ jobs:
         working-directory: ./schuly
         run: |
           mkdir -p artifacts
-          cp build/app/outputs/flutter-apk/app-release.apk artifacts/schuly-${{ github.ref_name }}.apk
-          cp build/app/outputs/bundle/release/app-release.aab artifacts/schuly-${{ github.ref_name }}.aab
+          cp build/app/outputs/flutter-apk/app-prod-release.apk artifacts/schuly-${{ github.ref_name }}.apk
+          cp build/app/outputs/bundle/prodRelease/app-prod-release.aab artifacts/schuly-${{ github.ref_name }}.aab
 
       - name: Upload Android artifacts
         uses: actions/upload-artifact@v4

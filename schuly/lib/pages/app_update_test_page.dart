@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
-import '../services/app_update_service.dart';
+import '../services/update_service.dart';
 import '../widgets/app_update_dialog.dart';
 
 class AppUpdateTestPage extends StatefulWidget {
@@ -68,11 +68,6 @@ class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
               onPressed: _isLoading ? null : _showUpdateDialog,
               child: Text(AppLocalizations.of(context)!.forceShowUpdateDialog),
             ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _isLoading ? null : _clearDismissed,
-              child: Text(AppLocalizations.of(context)!.clearDismissedUpdates),
-            ),
             const SizedBox(height: 24),
             Card(
               child: Padding(
@@ -106,12 +101,12 @@ class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
     });
 
     try {
-      final updateRelease = await AppUpdateService.checkForUpdates();
+      final updateRelease = await UpdateService.checkForUpdates();
       
       setState(() {
         _isLoading = false;
         if (updateRelease != null) {
-          _status = AppLocalizations.of(context)!.updateAvailableVersion(updateRelease.version);
+          _status = AppLocalizations.of(context)!.updateAvailableVersion(updateRelease.latestVersion);
         } else {
           _status = AppLocalizations.of(context)!.noUpdatesAvailable;
         }
@@ -148,23 +143,4 @@ class _AppUpdateTestPageState extends State<AppUpdateTestPage> {
     }
   }
 
-  Future<void> _clearDismissed() async {
-    setState(() {
-      _isLoading = true;
-      _status = AppLocalizations.of(context)!.clearingDismissedUpdates;
-    });
-
-    try {
-      await AppUpdateService.clearDismissedVersion();
-      setState(() {
-        _isLoading = false;
-        _status = AppLocalizations.of(context)!.dismissedUpdatesCleared;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-        _status = AppLocalizations.of(context)!.errorClearingDismissed(e.toString());
-      });
-    }
-  }
 }

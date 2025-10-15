@@ -645,6 +645,22 @@
   "cardViewDescription": "Detailed cards with expandable test info nya~ (◡ ω ◡)",
   "timelineView": "Timeline View~ ⏰",
   "timelineViewDescription": "Compact timeline with time-based layout desu~ ♪",
+
+  "shareYourMaggusLevel": "Share youw Maggus level~ ✨(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧",
+  "@shareYourMaggusLevel": {},
+
+  "myMaggusScore": "My Maggus Score: {score} Points! So strong uwu ♡",
+  "@myMaggusScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
+
+  "testYourMaggusLevel": "Test youw own Maggus level in the Schuly app desu~ ♪",
+  "@testYourMaggusLevel": {},
+
   "privacyAndDataCollection": "Privacy & Data Collection ✨",
   "@privacyAndDataCollection": {
     "description": "Privacy consent: privacyAndDataCollection"
@@ -818,5 +834,8 @@
   "@greenThreshold": {},
 
   "preview": "Preview",
-  "@preview": {}
+  "@preview": {},
+
+  "appInformation": "App Information",
+  "@appInformation": {}
 }

@@ -1456,16 +1456,16 @@ class AppLocalizationsGsw extends AppLocalizations {
       'Kompakti Ziitachse mit ziitbasiertem Layout';
 
   @override
-  String get shareYourMaggusLevel => 'Share your Maggus level';
+  String get shareYourMaggusLevel => 'Teil dis Maggus-Level';
 
   @override
   String myMaggusScore(Object score) {
-    return 'My Maggus Score: $score Points!';
+    return 'Mis Maggus-Score: $score Pünkt!';
   }
 
   @override
   String get testYourMaggusLevel =>
-      'Test your own Maggus level in the Schuly App!';
+      'Teste dis eigene Maggus-Level i de Schuly App!';
 
   @override
   String get gradeDisplaySettings => 'Note Azeig Iistellige';
@@ -1515,4 +1515,7 @@ class AppLocalizationsGsw extends AppLocalizations {
 
   @override
   String get preview => 'Vorschau';
+
+  @override
+  String get appInformation => 'App-Informatione';
 }

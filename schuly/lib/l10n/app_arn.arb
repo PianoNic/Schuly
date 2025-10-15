@@ -673,6 +673,22 @@
   "cardViewDescription": "Display data as tactical cards",
   "timelineView": "Mission timeline",
   "timelineViewDescription": "Display chronological sequence",
+
+  "shareYourMaggusLevel": "Deploy your Maggus level intel",
+  "@shareYourMaggusLevel": {},
+
+  "myMaggusScore": "My Maggus Score: {score} Points! I'll be back for more!",
+  "@myMaggusScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
+
+  "testYourMaggusLevel": "Test your Maggus level in the Schuly combat system!",
+  "@testYourMaggusLevel": {},
+
   "privacyAndDataCollection": "Privacy & Data Collection",
   "@privacyAndDataCollection": {
     "description": "Privacy consent: privacyAndDataCollection"
@@ -846,5 +862,8 @@
   "@greenThreshold": {},
 
   "preview": "Preview",
-  "@preview": {}
+  "@preview": {},
+
+  "appInformation": "App Information",
+  "@appInformation": {}
 }

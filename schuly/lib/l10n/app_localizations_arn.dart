@@ -1429,16 +1429,16 @@ class AppLocalizationsArn extends AppLocalizations {
   String get timelineViewDescription => 'Display chronological sequence';
 
   @override
-  String get shareYourMaggusLevel => 'Share your Maggus level';
+  String get shareYourMaggusLevel => 'Deploy your Maggus level intel';
 
   @override
   String myMaggusScore(Object score) {
-    return 'My Maggus Score: $score Points!';
+    return 'My Maggus Score: $score Points! I\'ll be back for more!';
   }
 
   @override
   String get testYourMaggusLevel =>
-      'Test your own Maggus level in the Schuly App!';
+      'Test your Maggus level in the Schuly combat system!';
 
   @override
   String get gradeDisplaySettings => 'Grade Display Settings';
@@ -1488,4 +1488,7 @@ class AppLocalizationsArn extends AppLocalizations {
 
   @override
   String get preview => 'Preview';
+
+  @override
+  String get appInformation => 'App Information';
 }

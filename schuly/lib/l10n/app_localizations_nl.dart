@@ -1455,16 +1455,16 @@ class AppLocalizationsNl extends AppLocalizations {
       'Compacte tijdlijn met tijd-gebaseerde indeling';
 
   @override
-  String get shareYourMaggusLevel => 'Share your Maggus level';
+  String get shareYourMaggusLevel => 'Deel je Maggus-level';
 
   @override
   String myMaggusScore(Object score) {
-    return 'My Maggus Score: $score Points!';
+    return 'Mijn Maggus-Score: $score Punten!';
   }
 
   @override
   String get testYourMaggusLevel =>
-      'Test your own Maggus level in the Schuly App!';
+      'Test je eigen Maggus-level in de Schuly app!';
 
   @override
   String get gradeDisplaySettings => 'Cijferweergave-instellingen';
@@ -1514,4 +1514,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get preview => 'Preview';
+
+  @override
+  String get appInformation => 'App-Informatie';
 }

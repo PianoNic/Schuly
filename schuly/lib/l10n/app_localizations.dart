@@ -2893,6 +2893,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Preview'**
   String get preview;
+
+  /// Title for app information section
+  ///
+  /// In en, this message translates to:
+  /// **'App Information'**
+  String get appInformation;
 }
 
 class _AppLocalizationsDelegate

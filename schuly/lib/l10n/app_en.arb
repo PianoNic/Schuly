@@ -2065,5 +2065,10 @@
   "preview": "Preview",
   "@preview": {
     "description": "Label for preview section"
+  },
+
+  "appInformation": "App Information",
+  "@appInformation": {
+    "description": "Title for app information section"
   }
 }

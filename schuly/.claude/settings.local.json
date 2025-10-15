@@ -1,31 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(flutter analyze:*)",
-      "Bash(flutter pub:*)",
-      "Bash(flutter build:*)",
-      "Bash(flutter clean:*)",
-      "Bash(adb logcat:*)",
-      "Read(//f/**)",
-      "Bash(flutter:*)",
-      "WebSearch",
-      "Bash(sed:*)",
-      "Bash(grep:*)",
-      "Bash(python:*)",
-      "Bash(nc localhost 58177)",
-      "Bash(/dev/null)",
-      "Bash(git commit:*)",
-      "Bash(git add:*)",
-      "Bash(cat:*)",
-      "Bash(dart:*)",
-      "Bash(del \"C:\\GithubProjects\\schuly\\schuly\\lib\\pages\\absenzen_page.dart\")",
-      "Bash(del:*)",
-      "Bash(dir:*)",
-      "Bash(adb shell am force-stop:*)",
-      "Bash(nc localhost 61107)",
-      "Bash(for file in lib/l10n/app_*.arb)",
-      "Bash(do echo \"=== $file ===\")",
-      "Bash(done)"
+      "Bash(for file in app_arr.arb app_kaw.arb app_nl.arb)"
     ],
     "deny": [],
     "ask": []

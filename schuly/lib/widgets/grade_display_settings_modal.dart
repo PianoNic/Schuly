@@ -233,9 +233,9 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
                 onChanged: (value) async {
                   setState(() {
                     _redThreshold = value;
-                    // Ensure yellow threshold is higher
+                    // Ensure yellow threshold is higher, but clamp to max
                     if (_yellowThreshold <= _redThreshold) {
-                      _yellowThreshold = _redThreshold + 0.5;
+                      _yellowThreshold = (_redThreshold + 0.5).clamp(1.0, 6.0);
                     }
                   });
                   await StorageService.setGradeRedThreshold(_redThreshold);
@@ -258,9 +258,9 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
                 onChanged: (value) async {
                   setState(() {
                     _yellowThreshold = value;
-                    // Ensure red threshold is lower
+                    // Ensure red threshold is lower, but clamp to min
                     if (_redThreshold >= _yellowThreshold) {
-                      _redThreshold = _yellowThreshold - 0.5;
+                      _redThreshold = (_yellowThreshold - 0.5).clamp(1.0, 6.0);
                     }
                   });
                   await StorageService.setGradeRedThreshold(_redThreshold);

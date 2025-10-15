@@ -645,6 +645,22 @@
   "cardViewDescription": "Detaillierti Charte mit erwiiterbare Testinfos",
   "timelineView": "Ziitachse-Asicht",
   "timelineViewDescription": "Kompakti Ziitachse mit ziitbasiertem Layout",
+
+  "shareYourMaggusLevel": "Teil dis Maggus-Level",
+  "@shareYourMaggusLevel": {},
+
+  "myMaggusScore": "Mis Maggus-Score: {score} Pünkt!",
+  "@myMaggusScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
+
+  "testYourMaggusLevel": "Teste dis eigene Maggus-Level i de Schuly App!",
+  "@testYourMaggusLevel": {},
+
   "privacyAndDataCollection": "Dateschutz & Date-Sammlig",
   "@privacyAndDataCollection": {
     "description": "Privacy consent: privacyAndDataCollection"
@@ -817,5 +833,8 @@
   "@greenThreshold": {},
 
   "preview": "Vorschau",
-  "@preview": {}
+  "@preview": {},
+
+  "appInformation": "App-Informatione",
+  "@appInformation": {}
 }

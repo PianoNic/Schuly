@@ -704,5 +704,8 @@
   "@greenThreshold": {},
 
   "preview": "Vorschau",
-  "@preview": {}
+  "@preview": {},
+
+  "appInformation": "App-Informationen",
+  "@appInformation": {}
 }

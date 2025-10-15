@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import '../widgets/info_row.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/help_support_modal.dart';
@@ -11,13 +12,87 @@ import 'app_settings_page.dart';
 import 'student_card_page.dart';
 import 'logs_viewer_page.dart';
 import 'microsoft_auth_page.dart';
+import 'release_notes_page.dart';
 import '../main.dart';
 import '../l10n/app_localizations.dart';
+import '../services/update_service.dart';
+import '../widgets/app_update_dialog.dart';
+import '../utils/error_handler.dart';
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends StatefulWidget {
   final ThemeProvider themeProvider;
 
   const AccountPage({super.key, required this.themeProvider});
+
+  @override
+  State<AccountPage> createState() => _AccountPageState();
+}
+
+class _AccountPageState extends State<AccountPage> {
+  String _appVersion = 'DEV';
+  String _appBuildNumber = '0';
+  bool _isCheckingUpdates = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAppVersion();
+  }
+
+  Future<void> _loadAppVersion() async {
+    try {
+      final packageInfo = await PackageInfo.fromPlatform();
+      setState(() {
+        _appVersion = packageInfo.version;
+        _appBuildNumber = packageInfo.buildNumber;
+      });
+    } catch (e) {
+      // Keep default values if package info fails to load
+    }
+  }
+
+  Future<void> _checkForUpdates() async {
+    setState(() {
+      _isCheckingUpdates = true;
+    });
+
+    try {
+      final updateRelease = await UpdateService.checkForUpdates();
+
+      if (mounted) {
+        setState(() {
+          _isCheckingUpdates = false;
+        });
+
+        if (updateRelease != null) {
+          // Show update dialog
+          await AppUpdateDialog.showIfAvailable(context);
+        } else {
+          // Show "no updates" message
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(AppLocalizations.of(context)!.latestVersionMessage),
+                backgroundColor: Colors.green,
+              ),
+            );
+          }
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isCheckingUpdates = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.errorCheckingUpdatesDetails(e.toString())),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -198,7 +273,7 @@ class AccountPage extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) =>
-                                AppSettingsPage(themeProvider: themeProvider),
+                                AppSettingsPage(themeProvider: widget.themeProvider),
                           ),
                         );
                       },
@@ -321,6 +396,139 @@ class AccountPage extends StatelessWidget {
                       trailing: const Icon(Icons.open_in_new),
                       onTap: () {
                         _launchBuyMeACoffee(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // App Information Card
+            Card(
+              margin: const EdgeInsets.only(top: 8),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      localizations.appInformation,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 12),
+                    ListTile(
+                      leading: const Icon(Icons.article_outlined),
+                      title: Text(localizations.whatsNew),
+                      subtitle: Text(localizations.changelogAndFeatures),
+                      trailing: const Icon(Icons.chevron_right),
+                      contentPadding: EdgeInsets.zero,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ReleaseNotesPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    const Divider(),
+                    ListTile(
+                      leading: const Icon(Icons.system_update),
+                      title: Text(localizations.checkForUpdates),
+                      subtitle: Text(localizations.checkForNewVersions),
+                      trailing: _isCheckingUpdates
+                          ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Icon(Icons.chevron_right),
+                      contentPadding: EdgeInsets.zero,
+                      onTap: _isCheckingUpdates ? null : _checkForUpdates,
+                    ),
+                    const Divider(),
+                    ListTile(
+                      leading: const Icon(Icons.info_outlined),
+                      title: Text(localizations.aboutApp),
+                      subtitle: Text(localizations.versionWithNumber(_appVersion, _appBuildNumber)),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Error tracking status badge
+                          if (ErrorHandler.isSentryEnabled) ...[
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.green.withValues(alpha: 0.15),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: Colors.green.withValues(alpha: 0.3),
+                                  width: 1,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.shield_outlined,
+                                    size: 14,
+                                    color: Colors.green[700],
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    'Error Tracking',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: Colors.green[700],
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                          ],
+                          const Icon(Icons.chevron_right),
+                        ],
+                      ),
+                      contentPadding: EdgeInsets.zero,
+                      onTap: () {
+                        showAboutDialog(
+                          context: context,
+                          applicationName: localizations.appTitle,
+                          applicationVersion: '$_appVersion+$_appBuildNumber',
+                          applicationLegalese: localizations.appLegalese,
+                          children: [
+                            const SizedBox(height: 16),
+                            Text(
+                              localizations.appDescription,
+                              style: const TextStyle(fontSize: 14),
+                            ),
+                            const SizedBox(height: 12),
+                            // Show error tracking status
+                            if (ErrorHandler.isSentryEnabled) ...[
+                              const Divider(),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.check_circle,
+                                    color: Colors.green[700],
+                                    size: 16,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  const Text(
+                                    'Error tracking enabled',
+                                    style: TextStyle(fontSize: 13),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              const Text(
+                                'App errors are automatically reported for improved stability.',
+                                style: TextStyle(fontSize: 12, color: Colors.grey),
+                              ),
+                            ],
+                          ],
+                        );
                       },
                     ),
                   ],

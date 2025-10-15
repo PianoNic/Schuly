@@ -1527,4 +1527,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get preview => 'Vorschau';
+
+  @override
+  String get appInformation => 'App-Informationen';
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:schuly/api/lib/api.dart';
 import 'dart:async' show TimeoutException;
 import '../widgets/theme_settings.dart';
@@ -9,13 +8,9 @@ import '../providers/api_store.dart';
 import '../services/storage_service.dart';
 import '../main.dart';
 import 'notification_config_page.dart';
-import 'release_notes_page.dart';
-import '../services/app_update_service.dart';
-import '../widgets/app_update_dialog.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/language_provider.dart';
 import '../services/push_notification_service.dart';
-import '../utils/error_handler.dart';
 import '../widgets/privacy_consent_dialog.dart';
 import 'maggus_checker_page.dart';
 
@@ -32,18 +27,12 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   bool _pushNotificationsEnabled = false;
   bool _privacyConsentEnabled = false;
   bool _isLoading = true;
-  bool _isCheckingUpdates = false;
-  String _appVersion = 'DEV';
-  String _appBuildNumber = '0';
-  int _aboutTapCount = 0;
-  DateTime? _lastTapTime;
 
   @override
   void initState() {
     super.initState();
     _loadSettings();
     _loadApiInfo();
-    _loadAppVersion();
   }
 
   Future<void> _loadApiInfo() async {
@@ -52,18 +41,6 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
       await apiStore.fetchAppInfo();
     } catch (e) {
       // Ignore errors when loading API info on settings page
-    }
-  }
-
-  Future<void> _loadAppVersion() async {
-    try {
-      final packageInfo = await PackageInfo.fromPlatform();
-      setState(() {
-        _appVersion = packageInfo.version;
-        _appBuildNumber = packageInfo.buildNumber;
-      });
-    } catch (e) {
-      // Keep default values if package info fails to load
     }
   }
 
@@ -143,49 +120,6 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
           duration: const Duration(seconds: 3),
         ),
       );
-    }
-  }
-
-  Future<void> _checkForUpdates() async {
-    setState(() {
-      _isCheckingUpdates = true;
-    });
-
-    try {
-      final updateRelease = await AppUpdateService.checkForUpdates();
-      
-      if (mounted) {
-        setState(() {
-          _isCheckingUpdates = false;
-        });
-
-        if (updateRelease != null) {
-          // Show update dialog
-          await AppUpdateDialog.showIfAvailable(context);
-        } else {
-          // Show "no updates" message
-          if (mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(AppLocalizations.of(context)!.latestVersionMessage),
-                backgroundColor: Colors.green,
-              ),
-            );
-          }
-        }
-      }
-    } catch (e) {
-      if (mounted) {
-        setState(() {
-          _isCheckingUpdates = false;
-        });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context)!.errorCheckingUpdatesDetails(e.toString())),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
     }
   }
 
@@ -372,152 +306,6 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       },
                     ),
 
-                    const Divider(),
-
-                    // Release Notes
-                    _buildSettingsTile(
-                      context,
-                      icon: Icons.article_outlined,
-                      title: localizations.whatsNew,
-                      subtitle: localizations.changelogAndFeatures,
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ReleaseNotesPage(),
-                          ),
-                        );
-                      },
-                    ),
-
-                    // Check for Updates
-                    _buildSettingsTile(
-                      context,
-                      icon: Icons.system_update,
-                      title: localizations.checkForUpdates,
-                      subtitle: localizations.checkForNewVersions,
-                      trailing: _isCheckingUpdates 
-                          ? const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : const Icon(Icons.chevron_right),
-                      onTap: _isCheckingUpdates ? null : _checkForUpdates,
-                    ),
-
-                    const Divider(),
-
-                    // About App
-                    _buildSettingsTile(
-                      context,
-                      icon: Icons.info_outlined,
-                      title: localizations.aboutApp,
-                      subtitle: localizations.versionWithNumber(_appVersion, _appBuildNumber),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // Error tracking status badge
-                          if (ErrorHandler.isSentryEnabled) ...[
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Colors.green.withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: Colors.green.withValues(alpha: 0.3),
-                                  width: 1,
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(
-                                    Icons.shield_outlined,
-                                    size: 14,
-                                    color: Colors.green[700],
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    'Error Tracking',
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      color: Colors.green[700],
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                          ],
-                          const Icon(Icons.chevron_right),
-                        ],
-                      ),
-                      onTap: () {
-                        // Easter egg: 5 quick taps opens Maggus checker (only when Maggus language is active)
-                        final languageProvider = Provider.of<LanguageProvider>(context, listen: false);
-                        if (languageProvider.locale.languageCode == 'mag') {
-                          final now = DateTime.now();
-                          if (_lastTapTime != null &&
-                              now.difference(_lastTapTime!).inMilliseconds < 500) {
-                            _aboutTapCount++;
-                            if (_aboutTapCount >= 5) {
-                              _aboutTapCount = 0;
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const MaggusCheckerPage(),
-                                ),
-                              );
-                              return;
-                            }
-                          } else {
-                            _aboutTapCount = 1;
-                          }
-                          _lastTapTime = now;
-                        }
-
-                        showAboutDialog(
-                          context: context,
-                          applicationName: localizations.appTitle,
-                          applicationVersion: '$_appVersion+$_appBuildNumber',
-                          applicationLegalese: localizations.appLegalese,
-                          children: [
-                            const SizedBox(height: 16),
-                            Text(
-                              localizations.appDescription,
-                              style: const TextStyle(fontSize: 14),
-                            ),
-                            const SizedBox(height: 12),
-                            // Show error tracking status
-                            if (ErrorHandler.isSentryEnabled) ...[
-                              const Divider(),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.check_circle,
-                                    color: Colors.green[700],
-                                    size: 16,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  const Text(
-                                    'Error tracking enabled',
-                                    style: TextStyle(fontSize: 13),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                'App errors are automatically reported for improved stability.',
-                                style: TextStyle(fontSize: 12, color: Colors.grey),
-                              ),
-                            ],
-                          ],
-                        );
-                      },
-                    ),
                   ],
                 ),
               ),

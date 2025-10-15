@@ -1450,16 +1450,16 @@ class AppLocalizationsKaw extends AppLocalizations {
       'Compact timeline with time-based layout desu~ ♪';
 
   @override
-  String get shareYourMaggusLevel => 'Share your Maggus level';
+  String get shareYourMaggusLevel => 'Share youw Maggus level~ ✨(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧';
 
   @override
   String myMaggusScore(Object score) {
-    return 'My Maggus Score: $score Points!';
+    return 'My Maggus Score: $score Points! So strong uwu ♡';
   }
 
   @override
   String get testYourMaggusLevel =>
-      'Test your own Maggus level in the Schuly App!';
+      'Test youw own Maggus level in the Schuly app desu~ ♪';
 
   @override
   String get gradeDisplaySettings => 'Grade Display Settings';
@@ -1509,4 +1509,7 @@ class AppLocalizationsKaw extends AppLocalizations {
 
   @override
   String get preview => 'Preview';
+
+  @override
+  String get appInformation => 'App Information';
 }

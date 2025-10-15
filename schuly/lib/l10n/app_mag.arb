@@ -1959,5 +1959,8 @@
   "@greenThreshold": {},
 
   "preview": "Preview",
-  "@preview": {}
+  "@preview": {},
+
+  "appInformation": "App-Infos, bruddal",
+  "@appInformation": {}
 }

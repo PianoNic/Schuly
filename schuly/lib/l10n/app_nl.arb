@@ -1878,6 +1878,22 @@
   "@timelineViewDescription": {
     "description": "Description for timeline view option"
   },
+
+  "shareYourMaggusLevel": "Deel je Maggus-level",
+  "@shareYourMaggusLevel": {},
+
+  "myMaggusScore": "Mijn Maggus-Score: {score} Punten!",
+  "@myMaggusScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
+
+  "testYourMaggusLevel": "Test je eigen Maggus-level in de Schuly app!",
+  "@testYourMaggusLevel": {},
+
   "gradeDisplaySettings": "Cijferweergave-instellingen",
   "@gradeDisplaySettings": {
     "description": "Grade display settings title"
@@ -1935,5 +1951,8 @@
   "@greenThreshold": {},
 
   "preview": "Preview",
-  "@preview": {}
+  "@preview": {},
+
+  "appInformation": "App-Informatie",
+  "@appInformation": {}
 }

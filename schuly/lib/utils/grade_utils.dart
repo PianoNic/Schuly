@@ -70,32 +70,34 @@ class GradeUtils {
     return result;
   }
 
-  /// Calculate overall average across all subjects
+  /// Calculate overall average across all subjects (weight-aware)
   static double? calculateOverallAverage(Map<String, List<GradeDto>> gradesBySubject) {
     if (gradesBySubject.isEmpty) return null;
-    
-    final subjectAverages = <double>[];
-    
+
+    // Flatten all grades and recalculate weighted average across all subjects
+    final allGrades = <GradeDto>[];
     for (final grades in gradesBySubject.values) {
-      final average = calculateWeightedAverage(grades);
-      if (average != null) {
-        subjectAverages.add(average);
-      }
+      allGrades.addAll(grades);
     }
-    
-    if (subjectAverages.isEmpty) return null;
-    
-    return subjectAverages.reduce((a, b) => a + b) / subjectAverages.length;
+
+    // Use the weighted average calculation on all grades
+    // This ensures the overall average respects weights across all subjects
+    return calculateWeightedAverage(allGrades);
   }
 
-  /// Format grade for display (show raw value with all decimals)
+  /// Format grade for display (show raw value with sensible precision)
   static String formatGrade(double grade) {
-    // Show the raw grade value as it is
-    String gradeStr = grade.toString();
-    // Remove trailing .0 if it's a whole number
-    if (gradeStr.endsWith('.0')) {
-      gradeStr = gradeStr.substring(0, gradeStr.length - 2);
+    // Round to 2 decimal places to avoid floating-point precision issues
+    // e.g., 3.8499999999999996 becomes 3.85
+    final rounded = (grade * 100).round() / 100;
+    String gradeStr = rounded.toStringAsFixed(2);
+
+    // Remove trailing zeros after decimal point
+    if (gradeStr.contains('.')) {
+      gradeStr = gradeStr.replaceAll(RegExp(r'0+$'), '');
+      gradeStr = gradeStr.replaceAll(RegExp(r'\.$'), '');
     }
+
     return gradeStr;
   }
 

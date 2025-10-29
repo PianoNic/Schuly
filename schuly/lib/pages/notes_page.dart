@@ -41,9 +41,13 @@ class _NotesPageState extends State<NotesPage> with SingleTickerProviderStateMix
         }
 
         // Filter out grades with mark 0 (not available yet)
+        // Keep grades where mark is null or non-zero
         final availableGrades = grades.where((grade) {
-          final markValue = double.tryParse(grade.mark ?? '0') ?? 0;
-          return markValue != 0;
+          if (grade.mark == null || grade.mark!.isEmpty) {
+            return true; // Keep grades with null/empty mark
+          }
+          final markValue = double.tryParse(grade.mark!) ?? 0;
+          return markValue != 0; // Filter out only if explicitly 0
         }).toList();
 
         if (availableGrades.isEmpty) {

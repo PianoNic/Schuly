@@ -525,10 +525,10 @@ class _StartPageState extends State<StartPage> {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  if (exam.text.isNotEmpty) ...[
+                                  if (exam.text != null && exam.text!.isNotEmpty) ...[
                                     const SizedBox(height: 4),
                                     Text(
-                                      exam.text,
+                                      exam.text!,
                                       style: Theme.of(context).textTheme.bodyMedium,
                                     ),
                                   ],
@@ -673,7 +673,7 @@ class _StartPageState extends State<StartPage> {
           : '';
       final subject = item.text;
       final room = item.roomToken;
-      final teacher = item.teachers.isNotEmpty ? item.teachers.join(', ') : '';
+      final teacher = item.teachers != null && item.teachers!.isNotEmpty ? item.teachers!.join(', ') : '';
 
       widgets.add(LessonTile(
         day: dayStr,

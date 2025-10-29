@@ -16,13 +16,13 @@ class ExamDto {
     required this.id,
     required this.startDate,
     required this.endDate,
-    required this.text,
+    this.text,
     this.comment,
     required this.roomToken,
     this.roomId,
-    this.teachers = const [],
-    this.teacherIds = const [],
-    this.teacherTokens = const [],
+    this.teachers,
+    this.teacherIds,
+    this.teacherTokens,
     required this.courseId,
     required this.courseToken,
     required this.courseName,
@@ -33,10 +33,10 @@ class ExamDto {
     this.timetableText,
     this.infoFacilityManagement,
     this.importset,
-    this.lessons = const [],
+    this.lessons,
     this.publishToInfoSystem,
-    this.studentNames = const [],
-    this.studentIds = const [],
+    this.studentNames,
+    this.studentIds,
     required this.client,
     required this.clientname,
     required this.weight,
@@ -48,7 +48,7 @@ class ExamDto {
 
   String endDate;
 
-  String text;
+  String? text;
 
   String? comment;
 
@@ -248,6 +248,21 @@ class ExamDto {
     return json;
   }
 
+  /// Helper method to parse numeric or string values from JSON
+  /// The API returns weight as numbers (e.g., 1) but the DTO stores it as string
+  static String? _parseNumberOrString(dynamic value) {
+    if (value == null) {
+      return null;
+    }
+    if (value is String) {
+      return value;
+    }
+    if (value is num) {
+      return value.toString();
+    }
+    return null;
+  }
+
   /// Returns a new [ExamDto] instance and imports its values from
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
@@ -270,19 +285,19 @@ class ExamDto {
         id: mapValueOfType<String>(json, r'id')!,
         startDate: mapValueOfType<String>(json, r'startDate')!,
         endDate: mapValueOfType<String>(json, r'endDate')!,
-        text: mapValueOfType<String>(json, r'text')!,
+        text: mapValueOfType<String>(json, r'text'),
         comment: mapValueOfType<String>(json, r'comment'),
         roomToken: mapValueOfType<String>(json, r'roomToken')!,
         roomId: mapValueOfType<String>(json, r'roomId'),
         teachers: json[r'teachers'] is Iterable
             ? (json[r'teachers'] as Iterable).cast<String>().toList(growable: false)
-            : const [],
+            : null,
         teacherIds: json[r'teacherIds'] is Iterable
             ? (json[r'teacherIds'] as Iterable).cast<String>().toList(growable: false)
-            : const [],
+            : null,
         teacherTokens: json[r'teacherTokens'] is Iterable
             ? (json[r'teacherTokens'] as Iterable).cast<String>().toList(growable: false)
-            : const [],
+            : null,
         courseId: mapValueOfType<String>(json, r'courseId')!,
         courseToken: mapValueOfType<String>(json, r'courseToken')!,
         courseName: mapValueOfType<String>(json, r'courseName')!,
@@ -295,17 +310,17 @@ class ExamDto {
         importset: mapValueOfType<String>(json, r'importset'),
         lessons: json[r'lessons'] is Iterable
             ? (json[r'lessons'] as Iterable).cast<String>().toList(growable: false)
-            : const [],
+            : null,
         publishToInfoSystem: mapValueOfType<bool>(json, r'publishToInfoSystem'),
         studentNames: json[r'studentNames'] is Iterable
             ? (json[r'studentNames'] as Iterable).cast<String>().toList(growable: false)
-            : const [],
+            : null,
         studentIds: json[r'studentIds'] is Iterable
             ? (json[r'studentIds'] as Iterable).cast<String>().toList(growable: false)
-            : const [],
+            : null,
         client: mapValueOfType<String>(json, r'client')!,
         clientname: mapValueOfType<String>(json, r'clientname')!,
-        weight: mapValueOfType<String>(json, r'weight')!,
+        weight: _parseNumberOrString(json[r'weight'])!,
       );
     }
     return null;

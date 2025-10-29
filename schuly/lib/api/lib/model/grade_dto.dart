@@ -23,10 +23,10 @@ class GradeDto {
     required this.date,
     this.mark,
     this.points,
-    required this.weight,
+    this.weight,
     required this.isConfirmed,
     this.courseGrade,
-    required this.examinationGroups,
+    this.examinationGroups,
     this.studentId,
     this.studentName,
     required this.inputType,
@@ -53,13 +53,13 @@ class GradeDto {
 
   String? points;
 
-  String weight;
+  String? weight;
 
   bool isConfirmed;
 
   String? courseGrade;
 
-  ExaminationGroupsDto examinationGroups;
+  ExaminationGroupsDto? examinationGroups;
 
   String? studentId;
 
@@ -162,6 +162,22 @@ class GradeDto {
     return json;
   }
 
+  /// Helper method to parse numeric or string values from JSON
+  /// The API returns mark, weight, points, and courseGrade as numbers (e.g., 3.5, 1)
+  /// but the DTO stores them as strings. This converts numbers to strings.
+  static String? _parseNumberOrString(dynamic value) {
+    if (value == null) {
+      return null;
+    }
+    if (value is String) {
+      return value;
+    }
+    if (value is num) {
+      return value.toString();
+    }
+    return null;
+  }
+
   /// Returns a new [GradeDto] instance and imports its values from
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
@@ -189,12 +205,12 @@ class GradeDto {
         subjectToken: mapValueOfType<String>(json, r'subjectToken')!,
         title: mapValueOfType<String>(json, r'title')!,
         date: mapValueOfType<String>(json, r'date')!,
-        mark: mapValueOfType<String>(json, r'mark'),
-        points: mapValueOfType<String>(json, r'points'),
-        weight: mapValueOfType<String>(json, r'weight')!,
+        mark: _parseNumberOrString(json[r'mark']),
+        points: _parseNumberOrString(json[r'points']),
+        weight: _parseNumberOrString(json[r'weight']),
         isConfirmed: mapValueOfType<bool>(json, r'isConfirmed')!,
-        courseGrade: mapValueOfType<String>(json, r'courseGrade'),
-        examinationGroups: ExaminationGroupsDto.fromJson(json[r'examinationGroups'])!,
+        courseGrade: _parseNumberOrString(json[r'courseGrade']),
+        examinationGroups: json[r'examinationGroups'] != null ? ExaminationGroupsDto.fromJson(json[r'examinationGroups']) : null,
         studentId: mapValueOfType<String>(json, r'studentId'),
         studentName: mapValueOfType<String>(json, r'studentName'),
         inputType: mapValueOfType<String>(json, r'inputType')!,

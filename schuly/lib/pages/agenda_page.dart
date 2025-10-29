@@ -497,7 +497,7 @@ class _AgendaPageState extends State<AgendaPage> {
               children: [
                 // Calendar always visible at the top
                 Card(
-                  margin: const EdgeInsets.only(bottom: 8),
+                  margin: const EdgeInsets.only(bottom: 16),
                   child: CustomCalendar(
                     selectedDate: _selectedDay,
                     firstDate: DateTime.now().subtract(const Duration(days: 365)),

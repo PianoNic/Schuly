@@ -61,10 +61,20 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    // Calculate appropriate height based on screen height
-    // 6 weeks × ~40 pixels per week + padding
+    // Calculate appropriate height based on available width (since cells are square)
+    // 6 weeks + header, with each cell being square (width / 7 columns)
+    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final calendarHeight = screenHeight > 800 ? 320.0 : 262.0;
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
+    // Available width for calendar (accounting for padding)
+    final availableWidth = screenWidth - 32; // 16px padding on each side
+    final cellSize = availableWidth / 7;
+
+    // Height needed: 6 rows of cells + header (~40px) + spacing
+    final calendarHeight = isLandscape
+        ? (cellSize * 6) + 60  // 6 weeks of square cells + header and spacing
+        : (screenHeight > 800 ? 320.0 : 262.0);
 
     return Column(
       mainAxisSize: MainAxisSize.min,

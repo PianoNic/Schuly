@@ -5,6 +5,7 @@ import 'package:fl_chart/fl_chart.dart';
 import '../providers/api_store.dart';
 import '../utils/grade_utils.dart';
 import '../l10n/app_localizations.dart';
+import 'subject_analytics_view.dart';
 
 class GradeStatisticsView extends StatelessWidget {
   final List<GradeDto> grades;
@@ -190,12 +191,16 @@ class GradeStatisticsView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              ...bestSubjects.map((entry) => _buildSubjectRankingRow(
-                    context,
-                    entry.key,
-                    entry.value,
-                    apiStore,
-                  )),
+              ...bestSubjects.map((entry) {
+                final subjectGrades = gradesBySubject[entry.key] ?? [];
+                return _buildSubjectRankingRow(
+                  context,
+                  entry.key,
+                  entry.value,
+                  apiStore,
+                  subjectGrades,
+                );
+              }),
               const SizedBox(height: 16),
             ],
             // Areas for improvement (below 4.0)
@@ -207,12 +212,16 @@ class GradeStatisticsView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              ...improvementSubjects.map((entry) => _buildSubjectRankingRow(
-                    context,
-                    entry.key,
-                    entry.value,
-                    apiStore,
-                  )),
+              ...improvementSubjects.map((entry) {
+                final subjectGrades = gradesBySubject[entry.key] ?? [];
+                return _buildSubjectRankingRow(
+                  context,
+                  entry.key,
+                  entry.value,
+                  apiStore,
+                  subjectGrades,
+                );
+              }),
             ] else if (bestSubjects.isEmpty)
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
@@ -235,65 +244,85 @@ class GradeStatisticsView extends StatelessWidget {
     String subject,
     double average,
     ApiStore apiStore,
+    List<GradeDto> subjectGrades,
   ) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.only(bottom: 6.0),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => SubjectAnalyticsView(
+                  subjectName: subject,
+                  subjectGrades: subjectGrades,
+                ),
+              ),
+            );
+          },
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            child: Row(
               children: [
-                Text(
-                  subject,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        subject,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: apiStore.useGradeColors
+                        ? GradeUtils.getGradeColor(
+                            average,
+                            apiStore.gradeRedThreshold,
+                            apiStore.gradeYellowThreshold,
+                            true,
+                          ).withValues(alpha: 0.15)
+                        : Theme.of(context).colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(12),
+                    border: apiStore.useGradeColors
+                        ? Border.all(
+                            color: GradeUtils.getGradeColor(
+                              average,
+                              apiStore.gradeRedThreshold,
+                              apiStore.gradeYellowThreshold,
+                              true,
+                            ).withValues(alpha: 0.3),
+                            width: 1,
+                          )
+                        : null,
+                  ),
+                  child: Text(
+                    GradeUtils.getDisplayGrade(average, apiStore.gradeDisplayMode),
+                    style: TextStyle(
+                      color: apiStore.useGradeColors
+                          ? GradeUtils.getGradeColor(
+                              average,
+                              apiStore.gradeRedThreshold,
+                              apiStore.gradeYellowThreshold,
+                              true,
+                            )
+                          : Theme.of(context).colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: apiStore.useGradeColors
-                  ? GradeUtils.getGradeColor(
-                      average,
-                      apiStore.gradeRedThreshold,
-                      apiStore.gradeYellowThreshold,
-                      true,
-                    ).withValues(alpha: 0.15)
-                  : Theme.of(context).colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(12),
-              border: apiStore.useGradeColors
-                  ? Border.all(
-                      color: GradeUtils.getGradeColor(
-                        average,
-                        apiStore.gradeRedThreshold,
-                        apiStore.gradeYellowThreshold,
-                        true,
-                      ).withValues(alpha: 0.3),
-                      width: 1,
-                    )
-                  : null,
-            ),
-            child: Text(
-              GradeUtils.getDisplayGrade(average, apiStore.gradeDisplayMode),
-              style: TextStyle(
-                color: apiStore.useGradeColors
-                    ? GradeUtils.getGradeColor(
-                        average,
-                        apiStore.gradeRedThreshold,
-                        apiStore.gradeYellowThreshold,
-                        true,
-                      )
-                    : Theme.of(context).colorScheme.onPrimaryContainer,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

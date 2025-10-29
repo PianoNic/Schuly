@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/grade_tile.dart';
 import '../widgets/grade_statistics_view.dart';
+import '../widgets/subject_analytics_view.dart';
 import '../providers/api_store.dart';
 import '../utils/grade_utils.dart';
 import 'package:schuly/api/lib/api.dart';
@@ -99,64 +100,76 @@ class _NotesPageState extends State<NotesPage> with SingleTickerProviderStateMix
             ...gradesBySubject.entries.map((entry) {
               final subjectAverage = GradeUtils.calculateWeightedAverage(entry.value);
 
-              return Card(
-                margin: const EdgeInsets.only(bottom: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Subject header with average in top right corner
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 12, 12, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              entry.key,
-                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: subjectAverage != null && apiStore.useGradeColors
-                                ? GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true).withValues(alpha: 0.15)
-                                : Theme.of(context).colorScheme.primaryContainer,
-                              borderRadius: BorderRadius.circular(16),
-                              border: subjectAverage != null && apiStore.useGradeColors
-                                ? Border.all(
-                                    color: GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true).withValues(alpha: 0.3),
-                                    width: 1,
-                                  )
-                                : null,
-                            ),
-                            child: Text(
-                              subjectAverage != null
-                                  ? GradeUtils.getDisplayGrade(subjectAverage, apiStore.gradeDisplayMode)
-                                  : '?',
-                              style: TextStyle(
-                                color: subjectAverage != null && apiStore.useGradeColors
-                                  ? GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true)
-                                  : Theme.of(context).colorScheme.onPrimaryContainer,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
+              return GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SubjectAnalyticsView(
+                        subjectName: entry.key,
+                        subjectGrades: entry.value,
+                      ),
+                    ),
+                  );
+                },
+                child: Card(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Subject header with average in top right corner
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 12, 12, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                entry.key,
+                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
                               ),
                             ),
-                          ),
-                        ],
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: subjectAverage != null && apiStore.useGradeColors
+                                  ? GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true).withValues(alpha: 0.15)
+                                  : Theme.of(context).colorScheme.primaryContainer,
+                                borderRadius: BorderRadius.circular(16),
+                                border: subjectAverage != null && apiStore.useGradeColors
+                                  ? Border.all(
+                                      color: GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true).withValues(alpha: 0.3),
+                                      width: 1,
+                                    )
+                                  : null,
+                              ),
+                              child: Text(
+                                subjectAverage != null
+                                    ? GradeUtils.getDisplayGrade(subjectAverage, apiStore.gradeDisplayMode)
+                                    : '?',
+                                style: TextStyle(
+                                  color: subjectAverage != null && apiStore.useGradeColors
+                                    ? GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true)
+                                    : Theme.of(context).colorScheme.onPrimaryContainer,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    // Grade tiles
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-                      child: Column(
-                        children: entry.value.map((gradeData) => GradeTile(
-                              grade: gradeData,
-                            )).toList(),
+                      // Grade tiles
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+                        child: Column(
+                          children: entry.value.map((gradeData) => GradeTile(
+                                grade: gradeData,
+                              )).toList(),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             }),

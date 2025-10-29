@@ -1960,5 +1960,8 @@
   "@overview": {},
 
   "statistics": "Statistieken",
-  "@statistics": {}
+  "@statistics": {},
+
+  "settings": "Instellingen",
+  "@settings": {}
 }

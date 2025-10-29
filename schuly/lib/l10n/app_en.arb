@@ -2080,5 +2080,10 @@
   "statistics": "Statistics",
   "@statistics": {
     "description": "Navigation tab label for grades statistics"
+  },
+
+  "settings": "Settings",
+  "@settings": {
+    "description": "Navigation tab label for grades settings"
   }
 }

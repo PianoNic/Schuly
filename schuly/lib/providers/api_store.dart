@@ -102,6 +102,16 @@ class ApiStore extends ChangeNotifier {
     _gradeYellowThreshold = yellowThreshold;
     notifyListeners();
   }
+
+  // Flashy animations for perfect grades
+  bool _enableFlashyAnimations = true;
+  bool get enableFlashyAnimations => _enableFlashyAnimations;
+
+  void setEnableFlashyAnimations(bool enabled) {
+    _enableFlashyAnimations = enabled;
+    notifyListeners();
+  }
+
   // Microsoft re-authentication needed flag
   bool _needsMicrosoftReAuth = false;
   bool get needsMicrosoftReAuth => _needsMicrosoftReAuth;
@@ -233,6 +243,10 @@ class ApiStore extends ChangeNotifier {
       _useGradeColors = await StorageService.getUseGradeColors();
       _gradeRedThreshold = await StorageService.getGradeRedThreshold();
       _gradeYellowThreshold = await StorageService.getGradeYellowThreshold();
+
+      // Load flashy animations preference
+      _enableFlashyAnimations = await StorageService.getEnableFlashyAnimations();
+
       // Check if API is reachable (with 5 second timeout)
       final isApiReachable = await _checkApiConnectivity();
 

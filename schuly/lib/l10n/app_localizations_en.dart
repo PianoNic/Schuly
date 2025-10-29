@@ -1518,4 +1518,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statistics => 'Statistics';
+
+  @override
+  String get settings => 'Settings';
 }

@@ -1524,4 +1524,7 @@ class AppLocalizationsGsw extends AppLocalizations {
 
   @override
   String get statistics => 'Statistike';
+
+  @override
+  String get settings => 'Istellige';
 }

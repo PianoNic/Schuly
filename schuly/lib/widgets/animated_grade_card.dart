@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class AnimatedGradeCard extends StatefulWidget {
   final double? gradeValue;
   final Widget child;
+  final bool enableFlashyAnimations;
 
   const AnimatedGradeCard({
     super.key,
     required this.gradeValue,
     required this.child,
+    this.enableFlashyAnimations = true,
   });
 
   @override
@@ -42,14 +44,17 @@ class _AnimatedGradeCardState extends State<AnimatedGradeCard>
   void didUpdateWidget(AnimatedGradeCard oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // Update animation if grade changes to/from 6.0
-    if (widget.gradeValue == 6.0 && !_animationController.isAnimating && _animationController.value == 0) {
+    // Update animation if grade changes to/from 6.0 or animations are toggled
+    final shouldAnimate = widget.gradeValue == 6.0 && widget.enableFlashyAnimations;
+    final shouldHaveBeenAnimating = oldWidget.gradeValue == 6.0 && oldWidget.enableFlashyAnimations;
+
+    if (shouldAnimate && !_animationController.isAnimating && _animationController.value == 0) {
       _animationController.forward();
-    } else if (widget.gradeValue == 6.0 && oldWidget.gradeValue != 6.0) {
-      // Grade changed to 6.0, reset and replay animation
+    } else if (shouldAnimate && !shouldHaveBeenAnimating) {
+      // Grade changed to 6.0 or animations enabled, reset and replay animation
       _animationController.reset();
       _animationController.forward();
-    } else if (widget.gradeValue != 6.0 && _animationController.isAnimating) {
+    } else if (!shouldAnimate && _animationController.isAnimating) {
       _animationController.stop();
       _animationController.reset();
     }
@@ -57,8 +62,8 @@ class _AnimatedGradeCardState extends State<AnimatedGradeCard>
 
   @override
   Widget build(BuildContext context) {
-    // Only apply animation if grade is 6.0
-    if (widget.gradeValue != 6.0) {
+    // Only apply animation if grade is 6.0 and flashy animations are enabled
+    if (widget.gradeValue != 6.0 || !widget.enableFlashyAnimations) {
       return widget.child;
     }
 

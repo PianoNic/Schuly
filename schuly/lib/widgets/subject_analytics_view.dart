@@ -281,7 +281,7 @@ class SubjectAnalyticsView extends StatelessWidget {
             const SizedBox(height: 16),
             ...sortedGrades.map((grade) {
               final gradeValue = double.tryParse(grade.mark ?? '0') ?? 0;
-              final weight = double.tryParse(grade.weight) ?? 0;
+              final weight = grade.weight != null ? double.tryParse(grade.weight!) ?? 0 : 0;
 
               return Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),

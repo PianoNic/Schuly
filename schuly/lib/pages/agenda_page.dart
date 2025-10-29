@@ -131,10 +131,10 @@ class _AgendaPageState extends State<AgendaPage> {
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
-                  if (exam.text.isNotEmpty) ...[
+                  if (exam.text != null && exam.text!.isNotEmpty) ...[
                     const SizedBox(height: 2),
                     Text(
-                      exam.text,
+                      exam.text!,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],

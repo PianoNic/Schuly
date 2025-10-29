@@ -17,16 +17,16 @@ class AgendaDto {
     required this.startDate,
     required this.endDate,
     required this.text,
-    required this.comment,
+    this.comment,
     required this.roomToken,
-    required this.roomId,
-    this.teachers = const [],
-    this.teacherIds = const [],
-    this.teacherTokens = const [],
+    this.roomId,
+    this.teachers,
+    this.teacherIds,
+    this.teacherTokens,
     required this.courseId,
     required this.courseToken,
     required this.courseName,
-    required this.status,
+    this.status,
     required this.color,
     required this.eventType,
     this.eventRoomStatus,
@@ -50,17 +50,17 @@ class AgendaDto {
 
   String text;
 
-  String comment;
+  String? comment;
 
   String roomToken;
 
-  String roomId;
+  String? roomId;
 
-  List<String> teachers;
+  List<String>? teachers;
 
-  List<String> teacherIds;
+  List<String>? teacherIds;
 
-  List<String> teacherTokens;
+  List<String>? teacherTokens;
 
   String courseId;
 
@@ -68,7 +68,7 @@ class AgendaDto {
 
   String courseName;
 
-  String status;
+  String? status;
 
   String color;
 
@@ -228,6 +228,21 @@ class AgendaDto {
     return json;
   }
 
+  /// Helper method to parse numeric or string values from JSON
+  /// The API returns weight as numbers (e.g., 1) but the DTO stores it as string
+  static String? _parseNumberOrString(dynamic value) {
+    if (value == null) {
+      return null;
+    }
+    if (value is String) {
+      return value;
+    }
+    if (value is num) {
+      return value.toString();
+    }
+    return null;
+  }
+
   /// Returns a new [AgendaDto] instance and imports its values from
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
@@ -251,22 +266,22 @@ class AgendaDto {
         startDate: mapValueOfType<String>(json, r'startDate')!,
         endDate: mapValueOfType<String>(json, r'endDate')!,
         text: mapValueOfType<String>(json, r'text')!,
-        comment: mapValueOfType<String>(json, r'comment')!,
+        comment: mapValueOfType<String>(json, r'comment'),
         roomToken: mapValueOfType<String>(json, r'roomToken')!,
-        roomId: mapValueOfType<String>(json, r'roomId')!,
+        roomId: mapValueOfType<String>(json, r'roomId'),
         teachers: json[r'teachers'] is Iterable
             ? (json[r'teachers'] as Iterable).cast<String>().toList(growable: false)
-            : const [],
+            : null,
         teacherIds: json[r'teacherIds'] is Iterable
             ? (json[r'teacherIds'] as Iterable).cast<String>().toList(growable: false)
-            : const [],
+            : null,
         teacherTokens: json[r'teacherTokens'] is Iterable
             ? (json[r'teacherTokens'] as Iterable).cast<String>().toList(growable: false)
-            : const [],
+            : null,
         courseId: mapValueOfType<String>(json, r'courseId')!,
         courseToken: mapValueOfType<String>(json, r'courseToken')!,
         courseName: mapValueOfType<String>(json, r'courseName')!,
-        status: mapValueOfType<String>(json, r'status')!,
+        status: mapValueOfType<String>(json, r'status'),
         color: mapValueOfType<String>(json, r'color')!,
         eventType: mapValueOfType<String>(json, r'eventType')!,
         eventRoomStatus: mapValueOfType<String>(json, r'eventRoomStatus'),
@@ -279,7 +294,7 @@ class AgendaDto {
         studentIds: mapValueOfType<String>(json, r'studentIds'),
         client: mapValueOfType<String>(json, r'client') ?? '',
         clientname: mapValueOfType<String>(json, r'clientname') ?? '',
-        weight: mapValueOfType<String>(json, r'weight'),
+        weight: _parseNumberOrString(json[r'weight']),
       );
     }
     return null;

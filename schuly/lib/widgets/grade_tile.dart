@@ -281,7 +281,7 @@ class GradeDetailsDialog extends StatelessWidget {
                   : grade.courseGrade!)
                 : '?', context),
 
-              if (grade.examinationGroups.averageExamGroup != null) ...[
+              if (grade.examinationGroups != null && grade.examinationGroups!.averageExamGroup != null) ...[
                 const SizedBox(height: 16),
                 Text(
                   localizations.classAverage,
@@ -291,11 +291,11 @@ class GradeDetailsDialog extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                if (grade.examinationGroups.examGroup != null)
-                  _buildDetailRow('${localizations.examGroupLabel}:', grade.examinationGroups.examGroup, context),
-                _buildDetailRow('${localizations.classAverageLabel}:', grade.examinationGroups.averageExamGroup, context),
-                if (grade.examinationGroups.weightExamGroup != null)
-                  _buildDetailRow('${localizations.groupWeightLabel}:', grade.examinationGroups.weightExamGroup, context),
+                if (grade.examinationGroups!.examGroup != null)
+                  _buildDetailRow('${localizations.examGroupLabel}:', grade.examinationGroups!.examGroup, context),
+                _buildDetailRow('${localizations.classAverageLabel}:', grade.examinationGroups!.averageExamGroup, context),
+                if (grade.examinationGroups!.weightExamGroup != null)
+                  _buildDetailRow('${localizations.groupWeightLabel}:', grade.examinationGroups!.weightExamGroup, context),
               ],
 
               if (grade.comment != null && grade.comment!.isNotEmpty) ...[

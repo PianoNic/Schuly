@@ -80,6 +80,7 @@ class GradeTile extends StatelessWidget {
       onTap: () => _showGradeDetails(context),
       child: AnimatedGradeCard(
         gradeValue: gradeValue,
+        enableFlashyAnimations: apiStore.enableFlashyAnimations,
         child: Container(
           margin: const EdgeInsets.only(bottom: 8),
           padding: const EdgeInsets.all(12),

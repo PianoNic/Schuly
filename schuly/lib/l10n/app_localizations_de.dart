@@ -1536,4 +1536,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get statistics => 'Statistiken';
+
+  @override
+  String get settings => 'Einstellungen';
 }

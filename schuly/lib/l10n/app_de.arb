@@ -713,5 +713,8 @@
   "@overview": {},
 
   "statistics": "Statistiken",
-  "@statistics": {}
+  "@statistics": {},
+
+  "settings": "Einstellungen",
+  "@settings": {}
 }

@@ -842,5 +842,8 @@
   "@overview": {},
 
   "statistics": "Statistike",
-  "@statistics": {}
+  "@statistics": {},
+
+  "settings": "Istellige",
+  "@settings": {}
 }

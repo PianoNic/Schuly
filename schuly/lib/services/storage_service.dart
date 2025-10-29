@@ -17,6 +17,7 @@ class StorageService {
   static const String _useGradeColorsKey = 'use_grade_colors';
   static const String _gradeRedThresholdKey = 'grade_red_threshold';
   static const String _gradeYellowThresholdKey = 'grade_yellow_threshold';
+  static const String _enableFlashyAnimationsKey = 'enable_flashy_animations';
 
   // Cache keys for API data
   static const String _cachePrefix = 'cache_';
@@ -161,6 +162,17 @@ class StorageService {
   static Future<void> setGradeYellowThreshold(double threshold) async {
     await _storage.write(key: _gradeYellowThresholdKey, value: threshold.toString());
   }
+
+  // Flashy animations setting
+  static Future<bool> getEnableFlashyAnimations() async {
+    final value = await _storage.read(key: _enableFlashyAnimationsKey);
+    return value?.toLowerCase() == 'true' || value == null; // Default to true
+  }
+
+  static Future<void> setEnableFlashyAnimations(bool enabled) async {
+    await _storage.write(key: _enableFlashyAnimationsKey, value: enabled.toString());
+  }
+
   static Future<void> clearAll() async {
     await _storage.deleteAll();
   }

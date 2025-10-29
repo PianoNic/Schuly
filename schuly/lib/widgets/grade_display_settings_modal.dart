@@ -15,6 +15,7 @@ class GradeDisplaySettingsModal extends StatefulWidget {
 class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
   GradeDisplayMode _selectedMode = GradeDisplayMode.exact;
   bool _useGradeColors = true;
+  bool _enableFlashyAnimations = true;
   double _redThreshold = 4.0;
   double _yellowThreshold = 5.0;
 
@@ -27,6 +28,7 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
   Future<void> _loadCurrentSettings() async {
     final modeString = await StorageService.getGradeDisplayMode();
     final useColors = await StorageService.getUseGradeColors();
+    final enableFlashyAnimations = await StorageService.getEnableFlashyAnimations();
     final redThreshold = await StorageService.getGradeRedThreshold();
     final yellowThreshold = await StorageService.getGradeYellowThreshold();
     setState(() {
@@ -41,6 +43,7 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
           _selectedMode = GradeDisplayMode.exact;
       }
       _useGradeColors = useColors;
+      _enableFlashyAnimations = enableFlashyAnimations;
       _redThreshold = redThreshold;
       _yellowThreshold = yellowThreshold;
     });
@@ -204,6 +207,7 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
 
             // Toggle for using colors
             SwitchListTile(
+              contentPadding: EdgeInsets.zero,
               title: Text(localizations.useGradeColors ?? 'Use Grade Colors'),
               subtitle: Text(localizations.useGradeColorsDesc ?? 'Color grades based on their value'),
               value: _useGradeColors,
@@ -294,6 +298,45 @@ class _GradeDisplaySettingsModalState extends State<GradeDisplaySettingsModal> {
                 ),
               ),
             ],
+
+            const SizedBox(height: 24),
+
+            // Flashy Animations Section
+            Divider(color: theme.dividerColor),
+            const SizedBox(height: 16),
+
+            Row(
+              children: [
+                Icon(
+                  Icons.animation_outlined,
+                  color: theme.colorScheme.primary,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  'Grade Animations',
+                  style: theme.textTheme.titleLarge,
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            // Toggle for flashy animations
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text('Flashy Perfect Grade Animation'),
+              subtitle: Text('Show animated RGB shadow effect on grade 6.0'),
+              value: _enableFlashyAnimations,
+              onChanged: (value) async {
+                setState(() {
+                  _enableFlashyAnimations = value;
+                });
+                await StorageService.setEnableFlashyAnimations(value);
+                if (mounted) {
+                  final apiStore = Provider.of<ApiStore>(context, listen: false);
+                  apiStore.setEnableFlashyAnimations(value);
+                }
+              },
+            ),
 
             const SizedBox(height: 20),
 

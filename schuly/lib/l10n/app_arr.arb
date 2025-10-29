@@ -843,5 +843,8 @@
   "@overview": {},
 
   "statistics": "Statistics",
-  "@statistics": {}
+  "@statistics": {},
+
+  "settings": "Settings",
+  "@settings": {}
 }

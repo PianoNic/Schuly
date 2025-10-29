@@ -6,6 +6,7 @@ import '../providers/api_store.dart';
 import '../utils/grade_utils.dart';
 import 'package:schuly/api/lib/api.dart';
 import '../l10n/app_localizations.dart';
+import 'animated_grade_card.dart';
 
 class GradeTile extends StatelessWidget {
   final GradeDto grade;
@@ -77,55 +78,58 @@ class GradeTile extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => _showGradeDetails(context),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: surfaceContainer,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          children: [
-            // Grade display - just the number with optional color
-            Text(
-              gradeDisplay,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: gradeValue != null && apiStore.useGradeColors
-                  ? GradeUtils.getGradeColor(gradeValue, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true)
-                  : Theme.of(context).colorScheme.primary,
+      child: AnimatedGradeCard(
+        gradeValue: gradeValue,
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: surfaceContainer,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            children: [
+              // Grade display - just the number with optional color
+              Text(
+                gradeDisplay,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: gradeValue != null && apiStore.useGradeColors
+                    ? GradeUtils.getGradeColor(gradeValue, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true)
+                    : Theme.of(context).colorScheme.primary,
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    grade.title,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      grade.title,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    _formatDate(grade.date),
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    const SizedBox(height: 2),
+                    Text(
+                      _formatDate(grade.date),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            // Simple confirmation indicator
-            Icon(
-              grade.isConfirmed ? Icons.check_circle_outline : Icons.schedule,
-              color: grade.isConfirmed
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.onSurfaceVariant,
-              size: 16,
-            ),
-          ],
+              // Simple confirmation indicator
+              Icon(
+                grade.isConfirmed ? Icons.check_circle_outline : Icons.schedule,
+                color: grade.isConfirmed
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 16,
+              ),
+            ],
+          ),
         ),
       ),
     );

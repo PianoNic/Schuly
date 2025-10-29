@@ -836,5 +836,11 @@
   "@preview": {},
 
   "appInformation": "App-Informatione",
-  "@appInformation": {}
+  "@appInformation": {},
+
+  "overview": "Überblick",
+  "@overview": {},
+
+  "statistics": "Statistike",
+  "@statistics": {}
 }

@@ -1954,5 +1954,11 @@
   "@preview": {},
 
   "appInformation": "App-Informatie",
-  "@appInformation": {}
+  "@appInformation": {},
+
+  "overview": "Overzicht",
+  "@overview": {},
+
+  "statistics": "Statistieken",
+  "@statistics": {}
 }

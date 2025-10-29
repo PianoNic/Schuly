@@ -1519,4 +1519,10 @@ class AppLocalizationsMag extends AppLocalizations {
 
   @override
   String get appInformation => 'App-Infos, bruddal';
+
+  @override
+  String get overview => 'Overview';
+
+  @override
+  String get statistics => 'Statistics';
 }

@@ -2070,5 +2070,15 @@
   "appInformation": "App Information",
   "@appInformation": {
     "description": "Title for app information section"
+  },
+
+  "overview": "Overview",
+  "@overview": {
+    "description": "Navigation tab label for grades overview"
+  },
+
+  "statistics": "Statistics",
+  "@statistics": {
+    "description": "Navigation tab label for grades statistics"
   }
 }

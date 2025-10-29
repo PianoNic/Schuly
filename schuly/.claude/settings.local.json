@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(for file in app_arr.arb app_kaw.arb app_nl.arb)"
+      "Bash(for file in app_arr.arb app_kaw.arb app_nl.arb)",
+      "Bash(flutter gen-l10n:*)",
+      "Bash(flutter pub get:*)"
     ],
     "deny": [],
     "ask": []

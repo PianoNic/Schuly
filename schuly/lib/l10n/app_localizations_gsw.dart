@@ -1518,4 +1518,10 @@ class AppLocalizationsGsw extends AppLocalizations {
 
   @override
   String get appInformation => 'App-Informatione';
+
+  @override
+  String get overview => 'Überblick';
+
+  @override
+  String get statistics => 'Statistike';
 }

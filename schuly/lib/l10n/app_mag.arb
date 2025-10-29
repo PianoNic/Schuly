@@ -1962,5 +1962,11 @@
   "@preview": {},
 
   "appInformation": "App-Infos, bruddal",
-  "@appInformation": {}
+  "@appInformation": {},
+
+  "overview": "Overview",
+  "@overview": {},
+
+  "statistics": "Statistics",
+  "@statistics": {}
 }

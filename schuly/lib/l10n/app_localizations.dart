@@ -2899,6 +2899,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'App Information'**
   String get appInformation;
+
+  /// Navigation tab label for grades overview
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get overview;
+
+  /// Navigation tab label for grades statistics
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics'**
+  String get statistics;
 }
 
 class _AppLocalizationsDelegate

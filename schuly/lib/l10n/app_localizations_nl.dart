@@ -1517,4 +1517,10 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get appInformation => 'App-Informatie';
+
+  @override
+  String get overview => 'Overzicht';
+
+  @override
+  String get statistics => 'Statistieken';
 }

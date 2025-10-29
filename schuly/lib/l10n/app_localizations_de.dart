@@ -1530,4 +1530,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get appInformation => 'App-Informationen';
+
+  @override
+  String get overview => 'Übersicht';
+
+  @override
+  String get statistics => 'Statistiken';
 }

@@ -1491,4 +1491,10 @@ class AppLocalizationsArn extends AppLocalizations {
 
   @override
   String get appInformation => 'App Information';
+
+  @override
+  String get overview => 'Overview';
+
+  @override
+  String get statistics => 'Statistics';
 }

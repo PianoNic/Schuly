@@ -61,11 +61,17 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   @override
   Widget build(BuildContext context) {
+    // Calculate appropriate height based on screen height
+    // 6 weeks × ~40 pixels per week + padding
+    final screenHeight = MediaQuery.of(context).size.height;
+    final calendarHeight = screenHeight > 800 ? 320.0 : 262.0;
+
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         _buildHeader(),
         SizedBox(
-          height: 262,
+          height: calendarHeight,
           child: PageView.builder(
             controller: _pageController,
             itemCount: _monthsBetween(widget.firstDate, widget.lastDate) + 1,

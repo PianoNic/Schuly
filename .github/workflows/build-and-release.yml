@@ -26,7 +26,7 @@ jobs:
           cache: true
 
       - name: Setup release keystore
-        working-directory: ./schuly/android
+        working-directory: ./src/Schuly.App/android
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -44,7 +44,7 @@ jobs:
           fi
 
       - name: Create key.properties
-        working-directory: ./schuly/android
+        working-directory: ./src/Schuly.App/android
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
@@ -58,15 +58,15 @@ jobs:
           EOF
 
       - name: Get dependencies
-        working-directory: ./schuly
+        working-directory: ./src/Schuly.App
         run: flutter pub get
 
       - name: Generate app icons
-        working-directory: ./schuly
+        working-directory: ./src/Schuly.App
         run: dart run flutter_launcher_icons
 
       - name: Build Android APK
-        working-directory: ./schuly
+        working-directory: ./src/Schuly.App
         env:
           SENTRY_DSN: ${{ vars.SENTRY_URL }}
         run: |
@@ -78,7 +78,7 @@ jobs:
             --dart-define=SENTRY_ENVIRONMENT="production"
 
       - name: Build Android AAB (App Bundle)
-        working-directory: ./schuly
+        working-directory: ./src/Schuly.App
         env:
           SENTRY_DSN: ${{ vars.SENTRY_URL }}
         run: |
@@ -90,7 +90,7 @@ jobs:
             --dart-define=SENTRY_ENVIRONMENT="production"
 
       - name: Prepare artifacts
-        working-directory: ./schuly
+        working-directory: ./src/Schuly.App
         run: |
           mkdir -p artifacts
           cp build/app/outputs/flutter-apk/app-prod-release.apk artifacts/schuly-${{ github.ref_name }}.apk
@@ -100,7 +100,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: android-build
-          path: schuly/artifacts/
+          path: src/Schuly.App/artifacts/
 
   build-ios:
     runs-on: macos-latest
@@ -116,15 +116,15 @@ jobs:
           cache: true
 
       - name: Get dependencies
-        working-directory: ./schuly
+        working-directory: ./src/Schuly.App
         run: flutter pub get
 
       - name: Generate app icons
-        working-directory: ./schuly
+        working-directory: ./src/Schuly.App
         run: dart run flutter_launcher_icons
 
       - name: Build iOS (unsigned)
-        working-directory: ./schuly
+        working-directory: ./src/Schuly.App
         env:
           SENTRY_DSN: ${{ vars.SENTRY_URL }}
         run: |
@@ -136,13 +136,13 @@ jobs:
             --dart-define=SENTRY_ENVIRONMENT="production"
 
       - name: Create iOS Archive
-        working-directory: ./schuly
+        working-directory: ./src/Schuly.App
         run: |
           cd ios
           xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -destination generic/platform=iOS -archivePath build/Runner.xcarchive archive CODE_SIGNING_ALLOWED=NO
 
       - name: Export iOS IPA
-        working-directory: ./schuly
+        working-directory: ./src/Schuly.App
         run: |
           cd ios
           mkdir -p artifacts
@@ -155,7 +155,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ios-build
-          path: schuly/ios/artifacts/
+          path: src/Schuly.App/ios/artifacts/
 
   upload-to-release:
     needs: [build-android, build-ios]

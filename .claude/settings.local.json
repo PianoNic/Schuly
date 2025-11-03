@@ -12,7 +12,10 @@
       "Bash(done)",
       "Bash(dir:*)",
       "Read(//c/Users/nicla/Downloads/images/**)",
-      "Bash(copy:*)"
+      "Bash(copy:*)",
+      "Bash(mkdir:*)",
+      "Bash(move:*)",
+      "Bash(mv:*)"
     ],
     "deny": [],
     "ask": []

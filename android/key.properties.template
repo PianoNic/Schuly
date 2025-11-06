@@ -1,8 +1,0 @@
-# This is a template for key.properties
-# Copy this file to key.properties and fill in your signing key details
-# DO NOT commit key.properties to version control!
-
-storePassword=myStorePassword
-keyPassword=myKeyPassword
-keyAlias=upload
-storeFile=upload-keystore.jks

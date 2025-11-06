@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TUnit" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Schuly.Application/Schuly.Application.csproj" />
+    <ProjectReference Include="../Schuly.Domain/Schuly.Domain.csproj" />
+    <ProjectReference Include="../Schuly.Infrastructure/Schuly.Infrastructure.csproj" />
+    <ProjectReference Include="../Schuly.API/Schuly.API.csproj" />
+  </ItemGroup>
+
+</Project>

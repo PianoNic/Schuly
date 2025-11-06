@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="src/Schuly.API/Schuly.API.csproj" />
+  <Project Path="src/Schuly.Application/Schuly.Application.csproj" />
+  <Project Path="src/Schuly.Domain/Schuly.Domain.csproj" />
+  <Project Path="src/Schuly.Infrastructure/Schuly.Infrastructure.csproj" />
+  <Project Path="src/Schuly.Tests/Schuly.Tests.csproj" />
+</Solution>

@@ -17,6 +17,7 @@ class GradeDto {
     this.course,
     this.courseId,
     this.courseType,
+    this.examId,
     this.subject,
     this.subjectToken,
     this.title,
@@ -25,6 +26,7 @@ class GradeDto {
     this.points,
     this.weight,
     this.isConfirmed,
+    this.isConfirmedByTrainer,
     this.courseGrade,
     this.examinationGroups,
     this.studentId,
@@ -41,6 +43,8 @@ class GradeDto {
 
   String? courseType;
 
+  String? examId;
+
   String? subject;
 
   String? subjectToken;
@@ -49,15 +53,17 @@ class GradeDto {
 
   String? date;
 
-  String? mark;
+  num? mark;
 
-  String? points;
+  num? points;
 
-  String? weight;
+  num? weight;
 
   bool? isConfirmed;
 
-  String? courseGrade;
+  bool? isConfirmedByTrainer;
+
+  num? courseGrade;
 
   ExaminationGroupsDto? examinationGroups;
 
@@ -75,6 +81,7 @@ class GradeDto {
     other.course == course &&
     other.courseId == courseId &&
     other.courseType == courseType &&
+    other.examId == examId &&
     other.subject == subject &&
     other.subjectToken == subjectToken &&
     other.title == title &&
@@ -83,6 +90,7 @@ class GradeDto {
     other.points == points &&
     other.weight == weight &&
     other.isConfirmed == isConfirmed &&
+    other.isConfirmedByTrainer == isConfirmedByTrainer &&
     other.courseGrade == courseGrade &&
     other.examinationGroups == examinationGroups &&
     other.studentId == studentId &&
@@ -97,6 +105,7 @@ class GradeDto {
     (course == null ? 0 : course!.hashCode) +
     (courseId == null ? 0 : courseId!.hashCode) +
     (courseType == null ? 0 : courseType!.hashCode) +
+    (examId == null ? 0 : examId!.hashCode) +
     (subject == null ? 0 : subject!.hashCode) +
     (subjectToken == null ? 0 : subjectToken!.hashCode) +
     (title == null ? 0 : title!.hashCode) +
@@ -105,6 +114,7 @@ class GradeDto {
     (points == null ? 0 : points!.hashCode) +
     (weight == null ? 0 : weight!.hashCode) +
     (isConfirmed == null ? 0 : isConfirmed!.hashCode) +
+    (isConfirmedByTrainer == null ? 0 : isConfirmedByTrainer!.hashCode) +
     (courseGrade == null ? 0 : courseGrade!.hashCode) +
     (examinationGroups == null ? 0 : examinationGroups!.hashCode) +
     (studentId == null ? 0 : studentId!.hashCode) +
@@ -113,7 +123,7 @@ class GradeDto {
     (comment == null ? 0 : comment!.hashCode);
 
   @override
-  String toString() => 'GradeDto[id=$id, course=$course, courseId=$courseId, courseType=$courseType, subject=$subject, subjectToken=$subjectToken, title=$title, date=$date, mark=$mark, points=$points, weight=$weight, isConfirmed=$isConfirmed, courseGrade=$courseGrade, examinationGroups=$examinationGroups, studentId=$studentId, studentName=$studentName, inputType=$inputType, comment=$comment]';
+  String toString() => 'GradeDto[id=$id, course=$course, courseId=$courseId, courseType=$courseType, examId=$examId, subject=$subject, subjectToken=$subjectToken, title=$title, date=$date, mark=$mark, points=$points, weight=$weight, isConfirmed=$isConfirmed, isConfirmedByTrainer=$isConfirmedByTrainer, courseGrade=$courseGrade, examinationGroups=$examinationGroups, studentId=$studentId, studentName=$studentName, inputType=$inputType, comment=$comment]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -136,6 +146,11 @@ class GradeDto {
       json[r'courseType'] = this.courseType;
     } else {
       json[r'courseType'] = null;
+    }
+    if (this.examId != null) {
+      json[r'examId'] = this.examId;
+    } else {
+      json[r'examId'] = null;
     }
     if (this.subject != null) {
       json[r'subject'] = this.subject;
@@ -176,6 +191,11 @@ class GradeDto {
       json[r'isConfirmed'] = this.isConfirmed;
     } else {
       json[r'isConfirmed'] = null;
+    }
+    if (this.isConfirmedByTrainer != null) {
+      json[r'isConfirmedByTrainer'] = this.isConfirmedByTrainer;
+    } else {
+      json[r'isConfirmedByTrainer'] = null;
     }
     if (this.courseGrade != null) {
       json[r'courseGrade'] = this.courseGrade;
@@ -233,15 +253,25 @@ class GradeDto {
         course: mapValueOfType<String>(json, r'course'),
         courseId: mapValueOfType<String>(json, r'courseId'),
         courseType: mapValueOfType<String>(json, r'courseType'),
+        examId: mapValueOfType<String>(json, r'examId'),
         subject: mapValueOfType<String>(json, r'subject'),
         subjectToken: mapValueOfType<String>(json, r'subjectToken'),
         title: mapValueOfType<String>(json, r'title'),
         date: mapValueOfType<String>(json, r'date'),
-        mark: mapValueOfType<String>(json, r'mark'),
-        points: mapValueOfType<String>(json, r'points'),
-        weight: mapValueOfType<String>(json, r'weight'),
+        mark: json[r'mark'] == null
+            ? null
+            : num.parse('${json[r'mark']}'),
+        points: json[r'points'] == null
+            ? null
+            : num.parse('${json[r'points']}'),
+        weight: json[r'weight'] == null
+            ? null
+            : num.parse('${json[r'weight']}'),
         isConfirmed: mapValueOfType<bool>(json, r'isConfirmed'),
-        courseGrade: mapValueOfType<String>(json, r'courseGrade'),
+        isConfirmedByTrainer: mapValueOfType<bool>(json, r'isConfirmedByTrainer'),
+        courseGrade: json[r'courseGrade'] == null
+            ? null
+            : num.parse('${json[r'courseGrade']}'),
         examinationGroups: ExaminationGroupsDto.fromJson(json[r'examinationGroups']),
         studentId: mapValueOfType<String>(json, r'studentId'),
         studentName: mapValueOfType<String>(json, r'studentName'),

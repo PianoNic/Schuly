@@ -46,16 +46,7 @@ class _NotesPageState extends State<NotesPage> with SingleTickerProviderStateMix
           if (grade.mark == null) {
             return true; // Keep grades with null mark
           }
-          double? markValue;
-          if (grade.mark is num) {
-            markValue = (grade.mark as num).toDouble();
-          } else if (grade.mark is String) {
-            final markStr = grade.mark as String;
-            if (markStr.isEmpty) {
-              return true; // Keep grades with empty mark
-            }
-            markValue = double.tryParse(markStr) ?? 0;
-          }
+          final markValue = (grade.mark as num).toDouble();
           return markValue != 0; // Filter out only if explicitly 0
         }).toList();
 

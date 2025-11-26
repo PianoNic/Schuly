@@ -49,23 +49,15 @@ class GradeUtils {
     for (final grade in gradesToUse) {
       logDebug('Processing grade: mark=${grade.mark}, weight=${grade.weight}, confirmed=${grade.isConfirmed}', source: 'GradeUtils');
 
-      // Handle both numeric and string types
+      // Mark and weight are now num types
       double? gradeValue;
       if (grade.mark != null) {
-        if (grade.mark is num) {
-          gradeValue = (grade.mark as num).toDouble();
-        } else if (grade.mark is String && (grade.mark as String).isNotEmpty) {
-          gradeValue = double.tryParse(grade.mark as String);
-        }
+        gradeValue = (grade.mark as num).toDouble();
       }
 
       double? weightValue;
       if (grade.weight != null) {
-        if (grade.weight is num) {
-          weightValue = (grade.weight as num).toDouble();
-        } else if (grade.weight is String && (grade.weight as String).isNotEmpty) {
-          weightValue = double.tryParse(grade.weight as String);
-        }
+        weightValue = (grade.weight as num).toDouble();
       }
 
       logDebug('Parsed values: gradeValue=$gradeValue, weightValue=$weightValue', source: 'GradeUtils');

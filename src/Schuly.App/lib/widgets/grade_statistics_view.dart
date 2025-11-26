@@ -341,11 +341,7 @@ class GradeStatisticsView extends StatelessWidget {
     for (final grade in grades) {
       double gradeValue = 0;
       if (grade.mark != null) {
-        if (grade.mark is num) {
-          gradeValue = (grade.mark as num).toDouble();
-        } else if (grade.mark is String) {
-          gradeValue = double.tryParse(grade.mark as String) ?? 0;
-        }
+        gradeValue = (grade.mark as num).toDouble();
       }
       // Skip grades with value 0 (not available yet)
       if (gradeValue == 0) continue;
@@ -446,13 +442,7 @@ class GradeStatisticsView extends StatelessWidget {
     for (final grade in grades) {
       double? gradeValue;
       if (grade.mark != null) {
-        if (grade.mark is num) {
-          gradeValue = (grade.mark as num).toDouble();
-        } else if (grade.mark is String) {
-          gradeValue = double.tryParse(grade.mark as String);
-        }
-      } else {
-        gradeValue = double.tryParse('0');
+        gradeValue = (grade.mark as num).toDouble();
       }
       if (gradeValue != null && gradeValue != 0) {
         // Best grade is the highest value (6 is best in Swiss system)
@@ -553,11 +543,7 @@ class GradeStatisticsView extends StatelessWidget {
         .where((grade) {
           double markValue = 0;
           if (grade.mark != null) {
-            if (grade.mark is num) {
-              markValue = (grade.mark as num).toDouble();
-            } else if (grade.mark is String) {
-              markValue = double.tryParse(grade.mark as String) ?? 0;
-            }
+            markValue = (grade.mark as num).toDouble();
           }
           return markValue != 0;
         })
@@ -582,7 +568,7 @@ class GradeStatisticsView extends StatelessWidget {
     // Convert grades to FlSpot points
     final spots = <FlSpot>[];
     for (int i = 0; i < chartGrades.length; i++) {
-      final gradeValue = double.tryParse(chartGrades[i].mark ?? '0') ?? 0;
+      final gradeValue = chartGrades[i].mark != null ? (chartGrades[i].mark as num).toDouble() : 0.0;
       spots.add(FlSpot(i.toDouble(), gradeValue));
     }
 

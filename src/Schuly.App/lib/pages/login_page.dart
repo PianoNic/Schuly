@@ -104,9 +104,10 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.all(24.0),
                   child: Form(
                     key: _formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
                     Text(
                       AppLocalizations.of(context)!.login,
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -267,34 +268,35 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
-      // Version display at the bottom
-      Positioned(
-        bottom: 20,
-        left: 0,
-        right: 0,
-        child: Center(
-          child: AnimatedOpacity(
-            opacity: _appVersion.isNotEmpty ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 500),
-            child: Text(
-              _appVersion,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
-                fontSize: 12,
-                letterSpacing: 0.5,
+          // Version display at the bottom
+          Positioned(
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: AnimatedOpacity(
+                opacity: _appVersion.isNotEmpty ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 500),
+                child: Text(
+                  _appVersion,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                    fontSize: 12,
+                    letterSpacing: 0.5,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
-    ],
-  ),
-);
+    );
   }
 }

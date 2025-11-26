@@ -275,9 +275,7 @@ class GradeDetailsDialog extends StatelessWidget {
               if (grade.points != null)
                 _buildDetailRow('${localizations.pointsLabel}:', grade.points.toString(), context),
               _buildDetailRow('${localizations.weightLabel}:', grade.weight != null ? grade.weight.toString() : 'N/A', context),
-              _buildDetailRow('${localizations.courseGradeLabel}:', grade.courseGrade != null
-                ? GradeUtils.getDisplayGrade((grade.courseGrade as num).toDouble(), apiStore.gradeDisplayMode)
-                : '?', context),
+              _buildDetailRow('${localizations.courseGradeLabel}:', grade.courseGrade != null ? grade.courseGrade.toString() : 'N/A', context),
 
               if (grade.examinationGroups != null && grade.examinationGroups!.averageExamGroup != null) ...[
                 const SizedBox(height: 16),

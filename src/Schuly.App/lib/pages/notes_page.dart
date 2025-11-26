@@ -102,7 +102,8 @@ class _NotesPageState extends State<NotesPage> with SingleTickerProviderStateMix
           children: [
             // Subject Cards
             ...gradesBySubject.entries.map((entry) {
-              final subjectAverage = GradeUtils.calculateWeightedAverage(entry.value);
+              // Get course grade from the first grade (already provided by backend)
+              num? courseGrade = entry.value.isNotEmpty ? entry.value.first.courseGrade : null;
 
               return GestureDetector(
                 onTap: () {
@@ -120,7 +121,7 @@ class _NotesPageState extends State<NotesPage> with SingleTickerProviderStateMix
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Subject header with average in top right corner
+                      // Subject header with course grade in top right corner
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 12, 12, 0),
                         child: Row(
@@ -136,24 +137,24 @@ class _NotesPageState extends State<NotesPage> with SingleTickerProviderStateMix
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                               decoration: BoxDecoration(
-                                color: subjectAverage != null && apiStore.useGradeColors
-                                  ? GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true).withValues(alpha: 0.15)
+                                color: courseGrade != null && apiStore.useGradeColors
+                                  ? GradeUtils.getGradeColor(courseGrade.toDouble(), apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true).withValues(alpha: 0.15)
                                   : Theme.of(context).colorScheme.primaryContainer,
                                 borderRadius: BorderRadius.circular(16),
-                                border: subjectAverage != null && apiStore.useGradeColors
+                                border: courseGrade != null && apiStore.useGradeColors
                                   ? Border.all(
-                                      color: GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true).withValues(alpha: 0.3),
+                                      color: GradeUtils.getGradeColor(courseGrade.toDouble(), apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true).withValues(alpha: 0.3),
                                       width: 1,
                                     )
                                   : null,
                               ),
                               child: Text(
-                                subjectAverage != null
-                                    ? GradeUtils.getDisplayGrade(subjectAverage, apiStore.gradeDisplayMode)
+                                courseGrade != null
+                                    ? GradeUtils.getDisplayGrade(courseGrade.toDouble(), apiStore.gradeDisplayMode)
                                     : '?',
                                 style: TextStyle(
-                                  color: subjectAverage != null && apiStore.useGradeColors
-                                    ? GradeUtils.getGradeColor(subjectAverage, apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true)
+                                  color: courseGrade != null && apiStore.useGradeColors
+                                    ? GradeUtils.getGradeColor(courseGrade.toDouble(), apiStore.gradeRedThreshold, apiStore.gradeYellowThreshold, true)
                                     : Theme.of(context).colorScheme.onPrimaryContainer,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,

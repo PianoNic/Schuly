@@ -43,10 +43,19 @@ class _NotesPageState extends State<NotesPage> with SingleTickerProviderStateMix
         // Filter out grades with mark 0 (not available yet)
         // Keep grades where mark is null or non-zero
         final availableGrades = grades.where((grade) {
-          if (grade.mark == null || grade.mark!.isEmpty) {
-            return true; // Keep grades with null/empty mark
+          if (grade.mark == null) {
+            return true; // Keep grades with null mark
           }
-          final markValue = double.tryParse(grade.mark!) ?? 0;
+          double? markValue;
+          if (grade.mark is num) {
+            markValue = (grade.mark as num).toDouble();
+          } else if (grade.mark is String) {
+            final markStr = grade.mark as String;
+            if (markStr.isEmpty) {
+              return true; // Keep grades with empty mark
+            }
+            markValue = double.tryParse(markStr) ?? 0;
+          }
           return markValue != 0; // Filter out only if explicitly 0
         }).toList();
 
@@ -88,7 +97,7 @@ class _NotesPageState extends State<NotesPage> with SingleTickerProviderStateMix
     // Group grades by subject
     final Map<String, List<GradeDto>> gradesBySubject = {};
     for (final grade in grades) {
-      gradesBySubject.putIfAbsent(grade.subject, () => []).add(grade);
+      gradesBySubject.putIfAbsent(grade.subject ?? '', () => []).add(grade);
     }
 
     return RefreshIndicator(

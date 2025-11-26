@@ -8,28 +8,28 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**studentId** | **String** |  | 
-**dateFrom** | **String** |  | 
-**dateTo** | **String** |  | 
+**id** | **String** |  | [optional] 
+**studentId** | **String** |  | [optional] 
+**dateFrom** | **String** |  | [optional] 
+**dateTo** | **String** |  | [optional] 
 **hourFrom** | **String** |  | [optional] 
 **hourTo** | **String** |  | [optional] 
 **subject** | **String** |  | [optional] 
 **subjectId** | **String** |  | [optional] 
-**profile** | **String** |  | 
-**profileId** | **String** |  | 
-**lessons** | **String** |  | 
-**reason** | **String** |  | 
-**category** | **String** |  | 
-**comment** | **String** |  | 
+**profile** | **String** |  | [optional] 
+**profileId** | **String** |  | [optional] 
+**lessons** | **String** |  | [optional] 
+**reason** | **String** |  | [optional] 
+**category** | **String** |  | [optional] 
+**comment** | **String** |  | [optional] 
 **remark** | **String** |  | [optional] 
-**isAcknowledged** | **bool** |  | 
-**isExcused** | **bool** |  | 
+**isAcknowledged** | **bool** |  | [optional] 
+**isExcused** | **bool** |  | [optional] 
 **excusedDate** | **String** |  | [optional] 
-**additionalPeriod** | **int** |  | 
-**statusEAE** | **String** |  | 
+**additionalPeriod** | **int** |  | [optional] 
+**statusEAE** | **String** |  | [optional] 
 **dateEAE** | **String** |  | [optional] 
-**statusEAB** | **String** |  | 
+**statusEAB** | **String** |  | [optional] 
 **dateEAB** | **String** |  | [optional] 
 **commentEAB** | **String** |  | [optional] 
 **studentTimestamp** | **String** |  | [optional] 

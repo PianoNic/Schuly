@@ -32,39 +32,69 @@ class GradeUtils {
       logDebug('No grades provided', source: 'GradeUtils');
       return null;
     }
-    
+
     logDebug('Total grades: ${grades.length}', source: 'GradeUtils');
-    
+
     // Filter only confirmed grades
-    final confirmedGrades = grades.where((grade) => grade.isConfirmed).toList();
+    final confirmedGrades = grades.where((grade) => grade.isConfirmed ?? false).toList();
     logDebug('Confirmed grades: ${confirmedGrades.length}', source: 'GradeUtils');
-    
+
     // If no confirmed grades, try with all grades as fallback
     final gradesToUse = confirmedGrades.isNotEmpty ? confirmedGrades : grades;
-    
+
     double totalWeightedGrades = 0.0;
     double totalWeight = 0.0;
-    
+    int gradesWithoutWeight = 0;
+
     for (final grade in gradesToUse) {
       logDebug('Processing grade: mark=${grade.mark}, weight=${grade.weight}, confirmed=${grade.isConfirmed}', source: 'GradeUtils');
-      
-      final gradeValue = grade.mark != null ? double.tryParse(grade.mark!) : null;
-      final weightValue = grade.weight != null ? double.tryParse(grade.weight!) : null;
-      
+
+      // Handle both numeric and string types
+      double? gradeValue;
+      if (grade.mark != null) {
+        if (grade.mark is num) {
+          gradeValue = (grade.mark as num).toDouble();
+        } else if (grade.mark is String && (grade.mark as String).isNotEmpty) {
+          gradeValue = double.tryParse(grade.mark as String);
+        }
+      }
+
+      double? weightValue;
+      if (grade.weight != null) {
+        if (grade.weight is num) {
+          weightValue = (grade.weight as num).toDouble();
+        } else if (grade.weight is String && (grade.weight as String).isNotEmpty) {
+          weightValue = double.tryParse(grade.weight as String);
+        }
+      }
+
       logDebug('Parsed values: gradeValue=$gradeValue, weightValue=$weightValue', source: 'GradeUtils');
-      
-      if (gradeValue != null && weightValue != null && weightValue > 0) {
-        totalWeightedGrades += gradeValue * weightValue;
-        totalWeight += weightValue;
-        logDebug('Added to calculation: totalWeightedGrades=$totalWeightedGrades, totalWeight=$totalWeight', source: 'GradeUtils');
+
+      if (gradeValue != null) {
+        // If weight is available and > 0, use weighted calculation
+        if (weightValue != null && weightValue > 0) {
+          totalWeightedGrades += gradeValue * weightValue;
+          totalWeight += weightValue;
+          logDebug('Added to calculation: totalWeightedGrades=$totalWeightedGrades, totalWeight=$totalWeight', source: 'GradeUtils');
+        } else {
+          // If no weight available, treat as weight = 1.0 for simple average
+          totalWeightedGrades += gradeValue;
+          totalWeight += 1.0;
+          gradesWithoutWeight++;
+          logDebug('Grade has no weight, treating as weight=1: totalWeightedGrades=$totalWeightedGrades, totalWeight=$totalWeight', source: 'GradeUtils');
+        }
       }
     }
-    
+
     if (totalWeight == 0) {
       logDebug('Total weight is 0, returning null', source: 'GradeUtils');
       return null;
     }
-    
+
+    if (gradesWithoutWeight > 0) {
+      logDebug('$gradesWithoutWeight grades had no weight, treated as weight=1', source: 'GradeUtils');
+    }
+
     final result = totalWeightedGrades / totalWeight;
     logDebug('Final average: $result', source: 'GradeUtils');
     return result;

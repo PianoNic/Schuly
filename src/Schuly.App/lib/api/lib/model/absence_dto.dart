@@ -13,40 +13,40 @@ part of openapi.api;
 class AbsenceDto {
   /// Returns a new [AbsenceDto] instance.
   AbsenceDto({
-    required this.id,
-    required this.studentId,
-    required this.dateFrom,
-    required this.dateTo,
+    this.id,
+    this.studentId,
+    this.dateFrom,
+    this.dateTo,
     this.hourFrom,
     this.hourTo,
     this.subject,
     this.subjectId,
-    required this.profile,
-    required this.profileId,
-    required this.lessons,
-    required this.reason,
-    required this.category,
-    required this.comment,
+    this.profile,
+    this.profileId,
+    this.lessons,
+    this.reason,
+    this.category,
+    this.comment,
     this.remark,
-    required this.isAcknowledged,
-    required this.isExcused,
+    this.isAcknowledged,
+    this.isExcused,
     this.excusedDate,
-    required this.additionalPeriod,
-    required this.statusEAE,
+    this.additionalPeriod,
+    this.statusEAE,
     this.dateEAE,
-    required this.statusEAB,
+    this.statusEAB,
     this.dateEAB,
     this.commentEAB,
     this.studentTimestamp,
   });
 
-  String id;
+  String? id;
 
-  String studentId;
+  String? studentId;
 
-  String dateFrom;
+  String? dateFrom;
 
-  String dateTo;
+  String? dateTo;
 
   String? hourFrom;
 
@@ -56,33 +56,33 @@ class AbsenceDto {
 
   String? subjectId;
 
-  String profile;
+  String? profile;
 
-  String profileId;
+  String? profileId;
 
-  String lessons;
+  String? lessons;
 
-  String reason;
+  String? reason;
 
-  String category;
+  String? category;
 
-  String comment;
+  String? comment;
 
   String? remark;
 
-  bool isAcknowledged;
+  bool? isAcknowledged;
 
-  bool isExcused;
+  bool? isExcused;
 
   String? excusedDate;
 
-  int additionalPeriod;
+  int? additionalPeriod;
 
-  String statusEAE;
+  String? statusEAE;
 
   String? dateEAE;
 
-  String statusEAB;
+  String? statusEAB;
 
   String? dateEAB;
 
@@ -121,28 +121,28 @@ class AbsenceDto {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (id.hashCode) +
-    (studentId.hashCode) +
-    (dateFrom.hashCode) +
-    (dateTo.hashCode) +
+    (id == null ? 0 : id!.hashCode) +
+    (studentId == null ? 0 : studentId!.hashCode) +
+    (dateFrom == null ? 0 : dateFrom!.hashCode) +
+    (dateTo == null ? 0 : dateTo!.hashCode) +
     (hourFrom == null ? 0 : hourFrom!.hashCode) +
     (hourTo == null ? 0 : hourTo!.hashCode) +
     (subject == null ? 0 : subject!.hashCode) +
     (subjectId == null ? 0 : subjectId!.hashCode) +
-    (profile.hashCode) +
-    (profileId.hashCode) +
-    (lessons.hashCode) +
-    (reason.hashCode) +
-    (category.hashCode) +
-    (comment.hashCode) +
+    (profile == null ? 0 : profile!.hashCode) +
+    (profileId == null ? 0 : profileId!.hashCode) +
+    (lessons == null ? 0 : lessons!.hashCode) +
+    (reason == null ? 0 : reason!.hashCode) +
+    (category == null ? 0 : category!.hashCode) +
+    (comment == null ? 0 : comment!.hashCode) +
     (remark == null ? 0 : remark!.hashCode) +
-    (isAcknowledged.hashCode) +
-    (isExcused.hashCode) +
+    (isAcknowledged == null ? 0 : isAcknowledged!.hashCode) +
+    (isExcused == null ? 0 : isExcused!.hashCode) +
     (excusedDate == null ? 0 : excusedDate!.hashCode) +
-    (additionalPeriod.hashCode) +
-    (statusEAE.hashCode) +
+    (additionalPeriod == null ? 0 : additionalPeriod!.hashCode) +
+    (statusEAE == null ? 0 : statusEAE!.hashCode) +
     (dateEAE == null ? 0 : dateEAE!.hashCode) +
-    (statusEAB.hashCode) +
+    (statusEAB == null ? 0 : statusEAB!.hashCode) +
     (dateEAB == null ? 0 : dateEAB!.hashCode) +
     (commentEAB == null ? 0 : commentEAB!.hashCode) +
     (studentTimestamp == null ? 0 : studentTimestamp!.hashCode);
@@ -152,10 +152,26 @@ class AbsenceDto {
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+    if (this.id != null) {
       json[r'id'] = this.id;
+    } else {
+      json[r'id'] = null;
+    }
+    if (this.studentId != null) {
       json[r'studentId'] = this.studentId;
+    } else {
+      json[r'studentId'] = null;
+    }
+    if (this.dateFrom != null) {
       json[r'dateFrom'] = this.dateFrom;
+    } else {
+      json[r'dateFrom'] = null;
+    }
+    if (this.dateTo != null) {
       json[r'dateTo'] = this.dateTo;
+    } else {
+      json[r'dateTo'] = null;
+    }
     if (this.hourFrom != null) {
       json[r'hourFrom'] = this.hourFrom;
     } else {
@@ -176,32 +192,76 @@ class AbsenceDto {
     } else {
       json[r'subjectId'] = null;
     }
+    if (this.profile != null) {
       json[r'profile'] = this.profile;
+    } else {
+      json[r'profile'] = null;
+    }
+    if (this.profileId != null) {
       json[r'profileId'] = this.profileId;
+    } else {
+      json[r'profileId'] = null;
+    }
+    if (this.lessons != null) {
       json[r'lessons'] = this.lessons;
+    } else {
+      json[r'lessons'] = null;
+    }
+    if (this.reason != null) {
       json[r'reason'] = this.reason;
+    } else {
+      json[r'reason'] = null;
+    }
+    if (this.category != null) {
       json[r'category'] = this.category;
+    } else {
+      json[r'category'] = null;
+    }
+    if (this.comment != null) {
       json[r'comment'] = this.comment;
+    } else {
+      json[r'comment'] = null;
+    }
     if (this.remark != null) {
       json[r'remark'] = this.remark;
     } else {
       json[r'remark'] = null;
     }
+    if (this.isAcknowledged != null) {
       json[r'isAcknowledged'] = this.isAcknowledged;
+    } else {
+      json[r'isAcknowledged'] = null;
+    }
+    if (this.isExcused != null) {
       json[r'isExcused'] = this.isExcused;
+    } else {
+      json[r'isExcused'] = null;
+    }
     if (this.excusedDate != null) {
       json[r'excusedDate'] = this.excusedDate;
     } else {
       json[r'excusedDate'] = null;
     }
+    if (this.additionalPeriod != null) {
       json[r'additionalPeriod'] = this.additionalPeriod;
+    } else {
+      json[r'additionalPeriod'] = null;
+    }
+    if (this.statusEAE != null) {
       json[r'statusEAE'] = this.statusEAE;
+    } else {
+      json[r'statusEAE'] = null;
+    }
     if (this.dateEAE != null) {
       json[r'dateEAE'] = this.dateEAE;
     } else {
       json[r'dateEAE'] = null;
     }
+    if (this.statusEAB != null) {
       json[r'statusEAB'] = this.statusEAB;
+    } else {
+      json[r'statusEAB'] = null;
+    }
     if (this.dateEAB != null) {
       json[r'dateEAB'] = this.dateEAB;
     } else {
@@ -233,38 +293,34 @@ class AbsenceDto {
       assert(() {
         requiredKeys.forEach((key) {
           assert(json.containsKey(key), 'Required key "AbsenceDto[$key]" is missing from JSON.');
-          // TEMPORARY FIX: Allow null for reason, category, and comment fields
-          if (key != 'reason' && key != 'category' && key != 'comment') {
-            assert(json[key] != null, 'Required key "AbsenceDto[$key]" has a null value in JSON.');
-          }
+          assert(json[key] != null, 'Required key "AbsenceDto[$key]" has a null value in JSON.');
         });
         return true;
       }());
 
       return AbsenceDto(
-        id: mapValueOfType<String>(json, r'id')!,
-        studentId: mapValueOfType<String>(json, r'studentId')!,
-        dateFrom: mapValueOfType<String>(json, r'dateFrom')!,
-        dateTo: mapValueOfType<String>(json, r'dateTo')!,
+        id: mapValueOfType<String>(json, r'id'),
+        studentId: mapValueOfType<String>(json, r'studentId'),
+        dateFrom: mapValueOfType<String>(json, r'dateFrom'),
+        dateTo: mapValueOfType<String>(json, r'dateTo'),
         hourFrom: mapValueOfType<String>(json, r'hourFrom'),
         hourTo: mapValueOfType<String>(json, r'hourTo'),
         subject: mapValueOfType<String>(json, r'subject'),
         subjectId: mapValueOfType<String>(json, r'subjectId'),
-        profile: mapValueOfType<String>(json, r'profile')!,
-        profileId: mapValueOfType<String>(json, r'profileId')!,
-        lessons: mapValueOfType<String>(json, r'lessons')!,
-        // TEMPORARY FIX: API sometimes returns null for these required fields
-        reason: mapValueOfType<String>(json, r'reason') ?? '',
-        category: mapValueOfType<String>(json, r'category') ?? '',
-        comment: mapValueOfType<String>(json, r'comment') ?? '',
+        profile: mapValueOfType<String>(json, r'profile'),
+        profileId: mapValueOfType<String>(json, r'profileId'),
+        lessons: mapValueOfType<String>(json, r'lessons'),
+        reason: mapValueOfType<String>(json, r'reason'),
+        category: mapValueOfType<String>(json, r'category'),
+        comment: mapValueOfType<String>(json, r'comment'),
         remark: mapValueOfType<String>(json, r'remark'),
-        isAcknowledged: mapValueOfType<bool>(json, r'isAcknowledged')!,
-        isExcused: mapValueOfType<bool>(json, r'isExcused')!,
+        isAcknowledged: mapValueOfType<bool>(json, r'isAcknowledged'),
+        isExcused: mapValueOfType<bool>(json, r'isExcused'),
         excusedDate: mapValueOfType<String>(json, r'excusedDate'),
-        additionalPeriod: mapValueOfType<int>(json, r'additionalPeriod')!,
-        statusEAE: mapValueOfType<String>(json, r'statusEAE')!,
+        additionalPeriod: mapValueOfType<int>(json, r'additionalPeriod'),
+        statusEAE: mapValueOfType<String>(json, r'statusEAE'),
         dateEAE: mapValueOfType<String>(json, r'dateEAE'),
-        statusEAB: mapValueOfType<String>(json, r'statusEAB')!,
+        statusEAB: mapValueOfType<String>(json, r'statusEAB'),
         dateEAB: mapValueOfType<String>(json, r'dateEAB'),
         commentEAB: mapValueOfType<String>(json, r'commentEAB'),
         studentTimestamp: mapValueOfType<String>(json, r'studentTimestamp'),
@@ -315,21 +371,6 @@ class AbsenceDto {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
-    'id',
-    'studentId',
-    'dateFrom',
-    'dateTo',
-    'profile',
-    'profileId',
-    'lessons',
-    'reason',
-    'category',
-    'comment',
-    'isAcknowledged',
-    'isExcused',
-    'additionalPeriod',
-    'statusEAE',
-    'statusEAB',
   };
 }
 

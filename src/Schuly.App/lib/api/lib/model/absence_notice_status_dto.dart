@@ -13,23 +13,23 @@ part of openapi.api;
 class AbsenceNoticeStatusDto {
   /// Returns a new [AbsenceNoticeStatusDto] instance.
   AbsenceNoticeStatusDto({
-    required this.id,
-    required this.code,
-    required this.name,
-    required this.sort,
+    this.id,
+    this.code,
+    this.name,
+    this.sort,
     this.comment,
     this.additionalInfo,
     this.iso2,
     this.iso3,
   });
 
-  String id;
+  String? id;
 
-  String code;
+  String? code;
 
-  String name;
+  String? name;
 
-  String sort;
+  String? sort;
 
   String? comment;
 
@@ -53,10 +53,10 @@ class AbsenceNoticeStatusDto {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (id.hashCode) +
-    (code.hashCode) +
-    (name.hashCode) +
-    (sort.hashCode) +
+    (id == null ? 0 : id!.hashCode) +
+    (code == null ? 0 : code!.hashCode) +
+    (name == null ? 0 : name!.hashCode) +
+    (sort == null ? 0 : sort!.hashCode) +
     (comment == null ? 0 : comment!.hashCode) +
     (additionalInfo == null ? 0 : additionalInfo!.hashCode) +
     (iso2 == null ? 0 : iso2!.hashCode) +
@@ -67,10 +67,26 @@ class AbsenceNoticeStatusDto {
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+    if (this.id != null) {
       json[r'id'] = this.id;
+    } else {
+      json[r'id'] = null;
+    }
+    if (this.code != null) {
       json[r'code'] = this.code;
+    } else {
+      json[r'code'] = null;
+    }
+    if (this.name != null) {
       json[r'name'] = this.name;
+    } else {
+      json[r'name'] = null;
+    }
+    if (this.sort != null) {
       json[r'sort'] = this.sort;
+    } else {
+      json[r'sort'] = null;
+    }
     if (this.comment != null) {
       json[r'comment'] = this.comment;
     } else {
@@ -113,10 +129,10 @@ class AbsenceNoticeStatusDto {
       }());
 
       return AbsenceNoticeStatusDto(
-        id: mapValueOfType<String>(json, r'id')!,
-        code: mapValueOfType<String>(json, r'code')!,
-        name: mapValueOfType<String>(json, r'name')!,
-        sort: mapValueOfType<String>(json, r'sort')!,
+        id: mapValueOfType<String>(json, r'id'),
+        code: mapValueOfType<String>(json, r'code'),
+        name: mapValueOfType<String>(json, r'name'),
+        sort: mapValueOfType<String>(json, r'sort'),
         comment: mapValueOfType<String>(json, r'comment'),
         additionalInfo: mapValueOfType<String>(json, r'additionalInfo'),
         iso2: mapValueOfType<String>(json, r'iso2'),
@@ -168,10 +184,6 @@ class AbsenceNoticeStatusDto {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
-    'id',
-    'code',
-    'name',
-    'sort',
   };
 }
 

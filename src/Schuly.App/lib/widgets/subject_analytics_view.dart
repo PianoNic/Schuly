@@ -25,8 +25,8 @@ class SubjectAnalyticsView extends StatelessWidget {
         // Sort by date
         final sortedGrades = List<GradeDto>.from(subjectGrades);
         sortedGrades.sort((a, b) {
-          final dateA = DateTime.tryParse(a.date);
-          final dateB = DateTime.tryParse(b.date);
+          final dateA = a.date != null ? DateTime.tryParse(a.date!) : null;
+          final dateB = b.date != null ? DateTime.tryParse(b.date!) : null;
           if (dateA == null || dateB == null) return 0;
           return dateA.compareTo(dateB);
         });
@@ -141,7 +141,15 @@ class SubjectAnalyticsView extends StatelessWidget {
     // Convert grades to FlSpot points
     final spots = <FlSpot>[];
     for (int i = 0; i < sortedGrades.length; i++) {
-      final gradeValue = double.tryParse(sortedGrades[i].mark ?? '0') ?? 0;
+      double gradeValue = 0;
+      final grade = sortedGrades[i];
+      if (grade.mark != null) {
+        if (grade.mark is num) {
+          gradeValue = (grade.mark as num).toDouble();
+        } else if (grade.mark is String) {
+          gradeValue = double.tryParse(grade.mark as String) ?? 0;
+        }
+      }
       if (gradeValue != 0) {
         spots.add(FlSpot(i.toDouble(), gradeValue));
       }
@@ -212,7 +220,7 @@ class SubjectAnalyticsView extends StatelessWidget {
                           if (index >= 0 && index < sortedGrades.length) {
                             final dateStr = sortedGrades[index].date;
                             try {
-                              final date = DateTime.parse(dateStr);
+                              final date = DateTime.parse(dateStr ?? '');
                               return Text(
                                 '${date.day}',
                                 style: Theme.of(context).textTheme.labelSmall,
@@ -280,8 +288,22 @@ class SubjectAnalyticsView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ...sortedGrades.map((grade) {
-              final gradeValue = double.tryParse(grade.mark ?? '0') ?? 0;
-              final weight = grade.weight != null ? double.tryParse(grade.weight!) ?? 0 : 0;
+              double gradeValue = 0;
+              if (grade.mark != null) {
+                if (grade.mark is num) {
+                  gradeValue = (grade.mark as num).toDouble();
+                } else if (grade.mark is String) {
+                  gradeValue = double.tryParse(grade.mark as String) ?? 0;
+                }
+              }
+              double weight = 0;
+              if (grade.weight != null) {
+                if (grade.weight is num) {
+                  weight = (grade.weight as num).toDouble();
+                } else if (grade.weight is String) {
+                  weight = double.tryParse(grade.weight as String) ?? 0;
+                }
+              }
 
               return Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),
@@ -292,7 +314,7 @@ class SubjectAnalyticsView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            grade.title,
+                            grade.title ?? '',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -301,7 +323,7 @@ class SubjectAnalyticsView extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                grade.date,
+                                grade.date ?? '',
                                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                                 ),

@@ -43,8 +43,8 @@ class _AgendaPageState extends State<AgendaPage> {
     final localizations = AppLocalizations.of(context)!;
 
     // Parse time
-    final startTime = DateTime.tryParse(exam.startDate);
-    final endTime = DateTime.tryParse(exam.endDate);
+    final startTime = exam.startDate != null ? DateTime.tryParse(exam.startDate!) : null;
+    final endTime = exam.endDate != null ? DateTime.tryParse(exam.endDate!) : null;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
@@ -125,7 +125,7 @@ class _AgendaPageState extends State<AgendaPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    exam.courseName,
+                    exam.courseName ?? '',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -143,7 +143,7 @@ class _AgendaPageState extends State<AgendaPage> {
                     spacing: 12,
                     runSpacing: 4,
                     children: [
-                      if (exam.roomToken.isNotEmpty)
+                      if (exam.roomToken != null && exam.roomToken!.isNotEmpty)
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -154,7 +154,7 @@ class _AgendaPageState extends State<AgendaPage> {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              exam.roomToken,
+                              exam.roomToken!,
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: Theme.of(context).colorScheme.onSurfaceVariant,
                               ),
@@ -360,7 +360,7 @@ class _AgendaPageState extends State<AgendaPage> {
 
     final datesWithTests = <DateTime>{};
     for (final exam in exams) {
-      final examDate = DateTime.tryParse(exam.startDate);
+      final examDate = exam.startDate != null ? DateTime.tryParse(exam.startDate!) : null;
       if (examDate != null) {
         datesWithTests.add(DateTime(examDate.year, examDate.month, examDate.day));
       }
@@ -397,12 +397,18 @@ class _AgendaPageState extends State<AgendaPage> {
             }
           }
 
-          final listItem = (
-            startTime: item.startDate.substring(11, 16) as String,
-            endTime: item.endDate.substring(11, 16) as String,
-            subject: item.text as String,
-            room: (item.roomToken ?? '') as String,
-            teachers: item.teachers as List<String>,
+          final startTimeStr = (item.startDate ?? '').substring(11, 16);
+          final endTimeStr = (item.endDate ?? '').substring(11, 16);
+          final subjectStr = item.text ?? '';
+          final roomStr = item.roomToken ?? '';
+          final teachersList = item.teachers ?? <String>[];
+
+          final ({String startTime, String endTime, String subject, String room, List<String> teachers, Color color, bool isTest, String? testNote}) listItem = (
+            startTime: startTimeStr,
+            endTime: endTimeStr,
+            subject: subjectStr,
+            room: roomStr,
+            teachers: teachersList,
             color: itemColor,
             isTest: false,
             testNote: null as String?,
@@ -416,15 +422,15 @@ class _AgendaPageState extends State<AgendaPage> {
     // Add exam items for selected date
     if (exams != null) {
       for (final exam in exams) {
-        final examDate = DateTime.tryParse(exam.startDate);
+        final examDate = exam.startDate != null ? DateTime.tryParse(exam.startDate!) : null;
         if (examDate != null &&
             examDate.year == selectedDate.year &&
             examDate.month == selectedDate.month &&
             examDate.day == selectedDate.day) {
 
           // Check if there's already a lesson at the same time
-          final examStartTime = exam.startDate.substring(11, 16);
-          final examEndTime = exam.endDate.substring(11, 16);
+          final examStartTime = (exam.startDate ?? '').substring(11, 16);
+          final examEndTime = (exam.endDate ?? '').substring(11, 16);
 
           bool foundMatch = false;
           for (int i = 0; i < dayItems.length; i++) {
@@ -432,11 +438,12 @@ class _AgendaPageState extends State<AgendaPage> {
                 dayItems[i].endTime == examEndTime &&
                 !dayItems[i].isTest) {
               // Update existing item to show it has a test
+              final updatedRoom = (exam.roomToken != null && exam.roomToken!.isNotEmpty) ? exam.roomToken! : dayItems[i].room;
               dayItems[i] = (
                 startTime: dayItems[i].startTime,
                 endTime: dayItems[i].endTime,
                 subject: dayItems[i].subject,
-                room: exam.roomToken.isNotEmpty ? exam.roomToken : dayItems[i].room,
+                room: updatedRoom,
                 teachers: dayItems[i].teachers,
                 color: dayItems[i].color,
                 isTest: true,
@@ -449,11 +456,16 @@ class _AgendaPageState extends State<AgendaPage> {
 
           if (!foundMatch) {
             // Add as standalone test
+            final testStartTime = examStartTime;
+            final testEndTime = examEndTime;
+            final testSubject = exam.courseName ?? '';
+            final testRoom = exam.roomToken ?? '';
+
             final testItem = (
-              startTime: examStartTime,
-              endTime: examEndTime,
-              subject: exam.courseName,
-              room: exam.roomToken,
+              startTime: testStartTime,
+              endTime: testEndTime,
+              subject: testSubject,
+              room: testRoom,
               teachers: const <String>[],
               color: Theme.of(context).colorScheme.error,
               isTest: true,
@@ -535,7 +547,7 @@ class _AgendaPageState extends State<AgendaPage> {
 
                               // Get today's agenda items
                               final todayAgenda = agenda?.where((a) {
-                                final start = DateTime.tryParse(a.startDate);
+                                final start = a.startDate != null ? DateTime.tryParse(a.startDate!) : null;
                                 return start != null &&
                                   start.year == _selectedDay.year &&
                                   start.month == _selectedDay.month &&
@@ -544,7 +556,7 @@ class _AgendaPageState extends State<AgendaPage> {
 
                               // Get today's exams
                               final todayExams = exams?.where((exam) {
-                                final examDate = DateTime.tryParse(exam.startDate);
+                                final examDate = exam.startDate != null ? DateTime.tryParse(exam.startDate!) : null;
                                 return examDate != null &&
                                   examDate.year == _selectedDay.year &&
                                   examDate.month == _selectedDay.month &&
@@ -556,13 +568,13 @@ class _AgendaPageState extends State<AgendaPage> {
 
                               // Add lessons to the map
                               for (final item in todayAgenda) {
-                                final timeKey = '${item.startDate.substring(11, 16)}-${item.endDate.substring(11, 16)}';
+                                final timeKey = '${(item.startDate ?? '').substring(11, 16)}-${(item.endDate ?? '').substring(11, 16)}';
                                 timeGroups[timeKey] = (lesson: item, exams: []);
                               }
 
                               // Add exams to matching lessons or create new entries
                               for (final exam in todayExams) {
-                                final examTimeKey = '${exam.startDate.substring(11, 16)}-${exam.endDate.substring(11, 16)}';
+                                final examTimeKey = '${(exam.startDate ?? '').substring(11, 16)}-${(exam.endDate ?? '').substring(11, 16)}';
 
                                 // Check if there's a lesson at the same time
                                 if (timeGroups.containsKey(examTimeKey)) {

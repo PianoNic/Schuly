@@ -13,13 +13,13 @@ part of openapi.api;
 class SettingDto {
   /// Returns a new [SettingDto] instance.
   SettingDto({
-    required this.key,
-    required this.value,
+    this.key,
+    this.value,
   });
 
-  String key;
+  String? key;
 
-  String value;
+  String? value;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is SettingDto &&
@@ -29,16 +29,24 @@ class SettingDto {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (key.hashCode) +
-    (value.hashCode);
+    (key == null ? 0 : key!.hashCode) +
+    (value == null ? 0 : value!.hashCode);
 
   @override
   String toString() => 'SettingDto[key=$key, value=$value]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+    if (this.key != null) {
       json[r'key'] = this.key;
+    } else {
+      json[r'key'] = null;
+    }
+    if (this.value != null) {
       json[r'value'] = this.value;
+    } else {
+      json[r'value'] = null;
+    }
     return json;
   }
 
@@ -61,8 +69,8 @@ class SettingDto {
       }());
 
       return SettingDto(
-        key: mapValueOfType<String>(json, r'key')!,
-        value: mapValueOfType<String>(json, r'value')!,
+        key: mapValueOfType<String>(json, r'key'),
+        value: mapValueOfType<String>(json, r'value'),
       );
     }
     return null;
@@ -110,8 +118,6 @@ class SettingDto {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
-    'key',
-    'value',
   };
 }
 

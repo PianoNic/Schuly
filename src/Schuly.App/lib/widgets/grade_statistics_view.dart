@@ -53,7 +53,7 @@ class GradeStatisticsView extends StatelessWidget {
     // Group grades by subject for overall average calculation
     final Map<String, List<GradeDto>> gradesBySubject = {};
     for (final grade in grades) {
-      gradesBySubject.putIfAbsent(grade.subject, () => []).add(grade);
+      gradesBySubject.putIfAbsent(grade.subject ?? '', () => []).add(grade);
     }
 
     final overallAverage = GradeUtils.calculateOverallAverage(gradesBySubject);
@@ -140,7 +140,7 @@ class GradeStatisticsView extends StatelessWidget {
     // Group by subject and calculate averages
     final Map<String, List<GradeDto>> gradesBySubject = {};
     for (final grade in grades) {
-      gradesBySubject.putIfAbsent(grade.subject, () => []).add(grade);
+      gradesBySubject.putIfAbsent(grade.subject ?? '', () => []).add(grade);
     }
 
     // Calculate averages and sort
@@ -339,7 +339,14 @@ class GradeStatisticsView extends StatelessWidget {
     };
 
     for (final grade in grades) {
-      final gradeValue = double.tryParse(grade.mark ?? '0') ?? 0;
+      double gradeValue = 0;
+      if (grade.mark != null) {
+        if (grade.mark is num) {
+          gradeValue = (grade.mark as num).toDouble();
+        } else if (grade.mark is String) {
+          gradeValue = double.tryParse(grade.mark as String) ?? 0;
+        }
+      }
       // Skip grades with value 0 (not available yet)
       if (gradeValue == 0) continue;
 
@@ -437,7 +444,16 @@ class GradeStatisticsView extends StatelessWidget {
     String? worstGradeSubject;
 
     for (final grade in grades) {
-      final gradeValue = double.tryParse(grade.mark ?? '0');
+      double? gradeValue;
+      if (grade.mark != null) {
+        if (grade.mark is num) {
+          gradeValue = (grade.mark as num).toDouble();
+        } else if (grade.mark is String) {
+          gradeValue = double.tryParse(grade.mark as String);
+        }
+      } else {
+        gradeValue = double.tryParse('0');
+      }
       if (gradeValue != null && gradeValue != 0) {
         // Best grade is the highest value (6 is best in Swiss system)
         if (bestGrade == null || gradeValue > bestGrade) {
@@ -535,14 +551,21 @@ class GradeStatisticsView extends StatelessWidget {
     // Sort grades by date and filter out grades with value 0
     final sortedGrades = List<GradeDto>.from(grades)
         .where((grade) {
-          final markValue = double.tryParse(grade.mark ?? '0') ?? 0;
+          double markValue = 0;
+          if (grade.mark != null) {
+            if (grade.mark is num) {
+              markValue = (grade.mark as num).toDouble();
+            } else if (grade.mark is String) {
+              markValue = double.tryParse(grade.mark as String) ?? 0;
+            }
+          }
           return markValue != 0;
         })
         .toList();
 
     sortedGrades.sort((a, b) {
-      final dateA = DateTime.tryParse(a.date);
-      final dateB = DateTime.tryParse(b.date);
+      final dateA = a.date != null ? DateTime.tryParse(a.date!) : null;
+      final dateB = b.date != null ? DateTime.tryParse(b.date!) : null;
       if (dateA == null || dateB == null) return 0;
       return dateA.compareTo(dateB);
     });
@@ -628,7 +651,7 @@ class GradeStatisticsView extends StatelessWidget {
                           if (index >= 0 && index < chartGrades.length) {
                             final dateStr = chartGrades[index].date;
                             try {
-                              final date = DateTime.parse(dateStr);
+                              final date = DateTime.parse(dateStr ?? '');
                               return Text(
                                 '${date.day}',
                                 style: Theme.of(context).textTheme.labelSmall,

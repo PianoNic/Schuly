@@ -13,41 +13,41 @@ part of openapi.api;
 class LatenessDto {
   /// Returns a new [LatenessDto] instance.
   LatenessDto({
-    required this.id,
-    required this.dateExcused,
-    required this.date,
-    required this.startTime,
-    required this.endTime,
-    required this.duration,
-    required this.reason,
-    required this.excused,
-    required this.extendedDeadline,
-    required this.courseId,
-    required this.courseToken,
-    required this.comment,
+    this.id,
+    this.dateExcused,
+    this.date,
+    this.startTime,
+    this.endTime,
+    this.duration,
+    this.reason,
+    this.excused,
+    this.extendedDeadline,
+    this.courseId,
+    this.courseToken,
+    this.comment,
   });
 
-  String id;
+  String? id;
 
   DateTime? dateExcused;
 
-  DateTime date;
+  String? date;
 
-  String startTime;
+  String? startTime;
 
-  String endTime;
+  String? endTime;
 
-  String duration;
+  String? duration;
 
   String? reason;
 
-  bool excused;
+  bool? excused;
 
-  int extendedDeadline;
+  int? extendedDeadline;
 
-  String courseId;
+  String? courseId;
 
-  String courseToken;
+  String? courseToken;
 
   String? comment;
 
@@ -69,17 +69,17 @@ class LatenessDto {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (id.hashCode) +
+    (id == null ? 0 : id!.hashCode) +
     (dateExcused == null ? 0 : dateExcused!.hashCode) +
-    (date.hashCode) +
-    (startTime.hashCode) +
-    (endTime.hashCode) +
-    (duration.hashCode) +
+    (date == null ? 0 : date!.hashCode) +
+    (startTime == null ? 0 : startTime!.hashCode) +
+    (endTime == null ? 0 : endTime!.hashCode) +
+    (duration == null ? 0 : duration!.hashCode) +
     (reason == null ? 0 : reason!.hashCode) +
-    (excused.hashCode) +
-    (extendedDeadline.hashCode) +
-    (courseId.hashCode) +
-    (courseToken.hashCode) +
+    (excused == null ? 0 : excused!.hashCode) +
+    (extendedDeadline == null ? 0 : extendedDeadline!.hashCode) +
+    (courseId == null ? 0 : courseId!.hashCode) +
+    (courseToken == null ? 0 : courseToken!.hashCode) +
     (comment == null ? 0 : comment!.hashCode);
 
   @override
@@ -87,25 +87,61 @@ class LatenessDto {
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+    if (this.id != null) {
       json[r'id'] = this.id;
+    } else {
+      json[r'id'] = null;
+    }
     if (this.dateExcused != null) {
       json[r'dateExcused'] = _dateFormatter.format(this.dateExcused!.toUtc());
     } else {
       json[r'dateExcused'] = null;
     }
-      json[r'date'] = _dateFormatter.format(this.date.toUtc());
+    if (this.date != null) {
+      json[r'date'] = this.date;
+    } else {
+      json[r'date'] = null;
+    }
+    if (this.startTime != null) {
       json[r'startTime'] = this.startTime;
+    } else {
+      json[r'startTime'] = null;
+    }
+    if (this.endTime != null) {
       json[r'endTime'] = this.endTime;
+    } else {
+      json[r'endTime'] = null;
+    }
+    if (this.duration != null) {
       json[r'duration'] = this.duration;
+    } else {
+      json[r'duration'] = null;
+    }
     if (this.reason != null) {
       json[r'reason'] = this.reason;
     } else {
       json[r'reason'] = null;
     }
+    if (this.excused != null) {
       json[r'excused'] = this.excused;
+    } else {
+      json[r'excused'] = null;
+    }
+    if (this.extendedDeadline != null) {
       json[r'extendedDeadline'] = this.extendedDeadline;
+    } else {
+      json[r'extendedDeadline'] = null;
+    }
+    if (this.courseId != null) {
       json[r'courseId'] = this.courseId;
+    } else {
+      json[r'courseId'] = null;
+    }
+    if (this.courseToken != null) {
       json[r'courseToken'] = this.courseToken;
+    } else {
+      json[r'courseToken'] = null;
+    }
     if (this.comment != null) {
       json[r'comment'] = this.comment;
     } else {
@@ -133,17 +169,17 @@ class LatenessDto {
       }());
 
       return LatenessDto(
-        id: mapValueOfType<String>(json, r'id')!,
+        id: mapValueOfType<String>(json, r'id'),
         dateExcused: mapDateTime(json, r'dateExcused', r''),
-        date: mapDateTime(json, r'date', r'')!,
-        startTime: mapValueOfType<String>(json, r'startTime')!,
-        endTime: mapValueOfType<String>(json, r'endTime')!,
-        duration: mapValueOfType<String>(json, r'duration')!,
+        date: mapValueOfType<String>(json, r'date'),
+        startTime: mapValueOfType<String>(json, r'startTime'),
+        endTime: mapValueOfType<String>(json, r'endTime'),
+        duration: mapValueOfType<String>(json, r'duration'),
         reason: mapValueOfType<String>(json, r'reason'),
-        excused: mapValueOfType<bool>(json, r'excused')!,
-        extendedDeadline: mapValueOfType<int>(json, r'extendedDeadline')!,
-        courseId: mapValueOfType<String>(json, r'courseId')!,
-        courseToken: mapValueOfType<String>(json, r'courseToken')!,
+        excused: mapValueOfType<bool>(json, r'excused'),
+        extendedDeadline: mapValueOfType<int>(json, r'extendedDeadline'),
+        courseId: mapValueOfType<String>(json, r'courseId'),
+        courseToken: mapValueOfType<String>(json, r'courseToken'),
         comment: mapValueOfType<String>(json, r'comment'),
       );
     }
@@ -192,18 +228,6 @@ class LatenessDto {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
-    'id',
-    'dateExcused',
-    'date',
-    'startTime',
-    'endTime',
-    'duration',
-    'reason',
-    'excused',
-    'extendedDeadline',
-    'courseId',
-    'courseToken',
-    'comment',
   };
 }
 

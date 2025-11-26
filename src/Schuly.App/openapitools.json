@@ -3,5 +3,17 @@
   "spaces": 2,
   "generator-cli": {
     "version": "7.14.0"
+  },
+  "openapi-generator-ignore-list": [],
+  "generators": {
+    "schuly-flutter": {
+      "inputSpec": "https://schlwr.pianonic.ch/openapi.json",
+      "generatorName": "dart",
+      "output": "./lib/api",
+      "additionalProperties": {
+        "pubName": "schuly_api",
+        "pubVersion": "1.0.0"
+      }
+    }
   }
 }

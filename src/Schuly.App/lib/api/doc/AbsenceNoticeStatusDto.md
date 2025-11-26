@@ -8,10 +8,10 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**code** | **String** |  | 
-**name** | **String** |  | 
-**sort** | **String** |  | 
+**id** | **String** |  | [optional] 
+**code** | **String** |  | [optional] 
+**name** | **String** |  | [optional] 
+**sort** | **String** |  | [optional] 
 **comment** | **String** |  | [optional] 
 **additionalInfo** | **String** |  | [optional] 
 **iso2** | **String** |  | [optional] 

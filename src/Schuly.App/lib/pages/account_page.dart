@@ -181,8 +181,8 @@ class _AccountPageState extends State<AccountPage> {
           children: [
             if (userInfo != null)
               ProfileHeader(
-                name: '${userInfo.firstName} ${userInfo.lastName}',
-                email: userInfo.email,
+                name: '${userInfo.firstName ?? ''} ${userInfo.lastName ?? ''}',
+                email: userInfo.email ?? '',
                 isMicrosoftAuth: apiStore.activeUser?['is_microsoft_auth'] == true,
                 onStudentCardPressed: () => _showStudentCard(context),
                 onSwitchAccountPressed: () => _showAccountSwitcher(context),
@@ -204,43 +204,43 @@ class _AccountPageState extends State<AccountPage> {
                       const SizedBox(height: 12),
                       InfoRow(
                         label: localizations.name,
-                        value: '${userInfo.firstName} ${userInfo.lastName}',
+                        value: '${userInfo.firstName ?? ''} ${userInfo.lastName ?? ''}',
                       ),
                       InfoRow(
                         label: localizations.street,
-                        value: userInfo.street,
+                        value: userInfo.street ?? '',
                       ),
                       InfoRow(
                         label: localizations.zipCity,
-                        value: '${userInfo.zip} ${userInfo.city}',
+                        value: '${userInfo.zip ?? ''} ${userInfo.city ?? ''}',
                       ),
                       InfoRow(
                         label: localizations.birthDate,
-                        value: userInfo.birthday,
+                        value: userInfo.birthday ?? '',
                       ),
                       InfoRow(
                         label: localizations.phone,
-                        value: userInfo.phone,
+                        value: userInfo.phone ?? '',
                       ),
                       InfoRow(
                         label: localizations.email,
-                        value: userInfo.email,
+                        value: userInfo.email ?? '',
                       ),
                       InfoRow(
                         label: localizations.nationality,
-                        value: userInfo.nationality,
+                        value: userInfo.nationality ?? '',
                       ),
                       InfoRow(
                         label: localizations.hometown,
-                        value: userInfo.hometown,
+                        value: userInfo.hometown ?? '',
                       ),
                       InfoRow(
                         label: localizations.mobile,
-                        value: userInfo.mobile,
+                        value: userInfo.mobile ?? '',
                       ),
                       InfoRow(
                         label: localizations.profile1,
-                        value: userInfo.profil1,
+                        value: userInfo.profil1 ?? '',
                       ),
                       if (userInfo.profil2 != null)
                         InfoRow(

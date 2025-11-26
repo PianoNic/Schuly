@@ -280,12 +280,13 @@ class _MicrosoftAuthPageState extends State<MicrosoftAuthPage> {
       transaction.throwable = e;
 
       logError('Failed to complete OAuth callback', source: 'MicrosoftAuthPage', error: e);
-      setState(() {
-        _isLoading = false;
-        _statusMessage = 'Authentication failed';
-      });
 
       if (mounted) {
+        setState(() {
+          _isLoading = false;
+          _statusMessage = 'Authentication failed';
+        });
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(AppLocalizations.of(context)!.authenticationFailed(e.toString())),

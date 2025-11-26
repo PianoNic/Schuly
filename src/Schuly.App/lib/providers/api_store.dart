@@ -307,10 +307,10 @@ class ApiStore extends ChangeNotifier {
         // Try to fetch user info to get email
         await fetchUserInfo();
 
-        if (userInfo == null || userInfo!.email.isEmpty) {
+        if (userInfo == null || (userInfo!.email ?? '').isEmpty) {
           return 'Failed to get user information from Microsoft token';
         }
-        email = userInfo!.email;
+        email = userInfo!.email ?? '';
       }
       final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 

@@ -56,10 +56,10 @@ class GradeTile extends StatelessWidget {
         Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3);
     final apiStore = Provider.of<ApiStore>(context);
 
-    // Parse grade to double if available
+    // Parse grade to double if available (mark is now num)
     double? gradeValue;
-    if (grade.mark != null && grade.mark!.isNotEmpty) {
-      gradeValue = double.tryParse(grade.mark!);
+    if (grade.mark != null) {
+      gradeValue = (grade.mark as num).toDouble();
     }
 
     // Always show raw value for individual grades in tiles
@@ -106,14 +106,14 @@ class GradeTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      grade.title,
+                      grade.title ?? '',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      _formatDate(grade.date),
+                      _formatDate(grade.date ?? ''),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
@@ -123,8 +123,8 @@ class GradeTile extends StatelessWidget {
               ),
               // Simple confirmation indicator
               Icon(
-                grade.isConfirmed ? Icons.check_circle_outline : Icons.schedule,
-                color: grade.isConfirmed
+                (grade.isConfirmed ?? false) ? Icons.check_circle_outline : Icons.schedule,
+                color: (grade.isConfirmed ?? false)
                     ? Theme.of(context).colorScheme.primary
                     : Theme.of(context).colorScheme.onSurfaceVariant,
                 size: 16,
@@ -194,10 +194,10 @@ class GradeDetailsDialog extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
     final apiStore = Provider.of<ApiStore>(context);
 
-    // Parse grade to double if available
+    // Parse grade to double if available (mark is now num)
     double? gradeValue;
-    if (grade.mark != null && grade.mark!.isNotEmpty) {
-      gradeValue = double.tryParse(grade.mark!);
+    if (grade.mark != null) {
+      gradeValue = (grade.mark as num).toDouble();
     }
 
     // Get display text based on mode
@@ -254,11 +254,11 @@ class GradeDetailsDialog extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              _buildDetailRow('${localizations.titleLabel}:', grade.title, context),
-              _buildDetailRow('${localizations.subjectLabel}:', grade.subject, context),
-              _buildDetailRow('${localizations.courseLabel}:', grade.course, context),
-              _buildDetailRow('${localizations.dateLabel}:', _formatDate(grade.date), context),
-              _buildDetailRow('${localizations.confirmedLabel}:', grade.isConfirmed ? localizations.yes : localizations.no, context),
+              _buildDetailRow('${localizations.titleLabel}:', grade.title ?? '', context),
+              _buildDetailRow('${localizations.subjectLabel}:', grade.subject ?? '', context),
+              _buildDetailRow('${localizations.courseLabel}:', grade.course ?? '', context),
+              _buildDetailRow('${localizations.dateLabel}:', _formatDate(grade.date ?? ''), context),
+              _buildDetailRow('${localizations.confirmedLabel}:', (grade.isConfirmed ?? false) ? localizations.yes : localizations.no, context),
 
               const SizedBox(height: 16),
 
@@ -273,12 +273,10 @@ class GradeDetailsDialog extends StatelessWidget {
               const SizedBox(height: 8),
               _buildDetailRow('${localizations.gradeLabel}:', gradeDisplay, context),
               if (grade.points != null)
-                _buildDetailRow('${localizations.pointsLabel}:', grade.points, context),
-              _buildDetailRow('${localizations.weightLabel}:', grade.weight, context),
-              _buildDetailRow('${localizations.courseGradeLabel}:', grade.courseGrade != null && grade.courseGrade!.isNotEmpty
-                ? (double.tryParse(grade.courseGrade!) != null
-                  ? GradeUtils.getDisplayGrade(double.parse(grade.courseGrade!), apiStore.gradeDisplayMode)
-                  : grade.courseGrade!)
+                _buildDetailRow('${localizations.pointsLabel}:', grade.points.toString(), context),
+              _buildDetailRow('${localizations.weightLabel}:', grade.weight != null ? grade.weight.toString() : 'N/A', context),
+              _buildDetailRow('${localizations.courseGradeLabel}:', grade.courseGrade != null
+                ? GradeUtils.getDisplayGrade((grade.courseGrade as num).toDouble(), apiStore.gradeDisplayMode)
                 : '?', context),
 
               if (grade.examinationGroups != null && grade.examinationGroups!.averageExamGroup != null) ...[

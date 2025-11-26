@@ -56,11 +56,11 @@ class _AbsencesPageState extends State<AbsencesPage> with SingleTickerProviderSt
   bool _isNoticeWithinAbsence(AbsenceDto absence, AbsenceNoticeDto notice) {
     try {
       // Parse absence dates
-      final absenceFromDate = DateTime.parse(absence.dateFrom);
-      final absenceToDate = DateTime.parse(absence.dateTo);
+      final absenceFromDate = DateTime.parse(absence.dateFrom ?? '');
+      final absenceToDate = DateTime.parse(absence.dateTo ?? '');
 
       // Parse notice date
-      final noticeDate = DateTime.parse(notice.date);
+      final noticeDate = DateTime.parse(notice.date ?? '');
 
       // Check if notice date is within absence date range
       if (noticeDate.isAfter(absenceFromDate.subtract(const Duration(days: 1))) &&
@@ -69,7 +69,7 @@ class _AbsencesPageState extends State<AbsencesPage> with SingleTickerProviderSt
         // If we have time information, check time overlap too
         if (absence.hourFrom != null && absence.hourFrom!.isNotEmpty &&
             absence.hourTo != null && absence.hourTo!.isNotEmpty &&
-            notice.hourFrom.isNotEmpty && notice.hourTo.isNotEmpty) {
+            notice.hourFrom != null && notice.hourFrom!.isNotEmpty && notice.hourTo != null && notice.hourTo!.isNotEmpty) {
 
           // For same day, check time overlap
           if (absenceFromDate.year == absenceToDate.year &&
@@ -79,8 +79,8 @@ class _AbsencesPageState extends State<AbsencesPage> with SingleTickerProviderSt
               noticeDate.month == absenceFromDate.month &&
               noticeDate.day == absenceFromDate.day) {
 
-            final absenceFromTime = _parseTime(absence.hourFrom!);
-            final absenceToTime = _parseTime(absence.hourTo!);
+            final absenceFromTime = _parseTime(absence.hourFrom);
+            final absenceToTime = _parseTime(absence.hourTo);
             final noticeFromTime = _parseTime(notice.hourFrom);
             final noticeToTime = _parseTime(notice.hourTo);
 
@@ -228,11 +228,11 @@ class _AbsencesPageState extends State<AbsencesPage> with SingleTickerProviderSt
 
                       return CompactAbsenceItem(
                         absence: absence,
-                        absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
-                        absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
-                        excuseUntil: absence.dateEAB != null ? _formatDateTime(absence.dateEAB!, null) : '',
-                        status: absence.statusEAB,
-                        reason: absence.reason,
+                        absentFrom: _formatDateTime(absence.dateFrom ?? '', absence.hourFrom),
+                        absentTo: _formatDateTime(absence.dateTo ?? '', absence.hourTo),
+                        excuseUntil: absence.dateEAB != null ? _formatDateTime(absence.dateEAB ?? '', null) : '',
+                        status: absence.statusEAB ?? '',
+                        reason: absence.reason ?? '',
                         relatedNotices: relatedNotices,
                         localizations: localizations,
                         initiallyExpanded: shouldExpand,
@@ -261,12 +261,12 @@ class _AbsencesPageState extends State<AbsencesPage> with SingleTickerProviderSt
   List<Widget> _buildLatenessItems(List<LatenessDto> latenessItems, AppLocalizations localizations) {
     return latenessItems.map((lateness) {
       return LatenessItem(
-        date: lateness.date,
-        duration: lateness.duration,
+        date: lateness.date != null && lateness.date!.isNotEmpty ? DateTime.parse(lateness.date!) : DateTime.now(),
+        duration: lateness.duration ?? '0',
         reason: lateness.reason ?? localizations.noReasonGiven, // TODO: Add noReasonGiven to ARB
-        excused: lateness.excused,
+        excused: lateness.excused ?? false,
         comment: lateness.comment ?? localizations.noCommentGiven, // TODO: Add noCommentGiven to ARB
-        courseToken: lateness.courseToken,
+        courseToken: lateness.courseToken ?? '',
         localizations: localizations,
       );
     }).toList();
@@ -347,11 +347,11 @@ class _AbsencesPageState extends State<AbsencesPage> with SingleTickerProviderSt
 
                     return CompactAbsenceItem(
                       absence: absence,
-                      absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
-                      absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
-                      excuseUntil: absence.dateEAB != null ? _formatDateTime(absence.dateEAB!, null) : '',
-                      status: absence.statusEAB,
-                      reason: absence.reason,
+                      absentFrom: _formatDateTime(absence.dateFrom ?? '', absence.hourFrom),
+                      absentTo: _formatDateTime(absence.dateTo ?? '', absence.hourTo),
+                      excuseUntil: absence.dateEAB != null ? _formatDateTime(absence.dateEAB ?? '', null) : '',
+                      status: absence.statusEAB ?? '',
+                      reason: absence.reason ?? '',
                       relatedNotices: relatedNotices,
                       localizations: localizations,
                       initiallyExpanded: shouldExpand,
@@ -742,21 +742,21 @@ class _CompactAbsenceItemState extends State<CompactAbsenceItem> {
           Row(
             children: [
               Icon(
-                notice.isExamLesson ? Icons.school : Icons.class_,
+                (notice.isExamLesson ?? false) ? Icons.school : Icons.class_,
                 size: 15,
                 color: Theme.of(context).colorScheme.primary,
               ),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
-                  notice.course,
+                  notice.course ?? '',
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 13,
                   ),
                 ),
               ),
-              if (notice.isExamLesson)
+              if (notice.isExamLesson ?? false)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
                   decoration: BoxDecoration(
@@ -777,11 +777,11 @@ class _CompactAbsenceItemState extends State<CompactAbsenceItem> {
           const SizedBox(height: 6),
           _buildNoticeDateTimeDurationRow(
             widget.localizations.date,
-            notice.date.split('T')[0].split('-').reversed.join('.'),
+            (notice.date ?? '').split('T')[0].split('-').reversed.join('.'),
             widget.localizations.time,
-            '${_formatTime(notice.hourFrom)} - ${_formatTime(notice.hourTo)}',
+            '${_formatTime(notice.hourFrom ?? '')} - ${_formatTime(notice.hourTo ?? '')}',
             widget.localizations.duration,
-            _calculateDuration(notice.hourFrom, notice.hourTo)
+            _calculateDuration(notice.hourFrom ?? '', notice.hourTo ?? '')
           ),
           if (notice.studentReason != null && notice.studentReason!.isNotEmpty)
             _buildNoticeDetailRow(widget.localizations.studentReason, notice.studentReason!), // TODO: Add studentReason to ARB
@@ -790,7 +790,7 @@ class _CompactAbsenceItemState extends State<CompactAbsenceItem> {
           if (notice.comment != null && notice.comment!.isNotEmpty)
             _buildNoticeDetailRow(widget.localizations.comment, notice.comment!), // TODO: Add comment to ARB
           const SizedBox(height: 4),
-          _buildNoticeStatusRow(notice.status, notice.statusLong),
+          _buildNoticeStatusRow(notice.status ?? '', notice.statusLong ?? ''),
         ],
       ),
     );

@@ -8,29 +8,29 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**userType** | **String** |  | 
-**idNr** | **String** |  | 
-**lastName** | **String** |  | 
-**firstName** | **String** |  | 
-**loginActive** | **bool** |  | 
-**gender** | **String** |  | 
-**birthday** | **String** |  | 
-**street** | **String** |  | 
+**id** | **String** |  | [optional] 
+**userType** | **String** |  | [optional] 
+**idNr** | **String** |  | [optional] 
+**lastName** | **String** |  | [optional] 
+**firstName** | **String** |  | [optional] 
+**loginActive** | **bool** |  | [optional] 
+**gender** | **String** |  | [optional] 
+**birthday** | **String** |  | [optional] 
+**street** | **String** |  | [optional] 
 **addressLine2** | **String** |  | [optional] 
 **postOfficeBox** | **String** |  | [optional] 
-**zip** | **String** |  | 
-**city** | **String** |  | 
-**nationality** | **String** |  | 
-**hometown** | **String** |  | 
-**phone** | **String** |  | 
-**mobile** | **String** |  | 
-**email** | **String** |  | 
-**emailPrivate** | **String** |  | 
-**profil1** | **String** |  | 
+**zip** | **String** |  | [optional] 
+**city** | **String** |  | [optional] 
+**nationality** | **String** |  | [optional] 
+**hometown** | **String** |  | [optional] 
+**phone** | **String** |  | [optional] 
+**mobile** | **String** |  | [optional] 
+**email** | **String** |  | [optional] 
+**emailPrivate** | **String** |  | [optional] 
+**profil1** | **String** |  | [optional] 
 **profil2** | **String** |  | [optional] 
-**entryDate** | **String** |  | 
-**exitDate** | **String** |  | 
+**entryDate** | **String** |  | [optional] 
+**exitDate** | **String** |  | [optional] 
 **regularClasses** | [**List<ClassInfoDto>**](ClassInfoDto.md) |  | [optional] [default to const []]
 **additionalClasses** | [**List<ClassInfoDto>**](ClassInfoDto.md) |  | [optional] [default to const []]
 

@@ -13,64 +13,64 @@ part of openapi.api;
 class AbsenceNoticeDto {
   /// Returns a new [AbsenceNoticeDto] instance.
   AbsenceNoticeDto({
-    required this.id,
-    required this.studentId,
+    this.id,
+    this.studentId,
     this.studentReason,
     this.studentReasonTimestamp,
-    required this.studentIs18,
-    required this.date,
-    required this.hourFrom,
-    required this.hourTo,
-    required this.time,
-    required this.status,
-    required this.statusLong,
+    this.studentIs18,
+    this.date,
+    this.hourFrom,
+    this.hourTo,
+    this.time,
+    this.status,
+    this.statusLong,
     this.comment,
-    required this.isExamLesson,
-    required this.profile,
-    required this.course,
-    required this.courseId,
-    required this.absenceId,
-    required this.absenceSemester,
+    this.isExamLesson,
+    this.profile,
+    this.course,
+    this.courseId,
+    this.absenceId,
+    this.absenceSemester,
     this.trainerAcknowledgement,
     this.trainerComment,
     this.trainerCommentTimestamp,
   });
 
-  String id;
+  String? id;
 
-  String studentId;
+  String? studentId;
 
   String? studentReason;
 
   String? studentReasonTimestamp;
 
-  bool studentIs18;
+  bool? studentIs18;
 
-  String date;
+  String? date;
 
-  String hourFrom;
+  String? hourFrom;
 
-  String hourTo;
+  String? hourTo;
 
-  String time;
+  String? time;
 
-  String status;
+  String? status;
 
-  String statusLong;
+  String? statusLong;
 
   String? comment;
 
-  bool isExamLesson;
+  bool? isExamLesson;
 
-  String profile;
+  String? profile;
 
-  String course;
+  String? course;
 
-  String courseId;
+  String? courseId;
 
-  String absenceId;
+  String? absenceId;
 
-  int absenceSemester;
+  int? absenceSemester;
 
   String? trainerAcknowledgement;
 
@@ -105,24 +105,24 @@ class AbsenceNoticeDto {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (id.hashCode) +
-    (studentId.hashCode) +
+    (id == null ? 0 : id!.hashCode) +
+    (studentId == null ? 0 : studentId!.hashCode) +
     (studentReason == null ? 0 : studentReason!.hashCode) +
     (studentReasonTimestamp == null ? 0 : studentReasonTimestamp!.hashCode) +
-    (studentIs18.hashCode) +
-    (date.hashCode) +
-    (hourFrom.hashCode) +
-    (hourTo.hashCode) +
-    (time.hashCode) +
-    (status.hashCode) +
-    (statusLong.hashCode) +
+    (studentIs18 == null ? 0 : studentIs18!.hashCode) +
+    (date == null ? 0 : date!.hashCode) +
+    (hourFrom == null ? 0 : hourFrom!.hashCode) +
+    (hourTo == null ? 0 : hourTo!.hashCode) +
+    (time == null ? 0 : time!.hashCode) +
+    (status == null ? 0 : status!.hashCode) +
+    (statusLong == null ? 0 : statusLong!.hashCode) +
     (comment == null ? 0 : comment!.hashCode) +
-    (isExamLesson.hashCode) +
-    (profile.hashCode) +
-    (course.hashCode) +
-    (courseId.hashCode) +
-    (absenceId.hashCode) +
-    (absenceSemester.hashCode) +
+    (isExamLesson == null ? 0 : isExamLesson!.hashCode) +
+    (profile == null ? 0 : profile!.hashCode) +
+    (course == null ? 0 : course!.hashCode) +
+    (courseId == null ? 0 : courseId!.hashCode) +
+    (absenceId == null ? 0 : absenceId!.hashCode) +
+    (absenceSemester == null ? 0 : absenceSemester!.hashCode) +
     (trainerAcknowledgement == null ? 0 : trainerAcknowledgement!.hashCode) +
     (trainerComment == null ? 0 : trainerComment!.hashCode) +
     (trainerCommentTimestamp == null ? 0 : trainerCommentTimestamp!.hashCode);
@@ -132,8 +132,16 @@ class AbsenceNoticeDto {
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+    if (this.id != null) {
       json[r'id'] = this.id;
+    } else {
+      json[r'id'] = null;
+    }
+    if (this.studentId != null) {
       json[r'studentId'] = this.studentId;
+    } else {
+      json[r'studentId'] = null;
+    }
     if (this.studentReason != null) {
       json[r'studentReason'] = this.studentReason;
     } else {
@@ -144,24 +152,76 @@ class AbsenceNoticeDto {
     } else {
       json[r'studentReasonTimestamp'] = null;
     }
+    if (this.studentIs18 != null) {
       json[r'studentIs18'] = this.studentIs18;
+    } else {
+      json[r'studentIs18'] = null;
+    }
+    if (this.date != null) {
       json[r'date'] = this.date;
+    } else {
+      json[r'date'] = null;
+    }
+    if (this.hourFrom != null) {
       json[r'hourFrom'] = this.hourFrom;
+    } else {
+      json[r'hourFrom'] = null;
+    }
+    if (this.hourTo != null) {
       json[r'hourTo'] = this.hourTo;
+    } else {
+      json[r'hourTo'] = null;
+    }
+    if (this.time != null) {
       json[r'time'] = this.time;
+    } else {
+      json[r'time'] = null;
+    }
+    if (this.status != null) {
       json[r'status'] = this.status;
+    } else {
+      json[r'status'] = null;
+    }
+    if (this.statusLong != null) {
       json[r'statusLong'] = this.statusLong;
+    } else {
+      json[r'statusLong'] = null;
+    }
     if (this.comment != null) {
       json[r'comment'] = this.comment;
     } else {
       json[r'comment'] = null;
     }
+    if (this.isExamLesson != null) {
       json[r'isExamLesson'] = this.isExamLesson;
+    } else {
+      json[r'isExamLesson'] = null;
+    }
+    if (this.profile != null) {
       json[r'profile'] = this.profile;
+    } else {
+      json[r'profile'] = null;
+    }
+    if (this.course != null) {
       json[r'course'] = this.course;
+    } else {
+      json[r'course'] = null;
+    }
+    if (this.courseId != null) {
       json[r'courseId'] = this.courseId;
+    } else {
+      json[r'courseId'] = null;
+    }
+    if (this.absenceId != null) {
       json[r'absenceId'] = this.absenceId;
+    } else {
+      json[r'absenceId'] = null;
+    }
+    if (this.absenceSemester != null) {
       json[r'absenceSemester'] = this.absenceSemester;
+    } else {
+      json[r'absenceSemester'] = null;
+    }
     if (this.trainerAcknowledgement != null) {
       json[r'trainerAcknowledgement'] = this.trainerAcknowledgement;
     } else {
@@ -199,24 +259,24 @@ class AbsenceNoticeDto {
       }());
 
       return AbsenceNoticeDto(
-        id: mapValueOfType<String>(json, r'id')!,
-        studentId: mapValueOfType<String>(json, r'studentId')!,
+        id: mapValueOfType<String>(json, r'id'),
+        studentId: mapValueOfType<String>(json, r'studentId'),
         studentReason: mapValueOfType<String>(json, r'studentReason'),
         studentReasonTimestamp: mapValueOfType<String>(json, r'studentReasonTimestamp'),
-        studentIs18: mapValueOfType<bool>(json, r'studentIs18')!,
-        date: mapValueOfType<String>(json, r'date')!,
-        hourFrom: mapValueOfType<String>(json, r'hourFrom')!,
-        hourTo: mapValueOfType<String>(json, r'hourTo')!,
-        time: mapValueOfType<String>(json, r'time')!,
-        status: mapValueOfType<String>(json, r'status')!,
-        statusLong: mapValueOfType<String>(json, r'statusLong')!,
+        studentIs18: mapValueOfType<bool>(json, r'studentIs18'),
+        date: mapValueOfType<String>(json, r'date'),
+        hourFrom: mapValueOfType<String>(json, r'hourFrom'),
+        hourTo: mapValueOfType<String>(json, r'hourTo'),
+        time: mapValueOfType<String>(json, r'time'),
+        status: mapValueOfType<String>(json, r'status'),
+        statusLong: mapValueOfType<String>(json, r'statusLong'),
         comment: mapValueOfType<String>(json, r'comment'),
-        isExamLesson: mapValueOfType<bool>(json, r'isExamLesson')!,
-        profile: mapValueOfType<String>(json, r'profile')!,
-        course: mapValueOfType<String>(json, r'course')!,
-        courseId: mapValueOfType<String>(json, r'courseId')!,
-        absenceId: mapValueOfType<String>(json, r'absenceId')!,
-        absenceSemester: mapValueOfType<int>(json, r'absenceSemester')!,
+        isExamLesson: mapValueOfType<bool>(json, r'isExamLesson'),
+        profile: mapValueOfType<String>(json, r'profile'),
+        course: mapValueOfType<String>(json, r'course'),
+        courseId: mapValueOfType<String>(json, r'courseId'),
+        absenceId: mapValueOfType<String>(json, r'absenceId'),
+        absenceSemester: mapValueOfType<int>(json, r'absenceSemester'),
         trainerAcknowledgement: mapValueOfType<String>(json, r'trainerAcknowledgement'),
         trainerComment: mapValueOfType<String>(json, r'trainerComment'),
         trainerCommentTimestamp: mapValueOfType<String>(json, r'trainerCommentTimestamp'),
@@ -267,21 +327,6 @@ class AbsenceNoticeDto {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
-    'id',
-    'studentId',
-    'studentIs18',
-    'date',
-    'hourFrom',
-    'hourTo',
-    'time',
-    'status',
-    'statusLong',
-    'isExamLesson',
-    'profile',
-    'course',
-    'courseId',
-    'absenceId',
-    'absenceSemester',
   };
 }
 

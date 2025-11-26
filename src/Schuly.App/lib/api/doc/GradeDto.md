@@ -8,23 +8,25 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**course** | **String** |  | 
-**courseId** | **String** |  | 
-**courseType** | **String** |  | 
-**subject** | **String** |  | 
-**subjectToken** | **String** |  | 
-**title** | **String** |  | 
-**date** | **String** |  | 
-**mark** | **String** |  | [optional] 
-**points** | **String** |  | [optional] 
-**weight** | **String** |  | 
-**isConfirmed** | **bool** |  | 
-**courseGrade** | **String** |  | [optional] 
-**examinationGroups** | [**ExaminationGroupsDto**](ExaminationGroupsDto.md) |  | 
+**id** | **String** |  | [optional] 
+**course** | **String** |  | [optional] 
+**courseId** | **String** |  | [optional] 
+**courseType** | **String** |  | [optional] 
+**examId** | **String** |  | [optional] 
+**subject** | **String** |  | [optional] 
+**subjectToken** | **String** |  | [optional] 
+**title** | **String** |  | [optional] 
+**date** | **String** |  | [optional] 
+**mark** | **num** |  | [optional] 
+**points** | **num** |  | [optional] 
+**weight** | **num** |  | [optional] 
+**isConfirmed** | **bool** |  | [optional] 
+**isConfirmedByTrainer** | **bool** |  | [optional] 
+**courseGrade** | **num** |  | [optional] 
+**examinationGroups** | [**ExaminationGroupsDto**](ExaminationGroupsDto.md) |  | [optional] 
 **studentId** | **String** |  | [optional] 
 **studentName** | **String** |  | [optional] 
-**inputType** | **String** |  | 
+**inputType** | **String** |  | [optional] 
 **comment** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

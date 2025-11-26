@@ -174,6 +174,24 @@ class PirateCupertinoLocalizations extends GlobalCupertinoLocalizations {
 
   @override
   String get noSpellCheckReplacementsLabel => 'No Replacements Found';
+
+  @override
+  String get collapsedHint => 'Double tap to expand, ye landlubber';
+
+  @override
+  String get expandedHint => 'Double tap to collapse, ye scallywag';
+
+  @override
+  String get expansionTileCollapsedHint => 'Double tap to expand, ye landlubber';
+
+  @override
+  String get expansionTileCollapsedTapHint => 'Double tap to expand, ye landlubber';
+
+  @override
+  String get expansionTileExpandedHint => 'Double tap to collapse, ye scallywag';
+
+  @override
+  String get expansionTileExpandedTapHint => 'Double tap to collapse, ye scallywag';
 }
 
 class _PirateCupertinoLocalizationsDelegate extends LocalizationsDelegate<CupertinoLocalizations> {

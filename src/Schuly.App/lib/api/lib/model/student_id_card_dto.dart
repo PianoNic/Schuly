@@ -13,10 +13,10 @@ part of openapi.api;
 class StudentIdCardDto {
   /// Returns a new [StudentIdCardDto] instance.
   StudentIdCardDto({
-    required this.html,
+    this.html,
   });
 
-  String html;
+  String? html;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is StudentIdCardDto &&
@@ -25,14 +25,18 @@ class StudentIdCardDto {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (html.hashCode);
+    (html == null ? 0 : html!.hashCode);
 
   @override
   String toString() => 'StudentIdCardDto[html=$html]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+    if (this.html != null) {
       json[r'html'] = this.html;
+    } else {
+      json[r'html'] = null;
+    }
     return json;
   }
 
@@ -55,7 +59,7 @@ class StudentIdCardDto {
       }());
 
       return StudentIdCardDto(
-        html: mapValueOfType<String>(json, r'html')!,
+        html: mapValueOfType<String>(json, r'html'),
       );
     }
     return null;
@@ -103,7 +107,6 @@ class StudentIdCardDto {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
-    'html',
   };
 }
 

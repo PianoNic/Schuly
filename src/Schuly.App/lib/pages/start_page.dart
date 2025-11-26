@@ -359,7 +359,7 @@ class _StartPageState extends State<StartPage> {
                 else ...[
                   ...(() {
                     final List<GradeDto> gradesList = grades.cast<GradeDto>().toList();
-                    gradesList.sort((a, b) => b.date.compareTo(a.date));
+                    gradesList.sort((a, b) => (b.date ?? '').compareTo(a.date ?? ''));
                     return gradesList.take(3).map((gradeData) => GradeTile(
                       grade: gradeData,
                     ));
@@ -397,7 +397,7 @@ class _StartPageState extends State<StartPage> {
                     }).whereType<AbsenceDto>().toList();
                     // Filter for unexcused absences only
                     final unexcusedAbsences = absList.where((absence) {
-                      return !absence.isExcused;
+                      return !(absence.isExcused ?? false);
                     }).toList();
                     if (unexcusedAbsences.isEmpty) {
                       if (absList.isEmpty) {
@@ -419,11 +419,11 @@ class _StartPageState extends State<StartPage> {
                         },
                         child: CompactAbsenceItem(
                           absence: absence,
-                          absentFrom: _formatDateTime(absence.dateFrom, absence.hourFrom),
-                          absentTo: _formatDateTime(absence.dateTo, absence.hourTo),
-                          excuseUntil: absence.dateEAB != null ? _formatDateTime(absence.dateEAB!, null) : '',
-                          status: absence.statusEAB,
-                          reason: absence.reason,
+                          absentFrom: _formatDateTime(absence.dateFrom ?? '', absence.hourFrom),
+                          absentTo: _formatDateTime(absence.dateTo ?? '', absence.hourTo),
+                          excuseUntil: absence.dateEAB != null ? _formatDateTime(absence.dateEAB ?? '', null) : '',
+                          status: absence.statusEAB ?? '',
+                          reason: absence.reason ?? '',
                           relatedNotices: [], // No notices needed on start page
                           localizations: localizations,
                         ),
@@ -458,12 +458,12 @@ class _StartPageState extends State<StartPage> {
                     // Filter for upcoming exams only
                     final now = DateTime.now();
                     final upcomingExams = examsList.where((exam) {
-                      final examDate = DateTime.tryParse(exam.startDate);
+                      final examDate = exam.startDate != null ? DateTime.tryParse(exam.startDate!) : null;
                       return examDate != null && examDate.isAfter(now);
                     }).toList();
 
                     // Sort by date
-                    upcomingExams.sort((a, b) => a.startDate.compareTo(b.startDate));
+                    upcomingExams.sort((a, b) => (a.startDate ?? '').compareTo(b.startDate ?? ''));
 
                     if (upcomingExams.isEmpty) {
                       return [Center(child: Text(localizations.noUpcomingTests))];
@@ -474,9 +474,9 @@ class _StartPageState extends State<StartPage> {
                     final numberOfTests = config.settings['numberOfTests'] ?? 3;
 
                     return upcomingExams.take(numberOfTests).map((exam) {
-                      final examDate = DateTime.parse(exam.startDate);
-                      final startTime = DateTime.tryParse(exam.startDate);
-                      final endTime = DateTime.tryParse(exam.endDate);
+                      final examDate = exam.startDate != null ? DateTime.parse(exam.startDate!) : DateTime.now();
+                      final startTime = exam.startDate != null ? DateTime.tryParse(exam.startDate!) : null;
+                      final endTime = exam.endDate != null ? DateTime.tryParse(exam.endDate!) : null;
 
                       final appColors = Theme.of(context).extension<AppColors>();
                       final surfaceContainer = appColors?.surfaceContainer ??
@@ -490,7 +490,7 @@ class _StartPageState extends State<StartPage> {
                           borderRadius: BorderRadius.circular(8),
                           border: Border(
                             left: BorderSide(
-                              color: Color(int.parse('0xFF${exam.color.substring(1)}')),
+                              color: Color(int.parse('0xFF${(exam.color ?? '#000000').substring(1)}')),
                               width: 3,
                             ),
                           ),
@@ -520,7 +520,7 @@ class _StartPageState extends State<StartPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    exam.courseName,
+                                    exam.courseName ?? '',
                                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -549,7 +549,7 @@ class _StartPageState extends State<StartPage> {
                                           ),
                                         ),
                                       ],
-                                      if (exam.roomToken.isNotEmpty) ...[
+                                      if (exam.roomToken != null && exam.roomToken!.isNotEmpty) ...[
                                         if (startTime != null && endTime != null)
                                           const SizedBox(width: 12),
                                         Icon(
@@ -559,7 +559,7 @@ class _StartPageState extends State<StartPage> {
                                         ),
                                         const SizedBox(width: 4),
                                         Text(
-                                          exam.roomToken,
+                                          exam.roomToken!,
                                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                             color: Theme.of(context).colorScheme.onSurfaceVariant,
                                           ),
@@ -660,8 +660,8 @@ class _StartPageState extends State<StartPage> {
 
     for (int i = 0; i < lessons.length; i++) {
       final item = lessons[i];
-      final start = DateTime.tryParse(item.startDate);
-      final end = DateTime.tryParse(item.endDate);
+      final start = item.startDate != null ? DateTime.tryParse(item.startDate!) : null;
+      final end = item.endDate != null ? DateTime.tryParse(item.endDate!) : null;
 
       // Add the lesson tile
       final dayStr = start != null ?
@@ -671,8 +671,8 @@ class _StartPageState extends State<StartPage> {
           ? '${start.hour.toString().padLeft(2, '0')}:${start.minute.toString().padLeft(2, '0')} - '
               '${end.hour.toString().padLeft(2, '0')}:${end.minute.toString().padLeft(2, '0')}'
           : '';
-      final subject = item.text;
-      final room = item.roomToken;
+      final subject = item.text ?? '';
+      final room = item.roomToken ?? '';
       final teacher = item.teachers != null && item.teachers!.isNotEmpty ? item.teachers!.join(', ') : '';
 
       widgets.add(LessonTile(
@@ -688,7 +688,7 @@ class _StartPageState extends State<StartPage> {
       // Add break card if there's a gap before the next lesson and showBreaks is true
       if (showBreaks && i < lessons.length - 1 && end != null) {
         final nextItem = lessons[i + 1];
-        final nextStart = DateTime.tryParse(nextItem.startDate);
+        final nextStart = nextItem.startDate != null ? DateTime.tryParse(nextItem.startDate!) : null;
 
         if (nextStart != null) {
           final breakDuration = nextStart.difference(end).inMinutes;

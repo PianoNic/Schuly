@@ -174,6 +174,24 @@ class MaggusCupertinoLocalizations extends GlobalCupertinoLocalizations {
 
   @override
   String get noSpellCheckReplacementsLabel => 'Keine Ersetzunge gefunde';
+
+  @override
+  String get collapsedHint => 'Doppelt tippe zum erweitere';
+
+  @override
+  String get expandedHint => 'Doppelt tippe zum zusammenklappe';
+
+  @override
+  String get expansionTileCollapsedHint => 'Doppelt tippe zum erweitere';
+
+  @override
+  String get expansionTileCollapsedTapHint => 'Doppelt tippe zum erweitere';
+
+  @override
+  String get expansionTileExpandedHint => 'Doppelt tippe zum zusammenklappe';
+
+  @override
+  String get expansionTileExpandedTapHint => 'Doppelt tippe zum zusammenklappe';
 }
 
 class _MaggusCupertinoLocalizationsDelegate extends LocalizationsDelegate<CupertinoLocalizations> {

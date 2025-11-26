@@ -38,9 +38,13 @@ class AuthApi {
 
     const contentTypes = <String>['application/x-www-form-urlencoded'];
 
-    formParams[r'email'] = parameterToString(email);
+    if (email != null) {
+      formParams[r'email'] = parameterToString(email);
+    }
+    if (password != null) {
       formParams[r'password'] = parameterToString(password);
-  
+    }
+
     return apiClient.invokeAPI(
       path,
       'POST',

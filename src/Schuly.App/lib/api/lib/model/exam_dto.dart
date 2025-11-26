@@ -13,46 +13,46 @@ part of openapi.api;
 class ExamDto {
   /// Returns a new [ExamDto] instance.
   ExamDto({
-    required this.id,
-    required this.startDate,
-    required this.endDate,
+    this.id,
+    this.startDate,
+    this.endDate,
     this.text,
     this.comment,
-    required this.roomToken,
+    this.roomToken,
     this.roomId,
-    this.teachers,
-    this.teacherIds,
-    this.teacherTokens,
-    required this.courseId,
-    required this.courseToken,
-    required this.courseName,
+    this.teachers = const [],
+    this.teacherIds = const [],
+    this.teacherTokens = const [],
+    this.courseId,
+    this.courseToken,
+    this.courseName,
     this.status,
-    required this.color,
-    required this.eventType,
+    this.color,
+    this.eventType,
     this.eventRoomStatus,
     this.timetableText,
     this.infoFacilityManagement,
     this.importset,
-    this.lessons,
+    this.lessons = const [],
     this.publishToInfoSystem,
-    this.studentNames,
-    this.studentIds,
-    required this.client,
-    required this.clientname,
-    required this.weight,
+    this.studentNames = const [],
+    this.studentIds = const [],
+    this.client,
+    this.clientname,
+    this.weight,
   });
 
-  String id;
+  String? id;
 
-  String startDate;
+  String? startDate;
 
-  String endDate;
+  String? endDate;
 
   String? text;
 
   String? comment;
 
-  String roomToken;
+  String? roomToken;
 
   String? roomId;
 
@@ -62,17 +62,17 @@ class ExamDto {
 
   List<String>? teacherTokens;
 
-  String courseId;
+  String? courseId;
 
-  String courseToken;
+  String? courseToken;
 
-  String courseName;
+  String? courseName;
 
   String? status;
 
-  String color;
+  String? color;
 
-  String eventType;
+  String? eventType;
 
   String? eventRoomStatus;
 
@@ -90,11 +90,11 @@ class ExamDto {
 
   List<String>? studentIds;
 
-  String client;
+  String? client;
 
-  String clientname;
+  String? clientname;
 
-  String weight;
+  String? weight;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is ExamDto &&
@@ -129,22 +129,22 @@ class ExamDto {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (id.hashCode) +
-    (startDate.hashCode) +
-    (endDate.hashCode) +
-    (text.hashCode) +
+    (id == null ? 0 : id!.hashCode) +
+    (startDate == null ? 0 : startDate!.hashCode) +
+    (endDate == null ? 0 : endDate!.hashCode) +
+    (text == null ? 0 : text!.hashCode) +
     (comment == null ? 0 : comment!.hashCode) +
-    (roomToken.hashCode) +
+    (roomToken == null ? 0 : roomToken!.hashCode) +
     (roomId == null ? 0 : roomId!.hashCode) +
     (teachers == null ? 0 : teachers!.hashCode) +
     (teacherIds == null ? 0 : teacherIds!.hashCode) +
     (teacherTokens == null ? 0 : teacherTokens!.hashCode) +
-    (courseId.hashCode) +
-    (courseToken.hashCode) +
-    (courseName.hashCode) +
+    (courseId == null ? 0 : courseId!.hashCode) +
+    (courseToken == null ? 0 : courseToken!.hashCode) +
+    (courseName == null ? 0 : courseName!.hashCode) +
     (status == null ? 0 : status!.hashCode) +
-    (color.hashCode) +
-    (eventType.hashCode) +
+    (color == null ? 0 : color!.hashCode) +
+    (eventType == null ? 0 : eventType!.hashCode) +
     (eventRoomStatus == null ? 0 : eventRoomStatus!.hashCode) +
     (timetableText == null ? 0 : timetableText!.hashCode) +
     (infoFacilityManagement == null ? 0 : infoFacilityManagement!.hashCode) +
@@ -153,25 +153,45 @@ class ExamDto {
     (publishToInfoSystem == null ? 0 : publishToInfoSystem!.hashCode) +
     (studentNames == null ? 0 : studentNames!.hashCode) +
     (studentIds == null ? 0 : studentIds!.hashCode) +
-    (client.hashCode) +
-    (clientname.hashCode) +
-    (weight.hashCode);
+    (client == null ? 0 : client!.hashCode) +
+    (clientname == null ? 0 : clientname!.hashCode) +
+    (weight == null ? 0 : weight!.hashCode);
 
   @override
   String toString() => 'ExamDto[id=$id, startDate=$startDate, endDate=$endDate, text=$text, comment=$comment, roomToken=$roomToken, roomId=$roomId, teachers=$teachers, teacherIds=$teacherIds, teacherTokens=$teacherTokens, courseId=$courseId, courseToken=$courseToken, courseName=$courseName, status=$status, color=$color, eventType=$eventType, eventRoomStatus=$eventRoomStatus, timetableText=$timetableText, infoFacilityManagement=$infoFacilityManagement, importset=$importset, lessons=$lessons, publishToInfoSystem=$publishToInfoSystem, studentNames=$studentNames, studentIds=$studentIds, client=$client, clientname=$clientname, weight=$weight]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+    if (this.id != null) {
       json[r'id'] = this.id;
+    } else {
+      json[r'id'] = null;
+    }
+    if (this.startDate != null) {
       json[r'startDate'] = this.startDate;
+    } else {
+      json[r'startDate'] = null;
+    }
+    if (this.endDate != null) {
       json[r'endDate'] = this.endDate;
+    } else {
+      json[r'endDate'] = null;
+    }
+    if (this.text != null) {
       json[r'text'] = this.text;
+    } else {
+      json[r'text'] = null;
+    }
     if (this.comment != null) {
       json[r'comment'] = this.comment;
     } else {
       json[r'comment'] = null;
     }
+    if (this.roomToken != null) {
       json[r'roomToken'] = this.roomToken;
+    } else {
+      json[r'roomToken'] = null;
+    }
     if (this.roomId != null) {
       json[r'roomId'] = this.roomId;
     } else {
@@ -192,16 +212,36 @@ class ExamDto {
     } else {
       json[r'teacherTokens'] = null;
     }
+    if (this.courseId != null) {
       json[r'courseId'] = this.courseId;
+    } else {
+      json[r'courseId'] = null;
+    }
+    if (this.courseToken != null) {
       json[r'courseToken'] = this.courseToken;
+    } else {
+      json[r'courseToken'] = null;
+    }
+    if (this.courseName != null) {
       json[r'courseName'] = this.courseName;
+    } else {
+      json[r'courseName'] = null;
+    }
     if (this.status != null) {
       json[r'status'] = this.status;
     } else {
       json[r'status'] = null;
     }
+    if (this.color != null) {
       json[r'color'] = this.color;
+    } else {
+      json[r'color'] = null;
+    }
+    if (this.eventType != null) {
       json[r'eventType'] = this.eventType;
+    } else {
+      json[r'eventType'] = null;
+    }
     if (this.eventRoomStatus != null) {
       json[r'eventRoomStatus'] = this.eventRoomStatus;
     } else {
@@ -242,25 +282,22 @@ class ExamDto {
     } else {
       json[r'studentIds'] = null;
     }
+    if (this.client != null) {
       json[r'client'] = this.client;
+    } else {
+      json[r'client'] = null;
+    }
+    if (this.clientname != null) {
       json[r'clientname'] = this.clientname;
+    } else {
+      json[r'clientname'] = null;
+    }
+    if (this.weight != null) {
       json[r'weight'] = this.weight;
+    } else {
+      json[r'weight'] = null;
+    }
     return json;
-  }
-
-  /// Helper method to parse numeric or string values from JSON
-  /// The API returns weight as numbers (e.g., 1) but the DTO stores it as string
-  static String? _parseNumberOrString(dynamic value) {
-    if (value == null) {
-      return null;
-    }
-    if (value is String) {
-      return value;
-    }
-    if (value is num) {
-      return value.toString();
-    }
-    return null;
   }
 
   /// Returns a new [ExamDto] instance and imports its values from
@@ -282,45 +319,45 @@ class ExamDto {
       }());
 
       return ExamDto(
-        id: mapValueOfType<String>(json, r'id')!,
-        startDate: mapValueOfType<String>(json, r'startDate')!,
-        endDate: mapValueOfType<String>(json, r'endDate')!,
+        id: mapValueOfType<String>(json, r'id'),
+        startDate: mapValueOfType<String>(json, r'startDate'),
+        endDate: mapValueOfType<String>(json, r'endDate'),
         text: mapValueOfType<String>(json, r'text'),
         comment: mapValueOfType<String>(json, r'comment'),
-        roomToken: mapValueOfType<String>(json, r'roomToken')!,
+        roomToken: mapValueOfType<String>(json, r'roomToken'),
         roomId: mapValueOfType<String>(json, r'roomId'),
         teachers: json[r'teachers'] is Iterable
             ? (json[r'teachers'] as Iterable).cast<String>().toList(growable: false)
-            : null,
+            : const [],
         teacherIds: json[r'teacherIds'] is Iterable
             ? (json[r'teacherIds'] as Iterable).cast<String>().toList(growable: false)
-            : null,
+            : const [],
         teacherTokens: json[r'teacherTokens'] is Iterable
             ? (json[r'teacherTokens'] as Iterable).cast<String>().toList(growable: false)
-            : null,
-        courseId: mapValueOfType<String>(json, r'courseId')!,
-        courseToken: mapValueOfType<String>(json, r'courseToken')!,
-        courseName: mapValueOfType<String>(json, r'courseName')!,
+            : const [],
+        courseId: mapValueOfType<String>(json, r'courseId'),
+        courseToken: mapValueOfType<String>(json, r'courseToken'),
+        courseName: mapValueOfType<String>(json, r'courseName'),
         status: mapValueOfType<String>(json, r'status'),
-        color: mapValueOfType<String>(json, r'color')!,
-        eventType: mapValueOfType<String>(json, r'eventType')!,
+        color: mapValueOfType<String>(json, r'color'),
+        eventType: mapValueOfType<String>(json, r'eventType'),
         eventRoomStatus: mapValueOfType<String>(json, r'eventRoomStatus'),
         timetableText: mapValueOfType<String>(json, r'timetableText'),
         infoFacilityManagement: mapValueOfType<String>(json, r'infoFacilityManagement'),
         importset: mapValueOfType<String>(json, r'importset'),
         lessons: json[r'lessons'] is Iterable
             ? (json[r'lessons'] as Iterable).cast<String>().toList(growable: false)
-            : null,
+            : const [],
         publishToInfoSystem: mapValueOfType<bool>(json, r'publishToInfoSystem'),
         studentNames: json[r'studentNames'] is Iterable
             ? (json[r'studentNames'] as Iterable).cast<String>().toList(growable: false)
-            : null,
+            : const [],
         studentIds: json[r'studentIds'] is Iterable
             ? (json[r'studentIds'] as Iterable).cast<String>().toList(growable: false)
-            : null,
-        client: mapValueOfType<String>(json, r'client')!,
-        clientname: mapValueOfType<String>(json, r'clientname')!,
-        weight: _parseNumberOrString(json[r'weight'])!,
+            : const [],
+        client: mapValueOfType<String>(json, r'client'),
+        clientname: mapValueOfType<String>(json, r'clientname'),
+        weight: mapValueOfType<String>(json, r'weight'),
       );
     }
     return null;
@@ -368,19 +405,6 @@ class ExamDto {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
-    'id',
-    'startDate',
-    'endDate',
-    'text',
-    'roomToken',
-    'courseId',
-    'courseToken',
-    'courseName',
-    'color',
-    'eventType',
-    'client',
-    'clientname',
-    'weight',
   };
 }
 

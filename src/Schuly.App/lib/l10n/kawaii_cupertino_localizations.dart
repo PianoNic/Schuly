@@ -174,6 +174,24 @@ class KawaiiCupertinoLocalizations extends GlobalCupertinoLocalizations {
 
   @override
   String get noSpellCheckReplacementsLabel => 'No Wepwacements Found';
+
+  @override
+  String get collapsedHint => 'Doubwe tap to expwand';
+
+  @override
+  String get expandedHint => 'Doubwe tap to cowwapse';
+
+  @override
+  String get expansionTileCollapsedHint => 'Doubwe tap to expwand';
+
+  @override
+  String get expansionTileCollapsedTapHint => 'Doubwe tap to expwand';
+
+  @override
+  String get expansionTileExpandedHint => 'Doubwe tap to cowwapse';
+
+  @override
+  String get expansionTileExpandedTapHint => 'Doubwe tap to cowwapse';
 }
 
 class _KawaiiCupertinoLocalizationsDelegate extends LocalizationsDelegate<CupertinoLocalizations> {

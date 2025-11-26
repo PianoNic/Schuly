@@ -174,6 +174,24 @@ class ArnCupertinoLocalizations extends GlobalCupertinoLocalizations {
 
   @override
   String get noSpellCheckReplacementsLabel => 'No Replacements Found';
+
+  @override
+  String get collapsedHint => 'Double tap to expand';
+
+  @override
+  String get expandedHint => 'Double tap to collapse';
+
+  @override
+  String get expansionTileCollapsedHint => 'Double tap to expand';
+
+  @override
+  String get expansionTileCollapsedTapHint => 'Double tap to expand';
+
+  @override
+  String get expansionTileExpandedHint => 'Double tap to collapse';
+
+  @override
+  String get expansionTileExpandedTapHint => 'Double tap to collapse';
 }
 
 class _ArnCupertinoLocalizationsDelegate extends LocalizationsDelegate<CupertinoLocalizations> {

@@ -29,7 +29,7 @@ class LatenessDto {
 
   String? id;
 
-  DateTime? dateExcused;
+  Object? dateExcused;
 
   String? date;
 
@@ -93,7 +93,7 @@ class LatenessDto {
       json[r'id'] = null;
     }
     if (this.dateExcused != null) {
-      json[r'dateExcused'] = _dateFormatter.format(this.dateExcused!.toUtc());
+      json[r'dateExcused'] = this.dateExcused;
     } else {
       json[r'dateExcused'] = null;
     }
@@ -170,7 +170,7 @@ class LatenessDto {
 
       return LatenessDto(
         id: mapValueOfType<String>(json, r'id'),
-        dateExcused: mapDateTime(json, r'dateExcused', r''),
+        dateExcused: mapValueOfType<Object>(json, r'dateExcused'),
         date: mapValueOfType<String>(json, r'date'),
         startTime: mapValueOfType<String>(json, r'startTime'),
         endTime: mapValueOfType<String>(json, r'endTime'),

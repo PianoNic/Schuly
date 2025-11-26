@@ -9,7 +9,7 @@ import 'package:openapi/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | [optional] 
-**dateExcused** | [**DateTime**](DateTime.md) |  | [optional] 
+**dateExcused** | [**Object**](.md) |  | [optional] 
 **date** | **String** |  | [optional] 
 **startTime** | **String** |  | [optional] 
 **endTime** | **String** |  | [optional] 

@@ -1,0 +1,14 @@
+services:
+  dev-db:
+    image: postgres:18.1
+    container_name: schuly-postgres-dev
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: d4vpas8w0rd13!!!
+      POSTGRES_DB: schuly-dev
+    ports:
+      - "2406:5432"
+    volumes:
+      - postgres-data-dev:/var/lib/postgresql
+volumes:
+  postgres-data-dev:

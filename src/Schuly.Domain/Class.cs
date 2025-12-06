@@ -1,14 +1,13 @@
 ﻿namespace Schuly.Domain
 {
-    public class Class
+    public class Class : Base
     {
-        public long Id { get; set; }
         public required string Name { get; set; }
         public string? Description { get; set; }
-        public List<User> Students { get; set; } = new List<User>();
-        public List<User> PersonsInCharge { get; set; } = new List<User>();
-        public List<Exam> Exams { get; set; } = new List<Exam>();
-        public List<ExamAverage> ExamAverages { get; set; } = new List<ExamAverage>();
-        public required Agenda Agenda { get; set; }
+
+        
+        public ICollection<UserClass> UserClasses { get; set; } = new List<UserClass>();
+        public ICollection<Exam> Exams { get; set; } = new List<Exam>();
+        public ICollection<AgendaEntry> AgendaEntries { get; set; } = new List<AgendaEntry>();
     }
 }

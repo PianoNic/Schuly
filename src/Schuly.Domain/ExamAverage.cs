@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Schuly.Domain
 {
-    public class ExamAverage
+    public class ExamAverage : Base
     {
-        public long Id { get; set; }
-        public decimal Grade { get; set; }
+        public decimal Average { get; set; }
+
+        public long ExamId { get; set; }
         public required Exam Exam { get; set; }
-        public required Class Class { get; set; }
     }
 }

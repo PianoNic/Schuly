@@ -6,14 +6,12 @@ namespace Schuly.Infrastructure
 {
     public class SchulyDbContext : DbContext
     {
+        public DbSet<Class> Classes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Exam> Exams { get; set; }
-        public DbSet<Class> Classes { get; set; }
         public DbSet<Absence> Absences { get; set; }
-        public DbSet<ExamAverage> ExamAverages { get; set; }
         public DbSet<AgendaEntry> AgendaEntries { get; set; }
-        public DbSet<UserClass> UserClasses { get; set; }
 
         public SchulyDbContext(DbContextOptions<SchulyDbContext> options) : base(options) { }
 
@@ -72,7 +70,7 @@ namespace Schuly.Infrastructure
                 entity.HasIndex(ae => ae.Date);
 
                 entity.HasOne(ae => ae.Class)
-                    .WithMany(c => c.AgendaEntries)
+                    .WithMany(c => c.Agenda)
                     .HasForeignKey(ae => ae.ClassId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
@@ -86,34 +84,7 @@ namespace Schuly.Infrastructure
                     .HasForeignKey(a => a.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasIndex(a => new { a.UserId, a.From, a.Until });
-            });
-
-            modelBuilder.Entity<ExamAverage>(entity =>
-            {
-                entity.HasKey(ea => ea.Id);
-
-                entity.HasOne(ea => ea.Exam)
-                    .WithOne(e => e.ExamAverage)
-                    .HasForeignKey<ExamAverage>(ea => ea.ExamId)
-                    .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasIndex(ea => ea.ExamId).IsUnique();
-            });
-
-            modelBuilder.Entity<UserClass>(entity =>
-            {
-                entity.HasKey(uc => new { uc.UserId, uc.ClassId });
-
-                entity.HasOne(uc => uc.User)
-                    .WithMany(u => u.UserClasses)
-                    .HasForeignKey(uc => uc.UserId)
-                    .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(uc => uc.Class)
-                    .WithMany(c => c.UserClasses)
-                    .HasForeignKey(uc => uc.ClassId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                entity.HasIndex(a => new { a.UserId, a.From, a.Until, a.Type });
             });
         }
 

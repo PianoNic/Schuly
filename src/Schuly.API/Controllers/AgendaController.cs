@@ -14,25 +14,25 @@ namespace Schuly.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("Absence", Name = "Absence")]
+        [HttpGet]
         public async Task<ActionResult> GetAgenda()
         {
             return Ok();
         }
 
-        [HttpPost("Absence", Name = "Absence")]
+        [HttpPost]
         public async Task<ActionResult> CreateEntry()
         {
             return Created();
         }
 
-        [HttpPut("Absence", Name = "Absence")]
+        [HttpPut]
         public async Task<ActionResult> UpdateEntry()
         {
             return Ok();
         }
 
-        [HttpDelete("Absence", Name = "Absence")]
+        [HttpDelete]
         public async Task<ActionResult> DeleteEntry()
         {
             return Ok();

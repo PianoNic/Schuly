@@ -16,10 +16,7 @@ namespace Schuly.Domain
         public required DateOnly EntryDate { get; set; }
         public DateOnly? LeaveDate { get; set; }
         public required Roles Role { get; set; }
-
-        
         public ICollection<Absence> Absences { get; set; } = new List<Absence>();
-        public ICollection<UserClass> UserClasses { get; set; } = new List<UserClass>();
         public ICollection<Grade> Grades { get; set; } = new List<Grade>();
     }
 }

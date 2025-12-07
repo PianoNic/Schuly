@@ -19,25 +19,25 @@ namespace Schuly.API.Controllers
             return Ok();
         }
 
-        [HttpGet("Exam", Name = "Exam")]
+        [HttpGet]
         public async Task<ActionResult> GetExam()
         {
             return Ok();
         }
 
-        [HttpPost("Exam", Name = "Exam")]
+        [HttpPost]
         public async Task<ActionResult> AddExam()
         {
             return Created();
         }
 
-        [HttpPut("Exam", Name = "Exam")]
+        [HttpPut]
         public async Task<ActionResult> UpdateExam()
         {
             return Ok();
         }
 
-        [HttpDelete("Exam", Name = "Exam")]
+        [HttpDelete]
         public async Task<ActionResult> DeleteExam()
         {
             return Ok();

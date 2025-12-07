@@ -1,7 +1,4 @@
 ﻿using Schuly.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Schuly.Domain
 {
@@ -13,7 +10,7 @@ namespace Schuly.Domain
         public string? Place { get; set; }
         public required DateTime Date { get; set; }
 
-        public long? ClassId { get; set; }
+        public long ClassId { get; set; }
         public Class? Class { get; set; }
     }
 }

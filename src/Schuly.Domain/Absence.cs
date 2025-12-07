@@ -10,8 +10,7 @@ namespace Schuly.Domain
         public required DateTime Until { get; set; }
 
         
-        public required long UserId { get; set; }
-        public long? ClassId { get; set; }
-        public required User User { get; set; }
+        public long UserId { get; set; }
+        public User User { get; set; }
     }
 }

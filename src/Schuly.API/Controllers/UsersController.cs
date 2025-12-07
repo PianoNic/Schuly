@@ -1,6 +1,6 @@
 ﻿using Mediator;
 using Microsoft.AspNetCore.Mvc;
-using Schuly.Application.Commands;
+using Schuly.Application.Commands.User;
 using Schuly.Application.Queries.User;
 
 namespace Schuly.API.Controllers
@@ -16,34 +16,37 @@ namespace Schuly.API.Controllers
         }
 
         [HttpGet("search", Name = "search")]
-        public async Task<ActionResult> GetUser([FromQuery] GetUserQuery userInfoQuery)
+        public async Task<ActionResult> GetUser([FromQuery] GetUserQuery getUser)
         {
-            await _mediator.Send(userInfoQuery);
+            await _mediator.Send(getUser);
             return Ok();
         }
 
         [HttpGet]
         public async Task<ActionResult> GetUsers()
         {
+            await _mediator.Send(new GetUsersQuery());
             return Ok();
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateUser()
+        public async Task<ActionResult> CreateUser(CreateUserCommand createUser)
         {
+            await _mediator.Send(createUser);
             return Created();
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateUser()
+        public async Task<ActionResult> UpdateUser(UpdateUserCommand updateUser)
         {
+            await _mediator.Send(updateUser);
             return Ok();
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteUser(RemoveUserCommand removeUserCommand)
+        public async Task<ActionResult> DeleteUser(DeleteUserCommand deleteUser)
         {
-            await _mediator.Send(removeUserCommand);
+            await _mediator.Send(deleteUser);
             return Ok();
         }
     }

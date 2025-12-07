@@ -1,6 +1,7 @@
 ﻿using Mediator;
 using Microsoft.AspNetCore.Mvc;
-using Schuly.Application.Queries;
+using Schuly.Application.Commands.Agenda;
+using Schuly.Application.Queries.Agenda;
 
 namespace Schuly.API.Controllers
 {
@@ -15,26 +16,37 @@ namespace Schuly.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAgenda()
+        public async Task<ActionResult> GetAgendas()
         {
+            await _mediator.Send(new GetAgendasQuery());
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAgenda(GetAgendaQuery getAgenda)
+        {
+            await _mediator.Send(getAgenda);
             return Ok();
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateEntry()
+        public async Task<ActionResult> CreateEntry(CreateAgendaEntryCommand createAgendaEntry)
         {
+            await _mediator.Send(createAgendaEntry);
             return Created();
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateEntry()
+        public async Task<ActionResult> UpdateEntry(UpdateAgendaEntryCommand updateAgendaEntry)
         {
+            await _mediator.Send(updateAgendaEntry);
             return Ok();
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteEntry()
+        public async Task<ActionResult> DeleteEntry(DeleteAgendaEntryCommand deleteAgendaEntry)
         {
+            await _mediator.Send(deleteAgendaEntry);
             return Ok();
         }
     }

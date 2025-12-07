@@ -2,6 +2,7 @@
 {
     public class Class : Base
     {
+        public new Guid Id { get; set; }
         public required string Name { get; set; }
         public string? Description { get; set; }
         public ICollection<User> Students { get; set; } = new List<User>();

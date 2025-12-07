@@ -27,6 +27,9 @@ namespace Schuly.Infrastructure
                 entity.Property(u => u.FirstName).HasMaxLength(100);
                 entity.Property(u => u.LastName).HasMaxLength(100);
                 entity.Property(u => u.Role).IsRequired();
+
+                entity.HasMany(u => u.Classes)
+                      .WithMany(c => c.Students);
             });
 
             modelBuilder.Entity<Grade>(entity =>
@@ -61,6 +64,9 @@ namespace Schuly.Infrastructure
                 entity.HasKey(c => c.Id);
                 entity.Property(c => c.Name).HasMaxLength(100);
                 entity.HasIndex(c => c.Name).IsUnique();
+
+                entity.HasMany(c => c.Students)
+                      .WithMany(u => u.Classes);
             });
 
             modelBuilder.Entity<AgendaEntry>(entity =>
@@ -107,7 +113,10 @@ namespace Schuly.Infrastructure
             foreach (var entry in entries)
             {
                 if (entry.State == EntityState.Added)
+                {
                     entry.Entity.CreatedAt = DateTime.UtcNow;
+                    entry.Entity.UpdatedAt = DateTime.UtcNow;
+                }
 
                 if (entry.State == EntityState.Modified)
                     entry.Entity.UpdatedAt = DateTime.UtcNow;

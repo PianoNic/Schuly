@@ -1,10 +1,10 @@
-﻿using Schuly.Domain.Enums;
+using Schuly.Domain.Enums;
 
-namespace Schuly.Domain
+namespace Schuly.Application.Dtos
 {
-    public class User : Base
+    public class UserDto
     {
-        public new Guid Id { get; set; }
+        public Guid Id { get; set; }
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
         public required string Email { get; set; }
@@ -17,8 +17,8 @@ namespace Schuly.Domain
         public required DateOnly EntryDate { get; set; }
         public DateOnly? LeaveDate { get; set; }
         public required Roles Role { get; set; }
-        public ICollection<Absence> Absences { get; set; } = new List<Absence>();
-        public ICollection<Grade> Grades { get; set; } = new List<Grade>();
-        public ICollection<Class> Classes { get; set; } = new List<Class>();
+        public List<AbsenceDto> Absences { get; set; } = new List<AbsenceDto>();
+        public List<GradeDto> Grades { get; set; } = new List<GradeDto>();
+        public List<UserClassDto> Classes { get; set; } = new List<UserClassDto>();
     }
 }

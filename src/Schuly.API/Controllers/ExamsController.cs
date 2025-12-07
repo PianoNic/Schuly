@@ -5,15 +5,15 @@ namespace Schuly.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ExamController : ControllerBase
+    public class ExamsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public ExamController(IMediator mediator)
+        public ExamsController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [HttpGet("Exams", Name = "Exams")]
+        [HttpGet("search", Name = "search")]
         public async Task<ActionResult> GetExams()
         {
             return Ok();

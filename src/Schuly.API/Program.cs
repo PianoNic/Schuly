@@ -1,7 +1,6 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
-using Scalar.AspNetCore;
-using Schuly.Application.Queries;
+using Schuly.Application.Queries.User;
 using Schuly.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +11,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddMediator((MediatorOptions options) =>
 {
-    options.Assemblies = [typeof(GetUserInfoQuery)];
+    options.Assemblies = [typeof(GetUserQuery)];
 });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -40,7 +39,10 @@ scope.ServiceProvider.GetRequiredService<SchulyDbContext>().Database.Migrate();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "Schuly API v1");
+    });
 }
 
 app.UseHttpsRedirection();

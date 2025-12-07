@@ -1,28 +1,28 @@
 ﻿using Mediator;
 using Microsoft.AspNetCore.Mvc;
 using Schuly.Application.Commands;
-using Schuly.Application.Queries;
+using Schuly.Application.Queries.User;
 
 namespace Schuly.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public UserController(IMediator mediator)
+        public UsersController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetUser()
+        [HttpGet("search", Name = "search")]
+        public async Task<ActionResult> GetUser([FromQuery] GetUserQuery userInfoQuery)
         {
-            await _mediator.Send(new GetUserInfoQuery());
+            await _mediator.Send(userInfoQuery);
             return Ok();
         }
 
-        [HttpGet("Users", Name = "Users")]
+        [HttpGet]
         public async Task<ActionResult> GetUsers()
         {
             return Ok();
@@ -41,9 +41,9 @@ namespace Schuly.API.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteUser(long userId)
+        public async Task<ActionResult> DeleteUser(RemoveUserCommand removeUserCommand)
         {
-            await _mediator.Send(new RemoveUserCommand(userId));
+            await _mediator.Send(removeUserCommand);
             return Ok();
         }
     }

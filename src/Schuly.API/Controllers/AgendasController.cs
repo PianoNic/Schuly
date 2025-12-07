@@ -6,10 +6,10 @@ namespace Schuly.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AgendaController : ControllerBase
+    public class AgendasController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public AgendaController(IMediator mediator)
+        public AgendasController(IMediator mediator)
         {
             _mediator = mediator;
         }

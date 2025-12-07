@@ -15,7 +15,7 @@ namespace Schuly.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("User", Name = "User")]
+        [HttpGet]
         public async Task<ActionResult> GetUser()
         {
             await _mediator.Send(new GetUserInfoQuery());
@@ -28,19 +28,19 @@ namespace Schuly.API.Controllers
             return Ok();
         }
 
-        [HttpPost("User", Name = "User")]
+        [HttpPost]
         public async Task<ActionResult> CreateUser()
         {
             return Created();
         }
 
-        [HttpPut("User", Name = "User")]
+        [HttpPut]
         public async Task<ActionResult> UpdateUser()
         {
             return Ok();
         }
 
-        [HttpDelete("User/{userId}", Name = "User")]
+        [HttpDelete]
         public async Task<ActionResult> DeleteUser(long userId)
         {
             await _mediator.Send(new RemoveUserCommand(userId));

@@ -1,16 +1,31 @@
 using Mediator;
+using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Dtos;
+using Schuly.Application.Mappers;
+using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.User
 {
-    public class GetUsersQuery : IRequest
+    public class GetUsersQuery : IRequest<List<UserDto>>
     {
     }
 
-    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery>
+    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, List<UserDto>>
     {
-        public ValueTask<Unit> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        private readonly SchulyDbContext _dbContext;
+
+        public GetUsersQueryHandler(SchulyDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+
+        public async ValueTask<List<UserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        {
+            var users = await _dbContext.Users
+                .Include(u => u.Absences)
+                .Include(u => u.Grades)
+                .ToListAsync(cancellationToken);
+            return users.ToDto();
         }
     }
 }

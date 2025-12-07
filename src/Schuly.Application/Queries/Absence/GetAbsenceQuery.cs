@@ -1,16 +1,31 @@
 using Mediator;
+using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Dtos;
+using Schuly.Application.Mappers;
+using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Absence
 {
-    public class GetAbsenceQuery : IRequest
+    public class GetAbsenceQuery : IRequest<AbsenceDto?>
     {
+        public required long AbsenceId { get; set; }
     }
 
-    public class GetAbsenceQueryHandler : IRequestHandler<GetAbsenceQuery>
+    public class GetAbsenceQueryHandler : IRequestHandler<GetAbsenceQuery, AbsenceDto?>
     {
-        public ValueTask<Unit> Handle(GetAbsenceQuery request, CancellationToken cancellationToken)
+        private readonly SchulyDbContext _dbContext;
+
+        public GetAbsenceQueryHandler(SchulyDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+
+        public async ValueTask<AbsenceDto?> Handle(GetAbsenceQuery request, CancellationToken cancellationToken)
+        {
+            var absence = await _dbContext.Absences
+                .SingleOrDefaultAsync(a => a.Id == request.AbsenceId, cancellationToken);
+
+            return absence?.ToDto();
         }
     }
 }

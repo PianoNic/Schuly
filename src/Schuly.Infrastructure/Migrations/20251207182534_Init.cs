@@ -16,8 +16,7 @@ namespace Schuly.Infrastructure.Migrations
                 name: "Classes",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -39,7 +38,7 @@ namespace Schuly.Infrastructure.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     Place = table.Column<string>(type: "text", nullable: true),
                     Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ClassId = table.Column<long>(type: "bigint", nullable: false),
+                    ClassId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -64,7 +63,7 @@ namespace Schuly.Infrastructure.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<int>(type: "integer", nullable: false),
                     ClassAverage = table.Column<decimal>(type: "numeric", nullable: false),
-                    ClassId = table.Column<long>(type: "bigint", nullable: false),
+                    ClassId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -83,8 +82,7 @@ namespace Schuly.Infrastructure.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     FirstName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
@@ -97,7 +95,7 @@ namespace Schuly.Infrastructure.Migrations
                     EntryDate = table.Column<DateOnly>(type: "date", nullable: false),
                     LeaveDate = table.Column<DateOnly>(type: "date", nullable: true),
                     Role = table.Column<int>(type: "integer", nullable: false),
-                    ClassId = table.Column<long>(type: "bigint", nullable: true),
+                    ClassId = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -121,7 +119,7 @@ namespace Schuly.Infrastructure.Migrations
                     Type = table.Column<int>(type: "integer", nullable: false),
                     From = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Until = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -146,7 +144,7 @@ namespace Schuly.Infrastructure.Migrations
                     Weighting = table.Column<decimal>(type: "numeric", nullable: false),
                     RegisteredDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ExamId = table.Column<long>(type: "bigint", nullable: false),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },

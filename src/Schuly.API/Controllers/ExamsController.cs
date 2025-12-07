@@ -1,7 +1,7 @@
-﻿using Mediator;
+using Mediator;
 using Microsoft.AspNetCore.Mvc;
 using Schuly.Application.Commands.Exam;
-using Schuly.Application.Commands.User;
+using Schuly.Application.Dtos;
 using Schuly.Application.Queries.Exam;
 
 namespace Schuly.API.Controllers
@@ -16,39 +16,50 @@ namespace Schuly.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("search", Name = "search")]
-        public async Task<ActionResult> GetExam(GetExamQuery getExam)
+        [HttpGet("search")]
+        [ProducesResponseType(typeof(ExamDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ExamDto>> GetExam([FromQuery] GetExamQuery getExam)
         {
-            await _mediator.Send(getExam);
-            return Ok();
+            var result = await _mediator.Send(getExam, HttpContext.RequestAborted);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetExams()
+        [ProducesResponseType(typeof(List<ExamDto>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<ExamDto>>> GetExams()
         {
-            await _mediator.Send(new GetExamsQuery());
-            return Ok();
+            return Ok(await _mediator.Send(new GetExamsQuery(), HttpContext.RequestAborted));
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AddExam(CreateExamCommand createExam)
         {
-            await _mediator.Send(createExam);
+            await _mediator.Send(createExam, HttpContext.RequestAborted);
             return Created();
         }
 
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> UpdateExam(UpdateExamCommand updateExam)
         {
-            await _mediator.Send(updateExam);
+            await _mediator.Send(updateExam, HttpContext.RequestAborted);
             return Ok();
         }
 
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteExam(DeleteExamCommand deleteExam)
         {
-            await _mediator.Send(deleteExam);
-            return Ok();
+            await _mediator.Send(deleteExam, HttpContext.RequestAborted);
+            return NoContent();
         }
     }
 }

@@ -2,12 +2,19 @@ using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Queries.User;
 using Schuly.Infrastructure;
+using System.Text.Json.Serialization;
+
+[assembly: MediatorOptions(ServiceLifetime = ServiceLifetime.Scoped)]
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 builder.Services.AddMediator((MediatorOptions options) =>
 {

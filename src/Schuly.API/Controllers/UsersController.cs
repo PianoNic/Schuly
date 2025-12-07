@@ -1,6 +1,7 @@
-﻿using Mediator;
+using Mediator;
 using Microsoft.AspNetCore.Mvc;
 using Schuly.Application.Commands.User;
+using Schuly.Application.Dtos;
 using Schuly.Application.Queries.User;
 
 namespace Schuly.API.Controllers
@@ -15,39 +16,50 @@ namespace Schuly.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("search", Name = "search")]
-        public async Task<ActionResult> GetUser([FromQuery] GetUserQuery getUser)
+        [HttpGet("search")]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<UserDto>> GetUser([FromQuery] GetUserQuery getUser)
         {
-            await _mediator.Send(getUser);
-            return Ok();
+            var result = await _mediator.Send(getUser, HttpContext.RequestAborted);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetUsers()
+        [ProducesResponseType(typeof(List<UserDto>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<UserDto>>> GetUsers()
         {
-            await _mediator.Send(new GetUsersQuery());
-            return Ok();
+            return Ok(await _mediator.Send(new GetUsersQuery(), HttpContext.RequestAborted));
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateUser(CreateUserCommand createUser)
         {
-            await _mediator.Send(createUser);
+            await _mediator.Send(createUser, HttpContext.RequestAborted);
             return Created();
         }
 
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> UpdateUser(UpdateUserCommand updateUser)
         {
-            await _mediator.Send(updateUser);
+            await _mediator.Send(updateUser, HttpContext.RequestAborted);
             return Ok();
         }
 
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteUser(DeleteUserCommand deleteUser)
         {
-            await _mediator.Send(deleteUser);
-            return Ok();
+            await _mediator.Send(deleteUser, HttpContext.RequestAborted);
+            return NoContent();
         }
     }
 }

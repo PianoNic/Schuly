@@ -12,7 +12,7 @@ using Schuly.Infrastructure;
 namespace Schuly.Infrastructure.Migrations
 {
     [DbContext(typeof(SchulyDbContext))]
-    [Migration("20251207100801_Init")]
+    [Migration("20251207182534_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -52,8 +52,8 @@ namespace Schuly.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -70,8 +70,8 @@ namespace Schuly.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("ClassId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ClassId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -107,11 +107,9 @@ namespace Schuly.Infrastructure.Migrations
 
             modelBuilder.Entity("Schuly.Domain.Class", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -146,8 +144,8 @@ namespace Schuly.Infrastructure.Migrations
                     b.Property<decimal>("ClassAverage")
                         .HasColumnType("numeric");
 
-                    b.Property<long>("ClassId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ClassId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -196,8 +194,8 @@ namespace Schuly.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.Property<decimal>("Weighting")
                         .HasColumnType("numeric");
@@ -213,11 +211,9 @@ namespace Schuly.Infrastructure.Migrations
 
             modelBuilder.Entity("Schuly.Domain.User", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateOnly>("Birthday")
                         .HasColumnType("date");
@@ -225,8 +221,8 @@ namespace Schuly.Infrastructure.Migrations
                     b.Property<string>("City")
                         .HasColumnType("text");
 
-                    b.Property<long?>("ClassId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid?>("ClassId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");

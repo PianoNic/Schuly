@@ -1,16 +1,32 @@
 using Mediator;
+using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Dtos;
+using Schuly.Application.Mappers;
+using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Exam
 {
-    public class GetExamQuery : IRequest
+    public class GetExamQuery : IRequest<ExamDto?>
     {
+        public required long ExamId { get; set; }
     }
 
-    public class GetExamQueryHandler : IRequestHandler<GetExamQuery>
+    public class GetExamQueryHandler : IRequestHandler<GetExamQuery, ExamDto?>
     {
-        public ValueTask<Unit> Handle(GetExamQuery request, CancellationToken cancellationToken)
+        private readonly SchulyDbContext _dbContext;
+
+        public GetExamQueryHandler(SchulyDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+
+        public async ValueTask<ExamDto?> Handle(GetExamQuery request, CancellationToken cancellationToken)
+        {
+            var exam = await _dbContext.Exams
+                .Include(e => e.Grades)
+                .SingleOrDefaultAsync(e => e.Id == request.ExamId, cancellationToken);
+
+            return exam?.ToDto();
         }
     }
 }

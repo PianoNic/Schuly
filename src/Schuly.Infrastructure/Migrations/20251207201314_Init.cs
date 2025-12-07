@@ -28,6 +28,31 @@ namespace Schuly.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    FirstName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    PrivateEmail = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    Street = table.Column<string>(type: "text", nullable: true),
+                    City = table.Column<string>(type: "text", nullable: true),
+                    Zip = table.Column<string>(type: "text", nullable: true),
+                    Birthday = table.Column<DateOnly>(type: "date", nullable: false),
+                    EntryDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    LeaveDate = table.Column<DateOnly>(type: "date", nullable: true),
+                    Role = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AgendaEntries",
                 columns: table => new
                 {
@@ -62,7 +87,6 @@ namespace Schuly.Infrastructure.Migrations
                     Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<int>(type: "integer", nullable: false),
-                    ClassAverage = table.Column<decimal>(type: "numeric", nullable: false),
                     ClassId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
@@ -76,37 +100,6 @@ namespace Schuly.Infrastructure.Migrations
                         principalTable: "Classes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    FirstName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    LastName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    PrivateEmail = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    Street = table.Column<string>(type: "text", nullable: true),
-                    City = table.Column<string>(type: "text", nullable: true),
-                    Zip = table.Column<string>(type: "text", nullable: true),
-                    Birthday = table.Column<DateOnly>(type: "date", nullable: false),
-                    EntryDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    LeaveDate = table.Column<DateOnly>(type: "date", nullable: true),
-                    Role = table.Column<int>(type: "integer", nullable: false),
-                    ClassId = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Classes_ClassId",
-                        column: x => x.ClassId,
-                        principalTable: "Classes",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -129,6 +122,30 @@ namespace Schuly.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Absences_Users_UserId",
                         column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClassUser",
+                columns: table => new
+                {
+                    ClassesId = table.Column<Guid>(type: "uuid", nullable: false),
+                    StudentsId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClassUser", x => new { x.ClassesId, x.StudentsId });
+                    table.ForeignKey(
+                        name: "FK_ClassUser_Classes_ClassesId",
+                        column: x => x.ClassesId,
+                        principalTable: "Classes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ClassUser_Users_StudentsId",
+                        column: x => x.StudentsId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -187,6 +204,11 @@ namespace Schuly.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ClassUser_StudentsId",
+                table: "ClassUser",
+                column: "StudentsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Exams_ClassId",
                 table: "Exams",
                 column: "ClassId");
@@ -200,11 +222,6 @@ namespace Schuly.Infrastructure.Migrations
                 name: "IX_Grades_UserId_ExamId",
                 table: "Grades",
                 columns: new[] { "UserId", "ExamId" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_ClassId",
-                table: "Users",
-                column: "ClassId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
@@ -221,6 +238,9 @@ namespace Schuly.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AgendaEntries");
+
+            migrationBuilder.DropTable(
+                name: "ClassUser");
 
             migrationBuilder.DropTable(
                 name: "Grades");

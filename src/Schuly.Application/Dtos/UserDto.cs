@@ -19,5 +19,6 @@ namespace Schuly.Application.Dtos
         public required Roles Role { get; set; }
         public List<AbsenceDto> Absences { get; set; } = new List<AbsenceDto>();
         public List<GradeDto> Grades { get; set; } = new List<GradeDto>();
+        public List<UserClassDto> Classes { get; set; } = new List<UserClassDto>();
     }
 }

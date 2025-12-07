@@ -7,8 +7,7 @@ namespace Schuly.Domain
         public required string Name { get; set; }
         public string? Description { get; set; }
         public ExamType Type { get; set; }
-        public required decimal ClassAverage { get; set; }
-        public required ICollection<Grade> Grades { get; set; } = new List<Grade>();
+        public ICollection<Grade> Grades { get; set; } = new List<Grade>();
 
         public Guid ClassId { get; set; }
         public Class Class { get; set; }

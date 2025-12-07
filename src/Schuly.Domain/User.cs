@@ -19,5 +19,6 @@ namespace Schuly.Domain
         public required Roles Role { get; set; }
         public ICollection<Absence> Absences { get; set; } = new List<Absence>();
         public ICollection<Grade> Grades { get; set; } = new List<Grade>();
+        public ICollection<Class> Classes { get; set; } = new List<Class>();
     }
 }

@@ -10,7 +10,6 @@ namespace Schuly.Application.Commands.Exam
         public required string Name { get; set; }
         public string? Description { get; set; }
         public ExamType Type { get; set; }
-        public required decimal ClassAverage { get; set; }
         public required Guid ClassId { get; set; }
     }
 
@@ -30,9 +29,7 @@ namespace Schuly.Application.Commands.Exam
                 Name = request.Name,
                 Description = request.Description,
                 Type = request.Type,
-                ClassAverage = request.ClassAverage,
-                ClassId = request.ClassId,
-                Grades = new List<Grade>()
+                ClassId = request.ClassId
             }, cancellationToken);
 
             await _dbContext.SaveChangesAsync(cancellationToken);

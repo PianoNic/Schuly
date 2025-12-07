@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Schuly.Domain\Schuly.Domain.csproj" />
     <ProjectReference Include="..\Schuly.Infrastructure\Schuly.Infrastructure.csproj" />
   </ItemGroup>

@@ -24,6 +24,7 @@ namespace Schuly.Application.Queries.User
             var users = await _dbContext.Users
                 .Include(u => u.Absences)
                 .Include(u => u.Grades)
+                .Include(u => u.Classes)
                 .ToListAsync(cancellationToken);
             return users.ToDto();
         }

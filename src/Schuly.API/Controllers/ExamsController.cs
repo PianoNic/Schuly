@@ -43,6 +43,15 @@ namespace Schuly.API.Controllers
             return Created();
         }
 
+        [HttpPost("grade")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AddGradeToExam(AddGradeToExamCommand addGradeToExam)
+        {
+            await _mediator.Send(addGradeToExam, HttpContext.RequestAborted);
+            return Created();
+        }
+
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

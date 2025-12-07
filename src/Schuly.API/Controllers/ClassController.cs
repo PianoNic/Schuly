@@ -43,6 +43,15 @@ namespace Schuly.API.Controllers
             return Created();
         }
 
+        [HttpPost("enrol-student")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> EnrolStudent(EnrolStudentCommand enrolStudent)
+        {
+            await _mediator.Send(enrolStudent, HttpContext.RequestAborted);
+            return Created();
+        }
+
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

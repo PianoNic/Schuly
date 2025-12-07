@@ -12,7 +12,7 @@ using Schuly.Infrastructure;
 namespace Schuly.Infrastructure.Migrations
 {
     [DbContext(typeof(SchulyDbContext))]
-    [Migration("20251207182534_Init")]
+    [Migration("20251207201314_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -24,6 +24,21 @@ namespace Schuly.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("ClassUser", b =>
+                {
+                    b.Property<Guid>("ClassesId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("StudentsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ClassesId", "StudentsId");
+
+                    b.HasIndex("StudentsId");
+
+                    b.ToTable("ClassUser");
+                });
 
             modelBuilder.Entity("Schuly.Domain.Absence", b =>
                 {
@@ -141,9 +156,6 @@ namespace Schuly.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<decimal>("ClassAverage")
-                        .HasColumnType("numeric");
-
                     b.Property<Guid>("ClassId")
                         .HasColumnType("uuid");
 
@@ -221,9 +233,6 @@ namespace Schuly.Infrastructure.Migrations
                     b.Property<string>("City")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("ClassId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -268,12 +277,25 @@ namespace Schuly.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassId");
-
                     b.HasIndex("Email")
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ClassUser", b =>
+                {
+                    b.HasOne("Schuly.Domain.Class", null)
+                        .WithMany()
+                        .HasForeignKey("ClassesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Schuly.Domain.User", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Schuly.Domain.Absence", b =>
@@ -328,20 +350,11 @@ namespace Schuly.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Schuly.Domain.User", b =>
-                {
-                    b.HasOne("Schuly.Domain.Class", null)
-                        .WithMany("Students")
-                        .HasForeignKey("ClassId");
-                });
-
             modelBuilder.Entity("Schuly.Domain.Class", b =>
                 {
                     b.Navigation("Agenda");
 
                     b.Navigation("Exams");
-
-                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("Schuly.Domain.Exam", b =>

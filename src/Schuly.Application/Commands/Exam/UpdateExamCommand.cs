@@ -11,7 +11,6 @@ namespace Schuly.Application.Commands.Exam
         public required string Name { get; set; }
         public string? Description { get; set; }
         public ExamType Type { get; set; }
-        public required decimal ClassAverage { get; set; }
         public required Guid ClassId { get; set; }
     }
 
@@ -34,7 +33,6 @@ namespace Schuly.Application.Commands.Exam
                 exam.Name = request.Name;
                 exam.Description = request.Description;
                 exam.Type = request.Type;
-                exam.ClassAverage = request.ClassAverage;
                 exam.ClassId = request.ClassId;
 
                 await _dbContext.SaveChangesAsync(cancellationToken);

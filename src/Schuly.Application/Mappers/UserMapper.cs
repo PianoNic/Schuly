@@ -23,7 +23,8 @@ namespace Schuly.Application.Mappers
                 LeaveDate = user.LeaveDate,
                 Role = user.Role,
                 Absences = user.Absences.Select(a => a.ToDto()).ToList(),
-                Grades = user.Grades.Select(g => g.ToDto()).ToList()
+                Grades = user.Grades.Select(g => g.ToDto()).ToList(),
+                Classes = user.Classes.Select(c => new UserClassDto() { ClassId = c.Id, ClassName = c.Name }).ToList(),
             };
         }
 

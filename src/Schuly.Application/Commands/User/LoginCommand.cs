@@ -1,5 +1,7 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using Schuly.Application.Models;
 using Schuly.Application.Services;
 using Schuly.Infrastructure;
 
@@ -17,6 +19,8 @@ namespace Schuly.Application.Commands.User
         public string? Token { get; set; }
         public string? Message { get; set; }
         public UserLoginDto? User { get; set; }
+        public bool RequiresTwoFactor { get; set; }
+        public Guid? TwoFactorSessionId { get; set; }
     }
 
     public class UserLoginDto
@@ -33,15 +37,18 @@ namespace Schuly.Application.Commands.User
         private readonly SchulyDbContext _dbContext;
         private readonly IPasswordHashingService _passwordHashingService;
         private readonly ITokenGenerationService _tokenGenerationService;
+        private readonly IMemoryCache _memoryCache;
 
         public LoginCommandHandler(
             SchulyDbContext dbContext,
             IPasswordHashingService passwordHashingService,
-            ITokenGenerationService tokenGenerationService)
+            ITokenGenerationService tokenGenerationService,
+            IMemoryCache memoryCache)
         {
             _dbContext = dbContext;
             _passwordHashingService = passwordHashingService;
             _tokenGenerationService = tokenGenerationService;
+            _memoryCache = memoryCache;
         }
 
         public async ValueTask<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -82,6 +89,21 @@ namespace Schuly.Application.Commands.User
                 {
                     Success = false,
                     Message = "User account is inactive. Please contact an administrator."
+                };
+            }
+
+            if (user.TwoFactorEnabled)
+            {
+                var sessionId = Guid.NewGuid();
+                var session = new TwoFactorSession(user.Id, user.Email, TimeSpan.FromMinutes(5));
+                _memoryCache.Set($"2fa-session:{sessionId}", session, TimeSpan.FromMinutes(5));
+
+                return new LoginResponse
+                {
+                    Success = false,
+                    RequiresTwoFactor = true,
+                    TwoFactorSessionId = sessionId,
+                    Message = "Two-factor authentication required"
                 };
             }
 

@@ -1,4 +1,5 @@
 using Mediator;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Schuly.Application.Commands.User;
 using Schuly.Application.Dtos;
@@ -8,12 +9,25 @@ namespace Schuly.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
         public UsersController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpPost("login")]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<LoginResponse>> Login(LoginCommand loginCommand)
+        {
+            var result = await _mediator.Send(loginCommand, HttpContext.RequestAborted);
+            if (!result.Success)
+                return Unauthorized(result);
+            return Ok(result);
         }
 
         [HttpGet("search")]

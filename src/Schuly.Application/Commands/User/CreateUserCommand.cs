@@ -1,10 +1,11 @@
 using Mediator;
+using Schuly.Application.Authorization;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.User
 {
-    public class CreateUserCommand : IRequest
+    public class CreateUserCommand : IRequest, IHasAuthorization
     {
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
@@ -17,6 +18,11 @@ namespace Schuly.Application.Commands.User
         public required DateOnly Birthday { get; set; }
         public required DateOnly EntryDate { get; set; }
         public required Roles Role { get; set; }
+
+        public Roles GetRequiredRole()
+        {
+            return Roles.Administrator;
+        }
     }
 
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>

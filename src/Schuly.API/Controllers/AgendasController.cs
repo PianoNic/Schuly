@@ -1,4 +1,5 @@
 using Mediator;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Schuly.Application.Commands.Agenda;
 using Schuly.Application.Dtos;
@@ -8,6 +9,7 @@ namespace Schuly.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class AgendasController : ControllerBase
     {
         private readonly IMediator _mediator;

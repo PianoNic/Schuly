@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Schuly.Infrastructure;
@@ -11,9 +12,11 @@ using Schuly.Infrastructure;
 namespace Schuly.Infrastructure.Migrations
 {
     [DbContext(typeof(SchulyDbContext))]
-    partial class SchulyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251217135308_AddUserState")]
+    partial class AddUserState
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,9 +227,6 @@ namespace Schuly.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthenticationEmail")
-                        .HasColumnType("text");
-
                     b.Property<DateOnly>("Birthday")
                         .HasColumnType("date");
 
@@ -249,9 +249,6 @@ namespace Schuly.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<bool>("IsAuthenticationEmailVerified")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -259,9 +256,6 @@ namespace Schuly.Infrastructure.Migrations
 
                     b.Property<DateOnly?>("LeaveDate")
                         .HasColumnType("date");
-
-                    b.Property<DateTime?>("PasswordChangedAt")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text");

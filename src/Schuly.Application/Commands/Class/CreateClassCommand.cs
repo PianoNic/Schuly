@@ -1,12 +1,19 @@
 using Mediator;
+using Schuly.Application.Authorization;
+using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Class
 {
-    public class CreateClassCommand : IRequest
+    public class CreateClassCommand : IRequest, IHasAuthorization
     {
         public required string Name { get; set; }
         public string? Description { get; set; }
+
+        public Roles GetRequiredRole()
+        {
+            return Roles.Teacher;
+        }
     }
 
     public class CreateClassCommandHandler : IRequestHandler<CreateClassCommand>

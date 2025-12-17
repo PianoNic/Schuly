@@ -1,16 +1,22 @@
 using Mediator;
+using Schuly.Application.Authorization;
 using Schuly.Domain;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Exam
 {
-    public class CreateExamCommand : IRequest
+    public class CreateExamCommand : IRequest, IHasAuthorization
     {
         public required string Name { get; set; }
         public string? Description { get; set; }
         public ExamType Type { get; set; }
         public required Guid ClassId { get; set; }
+
+        public Roles GetRequiredRole()
+        {
+            return Roles.Teacher;
+        }
     }
 
     public class CreateExamCommandHandler : IRequestHandler<CreateExamCommand>

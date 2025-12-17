@@ -1,13 +1,19 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Authorization;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.User
 {
-    public class GetUsersQuery : IRequest<List<UserDto>>
+    public class GetUsersQuery : IRequest<List<UserDto>>, IHasAuthorization
     {
+        public Roles GetRequiredRole()
+        {
+            return Roles.Teacher;
+        }
     }
 
     public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, List<UserDto>>

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Schuly.Infrastructure;
@@ -11,9 +12,11 @@ using Schuly.Infrastructure;
 namespace Schuly.Infrastructure.Migrations
 {
     [DbContext(typeof(SchulyDbContext))]
-    partial class SchulyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251217140809_AddAuthenticationCredentialsBase")]
+    partial class AddAuthenticationCredentialsBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,6 +252,9 @@ namespace Schuly.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
+                    b.Property<string>("GoogleOAuthId")
+                        .HasColumnType("text");
+
                     b.Property<bool>("IsAuthenticationEmailVerified")
                         .HasColumnType("boolean");
 
@@ -259,6 +265,18 @@ namespace Schuly.Infrastructure.Migrations
 
                     b.Property<DateOnly?>("LeaveDate")
                         .HasColumnType("date");
+
+                    b.Property<string>("MicrosoftOAuthId")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("OAuthLinkedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("OAuthProviderId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("OAuthProviderType")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("PasswordChangedAt")
                         .HasColumnType("timestamp with time zone");

@@ -1,12 +1,19 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Authorization;
+using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.User
 {
-    public class DeleteUserCommand : IRequest
+    public class DeleteUserCommand : IRequest, IHasAuthorization
     {
         public required Guid UserId { get; set; }
+
+        public Roles GetRequiredRole()
+        {
+            return Roles.Administrator;
+        }
     }
 
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>

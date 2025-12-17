@@ -1,11 +1,12 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Authorization;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.User
 {
-    public class UpdateUserCommand : IRequest
+    public class UpdateUserCommand : IRequest, IHasAuthorization
     {
         public required Guid UserId { get; set; }
         public required string FirstName { get; set; }
@@ -20,6 +21,11 @@ namespace Schuly.Application.Commands.User
         public required DateOnly EntryDate { get; set; }
         public DateOnly? LeaveDate { get; set; }
         public required Roles Role { get; set; }
+
+        public Roles GetRequiredRole()
+        {
+            return Roles.Administrator;
+        }
     }
 
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>

@@ -27,7 +27,7 @@ class _AgendaPageState extends State<AgendaPage> {
     return AgendaItemWithTest(
       time: '${lesson.startDate.substring(11, 16)} - ${lesson.endDate.substring(11, 16)}',
       subject: lesson.text,
-      room: lesson.roomToken,
+      room: lesson.roomToken ?? '',
       teachers: lesson.teachers,
       color: color,
       hasTest: hasTest,

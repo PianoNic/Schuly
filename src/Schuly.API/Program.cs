@@ -1,7 +1,11 @@
 using Mediator;
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Configuration;
 using Schuly.Application.Queries.User;
+using Schuly.Application.Services;
+using Schuly.Application.Services.Interfaces;
 using Schuly.Infrastructure;
 using System.Text.Json.Serialization;
 
@@ -20,7 +24,32 @@ builder.Services.Configure<JsonOptions>(options =>
 builder.Services.AddMediator((MediatorOptions options) =>
 {
     options.Assemblies = [typeof(GetUserQuery)];
+    options.ServiceLifetime = ServiceLifetime.Scoped;
 });
+
+// Register JWT configuration factory
+builder.Services.AddSingleton<IJwtConfigurationFactory, JwtConfigurationFactory>();
+
+// Load JWT settings and validate
+var jwtFactory = builder.Services.BuildServiceProvider().GetRequiredService<IJwtConfigurationFactory>();
+var jwtSettings = jwtFactory.LoadJwtSettings();
+
+// Add authentication services with JWT configuration
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options => jwtFactory.ConfigureJwtBearerOptions(options));
+
+builder.Services.AddAuthorization();
+
+// Register application services
+builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
+builder.Services.AddScoped<ITokenGenerationService>(sp =>
+    new TokenGenerationService(jwtSettings.SecretKey, jwtSettings.Issuer, jwtSettings.Audience, jwtSettings.ExpirationMinutes));
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -55,6 +84,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

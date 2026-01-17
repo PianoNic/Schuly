@@ -3,5 +3,6 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/app_icon_dev.png"
   adaptive_icon_background: "#FF6B6B"
-  adaptive_icon_foreground: "assets/app_icon_dev.png"
+  adaptive_icon_foreground: "assets/schuly_icon.png"
+  adaptive_icon_monochrome: "assets/schuly_icon.png"
   remove_alpha_ios: true

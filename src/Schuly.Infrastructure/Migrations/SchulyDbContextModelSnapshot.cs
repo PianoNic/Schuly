@@ -224,6 +224,9 @@ namespace Schuly.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("AuthenticationEmail")
+                        .HasColumnType("text");
+
                     b.Property<DateOnly>("Birthday")
                         .HasColumnType("date");
 
@@ -246,6 +249,9 @@ namespace Schuly.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
+                    b.Property<bool>("IsAuthenticationEmailVerified")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -254,6 +260,15 @@ namespace Schuly.Infrastructure.Migrations
                     b.Property<DateOnly?>("LeaveDate")
                         .HasColumnType("date");
 
+                    b.Property<DateTime?>("PasswordChangedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasswordSalt")
+                        .HasColumnType("text");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("text");
 
@@ -261,6 +276,9 @@ namespace Schuly.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<int>("Role")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("State")
                         .HasColumnType("integer");
 
                     b.Property<string>("Street")

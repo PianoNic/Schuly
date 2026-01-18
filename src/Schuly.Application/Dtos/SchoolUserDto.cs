@@ -6,6 +6,8 @@ namespace Schuly.Application.Dtos
     {
         public long Id { get; set; }
         public Guid ApplicationUserId { get; set; }
+        public long SchoolId { get; set; }
+        public string? SchoolName { get; set; }
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
         public required string Email { get; set; }

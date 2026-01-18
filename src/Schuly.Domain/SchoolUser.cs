@@ -7,6 +7,9 @@ namespace Schuly.Domain
         public Guid ApplicationUserId { get; set; }
         public ApplicationUser? ApplicationUser { get; set; }
 
+        public long SchoolId { get; set; }
+        public School? School { get; set; }
+
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
         public required string Email { get; set; }

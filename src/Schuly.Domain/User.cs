@@ -2,10 +2,6 @@
 
 namespace Schuly.Domain
 {
-    /// <summary>
-    /// User entity representing a student, teacher, or administrator in the system.
-    /// Inherits authentication credentials from AuthenticationCredentials base class.
-    /// </summary>
     public class User : AuthenticationCredentials
     {
         public new Guid Id { get; set; }
@@ -26,6 +22,9 @@ namespace Schuly.Domain
 
         public required Roles Role { get; set; }
         public UserState State { get; set; } = UserState.Active;
+
+        public long? SchoolId { get; set; }
+        public School? School { get; set; }
 
         public ICollection<Absence> Absences { get; set; } = new List<Absence>();
         public ICollection<Grade> Grades { get; set; } = new List<Grade>();

@@ -11,6 +11,8 @@ namespace Schuly.Application.Mappers
             {
                 Id = schoolUser.Id,
                 ApplicationUserId = schoolUser.ApplicationUserId,
+                SchoolId = schoolUser.SchoolId,
+                SchoolName = schoolUser.School?.Name,
                 FirstName = schoolUser.FirstName,
                 LastName = schoolUser.LastName,
                 Email = schoolUser.Email,

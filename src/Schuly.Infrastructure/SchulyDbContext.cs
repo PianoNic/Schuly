@@ -8,6 +8,8 @@ namespace Schuly.Infrastructure
     {
         public DbSet<Class> Classes { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<SchoolUser> SchoolUsers { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<Absence> Absences { get; set; }
@@ -30,6 +32,36 @@ namespace Schuly.Infrastructure
 
                 entity.HasMany(u => u.Classes)
                       .WithMany(c => c.Students);
+            });
+
+            modelBuilder.Entity<ApplicationUser>(entity =>
+            {
+                entity.HasKey(au => au.Id);
+                entity.HasIndex(au => au.AuthenticationEmail).IsUnique();
+                entity.Property(au => au.AuthenticationEmail).HasMaxLength(255);
+                entity.Property(au => au.DisplayName).HasMaxLength(200);
+
+                entity.HasMany(au => au.SchoolUsers)
+                    .WithOne(su => su.ApplicationUser)
+                    .HasForeignKey(su => su.ApplicationUserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<SchoolUser>(entity =>
+            {
+                entity.HasKey(su => su.Id);
+                entity.HasIndex(su => su.Email).IsUnique();
+                entity.Property(su => su.Email).HasMaxLength(255);
+                entity.Property(su => su.FirstName).HasMaxLength(100);
+                entity.Property(su => su.LastName).HasMaxLength(100);
+                entity.Property(su => su.Role).IsRequired();
+                entity.Property(su => su.StudentNumber).HasMaxLength(50);
+                entity.Property(su => su.TeacherCode).HasMaxLength(50);
+
+                entity.HasOne(su => su.ApplicationUser)
+                    .WithMany(au => au.SchoolUsers)
+                    .HasForeignKey(su => su.ApplicationUserId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Grade>(entity =>

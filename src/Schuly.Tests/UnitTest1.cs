@@ -1,18 +1,37 @@
+using Schuly.Plugin.Abstractions;
+using Schuly.Plugin.Example;
+
 namespace Schuly.Tests;
 
-public class UnitTest1
+public class PluginSystemTests
 {
     [Test]
-    public async Task Test_Example()
+    public async Task ExamplePlugin_ImplementsInterface()
     {
-        // Arrange
-        int a = 5;
-        int b = 10;
+        var plugin = new ExamplePlugin();
 
-        // Act
-        int result = a + b;
+        await Assert.That(plugin).IsAssignableTo<ISchulyPlugin>();
+        await Assert.That(plugin.Name).IsEqualTo("Example Plugin");
+        await Assert.That(plugin.Version).IsEqualTo("1.0.0");
+    }
 
-        // Assert
-        await Assert.That(result).IsEqualTo(15);
+    [Test]
+    public async Task ExamplePlugin_ConfigureServices_DoesNotThrow()
+    {
+        var plugin = new ExamplePlugin();
+        var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+
+        plugin.ConfigureServices(services);
+
+        await Assert.That(services.Count).IsGreaterThan(0);
+    }
+
+    [Test]
+    public async Task OnSchoolUserCreatedHandler_ImplementsEventHandler()
+    {
+        var handlerType = typeof(OnSchoolUserCreatedHandler);
+        var interfaceType = typeof(IPluginEventHandler<Schuly.Application.Commands.SchoolUser.CreateSchoolUserCommand>);
+
+        await Assert.That(interfaceType.IsAssignableFrom(handlerType)).IsTrue();
     }
 }

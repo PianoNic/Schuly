@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using Schuly.API.Extensions;
+using Schuly.API.Services;
 using Schuly.Infrastructure;
 using Schuly.Infrastructure.Services;
+using Schuly.Plugin.Abstractions;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -65,7 +67,10 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IOidcService, OidcService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPluginUserContext, PluginUserContext>();
 builder.Services.AddScoped<Schuly.Application.Authorization.IAppAuthorizationService, Schuly.Application.Authorization.AuthorizationService>();
+
+builder.Services.AddPlugins(builder.Configuration);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -101,5 +106,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+app.UsePlugins();
 
 app.Run();

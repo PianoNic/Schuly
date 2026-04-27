@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Schuly.Application\Schuly.Application.csproj" />
     <ProjectReference Include="..\Schuly.Infrastructure\Schuly.Infrastructure.csproj" />
+    <ProjectReference Include="..\Schuly.Plugin.Abstractions\Schuly.Plugin.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

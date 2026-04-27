@@ -12,7 +12,7 @@ using Schuly.Infrastructure;
 namespace Schuly.Infrastructure.Migrations
 {
     [DbContext(typeof(SchulyDbContext))]
-    [Migration("20260118001815_Init")]
+    [Migration("20260427150912_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -20,12 +20,12 @@ namespace Schuly.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.0")
+                .HasAnnotation("ProductVersion", "10.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ClassUser", b =>
+            modelBuilder.Entity("ClassSchoolUser", b =>
                 {
                     b.Property<Guid>("ClassesId")
                         .HasColumnType("uuid");
@@ -37,16 +37,14 @@ namespace Schuly.Infrastructure.Migrations
 
                     b.HasIndex("StudentsId");
 
-                    b.ToTable("ClassUser");
+                    b.ToTable("ClassSchoolUser");
                 });
 
             modelBuilder.Entity("Schuly.Domain.Absence", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -58,8 +56,8 @@ namespace Schuly.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long?>("SchoolUserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("SchoolUserId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Type")
                         .HasColumnType("integer");
@@ -70,25 +68,18 @@ namespace Schuly.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SchoolUserId");
-
-                    b.HasIndex("UserId", "From", "Until", "Type");
+                    b.HasIndex("SchoolUserId", "From", "Until", "Type");
 
                     b.ToTable("Absences");
                 });
 
             modelBuilder.Entity("Schuly.Domain.AgendaEntry", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("ClassId")
                         .HasColumnType("uuid");
@@ -131,36 +122,21 @@ namespace Schuly.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthenticationEmail")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("DisplayName")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
-                    b.Property<bool>("IsAuthenticationEmailVerified")
-                        .HasColumnType("boolean");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
-                    b.Property<bool>("IsEmailVerified")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsTwoFactorEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("LastLoginAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("PasswordChangedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PasswordSalt")
+                    b.Property<string>("ExternalId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ProfilePictureUrl")
@@ -171,7 +147,10 @@ namespace Schuly.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthenticationEmail")
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("ExternalId")
                         .IsUnique();
 
                     b.ToTable("ApplicationUsers");
@@ -194,8 +173,8 @@ namespace Schuly.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<long?>("SchoolUserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("SchoolId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -205,18 +184,16 @@ namespace Schuly.Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.HasIndex("SchoolUserId");
+                    b.HasIndex("SchoolId");
 
                     b.ToTable("Classes");
                 });
 
             modelBuilder.Entity("Schuly.Domain.Exam", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("ClassId")
                         .HasColumnType("uuid");
@@ -247,32 +224,24 @@ namespace Schuly.Infrastructure.Migrations
 
             modelBuilder.Entity("Schuly.Domain.Grade", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("ExamId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uuid");
 
-                    b.Property<DateTime>("RegisteredDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<long?>("SchoolUserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("SchoolUserId")
+                        .HasColumnType("uuid");
 
                     b.Property<decimal>("Score")
                         .HasColumnType("numeric");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
 
                     b.Property<decimal>("Weighting")
                         .HasColumnType("numeric");
@@ -281,20 +250,70 @@ namespace Schuly.Infrastructure.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.HasIndex("SchoolUserId");
-
-                    b.HasIndex("UserId", "ExamId");
+                    b.HasIndex("SchoolUserId", "ExamId");
 
                     b.ToTable("Grades");
                 });
 
+            modelBuilder.Entity("Schuly.Domain.School", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Website")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Zip")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name");
+
+                    b.ToTable("Schools");
+                });
+
             modelBuilder.Entity("Schuly.Domain.SchoolUser", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("ApplicationUserId")
                         .HasColumnType("uuid");
@@ -338,6 +357,9 @@ namespace Schuly.Infrastructure.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("integer");
 
+                    b.Property<Guid>("SchoolId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("State")
                         .HasColumnType("integer");
 
@@ -360,95 +382,17 @@ namespace Schuly.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("Email")
                         .IsUnique();
+
+                    b.HasIndex("SchoolId");
+
+                    b.HasIndex("ApplicationUserId", "SchoolId");
 
                     b.ToTable("SchoolUsers");
                 });
 
-            modelBuilder.Entity("Schuly.Domain.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("AuthenticationEmail")
-                        .HasColumnType("text");
-
-                    b.Property<DateOnly>("Birthday")
-                        .HasColumnType("date");
-
-                    b.Property<string>("City")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
-
-                    b.Property<DateOnly>("EntryDate")
-                        .HasColumnType("date");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<bool>("IsAuthenticationEmailVerified")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<DateOnly?>("LeaveDate")
-                        .HasColumnType("date");
-
-                    b.Property<DateTime?>("PasswordChangedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PasswordSalt")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PrivateEmail")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("State")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Zip")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("ClassUser", b =>
+            modelBuilder.Entity("ClassSchoolUser", b =>
                 {
                     b.HasOne("Schuly.Domain.Class", null)
                         .WithMany()
@@ -456,7 +400,7 @@ namespace Schuly.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Schuly.Domain.User", null)
+                    b.HasOne("Schuly.Domain.SchoolUser", null)
                         .WithMany()
                         .HasForeignKey("StudentsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -465,17 +409,13 @@ namespace Schuly.Infrastructure.Migrations
 
             modelBuilder.Entity("Schuly.Domain.Absence", b =>
                 {
-                    b.HasOne("Schuly.Domain.SchoolUser", null)
+                    b.HasOne("Schuly.Domain.SchoolUser", "SchoolUser")
                         .WithMany("Absences")
-                        .HasForeignKey("SchoolUserId");
-
-                    b.HasOne("Schuly.Domain.User", "User")
-                        .WithMany("Absences")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("SchoolUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("SchoolUser");
                 });
 
             modelBuilder.Entity("Schuly.Domain.AgendaEntry", b =>
@@ -491,9 +431,13 @@ namespace Schuly.Infrastructure.Migrations
 
             modelBuilder.Entity("Schuly.Domain.Class", b =>
                 {
-                    b.HasOne("Schuly.Domain.SchoolUser", null)
+                    b.HasOne("Schuly.Domain.School", "School")
                         .WithMany("Classes")
-                        .HasForeignKey("SchoolUserId");
+                        .HasForeignKey("SchoolId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("School");
                 });
 
             modelBuilder.Entity("Schuly.Domain.Exam", b =>
@@ -515,19 +459,15 @@ namespace Schuly.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Schuly.Domain.SchoolUser", null)
+                    b.HasOne("Schuly.Domain.SchoolUser", "SchoolUser")
                         .WithMany("Grades")
-                        .HasForeignKey("SchoolUserId");
-
-                    b.HasOne("Schuly.Domain.User", "User")
-                        .WithMany("Grades")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("SchoolUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Exam");
 
-                    b.Navigation("User");
+                    b.Navigation("SchoolUser");
                 });
 
             modelBuilder.Entity("Schuly.Domain.SchoolUser", b =>
@@ -538,7 +478,15 @@ namespace Schuly.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Schuly.Domain.School", "School")
+                        .WithMany("SchoolUsers")
+                        .HasForeignKey("SchoolId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("School");
                 });
 
             modelBuilder.Entity("Schuly.Domain.ApplicationUser", b =>
@@ -558,16 +506,14 @@ namespace Schuly.Infrastructure.Migrations
                     b.Navigation("Grades");
                 });
 
-            modelBuilder.Entity("Schuly.Domain.SchoolUser", b =>
+            modelBuilder.Entity("Schuly.Domain.School", b =>
                 {
-                    b.Navigation("Absences");
-
                     b.Navigation("Classes");
 
-                    b.Navigation("Grades");
+                    b.Navigation("SchoolUsers");
                 });
 
-            modelBuilder.Entity("Schuly.Domain.User", b =>
+            modelBuilder.Entity("Schuly.Domain.SchoolUser", b =>
                 {
                     b.Navigation("Absences");
 

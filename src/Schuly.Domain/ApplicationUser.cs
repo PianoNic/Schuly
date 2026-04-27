@@ -1,14 +1,11 @@
 namespace Schuly.Domain
 {
-    public class ApplicationUser : AuthenticationCredentials
+    public class ApplicationUser : Base
     {
-        public new Guid Id { get; set; }
-        public string? ExternalId { get; set; }
-        public string? DisplayName { get; set; }
+        public required string ExternalId { get; set; }
+        public required string Email { get; set; }
+        public string DisplayName { get; set; } = "Schuly User";
         public string? ProfilePictureUrl { get; set; }
-        public DateTime? LastLoginAt { get; set; }
-        public bool IsEmailVerified { get; set; } = false;
-        public bool IsTwoFactorEnabled { get; set; } = false;
-        public ICollection<SchoolUser> SchoolUsers { get; set; } = new List<SchoolUser>();
+        public ICollection<SchoolUser> SchoolUsers { get; set; } = [];
     }
 }

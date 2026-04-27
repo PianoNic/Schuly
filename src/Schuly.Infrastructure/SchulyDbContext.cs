@@ -7,7 +7,6 @@ namespace Schuly.Infrastructure
     public class SchulyDbContext : DbContext
     {
         public DbSet<Class> Classes { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<SchoolUser> SchoolUsers { get; set; }
         public DbSet<School> Schools { get; set; }
@@ -22,31 +21,12 @@ namespace Schuly.Infrastructure
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.HasKey(u => u.Id);
-                entity.HasIndex(u => u.Email).IsUnique();
-                entity.Property(u => u.Email).HasMaxLength(255);
-                entity.Property(u => u.FirstName).HasMaxLength(100);
-                entity.Property(u => u.LastName).HasMaxLength(100);
-                entity.Property(u => u.Role).IsRequired();
-
-                entity.HasMany(u => u.Classes)
-                      .WithMany(c => c.Students);
-
-                entity.HasOne(u => u.School)
-                    .WithMany(s => s.Users)
-                    .HasForeignKey(u => u.SchoolId)
-                    .OnDelete(DeleteBehavior.SetNull);
-
-                entity.HasIndex(u => u.SchoolId);
-            });
-
             modelBuilder.Entity<ApplicationUser>(entity =>
             {
                 entity.HasKey(au => au.Id);
-                entity.HasIndex(au => au.AuthenticationEmail).IsUnique();
-                entity.Property(au => au.AuthenticationEmail).HasMaxLength(255);
+                entity.HasIndex(au => au.ExternalId).IsUnique();
+                entity.HasIndex(au => au.Email).IsUnique();
+                entity.Property(au => au.Email).HasMaxLength(255);
                 entity.Property(au => au.DisplayName).HasMaxLength(200);
 
                 entity.HasMany(au => au.SchoolUsers)
@@ -73,11 +53,6 @@ namespace Schuly.Infrastructure
                     .WithOne(c => c.School)
                     .HasForeignKey(c => c.SchoolId)
                     .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasMany(s => s.Users)
-                    .WithOne(u => u.School)
-                    .HasForeignKey(u => u.SchoolId)
-                    .OnDelete(DeleteBehavior.SetNull);
             });
 
             modelBuilder.Entity<SchoolUser>(entity =>
@@ -101,15 +76,15 @@ namespace Schuly.Infrastructure
                     .HasForeignKey(su => su.SchoolId)
                     .OnDelete(DeleteBehavior.Restrict);
 
-                entity.HasIndex(su => su.SchoolId);
+                entity.HasIndex(su => new { su.ApplicationUserId, su.SchoolId });
             });
 
             modelBuilder.Entity<Grade>(entity =>
             {
                 entity.HasKey(g => g.Id);
-                entity.HasOne(g => g.User)
-                    .WithMany(u => u.Grades)
-                    .HasForeignKey(g => g.UserId)
+                entity.HasOne(g => g.SchoolUser)
+                    .WithMany(su => su.Grades)
+                    .HasForeignKey(g => g.SchoolUserId)
                     .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(g => g.Exam)
@@ -117,7 +92,8 @@ namespace Schuly.Infrastructure
                     .HasForeignKey(g => g.ExamId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasIndex(g => new { g.UserId, g.ExamId });
+                entity.HasIndex(g => new { g.SchoolUserId, g.ExamId });
+                entity.HasIndex(g => g.ExamId);
             });
 
             modelBuilder.Entity<Exam>(entity =>
@@ -138,7 +114,7 @@ namespace Schuly.Infrastructure
                 entity.HasIndex(c => c.Name).IsUnique();
 
                 entity.HasMany(c => c.Students)
-                      .WithMany(u => u.Classes);
+                      .WithMany(su => su.Classes);
 
                 entity.HasOne(c => c.School)
                     .WithMany(s => s.Classes)
@@ -164,12 +140,12 @@ namespace Schuly.Infrastructure
             {
                 entity.HasKey(a => a.Id);
 
-                entity.HasOne(a => a.User)
-                    .WithMany(u => u.Absences)
-                    .HasForeignKey(a => a.UserId)
+                entity.HasOne(a => a.SchoolUser)
+                    .WithMany(su => su.Absences)
+                    .HasForeignKey(a => a.SchoolUserId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasIndex(a => new { a.UserId, a.From, a.Until, a.Type });
+                entity.HasIndex(a => new { a.SchoolUserId, a.From, a.Until, a.Type });
             });
         }
 

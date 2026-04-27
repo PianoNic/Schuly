@@ -8,6 +8,7 @@ namespace Schuly.Application.Commands.SchoolUser
 {
     public record CreateSchoolUserCommand(
         Guid ApplicationUserId,
+        Guid SchoolId,
         string FirstName,
         string LastName,
         string Email,
@@ -20,18 +21,19 @@ namespace Schuly.Application.Commands.SchoolUser
         DateOnly EntryDate,
         Roles Role,
         string? StudentNumber,
-        string? TeacherCode) : ICommand<Result<long>>, IHasAuthorization
+        string? TeacherCode) : ICommand<Result<Guid>>, IHasAuthorization
     {
         public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class CreateSchoolUserCommandHandler(SchulyDbContext dbContext) : ICommandHandler<CreateSchoolUserCommand, Result<long>>
+    public class CreateSchoolUserCommandHandler(SchulyDbContext dbContext) : ICommandHandler<CreateSchoolUserCommand, Result<Guid>>
     {
-        public async ValueTask<Result<long>> Handle(CreateSchoolUserCommand command, CancellationToken cancellationToken)
+        public async ValueTask<Result<Guid>> Handle(CreateSchoolUserCommand command, CancellationToken cancellationToken)
         {
             var schoolUser = new Domain.SchoolUser
             {
                 ApplicationUserId = command.ApplicationUserId,
+                SchoolId = command.SchoolId,
                 FirstName = command.FirstName,
                 LastName = command.LastName,
                 Email = command.Email,
@@ -51,7 +53,7 @@ namespace Schuly.Application.Commands.SchoolUser
             await dbContext.SchoolUsers.AddAsync(schoolUser, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Result<long>.Success(schoolUser.Id);
+            return Result<Guid>.Success(schoolUser.Id);
         }
     }
 }

@@ -13,8 +13,7 @@ namespace Schuly.Domain
         public string? Zip { get; set; }
         public string? Country { get; set; }
 
-        public ICollection<SchoolUser> SchoolUsers { get; set; } = new List<SchoolUser>();
-        public ICollection<Class> Classes { get; set; } = new List<Class>();
-        public ICollection<User> Users { get; set; } = new List<User>();
+        public ICollection<SchoolUser> SchoolUsers { get; set; } = [];
+        public ICollection<Class> Classes { get; set; } = [];
     }
 }

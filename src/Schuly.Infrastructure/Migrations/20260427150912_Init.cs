@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -17,18 +16,12 @@ namespace Schuly.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    DisplayName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
+                    ExternalId = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    DisplayName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     ProfilePictureUrl = table.Column<string>(type: "text", nullable: true),
-                    LastLoginAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsEmailVerified = table.Column<bool>(type: "boolean", nullable: false),
-                    IsTwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    AuthenticationEmail = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
-                    PasswordHash = table.Column<string>(type: "text", nullable: true),
-                    PasswordSalt = table.Column<string>(type: "text", nullable: true),
-                    PasswordChangedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsAuthenticationEmailVerified = table.Column<bool>(type: "boolean", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,43 +29,57 @@ namespace Schuly.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "Schools",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    FirstName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    LastName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    PrivateEmail = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    PhoneNumber = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    Website = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     Street = table.Column<string>(type: "text", nullable: true),
                     City = table.Column<string>(type: "text", nullable: true),
+                    State = table.Column<string>(type: "text", nullable: true),
                     Zip = table.Column<string>(type: "text", nullable: true),
-                    Birthday = table.Column<DateOnly>(type: "date", nullable: false),
-                    EntryDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    LeaveDate = table.Column<DateOnly>(type: "date", nullable: true),
-                    Role = table.Column<int>(type: "integer", nullable: false),
-                    State = table.Column<int>(type: "integer", nullable: false),
+                    Country = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    AuthenticationEmail = table.Column<string>(type: "text", nullable: true),
-                    PasswordHash = table.Column<string>(type: "text", nullable: true),
-                    PasswordSalt = table.Column<string>(type: "text", nullable: true),
-                    PasswordChangedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsAuthenticationEmailVerified = table.Column<bool>(type: "boolean", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Schools", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Classes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    SchoolId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Classes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Classes_Schools_SchoolId",
+                        column: x => x.SchoolId,
+                        principalTable: "Schools",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "SchoolUsers",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ApplicationUserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SchoolId = table.Column<Guid>(type: "uuid", nullable: false),
                     FirstName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
@@ -100,66 +107,19 @@ namespace Schuly.Infrastructure.Migrations
                         principalTable: "ApplicationUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Absences",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Reason = table.Column<string>(type: "text", nullable: false),
-                    Type = table.Column<int>(type: "integer", nullable: false),
-                    From = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Until = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SchoolUserId = table.Column<long>(type: "bigint", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Absences", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Absences_SchoolUsers_SchoolUserId",
-                        column: x => x.SchoolUserId,
-                        principalTable: "SchoolUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Absences_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
+                        name: "FK_SchoolUsers_Schools_SchoolId",
+                        column: x => x.SchoolId,
+                        principalTable: "Schools",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Classes",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    SchoolUserId = table.Column<long>(type: "bigint", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Classes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Classes_SchoolUsers_SchoolUserId",
-                        column: x => x.SchoolUserId,
-                        principalTable: "SchoolUsers",
-                        principalColumn: "Id");
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AgendaEntries",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     EntryType = table.Column<int>(type: "integer", nullable: false),
                     Title = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
@@ -181,35 +141,10 @@ namespace Schuly.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClassUser",
-                columns: table => new
-                {
-                    ClassesId = table.Column<Guid>(type: "uuid", nullable: false),
-                    StudentsId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ClassUser", x => new { x.ClassesId, x.StudentsId });
-                    table.ForeignKey(
-                        name: "FK_ClassUser_Classes_ClassesId",
-                        column: x => x.ClassesId,
-                        principalTable: "Classes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ClassUser_Users_StudentsId",
-                        column: x => x.StudentsId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Exams",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<int>(type: "integer", nullable: false),
@@ -229,17 +164,62 @@ namespace Schuly.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Absences",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Reason = table.Column<string>(type: "text", nullable: false),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    From = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Until = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    SchoolUserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Absences", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Absences_SchoolUsers_SchoolUserId",
+                        column: x => x.SchoolUserId,
+                        principalTable: "SchoolUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClassSchoolUser",
+                columns: table => new
+                {
+                    ClassesId = table.Column<Guid>(type: "uuid", nullable: false),
+                    StudentsId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClassSchoolUser", x => new { x.ClassesId, x.StudentsId });
+                    table.ForeignKey(
+                        name: "FK_ClassSchoolUser_Classes_ClassesId",
+                        column: x => x.ClassesId,
+                        principalTable: "Classes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ClassSchoolUser_SchoolUsers_StudentsId",
+                        column: x => x.StudentsId,
+                        principalTable: "SchoolUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Grades",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Score = table.Column<decimal>(type: "numeric", nullable: false),
                     Weighting = table.Column<decimal>(type: "numeric", nullable: false),
-                    RegisteredDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ExamId = table.Column<long>(type: "bigint", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SchoolUserId = table.Column<long>(type: "bigint", nullable: true),
+                    ExamId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SchoolUserId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -256,24 +236,14 @@ namespace Schuly.Infrastructure.Migrations
                         name: "FK_Grades_SchoolUsers_SchoolUserId",
                         column: x => x.SchoolUserId,
                         principalTable: "SchoolUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Grades_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Absences_SchoolUserId",
+                name: "IX_Absences_SchoolUserId_From_Until_Type",
                 table: "Absences",
-                column: "SchoolUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Absences_UserId_From_Until_Type",
-                table: "Absences",
-                columns: new[] { "UserId", "From", "Until", "Type" });
+                columns: new[] { "SchoolUserId", "From", "Until", "Type" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AgendaEntries_ClassId",
@@ -286,9 +256,15 @@ namespace Schuly.Infrastructure.Migrations
                 column: "Date");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApplicationUsers_AuthenticationEmail",
+                name: "IX_ApplicationUsers_Email",
                 table: "ApplicationUsers",
-                column: "AuthenticationEmail",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApplicationUsers_ExternalId",
+                table: "ApplicationUsers",
+                column: "ExternalId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -298,13 +274,13 @@ namespace Schuly.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Classes_SchoolUserId",
+                name: "IX_Classes_SchoolId",
                 table: "Classes",
-                column: "SchoolUserId");
+                column: "SchoolId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClassUser_StudentsId",
-                table: "ClassUser",
+                name: "IX_ClassSchoolUser_StudentsId",
+                table: "ClassSchoolUser",
                 column: "StudentsId");
 
             migrationBuilder.CreateIndex(
@@ -318,19 +294,19 @@ namespace Schuly.Infrastructure.Migrations
                 column: "ExamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Grades_SchoolUserId",
+                name: "IX_Grades_SchoolUserId_ExamId",
                 table: "Grades",
-                column: "SchoolUserId");
+                columns: new[] { "SchoolUserId", "ExamId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Grades_UserId_ExamId",
-                table: "Grades",
-                columns: new[] { "UserId", "ExamId" });
+                name: "IX_Schools_Name",
+                table: "Schools",
+                column: "Name");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SchoolUsers_ApplicationUserId",
+                name: "IX_SchoolUsers_ApplicationUserId_SchoolId",
                 table: "SchoolUsers",
-                column: "ApplicationUserId");
+                columns: new[] { "ApplicationUserId", "SchoolId" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_SchoolUsers_Email",
@@ -339,10 +315,9 @@ namespace Schuly.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_Email",
-                table: "Users",
-                column: "Email",
-                unique: true);
+                name: "IX_SchoolUsers_SchoolId",
+                table: "SchoolUsers",
+                column: "SchoolId");
         }
 
         /// <inheritdoc />
@@ -355,7 +330,7 @@ namespace Schuly.Infrastructure.Migrations
                 name: "AgendaEntries");
 
             migrationBuilder.DropTable(
-                name: "ClassUser");
+                name: "ClassSchoolUser");
 
             migrationBuilder.DropTable(
                 name: "Grades");
@@ -364,16 +339,16 @@ namespace Schuly.Infrastructure.Migrations
                 name: "Exams");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "SchoolUsers");
 
             migrationBuilder.DropTable(
                 name: "Classes");
 
             migrationBuilder.DropTable(
-                name: "SchoolUsers");
+                name: "ApplicationUsers");
 
             migrationBuilder.DropTable(
-                name: "ApplicationUsers");
+                name: "Schools");
         }
     }
 }

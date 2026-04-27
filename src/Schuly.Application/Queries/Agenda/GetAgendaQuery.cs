@@ -7,7 +7,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Agenda
 {
-    public record GetAgendaQuery(long AgendaEntryId) : IQuery<Result<AgendaEntryDto>>;
+    public record GetAgendaQuery(Guid AgendaEntryId) : IQuery<Result<AgendaEntryDto>>;
 
     public class GetAgendaQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetAgendaQuery, Result<AgendaEntryDto>>
     {

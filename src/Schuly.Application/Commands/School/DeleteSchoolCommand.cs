@@ -7,7 +7,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.School
 {
-    public record DeleteSchoolCommand(long Id) : ICommand<Result>, IHasAuthorization
+    public record DeleteSchoolCommand(Guid Id) : ICommand<Result>, IHasAuthorization
     {
         public Roles GetRequiredRole() => Roles.Administrator;
     }
@@ -19,13 +19,12 @@ namespace Schuly.Application.Commands.School
             var school = await dbContext.Schools
                 .Include(s => s.SchoolUsers)
                 .Include(s => s.Classes)
-                .Include(s => s.Users)
                 .FirstOrDefaultAsync(s => s.Id == command.Id, cancellationToken: cancellationToken);
 
             if (school == null)
                 return Result.Failure($"School with ID {command.Id} not found");
 
-            if (school.SchoolUsers.Any() || school.Classes.Any() || school.Users.Any(u => u.SchoolId == command.Id))
+            if (school.SchoolUsers.Any() || school.Classes.Any())
                 return Result.Failure("Cannot delete school that has associated users or classes");
 
             dbContext.Schools.Remove(school);

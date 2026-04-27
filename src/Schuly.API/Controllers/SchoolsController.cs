@@ -36,10 +36,10 @@ namespace Schuly.API.Controllers
             return BadRequest(result.Error);
         }
 
-        [HttpGet("{id:long}")]
+        [HttpGet("{id:guid}")]
         [ProducesResponseType(typeof(SchoolDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetSchool(long id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetSchool(Guid id, CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new GetSchoolQuery(id), cancellationToken);
             if (result.IsSuccess)
@@ -49,7 +49,7 @@ namespace Schuly.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateSchool([FromBody] CreateSchoolCommand command, CancellationToken cancellationToken)
         {
@@ -72,10 +72,10 @@ namespace Schuly.API.Controllers
             return BadRequest(result.Error);
         }
 
-        [HttpDelete("{id:long}")]
+        [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteSchool(long id, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteSchool(Guid id, CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new DeleteSchoolCommand(id), cancellationToken);
             if (result.IsSuccess)

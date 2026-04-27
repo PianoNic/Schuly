@@ -5,7 +5,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Exam
 {
-    public record DeleteExamCommand(long ExamId) : ICommand<Result>;
+    public record DeleteExamCommand(Guid ExamId) : ICommand<Result>;
 
     public class DeleteExamCommandHandler(SchulyDbContext dbContext) : ICommandHandler<DeleteExamCommand, Result>
     {

@@ -5,7 +5,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Absence
 {
-    public record CreateAbsenceCommand(string Reason, AbsenceType Type, DateTime From, DateTime Until, Guid UserId) : ICommand<Result>;
+    public record CreateAbsenceCommand(string Reason, AbsenceType Type, DateTime From, DateTime Until, Guid SchoolUserId) : ICommand<Result>;
 
     public class CreateAbsenceCommandHandler(SchulyDbContext dbContext) : ICommandHandler<CreateAbsenceCommand, Result>
     {
@@ -17,7 +17,7 @@ namespace Schuly.Application.Commands.Absence
                 Type = command.Type,
                 From = command.From,
                 Until = command.Until,
-                UserId = command.UserId
+                SchoolUserId = command.SchoolUserId
             }, cancellationToken);
 
             await dbContext.SaveChangesAsync(cancellationToken);

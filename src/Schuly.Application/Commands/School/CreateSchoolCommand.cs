@@ -16,14 +16,14 @@ namespace Schuly.Application.Commands.School
         string? City,
         string? State,
         string? Zip,
-        string? Country) : ICommand<Result<long>>, IHasAuthorization
+        string? Country) : ICommand<Result<Guid>>, IHasAuthorization
     {
         public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class CreateSchoolCommandHandler(SchulyDbContext dbContext) : ICommandHandler<CreateSchoolCommand, Result<long>>
+    public class CreateSchoolCommandHandler(SchulyDbContext dbContext) : ICommandHandler<CreateSchoolCommand, Result<Guid>>
     {
-        public async ValueTask<Result<long>> Handle(CreateSchoolCommand command, CancellationToken cancellationToken)
+        public async ValueTask<Result<Guid>> Handle(CreateSchoolCommand command, CancellationToken cancellationToken)
         {
             var school = new Domain.School
             {
@@ -42,7 +42,7 @@ namespace Schuly.Application.Commands.School
             await dbContext.Schools.AddAsync(school, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Result<long>.Success(school.Id);
+            return Result<Guid>.Success(school.Id);
         }
     }
 }

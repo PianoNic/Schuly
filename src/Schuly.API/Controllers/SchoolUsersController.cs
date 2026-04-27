@@ -12,10 +12,10 @@ namespace Schuly.API.Controllers
     [Authorize]
     public class SchoolUsersController(IMediator mediator) : ControllerBase
     {
-        [HttpGet("{id:long}")]
+        [HttpGet("{id:guid}")]
         [ProducesResponseType(typeof(SchoolUserDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetSchoolUser(long id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetSchoolUser(Guid id, CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new GetSchoolUserQuery(id), cancellationToken);
             if (result.IsSuccess)
@@ -37,7 +37,7 @@ namespace Schuly.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateSchoolUser([FromBody] CreateSchoolUserCommand command, CancellationToken cancellationToken)
         {
@@ -60,10 +60,10 @@ namespace Schuly.API.Controllers
             return BadRequest(result.Error);
         }
 
-        [HttpDelete("{id:long}")]
+        [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteSchoolUser(long id, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteSchoolUser(Guid id, CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new DeleteSchoolUserCommand(id), cancellationToken);
             if (result.IsSuccess)

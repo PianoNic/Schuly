@@ -4,7 +4,7 @@ namespace Schuly.Application.Dtos
 {
     public class AgendaEntryDto
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
         public required AgendaEntryType EntryType { get; set; }
         public required string Title { get; set; }
         public string? Description { get; set; }

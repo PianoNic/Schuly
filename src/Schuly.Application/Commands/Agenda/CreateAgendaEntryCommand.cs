@@ -1,44 +1,30 @@
 using Mediator;
+using Schuly.Application.Models;
 using Schuly.Domain;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Agenda
 {
-    public class CreateAgendaEntryCommand : IRequest
+    public record CreateAgendaEntryCommand(AgendaEntryType EntryType, string Title, string? Description, string? Place, DateTime Date, Guid ClassId) : ICommand<Result>;
+
+    public class CreateAgendaEntryCommandHandler(SchulyDbContext dbContext) : ICommandHandler<CreateAgendaEntryCommand, Result>
     {
-        public required AgendaEntryType EntryType { get; set; }
-        public required string Title { get; set; }
-        public string? Description { get; set; }
-        public string? Place { get; set; }
-        public required DateTime Date { get; set; }
-        public required Guid ClassId { get; set; }
-    }
-
-    public class CreateAgendaEntryCommandHandler : IRequestHandler<CreateAgendaEntryCommand>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public CreateAgendaEntryCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(CreateAgendaEntryCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<Unit> Handle(CreateAgendaEntryCommand request, CancellationToken cancellationToken)
-        {
-            await _dbContext.AgendaEntries.AddAsync(new AgendaEntry
+            await dbContext.AgendaEntries.AddAsync(new AgendaEntry
             {
-                EntryType = request.EntryType,
-                Title = request.Title,
-                Description = request.Description,
-                Place = request.Place,
-                Date = request.Date,
-                ClassId = request.ClassId
+                EntryType = command.EntryType,
+                Title = command.Title,
+                Description = command.Description,
+                Place = command.Place,
+                Date = command.Date,
+                ClassId = command.ClassId
             }, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

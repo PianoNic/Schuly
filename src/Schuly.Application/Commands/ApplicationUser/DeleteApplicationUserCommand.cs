@@ -1,51 +1,37 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Authorization;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.ApplicationUser
 {
-    public class DeleteApplicationUserCommand : IRequest, IHasAuthorization
+    public record DeleteApplicationUserCommand(Guid ApplicationUserId) : ICommand<Result>, IHasAuthorization
     {
-        public required Guid ApplicationUserId { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class DeleteApplicationUserCommandHandler : IRequestHandler<DeleteApplicationUserCommand>
+    public class DeleteApplicationUserCommandHandler(SchulyDbContext dbContext) : ICommandHandler<DeleteApplicationUserCommand, Result>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public DeleteApplicationUserCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(DeleteApplicationUserCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<Unit> Handle(DeleteApplicationUserCommand request, CancellationToken cancellationToken)
-        {
-            // Retrieve the ApplicationUser with its SchoolUsers
-            var applicationUser = await _dbContext.ApplicationUsers
+            var applicationUser = await dbContext.ApplicationUsers
                 .Include(au => au.SchoolUsers)
-                .FirstOrDefaultAsync(au => au.Id == request.ApplicationUserId, cancellationToken);
+                .FirstOrDefaultAsync(au => au.Id == command.ApplicationUserId, cancellationToken);
 
             if (applicationUser == null)
-                throw new InvalidOperationException($"ApplicationUser with ID '{request.ApplicationUserId}' not found.");
+                return Result.Failure($"ApplicationUser with ID '{command.ApplicationUserId}' not found");
 
-            // Prevent deletion if SchoolUsers are linked
             if (applicationUser.SchoolUsers.Count > 0)
-                throw new InvalidOperationException(
+                return Result.Failure(
                     $"Cannot delete ApplicationUser with {applicationUser.SchoolUsers.Count} linked SchoolUser(s). " +
                     "Delete all linked SchoolUsers first.");
 
-            // Delete the ApplicationUser
-            _dbContext.ApplicationUsers.Remove(applicationUser);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            dbContext.ApplicationUsers.Remove(applicationUser);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

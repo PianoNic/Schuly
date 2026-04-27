@@ -1,44 +1,31 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Exam
 {
-    public class UpdateExamCommand : IRequest
+    public record UpdateExamCommand(long ExamId, string Name, string? Description, ExamType Type, Guid ClassId) : ICommand<Result>;
+
+    public class UpdateExamCommandHandler(SchulyDbContext dbContext) : ICommandHandler<UpdateExamCommand, Result>
     {
-        public required long ExamId { get; set; }
-        public required string Name { get; set; }
-        public string? Description { get; set; }
-        public ExamType Type { get; set; }
-        public required Guid ClassId { get; set; }
-    }
-
-    public class UpdateExamCommandHandler : IRequestHandler<UpdateExamCommand>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public UpdateExamCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(UpdateExamCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var exam = await dbContext.Exams
+                .SingleOrDefaultAsync(e => e.Id == command.ExamId, cancellationToken);
 
-        public async ValueTask<Unit> Handle(UpdateExamCommand request, CancellationToken cancellationToken)
-        {
-            var exam = await _dbContext.Exams
-                .SingleOrDefaultAsync(e => e.Id == request.ExamId, cancellationToken);
+            if (exam == null)
+                return Result.Failure($"Exam with ID '{command.ExamId}' not found");
 
-            if (exam != null)
-            {
-                exam.Name = request.Name;
-                exam.Description = request.Description;
-                exam.Type = request.Type;
-                exam.ClassId = request.ClassId;
+            exam.Name = command.Name;
+            exam.Description = command.Description;
+            exam.Type = command.Type;
+            exam.ClassId = command.ClassId;
 
-                await _dbContext.SaveChangesAsync(cancellationToken);
-            }
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

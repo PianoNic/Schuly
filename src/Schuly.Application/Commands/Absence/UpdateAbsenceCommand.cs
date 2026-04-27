@@ -1,46 +1,32 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Absence
 {
-    public class UpdateAbsenceCommand : IRequest
+    public record UpdateAbsenceCommand(long AbsenceId, string Reason, AbsenceType Type, DateTime From, DateTime Until, Guid UserId) : ICommand<Result>;
+
+    public class UpdateAbsenceCommandHandler(SchulyDbContext dbContext) : ICommandHandler<UpdateAbsenceCommand, Result>
     {
-        public required long AbsenceId { get; set; }
-        public required string Reason { get; set; }
-        public required AbsenceType Type { get; set; }
-        public required DateTime From { get; set; }
-        public required DateTime Until { get; set; }
-        public required Guid UserId { get; set; }
-    }
-
-    public class UpdateAbsenceCommandHandler : IRequestHandler<UpdateAbsenceCommand>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public UpdateAbsenceCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(UpdateAbsenceCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var absence = await dbContext.Absences
+                .SingleOrDefaultAsync(a => a.Id == command.AbsenceId, cancellationToken);
 
-        public async ValueTask<Unit> Handle(UpdateAbsenceCommand request, CancellationToken cancellationToken)
-        {
-            var absence = await _dbContext.Absences
-                .SingleOrDefaultAsync(a => a.Id == request.AbsenceId, cancellationToken);
+            if (absence == null)
+                return Result.Failure($"Absence with ID '{command.AbsenceId}' not found");
 
-            if (absence != null)
-            {
-                absence.Reason = request.Reason;
-                absence.Type = request.Type;
-                absence.From = request.From;
-                absence.Until = request.Until;
-                absence.UserId = request.UserId;
+            absence.Reason = command.Reason;
+            absence.Type = command.Type;
+            absence.From = command.From;
+            absence.Until = command.Until;
+            absence.UserId = command.UserId;
 
-                await _dbContext.SaveChangesAsync(cancellationToken);
-            }
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

@@ -3,37 +3,29 @@ using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Authorization;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.ApplicationUser
 {
-    public class GetApplicationUserQuery : IRequest<ApplicationUserDto?>, IHasAuthorization
+    public record GetApplicationUserQuery(Guid ApplicationUserId) : IQuery<Result<ApplicationUserDto>>, IHasAuthorization
     {
-        public required Guid ApplicationUserId { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class GetApplicationUserQueryHandler : IRequestHandler<GetApplicationUserQuery, ApplicationUserDto?>
+    public class GetApplicationUserQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetApplicationUserQuery, Result<ApplicationUserDto>>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetApplicationUserQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<ApplicationUserDto>> Handle(GetApplicationUserQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<ApplicationUserDto?> Handle(GetApplicationUserQuery request, CancellationToken cancellationToken)
-        {
-            var applicationUser = await _dbContext.ApplicationUsers
+            var applicationUser = await dbContext.ApplicationUsers
                 .Include(au => au.SchoolUsers)
-                .SingleOrDefaultAsync(au => au.Id == request.ApplicationUserId, cancellationToken);
+                .SingleOrDefaultAsync(au => au.Id == query.ApplicationUserId, cancellationToken);
 
-            return applicationUser?.ToDto();
+            if (applicationUser == null)
+                return Result<ApplicationUserDto>.Failure($"ApplicationUser with ID '{query.ApplicationUserId}' not found");
+
+            return Result<ApplicationUserDto>.Success(applicationUser.ToDto());
         }
     }
 }

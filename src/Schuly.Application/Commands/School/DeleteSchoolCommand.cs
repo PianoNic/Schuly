@@ -1,48 +1,37 @@
 using Mediator;
+using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Authorization;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 
 namespace Schuly.Application.Commands.School
 {
-    public class DeleteSchoolCommand : IRequest, IHasAuthorization
+    public record DeleteSchoolCommand(long Id) : ICommand<Result>, IHasAuthorization
     {
-        public required long Id { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class DeleteSchoolCommandHandler : IRequestHandler<DeleteSchoolCommand>
+    public class DeleteSchoolCommandHandler(SchulyDbContext dbContext) : ICommandHandler<DeleteSchoolCommand, Result>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public DeleteSchoolCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(DeleteSchoolCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<Unit> Handle(DeleteSchoolCommand request, CancellationToken cancellationToken)
-        {
-            var school = await _dbContext.Schools
+            var school = await dbContext.Schools
                 .Include(s => s.SchoolUsers)
                 .Include(s => s.Classes)
                 .Include(s => s.Users)
-                .FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken: cancellationToken);
+                .FirstOrDefaultAsync(s => s.Id == command.Id, cancellationToken: cancellationToken);
 
             if (school == null)
-                throw new InvalidOperationException($"School with ID {request.Id} not found");
+                return Result.Failure($"School with ID {command.Id} not found");
 
-            if (school.SchoolUsers.Any() || school.Classes.Any() || school.Users.Any(u => u.SchoolId == request.Id))
-                throw new InvalidOperationException("Cannot delete school that has associated users or classes");
+            if (school.SchoolUsers.Any() || school.Classes.Any() || school.Users.Any(u => u.SchoolId == command.Id))
+                return Result.Failure("Cannot delete school that has associated users or classes");
 
-            _dbContext.Schools.Remove(school);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            dbContext.Schools.Remove(school);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

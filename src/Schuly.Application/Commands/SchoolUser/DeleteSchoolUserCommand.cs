@@ -1,42 +1,31 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Authorization;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.SchoolUser
 {
-    public class DeleteSchoolUserCommand : IRequest, IHasAuthorization
+    public record DeleteSchoolUserCommand(long SchoolUserId) : ICommand<Result>, IHasAuthorization
     {
-        public required long SchoolUserId { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class DeleteSchoolUserCommandHandler : IRequestHandler<DeleteSchoolUserCommand>
+    public class DeleteSchoolUserCommandHandler(SchulyDbContext dbContext) : ICommandHandler<DeleteSchoolUserCommand, Result>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public DeleteSchoolUserCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(DeleteSchoolUserCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<Unit> Handle(DeleteSchoolUserCommand request, CancellationToken cancellationToken)
-        {
-            var schoolUser = await _dbContext.SchoolUsers
-                .FirstOrDefaultAsync(su => su.Id == request.SchoolUserId, cancellationToken);
+            var schoolUser = await dbContext.SchoolUsers
+                .FirstOrDefaultAsync(su => su.Id == command.SchoolUserId, cancellationToken);
 
             if (schoolUser == null)
-                throw new InvalidOperationException($"SchoolUser with ID '{request.SchoolUserId}' not found.");
+                return Result.Failure($"SchoolUser with ID '{command.SchoolUserId}' not found");
 
-            _dbContext.SchoolUsers.Remove(schoolUser);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            dbContext.SchoolUsers.Remove(schoolUser);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

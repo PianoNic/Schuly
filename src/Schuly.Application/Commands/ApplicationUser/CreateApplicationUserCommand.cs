@@ -1,58 +1,40 @@
 using Mediator;
 using Schuly.Application.Authorization;
+using Schuly.Application.Models;
 using Schuly.Application.Services;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.ApplicationUser
 {
-    public class CreateApplicationUserCommand : IRequest<Guid>, IHasAuthorization
+    public record CreateApplicationUserCommand(string AuthenticationEmail, string Password, string? DisplayName) : ICommand<Result<Guid>>, IHasAuthorization
     {
-        public required string AuthenticationEmail { get; set; }
-        public required string Password { get; set; }
-        public string? DisplayName { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class CreateApplicationUserCommandHandler : IRequestHandler<CreateApplicationUserCommand, Guid>
+    public class CreateApplicationUserCommandHandler(
+        SchulyDbContext dbContext,
+        IPasswordHashingService passwordHashingService) : ICommandHandler<CreateApplicationUserCommand, Result<Guid>>
     {
-        private readonly SchulyDbContext _dbContext;
-        private readonly IPasswordHashingService _passwordHashingService;
-
-        public CreateApplicationUserCommandHandler(
-            SchulyDbContext dbContext,
-            IPasswordHashingService passwordHashingService)
+        public async ValueTask<Result<Guid>> Handle(CreateApplicationUserCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-            _passwordHashingService = passwordHashingService;
-        }
+            var (passwordHash, passwordSalt) = passwordHashingService.HashPassword(command.Password);
 
-        public async ValueTask<Guid> Handle(CreateApplicationUserCommand request, CancellationToken cancellationToken)
-        {
-            // Hash the password
-            var (passwordHash, passwordSalt) = _passwordHashingService.HashPassword(request.Password);
-
-            // Create the new ApplicationUser
             var applicationUser = new Domain.ApplicationUser
             {
                 Id = Guid.NewGuid(),
-                AuthenticationEmail = request.AuthenticationEmail,
-                DisplayName = request.DisplayName,
+                AuthenticationEmail = command.AuthenticationEmail,
+                DisplayName = command.DisplayName,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 IsEmailVerified = false,
                 IsTwoFactorEnabled = false
             };
 
-            // Add to database
-            await _dbContext.ApplicationUsers.AddAsync(applicationUser, cancellationToken);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.ApplicationUsers.AddAsync(applicationUser, cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return applicationUser.Id;
+            return Result<Guid>.Success(applicationUser.Id);
         }
     }
 }

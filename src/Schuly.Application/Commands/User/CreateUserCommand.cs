@@ -1,59 +1,49 @@
 using Mediator;
 using Schuly.Application.Authorization;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.User
 {
-    public class CreateUserCommand : IRequest, IHasAuthorization
+    public record CreateUserCommand(
+        string FirstName,
+        string LastName,
+        string Email,
+        string? PrivateEmail,
+        string? PhoneNumber,
+        string? Street,
+        string? City,
+        string? Zip,
+        DateOnly Birthday,
+        DateOnly EntryDate,
+        Roles Role) : ICommand<Result>, IHasAuthorization
     {
-        public required string FirstName { get; set; }
-        public required string LastName { get; set; }
-        public required string Email { get; set; }
-        public string? PrivateEmail { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? Street { get; set; }
-        public string? City { get; set; }
-        public string? Zip { get; set; }
-        public required DateOnly Birthday { get; set; }
-        public required DateOnly EntryDate { get; set; }
-        public required Roles Role { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
+    public class CreateUserCommandHandler(SchulyDbContext dbContext) : ICommandHandler<CreateUserCommand, Result>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public CreateUserCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(CreateUserCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
-        {
-            var user = await _dbContext.Users.AddAsync(new Domain.User()
+            await dbContext.Users.AddAsync(new Domain.User
             {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Email = request.Email,
-                PrivateEmail = request.PrivateEmail,
-                PhoneNumber = request.PhoneNumber,
-                Street = request.Street,
-                City = request.City,
-                Zip = request.Zip,
-                Birthday = request.Birthday,
-                EntryDate = request.EntryDate,
-                Role = request.Role
-            });
+                FirstName = command.FirstName,
+                LastName = command.LastName,
+                Email = command.Email,
+                PrivateEmail = command.PrivateEmail,
+                PhoneNumber = command.PhoneNumber,
+                Street = command.Street,
+                City = command.City,
+                Zip = command.Zip,
+                Birthday = command.Birthday,
+                EntryDate = command.EntryDate,
+                Role = command.Role
+            }, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

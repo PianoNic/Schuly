@@ -2,27 +2,19 @@ using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Absence
 {
-    public class GetAbsencesQuery : IRequest<List<AbsenceDto>>
+    public record GetAbsencesQuery() : IQuery<Result<List<AbsenceDto>>>;
+
+    public class GetAbsencesQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetAbsencesQuery, Result<List<AbsenceDto>>>
     {
-    }
-
-    public class GetAbsencesQueryHandler : IRequestHandler<GetAbsencesQuery, List<AbsenceDto>>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetAbsencesQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<List<AbsenceDto>>> Handle(GetAbsencesQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<List<AbsenceDto>> Handle(GetAbsencesQuery request, CancellationToken cancellationToken)
-        {
-            var absences = await _dbContext.Absences.ToListAsync(cancellationToken);
-            return absences.ToDto();
+            var absences = await dbContext.Absences.ToListAsync(cancellationToken);
+            return Result<List<AbsenceDto>>.Success(absences.ToDto());
         }
     }
 }

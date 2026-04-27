@@ -2,31 +2,25 @@ using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Exam
 {
-    public class GetExamQuery : IRequest<ExamDto?>
+    public record GetExamQuery(long ExamId) : IQuery<Result<ExamDto>>;
+
+    public class GetExamQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetExamQuery, Result<ExamDto>>
     {
-        public required long ExamId { get; set; }
-    }
-
-    public class GetExamQueryHandler : IRequestHandler<GetExamQuery, ExamDto?>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetExamQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<ExamDto>> Handle(GetExamQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<ExamDto?> Handle(GetExamQuery request, CancellationToken cancellationToken)
-        {
-            var exam = await _dbContext.Exams
+            var exam = await dbContext.Exams
                 .Include(e => e.Grades)
-                .SingleOrDefaultAsync(e => e.Id == request.ExamId, cancellationToken);
+                .SingleOrDefaultAsync(e => e.Id == query.ExamId, cancellationToken);
 
-            return exam?.ToDto();
+            if (exam == null)
+                return Result<ExamDto>.Failure($"Exam with ID '{query.ExamId}' not found");
+
+            return Result<ExamDto>.Success(exam.ToDto());
         }
     }
 }

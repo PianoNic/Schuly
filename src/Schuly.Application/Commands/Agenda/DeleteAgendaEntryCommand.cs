@@ -1,35 +1,26 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Agenda
 {
-    public class DeleteAgendaEntryCommand : IRequest
+    public record DeleteAgendaEntryCommand(long AgendaEntryId) : ICommand<Result>;
+
+    public class DeleteAgendaEntryCommandHandler(SchulyDbContext dbContext) : ICommandHandler<DeleteAgendaEntryCommand, Result>
     {
-        public required long AgendaEntryId { get; set; }
-    }
-
-    public class DeleteAgendaEntryCommandHandler : IRequestHandler<DeleteAgendaEntryCommand>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public DeleteAgendaEntryCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(DeleteAgendaEntryCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var agendaEntry = await dbContext.AgendaEntries
+                .SingleOrDefaultAsync(a => a.Id == command.AgendaEntryId, cancellationToken);
 
-        public async ValueTask<Unit> Handle(DeleteAgendaEntryCommand request, CancellationToken cancellationToken)
-        {
-            var agendaEntry = await _dbContext.AgendaEntries
-                .SingleOrDefaultAsync(a => a.Id == request.AgendaEntryId, cancellationToken);
+            if (agendaEntry == null)
+                return Result.Failure($"Agenda entry with ID '{command.AgendaEntryId}' not found");
 
-            if (agendaEntry != null)
-            {
-                _dbContext.AgendaEntries.Remove(agendaEntry);
-                await _dbContext.SaveChangesAsync(cancellationToken);
-            }
+            dbContext.AgendaEntries.Remove(agendaEntry);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

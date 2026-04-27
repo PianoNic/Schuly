@@ -1,35 +1,26 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Absence
 {
-    public class RemoveAbsenceCommand : IRequest
+    public record RemoveAbsenceCommand(long AbsenceId) : ICommand<Result>;
+
+    public class RemoveAbsenceCommandHandler(SchulyDbContext dbContext) : ICommandHandler<RemoveAbsenceCommand, Result>
     {
-        public required long AbsenceId { get; set; }
-    }
-
-    public class RemoveAbsenceCommandHandler : IRequestHandler<RemoveAbsenceCommand>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public RemoveAbsenceCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(RemoveAbsenceCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var absence = await dbContext.Absences
+                .SingleOrDefaultAsync(a => a.Id == command.AbsenceId, cancellationToken);
 
-        public async ValueTask<Unit> Handle(RemoveAbsenceCommand request, CancellationToken cancellationToken)
-        {
-            var absence = await _dbContext.Absences
-                .SingleOrDefaultAsync(a => a.Id == request.AbsenceId, cancellationToken);
+            if (absence == null)
+                return Result.Failure($"Absence with ID '{command.AbsenceId}' not found");
 
-            if (absence != null)
-            {
-                _dbContext.Absences.Remove(absence);
-                await _dbContext.SaveChangesAsync(cancellationToken);
-            }
+            dbContext.Absences.Remove(absence);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

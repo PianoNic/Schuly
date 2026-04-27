@@ -10,58 +10,66 @@ namespace Schuly.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class AgendasController : ControllerBase
+    public class AgendasController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-        public AgendasController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet]
         [ProducesResponseType(typeof(List<AgendaEntryDto>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<List<AgendaEntryDto>>> GetAgendas()
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAgendas(CancellationToken cancellationToken)
         {
-            return Ok(await _mediator.Send(new GetAgendasQuery(), HttpContext.RequestAborted));
+            var result = await mediator.Send(new GetAgendasQuery(), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error);
         }
 
         [HttpGet("search")]
         [ProducesResponseType(typeof(AgendaEntryDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<AgendaEntryDto>> GetAgenda([FromQuery] GetAgendaQuery getAgenda)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAgenda([FromQuery] long agendaEntryId, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(getAgenda, HttpContext.RequestAborted);
-            if (result == null)
-                return NotFound();
-            return Ok(result);
+            var result = await mediator.Send(new GetAgendaQuery(agendaEntryId), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error);
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateEntry(CreateAgendaEntryCommand createAgendaEntry)
+        public async Task<IActionResult> CreateEntry([FromBody] CreateAgendaEntryCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(createAgendaEntry, HttpContext.RequestAborted);
-            return Created();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateEntry(UpdateAgendaEntryCommand updateAgendaEntry)
+        public async Task<IActionResult> UpdateEntry([FromBody] UpdateAgendaEntryCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(updateAgendaEntry, HttpContext.RequestAborted);
-            return Ok();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteEntry(DeleteAgendaEntryCommand deleteAgendaEntry)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteEntry(long id, CancellationToken cancellationToken)
         {
-            await _mediator.Send(deleteAgendaEntry, HttpContext.RequestAborted);
-            return NoContent();
+            var result = await mediator.Send(new DeleteAgendaEntryCommand(id), cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
     }
 }

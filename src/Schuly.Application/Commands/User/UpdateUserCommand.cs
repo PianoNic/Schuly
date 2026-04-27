@@ -1,66 +1,56 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Authorization;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.User
 {
-    public class UpdateUserCommand : IRequest, IHasAuthorization
+    public record UpdateUserCommand(
+        Guid UserId,
+        string FirstName,
+        string LastName,
+        string Email,
+        string? PrivateEmail,
+        string? PhoneNumber,
+        string? Street,
+        string? City,
+        string? Zip,
+        DateOnly Birthday,
+        DateOnly EntryDate,
+        DateOnly? LeaveDate,
+        Roles Role) : ICommand<Result>, IHasAuthorization
     {
-        public required Guid UserId { get; set; }
-        public required string FirstName { get; set; }
-        public required string LastName { get; set; }
-        public required string Email { get; set; }
-        public string? PrivateEmail { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? Street { get; set; }
-        public string? City { get; set; }
-        public string? Zip { get; set; }
-        public required DateOnly Birthday { get; set; }
-        public required DateOnly EntryDate { get; set; }
-        public DateOnly? LeaveDate { get; set; }
-        public required Roles Role { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
+    public class UpdateUserCommandHandler(SchulyDbContext dbContext) : ICommandHandler<UpdateUserCommand, Result>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public UpdateUserCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(UpdateUserCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var user = await dbContext.Users
+                .SingleOrDefaultAsync(u => u.Id == command.UserId, cancellationToken);
 
-        public async ValueTask<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
-        {
-            var user = await _dbContext.Users
-                .SingleOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
+            if (user == null)
+                return Result.Failure($"User with ID '{command.UserId}' not found");
 
-            if (user != null)
-            {
-                user.FirstName = request.FirstName;
-                user.LastName = request.LastName;
-                user.Email = request.Email;
-                user.PrivateEmail = request.PrivateEmail;
-                user.PhoneNumber = request.PhoneNumber;
-                user.Street = request.Street;
-                user.City = request.City;
-                user.Zip = request.Zip;
-                user.Birthday = request.Birthday;
-                user.EntryDate = request.EntryDate;
-                user.LeaveDate = request.LeaveDate;
-                user.Role = request.Role;
+            user.FirstName = command.FirstName;
+            user.LastName = command.LastName;
+            user.Email = command.Email;
+            user.PrivateEmail = command.PrivateEmail;
+            user.PhoneNumber = command.PhoneNumber;
+            user.Street = command.Street;
+            user.City = command.City;
+            user.Zip = command.Zip;
+            user.Birthday = command.Birthday;
+            user.EntryDate = command.EntryDate;
+            user.LeaveDate = command.LeaveDate;
+            user.Role = command.Role;
 
-                await _dbContext.SaveChangesAsync(cancellationToken);
-            }
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

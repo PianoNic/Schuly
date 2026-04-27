@@ -10,92 +10,78 @@ namespace Schuly.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class SchoolsController : ControllerBase
+    public class SchoolsController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-
-        public SchoolsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet]
         [ProducesResponseType(typeof(List<SchoolDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<ActionResult<List<SchoolDto>>> GetSchools()
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetSchools(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(
-                new GetSchoolsQuery(),
-                HttpContext.RequestAborted);
+            var result = await mediator.Send(new GetSchoolsQuery(), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
 
-            return Ok(result);
+            return BadRequest(result.Error);
         }
 
         [HttpGet("my-schools")]
         [ProducesResponseType(typeof(List<SchoolDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<List<SchoolDto>>> GetMySchools()
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetMySchools(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(
-                new GetMySchoolsQuery(),
-                HttpContext.RequestAborted);
+            var result = await mediator.Send(new GetMySchoolsQuery(), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
 
-            return Ok(result);
+            return BadRequest(result.Error);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:long}")]
         [ProducesResponseType(typeof(SchoolDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<SchoolDto>> GetSchool(long id)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetSchool(long id, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(
-                new GetSchoolQuery { SchoolId = id },
-                HttpContext.RequestAborted);
+            var result = await mediator.Send(new GetSchoolQuery(id), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
 
-            if (result == null)
-                return NotFound();
-
-            return Ok(result);
+            return BadRequest(result.Error);
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(long), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<ActionResult<long>> CreateSchool(CreateSchoolCommand command)
+        public async Task<IActionResult> CreateSchool([FromBody] CreateSchoolCommand command, CancellationToken cancellationToken)
         {
-            var id = await _mediator.Send(command, HttpContext.RequestAborted);
-            return CreatedAtAction(nameof(GetSchool), new { id }, id);
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error);
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<ActionResult> UpdateSchool(UpdateSchoolCommand command)
+        public async Task<IActionResult> UpdateSchool([FromBody] UpdateSchoolCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(command, HttpContext.RequestAborted);
-            return Ok();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<ActionResult> DeleteSchool(long id)
+        public async Task<IActionResult> DeleteSchool(long id, CancellationToken cancellationToken)
         {
-            await _mediator.Send(
-                new DeleteSchoolCommand { Id = id },
-                HttpContext.RequestAborted);
+            var result = await mediator.Send(new DeleteSchoolCommand(id), cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
 
-            return NoContent();
+            return BadRequest(result.Error);
         }
     }
 }

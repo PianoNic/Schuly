@@ -2,27 +2,18 @@ using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Class
 {
-    public class GetClassQuery : IRequest<ClassDto?>
+    public record GetClassQuery(Guid ClassId) : IQuery<Result<ClassDto>>;
+
+    public class GetClassQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetClassQuery, Result<ClassDto>>
     {
-        public required Guid ClassId { get; set; }
-    }
-
-    public class GetClassQueryHandler : IRequestHandler<GetClassQuery, ClassDto?>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetClassQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<ClassDto>> Handle(GetClassQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<ClassDto?> Handle(GetClassQuery request, CancellationToken cancellationToken)
-        {
-            var classEntity = await _dbContext.Classes
+            var classEntity = await dbContext.Classes
                 .Include(c => c.Students)
                     .ThenInclude(s => s.Absences)
                 .Include(c => c.Students)
@@ -30,9 +21,12 @@ namespace Schuly.Application.Queries.Class
                 .Include(c => c.Agenda)
                 .Include(c => c.Exams)
                     .ThenInclude(e => e.Grades)
-                .SingleOrDefaultAsync(c => c.Id == request.ClassId, cancellationToken);
+                .SingleOrDefaultAsync(c => c.Id == query.ClassId, cancellationToken);
 
-            return classEntity?.ToDto();
+            if (classEntity == null)
+                return Result<ClassDto>.Failure($"Class with ID '{query.ClassId}' not found");
+
+            return Result<ClassDto>.Success(classEntity.ToDto());
         }
     }
 }

@@ -12,7 +12,7 @@ using Schuly.Infrastructure;
 namespace Schuly.Infrastructure.Migrations
 {
     [DbContext(typeof(SchulyDbContext))]
-    [Migration("20260427150912_Init")]
+    [Migration("20260427151804_Init")]
     partial class Init
     {
         /// <inheritdoc />

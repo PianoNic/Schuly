@@ -2,44 +2,27 @@ using Mediator;
 using Schuly.Application.Authorization;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Application.Services.Interfaces;
 using Schuly.Domain.Enums;
 
 namespace Schuly.Application.Queries.User
 {
-    public class GetCurrentUserQuery : IRequest<CurrentUserDto?>, IHasAuthorization
+    public record GetCurrentUserQuery() : IQuery<Result<UserDto>>, IHasAuthorization
     {
-        public Roles GetRequiredRole()
-        {
-            return Roles.Student;
-        }
+        public Roles GetRequiredRole() => Roles.Student;
     }
 
-    public class CurrentUserDto
+    public class GetCurrentUserQueryHandler(IUserService userService) : IQueryHandler<GetCurrentUserQuery, Result<UserDto>>
     {
-        public UserDto User { get; set; }
-    }
-
-    public class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery, CurrentUserDto?>
-    {
-        private readonly IUserService _userService;
-
-        public GetCurrentUserQueryHandler(IUserService userService)
+        public async ValueTask<Result<UserDto>> Handle(GetCurrentUserQuery query, CancellationToken cancellationToken)
         {
-            _userService = userService;
-        }
-
-        public async ValueTask<CurrentUserDto?> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
-        {
-            var user = await _userService.GetCurrentUserAsync(cancellationToken);
+            var user = await userService.GetCurrentUserAsync(cancellationToken);
 
             if (user == null)
-                return null;
+                return Result<UserDto>.Failure("User not found");
 
-            return new CurrentUserDto
-            {
-                User = user.ToDto()
-            };
+            return Result<UserDto>.Success(user.ToDto());
         }
     }
 }

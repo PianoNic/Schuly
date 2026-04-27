@@ -1,41 +1,29 @@
 using Mediator;
 using Schuly.Application.Authorization;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Class
 {
-    public class CreateClassCommand : IRequest, IHasAuthorization
+    public record CreateClassCommand(string Name, string? Description) : ICommand<Result>, IHasAuthorization
     {
-        public required string Name { get; set; }
-        public string? Description { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Teacher;
-        }
+        public Roles GetRequiredRole() => Roles.Teacher;
     }
 
-    public class CreateClassCommandHandler : IRequestHandler<CreateClassCommand>
+    public class CreateClassCommandHandler(SchulyDbContext dbContext) : ICommandHandler<CreateClassCommand, Result>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public CreateClassCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(CreateClassCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<Unit> Handle(CreateClassCommand request, CancellationToken cancellationToken)
-        {
-            await _dbContext.Classes.AddAsync(new Domain.Class
+            await dbContext.Classes.AddAsync(new Domain.Class
             {
-                Name = request.Name,
-                Description = request.Description
+                Name = command.Name,
+                Description = command.Description
             }, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

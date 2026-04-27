@@ -3,39 +3,31 @@ using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Authorization;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.SchoolUser
 {
-    public class GetSchoolUserQuery : IRequest<SchoolUserDto?>, IHasAuthorization
+    public record GetSchoolUserQuery(long SchoolUserId) : IQuery<Result<SchoolUserDto>>, IHasAuthorization
     {
-        public required long SchoolUserId { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Student;
-        }
+        public Roles GetRequiredRole() => Roles.Student;
     }
 
-    public class GetSchoolUserQueryHandler : IRequestHandler<GetSchoolUserQuery, SchoolUserDto?>
+    public class GetSchoolUserQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetSchoolUserQuery, Result<SchoolUserDto>>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetSchoolUserQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<SchoolUserDto>> Handle(GetSchoolUserQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<SchoolUserDto?> Handle(GetSchoolUserQuery request, CancellationToken cancellationToken)
-        {
-            var schoolUser = await _dbContext.SchoolUsers
+            var schoolUser = await dbContext.SchoolUsers
                 .Include(su => su.Absences)
                 .Include(su => su.Grades)
                 .Include(su => su.Classes)
-                .SingleOrDefaultAsync(su => su.Id == request.SchoolUserId, cancellationToken);
+                .SingleOrDefaultAsync(su => su.Id == query.SchoolUserId, cancellationToken);
 
-            return schoolUser?.ToDto();
+            if (schoolUser == null)
+                return Result<SchoolUserDto>.Failure($"SchoolUser with ID '{query.SchoolUserId}' not found");
+
+            return Result<SchoolUserDto>.Success(schoolUser.ToDto());
         }
     }
 }

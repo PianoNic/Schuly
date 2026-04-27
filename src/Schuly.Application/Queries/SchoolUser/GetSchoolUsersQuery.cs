@@ -3,45 +3,32 @@ using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Authorization;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.SchoolUser
 {
-    public class GetSchoolUsersQuery : IRequest<List<SchoolUserDto>>, IHasAuthorization
+    public record GetSchoolUsersQuery(Guid? ApplicationUserId = null) : IQuery<Result<List<SchoolUserDto>>>, IHasAuthorization
     {
-        public Guid? ApplicationUserId { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Teacher;
-        }
+        public Roles GetRequiredRole() => Roles.Teacher;
     }
 
-    public class GetSchoolUsersQueryHandler : IRequestHandler<GetSchoolUsersQuery, List<SchoolUserDto>>
+    public class GetSchoolUsersQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetSchoolUsersQuery, Result<List<SchoolUserDto>>>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetSchoolUsersQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<List<SchoolUserDto>>> Handle(GetSchoolUsersQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<List<SchoolUserDto>> Handle(GetSchoolUsersQuery request, CancellationToken cancellationToken)
-        {
-            var query = _dbContext.SchoolUsers
+            var dbQuery = dbContext.SchoolUsers
                 .Include(su => su.Absences)
                 .Include(su => su.Grades)
                 .Include(su => su.Classes)
                 .AsQueryable();
 
-            if (request.ApplicationUserId.HasValue)
-            {
-                query = query.Where(su => su.ApplicationUserId == request.ApplicationUserId.Value);
-            }
+            if (query.ApplicationUserId.HasValue)
+                dbQuery = dbQuery.Where(su => su.ApplicationUserId == query.ApplicationUserId.Value);
 
-            var schoolUsers = await query.ToListAsync(cancellationToken);
-            return schoolUsers.ToDto();
+            var schoolUsers = await dbQuery.ToListAsync(cancellationToken);
+            return Result<List<SchoolUserDto>>.Success(schoolUsers.ToDto());
         }
     }
 }

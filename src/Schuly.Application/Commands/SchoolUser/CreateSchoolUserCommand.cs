@@ -1,67 +1,57 @@
 using Mediator;
 using Schuly.Application.Authorization;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.SchoolUser
 {
-    public class CreateSchoolUserCommand : IRequest<long>, IHasAuthorization
+    public record CreateSchoolUserCommand(
+        Guid ApplicationUserId,
+        string FirstName,
+        string LastName,
+        string Email,
+        string? PrivateEmail,
+        string? PhoneNumber,
+        string? Street,
+        string? City,
+        string? Zip,
+        DateOnly Birthday,
+        DateOnly EntryDate,
+        Roles Role,
+        string? StudentNumber,
+        string? TeacherCode) : ICommand<Result<long>>, IHasAuthorization
     {
-        public required Guid ApplicationUserId { get; set; }
-        public required string FirstName { get; set; }
-        public required string LastName { get; set; }
-        public required string Email { get; set; }
-        public string? PrivateEmail { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? Street { get; set; }
-        public string? City { get; set; }
-        public string? Zip { get; set; }
-        public required DateOnly Birthday { get; set; }
-        public required DateOnly EntryDate { get; set; }
-        public required Roles Role { get; set; }
-        public string? StudentNumber { get; set; }
-        public string? TeacherCode { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class CreateSchoolUserCommandHandler : IRequestHandler<CreateSchoolUserCommand, long>
+    public class CreateSchoolUserCommandHandler(SchulyDbContext dbContext) : ICommandHandler<CreateSchoolUserCommand, Result<long>>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public CreateSchoolUserCommandHandler(SchulyDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<long> Handle(CreateSchoolUserCommand request, CancellationToken cancellationToken)
+        public async ValueTask<Result<long>> Handle(CreateSchoolUserCommand command, CancellationToken cancellationToken)
         {
             var schoolUser = new Domain.SchoolUser
             {
-                ApplicationUserId = request.ApplicationUserId,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Email = request.Email,
-                PrivateEmail = request.PrivateEmail,
-                PhoneNumber = request.PhoneNumber,
-                Street = request.Street,
-                City = request.City,
-                Zip = request.Zip,
-                Birthday = request.Birthday,
-                EntryDate = request.EntryDate,
-                Role = request.Role,
+                ApplicationUserId = command.ApplicationUserId,
+                FirstName = command.FirstName,
+                LastName = command.LastName,
+                Email = command.Email,
+                PrivateEmail = command.PrivateEmail,
+                PhoneNumber = command.PhoneNumber,
+                Street = command.Street,
+                City = command.City,
+                Zip = command.Zip,
+                Birthday = command.Birthday,
+                EntryDate = command.EntryDate,
+                Role = command.Role,
                 State = UserState.Active,
-                StudentNumber = request.StudentNumber,
-                TeacherCode = request.TeacherCode
+                StudentNumber = command.StudentNumber,
+                TeacherCode = command.TeacherCode
             };
 
-            await _dbContext.SchoolUsers.AddAsync(schoolUser, cancellationToken);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SchoolUsers.AddAsync(schoolUser, cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return schoolUser.Id;
+            return Result<long>.Success(schoolUser.Id);
         }
     }
 }

@@ -2,61 +2,52 @@ using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Schuly.Application.Commands.User;
+using Schuly.Application.Dtos;
 using Schuly.Application.Queries.User;
 
 namespace Schuly.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-
-        public AuthController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<ActionResult<RegisterResponse>> Register([FromBody] RegisterCommand command)
+        [ProducesResponseType(typeof(LoginDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Register([FromBody] RegisterCommand command, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(command);
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
 
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-
-            return Ok(result);
+            return BadRequest(result.Error);
         }
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginCommand command)
+        [ProducesResponseType(typeof(LoginDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Login([FromBody] LoginCommand command, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(command);
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
 
-            if (!result.Success)
-            {
-                return Unauthorized(result);
-            }
-
-            return Ok(result);
+            return BadRequest(result.Error);
         }
 
         [HttpGet("me")]
         [Authorize]
-        public async Task<ActionResult<GetCurrentUserQuery>> GetCurrentUser()
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetCurrentUser(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetCurrentUserQuery());
+            var result = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
 
-            if (result == null)
-            {
-                return Unauthorized();
-            }
-
-            return Ok(result);
+            return BadRequest(result.Error);
         }
     }
 }

@@ -1,41 +1,33 @@
-﻿using Mediator;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Exam
 {
-    public class AddGradeToExamCommand : IRequest
+    public record AddGradeToExamCommand(long ExamId, Guid StudentId, decimal Grade, decimal Weight = 1) : ICommand<Result>;
+
+    public class AddGradeToExamCommandHandler(SchulyDbContext dbContext) : ICommandHandler<AddGradeToExamCommand, Result>
     {
-        public required long ExamId { get; set; }
-        public required Guid StudentId { get; set; }
-        public required decimal Grade { get; set; }
-        public decimal Weight { get; set; } = 1;
-    }
-
-    public class AddGradeToExamControllerHandler : IRequestHandler<AddGradeToExamCommand>
-    {
-        private readonly SchulyDbContext _dbContext;
-        public AddGradeToExamControllerHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(AddGradeToExamCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var exam = await dbContext.Exams.AsTracking()
+                .SingleOrDefaultAsync(e => e.Id == command.ExamId, cancellationToken);
 
-        public async ValueTask<Unit> Handle(AddGradeToExamCommand request, CancellationToken cancellationToken)
-        {
-            var exam = await _dbContext.Exams.AsTracking().SingleAsync(e => e.Id == request.ExamId, cancellationToken);
+            if (exam == null)
+                return Result.Failure($"Exam with ID '{command.ExamId}' not found");
 
-            exam.Grades.Add(new Domain.Grade()
+            exam.Grades.Add(new Domain.Grade
             {
-                ExamId = request.ExamId,
-                UserId = request.StudentId,
-
-                Score = request.Grade,
-                Weighting = request.Weight,
+                ExamId = command.ExamId,
+                UserId = command.StudentId,
+                Score = command.Grade,
+                Weighting = command.Weight,
             });
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

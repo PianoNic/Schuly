@@ -10,58 +10,66 @@ namespace Schuly.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class AbsencesController : ControllerBase
+    public class AbsencesController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-        public AbsencesController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet]
         [ProducesResponseType(typeof(List<AbsenceDto>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<List<AbsenceDto>>> GetAbsences()
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAbsences(CancellationToken cancellationToken)
         {
-            return Ok(await _mediator.Send(new GetAbsencesQuery(), HttpContext.RequestAborted));
+            var result = await mediator.Send(new GetAbsencesQuery(), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error);
         }
 
         [HttpGet("search")]
         [ProducesResponseType(typeof(AbsenceDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<AbsenceDto>> GetAbsence([FromQuery] GetAbsenceQuery getAbsence)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAbsence([FromQuery] long absenceId, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(getAbsence, HttpContext.RequestAborted);
-            if (result == null)
-                return NotFound();
-            return Ok(result);
+            var result = await mediator.Send(new GetAbsenceQuery(absenceId), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error);
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateAbsence(CreateAbsenceCommand createAbsenceCommand)
+        public async Task<IActionResult> CreateAbsence([FromBody] CreateAbsenceCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(createAbsenceCommand, HttpContext.RequestAborted);
-            return Created();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateAbsence(UpdateAbsenceCommand updateAbsenceCommand)
+        public async Task<IActionResult> UpdateAbsence([FromBody] UpdateAbsenceCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(updateAbsenceCommand, HttpContext.RequestAborted);
-            return Ok();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> RemoveAbsence(RemoveAbsenceCommand removeAbsence)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> RemoveAbsence(long id, CancellationToken cancellationToken)
         {
-            await _mediator.Send(removeAbsence, HttpContext.RequestAborted);
-            return NoContent();
+            var result = await mediator.Send(new RemoveAbsenceCommand(id), cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
     }
 }

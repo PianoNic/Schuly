@@ -10,70 +10,66 @@ namespace Schuly.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class UsersController : ControllerBase
+    public class UsersController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-        public UsersController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
-        [HttpPost("login")]
-        [AllowAnonymous]
-        [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<LoginResponse>> Login(LoginCommand loginCommand)
-        {
-            var result = await _mediator.Send(loginCommand, HttpContext.RequestAborted);
-            if (!result.Success)
-                return Unauthorized(result);
-            return Ok(result);
-        }
-
         [HttpGet("search")]
         [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserDto>> GetUser([FromQuery] GetUserQuery getUser)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetUser([FromQuery] Guid userId, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(getUser, HttpContext.RequestAborted);
-            if (result == null)
-                return NotFound();
-            return Ok(result);
+            var result = await mediator.Send(new GetUserQuery(userId), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error);
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(List<UserDto>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<List<UserDto>>> GetUsers()
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetUsers(CancellationToken cancellationToken)
         {
-            return Ok(await _mediator.Send(new GetUsersQuery(), HttpContext.RequestAborted));
+            var result = await mediator.Send(new GetUsersQuery(), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error);
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateUser(CreateUserCommand createUser)
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(createUser, HttpContext.RequestAborted);
-            return Created();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateUser(UpdateUserCommand updateUser)
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(updateUser, HttpContext.RequestAborted);
-            return Ok();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteUser(DeleteUserCommand deleteUser)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteUser(Guid id, CancellationToken cancellationToken)
         {
-            await _mediator.Send(deleteUser, HttpContext.RequestAborted);
-            return NoContent();
+            var result = await mediator.Send(new DeleteUserCommand(id), cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
     }
 }

@@ -2,27 +2,19 @@ using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Agenda
 {
-    public class GetAgendasQuery : IRequest<List<AgendaEntryDto>>
+    public record GetAgendasQuery() : IQuery<Result<List<AgendaEntryDto>>>;
+
+    public class GetAgendasQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetAgendasQuery, Result<List<AgendaEntryDto>>>
     {
-    }
-
-    public class GetAgendasQueryHandler : IRequestHandler<GetAgendasQuery, List<AgendaEntryDto>>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetAgendasQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<List<AgendaEntryDto>>> Handle(GetAgendasQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<List<AgendaEntryDto>> Handle(GetAgendasQuery request, CancellationToken cancellationToken)
-        {
-            var agendaEntries = await _dbContext.AgendaEntries.ToListAsync(cancellationToken);
-            return agendaEntries.ToDto();
+            var agendaEntries = await dbContext.AgendaEntries.ToListAsync(cancellationToken);
+            return Result<List<AgendaEntryDto>>.Success(agendaEntries.ToDto());
         }
     }
 }

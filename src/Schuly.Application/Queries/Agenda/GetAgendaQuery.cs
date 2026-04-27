@@ -2,30 +2,24 @@ using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Agenda
 {
-    public class GetAgendaQuery : IRequest<AgendaEntryDto?>
+    public record GetAgendaQuery(long AgendaEntryId) : IQuery<Result<AgendaEntryDto>>;
+
+    public class GetAgendaQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetAgendaQuery, Result<AgendaEntryDto>>
     {
-        public required long AgendaEntryId { get; set; }
-    }
-
-    public class GetAgendaQueryHandler : IRequestHandler<GetAgendaQuery, AgendaEntryDto?>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetAgendaQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<AgendaEntryDto>> Handle(GetAgendaQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var agendaEntry = await dbContext.AgendaEntries
+                .SingleOrDefaultAsync(a => a.Id == query.AgendaEntryId, cancellationToken);
 
-        public async ValueTask<AgendaEntryDto?> Handle(GetAgendaQuery request, CancellationToken cancellationToken)
-        {
-            var agendaEntry = await _dbContext.AgendaEntries
-                .SingleOrDefaultAsync(a => a.Id == request.AgendaEntryId, cancellationToken);
+            if (agendaEntry == null)
+                return Result<AgendaEntryDto>.Failure($"Agenda entry with ID '{query.AgendaEntryId}' not found");
 
-            return agendaEntry?.ToDto();
+            return Result<AgendaEntryDto>.Success(agendaEntry.ToDto());
         }
     }
 }

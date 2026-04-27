@@ -1,5 +1,4 @@
 using System.Security.Cryptography;
-using System.Text;
 
 namespace Schuly.Application.Services
 {
@@ -17,21 +16,12 @@ namespace Schuly.Application.Services
 
         public (string Hash, string Salt) HashPassword(string password)
         {
-            using (var rng = new RNGCryptoServiceProvider())
-            {
-                byte[] saltBytes = new byte[SaltSize];
-                rng.GetBytes(saltBytes);
+            byte[] saltBytes = RandomNumberGenerator.GetBytes(SaltSize);
 
-                using (var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, Iterations, HashAlgorithmName.SHA256))
-                {
-                    byte[] hashBytes = pbkdf2.GetBytes(HashSize);
+            using var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, Iterations, HashAlgorithmName.SHA256);
+            byte[] hashBytes = pbkdf2.GetBytes(HashSize);
 
-                    string salt = Convert.ToBase64String(saltBytes);
-                    string hash = Convert.ToBase64String(hashBytes);
-
-                    return (hash, salt);
-                }
-            }
+            return (Convert.ToBase64String(hashBytes), Convert.ToBase64String(saltBytes));
         }
 
         public bool VerifyPassword(string password, string hash, string salt)
@@ -41,20 +31,10 @@ namespace Schuly.Application.Services
                 byte[] saltBytes = Convert.FromBase64String(salt);
                 byte[] hashBytes = Convert.FromBase64String(hash);
 
-                using (var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, Iterations, HashAlgorithmName.SHA256))
-                {
-                    byte[] computedHash = pbkdf2.GetBytes(HashSize);
+                using var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, Iterations, HashAlgorithmName.SHA256);
+                byte[] computedHash = pbkdf2.GetBytes(HashSize);
 
-                    for (int i = 0; i < HashSize; i++)
-                    {
-                        if (hashBytes[i] != computedHash[i])
-                        {
-                            return false;
-                        }
-                    }
-
-                    return true;
-                }
+                return CryptographicOperations.FixedTimeEquals(hashBytes, computedHash);
             }
             catch
             {

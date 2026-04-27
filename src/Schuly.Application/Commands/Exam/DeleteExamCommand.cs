@@ -1,35 +1,26 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Exam
 {
-    public class DeleteExamCommand : IRequest
+    public record DeleteExamCommand(long ExamId) : ICommand<Result>;
+
+    public class DeleteExamCommandHandler(SchulyDbContext dbContext) : ICommandHandler<DeleteExamCommand, Result>
     {
-        public required long ExamId { get; set; }
-    }
-
-    public class DeleteExamCommandHandler : IRequestHandler<DeleteExamCommand>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public DeleteExamCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(DeleteExamCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var exam = await dbContext.Exams
+                .SingleOrDefaultAsync(e => e.Id == command.ExamId, cancellationToken);
 
-        public async ValueTask<Unit> Handle(DeleteExamCommand request, CancellationToken cancellationToken)
-        {
-            var exam = await _dbContext.Exams
-                .SingleOrDefaultAsync(e => e.Id == request.ExamId, cancellationToken);
+            if (exam == null)
+                return Result.Failure($"Exam with ID '{command.ExamId}' not found");
 
-            if (exam != null)
-            {
-                _dbContext.Exams.Remove(exam);
-                await _dbContext.SaveChangesAsync(cancellationToken);
-            }
+            dbContext.Exams.Remove(exam);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

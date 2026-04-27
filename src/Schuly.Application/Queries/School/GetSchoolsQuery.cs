@@ -3,32 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Authorization;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.School
 {
-    public class GetSchoolsQuery : IRequest<List<SchoolDto>>, IHasAuthorization
+    public record GetSchoolsQuery() : IQuery<Result<List<SchoolDto>>>, IHasAuthorization
     {
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class GetSchoolsQueryHandler : IRequestHandler<GetSchoolsQuery, List<SchoolDto>>
+    public class GetSchoolsQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetSchoolsQuery, Result<List<SchoolDto>>>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetSchoolsQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<List<SchoolDto>>> Handle(GetSchoolsQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<List<SchoolDto>> Handle(GetSchoolsQuery request, CancellationToken cancellationToken)
-        {
-            var schools = await _dbContext.Schools.ToListAsync(cancellationToken);
-            return schools.ToDto();
+            var schools = await dbContext.Schools.ToListAsync(cancellationToken);
+            return Result<List<SchoolDto>>.Success(schools.ToDto());
         }
     }
 }

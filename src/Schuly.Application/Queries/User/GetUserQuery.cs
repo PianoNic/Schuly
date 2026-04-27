@@ -3,39 +3,31 @@ using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Authorization;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.User
 {
-    public class GetUserQuery : IRequest<UserDto?>, IHasAuthorization
+    public record GetUserQuery(Guid UserId) : IQuery<Result<UserDto>>, IHasAuthorization
     {
-        public required Guid UserId { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Student;
-        }
+        public Roles GetRequiredRole() => Roles.Student;
     }
 
-    public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserDto?>
+    public class GetUserQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetUserQuery, Result<UserDto>>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetUserQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<UserDto>> Handle(GetUserQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<UserDto?> Handle(GetUserQuery request, CancellationToken cancellationToken)
-        {
-            var user = await _dbContext.Users
+            var user = await dbContext.Users
                 .Include(u => u.Absences)
                 .Include(u => u.Grades)
                 .Include(u => u.Classes)
-                .SingleOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
+                .SingleOrDefaultAsync(u => u.Id == query.UserId, cancellationToken);
 
-            return user?.ToDto();
+            if (user == null)
+                return Result<UserDto>.Failure($"User with ID '{query.UserId}' not found");
+
+            return Result<UserDto>.Success(user.ToDto());
         }
     }
 }

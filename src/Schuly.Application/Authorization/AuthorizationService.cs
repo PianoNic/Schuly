@@ -3,31 +3,31 @@ using Schuly.Domain.Enums;
 
 namespace Schuly.Application.Authorization
 {
-    public class AuthorizationService
+    public interface IAuthorizationService
     {
-        private readonly IUserService _userService;
+        Task CanAuthorizeAsync<T>(T obj) where T : notnull;
+    }
 
-        public AuthorizationService(IUserService userService)
-        {
-            _userService = userService;
-        }
-
-        public async Task CanAuthorizeAsync<T>(T obj) where T : notnull
+    public class AuthorizationService(IUserService userService) : IAuthorizationService
+    {
+        public Task CanAuthorizeAsync<T>(T obj) where T : notnull
         {
             if (obj is not IHasAuthorization authRequest)
-                return;
+                return Task.CompletedTask;
 
             var requiredRole = authRequest.GetRequiredRole();
-            var currentUserRole = _userService.GetCurrentUserRole();
+            var currentUserRole = userService.GetCurrentUserRole();
 
             if (!IsRoleAuthorized(currentUserRole, requiredRole))
             {
                 throw new UnauthorizedAccessException(
                     $"User with role {currentUserRole} is not authorized to perform this action. Required role: {requiredRole}.");
             }
+
+            return Task.CompletedTask;
         }
 
-        private bool IsRoleAuthorized(Roles userRole, Roles requiredRole)
+        private static bool IsRoleAuthorized(Roles userRole, Roles requiredRole)
         {
             if (userRole == Roles.Administrator)
                 return true;

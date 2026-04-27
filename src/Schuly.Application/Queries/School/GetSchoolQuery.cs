@@ -2,30 +2,24 @@ using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.School
 {
-    public class GetSchoolQuery : IRequest<SchoolDto?>
+    public record GetSchoolQuery(long SchoolId) : IQuery<Result<SchoolDto>>;
+
+    public class GetSchoolQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetSchoolQuery, Result<SchoolDto>>
     {
-        public required long SchoolId { get; set; }
-    }
-
-    public class GetSchoolQueryHandler : IRequestHandler<GetSchoolQuery, SchoolDto?>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetSchoolQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<SchoolDto>> Handle(GetSchoolQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var school = await dbContext.Schools
+                .SingleOrDefaultAsync(s => s.Id == query.SchoolId, cancellationToken);
 
-        public async ValueTask<SchoolDto?> Handle(GetSchoolQuery request, CancellationToken cancellationToken)
-        {
-            var school = await _dbContext.Schools
-                .SingleOrDefaultAsync(s => s.Id == request.SchoolId, cancellationToken);
+            if (school == null)
+                return Result<SchoolDto>.Failure($"School with ID '{query.SchoolId}' not found");
 
-            return school?.ToDto();
+            return Result<SchoolDto>.Success(school.ToDto());
         }
     }
 }

@@ -1,42 +1,31 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Authorization;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.User
 {
-    public class DeleteUserCommand : IRequest, IHasAuthorization
+    public record DeleteUserCommand(Guid UserId) : ICommand<Result>, IHasAuthorization
     {
-        public required Guid UserId { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
+    public class DeleteUserCommandHandler(SchulyDbContext dbContext) : ICommandHandler<DeleteUserCommand, Result>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public DeleteUserCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(DeleteUserCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var user = await dbContext.Users
+                .SingleOrDefaultAsync(u => u.Id == command.UserId, cancellationToken);
 
-        public async ValueTask<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
-        {
-            var user = await _dbContext.Users
-                .SingleOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
+            if (user == null)
+                return Result.Failure($"User with ID '{command.UserId}' not found");
 
-            if (user != null)
-            {
-                _dbContext.Users.Remove(user);
-                await _dbContext.SaveChangesAsync(cancellationToken);
-            }
+            dbContext.Users.Remove(user);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

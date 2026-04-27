@@ -1,60 +1,50 @@
 using Mediator;
 using Schuly.Application.Authorization;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.School
 {
-    public class UpdateSchoolCommand : IRequest, IHasAuthorization
+    public record UpdateSchoolCommand(
+        long Id,
+        string Name,
+        string? Description,
+        string? Email,
+        string? PhoneNumber,
+        string? Website,
+        string? Street,
+        string? City,
+        string? State,
+        string? Zip,
+        string? Country) : ICommand<Result>, IHasAuthorization
     {
-        public required long Id { get; set; }
-        public required string Name { get; set; }
-        public string? Description { get; set; }
-        public string? Email { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? Website { get; set; }
-        public string? Street { get; set; }
-        public string? City { get; set; }
-        public string? State { get; set; }
-        public string? Zip { get; set; }
-        public string? Country { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class UpdateSchoolCommandHandler : IRequestHandler<UpdateSchoolCommand>
+    public class UpdateSchoolCommandHandler(SchulyDbContext dbContext) : ICommandHandler<UpdateSchoolCommand, Result>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public UpdateSchoolCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(UpdateSchoolCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var school = await dbContext.Schools.FindAsync([command.Id], cancellationToken: cancellationToken);
 
-        public async ValueTask<Unit> Handle(UpdateSchoolCommand request, CancellationToken cancellationToken)
-        {
-            var school = await _dbContext.Schools.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
             if (school == null)
-                throw new InvalidOperationException($"School with ID {request.Id} not found");
+                return Result.Failure($"School with ID {command.Id} not found");
 
-            school.Name = request.Name;
-            school.Description = request.Description;
-            school.Email = request.Email;
-            school.PhoneNumber = request.PhoneNumber;
-            school.Website = request.Website;
-            school.Street = request.Street;
-            school.City = request.City;
-            school.State = request.State;
-            school.Zip = request.Zip;
-            school.Country = request.Country;
+            school.Name = command.Name;
+            school.Description = command.Description;
+            school.Email = command.Email;
+            school.PhoneNumber = command.PhoneNumber;
+            school.Website = command.Website;
+            school.Street = command.Street;
+            school.City = command.City;
+            school.State = command.State;
+            school.Zip = command.Zip;
+            school.Country = command.Country;
 
-            _dbContext.Schools.Update(school);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

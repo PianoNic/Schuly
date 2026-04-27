@@ -2,26 +2,18 @@ using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Class
 {
-    public class GetClasssQuery : IRequest<List<ClassDto>>
+    public record GetClassesQuery() : IQuery<Result<List<ClassDto>>>;
+
+    public class GetClassesQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetClassesQuery, Result<List<ClassDto>>>
     {
-    }
-
-    public class GetClasssQueryHandler : IRequestHandler<GetClasssQuery, List<ClassDto>>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetClasssQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<List<ClassDto>>> Handle(GetClassesQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<List<ClassDto>> Handle(GetClasssQuery request, CancellationToken cancellationToken)
-        {
-            var classes = await _dbContext.Classes
+            var classes = await dbContext.Classes
                 .Include(c => c.Students)
                     .ThenInclude(s => s.Absences)
                 .Include(c => c.Students)
@@ -30,7 +22,8 @@ namespace Schuly.Application.Queries.Class
                 .Include(c => c.Exams)
                     .ThenInclude(e => e.Grades)
                 .ToListAsync(cancellationToken);
-            return classes.ToDto();
+
+            return Result<List<ClassDto>>.Success(classes.ToDto());
         }
     }
 }

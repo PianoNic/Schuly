@@ -1,105 +1,45 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Models;
 using Schuly.Application.Services;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.User
 {
-    public class LoginCommand : IRequest<LoginResponse>
-    {
-        public required string Email { get; set; }
-        public required string Password { get; set; }
-    }
+    public record LoginCommand(string Email, string Password) : ICommand<Result<LoginDto>>;
 
-    public class LoginResponse
-    {
-        public bool Success { get; set; }
-        public string? Token { get; set; }
-        public string? Message { get; set; }
-        public UserLoginDto? User { get; set; }
-    }
+    public record LoginDto(string Token, UserLoginDto User);
 
-    public class UserLoginDto
-    {
-        public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Role { get; set; }
-    }
+    public record UserLoginDto(Guid Id, string FirstName, string LastName, string Email, string Role);
 
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse>
+    public class LoginCommandHandler(
+        SchulyDbContext dbContext,
+        IPasswordHashingService passwordHashingService,
+        ITokenGenerationService tokenGenerationService) : ICommandHandler<LoginCommand, Result<LoginDto>>
     {
-        private readonly SchulyDbContext _dbContext;
-        private readonly IPasswordHashingService _passwordHashingService;
-        private readonly ITokenGenerationService _tokenGenerationService;
-
-        public LoginCommandHandler(
-            SchulyDbContext dbContext,
-            IPasswordHashingService passwordHashingService,
-            ITokenGenerationService tokenGenerationService)
+        public async ValueTask<Result<LoginDto>> Handle(LoginCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-            _passwordHashingService = passwordHashingService;
-            _tokenGenerationService = tokenGenerationService;
-        }
-
-        public async ValueTask<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
-        {
-            var user = await _dbContext.Users
-                .FirstOrDefaultAsync(u => u.Email == request.Email, cancellationToken);
+            var user = await dbContext.Users
+                .FirstOrDefaultAsync(u => u.Email == command.Email, cancellationToken);
 
             if (user == null)
-            {
-                return new LoginResponse
-                {
-                    Success = false,
-                    Message = "Invalid email or password"
-                };
-            }
+                return Result<LoginDto>.Failure("Invalid email or password");
 
             if (string.IsNullOrEmpty(user.PasswordHash) || string.IsNullOrEmpty(user.PasswordSalt))
-            {
-                return new LoginResponse
-                {
-                    Success = false,
-                    Message = "User account is not properly configured. Please contact an administrator."
-                };
-            }
+                return Result<LoginDto>.Failure("User account is not properly configured. Please contact an administrator.");
 
-            if (!_passwordHashingService.VerifyPassword(request.Password, user.PasswordHash, user.PasswordSalt))
-            {
-                return new LoginResponse
-                {
-                    Success = false,
-                    Message = "Invalid email or password"
-                };
-            }
+            if (!passwordHashingService.VerifyPassword(command.Password, user.PasswordHash, user.PasswordSalt))
+                return Result<LoginDto>.Failure("Invalid email or password");
 
             if (user.State != Schuly.Domain.Enums.UserState.Active)
-            {
-                return new LoginResponse
-                {
-                    Success = false,
-                    Message = "User account is inactive. Please contact an administrator."
-                };
-            }
+                return Result<LoginDto>.Failure("User account is inactive. Please contact an administrator.");
 
-            var token = _tokenGenerationService.GenerateJwtToken(user);
+            var token = tokenGenerationService.GenerateJwtToken(user);
 
-            return new LoginResponse
-            {
-                Success = true,
-                Token = token,
-                User = new UserLoginDto
-                {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    Role = user.Role.ToString()
-                }
-            };
+            return Result<LoginDto>.Success(new LoginDto(
+                token,
+                new UserLoginDto(user.Id, user.FirstName, user.LastName, user.Email, user.Role.ToString())
+            ));
         }
     }
 }

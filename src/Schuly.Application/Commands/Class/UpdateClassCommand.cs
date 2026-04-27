@@ -1,39 +1,28 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Class
 {
-    public class UpdateClassCommand : IRequest
+    public record UpdateClassCommand(Guid ClassId, string Name, string? Description) : ICommand<Result>;
+
+    public class UpdateClassCommandHandler(SchulyDbContext dbContext) : ICommandHandler<UpdateClassCommand, Result>
     {
-        public required Guid ClassId { get; set; }
-        public required string Name { get; set; }
-        public string? Description { get; set; }
-    }
-
-    public class UpdateClassCommandHandler : IRequestHandler<UpdateClassCommand>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public UpdateClassCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(UpdateClassCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var classEntity = await dbContext.Classes
+                .SingleOrDefaultAsync(c => c.Id == command.ClassId, cancellationToken);
 
-        public async ValueTask<Unit> Handle(UpdateClassCommand request, CancellationToken cancellationToken)
-        {
-            var classEntity = await _dbContext.Classes
-                .SingleOrDefaultAsync(c => c.Id == request.ClassId, cancellationToken);
+            if (classEntity == null)
+                return Result.Failure($"Class with ID '{command.ClassId}' not found");
 
-            if (classEntity != null)
-            {
-                classEntity.Name = request.Name;
-                classEntity.Description = request.Description;
+            classEntity.Name = command.Name;
+            classEntity.Description = command.Description;
 
-                await _dbContext.SaveChangesAsync(cancellationToken);
-            }
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

@@ -10,67 +10,78 @@ namespace Schuly.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class ExamsController : ControllerBase
+    public class ExamsController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-        public ExamsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet("search")]
         [ProducesResponseType(typeof(ExamDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ExamDto>> GetExam([FromQuery] GetExamQuery getExam)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetExam([FromQuery] long examId, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(getExam, HttpContext.RequestAborted);
-            if (result == null)
-                return NotFound();
-            return Ok(result);
+            var result = await mediator.Send(new GetExamQuery(examId), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error);
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(List<ExamDto>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<List<ExamDto>>> GetExams()
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetExams(CancellationToken cancellationToken)
         {
-            return Ok(await _mediator.Send(new GetExamsQuery(), HttpContext.RequestAborted));
+            var result = await mediator.Send(new GetExamsQuery(), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error);
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AddExam(CreateExamCommand createExam)
+        public async Task<IActionResult> AddExam([FromBody] CreateExamCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(createExam, HttpContext.RequestAborted);
-            return Created();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
         [HttpPost("grade")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AddGradeToExam(AddGradeToExamCommand addGradeToExam)
+        public async Task<IActionResult> AddGradeToExam([FromBody] AddGradeToExamCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(addGradeToExam, HttpContext.RequestAborted);
-            return Created();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateExam(UpdateExamCommand updateExam)
+        public async Task<IActionResult> UpdateExam([FromBody] UpdateExamCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(updateExam, HttpContext.RequestAborted);
-            return Ok();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteExam(DeleteExamCommand deleteExam)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteExam(long id, CancellationToken cancellationToken)
         {
-            await _mediator.Send(deleteExam, HttpContext.RequestAborted);
-            return NoContent();
+            var result = await mediator.Send(new DeleteExamCommand(id), cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
     }
 }

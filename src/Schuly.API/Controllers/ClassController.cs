@@ -10,67 +10,78 @@ namespace Schuly.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class ClassController : ControllerBase
+    public class ClassController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-        public ClassController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet("search")]
         [ProducesResponseType(typeof(ClassDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ClassDto>> GetClass([FromQuery] GetClassQuery getClass)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetClass([FromQuery] Guid classId, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(getClass, HttpContext.RequestAborted);
-            if (result == null)
-                return NotFound();
-            return Ok(result);
+            var result = await mediator.Send(new GetClassQuery(classId), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error);
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(List<ClassDto>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<List<ClassDto>>> GetClasses()
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetClasses(CancellationToken cancellationToken)
         {
-            return Ok(await _mediator.Send(new GetClasssQuery(), HttpContext.RequestAborted));
+            var result = await mediator.Send(new GetClassesQuery(), cancellationToken);
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error);
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateClass(CreateClassCommand createClass)
+        public async Task<IActionResult> CreateClass([FromBody] CreateClassCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(createClass, HttpContext.RequestAborted);
-            return Created();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
         [HttpPost("enrol-student")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> EnrolStudent(EnrolStudentCommand enrolStudent)
+        public async Task<IActionResult> EnrolStudent([FromBody] EnrolStudentCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(enrolStudent, HttpContext.RequestAborted);
-            return Created();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateClass(UpdateClassCommand updateClass)
+        public async Task<IActionResult> UpdateClass([FromBody] UpdateClassCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(updateClass, HttpContext.RequestAborted);
-            return Ok();
+            var result = await mediator.Send(command, cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteClass(DeleteClassCommand deleteClass)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteClass(Guid id, CancellationToken cancellationToken)
         {
-            await _mediator.Send(deleteClass, HttpContext.RequestAborted);
-            return NoContent();
+            var result = await mediator.Send(new DeleteClassCommand(id), cancellationToken);
+            if (result.IsSuccess)
+                return NoContent();
+
+            return BadRequest(result.Error);
         }
     }
 }

@@ -1,46 +1,31 @@
 using Mediator;
 using Schuly.Application.Authorization;
-using Schuly.Domain;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Exam
 {
-    public class CreateExamCommand : IRequest, IHasAuthorization
+    public record CreateExamCommand(string Name, string? Description, ExamType Type, Guid ClassId) : ICommand<Result>, IHasAuthorization
     {
-        public required string Name { get; set; }
-        public string? Description { get; set; }
-        public ExamType Type { get; set; }
-        public required Guid ClassId { get; set; }
-
-        public Roles GetRequiredRole()
-        {
-            return Roles.Teacher;
-        }
+        public Roles GetRequiredRole() => Roles.Teacher;
     }
 
-    public class CreateExamCommandHandler : IRequestHandler<CreateExamCommand>
+    public class CreateExamCommandHandler(SchulyDbContext dbContext) : ICommandHandler<CreateExamCommand, Result>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public CreateExamCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(CreateExamCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<Unit> Handle(CreateExamCommand request, CancellationToken cancellationToken)
-        {
-            await _dbContext.Exams.AddAsync(new Domain.Exam
+            await dbContext.Exams.AddAsync(new Domain.Exam
             {
-                Name = request.Name,
-                Description = request.Description,
-                Type = request.Type,
-                ClassId = request.ClassId
+                Name = command.Name,
+                Description = command.Description,
+                Type = command.Type,
+                ClassId = command.ClassId
             }, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

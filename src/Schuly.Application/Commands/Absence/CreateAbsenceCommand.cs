@@ -1,41 +1,28 @@
 using Mediator;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Absence
 {
-    public class CreateAbsenceCommand : IRequest
+    public record CreateAbsenceCommand(string Reason, AbsenceType Type, DateTime From, DateTime Until, Guid UserId) : ICommand<Result>;
+
+    public class CreateAbsenceCommandHandler(SchulyDbContext dbContext) : ICommandHandler<CreateAbsenceCommand, Result>
     {
-        public required string Reason { get; set; }
-        public required AbsenceType Type { get; set; }
-        public required DateTime From { get; set; }
-        public required DateTime Until { get; set; }
-        public required Guid UserId { get; set; }
-    }
-
-    public class CreateAbsenceCommandHandler : IRequestHandler<CreateAbsenceCommand>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public CreateAbsenceCommandHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result> Handle(CreateAbsenceCommand command, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<Unit> Handle(CreateAbsenceCommand request, CancellationToken cancellationToken)
-        {
-            await _dbContext.Absences.AddAsync(new Domain.Absence
+            await dbContext.Absences.AddAsync(new Domain.Absence
             {
-                Reason = request.Reason,
-                Type = request.Type,
-                From = request.From,
-                Until = request.Until,
-                UserId = request.UserId
+                Reason = command.Reason,
+                Type = command.Type,
+                From = command.From,
+                Until = command.Until,
+                UserId = command.UserId
             }, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

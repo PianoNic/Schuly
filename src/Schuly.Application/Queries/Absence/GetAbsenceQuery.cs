@@ -2,30 +2,24 @@ using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Absence
 {
-    public class GetAbsenceQuery : IRequest<AbsenceDto?>
+    public record GetAbsenceQuery(long AbsenceId) : IQuery<Result<AbsenceDto>>;
+
+    public class GetAbsenceQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetAbsenceQuery, Result<AbsenceDto>>
     {
-        public required long AbsenceId { get; set; }
-    }
-
-    public class GetAbsenceQueryHandler : IRequestHandler<GetAbsenceQuery, AbsenceDto?>
-    {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetAbsenceQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<AbsenceDto>> Handle(GetAbsenceQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
+            var absence = await dbContext.Absences
+                .SingleOrDefaultAsync(a => a.Id == query.AbsenceId, cancellationToken);
 
-        public async ValueTask<AbsenceDto?> Handle(GetAbsenceQuery request, CancellationToken cancellationToken)
-        {
-            var absence = await _dbContext.Absences
-                .SingleOrDefaultAsync(a => a.Id == request.AbsenceId, cancellationToken);
+            if (absence == null)
+                return Result<AbsenceDto>.Failure($"Absence with ID '{query.AbsenceId}' not found");
 
-            return absence?.ToDto();
+            return Result<AbsenceDto>.Success(absence.ToDto());
         }
     }
 }

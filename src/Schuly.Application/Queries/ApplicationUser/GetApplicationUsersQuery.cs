@@ -3,35 +3,26 @@ using Microsoft.EntityFrameworkCore;
 using Schuly.Application.Authorization;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
+using Schuly.Application.Models;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.ApplicationUser
 {
-    public class GetApplicationUsersQuery : IRequest<List<ApplicationUserDto>>, IHasAuthorization
+    public record GetApplicationUsersQuery() : IQuery<Result<List<ApplicationUserDto>>>, IHasAuthorization
     {
-        public Roles GetRequiredRole()
-        {
-            return Roles.Administrator;
-        }
+        public Roles GetRequiredRole() => Roles.Administrator;
     }
 
-    public class GetApplicationUsersQueryHandler : IRequestHandler<GetApplicationUsersQuery, List<ApplicationUserDto>>
+    public class GetApplicationUsersQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetApplicationUsersQuery, Result<List<ApplicationUserDto>>>
     {
-        private readonly SchulyDbContext _dbContext;
-
-        public GetApplicationUsersQueryHandler(SchulyDbContext dbContext)
+        public async ValueTask<Result<List<ApplicationUserDto>>> Handle(GetApplicationUsersQuery query, CancellationToken cancellationToken)
         {
-            _dbContext = dbContext;
-        }
-
-        public async ValueTask<List<ApplicationUserDto>> Handle(GetApplicationUsersQuery request, CancellationToken cancellationToken)
-        {
-            var applicationUsers = await _dbContext.ApplicationUsers
+            var applicationUsers = await dbContext.ApplicationUsers
                 .Include(au => au.SchoolUsers)
                 .ToListAsync(cancellationToken);
 
-            return applicationUsers.ToDto();
+            return Result<List<ApplicationUserDto>>.Success(applicationUsers.ToDto());
         }
     }
 }

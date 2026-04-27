@@ -9,7 +9,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.SchoolUser
 {
-    public record GetSchoolUserQuery(long SchoolUserId) : IQuery<Result<SchoolUserDto>>, IHasAuthorization
+    public record GetSchoolUserQuery(Guid SchoolUserId) : IQuery<Result<SchoolUserDto>>, IHasAuthorization
     {
         public Roles GetRequiredRole() => Roles.Student;
     }

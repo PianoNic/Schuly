@@ -27,7 +27,7 @@ namespace Schuly.API.Controllers
         [HttpGet("search")]
         [ProducesResponseType(typeof(AbsenceDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAbsence([FromQuery] long absenceId, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAbsence([FromQuery] Guid absenceId, CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new GetAbsenceQuery(absenceId), cancellationToken);
             if (result.IsSuccess)
@@ -60,10 +60,10 @@ namespace Schuly.API.Controllers
             return BadRequest(result.Error);
         }
 
-        [HttpDelete("{id:long}")]
+        [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> RemoveAbsence(long id, CancellationToken cancellationToken)
+        public async Task<IActionResult> RemoveAbsence(Guid id, CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new RemoveAbsenceCommand(id), cancellationToken);
             if (result.IsSuccess)

@@ -7,7 +7,7 @@ using Schuly.Infrastructure;
 namespace Schuly.Application.Commands.School
 {
     public record UpdateSchoolCommand(
-        long Id,
+        Guid Id,
         string Name,
         string? Description,
         string? Email,

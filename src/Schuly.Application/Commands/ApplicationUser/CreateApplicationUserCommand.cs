@@ -6,7 +6,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.ApplicationUser
 {
-    public record CreateApplicationUserCommand(string AuthenticationEmail, string? DisplayName) : ICommand<Result<Guid>>, IHasAuthorization
+    public record CreateApplicationUserCommand(string ExternalId, string Email, string? DisplayName) : ICommand<Result<Guid>>, IHasAuthorization
     {
         public Roles GetRequiredRole() => Roles.Administrator;
     }
@@ -18,10 +18,9 @@ namespace Schuly.Application.Commands.ApplicationUser
             var applicationUser = new Domain.ApplicationUser
             {
                 Id = Guid.NewGuid(),
-                AuthenticationEmail = command.AuthenticationEmail,
-                DisplayName = command.DisplayName,
-                IsEmailVerified = false,
-                IsTwoFactorEnabled = false
+                ExternalId = command.ExternalId,
+                Email = command.Email,
+                DisplayName = command.DisplayName ?? "Schuly User"
             };
 
             await dbContext.ApplicationUsers.AddAsync(applicationUser, cancellationToken);

@@ -1,4 +1,4 @@
-﻿using Schuly.Domain.Enums;
+using Schuly.Domain.Enums;
 
 namespace Schuly.Domain
 {
@@ -9,7 +9,6 @@ namespace Schuly.Domain
         public string? Description { get; set; }
         public string? Place { get; set; }
         public required DateTime Date { get; set; }
-
         public Guid ClassId { get; set; }
         public Class? Class { get; set; }
     }

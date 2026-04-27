@@ -7,7 +7,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Exam
 {
-    public record GetExamQuery(long ExamId) : IQuery<Result<ExamDto>>;
+    public record GetExamQuery(Guid ExamId) : IQuery<Result<ExamDto>>;
 
     public class GetExamQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetExamQuery, Result<ExamDto>>
     {

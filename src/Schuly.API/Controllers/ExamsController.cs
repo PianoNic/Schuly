@@ -15,7 +15,7 @@ namespace Schuly.API.Controllers
         [HttpGet("search")]
         [ProducesResponseType(typeof(ExamDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetExam([FromQuery] long examId, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetExam([FromQuery] Guid examId, CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new GetExamQuery(examId), cancellationToken);
             if (result.IsSuccess)
@@ -72,10 +72,10 @@ namespace Schuly.API.Controllers
             return BadRequest(result.Error);
         }
 
-        [HttpDelete("{id:long}")]
+        [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteExam(long id, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteExam(Guid id, CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new DeleteExamCommand(id), cancellationToken);
             if (result.IsSuccess)

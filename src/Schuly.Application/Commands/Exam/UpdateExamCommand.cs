@@ -6,7 +6,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Exam
 {
-    public record UpdateExamCommand(long ExamId, string Name, string? Description, ExamType Type, Guid ClassId) : ICommand<Result>;
+    public record UpdateExamCommand(Guid ExamId, string Name, string? Description, ExamType Type, Guid ClassId) : ICommand<Result>;
 
     public class UpdateExamCommandHandler(SchulyDbContext dbContext) : ICommandHandler<UpdateExamCommand, Result>
     {

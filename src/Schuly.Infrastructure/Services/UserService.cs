@@ -40,11 +40,9 @@ namespace Schuly.Infrastructure.Services
                 {
                     Id = Guid.NewGuid(),
                     ExternalId = oidcUser.ExternalId,
-                    AuthenticationEmail = email,
+                    Email = email,
                     DisplayName = displayName,
-                    ProfilePictureUrl = oidcUser.AvatarUrl,
-                    IsEmailVerified = true,
-                    IsTwoFactorEnabled = false
+                    ProfilePictureUrl = oidcUser.AvatarUrl
                 };
 
                 dbContext.ApplicationUsers.Add(user);
@@ -52,7 +50,7 @@ namespace Schuly.Infrastructure.Services
                 return;
             }
 
-            user.AuthenticationEmail = email;
+            user.Email = email;
             user.DisplayName = displayName;
             user.ProfilePictureUrl = oidcUser.AvatarUrl;
 

@@ -7,7 +7,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.Absence
 {
-    public record GetAbsenceQuery(long AbsenceId) : IQuery<Result<AbsenceDto>>;
+    public record GetAbsenceQuery(Guid AbsenceId) : IQuery<Result<AbsenceDto>>;
 
     public class GetAbsenceQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetAbsenceQuery, Result<AbsenceDto>>
     {

@@ -6,7 +6,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Agenda
 {
-    public record UpdateAgendaEntryCommand(long AgendaEntryId, AgendaEntryType EntryType, string Title, string? Description, string? Place, DateTime Date, Guid ClassId) : ICommand<Result>;
+    public record UpdateAgendaEntryCommand(Guid AgendaEntryId, AgendaEntryType EntryType, string Title, string? Description, string? Place, DateTime Date, Guid ClassId) : ICommand<Result>;
 
     public class UpdateAgendaEntryCommandHandler(SchulyDbContext dbContext) : ICommandHandler<UpdateAgendaEntryCommand, Result>
     {

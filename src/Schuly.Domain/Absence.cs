@@ -1,4 +1,4 @@
-﻿using Schuly.Domain.Enums;
+using Schuly.Domain.Enums;
 
 namespace Schuly.Domain
 {
@@ -8,9 +8,7 @@ namespace Schuly.Domain
         public required AbsenceType Type { get; set; }
         public required DateTime From { get; set; }
         public required DateTime Until { get; set; }
-
-
-        public Guid UserId { get; set; }
-        public User User { get; set; }
+        public Guid SchoolUserId { get; set; }
+        public SchoolUser? SchoolUser { get; set; }
     }
 }

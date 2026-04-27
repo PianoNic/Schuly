@@ -7,7 +7,7 @@ namespace Schuly.Domain
         public Guid ApplicationUserId { get; set; }
         public ApplicationUser? ApplicationUser { get; set; }
 
-        public long SchoolId { get; set; }
+        public Guid SchoolId { get; set; }
         public School? School { get; set; }
 
         public required string FirstName { get; set; }
@@ -29,8 +29,8 @@ namespace Schuly.Domain
         public string? StudentNumber { get; set; }
         public string? TeacherCode { get; set; }
 
-        public ICollection<Absence> Absences { get; set; } = new List<Absence>();
-        public ICollection<Grade> Grades { get; set; } = new List<Grade>();
-        public ICollection<Class> Classes { get; set; } = new List<Class>();
+        public ICollection<Absence> Absences { get; set; } = [];
+        public ICollection<Grade> Grades { get; set; } = [];
+        public ICollection<Class> Classes { get; set; } = [];
     }
 }

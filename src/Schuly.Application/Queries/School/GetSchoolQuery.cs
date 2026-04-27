@@ -7,7 +7,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Queries.School
 {
-    public record GetSchoolQuery(long SchoolId) : IQuery<Result<SchoolDto>>;
+    public record GetSchoolQuery(Guid SchoolId) : IQuery<Result<SchoolDto>>;
 
     public class GetSchoolQueryHandler(SchulyDbContext dbContext) : IQueryHandler<GetSchoolQuery, Result<SchoolDto>>
     {

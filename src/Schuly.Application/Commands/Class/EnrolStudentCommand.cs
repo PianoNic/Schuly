@@ -11,15 +11,15 @@ namespace Schuly.Application.Commands.Class
     {
         public async ValueTask<Result> Handle(EnrolStudentCommand command, CancellationToken cancellationToken)
         {
-            var user = await dbContext.Users.SingleOrDefaultAsync(u => u.Id == command.UserId, cancellationToken);
-            if (user == null)
-                return Result.Failure($"User with ID '{command.UserId}' not found");
+            var schoolUser = await dbContext.SchoolUsers.SingleOrDefaultAsync(u => u.Id == command.UserId, cancellationToken);
+            if (schoolUser == null)
+                return Result.Failure($"SchoolUser with ID '{command.UserId}' not found");
 
             var @class = await dbContext.Classes.AsTracking().SingleOrDefaultAsync(c => c.Id == command.ClassId, cancellationToken);
             if (@class == null)
                 return Result.Failure($"Class with ID '{command.ClassId}' not found");
 
-            @class.Students.Add(user);
+            @class.Students.Add(schoolUser);
             await dbContext.SaveChangesAsync(cancellationToken);
 
             return Result.Success();

@@ -27,7 +27,7 @@ namespace Schuly.API.Controllers
         [HttpGet("search")]
         [ProducesResponseType(typeof(AgendaEntryDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAgenda([FromQuery] long agendaEntryId, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAgenda([FromQuery] Guid agendaEntryId, CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new GetAgendaQuery(agendaEntryId), cancellationToken);
             if (result.IsSuccess)
@@ -60,10 +60,10 @@ namespace Schuly.API.Controllers
             return BadRequest(result.Error);
         }
 
-        [HttpDelete("{id:long}")]
+        [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteEntry(long id, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteEntry(Guid id, CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new DeleteAgendaEntryCommand(id), cancellationToken);
             if (result.IsSuccess)

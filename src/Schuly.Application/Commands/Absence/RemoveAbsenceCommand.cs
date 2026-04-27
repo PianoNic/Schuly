@@ -5,7 +5,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Absence
 {
-    public record RemoveAbsenceCommand(long AbsenceId) : ICommand<Result>;
+    public record RemoveAbsenceCommand(Guid AbsenceId) : ICommand<Result>;
 
     public class RemoveAbsenceCommandHandler(SchulyDbContext dbContext) : ICommandHandler<RemoveAbsenceCommand, Result>
     {

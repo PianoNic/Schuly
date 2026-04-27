@@ -10,12 +10,10 @@ namespace Schuly.Application.Mappers
             return new ApplicationUserDto
             {
                 Id = applicationUser.Id,
-                AuthenticationEmail = applicationUser.AuthenticationEmail,
+                ExternalId = applicationUser.ExternalId,
+                Email = applicationUser.Email,
                 DisplayName = applicationUser.DisplayName,
                 ProfilePictureUrl = applicationUser.ProfilePictureUrl,
-                LastLoginAt = applicationUser.LastLoginAt,
-                IsEmailVerified = applicationUser.IsEmailVerified,
-                IsTwoFactorEnabled = applicationUser.IsTwoFactorEnabled,
                 CreatedAt = applicationUser.CreatedAt,
                 UpdatedAt = applicationUser.UpdatedAt,
                 SchoolUsers = applicationUser.SchoolUsers.Select(su => new SchoolUserSummaryDto

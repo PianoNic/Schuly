@@ -5,7 +5,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Agenda
 {
-    public record DeleteAgendaEntryCommand(long AgendaEntryId) : ICommand<Result>;
+    public record DeleteAgendaEntryCommand(Guid AgendaEntryId) : ICommand<Result>;
 
     public class DeleteAgendaEntryCommandHandler(SchulyDbContext dbContext) : ICommandHandler<DeleteAgendaEntryCommand, Result>
     {

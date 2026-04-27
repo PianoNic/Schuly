@@ -6,7 +6,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Absence
 {
-    public record UpdateAbsenceCommand(long AbsenceId, string Reason, AbsenceType Type, DateTime From, DateTime Until, Guid UserId) : ICommand<Result>;
+    public record UpdateAbsenceCommand(Guid AbsenceId, string Reason, AbsenceType Type, DateTime From, DateTime Until, Guid SchoolUserId) : ICommand<Result>;
 
     public class UpdateAbsenceCommandHandler(SchulyDbContext dbContext) : ICommandHandler<UpdateAbsenceCommand, Result>
     {
@@ -22,7 +22,7 @@ namespace Schuly.Application.Commands.Absence
             absence.Type = command.Type;
             absence.From = command.From;
             absence.Until = command.Until;
-            absence.UserId = command.UserId;
+            absence.SchoolUserId = command.SchoolUserId;
 
             await dbContext.SaveChangesAsync(cancellationToken);
 

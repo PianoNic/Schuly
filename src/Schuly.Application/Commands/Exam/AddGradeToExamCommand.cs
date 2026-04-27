@@ -5,7 +5,7 @@ using Schuly.Infrastructure;
 
 namespace Schuly.Application.Commands.Exam
 {
-    public record AddGradeToExamCommand(long ExamId, Guid StudentId, decimal Grade, decimal Weight = 1) : ICommand<Result>;
+    public record AddGradeToExamCommand(Guid ExamId, Guid StudentId, decimal Grade, decimal Weight = 1) : ICommand<Result>;
 
     public class AddGradeToExamCommandHandler(SchulyDbContext dbContext) : ICommandHandler<AddGradeToExamCommand, Result>
     {
@@ -20,7 +20,7 @@ namespace Schuly.Application.Commands.Exam
             exam.Grades.Add(new Domain.Grade
             {
                 ExamId = command.ExamId,
-                UserId = command.StudentId,
+                SchoolUserId = command.StudentId,
                 Score = command.Grade,
                 Weighting = command.Weight,
             });

@@ -12,9 +12,8 @@ namespace Schuly.Application.Mappers
                 Id = grade.Id,
                 Score = grade.Score,
                 Weighting = grade.Weighting,
-                RegisteredDate = grade.RegisteredDate,
                 ExamId = grade.ExamId,
-                UserId = grade.UserId
+                SchoolUserId = grade.SchoolUserId
             };
         }
 
@@ -25,9 +24,8 @@ namespace Schuly.Application.Mappers
                 Id = dto.Id,
                 Score = dto.Score,
                 Weighting = dto.Weighting,
-                RegisteredDate = dto.RegisteredDate,
                 ExamId = dto.ExamId,
-                UserId = dto.UserId
+                SchoolUserId = dto.SchoolUserId
             };
         }
 

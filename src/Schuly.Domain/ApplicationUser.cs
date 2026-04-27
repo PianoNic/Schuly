@@ -3,6 +3,7 @@ namespace Schuly.Domain
     public class ApplicationUser : AuthenticationCredentials
     {
         public new Guid Id { get; set; }
+        public string? ExternalId { get; set; }
         public string? DisplayName { get; set; }
         public string? ProfilePictureUrl { get; set; }
         public DateTime? LastLoginAt { get; set; }

@@ -3,7 +3,7 @@ using Schuly.Application.Authorization;
 
 namespace Schuly.Application.Behaviors
 {
-    public class AuthorizationBehavior<TRequest, TResponse>(IAuthorizationService authorizationService) : IPipelineBehavior<TRequest, TResponse>
+    public class AuthorizationBehavior<TRequest, TResponse>(IAppAuthorizationService authorizationService) : IPipelineBehavior<TRequest, TResponse>
         where TRequest : notnull, IMessage
     {
         public async ValueTask<TResponse> Handle(

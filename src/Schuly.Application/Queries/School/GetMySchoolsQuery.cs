@@ -4,9 +4,9 @@ using Schuly.Application.Authorization;
 using Schuly.Application.Dtos;
 using Schuly.Application.Mappers;
 using Schuly.Application.Models;
-using Schuly.Application.Services.Interfaces;
 using Schuly.Domain.Enums;
 using Schuly.Infrastructure;
+using Schuly.Infrastructure.Services;
 
 namespace Schuly.Application.Queries.School
 {
@@ -19,12 +19,10 @@ namespace Schuly.Application.Queries.School
     {
         public async ValueTask<Result<List<SchoolDto>>> Handle(GetMySchoolsQuery query, CancellationToken cancellationToken)
         {
-            var currentUser = await userService.GetCurrentUserAsync(cancellationToken);
-            if (currentUser == null)
-                return Result<List<SchoolDto>>.Failure("User not found");
+            var userId = await userService.GetCurrentUserIdAsync(cancellationToken);
 
             var schools = await dbContext.SchoolUsers
-                .Where(su => su.ApplicationUserId == currentUser.Id)
+                .Where(su => su.ApplicationUserId == userId)
                 .Include(su => su.School)
                 .Select(su => su.School!)
                 .Distinct()

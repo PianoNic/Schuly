@@ -1,5 +1,4 @@
 using Mediator;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Schuly.Application.Commands.User;
 using Schuly.Application.Dtos;
@@ -9,7 +8,6 @@ namespace Schuly.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class UsersController(IMediator mediator) : ControllerBase
     {
         [HttpGet("search")]

@@ -1,14 +1,15 @@
-using Schuly.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Schuly.Domain.Enums;
+using System.Security.Claims;
 
 namespace Schuly.Application.Authorization
 {
-    public interface IAuthorizationService
+    public interface IAppAuthorizationService
     {
         Task CanAuthorizeAsync<T>(T obj) where T : notnull;
     }
 
-    public class AuthorizationService(IUserService userService) : IAuthorizationService
+    public class AuthorizationService(IHttpContextAccessor httpContextAccessor) : IAppAuthorizationService
     {
         public Task CanAuthorizeAsync<T>(T obj) where T : notnull
         {
@@ -16,7 +17,7 @@ namespace Schuly.Application.Authorization
                 return Task.CompletedTask;
 
             var requiredRole = authRequest.GetRequiredRole();
-            var currentUserRole = userService.GetCurrentUserRole();
+            var currentUserRole = GetCurrentUserRole();
 
             if (!IsRoleAuthorized(currentUserRole, requiredRole))
             {
@@ -25,6 +26,15 @@ namespace Schuly.Application.Authorization
             }
 
             return Task.CompletedTask;
+        }
+
+        private Roles GetCurrentUserRole()
+        {
+            var roleClaim = httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Role)?.Value;
+            if (roleClaim != null && Enum.TryParse<Roles>(roleClaim, out var role))
+                return role;
+
+            return Roles.Student;
         }
 
         private static bool IsRoleAuthorized(Roles userRole, Roles requiredRole)

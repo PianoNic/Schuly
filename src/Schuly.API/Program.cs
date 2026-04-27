@@ -1,75 +1,105 @@
-using Mediator;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Schuly.Application.Authorization;
-using Schuly.Application.Configuration;
-using Schuly.Application.Queries.User;
-using Schuly.Application.Services;
-using Schuly.Application.Services.Interfaces;
+using Microsoft.OpenApi;
+using Schuly.API.Extensions;
 using Schuly.Infrastructure;
+using Schuly.Infrastructure.Services;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
-builder.Services.AddMediator(options => { options.ServiceLifetime = ServiceLifetime.Scoped; });
-
-builder.Services.AddSingleton<IJwtConfigurationFactory, JwtConfigurationFactory>();
-
-var jwtFactory = builder.Services.BuildServiceProvider().GetRequiredService<IJwtConfigurationFactory>();
-var jwtSettings = jwtFactory.LoadJwtSettings();
-
-builder.Services.AddAuthentication(options =>
+builder.Services.AddSwaggerGen(options =>
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options => jwtFactory.ConfigureJwtBearerOptions(options));
+    var authority = builder.Configuration["Oidc:Authority"]
+        ?? throw new InvalidOperationException("Oidc:Authority not configured");
 
-builder.Services.AddAuthorization();
+    options.AddSecurityDefinition("OAuth2", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.OAuth2,
+        Flows = new OpenApiOAuthFlows
+        {
+            AuthorizationCode = new OpenApiOAuthFlow
+            {
+                AuthorizationUrl = new Uri($"{authority}/authorize"),
+                TokenUrl = new Uri($"{authority}/api/oidc/token"),
+                Scopes = new Dictionary<string, string>
+                {
+                    ["openid"] = "OpenID Connect",
+                    ["profile"] = "User profile",
+                    ["email"] = "User email",
+                    ["groups"] = "User groups (roles)",
+                    ["picture"] = "Profile Picture",
+                }
+            }
+        }
+    });
 
-builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
-builder.Services.AddScoped<ITokenGenerationService>(sp =>
-    new TokenGenerationService(jwtSettings.SecretKey, jwtSettings.Issuer, jwtSettings.Audience, jwtSettings.ExpirationMinutes));
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
+    options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        [new OpenApiSecuritySchemeReference("OAuth2", document)] = new List<string>()
+    });
+});
 
-builder.Services.AddOpenApi();
+builder.Services.AddMediator(options => { options.ServiceLifetime = ServiceLifetime.Scoped; });
 
 builder.Services.AddDbContext<SchulyDbContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("SchulyDatabase"),
         npgsqlOptions => npgsqlOptions
-        .EnableRetryOnFailure(
-            maxRetryCount: 5,
-            maxRetryDelay: TimeSpan.FromSeconds(10),
-            errorCodesToAdd: null
-        )
+            .EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(10),
+                errorCodesToAdd: null
+            )
     ));
+
+builder.Services.AddHttpClient();
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<IOidcService, OidcService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<Schuly.Application.Authorization.IAppAuthorizationService, Schuly.Application.Authorization.AuthorizationService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = builder.Configuration["Oidc:Authority"];
+        options.RequireHttpsMetadata = builder.Configuration.GetValue("Oidc:RequireHttpsMetadata", true);
+        options.TokenValidationParameters.NameClaimType = "name";
+        options.TokenValidationParameters.RoleClaimType = "groups";
+        options.TokenValidationParameters.ValidateAudience = false;
+    })
+    .AddUserSync();
+
+builder.Services.AddAuthorization(options =>
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build());
 
 var app = builder.Build();
 
-using var scope = app.Services.CreateScope();
-scope.ServiceProvider.GetRequiredService<SchulyDbContext>().Database.Migrate();
+app.ApplyMigrations();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/openapi/v1.json", "Schuly API v1");
+        options.OAuthClientId(builder.Configuration["Oidc:ClientId"]);
+        options.OAuthUsePkce();
+        options.OAuthScopes("openid", "profile", "email", "groups", "picture");
     });
 }
 
-app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

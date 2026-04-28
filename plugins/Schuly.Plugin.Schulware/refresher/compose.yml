@@ -1,0 +1,15 @@
+services:
+  schulware-refresher:
+    build: .
+    container_name: schulware-refresher
+    ports:
+      - "8001:8001"
+    environment:
+      - SCHULNETZ_CLIENT_ID=ppyybShnMerHdtBQ
+    volumes:
+      - refresher-contexts:/tmp/schulware_contexts
+    restart: unless-stopped
+    ipc: host
+
+volumes:
+  refresher-contexts:

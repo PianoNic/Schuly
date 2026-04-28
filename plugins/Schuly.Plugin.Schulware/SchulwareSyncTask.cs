@@ -93,6 +93,7 @@ namespace Schuly.Plugin.Schulware
             IHttpClientFactory httpClientFactory, SchulwareAccount account,
             SchulwareDbContext db, ILogger logger, CancellationToken ct)
         {
+            // Try direct token.php refresh first
             try
             {
                 using var httpClient = httpClientFactory.CreateClient("Schulware");
@@ -106,28 +107,96 @@ namespace Schuly.Plugin.Schulware
                 });
 
                 var response = await httpClient.PostAsync(tokenUrl, content, ct);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadFromJsonAsync<System.Text.Json.JsonElement>(ct);
+                    var accessToken = json.GetProperty("access_token").GetString();
+                    var refreshToken = json.TryGetProperty("refresh_token", out var rt) ? rt.GetString() : account.MobileRefreshToken;
+
+                    account.MobileAccessToken = accessToken;
+                    account.MobileRefreshToken = refreshToken;
+                    account.MobileTokenExpiresAt = DateTime.UtcNow.AddHours(1);
+                    account.UpdatedAt = DateTime.UtcNow;
+                    await db.SaveChangesAsync(ct);
+
+                    logger.LogInformation("Refreshed token via token.php for account {AccountId}", account.Id);
+                    return true;
+                }
+
+                logger.LogWarning("Direct token refresh failed ({Status}), trying Playwright refresher", response.StatusCode);
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, "Direct token refresh error, trying Playwright refresher");
+            }
+
+            // Fall back to Playwright refresher service
+            return await TryPlaywrightRefresh(httpClientFactory, account, db, logger, ct);
+        }
+
+        private static async Task<bool> TryPlaywrightRefresh(
+            IHttpClientFactory httpClientFactory, SchulwareAccount account,
+            SchulwareDbContext db, ILogger logger, CancellationToken ct)
+        {
+            try
+            {
+                var refresherUrl = Environment.GetEnvironmentVariable("SCHULWARE_REFRESHER_URL") ?? "http://localhost:8001";
+
+                using var httpClient = httpClientFactory.CreateClient();
+                var response = await httpClient.PostAsJsonAsync($"{refresherUrl}/refresh", new
+                {
+                    schulnetz_base_url = account.SchulnetzBaseUrl,
+                    user_id = account.Id.ToString(),
+                }, ct);
+
                 if (!response.IsSuccessStatusCode)
                 {
-                    logger.LogWarning("Token refresh failed with {Status} for account {AccountId}", response.StatusCode, account.Id);
+                    logger.LogWarning("Playwright refresher returned {Status}", response.StatusCode);
                     return false;
                 }
 
-                var json = await response.Content.ReadFromJsonAsync<System.Text.Json.JsonElement>(ct);
-                var accessToken = json.GetProperty("access_token").GetString();
-                var refreshToken = json.TryGetProperty("refresh_token", out var rt) ? rt.GetString() : account.MobileRefreshToken;
+                var result = await response.Content.ReadFromJsonAsync<System.Text.Json.JsonElement>(ct);
+                if (!result.TryGetProperty("success", out var success) || !success.GetBoolean())
+                {
+                    var msg = result.TryGetProperty("message", out var m) ? m.GetString() : "unknown error";
+                    logger.LogWarning("Playwright refresher failed: {Message}", msg);
+                    return false;
+                }
 
-                account.MobileAccessToken = accessToken;
-                account.MobileRefreshToken = refreshToken;
+                if (result.TryGetProperty("access_token", out var at) && at.ValueKind == System.Text.Json.JsonValueKind.String)
+                    account.MobileAccessToken = at.GetString();
+
+                if (result.TryGetProperty("refresh_token", out var rtk) && rtk.ValueKind == System.Text.Json.JsonValueKind.String)
+                    account.MobileRefreshToken = rtk.GetString();
+
                 account.MobileTokenExpiresAt = DateTime.UtcNow.AddHours(1);
-                account.UpdatedAt = DateTime.UtcNow;
-                await db.SaveChangesAsync(ct);
 
-                logger.LogInformation("Refreshed token for account {AccountId}", account.Id);
+                if (result.TryGetProperty("session_id", out var sid) && sid.ValueKind == System.Text.Json.JsonValueKind.String)
+                    account.WebSessionId = sid.GetString();
+
+                if (result.TryGetProperty("web_session_user_id", out var wuid) && wuid.ValueKind == System.Text.Json.JsonValueKind.String)
+                    account.WebSessionUserId = wuid.GetString();
+
+                if (result.TryGetProperty("web_session_trans_id", out var wtid) && wtid.ValueKind == System.Text.Json.JsonValueKind.String)
+                    account.WebSessionTransId = wtid.GetString();
+
+                account.UpdatedAt = DateTime.UtcNow;
+                try
+                {
+                    db.Accounts.Update(account);
+                    await db.SaveChangesAsync(ct);
+                    logger.LogInformation("Refreshed tokens via Playwright for account {AccountId}. Expires: {Expires}", account.Id, account.MobileTokenExpiresAt);
+                }
+                catch (Exception saveEx)
+                {
+                    logger.LogError(saveEx, "Failed to save refreshed tokens for account {AccountId}", account.Id);
+                    return false;
+                }
                 return true;
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Token refresh error for account {AccountId}", account.Id);
+                logger.LogError(ex, "Playwright refresh error for account {AccountId}", account.Id);
                 return false;
             }
         }
@@ -198,7 +267,25 @@ namespace Schuly.Plugin.Schulware
                 .Include(su => su.Classes)
                 .FirstOrDefaultAsync(su => su.Id == schoolUserId, ct);
 
-            var classId = schoolUser?.Classes.FirstOrDefault()?.Id ?? Guid.Empty;
+            var cls = schoolUser?.Classes.FirstOrDefault();
+            if (cls is null && schoolUser is not null)
+            {
+                var className = grade.Course ?? grade.Subject ?? "Default";
+                cls = await mainDb.Classes.FirstOrDefaultAsync(c => c.Name == className && c.SchoolId == schoolUser.SchoolId, ct);
+                if (cls is null)
+                {
+                    cls = new Schuly.Domain.Class
+                    {
+                        Name = className,
+                        SchoolId = schoolUser.SchoolId,
+                    };
+                    mainDb.Classes.Add(cls);
+                    await mainDb.SaveChangesAsync(ct);
+                }
+            }
+
+            var classId = cls?.Id ?? Guid.Empty;
+            if (classId == Guid.Empty) return new Exam { Id = Guid.NewGuid(), Name = examName, Type = ExamType.Classic, ClassId = classId };
 
             var existing = await mainDb.Exams
                 .FirstOrDefaultAsync(e => e.Name == examName && e.ClassId == classId, ct);

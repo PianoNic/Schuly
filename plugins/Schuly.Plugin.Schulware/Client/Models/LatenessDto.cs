@@ -17,34 +17,34 @@ namespace Schuly.Plugin.Schulware.Client.Models
         /// <summary>The comment property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_comment? Comment { get; set; }
+        public string? Comment { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_comment Comment { get; set; }
+        public string Comment { get; set; }
 #endif
         /// <summary>The courseId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseId? CourseId { get; set; }
+        public string? CourseId { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseId CourseId { get; set; }
+        public string CourseId { get; set; }
 #endif
         /// <summary>The courseToken property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseToken? CourseToken { get; set; }
+        public string? CourseToken { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseToken CourseToken { get; set; }
+        public string CourseToken { get; set; }
 #endif
         /// <summary>The date property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_date? Date { get; set; }
+        public string? Date { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_date Date { get; set; }
+        public string Date { get; set; }
 #endif
         /// <summary>The dateExcused property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -57,58 +57,46 @@ namespace Schuly.Plugin.Schulware.Client.Models
         /// <summary>The duration property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_duration? Duration { get; set; }
+        public string? Duration { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_duration Duration { get; set; }
+        public string Duration { get; set; }
 #endif
         /// <summary>The endTime property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_endTime? EndTime { get; set; }
+        public string? EndTime { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_endTime EndTime { get; set; }
+        public string EndTime { get; set; }
 #endif
         /// <summary>The excused property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_excused? Excused { get; set; }
-#nullable restore
-#else
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_excused Excused { get; set; }
-#endif
+        public bool? Excused { get; set; }
         /// <summary>The extendedDeadline property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_extendedDeadline? ExtendedDeadline { get; set; }
-#nullable restore
-#else
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_extendedDeadline ExtendedDeadline { get; set; }
-#endif
+        public int? ExtendedDeadline { get; set; }
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_id? Id { get; set; }
+        public string? Id { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_id Id { get; set; }
+        public string Id { get; set; }
 #endif
         /// <summary>The reason property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_reason? Reason { get; set; }
+        public string? Reason { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_reason Reason { get; set; }
+        public string Reason { get; set; }
 #endif
         /// <summary>The startTime property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_startTime? StartTime { get; set; }
+        public string? StartTime { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_startTime StartTime { get; set; }
+        public string StartTime { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto"/> and sets the default values.
@@ -135,18 +123,18 @@ namespace Schuly.Plugin.Schulware.Client.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "comment", n => { Comment = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_comment>(global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_comment.CreateFromDiscriminatorValue); } },
-                { "courseId", n => { CourseId = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseId>(global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseId.CreateFromDiscriminatorValue); } },
-                { "courseToken", n => { CourseToken = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseToken>(global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseToken.CreateFromDiscriminatorValue); } },
-                { "date", n => { Date = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_date>(global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_date.CreateFromDiscriminatorValue); } },
+                { "comment", n => { Comment = n.GetStringValue(); } },
+                { "courseId", n => { CourseId = n.GetStringValue(); } },
+                { "courseToken", n => { CourseToken = n.GetStringValue(); } },
+                { "date", n => { Date = n.GetStringValue(); } },
                 { "dateExcused", n => { DateExcused = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
-                { "duration", n => { Duration = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_duration>(global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_duration.CreateFromDiscriminatorValue); } },
-                { "endTime", n => { EndTime = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_endTime>(global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_endTime.CreateFromDiscriminatorValue); } },
-                { "excused", n => { Excused = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_excused>(global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_excused.CreateFromDiscriminatorValue); } },
-                { "extendedDeadline", n => { ExtendedDeadline = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_extendedDeadline>(global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_extendedDeadline.CreateFromDiscriminatorValue); } },
-                { "id", n => { Id = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_id>(global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_id.CreateFromDiscriminatorValue); } },
-                { "reason", n => { Reason = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_reason>(global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_reason.CreateFromDiscriminatorValue); } },
-                { "startTime", n => { StartTime = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_startTime>(global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_startTime.CreateFromDiscriminatorValue); } },
+                { "duration", n => { Duration = n.GetStringValue(); } },
+                { "endTime", n => { EndTime = n.GetStringValue(); } },
+                { "excused", n => { Excused = n.GetBoolValue(); } },
+                { "extendedDeadline", n => { ExtendedDeadline = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "reason", n => { Reason = n.GetStringValue(); } },
+                { "startTime", n => { StartTime = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -156,755 +144,19 @@ namespace Schuly.Plugin.Schulware.Client.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_comment>("comment", Comment);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseId>("courseId", CourseId);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseToken>("courseToken", CourseToken);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_date>("date", Date);
+            writer.WriteStringValue("comment", Comment);
+            writer.WriteStringValue("courseId", CourseId);
+            writer.WriteStringValue("courseToken", CourseToken);
+            writer.WriteStringValue("date", Date);
             writer.WriteObjectValue<UntypedNode>("dateExcused", DateExcused);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_duration>("duration", Duration);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_endTime>("endTime", EndTime);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_excused>("excused", Excused);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_extendedDeadline>("extendedDeadline", ExtendedDeadline);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_id>("id", Id);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_reason>("reason", Reason);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_startTime>("startTime", StartTime);
+            writer.WriteStringValue("duration", Duration);
+            writer.WriteStringValue("endTime", EndTime);
+            writer.WriteBoolValue("excused", Excused);
+            writer.WriteIntValue("extendedDeadline", ExtendedDeadline);
+            writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("reason", Reason);
+            writer.WriteStringValue("startTime", StartTime);
             writer.WriteAdditionalData(AdditionalData);
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_commentMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class LatenessDto_comment : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_commentMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_commentMember1? LatenessDtoCommentMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_commentMember1 LatenessDtoCommentMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_comment"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_comment CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_comment();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.LatenessDtoCommentMember1 = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_commentMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(LatenessDtoCommentMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(LatenessDtoCommentMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_commentMember1>(null, LatenessDtoCommentMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseIdMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class LatenessDto_courseId : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseIdMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseIdMember1? LatenessDtoCourseIdMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseIdMember1 LatenessDtoCourseIdMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseId"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseId CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseId();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.LatenessDtoCourseIdMember1 = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseIdMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(LatenessDtoCourseIdMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(LatenessDtoCourseIdMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseIdMember1>(null, LatenessDtoCourseIdMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseTokenMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class LatenessDto_courseToken : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseTokenMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseTokenMember1? LatenessDtoCourseTokenMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseTokenMember1 LatenessDtoCourseTokenMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseToken"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseToken CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_courseToken();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.LatenessDtoCourseTokenMember1 = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseTokenMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(LatenessDtoCourseTokenMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(LatenessDtoCourseTokenMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_courseTokenMember1>(null, LatenessDtoCourseTokenMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_dateMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class LatenessDto_date : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_dateMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_dateMember1? LatenessDtoDateMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_dateMember1 LatenessDtoDateMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_date"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_date CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_date();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.LatenessDtoDateMember1 = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_dateMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(LatenessDtoDateMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(LatenessDtoDateMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_dateMember1>(null, LatenessDtoDateMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_durationMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class LatenessDto_duration : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_durationMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_durationMember1? LatenessDtoDurationMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_durationMember1 LatenessDtoDurationMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_duration"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_duration CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_duration();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.LatenessDtoDurationMember1 = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_durationMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(LatenessDtoDurationMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(LatenessDtoDurationMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_durationMember1>(null, LatenessDtoDurationMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_endTimeMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class LatenessDto_endTime : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_endTimeMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_endTimeMember1? LatenessDtoEndTimeMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_endTimeMember1 LatenessDtoEndTimeMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_endTime"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_endTime CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_endTime();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.LatenessDtoEndTimeMember1 = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_endTimeMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(LatenessDtoEndTimeMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(LatenessDtoEndTimeMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_endTimeMember1>(null, LatenessDtoEndTimeMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="bool"/>, <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_excusedMember1"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class LatenessDto_excused : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="bool"/></summary>
-            public bool? Boolean { get; set; }
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_excusedMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_excusedMember1? LatenessDtoExcusedMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_excusedMember1 LatenessDtoExcusedMember1 { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_excused"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_excused CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_excused();
-                if(parseNode.GetBoolValue() is bool booleanValue)
-                {
-                    result.Boolean = booleanValue;
-                }
-                else {
-                    result.LatenessDtoExcusedMember1 = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_excusedMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(LatenessDtoExcusedMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(LatenessDtoExcusedMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(Boolean != null)
-                {
-                    writer.WriteBoolValue(null, Boolean);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_excusedMember1>(null, LatenessDtoExcusedMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_extendedDeadlineMember1"/>, <see cref="int"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class LatenessDto_extendedDeadline : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="int"/></summary>
-            public int? Integer { get; set; }
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_extendedDeadlineMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_extendedDeadlineMember1? LatenessDtoExtendedDeadlineMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_extendedDeadlineMember1 LatenessDtoExtendedDeadlineMember1 { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_extendedDeadline"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_extendedDeadline CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_extendedDeadline();
-                if(parseNode.GetIntValue() is int integerValue)
-                {
-                    result.Integer = integerValue;
-                }
-                else {
-                    result.LatenessDtoExtendedDeadlineMember1 = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_extendedDeadlineMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(LatenessDtoExtendedDeadlineMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(LatenessDtoExtendedDeadlineMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(Integer != null)
-                {
-                    writer.WriteIntValue(null, Integer);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_extendedDeadlineMember1>(null, LatenessDtoExtendedDeadlineMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_idMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class LatenessDto_id : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_idMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_idMember1? LatenessDtoIdMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_idMember1 LatenessDtoIdMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_id"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_id CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_id();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.LatenessDtoIdMember1 = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_idMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(LatenessDtoIdMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(LatenessDtoIdMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_idMember1>(null, LatenessDtoIdMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_reasonMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class LatenessDto_reason : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_reasonMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_reasonMember1? LatenessDtoReasonMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_reasonMember1 LatenessDtoReasonMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_reason"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_reason CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_reason();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.LatenessDtoReasonMember1 = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_reasonMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(LatenessDtoReasonMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(LatenessDtoReasonMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_reasonMember1>(null, LatenessDtoReasonMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_startTimeMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class LatenessDto_startTime : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_startTimeMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_startTimeMember1? LatenessDtoStartTimeMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_startTimeMember1 LatenessDtoStartTimeMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_startTime"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_startTime CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto.LatenessDto_startTime();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.LatenessDtoStartTimeMember1 = new global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_startTimeMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(LatenessDtoStartTimeMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(LatenessDtoStartTimeMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.LatenessDto_startTimeMember1>(null, LatenessDtoStartTimeMember1);
-                }
-            }
         }
     }
 }

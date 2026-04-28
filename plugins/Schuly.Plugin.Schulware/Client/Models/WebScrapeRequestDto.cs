@@ -7,14 +7,15 @@ using System.IO;
 using System;
 namespace Schuly.Plugin.Schulware.Client.Models
 {
+    /// <summary>
+    /// Request DTO for scraping a Schulnetz page.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public partial class ClassInfoDto : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
+    public partial class WebScrapeRequestDto : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The id property</summary>
+        /// <summary>Session id parameter from URL</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Id { get; set; }
@@ -22,38 +23,46 @@ namespace Schuly.Plugin.Schulware.Client.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The semester property</summary>
+        /// <summary>Page to scrape: home, grades, absences, agenda, lessons, documents, student_id</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Semester { get; set; }
+        public string? Page { get; set; }
 #nullable restore
 #else
-        public string Semester { get; set; }
+        public string Page { get; set; }
 #endif
-        /// <summary>The token property</summary>
+        /// <summary>PHPSESSID cookie value</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Token { get; set; }
+        public string? SessionId { get; set; }
 #nullable restore
 #else
-        public string Token { get; set; }
+        public string SessionId { get; set; }
+#endif
+        /// <summary>Transaction id parameter from URL</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Transid { get; set; }
+#nullable restore
+#else
+        public string Transid { get; set; }
 #endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Schuly.Plugin.Schulware.Client.Models.ClassInfoDto"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Schuly.Plugin.Schulware.Client.Models.WebScrapeRequestDto"/> and sets the default values.
         /// </summary>
-        public ClassInfoDto()
+        public WebScrapeRequestDto()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ClassInfoDto"/></returns>
+        /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.WebScrapeRequestDto"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Schuly.Plugin.Schulware.Client.Models.ClassInfoDto CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Schuly.Plugin.Schulware.Client.Models.WebScrapeRequestDto CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Schuly.Plugin.Schulware.Client.Models.ClassInfoDto();
+            return new global::Schuly.Plugin.Schulware.Client.Models.WebScrapeRequestDto();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -64,8 +73,9 @@ namespace Schuly.Plugin.Schulware.Client.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "semester", n => { Semester = n.GetStringValue(); } },
-                { "token", n => { Token = n.GetStringValue(); } },
+                { "page", n => { Page = n.GetStringValue(); } },
+                { "session_id", n => { SessionId = n.GetStringValue(); } },
+                { "transid", n => { Transid = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -76,8 +86,9 @@ namespace Schuly.Plugin.Schulware.Client.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("id", Id);
-            writer.WriteStringValue("semester", Semester);
-            writer.WriteStringValue("token", Token);
+            writer.WriteStringValue("page", Page);
+            writer.WriteStringValue("session_id", SessionId);
+            writer.WriteStringValue("transid", Transid);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

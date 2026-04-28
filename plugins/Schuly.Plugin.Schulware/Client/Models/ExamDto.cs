@@ -17,218 +17,212 @@ namespace Schuly.Plugin.Schulware.Client.Models
         /// <summary>The client property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_client? Client { get; set; }
+        public string? Client { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_client Client { get; set; }
+        public string Client { get; set; }
 #endif
         /// <summary>The clientname property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_clientname? Clientname { get; set; }
+        public string? Clientname { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_clientname Clientname { get; set; }
+        public string Clientname { get; set; }
 #endif
         /// <summary>The color property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_color? Color { get; set; }
+        public string? Color { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_color Color { get; set; }
+        public string Color { get; set; }
 #endif
         /// <summary>The comment property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_comment? Comment { get; set; }
+        public string? Comment { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_comment Comment { get; set; }
+        public string Comment { get; set; }
 #endif
         /// <summary>The courseId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseId? CourseId { get; set; }
+        public string? CourseId { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseId CourseId { get; set; }
+        public string CourseId { get; set; }
 #endif
         /// <summary>The courseName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseName? CourseName { get; set; }
+        public string? CourseName { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseName CourseName { get; set; }
+        public string CourseName { get; set; }
 #endif
         /// <summary>The courseToken property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseToken? CourseToken { get; set; }
+        public string? CourseToken { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseToken CourseToken { get; set; }
+        public string CourseToken { get; set; }
 #endif
         /// <summary>The endDate property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_endDate? EndDate { get; set; }
+        public string? EndDate { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_endDate EndDate { get; set; }
+        public string EndDate { get; set; }
 #endif
         /// <summary>The eventRoomStatus property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventRoomStatus? EventRoomStatus { get; set; }
+        public string? EventRoomStatus { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventRoomStatus EventRoomStatus { get; set; }
+        public string EventRoomStatus { get; set; }
 #endif
         /// <summary>The eventType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventType? EventType { get; set; }
+        public string? EventType { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventType EventType { get; set; }
+        public string EventType { get; set; }
 #endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_id? Id { get; set; }
+        public string? Id { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_id Id { get; set; }
+        public string Id { get; set; }
 #endif
         /// <summary>The importset property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_importset? Importset { get; set; }
+        public string? Importset { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_importset Importset { get; set; }
+        public string Importset { get; set; }
 #endif
         /// <summary>The infoFacilityManagement property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_infoFacilityManagement? InfoFacilityManagement { get; set; }
+        public string? InfoFacilityManagement { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_infoFacilityManagement InfoFacilityManagement { get; set; }
+        public string InfoFacilityManagement { get; set; }
 #endif
         /// <summary>The lessons property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_lessons? Lessons { get; set; }
+        public List<string>? Lessons { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_lessons Lessons { get; set; }
+        public List<string> Lessons { get; set; }
 #endif
         /// <summary>The publishToInfoSystem property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_publishToInfoSystem? PublishToInfoSystem { get; set; }
-#nullable restore
-#else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_publishToInfoSystem PublishToInfoSystem { get; set; }
-#endif
+        public bool? PublishToInfoSystem { get; set; }
         /// <summary>The roomId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomId? RoomId { get; set; }
+        public string? RoomId { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomId RoomId { get; set; }
+        public string RoomId { get; set; }
 #endif
         /// <summary>The roomToken property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomToken? RoomToken { get; set; }
+        public string? RoomToken { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomToken RoomToken { get; set; }
+        public string RoomToken { get; set; }
 #endif
         /// <summary>The startDate property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_startDate? StartDate { get; set; }
+        public string? StartDate { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_startDate StartDate { get; set; }
+        public string StartDate { get; set; }
 #endif
         /// <summary>The status property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_status? Status { get; set; }
+        public string? Status { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_status Status { get; set; }
+        public string Status { get; set; }
 #endif
         /// <summary>The studentIds property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentIds? StudentIds { get; set; }
+        public List<string>? StudentIds { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentIds StudentIds { get; set; }
+        public List<string> StudentIds { get; set; }
 #endif
         /// <summary>The studentNames property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentNames? StudentNames { get; set; }
+        public List<string>? StudentNames { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentNames StudentNames { get; set; }
+        public List<string> StudentNames { get; set; }
 #endif
         /// <summary>The teacherIds property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherIds? TeacherIds { get; set; }
+        public List<string>? TeacherIds { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherIds TeacherIds { get; set; }
+        public List<string> TeacherIds { get; set; }
 #endif
         /// <summary>The teachers property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teachers? Teachers { get; set; }
+        public List<string>? Teachers { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teachers Teachers { get; set; }
+        public List<string> Teachers { get; set; }
 #endif
         /// <summary>The teacherTokens property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherTokens? TeacherTokens { get; set; }
+        public List<string>? TeacherTokens { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherTokens TeacherTokens { get; set; }
+        public List<string> TeacherTokens { get; set; }
 #endif
         /// <summary>The text property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_text? Text { get; set; }
+        public string? Text { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_text Text { get; set; }
+        public string Text { get; set; }
 #endif
         /// <summary>The timetableText property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_timetableText? TimetableText { get; set; }
+        public string? TimetableText { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_timetableText TimetableText { get; set; }
+        public string TimetableText { get; set; }
 #endif
         /// <summary>The weight property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_weight? Weight { get; set; }
+        public string? Weight { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_weight Weight { get; set; }
+        public string Weight { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto"/> and sets the default values.
@@ -255,33 +249,33 @@ namespace Schuly.Plugin.Schulware.Client.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "client", n => { Client = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_client>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_client.CreateFromDiscriminatorValue); } },
-                { "clientname", n => { Clientname = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_clientname>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_clientname.CreateFromDiscriminatorValue); } },
-                { "color", n => { Color = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_color>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_color.CreateFromDiscriminatorValue); } },
-                { "comment", n => { Comment = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_comment>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_comment.CreateFromDiscriminatorValue); } },
-                { "courseId", n => { CourseId = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseId>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseId.CreateFromDiscriminatorValue); } },
-                { "courseName", n => { CourseName = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseName>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseName.CreateFromDiscriminatorValue); } },
-                { "courseToken", n => { CourseToken = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseToken>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseToken.CreateFromDiscriminatorValue); } },
-                { "endDate", n => { EndDate = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_endDate>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_endDate.CreateFromDiscriminatorValue); } },
-                { "eventRoomStatus", n => { EventRoomStatus = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventRoomStatus>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventRoomStatus.CreateFromDiscriminatorValue); } },
-                { "eventType", n => { EventType = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventType>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventType.CreateFromDiscriminatorValue); } },
-                { "id", n => { Id = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_id>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_id.CreateFromDiscriminatorValue); } },
-                { "importset", n => { Importset = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_importset>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_importset.CreateFromDiscriminatorValue); } },
-                { "infoFacilityManagement", n => { InfoFacilityManagement = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_infoFacilityManagement>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_infoFacilityManagement.CreateFromDiscriminatorValue); } },
-                { "lessons", n => { Lessons = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_lessons>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_lessons.CreateFromDiscriminatorValue); } },
-                { "publishToInfoSystem", n => { PublishToInfoSystem = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_publishToInfoSystem>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_publishToInfoSystem.CreateFromDiscriminatorValue); } },
-                { "roomId", n => { RoomId = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomId>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomId.CreateFromDiscriminatorValue); } },
-                { "roomToken", n => { RoomToken = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomToken>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomToken.CreateFromDiscriminatorValue); } },
-                { "startDate", n => { StartDate = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_startDate>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_startDate.CreateFromDiscriminatorValue); } },
-                { "status", n => { Status = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_status>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_status.CreateFromDiscriminatorValue); } },
-                { "studentIds", n => { StudentIds = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentIds>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentIds.CreateFromDiscriminatorValue); } },
-                { "studentNames", n => { StudentNames = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentNames>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentNames.CreateFromDiscriminatorValue); } },
-                { "teacherIds", n => { TeacherIds = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherIds>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherIds.CreateFromDiscriminatorValue); } },
-                { "teacherTokens", n => { TeacherTokens = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherTokens>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherTokens.CreateFromDiscriminatorValue); } },
-                { "teachers", n => { Teachers = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teachers>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teachers.CreateFromDiscriminatorValue); } },
-                { "text", n => { Text = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_text>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_text.CreateFromDiscriminatorValue); } },
-                { "timetableText", n => { TimetableText = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_timetableText>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_timetableText.CreateFromDiscriminatorValue); } },
-                { "weight", n => { Weight = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_weight>(global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_weight.CreateFromDiscriminatorValue); } },
+                { "client", n => { Client = n.GetStringValue(); } },
+                { "clientname", n => { Clientname = n.GetStringValue(); } },
+                { "color", n => { Color = n.GetStringValue(); } },
+                { "comment", n => { Comment = n.GetStringValue(); } },
+                { "courseId", n => { CourseId = n.GetStringValue(); } },
+                { "courseName", n => { CourseName = n.GetStringValue(); } },
+                { "courseToken", n => { CourseToken = n.GetStringValue(); } },
+                { "endDate", n => { EndDate = n.GetStringValue(); } },
+                { "eventRoomStatus", n => { EventRoomStatus = n.GetStringValue(); } },
+                { "eventType", n => { EventType = n.GetStringValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "importset", n => { Importset = n.GetStringValue(); } },
+                { "infoFacilityManagement", n => { InfoFacilityManagement = n.GetStringValue(); } },
+                { "lessons", n => { Lessons = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "publishToInfoSystem", n => { PublishToInfoSystem = n.GetBoolValue(); } },
+                { "roomId", n => { RoomId = n.GetStringValue(); } },
+                { "roomToken", n => { RoomToken = n.GetStringValue(); } },
+                { "startDate", n => { StartDate = n.GetStringValue(); } },
+                { "status", n => { Status = n.GetStringValue(); } },
+                { "studentIds", n => { StudentIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "studentNames", n => { StudentNames = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "teacherIds", n => { TeacherIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "teacherTokens", n => { TeacherTokens = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "teachers", n => { Teachers = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "text", n => { Text = n.GetStringValue(); } },
+                { "timetableText", n => { TimetableText = n.GetStringValue(); } },
+                { "weight", n => { Weight = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -291,1864 +285,34 @@ namespace Schuly.Plugin.Schulware.Client.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_client>("client", Client);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_clientname>("clientname", Clientname);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_color>("color", Color);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_comment>("comment", Comment);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseId>("courseId", CourseId);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseName>("courseName", CourseName);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseToken>("courseToken", CourseToken);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_endDate>("endDate", EndDate);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventRoomStatus>("eventRoomStatus", EventRoomStatus);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventType>("eventType", EventType);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_id>("id", Id);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_importset>("importset", Importset);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_infoFacilityManagement>("infoFacilityManagement", InfoFacilityManagement);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_lessons>("lessons", Lessons);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_publishToInfoSystem>("publishToInfoSystem", PublishToInfoSystem);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomId>("roomId", RoomId);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomToken>("roomToken", RoomToken);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_startDate>("startDate", StartDate);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_status>("status", Status);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentIds>("studentIds", StudentIds);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentNames>("studentNames", StudentNames);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherIds>("teacherIds", TeacherIds);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teachers>("teachers", Teachers);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherTokens>("teacherTokens", TeacherTokens);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_text>("text", Text);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_timetableText>("timetableText", TimetableText);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_weight>("weight", Weight);
+            writer.WriteStringValue("client", Client);
+            writer.WriteStringValue("clientname", Clientname);
+            writer.WriteStringValue("color", Color);
+            writer.WriteStringValue("comment", Comment);
+            writer.WriteStringValue("courseId", CourseId);
+            writer.WriteStringValue("courseName", CourseName);
+            writer.WriteStringValue("courseToken", CourseToken);
+            writer.WriteStringValue("endDate", EndDate);
+            writer.WriteStringValue("eventRoomStatus", EventRoomStatus);
+            writer.WriteStringValue("eventType", EventType);
+            writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("importset", Importset);
+            writer.WriteStringValue("infoFacilityManagement", InfoFacilityManagement);
+            writer.WriteCollectionOfPrimitiveValues<string>("lessons", Lessons);
+            writer.WriteBoolValue("publishToInfoSystem", PublishToInfoSystem);
+            writer.WriteStringValue("roomId", RoomId);
+            writer.WriteStringValue("roomToken", RoomToken);
+            writer.WriteStringValue("startDate", StartDate);
+            writer.WriteStringValue("status", Status);
+            writer.WriteCollectionOfPrimitiveValues<string>("studentIds", StudentIds);
+            writer.WriteCollectionOfPrimitiveValues<string>("studentNames", StudentNames);
+            writer.WriteCollectionOfPrimitiveValues<string>("teacherIds", TeacherIds);
+            writer.WriteCollectionOfPrimitiveValues<string>("teachers", Teachers);
+            writer.WriteCollectionOfPrimitiveValues<string>("teacherTokens", TeacherTokens);
+            writer.WriteStringValue("text", Text);
+            writer.WriteStringValue("timetableText", TimetableText);
+            writer.WriteStringValue("weight", Weight);
             writer.WriteAdditionalData(AdditionalData);
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_client : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientMember1? ExamDtoClientMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientMember1 ExamDtoClientMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_client"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_client CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_client();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoClientMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoClientMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoClientMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientMember1>(null, ExamDtoClientMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientnameMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_clientname : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientnameMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientnameMember1? ExamDtoClientnameMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientnameMember1 ExamDtoClientnameMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_clientname"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_clientname CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_clientname();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoClientnameMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientnameMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoClientnameMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoClientnameMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_clientnameMember1>(null, ExamDtoClientnameMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_colorMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_color : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_colorMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_colorMember1? ExamDtoColorMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_colorMember1 ExamDtoColorMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_color"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_color CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_color();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoColorMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_colorMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoColorMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoColorMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_colorMember1>(null, ExamDtoColorMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_commentMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_comment : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_commentMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_commentMember1? ExamDtoCommentMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_commentMember1 ExamDtoCommentMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_comment"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_comment CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_comment();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoCommentMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_commentMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoCommentMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoCommentMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_commentMember1>(null, ExamDtoCommentMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseIdMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_courseId : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseIdMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseIdMember1? ExamDtoCourseIdMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseIdMember1 ExamDtoCourseIdMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseId"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseId CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseId();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoCourseIdMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseIdMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoCourseIdMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoCourseIdMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseIdMember1>(null, ExamDtoCourseIdMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseNameMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_courseName : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseNameMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseNameMember1? ExamDtoCourseNameMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseNameMember1 ExamDtoCourseNameMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseName"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseName CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseName();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoCourseNameMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseNameMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoCourseNameMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoCourseNameMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseNameMember1>(null, ExamDtoCourseNameMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseTokenMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_courseToken : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseTokenMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseTokenMember1? ExamDtoCourseTokenMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseTokenMember1 ExamDtoCourseTokenMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseToken"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseToken CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_courseToken();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoCourseTokenMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseTokenMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoCourseTokenMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoCourseTokenMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_courseTokenMember1>(null, ExamDtoCourseTokenMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_endDateMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_endDate : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_endDateMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_endDateMember1? ExamDtoEndDateMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_endDateMember1 ExamDtoEndDateMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_endDate"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_endDate CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_endDate();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoEndDateMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_endDateMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoEndDateMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoEndDateMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_endDateMember1>(null, ExamDtoEndDateMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventRoomStatusMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_eventRoomStatus : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventRoomStatusMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventRoomStatusMember1? ExamDtoEventRoomStatusMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventRoomStatusMember1 ExamDtoEventRoomStatusMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventRoomStatus"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventRoomStatus CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventRoomStatus();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoEventRoomStatusMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventRoomStatusMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoEventRoomStatusMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoEventRoomStatusMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventRoomStatusMember1>(null, ExamDtoEventRoomStatusMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventTypeMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_eventType : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventTypeMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventTypeMember1? ExamDtoEventTypeMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventTypeMember1 ExamDtoEventTypeMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventType"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventType CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_eventType();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoEventTypeMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventTypeMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoEventTypeMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoEventTypeMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_eventTypeMember1>(null, ExamDtoEventTypeMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_idMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_id : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_idMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_idMember1? ExamDtoIdMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_idMember1 ExamDtoIdMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_id"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_id CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_id();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoIdMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_idMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoIdMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoIdMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_idMember1>(null, ExamDtoIdMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_importsetMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_importset : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_importsetMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_importsetMember1? ExamDtoImportsetMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_importsetMember1 ExamDtoImportsetMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_importset"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_importset CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_importset();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoImportsetMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_importsetMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoImportsetMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoImportsetMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_importsetMember1>(null, ExamDtoImportsetMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_infoFacilityManagementMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_infoFacilityManagement : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_infoFacilityManagementMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_infoFacilityManagementMember1? ExamDtoInfoFacilityManagementMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_infoFacilityManagementMember1 ExamDtoInfoFacilityManagementMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_infoFacilityManagement"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_infoFacilityManagement CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_infoFacilityManagement();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoInfoFacilityManagementMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_infoFacilityManagementMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoInfoFacilityManagementMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoInfoFacilityManagementMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_infoFacilityManagementMember1>(null, ExamDtoInfoFacilityManagementMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_lessonsMember1"/>, List&lt;string&gt;
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_lessons : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_lessonsMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_lessonsMember1? ExamDtoLessonsMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_lessonsMember1 ExamDtoLessonsMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type List&lt;string&gt;</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public List<string>? String { get; set; }
-#nullable restore
-#else
-            public List<string> String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_lessons"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_lessons CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_lessons();
-                if(parseNode.GetCollectionOfPrimitiveValues<string>()?.AsList() is List<string> stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoLessonsMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_lessonsMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoLessonsMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoLessonsMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteCollectionOfPrimitiveValues<string>(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_lessonsMember1>(null, ExamDtoLessonsMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="bool"/>, <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_publishToInfoSystemMember1"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_publishToInfoSystem : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="bool"/></summary>
-            public bool? Boolean { get; set; }
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_publishToInfoSystemMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_publishToInfoSystemMember1? ExamDtoPublishToInfoSystemMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_publishToInfoSystemMember1 ExamDtoPublishToInfoSystemMember1 { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_publishToInfoSystem"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_publishToInfoSystem CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_publishToInfoSystem();
-                if(parseNode.GetBoolValue() is bool booleanValue)
-                {
-                    result.Boolean = booleanValue;
-                }
-                else {
-                    result.ExamDtoPublishToInfoSystemMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_publishToInfoSystemMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoPublishToInfoSystemMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoPublishToInfoSystemMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(Boolean != null)
-                {
-                    writer.WriteBoolValue(null, Boolean);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_publishToInfoSystemMember1>(null, ExamDtoPublishToInfoSystemMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomIdMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_roomId : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomIdMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomIdMember1? ExamDtoRoomIdMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomIdMember1 ExamDtoRoomIdMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomId"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomId CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomId();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoRoomIdMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomIdMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoRoomIdMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoRoomIdMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomIdMember1>(null, ExamDtoRoomIdMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomTokenMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_roomToken : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomTokenMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomTokenMember1? ExamDtoRoomTokenMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomTokenMember1 ExamDtoRoomTokenMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomToken"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomToken CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_roomToken();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoRoomTokenMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomTokenMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoRoomTokenMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoRoomTokenMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_roomTokenMember1>(null, ExamDtoRoomTokenMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_startDateMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_startDate : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_startDateMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_startDateMember1? ExamDtoStartDateMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_startDateMember1 ExamDtoStartDateMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_startDate"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_startDate CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_startDate();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoStartDateMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_startDateMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoStartDateMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoStartDateMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_startDateMember1>(null, ExamDtoStartDateMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_statusMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_status : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_statusMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_statusMember1? ExamDtoStatusMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_statusMember1 ExamDtoStatusMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_status"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_status CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_status();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoStatusMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_statusMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoStatusMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoStatusMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_statusMember1>(null, ExamDtoStatusMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentIdsMember1"/>, List&lt;string&gt;
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_studentIds : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentIdsMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentIdsMember1? ExamDtoStudentIdsMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentIdsMember1 ExamDtoStudentIdsMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type List&lt;string&gt;</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public List<string>? String { get; set; }
-#nullable restore
-#else
-            public List<string> String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentIds"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentIds CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentIds();
-                if(parseNode.GetCollectionOfPrimitiveValues<string>()?.AsList() is List<string> stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoStudentIdsMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentIdsMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoStudentIdsMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoStudentIdsMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteCollectionOfPrimitiveValues<string>(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentIdsMember1>(null, ExamDtoStudentIdsMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentNamesMember1"/>, List&lt;string&gt;
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_studentNames : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentNamesMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentNamesMember1? ExamDtoStudentNamesMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentNamesMember1 ExamDtoStudentNamesMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type List&lt;string&gt;</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public List<string>? String { get; set; }
-#nullable restore
-#else
-            public List<string> String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentNames"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentNames CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_studentNames();
-                if(parseNode.GetCollectionOfPrimitiveValues<string>()?.AsList() is List<string> stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoStudentNamesMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentNamesMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoStudentNamesMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoStudentNamesMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteCollectionOfPrimitiveValues<string>(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_studentNamesMember1>(null, ExamDtoStudentNamesMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherIdsMember1"/>, List&lt;string&gt;
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_teacherIds : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherIdsMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherIdsMember1? ExamDtoTeacherIdsMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherIdsMember1 ExamDtoTeacherIdsMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type List&lt;string&gt;</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public List<string>? String { get; set; }
-#nullable restore
-#else
-            public List<string> String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherIds"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherIds CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherIds();
-                if(parseNode.GetCollectionOfPrimitiveValues<string>()?.AsList() is List<string> stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoTeacherIdsMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherIdsMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoTeacherIdsMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoTeacherIdsMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteCollectionOfPrimitiveValues<string>(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherIdsMember1>(null, ExamDtoTeacherIdsMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teachersMember1"/>, List&lt;string&gt;
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_teachers : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teachersMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teachersMember1? ExamDtoTeachersMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teachersMember1 ExamDtoTeachersMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type List&lt;string&gt;</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public List<string>? String { get; set; }
-#nullable restore
-#else
-            public List<string> String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teachers"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teachers CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teachers();
-                if(parseNode.GetCollectionOfPrimitiveValues<string>()?.AsList() is List<string> stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoTeachersMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teachersMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoTeachersMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoTeachersMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteCollectionOfPrimitiveValues<string>(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teachersMember1>(null, ExamDtoTeachersMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherTokensMember1"/>, List&lt;string&gt;
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_teacherTokens : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherTokensMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherTokensMember1? ExamDtoTeacherTokensMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherTokensMember1 ExamDtoTeacherTokensMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type List&lt;string&gt;</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public List<string>? String { get; set; }
-#nullable restore
-#else
-            public List<string> String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherTokens"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherTokens CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_teacherTokens();
-                if(parseNode.GetCollectionOfPrimitiveValues<string>()?.AsList() is List<string> stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoTeacherTokensMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherTokensMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoTeacherTokensMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoTeacherTokensMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteCollectionOfPrimitiveValues<string>(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_teacherTokensMember1>(null, ExamDtoTeacherTokensMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_textMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_text : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_textMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_textMember1? ExamDtoTextMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_textMember1 ExamDtoTextMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_text"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_text CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_text();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoTextMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_textMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoTextMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoTextMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_textMember1>(null, ExamDtoTextMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_timetableTextMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_timetableText : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_timetableTextMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_timetableTextMember1? ExamDtoTimetableTextMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_timetableTextMember1 ExamDtoTimetableTextMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_timetableText"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_timetableText CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_timetableText();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoTimetableTextMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_timetableTextMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoTimetableTextMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoTimetableTextMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_timetableTextMember1>(null, ExamDtoTimetableTextMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_weightMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExamDto_weight : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto_weightMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_weightMember1? ExamDtoWeightMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExamDto_weightMember1 ExamDtoWeightMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_weight"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_weight CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto.ExamDto_weight();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExamDtoWeightMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExamDto_weightMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExamDtoWeightMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExamDtoWeightMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExamDto_weightMember1>(null, ExamDtoWeightMember1);
-                }
-            }
         }
     }
 }

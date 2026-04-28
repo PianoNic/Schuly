@@ -7,53 +7,48 @@ using System.IO;
 using System;
 namespace Schuly.Plugin.Schulware.Client.Models
 {
+    /// <summary>
+    /// Response DTO for scraped page.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public partial class ClassInfoDto : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
+    public partial class WebScrapeResponseDto : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The id property</summary>
+        /// <summary>The data property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public UntypedNode? Data { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public UntypedNode Data { get; set; }
 #endif
-        /// <summary>The semester property</summary>
+        /// <summary>The message property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Semester { get; set; }
+        public string? Message { get; set; }
 #nullable restore
 #else
-        public string Semester { get; set; }
+        public string Message { get; set; }
 #endif
-        /// <summary>The token property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Token { get; set; }
-#nullable restore
-#else
-        public string Token { get; set; }
-#endif
+        /// <summary>The success property</summary>
+        public bool? Success { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Schuly.Plugin.Schulware.Client.Models.ClassInfoDto"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Schuly.Plugin.Schulware.Client.Models.WebScrapeResponseDto"/> and sets the default values.
         /// </summary>
-        public ClassInfoDto()
+        public WebScrapeResponseDto()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ClassInfoDto"/></returns>
+        /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.WebScrapeResponseDto"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Schuly.Plugin.Schulware.Client.Models.ClassInfoDto CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Schuly.Plugin.Schulware.Client.Models.WebScrapeResponseDto CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Schuly.Plugin.Schulware.Client.Models.ClassInfoDto();
+            return new global::Schuly.Plugin.Schulware.Client.Models.WebScrapeResponseDto();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -63,9 +58,9 @@ namespace Schuly.Plugin.Schulware.Client.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "semester", n => { Semester = n.GetStringValue(); } },
-                { "token", n => { Token = n.GetStringValue(); } },
+                { "data", n => { Data = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
+                { "message", n => { Message = n.GetStringValue(); } },
+                { "success", n => { Success = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -75,9 +70,9 @@ namespace Schuly.Plugin.Schulware.Client.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("id", Id);
-            writer.WriteStringValue("semester", Semester);
-            writer.WriteStringValue("token", Token);
+            writer.WriteObjectValue<UntypedNode>("data", Data);
+            writer.WriteStringValue("message", Message);
+            writer.WriteBoolValue("success", Success);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

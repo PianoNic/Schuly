@@ -1,0 +1,8 @@
+{
+  "SchulwareApi": {
+    "BaseUrl": "http://localhost:8000"
+  },
+  "Sync": {
+    "IntervalMinutes": 30
+  }
+}

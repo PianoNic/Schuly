@@ -21,7 +21,8 @@ public class PluginSystemTests
         var plugin = new ExamplePlugin();
         var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
 
-        plugin.ConfigureServices(services);
+        var context = new PluginServiceContext("Host=localhost;Database=test", new Microsoft.Extensions.Configuration.ConfigurationBuilder().Build());
+        plugin.ConfigureServices(services, context);
 
         await Assert.That(services.Count).IsGreaterThan(0);
     }

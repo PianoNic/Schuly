@@ -6,4 +6,5 @@
   <Project Path="src/Schuly.Plugin.Abstractions/Schuly.Plugin.Abstractions.csproj" />
   <Project Path="src/Schuly.Tests/Schuly.Tests.csproj" />
   <Project Path="plugins/Schuly.Plugin.Example/Schuly.Plugin.Example.csproj" />
+  <Project Path="plugins/Schuly.Plugin.Schulware/Schuly.Plugin.Schulware.csproj" />
 </Solution>

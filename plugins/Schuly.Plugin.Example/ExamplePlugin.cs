@@ -11,7 +11,7 @@ namespace Schuly.Plugin.Example
         public string Name => "Example Plugin";
         public string Version => "1.0.0";
 
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, PluginServiceContext context)
         {
             services.AddScoped<IPluginEventHandler<Schuly.Application.Commands.SchoolUser.CreateSchoolUserCommand>, OnSchoolUserCreatedHandler>();
         }
@@ -27,6 +27,11 @@ namespace Schuly.Plugin.Example
             {
                 return Results.Ok(new { Name, Version, Description = "A sample plugin demonstrating the Schuly plugin system." });
             }).AllowAnonymous();
+        }
+
+        public Task MigrateAsync(IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
         }
     }
 }

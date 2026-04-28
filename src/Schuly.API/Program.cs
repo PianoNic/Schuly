@@ -71,6 +71,7 @@ builder.Services.AddScoped<IPluginUserContext, PluginUserContext>();
 builder.Services.AddScoped<Schuly.Application.Authorization.IAppAuthorizationService, Schuly.Application.Authorization.AuthorizationService>();
 
 builder.Services.AddPlugins(builder.Configuration);
+builder.Services.AddHostedService<PluginBackgroundTaskHost>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -106,6 +107,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-app.UsePlugins();
+await app.UsePluginsAsync();
 
 app.Run();

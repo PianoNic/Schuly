@@ -17,26 +17,26 @@ namespace Schuly.Plugin.Schulware.Client.Models
         /// <summary>The averageExamGroup property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_averageExamGroup? AverageExamGroup { get; set; }
+        public string? AverageExamGroup { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_averageExamGroup AverageExamGroup { get; set; }
+        public string AverageExamGroup { get; set; }
 #endif
         /// <summary>The examGroup property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_examGroup? ExamGroup { get; set; }
+        public string? ExamGroup { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_examGroup ExamGroup { get; set; }
+        public string ExamGroup { get; set; }
 #endif
         /// <summary>The weightExamGroup property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_weightExamGroup? WeightExamGroup { get; set; }
+        public string? WeightExamGroup { get; set; }
 #nullable restore
 #else
-        public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_weightExamGroup WeightExamGroup { get; set; }
+        public string WeightExamGroup { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto"/> and sets the default values.
@@ -63,9 +63,9 @@ namespace Schuly.Plugin.Schulware.Client.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "averageExamGroup", n => { AverageExamGroup = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_averageExamGroup>(global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_averageExamGroup.CreateFromDiscriminatorValue); } },
-                { "examGroup", n => { ExamGroup = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_examGroup>(global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_examGroup.CreateFromDiscriminatorValue); } },
-                { "weightExamGroup", n => { WeightExamGroup = n.GetObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_weightExamGroup>(global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_weightExamGroup.CreateFromDiscriminatorValue); } },
+                { "averageExamGroup", n => { AverageExamGroup = n.GetStringValue(); } },
+                { "examGroup", n => { ExamGroup = n.GetStringValue(); } },
+                { "weightExamGroup", n => { WeightExamGroup = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -75,214 +75,10 @@ namespace Schuly.Plugin.Schulware.Client.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_averageExamGroup>("averageExamGroup", AverageExamGroup);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_examGroup>("examGroup", ExamGroup);
-            writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_weightExamGroup>("weightExamGroup", WeightExamGroup);
+            writer.WriteStringValue("averageExamGroup", AverageExamGroup);
+            writer.WriteStringValue("examGroup", ExamGroup);
+            writer.WriteStringValue("weightExamGroup", WeightExamGroup);
             writer.WriteAdditionalData(AdditionalData);
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_averageExamGroupMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExaminationGroupsDto_averageExamGroup : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_averageExamGroupMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_averageExamGroupMember1? ExaminationGroupsDtoAverageExamGroupMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_averageExamGroupMember1 ExaminationGroupsDtoAverageExamGroupMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_averageExamGroup"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_averageExamGroup CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_averageExamGroup();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExaminationGroupsDtoAverageExamGroupMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_averageExamGroupMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExaminationGroupsDtoAverageExamGroupMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExaminationGroupsDtoAverageExamGroupMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_averageExamGroupMember1>(null, ExaminationGroupsDtoAverageExamGroupMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_examGroupMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExaminationGroupsDto_examGroup : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_examGroupMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_examGroupMember1? ExaminationGroupsDtoExamGroupMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_examGroupMember1 ExaminationGroupsDtoExamGroupMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_examGroup"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_examGroup CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_examGroup();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExaminationGroupsDtoExamGroupMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_examGroupMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExaminationGroupsDtoExamGroupMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExaminationGroupsDtoExamGroupMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_examGroupMember1>(null, ExaminationGroupsDtoExamGroupMember1);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_weightExamGroupMember1"/>, <see cref="string"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ExaminationGroupsDto_weightExamGroup : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_weightExamGroupMember1"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_weightExamGroupMember1? ExaminationGroupsDtoWeightExamGroupMember1 { get; set; }
-#nullable restore
-#else
-            public global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_weightExamGroupMember1 ExaminationGroupsDtoWeightExamGroupMember1 { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="string"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public string? String { get; set; }
-#nullable restore
-#else
-            public string String { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_weightExamGroup"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_weightExamGroup CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto.ExaminationGroupsDto_weightExamGroup();
-                if(parseNode.GetStringValue() is string stringValue)
-                {
-                    result.String = stringValue;
-                }
-                else {
-                    result.ExaminationGroupsDtoWeightExamGroupMember1 = new global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_weightExamGroupMember1();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(ExaminationGroupsDtoWeightExamGroupMember1 != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ExaminationGroupsDtoWeightExamGroupMember1);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(String != null)
-                {
-                    writer.WriteStringValue(null, String);
-                }
-                else {
-                    writer.WriteObjectValue<global::Schuly.Plugin.Schulware.Client.Models.ExaminationGroupsDto_weightExamGroupMember1>(null, ExaminationGroupsDtoWeightExamGroupMember1);
-                }
-            }
         }
     }
 }

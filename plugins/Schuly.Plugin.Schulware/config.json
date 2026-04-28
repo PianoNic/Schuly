@@ -1,6 +1,6 @@
 {
   "SchulwareApi": {
-    "BaseUrl": "http://localhost:8000"
+    "BaseUrl": "https://schlwr.pianonic.ch"
   },
   "Sync": {
     "IntervalMinutes": 30

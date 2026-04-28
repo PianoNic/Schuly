@@ -3,8 +3,10 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Schuly.Plugin.Schulware.Client.Api.App;
+using Schuly.Plugin.Schulware.Client.Api.Authenticate;
 using Schuly.Plugin.Schulware.Client.Api.Mobile;
 using Schuly.Plugin.Schulware.Client.Api.Web;
+using Schuly.Plugin.Schulware.Client.Api.Websession;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -22,6 +24,11 @@ namespace Schuly.Plugin.Schulware.Client.Api
         {
             get => new global::Schuly.Plugin.Schulware.Client.Api.App.AppRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The authenticate property</summary>
+        public global::Schuly.Plugin.Schulware.Client.Api.Authenticate.AuthenticateRequestBuilder Authenticate
+        {
+            get => new global::Schuly.Plugin.Schulware.Client.Api.Authenticate.AuthenticateRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The mobile property</summary>
         public global::Schuly.Plugin.Schulware.Client.Api.Mobile.MobileRequestBuilder Mobile
         {
@@ -31,6 +38,11 @@ namespace Schuly.Plugin.Schulware.Client.Api
         public global::Schuly.Plugin.Schulware.Client.Api.Web.WebRequestBuilder Web
         {
             get => new global::Schuly.Plugin.Schulware.Client.Api.Web.WebRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The websession property</summary>
+        public global::Schuly.Plugin.Schulware.Client.Api.Websession.WebsessionRequestBuilder Websession
+        {
+            get => new global::Schuly.Plugin.Schulware.Client.Api.Websession.WebsessionRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Schuly.Plugin.Schulware.Client.Api.ApiRequestBuilder"/> and sets the default values.

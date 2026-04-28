@@ -13,7 +13,6 @@ namespace Schuly.Plugin.Schulware.Data
             {
                 entity.HasKey(c => c.Id);
                 entity.HasIndex(c => c.ApplicationUserId).IsUnique();
-                entity.Property(c => c.EncryptedToken).IsRequired();
             });
 
             modelBuilder.Entity<SyncState>(entity =>
@@ -28,7 +27,11 @@ namespace Schuly.Plugin.Schulware.Data
     {
         public Guid Id { get; set; }
         public Guid ApplicationUserId { get; set; }
-        public required string EncryptedToken { get; set; }
+        public string? MobileAccessToken { get; set; }
+        public string? MobileRefreshToken { get; set; }
+        public DateTime? MobileTokenExpiresAt { get; set; }
+        public string? WebSessionId { get; set; }
+        public string? WebNavigationUrlsJson { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; }
     }

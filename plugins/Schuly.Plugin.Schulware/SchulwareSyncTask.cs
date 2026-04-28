@@ -1,6 +1,11 @@
+using System.Net.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Kiota.Abstractions.Authentication;
+using Microsoft.Kiota.Http.HttpClientLibrary;
+using Schuly.Domain;
+using Schuly.Domain.Enums;
 using Schuly.Plugin.Abstractions;
 using Schuly.Plugin.Schulware.Client;
 using Schuly.Plugin.Schulware.Data;
@@ -16,34 +21,60 @@ namespace Schuly.Plugin.Schulware
         {
             using var scope = serviceProvider.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<SchulwareDbContext>();
-            var client = scope.ServiceProvider.GetRequiredService<SchulwareApiClient>();
-            var logger = scope.ServiceProvider.GetRequiredService<ILogger<SchulwareSyncTask>>();
             var mainDb = scope.ServiceProvider.GetRequiredService<Schuly.Infrastructure.SchulyDbContext>();
+            var httpClientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<SchulwareSyncTask>>();
 
-            var credentials = await db.Credentials.ToListAsync(cancellationToken);
+            var accounts = await db.Accounts
+                .Where(a => a.MobileAccessToken != null && a.SchoolUserId != null)
+                .ToListAsync(cancellationToken);
 
-            foreach (var credential in credentials)
+            logger.LogInformation("Syncing {Count} Schulware accounts", accounts.Count);
+
+            foreach (var account in accounts)
             {
                 var syncState = await db.SyncStates
-                    .FirstOrDefaultAsync(s => s.ApplicationUserId == credential.ApplicationUserId, cancellationToken);
+                    .FirstOrDefaultAsync(s => s.AccountId == account.Id, cancellationToken);
 
-                if (syncState == null)
+                if (syncState is null)
                 {
-                    syncState = new SyncState { ApplicationUserId = credential.ApplicationUserId };
+                    syncState = new SyncState { AccountId = account.Id };
                     db.SyncStates.Add(syncState);
                 }
 
                 try
                 {
-                    // TODO: Set bearer token on client from credential.EncryptedToken
-                    // TODO: Fetch grades, absences, exams from SchulwareAPI
-                    // TODO: Map and upsert into main Schuly DB
+                    if (account.MobileTokenExpiresAt.HasValue && account.MobileTokenExpiresAt < DateTime.UtcNow)
+                    {
+                        if (account.MobileRefreshToken is not null)
+                        {
+                            var refreshed = await TryRefreshToken(httpClientFactory, account, db, logger, cancellationToken);
+                            if (!refreshed)
+                            {
+                                syncState.LastSyncAt = DateTime.UtcNow;
+                                syncState.LastSyncStatus = "TokenExpired";
+                                syncState.LastSyncError = "Token expired and refresh failed. User needs to re-authenticate.";
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            syncState.LastSyncAt = DateTime.UtcNow;
+                            syncState.LastSyncStatus = "TokenExpired";
+                            syncState.LastSyncError = "Token expired. No refresh token available. User needs to re-authenticate.";
+                            continue;
+                        }
+                    }
+
+                    var client = CreateAuthenticatedClient(httpClientFactory, account);
+                    await SyncGrades(client, account, mainDb, logger, cancellationToken);
+                    await SyncAbsences(client, account, mainDb, logger, cancellationToken);
 
                     syncState.LastSyncAt = DateTime.UtcNow;
                     syncState.LastSyncStatus = "Success";
                     syncState.LastSyncError = null;
 
-                    logger.LogInformation("Synced data for user {UserId}", credential.ApplicationUserId);
+                    logger.LogInformation("Synced account {AccountId} ({Url})", account.Id, account.SchulnetzBaseUrl);
                 }
                 catch (Exception ex)
                 {
@@ -51,10 +82,183 @@ namespace Schuly.Plugin.Schulware
                     syncState.LastSyncStatus = "Failed";
                     syncState.LastSyncError = ex.Message;
 
-                    logger.LogError(ex, "Failed to sync data for user {UserId}", credential.ApplicationUserId);
+                    logger.LogError(ex, "Failed to sync account {AccountId}", account.Id);
                 }
 
                 await db.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        private static async Task<bool> TryRefreshToken(
+            IHttpClientFactory httpClientFactory, SchulwareAccount account,
+            SchulwareDbContext db, ILogger logger, CancellationToken ct)
+        {
+            try
+            {
+                using var httpClient = httpClientFactory.CreateClient("Schulware");
+                var tokenUrl = $"{account.SchulnetzBaseUrl}/token.php";
+
+                var content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("grant_type", "refresh_token"),
+                    new KeyValuePair<string, string>("refresh_token", account.MobileRefreshToken!),
+                    new KeyValuePair<string, string>("client_id", "ppyybShnMerHdtBQ"),
+                });
+
+                var response = await httpClient.PostAsync(tokenUrl, content, ct);
+                if (!response.IsSuccessStatusCode)
+                {
+                    logger.LogWarning("Token refresh failed with {Status} for account {AccountId}", response.StatusCode, account.Id);
+                    return false;
+                }
+
+                var json = await response.Content.ReadFromJsonAsync<System.Text.Json.JsonElement>(ct);
+                var accessToken = json.GetProperty("access_token").GetString();
+                var refreshToken = json.TryGetProperty("refresh_token", out var rt) ? rt.GetString() : account.MobileRefreshToken;
+
+                account.MobileAccessToken = accessToken;
+                account.MobileRefreshToken = refreshToken;
+                account.MobileTokenExpiresAt = DateTime.UtcNow.AddHours(1);
+                account.UpdatedAt = DateTime.UtcNow;
+                await db.SaveChangesAsync(ct);
+
+                logger.LogInformation("Refreshed token for account {AccountId}", account.Id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Token refresh error for account {AccountId}", account.Id);
+                return false;
+            }
+        }
+
+        private static SchulwareApiClient CreateAuthenticatedClient(IHttpClientFactory httpClientFactory, SchulwareAccount account)
+        {
+            var httpClient = httpClientFactory.CreateClient("Schulware");
+            httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", account.MobileAccessToken);
+
+            var adapter = new HttpClientRequestAdapter(new AnonymousAuthenticationProvider(), httpClient: httpClient);
+            adapter.BaseUrl = account.SchulwareApiBaseUrl;
+            return new SchulwareApiClient(adapter);
+        }
+
+        private static async Task SyncGrades(
+            SchulwareApiClient client, SchulwareAccount account,
+            Schuly.Infrastructure.SchulyDbContext mainDb, ILogger logger, CancellationToken ct)
+        {
+            var grades = await client.Api.Mobile.Grades.GetAsync(cancellationToken: ct);
+            if (grades is null || grades.Count == 0) return;
+
+            var schoolUserId = account.SchoolUserId!.Value;
+            var synced = 0;
+
+            foreach (var grade in grades)
+            {
+                if (grade.Mark is null || grade.ExamId is null) continue;
+
+                var exam = await FindOrCreateExam(mainDb, grade, schoolUserId, ct);
+
+                var existing = await mainDb.Grades
+                    .FirstOrDefaultAsync(g => g.SchoolUserId == schoolUserId && g.ExamId == exam.Id, ct);
+
+                if (existing is null)
+                {
+                    mainDb.Grades.Add(new Grade
+                    {
+                        SchoolUserId = schoolUserId,
+                        ExamId = exam.Id,
+                        Score = (decimal)grade.Mark,
+                        Weighting = (decimal)(grade.Weight ?? 1),
+                    });
+                    synced++;
+                }
+                else if (existing.Score != (decimal)grade.Mark)
+                {
+                    existing.Score = (decimal)grade.Mark;
+                    existing.Weighting = (decimal)(grade.Weight ?? 1);
+                    synced++;
+                }
+            }
+
+            if (synced > 0)
+            {
+                await mainDb.SaveChangesAsync(ct);
+                logger.LogInformation("Synced {Count} grades for account {AccountId}", synced, account.Id);
+            }
+        }
+
+        private static async Task<Exam> FindOrCreateExam(
+            Schuly.Infrastructure.SchulyDbContext mainDb,
+            Client.Models.GradeDto grade, Guid schoolUserId, CancellationToken ct)
+        {
+            var examName = grade.Title ?? grade.Subject ?? $"Exam {grade.ExamId}";
+
+            var schoolUser = await mainDb.SchoolUsers
+                .Include(su => su.Classes)
+                .FirstOrDefaultAsync(su => su.Id == schoolUserId, ct);
+
+            var classId = schoolUser?.Classes.FirstOrDefault()?.Id ?? Guid.Empty;
+
+            var existing = await mainDb.Exams
+                .FirstOrDefaultAsync(e => e.Name == examName && e.ClassId == classId, ct);
+
+            if (existing is not null) return existing;
+
+            var exam = new Exam
+            {
+                Name = examName,
+                Type = ExamType.Classic,
+                ClassId = classId,
+            };
+            mainDb.Exams.Add(exam);
+            await mainDb.SaveChangesAsync(ct);
+            return exam;
+        }
+
+        private static async Task SyncAbsences(
+            SchulwareApiClient client, SchulwareAccount account,
+            Schuly.Infrastructure.SchulyDbContext mainDb, ILogger logger, CancellationToken ct)
+        {
+            var absences = await client.Api.Mobile.Absences.GetAsync(cancellationToken: ct);
+            if (absences is null || absences.Count == 0) return;
+
+            var schoolUserId = account.SchoolUserId!.Value;
+            var synced = 0;
+
+            foreach (var absence in absences)
+            {
+                if (absence.DateFrom is null || absence.DateTo is null) continue;
+
+                if (!DateTime.TryParse(absence.DateFrom, out var from) ||
+                    !DateTime.TryParse(absence.DateTo, out var to))
+                    continue;
+
+                from = DateTime.SpecifyKind(from, DateTimeKind.Utc);
+                to = DateTime.SpecifyKind(to, DateTimeKind.Utc);
+
+                var existing = await mainDb.Absences
+                    .FirstOrDefaultAsync(a => a.SchoolUserId == schoolUserId
+                        && a.From == from && a.Until == to, ct);
+
+                if (existing is null)
+                {
+                    mainDb.Absences.Add(new Absence
+                    {
+                        SchoolUserId = schoolUserId,
+                        From = from,
+                        Until = to,
+                        Reason = absence.Reason ?? "Imported from Schulnetz",
+                        Type = AbsenceType.Absence,
+                    });
+                    synced++;
+                }
+            }
+
+            if (synced > 0)
+            {
+                await mainDb.SaveChangesAsync(ct);
+                logger.LogInformation("Synced {Count} absences for account {AccountId}", synced, account.Id);
             }
         }
     }

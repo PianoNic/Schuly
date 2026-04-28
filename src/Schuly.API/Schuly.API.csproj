@@ -10,6 +10,10 @@
 
   <ItemGroup>
     <PackageReference Include="Mediator.Abstractions" Version="3.0.2" />
+    <PackageReference Include="Mediator.SourceGenerator" Version="3.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.7" />
@@ -27,6 +31,7 @@
     <ProjectReference Include="..\Schuly.Application\Schuly.Application.csproj" />
     <ProjectReference Include="..\Schuly.Infrastructure\Schuly.Infrastructure.csproj" />
     <ProjectReference Include="..\Schuly.Plugin.Abstractions\Schuly.Plugin.Abstractions.csproj" />
+    <ProjectReference Include="..\..\plugins\Schuly.Plugin.Schulware\Schuly.Plugin.Schulware.csproj" />
   </ItemGroup>
 
 </Project>

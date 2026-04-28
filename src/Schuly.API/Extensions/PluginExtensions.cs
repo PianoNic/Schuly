@@ -68,6 +68,23 @@ namespace Schuly.API.Extensions
         private static List<ISchulyPlugin> DiscoverPlugins(IConfiguration configuration)
         {
             var plugins = new List<ISchulyPlugin>();
+
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                try
+                {
+                    var pluginTypes = assembly.GetTypes()
+                        .Where(t => typeof(ISchulyPlugin).IsAssignableFrom(t) && t is { IsAbstract: false, IsInterface: false });
+
+                    foreach (var type in pluginTypes)
+                    {
+                        if (Activator.CreateInstance(type) is ISchulyPlugin plugin)
+                            plugins.Add(plugin);
+                    }
+                }
+                catch { }
+            }
+
             var pluginDir = configuration["Plugins:Directory"] ?? "plugins";
 
             if (!Path.IsPathRooted(pluginDir))

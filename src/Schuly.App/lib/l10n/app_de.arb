@@ -5,5 +5,6 @@
   "tabAgenda": "Agenda",
   "tabGrades": "Noten",
   "tabAbsences": "Absenzen",
-  "tabAccount": "Konto"
+  "tabAccount": "Konto",
+  "signIn": "Anmelden"
 }

@@ -10,7 +10,6 @@ class AgendaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     return PlatformScaffold(
-      appBar: PlatformAppBar(title: Text(t.tabAgenda)),
       body: Center(child: Text(t.tabAgenda)),
     );
   }

@@ -8,5 +8,6 @@
   "tabAgenda": "Agenda",
   "tabGrades": "Grades",
   "tabAbsences": "Absences",
-  "tabAccount": "Account"
+  "tabAccount": "Account",
+  "signIn": "Sign in"
 }

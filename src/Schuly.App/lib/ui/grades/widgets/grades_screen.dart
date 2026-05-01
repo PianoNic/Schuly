@@ -10,7 +10,6 @@ class GradesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     return PlatformScaffold(
-      appBar: PlatformAppBar(title: Text(t.tabGrades)),
       body: Center(child: Text(t.tabGrades)),
     );
   }

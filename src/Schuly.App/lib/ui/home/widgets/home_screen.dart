@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     return PlatformScaffold(
-      appBar: PlatformAppBar(title: Text(t.tabStart)),
       body: Center(child: Text(t.tabStart)),
     );
   }

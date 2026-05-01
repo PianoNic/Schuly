@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -27,14 +28,23 @@ class _RootScreenState extends State<RootScreen> {
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
+    final cupertino = isCupertino(context);
+
+    BottomNavigationBarItem item(IconData material, IconData cupertinoIcon, String label) {
+      return BottomNavigationBarItem(
+        icon: Icon(cupertino ? cupertinoIcon : material),
+        label: label,
+      );
+    }
+
     return PlatformTabScaffold(
       tabController: _controller,
       items: [
-        BottomNavigationBarItem(icon: const Icon(Icons.home_outlined), label: t.tabStart),
-        BottomNavigationBarItem(icon: const Icon(Icons.calendar_today_outlined), label: t.tabAgenda),
-        BottomNavigationBarItem(icon: const Icon(Icons.grade_outlined), label: t.tabGrades),
-        BottomNavigationBarItem(icon: const Icon(Icons.event_busy_outlined), label: t.tabAbsences),
-        BottomNavigationBarItem(icon: const Icon(Icons.person_outline), label: t.tabAccount),
+        item(Icons.home_outlined, CupertinoIcons.house, t.tabStart),
+        item(Icons.calendar_today_outlined, CupertinoIcons.calendar, t.tabAgenda),
+        item(Icons.grade_outlined, CupertinoIcons.star, t.tabGrades),
+        item(Icons.event_busy_outlined, CupertinoIcons.calendar_badge_minus, t.tabAbsences),
+        item(Icons.person_outline, CupertinoIcons.person, t.tabAccount),
       ],
       bodyBuilder: (context, index) => switch (index) {
         0 => const HomeScreen(),

@@ -8,13 +8,27 @@ import '../../agenda/widgets/agenda_screen.dart';
 import '../../grades/widgets/grades_screen.dart';
 import '../../home/widgets/home_screen.dart';
 
-class RootScreen extends StatelessWidget {
+class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
+
+  @override
+  State<RootScreen> createState() => _RootScreenState();
+}
+
+class _RootScreenState extends State<RootScreen> {
+  final _controller = PlatformTabController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     return PlatformTabScaffold(
+      tabController: _controller,
       items: [
         BottomNavigationBarItem(icon: const Icon(Icons.home_outlined), label: t.tabStart),
         BottomNavigationBarItem(icon: const Icon(Icons.calendar_today_outlined), label: t.tabAgenda),

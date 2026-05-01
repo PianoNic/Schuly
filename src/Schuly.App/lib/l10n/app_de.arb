@@ -1,5 +1,9 @@
 {
   "@@locale": "de",
   "appTitle": "Schuly",
-  "helloWorld": "Hallo, Schuly"
+  "tabStart": "Start",
+  "tabAgenda": "Agenda",
+  "tabGrades": "Noten",
+  "tabAbsences": "Absenzen",
+  "tabAccount": "Konto"
 }

@@ -4,8 +4,9 @@
   "@appTitle": {
     "description": "Application title"
   },
-  "helloWorld": "Hello, Schuly",
-  "@helloWorld": {
-    "description": "Placeholder greeting on the home screen"
-  }
+  "tabStart": "Start",
+  "tabAgenda": "Agenda",
+  "tabGrades": "Grades",
+  "tabAbsences": "Absences",
+  "tabAccount": "Account"
 }

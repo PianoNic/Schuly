@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'l10n/app_localizations.dart';
-import 'ui/home/widgets/home_screen.dart';
+import 'ui/core/ui/root_screen.dart';
 
 void main() => runApp(const SchulyApp());
 
@@ -16,7 +16,7 @@ class SchulyApp extends StatelessWidget {
         onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const HomeScreen(),
+        home: const RootScreen(),
       ),
     );
   }

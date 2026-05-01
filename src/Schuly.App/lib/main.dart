@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+import 'ui/home/widgets/home_screen.dart';
+
 void main() => runApp(const SchulyApp());
 
 class SchulyApp extends StatelessWidget {
@@ -11,20 +13,8 @@ class SchulyApp extends StatelessWidget {
     return PlatformProvider(
       builder: (context) => const PlatformApp(
         title: 'Schuly',
-        home: HomePage(),
+        home: HomeScreen(),
       ),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return PlatformScaffold(
-      appBar: PlatformAppBar(title: const Text('Schuly')),
-      body: const Center(child: Text('Hello, Schuly')),
     );
   }
 }

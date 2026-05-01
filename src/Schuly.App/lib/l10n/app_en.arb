@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "appTitle": "Schuly",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "helloWorld": "Hello, Schuly",
+  "@helloWorld": {
+    "description": "Placeholder greeting on the home screen"
+  }
+}

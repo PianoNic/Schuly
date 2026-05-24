@@ -1,8 +1,0 @@
-{
-  "SchulwareApi": {
-    "BaseUrl": "https://schlwr.pianonic.ch"
-  },
-  "Sync": {
-    "IntervalMinutes": 30
-  }
-}

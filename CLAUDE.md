@@ -15,10 +15,11 @@ Flavors: `dev` (`com.schuly.app.dev`, "Schuly DEV") and `prod` (`com.schuly.app`
 
 ## Regenerate API client
 
-The client at `lib/api/` is generated from the C# backend's OpenAPI spec.
+The client at `lib/api/` is generated from [SchulyBackend](https://github.com/schulydev/SchulyBackend)'s OpenAPI spec.
 
 ```sh
-# 1. Start backend (from src/Schuly.API): dotnet run --urls=http://localhost:5033
+# 1. Start backend from a SchulyBackend checkout:
+#    cd path/to/SchulyBackend/src/Schuly.API && dotnet run --urls=http://localhost:5033
 # 2. Generate directly from the live spec
 npx --yes @openapitools/openapi-generator-cli generate \
   -i http://localhost:5033/swagger/v1/swagger.json \

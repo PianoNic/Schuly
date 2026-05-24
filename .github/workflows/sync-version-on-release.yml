@@ -1,0 +1,63 @@
+name: Sync version on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  sync-version:
+    name: Sync application.properties + pubspec.yaml with release tag
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.MAIN_PUSH_TOKEN }}
+
+      - name: Configure git as the maintainer
+        run: |
+          git config user.name "PianoNic"
+          git config user.email "79938743+PianoNic@users.noreply.github.com"
+
+      - name: Compare versions and open + merge sync PR if different
+        env:
+          GH_TOKEN: ${{ secrets.MAIN_PUSH_TOKEN }}
+        run: |
+          TAG_VERSION="${{ github.event.release.tag_name }}"
+          TAG_VERSION="${TAG_VERSION#v}"
+          FILE_VERSION=$(grep -oP '(?<=<version>)[^<]+' application.properties)
+
+          if [ "$TAG_VERSION" = "$FILE_VERSION" ]; then
+            echo "Already in sync, nothing to do."
+            exit 0
+          fi
+
+          # Update application.properties
+          sed -i "s|<version>$FILE_VERSION</version>|<version>$TAG_VERSION</version>|" application.properties
+
+          # Update pubspec.yaml — preserve build number after '+'
+          PUBSPEC_VERSION=$(grep -oP '^version:\s*\K[^\s]+' pubspec.yaml)
+          PUBSPEC_BUILD="${PUBSPEC_VERSION#*+}"
+          NEW_PUBSPEC="$TAG_VERSION"
+          if [ "$PUBSPEC_BUILD" != "$PUBSPEC_VERSION" ]; then
+            NEW_PUBSPEC="$TAG_VERSION+$PUBSPEC_BUILD"
+          fi
+          sed -i "s|^version:.*|version: $NEW_PUBSPEC|" pubspec.yaml
+
+          BRANCH="release-sync/$TAG_VERSION"
+          git checkout -b "$BRANCH"
+          git add application.properties pubspec.yaml
+          git commit -m "Bumped version to $TAG_VERSION for release"
+          git push origin "$BRANCH"
+
+          PR_URL=$(gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "Bumped version to $TAG_VERSION for release" \
+            --body "Bumped version to $TAG_VERSION for release" \
+            --label CI/CD)
+          gh pr merge "$PR_URL" --admin --squash --delete-branch

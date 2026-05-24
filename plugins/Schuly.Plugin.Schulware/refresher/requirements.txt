@@ -1,4 +1,0 @@
-fastapi==0.122.0
-uvicorn==0.38.0
-playwright==1.56.0
-httpx==0.28.1

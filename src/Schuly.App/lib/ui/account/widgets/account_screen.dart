@@ -19,7 +19,7 @@ class AccountScreen extends StatelessWidget {
         'state': 'test',
       },
     );
-    await launchUrl(url, mode: LaunchMode.externalApplication);
+    await launchUrl(url, mode: LaunchMode.inAppBrowserView);
   }
 
   @override

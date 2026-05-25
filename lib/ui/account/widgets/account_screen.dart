@@ -1,25 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../../../config/oidc_config.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../plugin_test/plugin_test_screen.dart';
+import '../../../services/auth_service.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
 
-  Future<void> _openAuthPage() async {
-    final url = Uri.parse(OidcConfig.authority).replace(
-      path: '/authorize',
-      queryParameters: {
-        'client_id': OidcConfig.clientId,
-        'response_type': 'code',
-        'scope': OidcConfig.scope,
-        'redirect_uri': OidcConfig.redirectUri,
-        'state': 'test',
-      },
+  @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  bool _signedIn = false;
+  bool _busy = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _refresh();
+  }
+
+  Future<void> _refresh() async {
+    final token = await AuthService.getAccessToken();
+    if (mounted) setState(() => _signedIn = token != null);
+  }
+
+  Future<void> _signIn() async {
+    setState(() => _busy = true);
+    try {
+      await AuthService.signIn();
+      await _refresh();
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$e')));
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  void _openPluginTest() {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const PluginTestScreen()),
     );
-    await launchUrl(url, mode: LaunchMode.inAppBrowserView);
+  }
+
+  Future<void> _signOut() async {
+    await AuthService.signOut();
+    await _refresh();
   }
 
   @override
@@ -28,9 +58,28 @@ class AccountScreen extends StatelessWidget {
     return PlatformScaffold(
       body: SafeArea(
         child: Center(
-          child: PlatformElevatedButton(
-            onPressed: _openAuthPage,
-            child: Text(t.signIn),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (!_signedIn)
+                PlatformElevatedButton(
+                  onPressed: _busy ? null : _signIn,
+                  child: Text(_busy ? 'Waiting for browser...' : t.signIn),
+                )
+              else ...[
+                const Text('Signed in'),
+                const SizedBox(height: 12),
+                PlatformElevatedButton(
+                  onPressed: _openPluginTest,
+                  child: const Text('Open Plugin Test'),
+                ),
+                const SizedBox(height: 8),
+                PlatformElevatedButton(
+                  onPressed: _signOut,
+                  child: const Text('Sign out'),
+                ),
+              ],
+            ],
           ),
         ),
       ),

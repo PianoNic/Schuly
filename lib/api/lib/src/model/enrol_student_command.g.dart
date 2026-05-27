@@ -12,15 +12,15 @@ class _$EnrolStudentCommand extends EnrolStudentCommand {
   @override
   final String? classId;
 
-  factory _$EnrolStudentCommand(
-          [void Function(EnrolStudentCommandBuilder)? updates]) =>
-      (EnrolStudentCommandBuilder()..update(updates))._build();
+  factory _$EnrolStudentCommand([
+    void Function(EnrolStudentCommandBuilder)? updates,
+  ]) => (EnrolStudentCommandBuilder()..update(updates))._build();
 
   _$EnrolStudentCommand._({this.userId, this.classId}) : super._();
   @override
   EnrolStudentCommand rebuild(
-          void Function(EnrolStudentCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(EnrolStudentCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   EnrolStudentCommandBuilder toBuilder() =>
@@ -92,11 +92,8 @@ class EnrolStudentCommandBuilder
   EnrolStudentCommand build() => _build();
 
   _$EnrolStudentCommand _build() {
-    final _$result = _$v ??
-        _$EnrolStudentCommand._(
-          userId: userId,
-          classId: classId,
-        );
+    final _$result =
+        _$v ?? _$EnrolStudentCommand._(userId: userId, classId: classId);
     replace(_$result);
     return _$result;
   }

@@ -1,0 +1,23 @@
+{
+  "name": "schuly",
+  "private": true,
+  "description": "Task runner for the Schuly Flutter app. Use `bun run <script>`.",
+  "scripts": {
+    "dev": "flutter run --flavor dev",
+    "prod": "flutter run --flavor prod",
+    "analyze": "flutter analyze",
+    "test": "flutter test",
+    "format": "dart format lib",
+    "build:apk:dev": "flutter build apk --flavor dev --release",
+    "build:apk:prod": "flutter build apk --flavor prod --release",
+    "build:ios": "flutter build ios --flavor prod --no-codesign",
+    "install:dev": "flutter build apk --flavor dev --release && flutter install --flavor dev",
+    "install:prod": "flutter build apk --flavor prod --release && flutter install --flavor prod",
+    "apigen": "bunx --bun @openapitools/openapi-generator-cli generate -i http://192.168.188.162:5033/swagger/v1/swagger.json -g dart-dio -o lib/api --additional-properties=pubName=schuly_api,pubLibrary=schuly_api && bun run apigen:patch && bun run apigen:build",
+    "apigen:local": "bunx --bun @openapitools/openapi-generator-cli generate -i http://localhost:5033/swagger/v1/swagger.json -g dart-dio -o lib/api --additional-properties=pubName=schuly_api,pubLibrary=schuly_api && bun run apigen:patch && bun run apigen:build",
+    "apigen:patch": "bun -e \"const f='lib/api/pubspec.yaml';await Bun.write(f,(await Bun.file(f).text()).replace(/sdk: '>=2\\\\.18\\\\.0 <4\\\\.0\\\\.0'/,'sdk: ^3.10.0'))\"",
+    "apigen:build": "cd lib/api && dart pub get && dart run build_runner build",
+    "icons": "dart run flutter_launcher_icons",
+    "clean": "flutter clean && flutter pub get"
+  }
+}

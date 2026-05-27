@@ -30,27 +30,27 @@ class _$UpdateSchoolUserCommand extends UpdateSchoolUserCommand {
   @override
   final UserState? state;
 
-  factory _$UpdateSchoolUserCommand(
-          [void Function(UpdateSchoolUserCommandBuilder)? updates]) =>
-      (UpdateSchoolUserCommandBuilder()..update(updates))._build();
+  factory _$UpdateSchoolUserCommand([
+    void Function(UpdateSchoolUserCommandBuilder)? updates,
+  ]) => (UpdateSchoolUserCommandBuilder()..update(updates))._build();
 
-  _$UpdateSchoolUserCommand._(
-      {this.schoolUserId,
-      this.firstName,
-      this.lastName,
-      this.email,
-      this.privateEmail,
-      this.phoneNumber,
-      this.street,
-      this.city,
-      this.zip,
-      this.leaveDate,
-      this.state})
-      : super._();
+  _$UpdateSchoolUserCommand._({
+    this.schoolUserId,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.privateEmail,
+    this.phoneNumber,
+    this.street,
+    this.city,
+    this.zip,
+    this.leaveDate,
+    this.state,
+  }) : super._();
   @override
   UpdateSchoolUserCommand rebuild(
-          void Function(UpdateSchoolUserCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(UpdateSchoolUserCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   UpdateSchoolUserCommandBuilder toBuilder() =>
@@ -195,7 +195,8 @@ class UpdateSchoolUserCommandBuilder
   UpdateSchoolUserCommand build() => _build();
 
   _$UpdateSchoolUserCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$UpdateSchoolUserCommand._(
           schoolUserId: schoolUserId,
           firstName: firstName,

@@ -18,13 +18,17 @@ class _$UpdateExamCommand extends UpdateExamCommand {
   @override
   final String? classId;
 
-  factory _$UpdateExamCommand(
-          [void Function(UpdateExamCommandBuilder)? updates]) =>
-      (UpdateExamCommandBuilder()..update(updates))._build();
+  factory _$UpdateExamCommand([
+    void Function(UpdateExamCommandBuilder)? updates,
+  ]) => (UpdateExamCommandBuilder()..update(updates))._build();
 
-  _$UpdateExamCommand._(
-      {this.examId, this.name, this.description, this.type, this.classId})
-      : super._();
+  _$UpdateExamCommand._({
+    this.examId,
+    this.name,
+    this.description,
+    this.type,
+    this.classId,
+  }) : super._();
   @override
   UpdateExamCommand rebuild(void Function(UpdateExamCommandBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -123,7 +127,8 @@ class UpdateExamCommandBuilder
   UpdateExamCommand build() => _build();
 
   _$UpdateExamCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$UpdateExamCommand._(
           examId: examId,
           name: name,

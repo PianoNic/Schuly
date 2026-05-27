@@ -38,7 +38,7 @@ class _$RolesMeta {
   BuiltSet<Roles> get values => _$values;
 }
 
-abstract class _$RolesMixin {
+mixin _$RolesMixin {
   // ignore: non_constant_identifier_names
   _$RolesMeta get Roles => const _$RolesMeta();
 }
@@ -63,15 +63,20 @@ class _$RolesSerializer implements PrimitiveSerializer<Roles> {
   final String wireName = 'Roles';
 
   @override
-  Object serialize(Serializers serializers, Roles object,
-          {FullType specifiedType = FullType.unspecified}) =>
-      _toWire[object.name] ?? object.name;
+  Object serialize(
+    Serializers serializers,
+    Roles object, {
+    FullType specifiedType = FullType.unspecified,
+  }) => _toWire[object.name] ?? object.name;
 
   @override
-  Roles deserialize(Serializers serializers, Object serialized,
-          {FullType specifiedType = FullType.unspecified}) =>
-      Roles.valueOf(
-          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
+  Roles deserialize(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) => Roles.valueOf(
+    _fromWire[serialized] ?? (serialized is String ? serialized : ''),
+  );
 }
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

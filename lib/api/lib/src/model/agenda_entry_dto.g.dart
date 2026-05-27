@@ -25,15 +25,15 @@ class _$AgendaEntryDto extends AgendaEntryDto {
   factory _$AgendaEntryDto([void Function(AgendaEntryDtoBuilder)? updates]) =>
       (AgendaEntryDtoBuilder()..update(updates))._build();
 
-  _$AgendaEntryDto._(
-      {this.id,
-      required this.entryType,
-      this.title,
-      this.description,
-      this.place,
-      required this.date,
-      this.classId})
-      : super._();
+  _$AgendaEntryDto._({
+    this.id,
+    required this.entryType,
+    this.title,
+    this.description,
+    this.place,
+    required this.date,
+    this.classId,
+  }) : super._();
   @override
   AgendaEntryDto rebuild(void Function(AgendaEntryDtoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -147,16 +147,23 @@ class AgendaEntryDtoBuilder
   AgendaEntryDto build() => _build();
 
   _$AgendaEntryDto _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$AgendaEntryDto._(
           id: id,
           entryType: BuiltValueNullFieldError.checkNotNull(
-              entryType, r'AgendaEntryDto', 'entryType'),
+            entryType,
+            r'AgendaEntryDto',
+            'entryType',
+          ),
           title: title,
           description: description,
           place: place,
           date: BuiltValueNullFieldError.checkNotNull(
-              date, r'AgendaEntryDto', 'date'),
+            date,
+            r'AgendaEntryDto',
+            'date',
+          ),
           classId: classId,
         );
     replace(_$result);

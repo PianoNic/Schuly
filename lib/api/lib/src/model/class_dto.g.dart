@@ -27,16 +27,16 @@ class _$ClassDto extends ClassDto {
   factory _$ClassDto([void Function(ClassDtoBuilder)? updates]) =>
       (ClassDtoBuilder()..update(updates))._build();
 
-  _$ClassDto._(
-      {this.id,
-      this.name,
-      this.description,
-      this.schoolId,
-      this.schoolName,
-      this.students,
-      this.agenda,
-      this.exams})
-      : super._();
+  _$ClassDto._({
+    this.id,
+    this.name,
+    this.description,
+    this.schoolId,
+    this.schoolName,
+    this.students,
+    this.agenda,
+    this.exams,
+  }) : super._();
   @override
   ClassDto rebuild(void Function(ClassDtoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -162,7 +162,8 @@ class ClassDtoBuilder implements Builder<ClassDto, ClassDtoBuilder> {
   _$ClassDto _build() {
     _$ClassDto _$result;
     try {
-      _$result = _$v ??
+      _$result =
+          _$v ??
           _$ClassDto._(
             id: id,
             name: name,
@@ -184,7 +185,10 @@ class ClassDtoBuilder implements Builder<ClassDto, ClassDtoBuilder> {
         _exams?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
-            r'ClassDto', _$failedField, e.toString());
+          r'ClassDto',
+          _$failedField,
+          e.toString(),
+        );
       }
       rethrow;
     }

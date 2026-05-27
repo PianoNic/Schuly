@@ -25,15 +25,15 @@ class _$ExamDto extends ExamDto {
   factory _$ExamDto([void Function(ExamDtoBuilder)? updates]) =>
       (ExamDtoBuilder()..update(updates))._build();
 
-  _$ExamDto._(
-      {this.id,
-      this.name,
-      this.description,
-      this.type,
-      required this.classAverage,
-      this.classId,
-      this.grades})
-      : super._();
+  _$ExamDto._({
+    this.id,
+    this.name,
+    this.description,
+    this.type,
+    required this.classAverage,
+    this.classId,
+    this.grades,
+  }) : super._();
   @override
   ExamDto rebuild(void Function(ExamDtoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -149,14 +149,18 @@ class ExamDtoBuilder implements Builder<ExamDto, ExamDtoBuilder> {
   _$ExamDto _build() {
     _$ExamDto _$result;
     try {
-      _$result = _$v ??
+      _$result =
+          _$v ??
           _$ExamDto._(
             id: id,
             name: name,
             description: description,
             type: type,
             classAverage: BuiltValueNullFieldError.checkNotNull(
-                classAverage, r'ExamDto', 'classAverage'),
+              classAverage,
+              r'ExamDto',
+              'classAverage',
+            ),
             classId: classId,
             grades: _grades?.build(),
           );
@@ -167,7 +171,10 @@ class ExamDtoBuilder implements Builder<ExamDto, ExamDtoBuilder> {
         _grades?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
-            r'ExamDto', _$failedField, e.toString());
+          r'ExamDto',
+          _$failedField,
+          e.toString(),
+        );
       }
       rethrow;
     }

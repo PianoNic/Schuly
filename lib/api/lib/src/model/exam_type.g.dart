@@ -33,7 +33,7 @@ class _$ExamTypeMeta {
   BuiltSet<ExamType> get values => _$values;
 }
 
-abstract class _$ExamTypeMixin {
+mixin _$ExamTypeMixin {
   // ignore: non_constant_identifier_names
   _$ExamTypeMeta get ExamType => const _$ExamTypeMeta();
 }
@@ -56,15 +56,20 @@ class _$ExamTypeSerializer implements PrimitiveSerializer<ExamType> {
   final String wireName = 'ExamType';
 
   @override
-  Object serialize(Serializers serializers, ExamType object,
-          {FullType specifiedType = FullType.unspecified}) =>
-      _toWire[object.name] ?? object.name;
+  Object serialize(
+    Serializers serializers,
+    ExamType object, {
+    FullType specifiedType = FullType.unspecified,
+  }) => _toWire[object.name] ?? object.name;
 
   @override
-  ExamType deserialize(Serializers serializers, Object serialized,
-          {FullType specifiedType = FullType.unspecified}) =>
-      ExamType.valueOf(
-          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
+  ExamType deserialize(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) => ExamType.valueOf(
+    _fromWire[serialized] ?? (serialized is String ? serialized : ''),
+  );
 }
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

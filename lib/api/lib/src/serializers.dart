@@ -22,6 +22,7 @@ import 'package:schuly_api/src/model/agenda_entry_type.dart';
 import 'package:schuly_api/src/model/app_dto.dart';
 import 'package:schuly_api/src/model/application_user_dto.dart';
 import 'package:schuly_api/src/model/class_dto.dart';
+import 'package:schuly_api/src/model/connect_account_request.dart';
 import 'package:schuly_api/src/model/create_absence_command.dart';
 import 'package:schuly_api/src/model/create_agenda_entry_command.dart';
 import 'package:schuly_api/src/model/create_application_user_command.dart';
@@ -33,6 +34,8 @@ import 'package:schuly_api/src/model/enrol_student_command.dart';
 import 'package:schuly_api/src/model/exam_dto.dart';
 import 'package:schuly_api/src/model/exam_type.dart';
 import 'package:schuly_api/src/model/grade_dto.dart';
+import 'package:schuly_api/src/model/o_auth_callback_request.dart';
+import 'package:schuly_api/src/model/plugin_dto.dart';
 import 'package:schuly_api/src/model/problem_details.dart';
 import 'package:schuly_api/src/model/roles.dart';
 import 'package:schuly_api/src/model/school_dto.dart';
@@ -59,6 +62,7 @@ part 'serializers.g.dart';
   AppDto,
   ApplicationUserDto,
   ClassDto,
+  ConnectAccountRequest,
   CreateAbsenceCommand,
   CreateAgendaEntryCommand,
   CreateApplicationUserCommand,
@@ -70,6 +74,8 @@ part 'serializers.g.dart';
   ExamDto,
   ExamType,
   GradeDto,
+  OAuthCallbackRequest,
+  PluginDto,
   ProblemDetails,
   Roles,
   SchoolDto,
@@ -89,6 +95,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(ExamDto)]),
         () => ListBuilder<ExamDto>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(PluginDto)]),
+        () => ListBuilder<PluginDto>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(SchoolUserDto)]),

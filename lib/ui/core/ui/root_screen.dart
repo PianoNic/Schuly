@@ -1,14 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:forui/forui.dart';
 
 import '../../../l10n/app_localizations.dart';
-import '../../absences/widgets/absences_screen.dart';
-import '../../account/widgets/account_screen.dart';
-import '../../agenda/widgets/agenda_screen.dart';
-import '../../grades/widgets/grades_screen.dart';
-import '../../home/widgets/home_screen.dart';
+import '../../../services/auth_service.dart';
+import '../../schulnetz/connect_account_screen.dart';
 
+/// Tier-1 gate: until the user has signed in with Pocket ID (i.e. has an
+/// access token in [AuthService]), nothing else in the app is reachable.
+/// Once signed in, the Schulnetz connect screen takes over and exposes
+/// sign-out via its callback.
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
 
@@ -17,42 +17,75 @@ class RootScreen extends StatefulWidget {
 }
 
 class _RootScreenState extends State<RootScreen> {
-  final _controller = PlatformTabController();
+  bool? _signedIn;
+  bool _busy = false;
+  String? _error;
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    _refresh();
+  }
+
+  Future<void> _refresh() async {
+    final token = await AuthService.getAccessToken();
+    if (mounted) setState(() => _signedIn = token != null);
+  }
+
+  Future<void> _signIn() async {
+    setState(() {
+      _busy = true;
+      _error = null;
+    });
+    try {
+      await AuthService.signIn();
+      await _refresh();
+    } catch (e) {
+      setState(() => _error = '$e');
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _signOut() async {
+    await AuthService.signOut();
+    await _refresh();
   }
 
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
-    final cupertino = isCupertino(context);
+    final signedIn = _signedIn;
 
-    BottomNavigationBarItem item(IconData material, IconData cupertinoIcon, String label) {
-      return BottomNavigationBarItem(
-        icon: Icon(cupertino ? cupertinoIcon : material),
-        label: label,
-      );
+    if (signedIn == null) {
+      return const FScaffold(child: Center(child: CircularProgressIndicator()));
     }
 
-    return PlatformTabScaffold(
-      tabController: _controller,
-      items: [
-        item(Icons.home_outlined, CupertinoIcons.house, t.tabStart),
-        item(Icons.calendar_today_outlined, CupertinoIcons.calendar, t.tabAgenda),
-        item(Icons.grade_outlined, CupertinoIcons.star, t.tabGrades),
-        item(Icons.event_busy_outlined, CupertinoIcons.calendar_badge_minus, t.tabAbsences),
-        item(Icons.person_outline, CupertinoIcons.person, t.tabAccount),
-      ],
-      bodyBuilder: (context, index) => switch (index) {
-        0 => const HomeScreen(),
-        1 => const AgendaScreen(),
-        2 => const GradesScreen(),
-        3 => const AbsencesScreen(),
-        _ => const AccountScreen(),
-      },
+    if (signedIn) {
+      return ConnectAccountScreen(onSignOut: _signOut);
+    }
+
+    final colors = context.theme.colors;
+    return FScaffold(
+      header: const FHeader(title: Text('Schuly')),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 16,
+          children: [
+            const Text(
+              'Sign in to Pocket ID to use Schuly.',
+              textAlign: TextAlign.center,
+            ),
+            FButton(
+              onPress: _busy ? null : _signIn,
+              child: Text(_busy ? 'Waiting for browser…' : t.signIn),
+            ),
+            if (_error != null)
+              SelectableText(_error!, style: TextStyle(color: colors.destructive)),
+          ],
+        ),
+      ),
     );
   }
 }

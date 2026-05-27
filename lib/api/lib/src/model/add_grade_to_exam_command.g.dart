@@ -16,17 +16,20 @@ class _$AddGradeToExamCommand extends AddGradeToExamCommand {
   @override
   final double? weight;
 
-  factory _$AddGradeToExamCommand(
-          [void Function(AddGradeToExamCommandBuilder)? updates]) =>
-      (AddGradeToExamCommandBuilder()..update(updates))._build();
+  factory _$AddGradeToExamCommand([
+    void Function(AddGradeToExamCommandBuilder)? updates,
+  ]) => (AddGradeToExamCommandBuilder()..update(updates))._build();
 
-  _$AddGradeToExamCommand._(
-      {this.examId, this.studentId, this.grade, this.weight})
-      : super._();
+  _$AddGradeToExamCommand._({
+    this.examId,
+    this.studentId,
+    this.grade,
+    this.weight,
+  }) : super._();
   @override
   AddGradeToExamCommand rebuild(
-          void Function(AddGradeToExamCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(AddGradeToExamCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   AddGradeToExamCommandBuilder toBuilder() =>
@@ -114,7 +117,8 @@ class AddGradeToExamCommandBuilder
   AddGradeToExamCommand build() => _build();
 
   _$AddGradeToExamCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$AddGradeToExamCommand._(
           examId: examId,
           studentId: studentId,

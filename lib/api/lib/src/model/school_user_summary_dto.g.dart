@@ -18,17 +18,21 @@ class _$SchoolUserSummaryDto extends SchoolUserSummaryDto {
   @override
   final String? role;
 
-  factory _$SchoolUserSummaryDto(
-          [void Function(SchoolUserSummaryDtoBuilder)? updates]) =>
-      (SchoolUserSummaryDtoBuilder()..update(updates))._build();
+  factory _$SchoolUserSummaryDto([
+    void Function(SchoolUserSummaryDtoBuilder)? updates,
+  ]) => (SchoolUserSummaryDtoBuilder()..update(updates))._build();
 
-  _$SchoolUserSummaryDto._(
-      {this.id, this.firstName, this.lastName, this.email, this.role})
-      : super._();
+  _$SchoolUserSummaryDto._({
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.role,
+  }) : super._();
   @override
   SchoolUserSummaryDto rebuild(
-          void Function(SchoolUserSummaryDtoBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(SchoolUserSummaryDtoBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   SchoolUserSummaryDtoBuilder toBuilder() =>
@@ -124,7 +128,8 @@ class SchoolUserSummaryDtoBuilder
   SchoolUserSummaryDto build() => _build();
 
   _$SchoolUserSummaryDto _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$SchoolUserSummaryDto._(
           id: id,
           firstName: firstName,

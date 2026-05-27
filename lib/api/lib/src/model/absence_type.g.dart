@@ -20,11 +20,9 @@ AbsenceType _$valueOf(String name) {
   }
 }
 
-final BuiltSet<AbsenceType> _$values =
-    BuiltSet<AbsenceType>(const <AbsenceType>[
-  _$absence,
-  _$delay,
-]);
+final BuiltSet<AbsenceType> _$values = BuiltSet<AbsenceType>(
+  const <AbsenceType>[_$absence, _$delay],
+);
 
 class _$AbsenceTypeMeta {
   const _$AbsenceTypeMeta();
@@ -34,7 +32,7 @@ class _$AbsenceTypeMeta {
   BuiltSet<AbsenceType> get values => _$values;
 }
 
-abstract class _$AbsenceTypeMixin {
+mixin _$AbsenceTypeMixin {
   // ignore: non_constant_identifier_names
   _$AbsenceTypeMeta get AbsenceType => const _$AbsenceTypeMeta();
 }
@@ -57,15 +55,20 @@ class _$AbsenceTypeSerializer implements PrimitiveSerializer<AbsenceType> {
   final String wireName = 'AbsenceType';
 
   @override
-  Object serialize(Serializers serializers, AbsenceType object,
-          {FullType specifiedType = FullType.unspecified}) =>
-      _toWire[object.name] ?? object.name;
+  Object serialize(
+    Serializers serializers,
+    AbsenceType object, {
+    FullType specifiedType = FullType.unspecified,
+  }) => _toWire[object.name] ?? object.name;
 
   @override
-  AbsenceType deserialize(Serializers serializers, Object serialized,
-          {FullType specifiedType = FullType.unspecified}) =>
-      AbsenceType.valueOf(
-          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
+  AbsenceType deserialize(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) => AbsenceType.valueOf(
+    _fromWire[serialized] ?? (serialized is String ? serialized : ''),
+  );
 }
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

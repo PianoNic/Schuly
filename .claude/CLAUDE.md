@@ -1,34 +1,42 @@
 # Notes for Claude (and humans)
 
-Minimal Flutter app. Adaptive Material/Cupertino via `flutter_platform_widgets`.
+Minimal Flutter app. UI built with [Forui](https://forui.dev) (`FTheme` + `F*` widgets).
 
-## Run / build
+## Tasks (preferred)
+
+All common workflows are wrapped as `package.json` scripts so they're invoked the
+same way from any shell. Uses bun as the task runner — it doesn't pull in a Node
+toolchain, just dispatches.
 
 ```sh
-flutter run --flavor dev
-flutter run --flavor prod
-flutter build apk --flavor prod --release
-flutter build ios --flavor prod --no-codesign
+bun run dev               # flutter run --flavor dev
+bun run prod              # flutter run --flavor prod
+bun run analyze
+bun run test
+bun run format
+bun run build:apk:dev     # release APK, dev flavor
+bun run build:apk:prod
+bun run build:ios
+bun run install:dev       # build + install over current adb target
+bun run install:prod
+bun run apigen            # see "Regenerate API client" below
+bun run apigen:local      # same, but against http://localhost:5033
+bun run icons             # dart run flutter_launcher_icons
+bun run clean             # flutter clean && pub get
 ```
 
 Flavors: `dev` (`com.schuly.app.dev`, "Schuly DEV") and `prod` (`com.schuly.app`, "Schuly").
 
 ## Regenerate API client
 
-The client at `lib/api/` is generated from [SchulyBackend](https://github.com/schulydev/SchulyBackend)'s OpenAPI spec.
+The client at `lib/api/` is generated from [SchulyBackend](https://github.com/schulydev/SchulyBackend)'s
+OpenAPI spec. `apigen` chains three steps in `package.json`:
 
-```sh
-# 1. Start backend from a SchulyBackend checkout:
-#    cd path/to/SchulyBackend/src/Schuly.API && dotnet run --urls=http://localhost:5033
-# 2. Generate directly from the live spec
-npx --yes @openapitools/openapi-generator-cli generate \
-  -i http://localhost:5033/swagger/v1/swagger.json \
-  -g dart-dio -o lib/api \
-  --additional-properties=pubName=schuly_api,pubLibrary=schuly_api
-
-# 3. Build value classes
-cd lib/api && dart pub get && dart run build_runner build --delete-conflicting-outputs
-```
+1. `bunx openapi-generator-cli` against the live swagger
+2. `apigen:patch` rewrites `lib/api/pubspec.yaml`'s SDK constraint (the generator resets
+   it to `>=2.18.0 <4.0.0`, which breaks the build because of a part-file language-version
+   mismatch). Implemented as a `bun -e` one-liner so it runs identically on any shell.
+3. `apigen:build` — `dart pub get` + `dart run build_runner build` inside `lib/api/`
 
 `openapi.json` is gitignored — always regenerate from the running backend.
 
@@ -36,4 +44,4 @@ cd lib/api && dart pub get && dart run build_runner build --delete-conflicting-o
 
 ## App icons
 
-Source: `assets/app_icon.png`. Regenerate with `dart run flutter_launcher_icons`.
+Source: `assets/app_icon.png`. Regenerate with `bun run icons`.

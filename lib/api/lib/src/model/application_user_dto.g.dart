@@ -24,24 +24,24 @@ class _$ApplicationUserDto extends ApplicationUserDto {
   @override
   final BuiltList<SchoolUserSummaryDto>? schoolUsers;
 
-  factory _$ApplicationUserDto(
-          [void Function(ApplicationUserDtoBuilder)? updates]) =>
-      (ApplicationUserDtoBuilder()..update(updates))._build();
+  factory _$ApplicationUserDto([
+    void Function(ApplicationUserDtoBuilder)? updates,
+  ]) => (ApplicationUserDtoBuilder()..update(updates))._build();
 
-  _$ApplicationUserDto._(
-      {this.id,
-      this.externalId,
-      this.email,
-      this.displayName,
-      this.profilePictureUrl,
-      this.createdAt,
-      this.updatedAt,
-      this.schoolUsers})
-      : super._();
+  _$ApplicationUserDto._({
+    this.id,
+    this.externalId,
+    this.email,
+    this.displayName,
+    this.profilePictureUrl,
+    this.createdAt,
+    this.updatedAt,
+    this.schoolUsers,
+  }) : super._();
   @override
   ApplicationUserDto rebuild(
-          void Function(ApplicationUserDtoBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(ApplicationUserDtoBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   ApplicationUserDtoBuilder toBuilder() =>
@@ -166,7 +166,8 @@ class ApplicationUserDtoBuilder
   _$ApplicationUserDto _build() {
     _$ApplicationUserDto _$result;
     try {
-      _$result = _$v ??
+      _$result =
+          _$v ??
           _$ApplicationUserDto._(
             id: id,
             externalId: externalId,
@@ -184,7 +185,10 @@ class ApplicationUserDtoBuilder
         _schoolUsers?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
-            r'ApplicationUserDto', _$failedField, e.toString());
+          r'ApplicationUserDto',
+          _$failedField,
+          e.toString(),
+        );
       }
       rethrow;
     }

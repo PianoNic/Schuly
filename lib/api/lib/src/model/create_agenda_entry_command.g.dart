@@ -20,22 +20,22 @@ class _$CreateAgendaEntryCommand extends CreateAgendaEntryCommand {
   @override
   final String? classId;
 
-  factory _$CreateAgendaEntryCommand(
-          [void Function(CreateAgendaEntryCommandBuilder)? updates]) =>
-      (CreateAgendaEntryCommandBuilder()..update(updates))._build();
+  factory _$CreateAgendaEntryCommand([
+    void Function(CreateAgendaEntryCommandBuilder)? updates,
+  ]) => (CreateAgendaEntryCommandBuilder()..update(updates))._build();
 
-  _$CreateAgendaEntryCommand._(
-      {this.entryType,
-      this.title,
-      this.description,
-      this.place,
-      this.date,
-      this.classId})
-      : super._();
+  _$CreateAgendaEntryCommand._({
+    this.entryType,
+    this.title,
+    this.description,
+    this.place,
+    this.date,
+    this.classId,
+  }) : super._();
   @override
   CreateAgendaEntryCommand rebuild(
-          void Function(CreateAgendaEntryCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(CreateAgendaEntryCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   CreateAgendaEntryCommandBuilder toBuilder() =>
@@ -140,7 +140,8 @@ class CreateAgendaEntryCommandBuilder
   CreateAgendaEntryCommand build() => _build();
 
   _$CreateAgendaEntryCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$CreateAgendaEntryCommand._(
           entryType: entryType,
           title: title,

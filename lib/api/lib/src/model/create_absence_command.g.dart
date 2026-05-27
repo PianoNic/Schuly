@@ -18,17 +18,21 @@ class _$CreateAbsenceCommand extends CreateAbsenceCommand {
   @override
   final String? schoolUserId;
 
-  factory _$CreateAbsenceCommand(
-          [void Function(CreateAbsenceCommandBuilder)? updates]) =>
-      (CreateAbsenceCommandBuilder()..update(updates))._build();
+  factory _$CreateAbsenceCommand([
+    void Function(CreateAbsenceCommandBuilder)? updates,
+  ]) => (CreateAbsenceCommandBuilder()..update(updates))._build();
 
-  _$CreateAbsenceCommand._(
-      {this.reason, this.type, this.from, this.until, this.schoolUserId})
-      : super._();
+  _$CreateAbsenceCommand._({
+    this.reason,
+    this.type,
+    this.from,
+    this.until,
+    this.schoolUserId,
+  }) : super._();
   @override
   CreateAbsenceCommand rebuild(
-          void Function(CreateAbsenceCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(CreateAbsenceCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   CreateAbsenceCommandBuilder toBuilder() =>
@@ -124,7 +128,8 @@ class CreateAbsenceCommandBuilder
   CreateAbsenceCommand build() => _build();
 
   _$CreateAbsenceCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$CreateAbsenceCommand._(
           reason: reason,
           type: type,

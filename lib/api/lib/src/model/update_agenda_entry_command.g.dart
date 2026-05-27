@@ -22,23 +22,23 @@ class _$UpdateAgendaEntryCommand extends UpdateAgendaEntryCommand {
   @override
   final String? classId;
 
-  factory _$UpdateAgendaEntryCommand(
-          [void Function(UpdateAgendaEntryCommandBuilder)? updates]) =>
-      (UpdateAgendaEntryCommandBuilder()..update(updates))._build();
+  factory _$UpdateAgendaEntryCommand([
+    void Function(UpdateAgendaEntryCommandBuilder)? updates,
+  ]) => (UpdateAgendaEntryCommandBuilder()..update(updates))._build();
 
-  _$UpdateAgendaEntryCommand._(
-      {this.agendaEntryId,
-      this.entryType,
-      this.title,
-      this.description,
-      this.place,
-      this.date,
-      this.classId})
-      : super._();
+  _$UpdateAgendaEntryCommand._({
+    this.agendaEntryId,
+    this.entryType,
+    this.title,
+    this.description,
+    this.place,
+    this.date,
+    this.classId,
+  }) : super._();
   @override
   UpdateAgendaEntryCommand rebuild(
-          void Function(UpdateAgendaEntryCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(UpdateAgendaEntryCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   UpdateAgendaEntryCommandBuilder toBuilder() =>
@@ -152,7 +152,8 @@ class UpdateAgendaEntryCommandBuilder
   UpdateAgendaEntryCommand build() => _build();
 
   _$UpdateAgendaEntryCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$UpdateAgendaEntryCommand._(
           agendaEntryId: agendaEntryId,
           entryType: entryType,

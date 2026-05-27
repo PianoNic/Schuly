@@ -21,9 +21,13 @@ class _$GradeDto extends GradeDto {
   factory _$GradeDto([void Function(GradeDtoBuilder)? updates]) =>
       (GradeDtoBuilder()..update(updates))._build();
 
-  _$GradeDto._(
-      {this.id, this.score, this.weighting, this.examId, this.schoolUserId})
-      : super._();
+  _$GradeDto._({
+    this.id,
+    this.score,
+    this.weighting,
+    this.examId,
+    this.schoolUserId,
+  }) : super._();
   @override
   GradeDto rebuild(void Function(GradeDtoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -120,7 +124,8 @@ class GradeDtoBuilder implements Builder<GradeDto, GradeDtoBuilder> {
   GradeDto build() => _build();
 
   _$GradeDto _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$GradeDto._(
           id: id,
           score: score,

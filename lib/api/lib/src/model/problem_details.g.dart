@@ -21,9 +21,13 @@ class _$ProblemDetails extends ProblemDetails {
   factory _$ProblemDetails([void Function(ProblemDetailsBuilder)? updates]) =>
       (ProblemDetailsBuilder()..update(updates))._build();
 
-  _$ProblemDetails._(
-      {this.type, this.title, this.status, this.detail, this.instance})
-      : super._();
+  _$ProblemDetails._({
+    this.type,
+    this.title,
+    this.status,
+    this.detail,
+    this.instance,
+  }) : super._();
   @override
   ProblemDetails rebuild(void Function(ProblemDetailsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -121,7 +125,8 @@ class ProblemDetailsBuilder
   ProblemDetails build() => _build();
 
   _$ProblemDetails _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$ProblemDetails._(
           type: type,
           title: title,

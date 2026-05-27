@@ -11,8 +11,10 @@ class OidcConfig {
   static const redirectUri = 'schulytest://callback';
   static const callbackScheme = 'schulytest';
 
-  // Local Schuly backend. On a phone, pair with `adb reverse tcp:5033 tcp:5033`.
-  static const backendBaseUrl = 'http://localhost:5033';
+  // LAN address of the Schuly backend (dev box). The phone must be on the same
+  // network. Switch to `http://localhost:5033` + `adb reverse tcp:5033 tcp:5033`
+  // when running against a backend on the workstation.
+  static const backendBaseUrl = 'http://192.168.188.162:5033';
 
   static const tokenEndpoint = '$authority/api/oidc/token';
   static const authorizationEndpoint = '$authority/authorize';

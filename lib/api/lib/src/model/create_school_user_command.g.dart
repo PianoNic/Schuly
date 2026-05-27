@@ -38,31 +38,31 @@ class _$CreateSchoolUserCommand extends CreateSchoolUserCommand {
   @override
   final String? teacherCode;
 
-  factory _$CreateSchoolUserCommand(
-          [void Function(CreateSchoolUserCommandBuilder)? updates]) =>
-      (CreateSchoolUserCommandBuilder()..update(updates))._build();
+  factory _$CreateSchoolUserCommand([
+    void Function(CreateSchoolUserCommandBuilder)? updates,
+  ]) => (CreateSchoolUserCommandBuilder()..update(updates))._build();
 
-  _$CreateSchoolUserCommand._(
-      {this.applicationUserId,
-      this.schoolId,
-      this.firstName,
-      this.lastName,
-      this.email,
-      this.privateEmail,
-      this.phoneNumber,
-      this.street,
-      this.city,
-      this.zip,
-      this.birthday,
-      this.entryDate,
-      this.role,
-      this.studentNumber,
-      this.teacherCode})
-      : super._();
+  _$CreateSchoolUserCommand._({
+    this.applicationUserId,
+    this.schoolId,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.privateEmail,
+    this.phoneNumber,
+    this.street,
+    this.city,
+    this.zip,
+    this.birthday,
+    this.entryDate,
+    this.role,
+    this.studentNumber,
+    this.teacherCode,
+  }) : super._();
   @override
   CreateSchoolUserCommand rebuild(
-          void Function(CreateSchoolUserCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(CreateSchoolUserCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   CreateSchoolUserCommandBuilder toBuilder() =>
@@ -241,7 +241,8 @@ class CreateSchoolUserCommandBuilder
   CreateSchoolUserCommand build() => _build();
 
   _$CreateSchoolUserCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$CreateSchoolUserCommand._(
           applicationUserId: applicationUserId,
           schoolId: schoolId,

@@ -34,8 +34,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  flutter_platform_widgets: ^10.0.1
   dio: ^5.9.2
+  built_collection: ^5.1.1
   schuly_api:
     path: lib/api
   flutter_localizations:
@@ -47,6 +47,8 @@ dependencies:
   shared_preferences: ^2.3.2
   app_links: ^6.3.2
   flutter_inappwebview: ^6.1.5
+  forui: ^0.17.0
+  forui_assets: ^0.17.1
 
 dev_dependencies:
   flutter_test:

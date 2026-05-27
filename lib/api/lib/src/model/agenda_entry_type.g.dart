@@ -23,12 +23,9 @@ AgendaEntryType _$valueOf(String name) {
   }
 }
 
-final BuiltSet<AgendaEntryType> _$values =
-    BuiltSet<AgendaEntryType>(const <AgendaEntryType>[
-  _$event,
-  _$lesson,
-  _$test,
-]);
+final BuiltSet<AgendaEntryType> _$values = BuiltSet<AgendaEntryType>(
+  const <AgendaEntryType>[_$event, _$lesson, _$test],
+);
 
 class _$AgendaEntryTypeMeta {
   const _$AgendaEntryTypeMeta();
@@ -39,7 +36,7 @@ class _$AgendaEntryTypeMeta {
   BuiltSet<AgendaEntryType> get values => _$values;
 }
 
-abstract class _$AgendaEntryTypeMixin {
+mixin _$AgendaEntryTypeMixin {
   // ignore: non_constant_identifier_names
   _$AgendaEntryTypeMeta get AgendaEntryType => const _$AgendaEntryTypeMeta();
 }
@@ -66,15 +63,20 @@ class _$AgendaEntryTypeSerializer
   final String wireName = 'AgendaEntryType';
 
   @override
-  Object serialize(Serializers serializers, AgendaEntryType object,
-          {FullType specifiedType = FullType.unspecified}) =>
-      _toWire[object.name] ?? object.name;
+  Object serialize(
+    Serializers serializers,
+    AgendaEntryType object, {
+    FullType specifiedType = FullType.unspecified,
+  }) => _toWire[object.name] ?? object.name;
 
   @override
-  AgendaEntryType deserialize(Serializers serializers, Object serialized,
-          {FullType specifiedType = FullType.unspecified}) =>
-      AgendaEntryType.valueOf(
-          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
+  AgendaEntryType deserialize(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) => AgendaEntryType.valueOf(
+    _fromWire[serialized] ?? (serialized is String ? serialized : ''),
+  );
 }
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

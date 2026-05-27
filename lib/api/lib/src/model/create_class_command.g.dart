@@ -12,15 +12,15 @@ class _$CreateClassCommand extends CreateClassCommand {
   @override
   final String? description;
 
-  factory _$CreateClassCommand(
-          [void Function(CreateClassCommandBuilder)? updates]) =>
-      (CreateClassCommandBuilder()..update(updates))._build();
+  factory _$CreateClassCommand([
+    void Function(CreateClassCommandBuilder)? updates,
+  ]) => (CreateClassCommandBuilder()..update(updates))._build();
 
   _$CreateClassCommand._({this.name, this.description}) : super._();
   @override
   CreateClassCommand rebuild(
-          void Function(CreateClassCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(CreateClassCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   CreateClassCommandBuilder toBuilder() =>
@@ -92,11 +92,8 @@ class CreateClassCommandBuilder
   CreateClassCommand build() => _build();
 
   _$CreateClassCommand _build() {
-    final _$result = _$v ??
-        _$CreateClassCommand._(
-          name: name,
-          description: description,
-        );
+    final _$result =
+        _$v ?? _$CreateClassCommand._(name: name, description: description);
     replace(_$result);
     return _$result;
   }

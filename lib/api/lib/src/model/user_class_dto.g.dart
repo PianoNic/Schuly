@@ -89,10 +89,14 @@ class UserClassDtoBuilder
   UserClassDto build() => _build();
 
   _$UserClassDto _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$UserClassDto._(
           classId: BuiltValueNullFieldError.checkNotNull(
-              classId, r'UserClassDto', 'classId'),
+            classId,
+            r'UserClassDto',
+            'classId',
+          ),
           className: className,
         );
     replace(_$result);

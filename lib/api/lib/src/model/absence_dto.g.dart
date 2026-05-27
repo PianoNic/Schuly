@@ -23,14 +23,14 @@ class _$AbsenceDto extends AbsenceDto {
   factory _$AbsenceDto([void Function(AbsenceDtoBuilder)? updates]) =>
       (AbsenceDtoBuilder()..update(updates))._build();
 
-  _$AbsenceDto._(
-      {this.id,
-      this.reason,
-      required this.type,
-      required this.from,
-      required this.until,
-      this.schoolUserId})
-      : super._();
+  _$AbsenceDto._({
+    this.id,
+    this.reason,
+    required this.type,
+    required this.from,
+    required this.until,
+    this.schoolUserId,
+  }) : super._();
   @override
   AbsenceDto rebuild(void Function(AbsenceDtoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -135,16 +135,26 @@ class AbsenceDtoBuilder implements Builder<AbsenceDto, AbsenceDtoBuilder> {
   AbsenceDto build() => _build();
 
   _$AbsenceDto _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$AbsenceDto._(
           id: id,
           reason: reason,
           type: BuiltValueNullFieldError.checkNotNull(
-              type, r'AbsenceDto', 'type'),
+            type,
+            r'AbsenceDto',
+            'type',
+          ),
           from: BuiltValueNullFieldError.checkNotNull(
-              from, r'AbsenceDto', 'from'),
+            from,
+            r'AbsenceDto',
+            'from',
+          ),
           until: BuiltValueNullFieldError.checkNotNull(
-              until, r'AbsenceDto', 'until'),
+            until,
+            r'AbsenceDto',
+            'until',
+          ),
           schoolUserId: schoolUserId,
         );
     replace(_$result);

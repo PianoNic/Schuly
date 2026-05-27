@@ -14,17 +14,19 @@ class _$UpdateApplicationUserCommand extends UpdateApplicationUserCommand {
   @override
   final String? profilePictureUrl;
 
-  factory _$UpdateApplicationUserCommand(
-          [void Function(UpdateApplicationUserCommandBuilder)? updates]) =>
-      (UpdateApplicationUserCommandBuilder()..update(updates))._build();
+  factory _$UpdateApplicationUserCommand([
+    void Function(UpdateApplicationUserCommandBuilder)? updates,
+  ]) => (UpdateApplicationUserCommandBuilder()..update(updates))._build();
 
-  _$UpdateApplicationUserCommand._(
-      {this.applicationUserId, this.displayName, this.profilePictureUrl})
-      : super._();
+  _$UpdateApplicationUserCommand._({
+    this.applicationUserId,
+    this.displayName,
+    this.profilePictureUrl,
+  }) : super._();
   @override
   UpdateApplicationUserCommand rebuild(
-          void Function(UpdateApplicationUserCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(UpdateApplicationUserCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   UpdateApplicationUserCommandBuilder toBuilder() =>
@@ -61,8 +63,10 @@ class _$UpdateApplicationUserCommand extends UpdateApplicationUserCommand {
 
 class UpdateApplicationUserCommandBuilder
     implements
-        Builder<UpdateApplicationUserCommand,
-            UpdateApplicationUserCommandBuilder> {
+        Builder<
+          UpdateApplicationUserCommand,
+          UpdateApplicationUserCommandBuilder
+        > {
   _$UpdateApplicationUserCommand? _$v;
 
   String? _applicationUserId;
@@ -108,7 +112,8 @@ class UpdateApplicationUserCommandBuilder
   UpdateApplicationUserCommand build() => _build();
 
   _$UpdateApplicationUserCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$UpdateApplicationUserCommand._(
           applicationUserId: applicationUserId,
           displayName: displayName,

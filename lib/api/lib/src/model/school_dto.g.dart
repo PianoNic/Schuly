@@ -37,21 +37,21 @@ class _$SchoolDto extends SchoolDto {
   factory _$SchoolDto([void Function(SchoolDtoBuilder)? updates]) =>
       (SchoolDtoBuilder()..update(updates))._build();
 
-  _$SchoolDto._(
-      {this.id,
-      this.name,
-      this.description,
-      this.email,
-      this.phoneNumber,
-      this.website,
-      this.street,
-      this.city,
-      this.state,
-      this.zip,
-      this.country,
-      this.createdAt,
-      this.updatedAt})
-      : super._();
+  _$SchoolDto._({
+    this.id,
+    this.name,
+    this.description,
+    this.email,
+    this.phoneNumber,
+    this.website,
+    this.street,
+    this.city,
+    this.state,
+    this.zip,
+    this.country,
+    this.createdAt,
+    this.updatedAt,
+  }) : super._();
   @override
   SchoolDto rebuild(void Function(SchoolDtoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -212,7 +212,8 @@ class SchoolDtoBuilder implements Builder<SchoolDto, SchoolDtoBuilder> {
   SchoolDto build() => _build();
 
   _$SchoolDto _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$SchoolDto._(
           id: id,
           name: name,

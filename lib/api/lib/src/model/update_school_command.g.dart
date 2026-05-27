@@ -30,27 +30,27 @@ class _$UpdateSchoolCommand extends UpdateSchoolCommand {
   @override
   final String? country;
 
-  factory _$UpdateSchoolCommand(
-          [void Function(UpdateSchoolCommandBuilder)? updates]) =>
-      (UpdateSchoolCommandBuilder()..update(updates))._build();
+  factory _$UpdateSchoolCommand([
+    void Function(UpdateSchoolCommandBuilder)? updates,
+  ]) => (UpdateSchoolCommandBuilder()..update(updates))._build();
 
-  _$UpdateSchoolCommand._(
-      {this.id,
-      this.name,
-      this.description,
-      this.email,
-      this.phoneNumber,
-      this.website,
-      this.street,
-      this.city,
-      this.state,
-      this.zip,
-      this.country})
-      : super._();
+  _$UpdateSchoolCommand._({
+    this.id,
+    this.name,
+    this.description,
+    this.email,
+    this.phoneNumber,
+    this.website,
+    this.street,
+    this.city,
+    this.state,
+    this.zip,
+    this.country,
+  }) : super._();
   @override
   UpdateSchoolCommand rebuild(
-          void Function(UpdateSchoolCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(UpdateSchoolCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   UpdateSchoolCommandBuilder toBuilder() =>
@@ -194,7 +194,8 @@ class UpdateSchoolCommandBuilder
   UpdateSchoolCommand build() => _build();
 
   _$UpdateSchoolCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$UpdateSchoolCommand._(
           id: id,
           name: name,

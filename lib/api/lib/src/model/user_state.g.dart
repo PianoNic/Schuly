@@ -38,7 +38,7 @@ class _$UserStateMeta {
   BuiltSet<UserState> get values => _$values;
 }
 
-abstract class _$UserStateMixin {
+mixin _$UserStateMixin {
   // ignore: non_constant_identifier_names
   _$UserStateMeta get UserState => const _$UserStateMeta();
 }
@@ -63,15 +63,20 @@ class _$UserStateSerializer implements PrimitiveSerializer<UserState> {
   final String wireName = 'UserState';
 
   @override
-  Object serialize(Serializers serializers, UserState object,
-          {FullType specifiedType = FullType.unspecified}) =>
-      _toWire[object.name] ?? object.name;
+  Object serialize(
+    Serializers serializers,
+    UserState object, {
+    FullType specifiedType = FullType.unspecified,
+  }) => _toWire[object.name] ?? object.name;
 
   @override
-  UserState deserialize(Serializers serializers, Object serialized,
-          {FullType specifiedType = FullType.unspecified}) =>
-      UserState.valueOf(
-          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
+  UserState deserialize(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) => UserState.valueOf(
+    _fromWire[serialized] ?? (serialized is String ? serialized : ''),
+  );
 }
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

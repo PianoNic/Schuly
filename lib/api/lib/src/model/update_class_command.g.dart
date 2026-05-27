@@ -14,16 +14,16 @@ class _$UpdateClassCommand extends UpdateClassCommand {
   @override
   final String? description;
 
-  factory _$UpdateClassCommand(
-          [void Function(UpdateClassCommandBuilder)? updates]) =>
-      (UpdateClassCommandBuilder()..update(updates))._build();
+  factory _$UpdateClassCommand([
+    void Function(UpdateClassCommandBuilder)? updates,
+  ]) => (UpdateClassCommandBuilder()..update(updates))._build();
 
   _$UpdateClassCommand._({this.classId, this.name, this.description})
-      : super._();
+    : super._();
   @override
   UpdateClassCommand rebuild(
-          void Function(UpdateClassCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(UpdateClassCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   UpdateClassCommandBuilder toBuilder() =>
@@ -103,7 +103,8 @@ class UpdateClassCommandBuilder
   UpdateClassCommand build() => _build();
 
   _$UpdateClassCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$UpdateClassCommand._(
           classId: classId,
           name: name,

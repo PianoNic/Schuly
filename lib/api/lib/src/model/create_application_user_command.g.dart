@@ -14,17 +14,19 @@ class _$CreateApplicationUserCommand extends CreateApplicationUserCommand {
   @override
   final String? displayName;
 
-  factory _$CreateApplicationUserCommand(
-          [void Function(CreateApplicationUserCommandBuilder)? updates]) =>
-      (CreateApplicationUserCommandBuilder()..update(updates))._build();
+  factory _$CreateApplicationUserCommand([
+    void Function(CreateApplicationUserCommandBuilder)? updates,
+  ]) => (CreateApplicationUserCommandBuilder()..update(updates))._build();
 
-  _$CreateApplicationUserCommand._(
-      {this.externalId, this.email, this.displayName})
-      : super._();
+  _$CreateApplicationUserCommand._({
+    this.externalId,
+    this.email,
+    this.displayName,
+  }) : super._();
   @override
   CreateApplicationUserCommand rebuild(
-          void Function(CreateApplicationUserCommandBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(CreateApplicationUserCommandBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   CreateApplicationUserCommandBuilder toBuilder() =>
@@ -61,8 +63,10 @@ class _$CreateApplicationUserCommand extends CreateApplicationUserCommand {
 
 class CreateApplicationUserCommandBuilder
     implements
-        Builder<CreateApplicationUserCommand,
-            CreateApplicationUserCommandBuilder> {
+        Builder<
+          CreateApplicationUserCommand,
+          CreateApplicationUserCommandBuilder
+        > {
   _$CreateApplicationUserCommand? _$v;
 
   String? _externalId;
@@ -106,7 +110,8 @@ class CreateApplicationUserCommandBuilder
   CreateApplicationUserCommand build() => _build();
 
   _$CreateApplicationUserCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$CreateApplicationUserCommand._(
           externalId: externalId,
           email: email,

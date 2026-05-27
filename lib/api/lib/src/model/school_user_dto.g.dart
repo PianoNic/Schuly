@@ -59,32 +59,32 @@ class _$SchoolUserDto extends SchoolUserDto {
   factory _$SchoolUserDto([void Function(SchoolUserDtoBuilder)? updates]) =>
       (SchoolUserDtoBuilder()..update(updates))._build();
 
-  _$SchoolUserDto._(
-      {this.id,
-      this.applicationUserId,
-      this.schoolId,
-      this.schoolName,
-      this.firstName,
-      this.lastName,
-      this.email,
-      this.privateEmail,
-      this.phoneNumber,
-      this.street,
-      this.city,
-      this.zip,
-      required this.birthday,
-      required this.entryDate,
-      this.leaveDate,
-      required this.role,
-      this.state,
-      this.studentNumber,
-      this.teacherCode,
-      this.createdAt,
-      this.updatedAt,
-      this.absences,
-      this.grades,
-      this.classes})
-      : super._();
+  _$SchoolUserDto._({
+    this.id,
+    this.applicationUserId,
+    this.schoolId,
+    this.schoolName,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.privateEmail,
+    this.phoneNumber,
+    this.street,
+    this.city,
+    this.zip,
+    required this.birthday,
+    required this.entryDate,
+    this.leaveDate,
+    required this.role,
+    this.state,
+    this.studentNumber,
+    this.teacherCode,
+    this.createdAt,
+    this.updatedAt,
+    this.absences,
+    this.grades,
+    this.classes,
+  }) : super._();
   @override
   SchoolUserDto rebuild(void Function(SchoolUserDtoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -342,7 +342,8 @@ class SchoolUserDtoBuilder
   _$SchoolUserDto _build() {
     _$SchoolUserDto _$result;
     try {
-      _$result = _$v ??
+      _$result =
+          _$v ??
           _$SchoolUserDto._(
             id: id,
             applicationUserId: applicationUserId,
@@ -357,12 +358,21 @@ class SchoolUserDtoBuilder
             city: city,
             zip: zip,
             birthday: BuiltValueNullFieldError.checkNotNull(
-                birthday, r'SchoolUserDto', 'birthday'),
+              birthday,
+              r'SchoolUserDto',
+              'birthday',
+            ),
             entryDate: BuiltValueNullFieldError.checkNotNull(
-                entryDate, r'SchoolUserDto', 'entryDate'),
+              entryDate,
+              r'SchoolUserDto',
+              'entryDate',
+            ),
             leaveDate: leaveDate,
             role: BuiltValueNullFieldError.checkNotNull(
-                role, r'SchoolUserDto', 'role'),
+              role,
+              r'SchoolUserDto',
+              'role',
+            ),
             state: state,
             studentNumber: studentNumber,
             teacherCode: teacherCode,
@@ -383,7 +393,10 @@ class SchoolUserDtoBuilder
         _classes?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
-            r'SchoolUserDto', _$failedField, e.toString());
+          r'SchoolUserDto',
+          _$failedField,
+          e.toString(),
+        );
       }
       rethrow;
     }

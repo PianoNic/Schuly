@@ -23,14 +23,14 @@ class _$AppDto extends AppDto {
   factory _$AppDto([void Function(AppDtoBuilder)? updates]) =>
       (AppDtoBuilder()..update(updates))._build();
 
-  _$AppDto._(
-      {this.authority,
-      this.clientId,
-      this.redirectUri,
-      this.postLogoutRedirectUri,
-      this.scope,
-      this.version})
-      : super._();
+  _$AppDto._({
+    this.authority,
+    this.clientId,
+    this.redirectUri,
+    this.postLogoutRedirectUri,
+    this.scope,
+    this.version,
+  }) : super._();
   @override
   AppDto rebuild(void Function(AppDtoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -136,7 +136,8 @@ class AppDtoBuilder implements Builder<AppDto, AppDtoBuilder> {
   AppDto build() => _build();
 
   _$AppDto _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$AppDto._(
           authority: authority,
           clientId: clientId,

@@ -16,12 +16,12 @@ class _$CreateExamCommand extends CreateExamCommand {
   @override
   final String? classId;
 
-  factory _$CreateExamCommand(
-          [void Function(CreateExamCommandBuilder)? updates]) =>
-      (CreateExamCommandBuilder()..update(updates))._build();
+  factory _$CreateExamCommand([
+    void Function(CreateExamCommandBuilder)? updates,
+  ]) => (CreateExamCommandBuilder()..update(updates))._build();
 
   _$CreateExamCommand._({this.name, this.description, this.type, this.classId})
-      : super._();
+    : super._();
   @override
   CreateExamCommand rebuild(void Function(CreateExamCommandBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -112,7 +112,8 @@ class CreateExamCommandBuilder
   CreateExamCommand build() => _build();
 
   _$CreateExamCommand _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$CreateExamCommand._(
           name: name,
           description: description,

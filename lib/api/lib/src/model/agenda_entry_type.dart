@@ -17,6 +17,8 @@ class AgendaEntryType extends EnumClass {
   static const AgendaEntryType lesson = _$lesson;
   @BuiltValueEnumConst(wireName: r'Test')
   static const AgendaEntryType test = _$test;
+  @BuiltValueEnumConst(wireName: r'Holiday')
+  static const AgendaEntryType holiday = _$holiday;
 
   static Serializer<AgendaEntryType> get serializer => _$agendaEntryTypeSerializer;
 

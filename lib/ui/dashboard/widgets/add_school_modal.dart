@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
+import '../../schulnetz/connect_account_screen.dart';
+
 /// A school system the user can connect. Today only Schulnetz; the modal is
 /// shaped as a list so additional providers slot in without UX churn.
 class SchoolSystem {
@@ -33,6 +35,23 @@ const _systems = <SchoolSystem>[
   ),
 ];
 
+/// Full add-school flow: show the school-system picker, then run the chosen
+/// system's connect screen. Returns the new account id, or null if the user
+/// cancelled at any step. [navigator] is the navigator the connect screen is
+/// pushed onto — pass the dashboard's, not a sheet/dialog navigator that may
+/// be torn down mid-flow.
+Future<String?> runAddSchoolFlow(
+  BuildContext context,
+  NavigatorState navigator,
+) async {
+  final system = await showAddSchoolModal(context);
+  if (system == null) return null;
+  // Only Schulnetz is wired today; future systems would branch on `system`.
+  return navigator.push<String>(
+    MaterialPageRoute(builder: (_) => const ConnectAccountScreen()),
+  );
+}
+
 /// Shows the school-system picker. Resolves to the chosen [SchoolSystem.id]
 /// or `null` if the user dismissed.
 Future<String?> showAddSchoolModal(BuildContext context) {
@@ -41,18 +60,15 @@ Future<String?> showAddSchoolModal(BuildContext context) {
     builder: (dialogCtx, style, animation) => FDialog(
       animation: animation,
       title: const Text('Choose a school system'),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
+      body: Wrap(
+        spacing: 12,
+        runSpacing: 12,
+        alignment: WrapAlignment.center,
         children: [
           for (final s in _systems)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: _SystemCard(
-                system: s,
-                onTap: s.enabled
-                    ? () => Navigator.of(dialogCtx).pop(s.id)
-                    : null,
-              ),
+            _SystemCard(
+              system: s,
+              onTap: s.enabled ? () => Navigator.of(dialogCtx).pop(s.id) : null,
             ),
         ],
       ),
@@ -74,17 +90,39 @@ class _SystemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.theme.colors;
-    final image = Image.asset(system.assetPath, width: 40, height: 40);
+    final disabled = onTap == null;
     return Opacity(
-      opacity: onTap == null ? 0.5 : 1.0,
-      child: FCard(
-        child: FTile(
-          prefix: image,
-          title: Text(system.label),
-          subtitle: onTap == null
-              ? Text('Coming soon', style: TextStyle(color: colors.mutedForeground))
-              : null,
+      opacity: disabled ? 0.5 : 1.0,
+      child: SizedBox(
+        width: 120,
+        height: 120,
+        child: FTappable(
           onPress: onTap,
+          child: FCard(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(system.assetPath, width: 48, height: 48),
+                  const SizedBox(height: 10),
+                  Text(
+                    system.label,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  if (disabled)
+                    Text(
+                      'Coming soon',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: colors.mutedForeground,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

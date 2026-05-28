@@ -4,32 +4,33 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../domain/schulware_account.dart';
 import 'api_client.dart';
 
-/// App-wide source of truth for "which connected school account is the user
-/// currently looking at". Listens-friendly via [ChangeNotifier] so the avatar,
-/// the side sheet, and the dashboard can all rebuild from one place.
+/// App-wide source of truth for "which connected school is the user currently
+/// looking at". Backed by `GET /api/schools/my-schools`. Listens-friendly via
+/// [ChangeNotifier] so the avatar, the side sheet, and the dashboard rebuild
+/// from one place.
 class ActiveAccountService extends ChangeNotifier {
   ActiveAccountService._();
   static final ActiveAccountService instance = ActiveAccountService._();
 
   static const _activeIdKey = 'accounts.active_id';
 
-  List<SchulwareAccount> _accounts = const [];
+  List<MySchool> _schools = const [];
   String? _activeId;
   bool _loading = false;
   Object? _error;
 
-  List<SchulwareAccount> get accounts => _accounts;
+  List<MySchool> get schools => _schools;
   bool get loading => _loading;
   Object? get error => _error;
 
-  SchulwareAccount? get active {
-    if (_accounts.isEmpty) return null;
+  MySchool? get active {
+    if (_schools.isEmpty) return null;
     if (_activeId != null) {
-      for (final a in _accounts) {
-        if (a.id == _activeId) return a;
+      for (final s in _schools) {
+        if (s.id == _activeId) return s;
       }
     }
-    return _accounts.first;
+    return _schools.first;
   }
 
   Future<void> refresh() async {
@@ -38,21 +39,20 @@ class ActiveAccountService extends ChangeNotifier {
     notifyListeners();
     try {
       final res = await ApiClient.instance.api
-          .getAccountsApi()
-          .apiPluginsSchulwareAccountsGet();
-      final raw = res.data as List<dynamic>? ?? const [];
-      _accounts = raw
-          .cast<Map<String, dynamic>>()
-          .map(SchulwareAccount.fromJson)
-          .toList(growable: false);
+          .getSchoolsApi()
+          .apiSchoolsMySchoolsGet();
+      final data = res.data;
+      _schools = data == null
+          ? const []
+          : data.map(MySchool.fromDto).toList(growable: false);
 
-      // Make sure the persisted active id still points at a real row.
+      // Keep the persisted active id only if it still resolves to a school.
       final prefs = await SharedPreferences.getInstance();
       final persisted = prefs.getString(_activeIdKey);
-      if (persisted != null && _accounts.any((a) => a.id == persisted)) {
+      if (persisted != null && _schools.any((s) => s.id == persisted)) {
         _activeId = persisted;
       } else {
-        _activeId = _accounts.isEmpty ? null : _accounts.first.id;
+        _activeId = _schools.isEmpty ? null : _schools.first.id;
         if (_activeId != null) {
           await prefs.setString(_activeIdKey, _activeId!);
         } else {
@@ -67,16 +67,16 @@ class ActiveAccountService extends ChangeNotifier {
     }
   }
 
-  Future<void> setActive(String accountId) async {
-    if (_activeId == accountId) return;
-    _activeId = accountId;
+  Future<void> setActive(String id) async {
+    if (_activeId == id) return;
+    _activeId = id;
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_activeIdKey, accountId);
+    await prefs.setString(_activeIdKey, id);
     notifyListeners();
   }
 
   Future<void> clear() async {
-    _accounts = const [];
+    _schools = const [];
     _activeId = null;
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_activeIdKey);

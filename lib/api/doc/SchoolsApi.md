@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apiSchoolsMySchoolsGet**
-> BuiltList<SchoolDto> apiSchoolsMySchoolsGet()
+> BuiltList<MySchoolDto> apiSchoolsMySchoolsGet()
 
 
 
@@ -167,7 +167,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**BuiltList&lt;SchoolDto&gt;**](SchoolDto.md)
+[**BuiltList&lt;MySchoolDto&gt;**](MySchoolDto.md)
 
 ### Authorization
 

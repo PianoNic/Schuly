@@ -9,6 +9,7 @@ part of 'agenda_entry_type.dart';
 const AgendaEntryType _$event = const AgendaEntryType._('event');
 const AgendaEntryType _$lesson = const AgendaEntryType._('lesson');
 const AgendaEntryType _$test = const AgendaEntryType._('test');
+const AgendaEntryType _$holiday = const AgendaEntryType._('holiday');
 
 AgendaEntryType _$valueOf(String name) {
   switch (name) {
@@ -18,13 +19,15 @@ AgendaEntryType _$valueOf(String name) {
       return _$lesson;
     case 'test':
       return _$test;
+    case 'holiday':
+      return _$holiday;
     default:
       throw ArgumentError(name);
   }
 }
 
 final BuiltSet<AgendaEntryType> _$values = BuiltSet<AgendaEntryType>(
-  const <AgendaEntryType>[_$event, _$lesson, _$test],
+  const <AgendaEntryType>[_$event, _$lesson, _$test, _$holiday],
 );
 
 class _$AgendaEntryTypeMeta {
@@ -32,6 +35,7 @@ class _$AgendaEntryTypeMeta {
   AgendaEntryType get event => _$event;
   AgendaEntryType get lesson => _$lesson;
   AgendaEntryType get test => _$test;
+  AgendaEntryType get holiday => _$holiday;
   AgendaEntryType valueOf(String name) => _$valueOf(name);
   BuiltSet<AgendaEntryType> get values => _$values;
 }
@@ -50,11 +54,13 @@ class _$AgendaEntryTypeSerializer
     'event': 'Event',
     'lesson': 'Lesson',
     'test': 'Test',
+    'holiday': 'Holiday',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
     'Event': 'event',
     'Lesson': 'lesson',
     'Test': 'test',
+    'Holiday': 'holiday',
   };
 
   @override

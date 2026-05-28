@@ -18,6 +18,7 @@ part 'absence_dto.g.dart';
 /// * [from] 
 /// * [until] 
 /// * [schoolUserId] 
+/// * [schoolId] 
 @BuiltValue()
 abstract class AbsenceDto implements Built<AbsenceDto, AbsenceDtoBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -38,6 +39,9 @@ abstract class AbsenceDto implements Built<AbsenceDto, AbsenceDtoBuilder> {
 
   @BuiltValueField(wireName: r'schoolUserId')
   String? get schoolUserId;
+
+  @BuiltValueField(wireName: r'schoolId')
+  String? get schoolId;
 
   AbsenceDto._();
 
@@ -94,6 +98,13 @@ class _$AbsenceDtoSerializer implements PrimitiveSerializer<AbsenceDto> {
       yield serializers.serialize(
         object.schoolUserId,
         specifiedType: const FullType(String),
+      );
+    }
+    if (object.schoolId != null) {
+      yield r'schoolId';
+      yield serializers.serialize(
+        object.schoolId,
+        specifiedType: const FullType.nullable(String),
       );
     }
   }
@@ -161,6 +172,14 @@ class _$AbsenceDtoSerializer implements PrimitiveSerializer<AbsenceDto> {
             specifiedType: const FullType(String),
           ) as String;
           result.schoolUserId = valueDes;
+          break;
+        case r'schoolId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.schoolId = valueDes;
           break;
         default:
           unhandled.add(key);

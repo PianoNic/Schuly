@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **place** | **String** |  | [optional] 
 **date** | [**DateTime**](DateTime.md) |  | 
 **classId** | **String** |  | [optional] 
+**schoolId** | **String** |  | [optional] 
+**schoolUserId** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

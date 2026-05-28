@@ -26,8 +26,6 @@ part 'create_school_user_command.g.dart';
 /// * [birthday] 
 /// * [entryDate] 
 /// * [role] 
-/// * [studentNumber] 
-/// * [teacherCode] 
 @BuiltValue()
 abstract class CreateSchoolUserCommand implements Built<CreateSchoolUserCommand, CreateSchoolUserCommandBuilder> {
   @BuiltValueField(wireName: r'applicationUserId')
@@ -69,12 +67,6 @@ abstract class CreateSchoolUserCommand implements Built<CreateSchoolUserCommand,
   @BuiltValueField(wireName: r'role')
   Roles? get role;
   // enum roleEnum {  Student,  Teacher,  Administrator,  };
-
-  @BuiltValueField(wireName: r'studentNumber')
-  String? get studentNumber;
-
-  @BuiltValueField(wireName: r'teacherCode')
-  String? get teacherCode;
 
   CreateSchoolUserCommand._();
 
@@ -188,20 +180,6 @@ class _$CreateSchoolUserCommandSerializer implements PrimitiveSerializer<CreateS
       yield serializers.serialize(
         object.role,
         specifiedType: const FullType(Roles),
-      );
-    }
-    if (object.studentNumber != null) {
-      yield r'studentNumber';
-      yield serializers.serialize(
-        object.studentNumber,
-        specifiedType: const FullType.nullable(String),
-      );
-    }
-    if (object.teacherCode != null) {
-      yield r'teacherCode';
-      yield serializers.serialize(
-        object.teacherCode,
-        specifiedType: const FullType.nullable(String),
       );
     }
   }
@@ -325,22 +303,6 @@ class _$CreateSchoolUserCommandSerializer implements PrimitiveSerializer<CreateS
             specifiedType: const FullType(Roles),
           ) as Roles;
           result.role = valueDes;
-          break;
-        case r'studentNumber':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.studentNumber = valueDes;
-          break;
-        case r'teacherCode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.teacherCode = valueDes;
           break;
         default:
           unhandled.add(key);

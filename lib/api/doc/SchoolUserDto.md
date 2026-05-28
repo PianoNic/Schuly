@@ -25,8 +25,6 @@ Name | Type | Description | Notes
 **leaveDate** | [**Date**](Date.md) |  | [optional] 
 **role** | [**Roles**](Roles.md) |  | 
 **state** | [**UserState**](UserState.md) |  | [optional] 
-**studentNumber** | **String** |  | [optional] 
-**teacherCode** | **String** |  | [optional] 
 **createdAt** | [**DateTime**](DateTime.md) |  | [optional] 
 **updatedAt** | [**DateTime**](DateTime.md) |  | [optional] 
 **absences** | [**BuiltList&lt;AbsenceDto&gt;**](AbsenceDto.md) |  | [optional] 

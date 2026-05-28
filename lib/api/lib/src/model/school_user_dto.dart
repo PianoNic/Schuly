@@ -35,8 +35,6 @@ part 'school_user_dto.g.dart';
 /// * [leaveDate] 
 /// * [role] 
 /// * [state] 
-/// * [studentNumber] 
-/// * [teacherCode] 
 /// * [createdAt] 
 /// * [updatedAt] 
 /// * [absences] 
@@ -96,12 +94,6 @@ abstract class SchoolUserDto implements Built<SchoolUserDto, SchoolUserDtoBuilde
   @BuiltValueField(wireName: r'state')
   UserState? get state;
   // enum stateEnum {  None,  Active,  Inactive,  };
-
-  @BuiltValueField(wireName: r'studentNumber')
-  String? get studentNumber;
-
-  @BuiltValueField(wireName: r'teacherCode')
-  String? get teacherCode;
 
   @BuiltValueField(wireName: r'createdAt')
   DateTime? get createdAt;
@@ -246,20 +238,6 @@ class _$SchoolUserDtoSerializer implements PrimitiveSerializer<SchoolUserDto> {
       yield serializers.serialize(
         object.state,
         specifiedType: const FullType(UserState),
-      );
-    }
-    if (object.studentNumber != null) {
-      yield r'studentNumber';
-      yield serializers.serialize(
-        object.studentNumber,
-        specifiedType: const FullType.nullable(String),
-      );
-    }
-    if (object.teacherCode != null) {
-      yield r'teacherCode';
-      yield serializers.serialize(
-        object.teacherCode,
-        specifiedType: const FullType.nullable(String),
       );
     }
     if (object.createdAt != null) {
@@ -448,22 +426,6 @@ class _$SchoolUserDtoSerializer implements PrimitiveSerializer<SchoolUserDto> {
             specifiedType: const FullType(UserState),
           ) as UserState;
           result.state = valueDes;
-          break;
-        case r'studentNumber':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.studentNumber = valueDes;
-          break;
-        case r'teacherCode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.teacherCode = valueDes;
           break;
         case r'createdAt':
           final valueDes = serializers.deserialize(

@@ -11,6 +11,7 @@ import 'package:dio/dio.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:schuly_api/src/api_util.dart';
 import 'package:schuly_api/src/model/create_school_command.dart';
+import 'package:schuly_api/src/model/my_school_dto.dart';
 import 'package:schuly_api/src/model/problem_details.dart';
 import 'package:schuly_api/src/model/school_dto.dart';
 import 'package:schuly_api/src/model/update_school_command.dart';
@@ -244,9 +245,9 @@ class SchoolsApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [BuiltList<SchoolDto>] as data
+  /// Returns a [Future] containing a [Response] with a [BuiltList<MySchoolDto>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<SchoolDto>>> apiSchoolsMySchoolsGet({ 
+  Future<Response<BuiltList<MySchoolDto>>> apiSchoolsMySchoolsGet({ 
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -280,14 +281,14 @@ class SchoolsApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    BuiltList<SchoolDto>? _responseData;
+    BuiltList<MySchoolDto>? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(SchoolDto)]),
-      ) as BuiltList<SchoolDto>;
+        specifiedType: const FullType(BuiltList, [FullType(MySchoolDto)]),
+      ) as BuiltList<MySchoolDto>;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -299,7 +300,7 @@ class SchoolsApi {
       );
     }
 
-    return Response<BuiltList<SchoolDto>>(
+    return Response<BuiltList<MySchoolDto>>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

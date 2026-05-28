@@ -24,11 +24,23 @@ class _RootScreenState extends State<RootScreen> {
   @override
   void initState() {
     super.initState();
+    // React to session changes — including a failed silent refresh, which
+    // signs the user out from inside the API interceptor.
+    AuthService.sessionEpoch.addListener(_refresh);
     _refresh();
+  }
+
+  @override
+  void dispose() {
+    AuthService.sessionEpoch.removeListener(_refresh);
+    super.dispose();
   }
 
   Future<void> _refresh() async {
     final token = await AuthService.getAccessToken();
+    if (token == null) {
+      await ActiveAccountService.instance.clear();
+    }
     if (mounted) setState(() => _signedIn = token != null);
   }
 

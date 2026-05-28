@@ -21,8 +21,11 @@ import 'package:schuly_api/src/api/o_auth_api.dart';
 import 'package:schuly_api/src/api/plugins_api.dart';
 import 'package:schuly_api/src/api/school_users_api.dart';
 import 'package:schuly_api/src/api/schools_api.dart';
+import 'package:schuly_api/src/api/semester_reports_api.dart';
 import 'package:schuly_api/src/api/status_api.dart';
+import 'package:schuly_api/src/api/student_documents_api.dart';
 import 'package:schuly_api/src/api/sync_api.dart';
+import 'package:schuly_api/src/api/teachers_api.dart';
 
 class SchulyApi {
   static const String basePath = r'http://localhost';
@@ -150,15 +153,33 @@ class SchulyApi {
     return SchoolsApi(dio, serializers);
   }
 
+  /// Get SemesterReportsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  SemesterReportsApi getSemesterReportsApi() {
+    return SemesterReportsApi(dio, serializers);
+  }
+
   /// Get StatusApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   StatusApi getStatusApi() {
     return StatusApi(dio, serializers);
   }
 
+  /// Get StudentDocumentsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  StudentDocumentsApi getStudentDocumentsApi() {
+    return StudentDocumentsApi(dio, serializers);
+  }
+
   /// Get SyncApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   SyncApi getSyncApi() {
     return SyncApi(dio, serializers);
+  }
+
+  /// Get TeachersApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  TeachersApi getTeachersApi() {
+    return TeachersApi(dio, serializers);
   }
 }

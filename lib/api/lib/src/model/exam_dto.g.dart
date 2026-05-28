@@ -20,6 +20,8 @@ class _$ExamDto extends ExamDto {
   @override
   final String? classId;
   @override
+  final String? schoolId;
+  @override
   final BuiltList<GradeDto>? grades;
 
   factory _$ExamDto([void Function(ExamDtoBuilder)? updates]) =>
@@ -32,6 +34,7 @@ class _$ExamDto extends ExamDto {
     this.type,
     required this.classAverage,
     this.classId,
+    this.schoolId,
     this.grades,
   }) : super._();
   @override
@@ -51,6 +54,7 @@ class _$ExamDto extends ExamDto {
         type == other.type &&
         classAverage == other.classAverage &&
         classId == other.classId &&
+        schoolId == other.schoolId &&
         grades == other.grades;
   }
 
@@ -63,6 +67,7 @@ class _$ExamDto extends ExamDto {
     _$hash = $jc(_$hash, type.hashCode);
     _$hash = $jc(_$hash, classAverage.hashCode);
     _$hash = $jc(_$hash, classId.hashCode);
+    _$hash = $jc(_$hash, schoolId.hashCode);
     _$hash = $jc(_$hash, grades.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -77,6 +82,7 @@ class _$ExamDto extends ExamDto {
           ..add('type', type)
           ..add('classAverage', classAverage)
           ..add('classId', classId)
+          ..add('schoolId', schoolId)
           ..add('grades', grades))
         .toString();
   }
@@ -109,6 +115,10 @@ class ExamDtoBuilder implements Builder<ExamDto, ExamDtoBuilder> {
   String? get classId => _$this._classId;
   set classId(String? classId) => _$this._classId = classId;
 
+  String? _schoolId;
+  String? get schoolId => _$this._schoolId;
+  set schoolId(String? schoolId) => _$this._schoolId = schoolId;
+
   ListBuilder<GradeDto>? _grades;
   ListBuilder<GradeDto> get grades =>
       _$this._grades ??= ListBuilder<GradeDto>();
@@ -127,6 +137,7 @@ class ExamDtoBuilder implements Builder<ExamDto, ExamDtoBuilder> {
       _type = $v.type;
       _classAverage = $v.classAverage;
       _classId = $v.classId;
+      _schoolId = $v.schoolId;
       _grades = $v.grades?.toBuilder();
       _$v = null;
     }
@@ -162,6 +173,7 @@ class ExamDtoBuilder implements Builder<ExamDto, ExamDtoBuilder> {
               'classAverage',
             ),
             classId: classId,
+            schoolId: schoolId,
             grades: _grades?.build(),
           );
     } catch (_) {

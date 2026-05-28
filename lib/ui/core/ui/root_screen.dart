@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../services/active_account_service.dart';
 import '../../../services/auth_service.dart';
-import '../../schulnetz/connect_account_screen.dart';
+import '../../dashboard/dashboard_screen.dart';
 
-/// Tier-1 gate: until the user has signed in with Pocket ID (i.e. has an
-/// access token in [AuthService]), nothing else in the app is reachable.
-/// Once signed in, the Schulnetz connect screen takes over and exposes
-/// sign-out via its callback.
+/// Tier-1 gate: until the user has signed in with Pocket ID, nothing else is
+/// reachable. Once signed in, [DashboardScreen] owns the avatar, sidebar, and
+/// add-account flow.
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
 
@@ -49,6 +49,7 @@ class _RootScreenState extends State<RootScreen> {
 
   Future<void> _signOut() async {
     await AuthService.signOut();
+    await ActiveAccountService.instance.clear();
     await _refresh();
   }
 
@@ -62,7 +63,7 @@ class _RootScreenState extends State<RootScreen> {
     }
 
     if (signedIn) {
-      return ConnectAccountScreen(onSignOut: _signOut);
+      return DashboardScreen(onSignOut: _signOut);
     }
 
     final colors = context.theme.colors;
@@ -82,7 +83,8 @@ class _RootScreenState extends State<RootScreen> {
               child: Text(_busy ? 'Waiting for browser…' : t.signIn),
             ),
             if (_error != null)
-              SelectableText(_error!, style: TextStyle(color: colors.destructive)),
+              SelectableText(_error!,
+                  style: TextStyle(color: colors.destructive)),
           ],
         ),
       ),

@@ -24,10 +24,12 @@ Serializers _$serializers =
           ..add(CreateExamCommand.serializer)
           ..add(CreateSchoolCommand.serializer)
           ..add(CreateSchoolUserCommand.serializer)
+          ..add(CreateTeacherCommand.serializer)
           ..add(EnrolStudentCommand.serializer)
           ..add(ExamDto.serializer)
           ..add(ExamType.serializer)
           ..add(GradeDto.serializer)
+          ..add(MySchoolDto.serializer)
           ..add(OAuthCallbackRequest.serializer)
           ..add(PluginDto.serializer)
           ..add(ProblemDetails.serializer)
@@ -35,6 +37,10 @@ Serializers _$serializers =
           ..add(SchoolDto.serializer)
           ..add(SchoolUserDto.serializer)
           ..add(SchoolUserSummaryDto.serializer)
+          ..add(SemesterReportDto.serializer)
+          ..add(SemesterSubjectGradeDto.serializer)
+          ..add(StudentDocumentDto.serializer)
+          ..add(TeacherDto.serializer)
           ..add(UpdateAbsenceCommand.serializer)
           ..add(UpdateAgendaEntryCommand.serializer)
           ..add(UpdateApplicationUserCommand.serializer)
@@ -42,6 +48,7 @@ Serializers _$serializers =
           ..add(UpdateExamCommand.serializer)
           ..add(UpdateSchoolCommand.serializer)
           ..add(UpdateSchoolUserCommand.serializer)
+          ..add(UpdateTeacherCommand.serializer)
           ..add(UserClassDto.serializer)
           ..add(UserState.serializer)
           ..addBuilderFactory(
@@ -77,6 +84,12 @@ Serializers _$serializers =
               const FullType(SchoolUserSummaryDto),
             ]),
             () => ListBuilder<SchoolUserSummaryDto>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, const [
+              const FullType(SemesterSubjectGradeDto),
+            ]),
+            () => ListBuilder<SemesterSubjectGradeDto>(),
           ))
         .build();
 

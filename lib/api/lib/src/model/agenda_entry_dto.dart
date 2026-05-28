@@ -19,6 +19,8 @@ part 'agenda_entry_dto.g.dart';
 /// * [place] 
 /// * [date] 
 /// * [classId] 
+/// * [schoolId] 
+/// * [schoolUserId] 
 @BuiltValue()
 abstract class AgendaEntryDto implements Built<AgendaEntryDto, AgendaEntryDtoBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -26,7 +28,7 @@ abstract class AgendaEntryDto implements Built<AgendaEntryDto, AgendaEntryDtoBui
 
   @BuiltValueField(wireName: r'entryType')
   AgendaEntryType get entryType;
-  // enum entryTypeEnum {  Event,  Lesson,  Test,  };
+  // enum entryTypeEnum {  Event,  Lesson,  Test,  Holiday,  };
 
   @BuiltValueField(wireName: r'title')
   String? get title;
@@ -42,6 +44,12 @@ abstract class AgendaEntryDto implements Built<AgendaEntryDto, AgendaEntryDtoBui
 
   @BuiltValueField(wireName: r'classId')
   String? get classId;
+
+  @BuiltValueField(wireName: r'schoolId')
+  String? get schoolId;
+
+  @BuiltValueField(wireName: r'schoolUserId')
+  String? get schoolUserId;
 
   AgendaEntryDto._();
 
@@ -106,7 +114,21 @@ class _$AgendaEntryDtoSerializer implements PrimitiveSerializer<AgendaEntryDto> 
       yield r'classId';
       yield serializers.serialize(
         object.classId,
-        specifiedType: const FullType(String),
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.schoolId != null) {
+      yield r'schoolId';
+      yield serializers.serialize(
+        object.schoolId,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.schoolUserId != null) {
+      yield r'schoolUserId';
+      yield serializers.serialize(
+        object.schoolUserId,
+        specifiedType: const FullType.nullable(String),
       );
     }
   }
@@ -180,9 +202,26 @@ class _$AgendaEntryDtoSerializer implements PrimitiveSerializer<AgendaEntryDto> 
         case r'classId':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(String),
-          ) as String;
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
           result.classId = valueDes;
+          break;
+        case r'schoolId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.schoolId = valueDes;
+          break;
+        case r'schoolUserId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.schoolUserId = valueDes;
           break;
         default:
           unhandled.add(key);

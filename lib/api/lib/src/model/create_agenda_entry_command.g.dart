@@ -19,6 +19,10 @@ class _$CreateAgendaEntryCommand extends CreateAgendaEntryCommand {
   final DateTime? date;
   @override
   final String? classId;
+  @override
+  final String? schoolId;
+  @override
+  final String? schoolUserId;
 
   factory _$CreateAgendaEntryCommand([
     void Function(CreateAgendaEntryCommandBuilder)? updates,
@@ -31,6 +35,8 @@ class _$CreateAgendaEntryCommand extends CreateAgendaEntryCommand {
     this.place,
     this.date,
     this.classId,
+    this.schoolId,
+    this.schoolUserId,
   }) : super._();
   @override
   CreateAgendaEntryCommand rebuild(
@@ -50,7 +56,9 @@ class _$CreateAgendaEntryCommand extends CreateAgendaEntryCommand {
         description == other.description &&
         place == other.place &&
         date == other.date &&
-        classId == other.classId;
+        classId == other.classId &&
+        schoolId == other.schoolId &&
+        schoolUserId == other.schoolUserId;
   }
 
   @override
@@ -62,6 +70,8 @@ class _$CreateAgendaEntryCommand extends CreateAgendaEntryCommand {
     _$hash = $jc(_$hash, place.hashCode);
     _$hash = $jc(_$hash, date.hashCode);
     _$hash = $jc(_$hash, classId.hashCode);
+    _$hash = $jc(_$hash, schoolId.hashCode);
+    _$hash = $jc(_$hash, schoolUserId.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -74,7 +84,9 @@ class _$CreateAgendaEntryCommand extends CreateAgendaEntryCommand {
           ..add('description', description)
           ..add('place', place)
           ..add('date', date)
-          ..add('classId', classId))
+          ..add('classId', classId)
+          ..add('schoolId', schoolId)
+          ..add('schoolUserId', schoolUserId))
         .toString();
   }
 }
@@ -108,6 +120,14 @@ class CreateAgendaEntryCommandBuilder
   String? get classId => _$this._classId;
   set classId(String? classId) => _$this._classId = classId;
 
+  String? _schoolId;
+  String? get schoolId => _$this._schoolId;
+  set schoolId(String? schoolId) => _$this._schoolId = schoolId;
+
+  String? _schoolUserId;
+  String? get schoolUserId => _$this._schoolUserId;
+  set schoolUserId(String? schoolUserId) => _$this._schoolUserId = schoolUserId;
+
   CreateAgendaEntryCommandBuilder() {
     CreateAgendaEntryCommand._defaults(this);
   }
@@ -121,6 +141,8 @@ class CreateAgendaEntryCommandBuilder
       _place = $v.place;
       _date = $v.date;
       _classId = $v.classId;
+      _schoolId = $v.schoolId;
+      _schoolUserId = $v.schoolUserId;
       _$v = null;
     }
     return this;
@@ -149,6 +171,8 @@ class CreateAgendaEntryCommandBuilder
           place: place,
           date: date,
           classId: classId,
+          schoolId: schoolId,
+          schoolUserId: schoolUserId,
         );
     replace(_$result);
     return _$result;

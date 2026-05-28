@@ -19,6 +19,8 @@ class _$AbsenceDto extends AbsenceDto {
   final DateTime until;
   @override
   final String? schoolUserId;
+  @override
+  final String? schoolId;
 
   factory _$AbsenceDto([void Function(AbsenceDtoBuilder)? updates]) =>
       (AbsenceDtoBuilder()..update(updates))._build();
@@ -30,6 +32,7 @@ class _$AbsenceDto extends AbsenceDto {
     required this.from,
     required this.until,
     this.schoolUserId,
+    this.schoolId,
   }) : super._();
   @override
   AbsenceDto rebuild(void Function(AbsenceDtoBuilder) updates) =>
@@ -47,7 +50,8 @@ class _$AbsenceDto extends AbsenceDto {
         type == other.type &&
         from == other.from &&
         until == other.until &&
-        schoolUserId == other.schoolUserId;
+        schoolUserId == other.schoolUserId &&
+        schoolId == other.schoolId;
   }
 
   @override
@@ -59,6 +63,7 @@ class _$AbsenceDto extends AbsenceDto {
     _$hash = $jc(_$hash, from.hashCode);
     _$hash = $jc(_$hash, until.hashCode);
     _$hash = $jc(_$hash, schoolUserId.hashCode);
+    _$hash = $jc(_$hash, schoolId.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -71,7 +76,8 @@ class _$AbsenceDto extends AbsenceDto {
           ..add('type', type)
           ..add('from', from)
           ..add('until', until)
-          ..add('schoolUserId', schoolUserId))
+          ..add('schoolUserId', schoolUserId)
+          ..add('schoolId', schoolId))
         .toString();
   }
 }
@@ -103,6 +109,10 @@ class AbsenceDtoBuilder implements Builder<AbsenceDto, AbsenceDtoBuilder> {
   String? get schoolUserId => _$this._schoolUserId;
   set schoolUserId(String? schoolUserId) => _$this._schoolUserId = schoolUserId;
 
+  String? _schoolId;
+  String? get schoolId => _$this._schoolId;
+  set schoolId(String? schoolId) => _$this._schoolId = schoolId;
+
   AbsenceDtoBuilder() {
     AbsenceDto._defaults(this);
   }
@@ -116,6 +126,7 @@ class AbsenceDtoBuilder implements Builder<AbsenceDto, AbsenceDtoBuilder> {
       _from = $v.from;
       _until = $v.until;
       _schoolUserId = $v.schoolUserId;
+      _schoolId = $v.schoolId;
       _$v = null;
     }
     return this;
@@ -156,6 +167,7 @@ class AbsenceDtoBuilder implements Builder<AbsenceDto, AbsenceDtoBuilder> {
             'until',
           ),
           schoolUserId: schoolUserId,
+          schoolId: schoolId,
         );
     replace(_$result);
     return _$result;

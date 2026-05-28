@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:app_links/app_links.dart';
 import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
@@ -28,6 +29,10 @@ class AuthService {
   static const _kRefreshTokenKey = 'auth.refresh_token';
 
   static final AppLinks _appLinks = AppLinks();
+
+  /// Bumped whenever the session changes (sign-out / expiry). The auth gate
+  /// listens to re-evaluate whether to show the sign-in screen.
+  static final ValueNotifier<int> sessionEpoch = ValueNotifier<int>(0);
 
   /// Full OIDC PKCE flow via the external browser:
   /// 1. Build authorize URL + PKCE pair.
@@ -133,10 +138,68 @@ class AuthService {
     return prefs.getString(_kAccessTokenKey);
   }
 
+  static Future<String?> getRefreshToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_kRefreshTokenKey);
+  }
+
+  /// Exchanges the stored refresh token for a fresh access token and persists
+  /// the result. Returns the new access token, or null if there's no refresh
+  /// token or the exchange failed — in which case the caller should treat the
+  /// session as expired.
+  static Future<String?> refreshAccessToken() async {
+    final refreshToken = await getRefreshToken();
+    if (refreshToken == null) return null;
+    try {
+      final response = await http.post(
+        Uri.parse(OidcConfig.tokenEndpoint),
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: {
+          'grant_type': 'refresh_token',
+          'refresh_token': refreshToken,
+          'client_id': OidcConfig.clientId,
+        },
+      );
+      if (response.statusCode != 200) return null;
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      final tokens = AuthTokens(
+        accessToken: data['access_token'] as String,
+        idToken: data['id_token'] as String?,
+        // Pocket ID rotates refresh tokens; fall back to the old one if the
+        // response omits a new one.
+        refreshToken: (data['refresh_token'] as String?) ?? refreshToken,
+        expiresIn: data['expires_in'] as int?,
+      );
+      await _persist(tokens);
+      return tokens.accessToken;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// Decodes the persisted OIDC ID token's payload. Returns its claims
+  /// (`name`, `email`, `picture`, …) or null if there's no token / it's
+  /// malformed. Pure local decode — no signature verification, which is fine
+  /// since the token was already validated at exchange time.
+  static Future<Map<String, dynamic>?> getIdTokenClaims() async {
+    final prefs = await SharedPreferences.getInstance();
+    final idToken = prefs.getString(_kIdTokenKey);
+    if (idToken == null) return null;
+    final parts = idToken.split('.');
+    if (parts.length != 3) return null;
+    try {
+      final payload = utf8.decode(base64Url.decode(base64Url.normalize(parts[1])));
+      return jsonDecode(payload) as Map<String, dynamic>;
+    } catch (_) {
+      return null;
+    }
+  }
+
   static Future<void> signOut() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_kAccessTokenKey);
     await prefs.remove(_kIdTokenKey);
     await prefs.remove(_kRefreshTokenKey);
+    sessionEpoch.value++;
   }
 }

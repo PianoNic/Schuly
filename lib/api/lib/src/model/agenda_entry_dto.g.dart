@@ -21,6 +21,10 @@ class _$AgendaEntryDto extends AgendaEntryDto {
   final DateTime date;
   @override
   final String? classId;
+  @override
+  final String? schoolId;
+  @override
+  final String? schoolUserId;
 
   factory _$AgendaEntryDto([void Function(AgendaEntryDtoBuilder)? updates]) =>
       (AgendaEntryDtoBuilder()..update(updates))._build();
@@ -33,6 +37,8 @@ class _$AgendaEntryDto extends AgendaEntryDto {
     this.place,
     required this.date,
     this.classId,
+    this.schoolId,
+    this.schoolUserId,
   }) : super._();
   @override
   AgendaEntryDto rebuild(void Function(AgendaEntryDtoBuilder) updates) =>
@@ -51,7 +57,9 @@ class _$AgendaEntryDto extends AgendaEntryDto {
         description == other.description &&
         place == other.place &&
         date == other.date &&
-        classId == other.classId;
+        classId == other.classId &&
+        schoolId == other.schoolId &&
+        schoolUserId == other.schoolUserId;
   }
 
   @override
@@ -64,6 +72,8 @@ class _$AgendaEntryDto extends AgendaEntryDto {
     _$hash = $jc(_$hash, place.hashCode);
     _$hash = $jc(_$hash, date.hashCode);
     _$hash = $jc(_$hash, classId.hashCode);
+    _$hash = $jc(_$hash, schoolId.hashCode);
+    _$hash = $jc(_$hash, schoolUserId.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -77,7 +87,9 @@ class _$AgendaEntryDto extends AgendaEntryDto {
           ..add('description', description)
           ..add('place', place)
           ..add('date', date)
-          ..add('classId', classId))
+          ..add('classId', classId)
+          ..add('schoolId', schoolId)
+          ..add('schoolUserId', schoolUserId))
         .toString();
   }
 }
@@ -114,6 +126,14 @@ class AgendaEntryDtoBuilder
   String? get classId => _$this._classId;
   set classId(String? classId) => _$this._classId = classId;
 
+  String? _schoolId;
+  String? get schoolId => _$this._schoolId;
+  set schoolId(String? schoolId) => _$this._schoolId = schoolId;
+
+  String? _schoolUserId;
+  String? get schoolUserId => _$this._schoolUserId;
+  set schoolUserId(String? schoolUserId) => _$this._schoolUserId = schoolUserId;
+
   AgendaEntryDtoBuilder() {
     AgendaEntryDto._defaults(this);
   }
@@ -128,6 +148,8 @@ class AgendaEntryDtoBuilder
       _place = $v.place;
       _date = $v.date;
       _classId = $v.classId;
+      _schoolId = $v.schoolId;
+      _schoolUserId = $v.schoolUserId;
       _$v = null;
     }
     return this;
@@ -165,6 +187,8 @@ class AgendaEntryDtoBuilder
             'date',
           ),
           classId: classId,
+          schoolId: schoolId,
+          schoolUserId: schoolUserId,
         );
     replace(_$result);
     return _$result;

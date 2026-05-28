@@ -1,17 +1,17 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:forui/forui.dart';
 
 import '../../services/active_account_service.dart';
-import '../../services/api_client.dart';
-import '../schulnetz/connect_account_screen.dart';
+import '../../services/auth_service.dart';
+import '../../services/school_data_service.dart';
+import '../grades/grades_page.dart';
+import '../home/home_page.dart';
 import 'widgets/accounts_sidebar.dart';
+import 'widgets/add_school_modal.dart';
 
-/// Post-sign-in shell. Owns the avatar in the top-left, opens the sidebar on
-/// tap, and routes to the connect flow when the user has zero accounts.
-///
-/// The actual dashboard content is intentionally a stub for now — once the
-/// agenda/exam/absence endpoints are wired in we'll fill out the body.
+/// Post-sign-in shell: a 5-tab bottom-navigation app. The top bar carries the
+/// profile avatar (opens the account switcher) and the active school name.
 class DashboardScreen extends StatefulWidget {
   final VoidCallback onSignOut;
   const DashboardScreen({super.key, required this.onSignOut});
@@ -21,159 +21,222 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  bool _syncing = false;
-  String? _syncMessage;
+  String? _pictureUrl;
+  String? _userName;
+  String? _userEmail;
+  int _index = 0;
 
   @override
   void initState() {
     super.initState();
+    ActiveAccountService.instance.addListener(_onActiveChanged);
     WidgetsBinding.instance.addPostFrameCallback((_) => _bootstrap());
   }
 
+  @override
+  void dispose() {
+    ActiveAccountService.instance.removeListener(_onActiveChanged);
+    super.dispose();
+  }
+
+  String? _lastSchoolId;
+  void _onActiveChanged() {
+    final id = ActiveAccountService.instance.active?.id;
+    if (id != _lastSchoolId) {
+      _lastSchoolId = id;
+      SchoolDataService.instance.refresh();
+    }
+  }
+
   Future<void> _bootstrap() async {
+    final claims = await AuthService.getIdTokenClaims();
+    if (mounted && claims != null) {
+      setState(() {
+        _pictureUrl = claims['picture'] as String?;
+        _userName = claims['name'] as String?;
+        _userEmail = claims['email'] as String?;
+      });
+    }
+
     final svc = ActiveAccountService.instance;
     await svc.refresh();
     if (!mounted) return;
-    if (svc.accounts.isEmpty) {
-      await _pushConnect();
+    if (svc.schools.isEmpty) {
+      await _addSchool();
+    } else {
+      _lastSchoolId = svc.active?.id;
+      await SchoolDataService.instance.refresh();
     }
   }
 
-  Future<void> _pushConnect() async {
-    final newId = await Navigator.of(context).push<String>(
-      MaterialPageRoute(builder: (_) => const ConnectAccountScreen()),
-    );
-    if (newId != null) {
-      await ActiveAccountService.instance.refresh();
-      await ActiveAccountService.instance.setActive(newId);
-    }
-  }
-
-  Future<void> _forceSync() async {
+  Future<void> _addSchool() async {
     final svc = ActiveAccountService.instance;
-    final active = svc.active;
-    if (active == null) return;
-    setState(() {
-      _syncing = true;
-      _syncMessage = null;
-    });
-    try {
-      await ApiClient.instance.api
-          .getSyncApi()
-          .apiPluginsSchulwareAccountsAccountIdSyncPost(accountId: active.id);
-      setState(() => _syncMessage = 'Sync triggered for ${active.displayName}');
-    } on DioException catch (e) {
-      setState(() => _syncMessage =
-          'Sync failed: HTTP ${e.response?.statusCode} ${e.response?.data}');
-    } catch (e) {
-      setState(() => _syncMessage = 'Sync failed: $e');
-    } finally {
-      if (mounted) setState(() => _syncing = false);
-    }
+    final before = svc.schools.map((s) => s.id).toSet();
+    final connected = await runAddSchoolFlow(context, Navigator.of(context));
+    if (connected == null) return;
+    await svc.refresh();
+    final added = svc.schools.where((s) => !before.contains(s.id));
+    if (added.isNotEmpty) await svc.setActive(added.first.id);
   }
 
   void _openSidebar() {
-    openAccountsSidebar(context, onSignOut: widget.onSignOut);
+    openAccountsSidebar(
+      context,
+      onSignOut: widget.onSignOut,
+      userName: _userName,
+      userEmail: _userEmail,
+      pictureUrl: _pictureUrl,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final colors = context.theme.colors;
+
     return AnimatedBuilder(
-      animation: ActiveAccountService.instance,
+      animation: Listenable.merge([
+        ActiveAccountService.instance,
+        SchoolDataService.instance,
+      ]),
       builder: (context, _) {
-        final svc = ActiveAccountService.instance;
-        final active = svc.active;
-        final initial = (active?.displayName.isNotEmpty ?? false)
-            ? active!.displayName.characters.first.toUpperCase()
-            : '?';
+        final account = ActiveAccountService.instance;
+        final data = SchoolDataService.instance;
+        final active = account.active;
+
+        final pages = const [
+          HomePage(),
+          _Placeholder(label: 'Timetable'),
+          GradesPage(),
+          _Placeholder(label: 'Absences'),
+          _Placeholder(label: 'Account'),
+        ];
+
+        Widget body;
+        if (data.loading && data.me == null) {
+          body = const Center(child: CircularProgressIndicator());
+        } else if (data.error != null && data.me == null) {
+          body = Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: SelectableText('Failed to load: ${data.error}',
+                  style: TextStyle(color: colors.destructive)),
+            ),
+          );
+        } else {
+          body = IndexedStack(index: _index, children: pages);
+        }
 
         return FScaffold(
-          header: FHeader(
-            title: Text(active?.displayName ?? 'Schuly'),
-            suffixes: [
-              FHeaderAction(
-                icon: const Icon(FIcons.refreshCw),
-                onPress: _syncing ? null : _forceSync,
-              ),
-            ],
-            // FHeader doesn't expose a left-prefix slot; instead we use the
-            // title widget. Tappable avatar lives in a leading position via
-            // a Row below — see the body's first child.
+          header: _TopBar(
+            title: active?.name ?? 'Schuly',
+            subtitle: active?.fullName,
+            pictureUrl: _pictureUrl,
+            userName: _userName,
+            loading: data.loading,
+            onAvatar: _openSidebar,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: 16,
-            children: [
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: _openSidebar,
-                    child: FAvatar.raw(
-                      child: Text(
-                        initial,
-                        style: TextStyle(color: colors.primaryForeground),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      active?.schulnetzBaseUrl ?? 'No account connected',
-                      style: TextStyle(color: colors.mutedForeground),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-              if (svc.loading)
-                const Center(child: CircularProgressIndicator())
-              else if (svc.accounts.isEmpty)
-                FCard(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      spacing: 12,
-                      children: [
-                        const Text('No school accounts yet.'),
-                        FButton(
-                          onPress: _pushConnect,
-                          child: const Text('Connect your first school'),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              else
-                FCard(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      spacing: 12,
-                      children: [
-                        Text('Active: ${active?.displayName ?? '—'}'),
-                        Text(active?.schulnetzBaseUrl ?? '',
-                            style: TextStyle(color: colors.mutedForeground)),
-                        FButton(
-                          onPress: _syncing ? null : _forceSync,
-                          child: Text(_syncing ? 'Syncing…' : 'Force sync'),
-                        ),
-                        if (_syncMessage != null)
-                          SelectableText(_syncMessage!,
-                              style: TextStyle(color: colors.mutedForeground)),
-                      ],
-                    ),
-                  ),
-                ),
-              if (svc.error != null)
-                SelectableText('Load error: ${svc.error}',
-                    style: TextStyle(color: colors.destructive)),
-            ],
+          footer: SafeArea(
+            top: false,
+            // Keep the nav labels clear of the Android gesture/nav bar.
+            child: FBottomNavigationBar(
+              index: _index,
+              onChange: (i) {
+                if (i != _index) HapticFeedback.selectionClick();
+                setState(() => _index = i);
+              },
+              children: const [
+                FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.calendarDays), label: Text('Timetable')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.chartColumn), label: Text('Grades')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.calendarOff), label: Text('Absences')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.user), label: Text('Account')),
+              ],
+            ),
           ),
+          childPad: false,
+          child: body,
         );
       },
     );
   }
+}
+
+class _TopBar extends StatelessWidget {
+  final String title;
+  final String? subtitle;
+  final String? pictureUrl;
+  final String? userName;
+  final bool loading;
+  final VoidCallback onAvatar;
+  const _TopBar({
+    required this.title,
+    required this.subtitle,
+    required this.pictureUrl,
+    required this.userName,
+    required this.loading,
+    required this.onAvatar,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.theme.colors;
+    final typography = context.theme.typography;
+    final initial = (userName?.isNotEmpty ?? false) ? userName!.characters.first.toUpperCase() : '?';
+    final fallback = Text(initial,
+        style: TextStyle(color: colors.mutedForeground, fontWeight: FontWeight.w600));
+
+    return SafeArea(
+      bottom: false,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: onAvatar,
+                  child: (pictureUrl == null || pictureUrl!.isEmpty)
+                      ? FAvatar.raw(size: 40, child: fallback)
+                      : FAvatar(size: 40, image: NetworkImage(pictureUrl!), fallback: fallback),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(title,
+                          style: typography.lg.copyWith(fontWeight: FontWeight.w600),
+                          overflow: TextOverflow.ellipsis),
+                      if (subtitle?.isNotEmpty ?? false)
+                        Text(subtitle!,
+                            style: typography.sm.copyWith(color: colors.mutedForeground),
+                            overflow: TextOverflow.ellipsis),
+                    ],
+                  ),
+                ),
+                if (loading)
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8),
+                    child: SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2)),
+                  ),
+              ],
+            ),
+          ),
+          // Default divider padding is vertical: 20 (huge gap); tighten it.
+          FDivider(style: (s) => s.copyWith(padding: EdgeInsets.zero)),
+        ],
+      ),
+    );
+  }
+}
+
+class _Placeholder extends StatelessWidget {
+  final String label;
+  const _Placeholder({required this.label});
+  @override
+  Widget build(BuildContext context) => Center(
+        child: Text('$label — coming soon',
+            style: TextStyle(color: context.theme.colors.mutedForeground)),
+      );
 }

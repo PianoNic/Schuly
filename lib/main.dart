@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -12,13 +11,7 @@ class SchulyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = const {
-      TargetPlatform.android,
-      TargetPlatform.iOS,
-      TargetPlatform.fuchsia,
-    }.contains(defaultTargetPlatform)
-        ? FThemes.zinc.dark
-        : FThemes.zinc.dark;
+    final theme = FThemes.zinc.dark;
 
     return MaterialApp(
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,

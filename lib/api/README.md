@@ -112,9 +112,18 @@ Class | Method | HTTP request | Description
 [*SchoolsApi*](doc/SchoolsApi.md) | [**apiSchoolsMySchoolsGet**](doc/SchoolsApi.md#apischoolsmyschoolsget) | **GET** /api/Schools/my-schools | 
 [*SchoolsApi*](doc/SchoolsApi.md) | [**apiSchoolsPost**](doc/SchoolsApi.md#apischoolspost) | **POST** /api/Schools | 
 [*SchoolsApi*](doc/SchoolsApi.md) | [**apiSchoolsPut**](doc/SchoolsApi.md#apischoolsput) | **PUT** /api/Schools | 
+[*SemesterReportsApi*](doc/SemesterReportsApi.md) | [**apiSemesterReportsGet**](doc/SemesterReportsApi.md#apisemesterreportsget) | **GET** /api/SemesterReports | 
 [*StatusApi*](doc/StatusApi.md) | [**apiPluginsSchulwareStatusGet**](doc/StatusApi.md#apipluginsschulwarestatusget) | **GET** /api/plugins/schulware/status | 
+[*StudentDocumentsApi*](doc/StudentDocumentsApi.md) | [**apiDocumentsDocumentIdGet**](doc/StudentDocumentsApi.md#apidocumentsdocumentidget) | **GET** /api/documents/{documentId} | 
+[*StudentDocumentsApi*](doc/StudentDocumentsApi.md) | [**apiDocumentsGet**](doc/StudentDocumentsApi.md#apidocumentsget) | **GET** /api/documents | 
+[*StudentDocumentsApi*](doc/StudentDocumentsApi.md) | [**apiStudentsSchoolUserIdDocumentsPost**](doc/StudentDocumentsApi.md#apistudentsschooluseriddocumentspost) | **POST** /api/students/{schoolUserId}/documents | 
 [*SyncApi*](doc/SyncApi.md) | [**apiPluginsSchulwareAccountsAccountIdSyncGet**](doc/SyncApi.md#apipluginsschulwareaccountsaccountidsyncget) | **GET** /api/plugins/schulware/accounts/{accountId}/sync | 
 [*SyncApi*](doc/SyncApi.md) | [**apiPluginsSchulwareAccountsAccountIdSyncPost**](doc/SyncApi.md#apipluginsschulwareaccountsaccountidsyncpost) | **POST** /api/plugins/schulware/accounts/{accountId}/sync | 
+[*TeachersApi*](doc/TeachersApi.md) | [**apiTeachersGet**](doc/TeachersApi.md#apiteachersget) | **GET** /api/Teachers | 
+[*TeachersApi*](doc/TeachersApi.md) | [**apiTeachersIdDelete**](doc/TeachersApi.md#apiteachersiddelete) | **DELETE** /api/Teachers/{id} | 
+[*TeachersApi*](doc/TeachersApi.md) | [**apiTeachersIdGet**](doc/TeachersApi.md#apiteachersidget) | **GET** /api/Teachers/{id} | 
+[*TeachersApi*](doc/TeachersApi.md) | [**apiTeachersPost**](doc/TeachersApi.md#apiteacherspost) | **POST** /api/Teachers | 
+[*TeachersApi*](doc/TeachersApi.md) | [**apiTeachersPut**](doc/TeachersApi.md#apiteachersput) | **PUT** /api/Teachers | 
 
 
 ## Documentation For Models
@@ -135,10 +144,12 @@ Class | Method | HTTP request | Description
  - [CreateExamCommand](doc/CreateExamCommand.md)
  - [CreateSchoolCommand](doc/CreateSchoolCommand.md)
  - [CreateSchoolUserCommand](doc/CreateSchoolUserCommand.md)
+ - [CreateTeacherCommand](doc/CreateTeacherCommand.md)
  - [EnrolStudentCommand](doc/EnrolStudentCommand.md)
  - [ExamDto](doc/ExamDto.md)
  - [ExamType](doc/ExamType.md)
  - [GradeDto](doc/GradeDto.md)
+ - [MySchoolDto](doc/MySchoolDto.md)
  - [OAuthCallbackRequest](doc/OAuthCallbackRequest.md)
  - [PluginDto](doc/PluginDto.md)
  - [ProblemDetails](doc/ProblemDetails.md)
@@ -146,6 +157,10 @@ Class | Method | HTTP request | Description
  - [SchoolDto](doc/SchoolDto.md)
  - [SchoolUserDto](doc/SchoolUserDto.md)
  - [SchoolUserSummaryDto](doc/SchoolUserSummaryDto.md)
+ - [SemesterReportDto](doc/SemesterReportDto.md)
+ - [SemesterSubjectGradeDto](doc/SemesterSubjectGradeDto.md)
+ - [StudentDocumentDto](doc/StudentDocumentDto.md)
+ - [TeacherDto](doc/TeacherDto.md)
  - [UpdateAbsenceCommand](doc/UpdateAbsenceCommand.md)
  - [UpdateAgendaEntryCommand](doc/UpdateAgendaEntryCommand.md)
  - [UpdateApplicationUserCommand](doc/UpdateApplicationUserCommand.md)
@@ -153,6 +168,7 @@ Class | Method | HTTP request | Description
  - [UpdateExamCommand](doc/UpdateExamCommand.md)
  - [UpdateSchoolCommand](doc/UpdateSchoolCommand.md)
  - [UpdateSchoolUserCommand](doc/UpdateSchoolUserCommand.md)
+ - [UpdateTeacherCommand](doc/UpdateTeacherCommand.md)
  - [UserClassDto](doc/UserClassDto.md)
  - [UserState](doc/UserState.md)
 

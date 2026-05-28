@@ -20,6 +20,7 @@ part 'exam_dto.g.dart';
 /// * [type] 
 /// * [classAverage] 
 /// * [classId] 
+/// * [schoolId] 
 /// * [grades] 
 @BuiltValue()
 abstract class ExamDto implements Built<ExamDto, ExamDtoBuilder> {
@@ -41,6 +42,9 @@ abstract class ExamDto implements Built<ExamDto, ExamDtoBuilder> {
 
   @BuiltValueField(wireName: r'classId')
   String? get classId;
+
+  @BuiltValueField(wireName: r'schoolId')
+  String? get schoolId;
 
   @BuiltValueField(wireName: r'grades')
   BuiltList<GradeDto>? get grades;
@@ -104,6 +108,13 @@ class _$ExamDtoSerializer implements PrimitiveSerializer<ExamDto> {
       yield serializers.serialize(
         object.classId,
         specifiedType: const FullType(String),
+      );
+    }
+    if (object.schoolId != null) {
+      yield r'schoolId';
+      yield serializers.serialize(
+        object.schoolId,
+        specifiedType: const FullType.nullable(String),
       );
     }
     if (object.grades != null) {
@@ -179,6 +190,14 @@ class _$ExamDtoSerializer implements PrimitiveSerializer<ExamDto> {
             specifiedType: const FullType(String),
           ) as String;
           result.classId = valueDes;
+          break;
+        case r'schoolId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.schoolId = valueDes;
           break;
         case r'grades':
           final valueDes = serializers.deserialize(

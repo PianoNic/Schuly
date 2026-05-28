@@ -1,20 +1,25 @@
-/// Light view of a Schulware-plugin account row. The backend's swagger
-/// declares the list response as `void`, so we narrow the raw JSON map at
-/// the boundary instead of through generated DTOs.
-class SchulwareAccount {
-  final String id;
-  final String displayName;
-  final String schulnetzBaseUrl;
+import 'package:schuly_api/schuly_api.dart';
 
-  const SchulwareAccount({
+/// A school the signed-in user belongs to, from `GET /api/schools/my-schools`.
+/// Carries the school name plus the user's identity (full name + email) at
+/// that school — what the account switcher displays.
+class MySchool {
+  final String id;
+  final String name;
+  final String? email;
+  final String? fullName;
+
+  const MySchool({
     required this.id,
-    required this.displayName,
-    required this.schulnetzBaseUrl,
+    required this.name,
+    this.email,
+    this.fullName,
   });
 
-  factory SchulwareAccount.fromJson(Map<String, dynamic> json) => SchulwareAccount(
-        id: json['id'] as String,
-        displayName: (json['displayName'] as String?) ?? 'Untitled',
-        schulnetzBaseUrl: (json['schulnetzBaseUrl'] as String?) ?? '',
+  factory MySchool.fromDto(MySchoolDto dto) => MySchool(
+        id: dto.id ?? '',
+        name: (dto.name?.isNotEmpty ?? false) ? dto.name! : 'School',
+        email: dto.email,
+        fullName: dto.fullName,
       );
 }

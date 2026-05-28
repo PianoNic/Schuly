@@ -42,10 +42,6 @@ class _$SchoolUserDto extends SchoolUserDto {
   @override
   final UserState? state;
   @override
-  final String? studentNumber;
-  @override
-  final String? teacherCode;
-  @override
   final DateTime? createdAt;
   @override
   final DateTime? updatedAt;
@@ -77,8 +73,6 @@ class _$SchoolUserDto extends SchoolUserDto {
     this.leaveDate,
     required this.role,
     this.state,
-    this.studentNumber,
-    this.teacherCode,
     this.createdAt,
     this.updatedAt,
     this.absences,
@@ -113,8 +107,6 @@ class _$SchoolUserDto extends SchoolUserDto {
         leaveDate == other.leaveDate &&
         role == other.role &&
         state == other.state &&
-        studentNumber == other.studentNumber &&
-        teacherCode == other.teacherCode &&
         createdAt == other.createdAt &&
         updatedAt == other.updatedAt &&
         absences == other.absences &&
@@ -142,8 +134,6 @@ class _$SchoolUserDto extends SchoolUserDto {
     _$hash = $jc(_$hash, leaveDate.hashCode);
     _$hash = $jc(_$hash, role.hashCode);
     _$hash = $jc(_$hash, state.hashCode);
-    _$hash = $jc(_$hash, studentNumber.hashCode);
-    _$hash = $jc(_$hash, teacherCode.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jc(_$hash, updatedAt.hashCode);
     _$hash = $jc(_$hash, absences.hashCode);
@@ -173,8 +163,6 @@ class _$SchoolUserDto extends SchoolUserDto {
           ..add('leaveDate', leaveDate)
           ..add('role', role)
           ..add('state', state)
-          ..add('studentNumber', studentNumber)
-          ..add('teacherCode', teacherCode)
           ..add('createdAt', createdAt)
           ..add('updatedAt', updatedAt)
           ..add('absences', absences)
@@ -257,15 +245,6 @@ class SchoolUserDtoBuilder
   UserState? get state => _$this._state;
   set state(UserState? state) => _$this._state = state;
 
-  String? _studentNumber;
-  String? get studentNumber => _$this._studentNumber;
-  set studentNumber(String? studentNumber) =>
-      _$this._studentNumber = studentNumber;
-
-  String? _teacherCode;
-  String? get teacherCode => _$this._teacherCode;
-  set teacherCode(String? teacherCode) => _$this._teacherCode = teacherCode;
-
   DateTime? _createdAt;
   DateTime? get createdAt => _$this._createdAt;
   set createdAt(DateTime? createdAt) => _$this._createdAt = createdAt;
@@ -314,8 +293,6 @@ class SchoolUserDtoBuilder
       _leaveDate = $v.leaveDate;
       _role = $v.role;
       _state = $v.state;
-      _studentNumber = $v.studentNumber;
-      _teacherCode = $v.teacherCode;
       _createdAt = $v.createdAt;
       _updatedAt = $v.updatedAt;
       _absences = $v.absences?.toBuilder();
@@ -374,8 +351,6 @@ class SchoolUserDtoBuilder
               'role',
             ),
             state: state,
-            studentNumber: studentNumber,
-            teacherCode: teacherCode,
             createdAt: createdAt,
             updatedAt: updatedAt,
             absences: _absences?.build(),

@@ -33,10 +33,6 @@ class _$CreateSchoolUserCommand extends CreateSchoolUserCommand {
   final Date? entryDate;
   @override
   final Roles? role;
-  @override
-  final String? studentNumber;
-  @override
-  final String? teacherCode;
 
   factory _$CreateSchoolUserCommand([
     void Function(CreateSchoolUserCommandBuilder)? updates,
@@ -56,8 +52,6 @@ class _$CreateSchoolUserCommand extends CreateSchoolUserCommand {
     this.birthday,
     this.entryDate,
     this.role,
-    this.studentNumber,
-    this.teacherCode,
   }) : super._();
   @override
   CreateSchoolUserCommand rebuild(
@@ -84,9 +78,7 @@ class _$CreateSchoolUserCommand extends CreateSchoolUserCommand {
         zip == other.zip &&
         birthday == other.birthday &&
         entryDate == other.entryDate &&
-        role == other.role &&
-        studentNumber == other.studentNumber &&
-        teacherCode == other.teacherCode;
+        role == other.role;
   }
 
   @override
@@ -105,8 +97,6 @@ class _$CreateSchoolUserCommand extends CreateSchoolUserCommand {
     _$hash = $jc(_$hash, birthday.hashCode);
     _$hash = $jc(_$hash, entryDate.hashCode);
     _$hash = $jc(_$hash, role.hashCode);
-    _$hash = $jc(_$hash, studentNumber.hashCode);
-    _$hash = $jc(_$hash, teacherCode.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -126,9 +116,7 @@ class _$CreateSchoolUserCommand extends CreateSchoolUserCommand {
           ..add('zip', zip)
           ..add('birthday', birthday)
           ..add('entryDate', entryDate)
-          ..add('role', role)
-          ..add('studentNumber', studentNumber)
-          ..add('teacherCode', teacherCode))
+          ..add('role', role))
         .toString();
   }
 }
@@ -191,15 +179,6 @@ class CreateSchoolUserCommandBuilder
   Roles? get role => _$this._role;
   set role(Roles? role) => _$this._role = role;
 
-  String? _studentNumber;
-  String? get studentNumber => _$this._studentNumber;
-  set studentNumber(String? studentNumber) =>
-      _$this._studentNumber = studentNumber;
-
-  String? _teacherCode;
-  String? get teacherCode => _$this._teacherCode;
-  set teacherCode(String? teacherCode) => _$this._teacherCode = teacherCode;
-
   CreateSchoolUserCommandBuilder() {
     CreateSchoolUserCommand._defaults(this);
   }
@@ -220,8 +199,6 @@ class CreateSchoolUserCommandBuilder
       _birthday = $v.birthday;
       _entryDate = $v.entryDate;
       _role = $v.role;
-      _studentNumber = $v.studentNumber;
-      _teacherCode = $v.teacherCode;
       _$v = null;
     }
     return this;
@@ -257,8 +234,6 @@ class CreateSchoolUserCommandBuilder
           birthday: birthday,
           entryDate: entryDate,
           role: role,
-          studentNumber: studentNumber,
-          teacherCode: teacherCode,
         );
     replace(_$result);
     return _$result;

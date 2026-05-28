@@ -1,4 +1,3 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
@@ -6,9 +5,12 @@ import 'package:schuly_api/schuly_api.dart';
 import '../../services/api_client.dart';
 import 'schulnetz_oauth_screen.dart';
 
+/// Connects a Schulnetz school account on the backend.
+///
+/// Pushed as its own route. Pops with the new account id (`String`) on success
+/// or `null` if the user cancels / a failure occurred.
 class ConnectAccountScreen extends StatefulWidget {
-  final VoidCallback? onSignOut;
-  const ConnectAccountScreen({super.key, this.onSignOut});
+  const ConnectAccountScreen({super.key});
 
   @override
   State<ConnectAccountScreen> createState() => _ConnectAccountScreenState();
@@ -19,7 +21,6 @@ class _ConnectAccountScreenState extends State<ConnectAccountScreen> {
   final _nameCtrl = TextEditingController(text: 'BBBaden');
   bool _busy = false;
   String? _error;
-  String? _pingResult;
 
   SchulyApi get _api => ApiClient.instance.api;
 
@@ -30,28 +31,6 @@ class _ConnectAccountScreenState extends State<ConnectAccountScreen> {
     super.dispose();
   }
 
-  Future<void> _checkBackend() async {
-    setState(() {
-      _busy = true;
-      _error = null;
-      _pingResult = null;
-    });
-    try {
-      final response = await _api.getPluginsApi().apiPluginsGet();
-      final plugins = response.data ?? BuiltList<PluginDto>();
-      setState(() => _pingResult =
-          'Backend OK — ${plugins.length} plugin(s): ${plugins.map((p) => p.name).join(', ')}');
-    } catch (e) {
-      setState(() => _error = 'Backend check failed: $e');
-    } finally {
-      if (mounted) setState(() => _busy = false);
-    }
-  }
-
-  /// Untyped JSON body extractor. The generated APIs declare `Response<void>`
-  /// because the backend's OpenAPI spec omits response schemas, but the raw
-  /// body is still on `response.data` as `Object?` from the underlying Dio
-  /// call. We narrow to the shape we expect at the call site.
   T _expectJson<T>(Response<void> response) {
     final data = response.data as Object?;
     if (data is! T) {
@@ -64,7 +43,6 @@ class _ConnectAccountScreenState extends State<ConnectAccountScreen> {
     setState(() {
       _busy = true;
       _error = null;
-      _pingResult = null;
     });
     try {
       final url = _urlCtrl.text.trim();
@@ -72,9 +50,10 @@ class _ConnectAccountScreenState extends State<ConnectAccountScreen> {
       final oauthApi = _api.getOAuthApi();
       String? accountId;
 
-      // 1. Reuse the existing row for this Schulnetz URL if there is one.
+      // 1. Reuse an existing row if the user is reconnecting the same school.
       final list = await accountsApi.apiPluginsSchulwareAccountsGet();
-      final accounts = _expectJson<List<dynamic>>(list).cast<Map<String, dynamic>>();
+      final accounts =
+          _expectJson<List<dynamic>>(list).cast<Map<String, dynamic>>();
       for (final a in accounts) {
         if (a['schulnetzBaseUrl'] == url) {
           accountId = a['id'] as String;
@@ -82,7 +61,7 @@ class _ConnectAccountScreenState extends State<ConnectAccountScreen> {
         }
       }
 
-      // 2. Otherwise create a fresh one.
+      // 2. Otherwise create a fresh row.
       if (accountId == null) {
         final create = await accountsApi.apiPluginsSchulwareAccountsPost(
           connectAccountRequest: ConnectAccountRequest((b) => b
@@ -92,19 +71,21 @@ class _ConnectAccountScreenState extends State<ConnectAccountScreen> {
         accountId = _expectJson<Map<String, dynamic>>(create)['id'] as String;
       }
 
-      // 3. Ask backend for Schulnetz authorize URL + PKCE verifier.
-      final urlRes = await oauthApi.apiPluginsSchulwareAccountsAccountIdAuthOauthUrlGet(
+      // 3. Backend hands back the Schulnetz authorize URL + PKCE verifier.
+      final urlRes =
+          await oauthApi.apiPluginsSchulwareAccountsAccountIdAuthOauthUrlGet(
         accountId: accountId,
       );
       final urlData = _expectJson<Map<String, dynamic>>(urlRes);
       final authorizationUrl = urlData['authorizationUrl'] as String;
       final codeVerifier = urlData['codeVerifier'] as String;
 
-      // 4. Drive Schulnetz OAuth in a WebView, capture the final code.
+      // 4. Drive Schulnetz's OAuth in a WebView and capture the SSO chain.
       if (!mounted) return;
       final result = await Navigator.of(context).push<SchulnetzOAuthResult>(
         MaterialPageRoute(
-          builder: (_) => SchulnetzOAuthScreen(authorizationUrl: authorizationUrl),
+          builder: (_) =>
+              SchulnetzOAuthScreen(authorizationUrl: authorizationUrl),
         ),
       );
       if (result == null) {
@@ -112,9 +93,10 @@ class _ConnectAccountScreenState extends State<ConnectAccountScreen> {
         return;
       }
 
-      // 5. Hand code + context_state + UA back to the backend so the
-      //    stateless refresh flow can replay the SSO chain.
-      await oauthApi.apiPluginsSchulwareAccountsAccountIdAuthOauthCallbackPost(
+      // 5. Hand the captured code + storage_state back so the backend can
+      //    finish token exchange and replay the SSO chain on refresh.
+      await oauthApi
+          .apiPluginsSchulwareAccountsAccountIdAuthOauthCallbackPost(
         accountId: accountId,
         oAuthCallbackRequest: OAuthCallbackRequest((b) => b
           ..code = result.code
@@ -124,13 +106,12 @@ class _ConnectAccountScreenState extends State<ConnectAccountScreen> {
           ..userAgent = result.userAgent),
       );
 
-      if (mounted) setState(() => _pingResult = 'Connected $accountId');
+      if (mounted) Navigator.of(context).pop(accountId);
     } on DioException catch (e) {
-      // Dio's generic .toString() hides the response body. Surface it so
-      // backend ProblemDetails / validation errors are visible.
       final body = e.response?.data;
       final status = e.response?.statusCode;
-      setState(() => _error = 'HTTP ${status ?? '?'} ${e.requestOptions.method} '
+      setState(() => _error =
+          'HTTP ${status ?? '?'} ${e.requestOptions.method} '
           '${e.requestOptions.path}\n$body');
     } catch (e) {
       setState(() => _error = e.toString());
@@ -143,14 +124,12 @@ class _ConnectAccountScreenState extends State<ConnectAccountScreen> {
   Widget build(BuildContext context) {
     final colors = context.theme.colors;
     return FScaffold(
-      header: FHeader(
-        title: const Text('Connect Schulnetz Account'),
-        suffixes: [
-          if (widget.onSignOut != null)
-            FHeaderAction(
-              icon: const Icon(FIcons.logOut),
-              onPress: widget.onSignOut,
-            ),
+      header: FHeader.nested(
+        title: const Text('Add Schulnetz Account'),
+        prefixes: [
+          FHeaderAction.back(
+            onPress: () => Navigator.of(context).pop(),
+          ),
         ],
       ),
       child: Column(
@@ -171,14 +150,9 @@ class _ConnectAccountScreenState extends State<ConnectAccountScreen> {
             onPress: _busy ? null : _create,
             child: Text(_busy ? 'Working...' : 'Connect'),
           ),
-          FButton(
-            onPress: _busy ? null : _checkBackend,
-            child: const Text('Check backend (generated client)'),
-          ),
-          if (_pingResult != null)
-            SelectableText(_pingResult!, style: TextStyle(color: colors.primary)),
           if (_error != null)
-            SelectableText(_error!, style: TextStyle(color: colors.destructive)),
+            SelectableText(_error!,
+                style: TextStyle(color: colors.destructive)),
         ],
       ),
     );

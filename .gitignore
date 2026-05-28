@@ -52,3 +52,6 @@ lib/l10n/app_localizations*.dart
 /windows/
 /linux/
 /macos/
+
+# Scratch screenshots at repo root
+/*.png

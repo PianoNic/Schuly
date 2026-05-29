@@ -43,13 +43,15 @@ class ActiveAccountService extends ChangeNotifier {
       final res = await api.getSchoolsApi().apiSchoolsMySchoolsGet();
       final data = res.data;
 
-      final providerBySchoolId = await _detectProviders();
+      final pluginBySchoolId = await _detectPluginAccounts();
       _schools = data == null
           ? const []
-          : data
-              .map((dto) => MySchool.fromDto(dto,
-                  provider: providerBySchoolId[dto.id] ?? 'schulnetz'))
-              .toList(growable: false);
+          : data.map((dto) {
+              final info = pluginBySchoolId[dto.id];
+              return MySchool.fromDto(dto,
+                  provider: info?.provider ?? 'schulnetz',
+                  pluginAccountId: info?.accountId);
+            }).toList(growable: false);
 
       // Keep the persisted active id only if it still resolves to a school.
       final prefs = await SharedPreferences.getInstance();
@@ -72,11 +74,11 @@ class ActiveAccountService extends ChangeNotifier {
     }
   }
 
-  /// Maps schoolId → provider by cross-referencing the OdaOrg plugin's
-  /// accounts (which expose `schoolUserId`) against the user's SchoolUsers.
-  /// Anything not owned by OdaOrg defaults to Schulnetz. Best-effort: returns
-  /// an empty map on any failure so the account list still loads.
-  Future<Map<String, String>> _detectProviders() async {
+  /// Maps schoolId → (provider, plugin account id) by cross-referencing each
+  /// plugin's accounts (which expose `schoolUserId` + `id`) against the user's
+  /// SchoolUsers. Best-effort: returns an empty map on any failure so the
+  /// account list still loads.
+  Future<Map<String, ({String provider, String accountId})>> _detectPluginAccounts() async {
     try {
       final api = ApiClient.instance.api;
       final me = await api.getAuthApi().apiAuthMeGet();
@@ -90,14 +92,22 @@ class ActiveAccountService extends ChangeNotifier {
           if (u.id != null && u.schoolId != null) u.id!: u.schoolId!,
       };
 
-      final odaRes = await api.getAccountsApi().apiPluginsOdaorgAccountsGet();
-      final odaAccounts = (odaRes.data as List<dynamic>?) ?? const [];
-      final out = <String, String>{};
-      for (final a in odaAccounts.cast<Map<String, dynamic>>()) {
-        final suId = a['schoolUserId'] as String?;
-        final schoolId = suId == null ? null : schoolIdByUser[suId];
-        if (schoolId != null) out[schoolId] = 'odaorg';
+      final out = <String, ({String provider, String accountId})>{};
+      void mapAccounts(List<dynamic> accounts, String provider) {
+        for (final a in accounts.cast<Map<String, dynamic>>()) {
+          final suId = a['schoolUserId'] as String?;
+          final accId = a['id'] as String?;
+          final schoolId = suId == null ? null : schoolIdByUser[suId];
+          if (schoolId != null && accId != null) {
+            out[schoolId] = (provider: provider, accountId: accId);
+          }
+        }
       }
+
+      final oda = await api.getAccountsApi().apiPluginsOdaorgAccountsGet();
+      mapAccounts((oda.data as List<dynamic>?) ?? const [], 'odaorg');
+      final schul = await api.getAccountsApi().apiPluginsSchulwareAccountsGet();
+      mapAccounts((schul.data as List<dynamic>?) ?? const [], 'schulnetz');
       return out;
     } catch (_) {
       return const {};

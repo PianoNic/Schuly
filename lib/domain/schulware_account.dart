@@ -10,6 +10,8 @@ class MySchool {
   final String? email;
   final String? fullName;
   final String provider; // 'schulnetz' | 'odaorg'
+  /// The plugin account id backing this school (for triggering a sync).
+  final String? pluginAccountId;
 
   const MySchool({
     required this.id,
@@ -17,14 +19,21 @@ class MySchool {
     this.email,
     this.fullName,
     this.provider = 'schulnetz',
+    this.pluginAccountId,
   });
 
-  factory MySchool.fromDto(MySchoolDto dto, {String provider = 'schulnetz'}) => MySchool(
+  factory MySchool.fromDto(
+    MySchoolDto dto, {
+    String provider = 'schulnetz',
+    String? pluginAccountId,
+  }) =>
+      MySchool(
         id: dto.id ?? '',
         name: (dto.name?.isNotEmpty ?? false) ? dto.name! : 'School',
         email: dto.email,
         fullName: dto.fullName,
         provider: provider,
+        pluginAccountId: pluginAccountId,
       );
 
   /// Asset for this provider's logo.

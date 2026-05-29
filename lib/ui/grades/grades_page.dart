@@ -136,9 +136,87 @@ class _ClassSection extends StatelessWidget {
                 'class ⌀ ${formatGrade(e.classAverage)}',
               ].join(' · ')),
               suffix: GradePill(myGrades[e.id]?.score),
+              onPress: () => _showExamDetail(context, e, myGrades[e.id]),
             ),
           ),
       ],
+    );
+  }
+}
+
+void _showExamDetail(BuildContext context, ExamDto exam, GradeDto? grade) {
+  showFSheet<void>(
+    context: context,
+    side: FLayout.btt,
+    mainAxisMaxRatio: null,
+    builder: (sheetCtx) => _ExamDetailSheet(exam: exam, grade: grade),
+  );
+}
+
+class _ExamDetailSheet extends StatelessWidget {
+  final ExamDto exam;
+  final GradeDto? grade;
+  const _ExamDetailSheet({required this.exam, required this.grade});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.theme.colors;
+    final typography = context.theme.typography;
+    final score = grade?.score;
+    final classAvg = exam.classAverage;
+
+    Widget bar(String label, num? value) {
+      final v = value ?? 0;
+      final pct = (v / 6).clamp(0.0, 1.0);
+      final c = isGraded(value) ? gradeColor(context, v) : colors.muted;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(label, style: typography.sm.copyWith(color: colors.mutedForeground)),
+              Text(isGraded(value) ? formatGrade(v) : '—',
+                  style: typography.sm.copyWith(fontWeight: FontWeight.w700, color: c)),
+            ],
+          ),
+          const SizedBox(height: 4),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(6),
+            child: LinearProgressIndicator(
+              value: pct,
+              minHeight: 8,
+              backgroundColor: colors.muted,
+              valueColor: AlwaysStoppedAnimation(c),
+            ),
+          ),
+        ],
+      );
+    }
+
+    return Container(
+      decoration: BoxDecoration(color: colors.background),
+      padding: EdgeInsets.fromLTRB(20, 20, 20, 24 + MediaQuery.viewPaddingOf(context).bottom),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(exam.name ?? 'Exam', style: typography.lg.copyWith(fontWeight: FontWeight.w700)),
+          if ((exam.description?.isNotEmpty ?? false)) ...[
+            const SizedBox(height: 4),
+            Text(exam.description!, style: TextStyle(color: colors.mutedForeground)),
+          ],
+          const SizedBox(height: 20),
+          bar('Your score', score),
+          const SizedBox(height: 14),
+          bar('Class average', classAvg),
+          if ((grade?.weighting ?? 1) != 1) ...[
+            const SizedBox(height: 16),
+            Text('Weighting: ${formatGrade(grade!.weighting ?? 1)}',
+                style: typography.sm.copyWith(color: colors.mutedForeground)),
+          ],
+        ],
+      ),
     );
   }
 }

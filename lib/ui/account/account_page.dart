@@ -1,8 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:schuly_api/schuly_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../services/active_account_service.dart';
 import '../../services/api_client.dart';
 import '../../services/school_data_service.dart';
 import '../classes/class_detail_screen.dart';
@@ -28,6 +30,8 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   String? _version;
+  bool _syncing = false;
+  String? _syncMsg;
 
   @override
   void initState() {
@@ -40,6 +44,38 @@ class _AccountPageState extends State<AccountPage> {
       final res = await ApiClient.instance.api.getAppApi().apiAppGet();
       if (mounted) setState(() => _version = res.data?.version);
     } catch (_) {/* non-critical */}
+  }
+
+  /// Triggers an actual provider re-fetch for the active account, then reloads
+  /// the local data. Unlike pull-to-refresh (which only re-reads the backend),
+  /// this pulls fresh data from Schulnetz / OdaOrg.
+  Future<void> _syncNow() async {
+    final active = ActiveAccountService.instance.active;
+    final accountId = active?.pluginAccountId;
+    if (accountId == null) {
+      setState(() => _syncMsg = 'No connected account to sync');
+      return;
+    }
+    setState(() {
+      _syncing = true;
+      _syncMsg = null;
+    });
+    try {
+      final sync = ApiClient.instance.api.getSyncApi();
+      if (active!.provider == 'odaorg') {
+        await sync.apiPluginsOdaorgAccountsAccountIdSyncPost(accountId: accountId);
+      } else {
+        await sync.apiPluginsSchulwareAccountsAccountIdSyncPost(accountId: accountId);
+      }
+      await SchoolDataService.instance.refresh();
+      if (mounted) setState(() => _syncMsg = 'Synced just now');
+    } on DioException catch (e) {
+      if (mounted) setState(() => _syncMsg = 'Sync failed (${e.response?.statusCode ?? 'network'})');
+    } catch (e) {
+      if (mounted) setState(() => _syncMsg = 'Sync failed');
+    } finally {
+      if (mounted) setState(() => _syncing = false);
+    }
   }
 
   @override
@@ -159,6 +195,20 @@ class _AccountPageState extends State<AccountPage> {
           const SizedBox(height: 12),
         ],
         _SectionLabel('App'),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: FTile(
+            prefix: _syncing
+                ? const SizedBox(
+                    width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
+                : const Icon(FIcons.refreshCw),
+            title: const Text('Sync now'),
+            subtitle: _syncMsg != null
+                ? Text(_syncMsg!)
+                : const Text('Fetch fresh data from the provider'),
+            onPress: _syncing ? null : _syncNow,
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: FTile(

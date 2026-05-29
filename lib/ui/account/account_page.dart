@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:schuly_api/schuly_api.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../services/api_client.dart';
 import '../../services/school_data_service.dart';
+import '../classes/class_detail_screen.dart';
 
 /// Account tab — profile details, enrolled classes, app info, and the account
 /// switcher + sign out.
@@ -112,6 +114,46 @@ class _AccountPageState extends State<AccountPage> {
               child: FTile(
                 prefix: const Icon(FIcons.users),
                 title: Text(c.className ?? 'Class'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => ClassDetailScreen(
+                    classId: c.classId,
+                    title: c.className ?? 'Class',
+                  ),
+                )),
+              ),
+            ),
+          const SizedBox(height: 12),
+        ],
+        if (SchoolDataService.instance.teachers.isNotEmpty) ...[
+          _SectionLabel('Teachers'),
+          for (final t in SchoolDataService.instance.teachers)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: FTile(
+                prefix: const Icon(FIcons.user),
+                title: Text('${t.firstName ?? ''} ${t.lastName ?? ''}'.trim()),
+                subtitle: (t.code?.isNotEmpty ?? false) ? Text(t.code!) : null,
+                suffix: (t.email?.isNotEmpty ?? false) ? const Icon(FIcons.mail) : null,
+                onPress: (t.email?.isNotEmpty ?? false)
+                    ? () => launchUrl(Uri(scheme: 'mailto', path: t.email))
+                    : null,
+              ),
+            ),
+          const SizedBox(height: 12),
+        ],
+        if (SchoolDataService.instance.documents.isNotEmpty) ...[
+          _SectionLabel('Documents'),
+          for (final dDoc in SchoolDataService.instance.documents)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: FTile(
+                prefix: const Icon(FIcons.fileText),
+                title: Text(dDoc.title?.isNotEmpty == true ? dDoc.title! : (dDoc.fileName ?? 'Document')),
+                subtitle: Text([
+                  dDoc.category,
+                  if (dDoc.fileSizeBytes != null) _fmtSize(dDoc.fileSizeBytes!),
+                ].whereType<String>().where((s) => s.isNotEmpty).join(' · ')),
               ),
             ),
           const SizedBox(height: 12),
@@ -142,6 +184,12 @@ class _AccountPageState extends State<AccountPage> {
       ],
       ),
     );
+  }
+
+  static String _fmtSize(int bytes) {
+    if (bytes < 1024) return '$bytes B';
+    if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(0)} KB';
+    return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
   }
 
   static String _roleLabel(Roles? r) => switch (r) {

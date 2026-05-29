@@ -15,11 +15,22 @@ class _$MySchoolDto extends MySchoolDto {
   final String? email;
   @override
   final String? fullName;
+  @override
+  final String? logoUrl;
+  @override
+  final String? profilePictureUrl;
 
   factory _$MySchoolDto([void Function(MySchoolDtoBuilder)? updates]) =>
       (MySchoolDtoBuilder()..update(updates))._build();
 
-  _$MySchoolDto._({this.id, this.name, this.email, this.fullName}) : super._();
+  _$MySchoolDto._({
+    this.id,
+    this.name,
+    this.email,
+    this.fullName,
+    this.logoUrl,
+    this.profilePictureUrl,
+  }) : super._();
   @override
   MySchoolDto rebuild(void Function(MySchoolDtoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -34,7 +45,9 @@ class _$MySchoolDto extends MySchoolDto {
         id == other.id &&
         name == other.name &&
         email == other.email &&
-        fullName == other.fullName;
+        fullName == other.fullName &&
+        logoUrl == other.logoUrl &&
+        profilePictureUrl == other.profilePictureUrl;
   }
 
   @override
@@ -44,6 +57,8 @@ class _$MySchoolDto extends MySchoolDto {
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jc(_$hash, email.hashCode);
     _$hash = $jc(_$hash, fullName.hashCode);
+    _$hash = $jc(_$hash, logoUrl.hashCode);
+    _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -54,7 +69,9 @@ class _$MySchoolDto extends MySchoolDto {
           ..add('id', id)
           ..add('name', name)
           ..add('email', email)
-          ..add('fullName', fullName))
+          ..add('fullName', fullName)
+          ..add('logoUrl', logoUrl)
+          ..add('profilePictureUrl', profilePictureUrl))
         .toString();
   }
 }
@@ -78,6 +95,15 @@ class MySchoolDtoBuilder implements Builder<MySchoolDto, MySchoolDtoBuilder> {
   String? get fullName => _$this._fullName;
   set fullName(String? fullName) => _$this._fullName = fullName;
 
+  String? _logoUrl;
+  String? get logoUrl => _$this._logoUrl;
+  set logoUrl(String? logoUrl) => _$this._logoUrl = logoUrl;
+
+  String? _profilePictureUrl;
+  String? get profilePictureUrl => _$this._profilePictureUrl;
+  set profilePictureUrl(String? profilePictureUrl) =>
+      _$this._profilePictureUrl = profilePictureUrl;
+
   MySchoolDtoBuilder() {
     MySchoolDto._defaults(this);
   }
@@ -89,6 +115,8 @@ class MySchoolDtoBuilder implements Builder<MySchoolDto, MySchoolDtoBuilder> {
       _name = $v.name;
       _email = $v.email;
       _fullName = $v.fullName;
+      _logoUrl = $v.logoUrl;
+      _profilePictureUrl = $v.profilePictureUrl;
       _$v = null;
     }
     return this;
@@ -110,7 +138,14 @@ class MySchoolDtoBuilder implements Builder<MySchoolDto, MySchoolDtoBuilder> {
   _$MySchoolDto _build() {
     final _$result =
         _$v ??
-        _$MySchoolDto._(id: id, name: name, email: email, fullName: fullName);
+        _$MySchoolDto._(
+          id: id,
+          name: name,
+          email: email,
+          fullName: fullName,
+          logoUrl: logoUrl,
+          profilePictureUrl: profilePictureUrl,
+        );
     replace(_$result);
     return _$result;
   }

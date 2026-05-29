@@ -17,6 +17,7 @@ doc/AuthApi.md
 doc/ClassApi.md
 doc/ClassDto.md
 doc/ConnectAccountRequest.md
+doc/ConnectOdaOrgRequest.md
 doc/CreateAbsenceCommand.md
 doc/CreateAgendaEntryCommand.md
 doc/CreateApplicationUserCommand.md
@@ -96,6 +97,7 @@ lib/src/model/app_dto.dart
 lib/src/model/application_user_dto.dart
 lib/src/model/class_dto.dart
 lib/src/model/connect_account_request.dart
+lib/src/model/connect_oda_org_request.dart
 lib/src/model/create_absence_command.dart
 lib/src/model/create_agenda_entry_command.dart
 lib/src/model/create_application_user_command.dart
@@ -133,7 +135,3 @@ lib/src/model/user_class_dto.dart
 lib/src/model/user_state.dart
 lib/src/serializers.dart
 pubspec.yaml
-test/semester_report_dto_test.dart
-test/semester_reports_api_test.dart
-test/semester_subject_grade_dto_test.dart
-test/student_document_dto_test.dart

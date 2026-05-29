@@ -22,6 +22,7 @@ part 'update_school_command.g.dart';
 /// * [state] 
 /// * [zip] 
 /// * [country] 
+/// * [logoUrl] 
 @BuiltValue()
 abstract class UpdateSchoolCommand implements Built<UpdateSchoolCommand, UpdateSchoolCommandBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -56,6 +57,9 @@ abstract class UpdateSchoolCommand implements Built<UpdateSchoolCommand, UpdateS
 
   @BuiltValueField(wireName: r'country')
   String? get country;
+
+  @BuiltValueField(wireName: r'logoUrl')
+  String? get logoUrl;
 
   UpdateSchoolCommand._();
 
@@ -154,6 +158,13 @@ class _$UpdateSchoolCommandSerializer implements PrimitiveSerializer<UpdateSchoo
       yield r'country';
       yield serializers.serialize(
         object.country,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.logoUrl != null) {
+      yield r'logoUrl';
+      yield serializers.serialize(
+        object.logoUrl,
         specifiedType: const FullType.nullable(String),
       );
     }
@@ -266,6 +277,14 @@ class _$UpdateSchoolCommandSerializer implements PrimitiveSerializer<UpdateSchoo
           ) as String?;
           if (valueDes == null) continue;
           result.country = valueDes;
+          break;
+        case r'logoUrl':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.logoUrl = valueDes;
           break;
         default:
           unhandled.add(key);

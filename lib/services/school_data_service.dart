@@ -87,9 +87,14 @@ class SchoolDataService extends ChangeNotifier {
           .where((e) => e.schoolId == schoolId)
           .toList(growable: false);
 
+      // Agenda entries carry a classId but no schoolId, so scope them by the
+      // user's classes (their classes all belong to the active school).
+      final myClassIds = {
+        for (final c in (_me?.classes ?? const <UserClassDto>[])) c.classId,
+      };
       final agenda = await _api.getAgendasApi().apiAgendasGet();
       _agenda = (agenda.data ?? BuiltList<AgendaEntryDto>())
-          .where((a) => a.schoolId == schoolId)
+          .where((a) => myClassIds.isEmpty || myClassIds.contains(a.classId))
           .toList(growable: false);
 
       final absences = await _api.getAbsencesApi().apiAbsencesGet();

@@ -17,6 +17,7 @@ Serializers _$serializers =
           ..add(ApplicationUserDto.serializer)
           ..add(ClassDto.serializer)
           ..add(ConnectAccountRequest.serializer)
+          ..add(ConnectOdaOrgRequest.serializer)
           ..add(CreateAbsenceCommand.serializer)
           ..add(CreateAgendaEntryCommand.serializer)
           ..add(CreateApplicationUserCommand.serializer)

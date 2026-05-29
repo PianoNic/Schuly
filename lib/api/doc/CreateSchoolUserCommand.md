@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **birthday** | [**Date**](Date.md) |  | [optional] 
 **entryDate** | [**Date**](Date.md) |  | [optional] 
 **role** | [**Roles**](Roles.md) |  | [optional] 
+**profilePictureUrl** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

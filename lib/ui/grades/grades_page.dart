@@ -30,13 +30,14 @@ class GradesPage extends StatelessWidget {
       ...svc.classNameById,
     };
 
-    // Overall weighted average across all graded exams.
+    // Overall weighted average — only real (graded) scores count.
     double weightSum = 0, scoreSum = 0;
     for (final entry in myGrades.entries) {
       final g = entry.value;
+      if (!isGraded(g.score)) continue;
       final w = (g.weighting ?? 1).toDouble();
       weightSum += w;
-      scoreSum += (g.score ?? 0).toDouble() * w;
+      scoreSum += g.score!.toDouble() * w;
     }
     final overall = weightSum > 0 ? scoreSum / weightSum : null;
 
@@ -110,10 +111,10 @@ class _ClassSection extends StatelessWidget {
     double ws = 0, ss = 0;
     for (final e in exams) {
       final g = myGrades[e.id];
-      if (g == null) continue;
+      if (g == null || !isGraded(g.score)) continue;
       final w = (g.weighting ?? 1).toDouble();
       ws += w;
-      ss += (g.score ?? 0).toDouble() * w;
+      ss += g.score!.toDouble() * w;
     }
     final avg = ws > 0 ? ss / ws : null;
 
@@ -142,7 +143,7 @@ class _ClassSection extends StatelessWidget {
                 if ((myGrades[e.id]?.weighting ?? 1) != 1) 'weight ${formatGrade(myGrades[e.id]!.weighting ?? 1)}',
                 'class ⌀ ${formatGrade(e.classAverage)}',
               ].join(' · ')),
-              suffix: _GradePill(myGrades[e.id]?.score ?? 0),
+              suffix: GradePill(myGrades[e.id]?.score),
             ),
           ),
       ],
@@ -150,16 +151,3 @@ class _ClassSection extends StatelessWidget {
   }
 }
 
-class _GradePill extends StatelessWidget {
-  final num score;
-  const _GradePill(this.score);
-  @override
-  Widget build(BuildContext context) {
-    final c = gradeColor(context, score);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: c.withValues(alpha: 0.18), borderRadius: BorderRadius.circular(8)),
-      child: Text(formatGrade(score), style: TextStyle(color: c, fontWeight: FontWeight.w700)),
-    );
-  }
-}

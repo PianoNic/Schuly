@@ -27,6 +27,7 @@ part 'school_user_dto.g.dart';
 /// * [email] 
 /// * [privateEmail] 
 /// * [phoneNumber] 
+/// * [profilePictureUrl] 
 /// * [street] 
 /// * [city] 
 /// * [zip] 
@@ -68,6 +69,9 @@ abstract class SchoolUserDto implements Built<SchoolUserDto, SchoolUserDtoBuilde
 
   @BuiltValueField(wireName: r'phoneNumber')
   String? get phoneNumber;
+
+  @BuiltValueField(wireName: r'profilePictureUrl')
+  String? get profilePictureUrl;
 
   @BuiltValueField(wireName: r'street')
   String? get street;
@@ -187,6 +191,13 @@ class _$SchoolUserDtoSerializer implements PrimitiveSerializer<SchoolUserDto> {
       yield r'phoneNumber';
       yield serializers.serialize(
         object.phoneNumber,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.profilePictureUrl != null) {
+      yield r'profilePictureUrl';
+      yield serializers.serialize(
+        object.profilePictureUrl,
         specifiedType: const FullType.nullable(String),
       );
     }
@@ -366,6 +377,14 @@ class _$SchoolUserDtoSerializer implements PrimitiveSerializer<SchoolUserDto> {
           ) as String?;
           if (valueDes == null) continue;
           result.phoneNumber = valueDes;
+          break;
+        case r'profilePictureUrl':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.profilePictureUrl = valueDes;
           break;
         case r'street':
           final valueDes = serializers.deserialize(

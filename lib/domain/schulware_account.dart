@@ -2,24 +2,34 @@ import 'package:schuly_api/schuly_api.dart';
 
 /// A school the signed-in user belongs to, from `GET /api/schools/my-schools`.
 /// Carries the school name plus the user's identity (full name + email) at
-/// that school — what the account switcher displays.
+/// that school — what the account switcher displays. [provider] is inferred
+/// from which plugin owns the school's SchoolUser (the API doesn't expose it).
 class MySchool {
   final String id;
   final String name;
   final String? email;
   final String? fullName;
+  final String provider; // 'schulnetz' | 'odaorg'
 
   const MySchool({
     required this.id,
     required this.name,
     this.email,
     this.fullName,
+    this.provider = 'schulnetz',
   });
 
-  factory MySchool.fromDto(MySchoolDto dto) => MySchool(
+  factory MySchool.fromDto(MySchoolDto dto, {String provider = 'schulnetz'}) => MySchool(
         id: dto.id ?? '',
         name: (dto.name?.isNotEmpty ?? false) ? dto.name! : 'School',
         email: dto.email,
         fullName: dto.fullName,
+        provider: provider,
       );
+
+  /// Asset for this provider's logo.
+  String get logoAsset => switch (provider) {
+        'odaorg' => 'assets/schoolsystems/odaorg.webp',
+        _ => 'assets/schoolsystems/schulnetz.webp',
+      };
 }

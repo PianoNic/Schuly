@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
+import '../../odaorg/connect_odaorg_screen.dart';
 import '../../schulnetz/connect_account_screen.dart';
 
 /// A school system the user can connect. Today only Schulnetz; the modal is
@@ -31,7 +32,6 @@ const _systems = <SchoolSystem>[
     id: 'odaorg',
     label: 'OdAOrg',
     assetPath: 'assets/schoolsystems/odaorg.webp',
-    enabled: false,
   ),
 ];
 
@@ -46,10 +46,13 @@ Future<String?> runAddSchoolFlow(
 ) async {
   final system = await showAddSchoolModal(context);
   if (system == null) return null;
-  // Only Schulnetz is wired today; future systems would branch on `system`.
-  return navigator.push<String>(
-    MaterialPageRoute(builder: (_) => const ConnectAccountScreen()),
-  );
+  // Each provider has its own connect screen — Schulnetz uses OAuth (WebView),
+  // OdAOrg uses username/password.
+  final Widget screen = switch (system) {
+    'odaorg' => const ConnectOdaOrgScreen(),
+    _ => const ConnectAccountScreen(),
+  };
+  return navigator.push<String>(MaterialPageRoute(builder: (_) => screen));
 }
 
 /// Shows the school-system picker. Resolves to the chosen [SchoolSystem.id]

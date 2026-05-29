@@ -4,6 +4,7 @@ import 'package:forui/forui.dart';
 import 'package:schuly_api/schuly_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../config/oidc_config.dart';
 import '../../services/active_account_service.dart';
 import '../../services/api_client.dart';
 import '../../services/school_data_service.dart';
@@ -92,9 +93,9 @@ class _AccountPageState extends State<AccountPage> {
     final initial = fullName.isNotEmpty ? fullName.characters.first.toUpperCase() : '?';
     final fallback = Text(initial,
         style: TextStyle(color: colors.mutedForeground, fontWeight: FontWeight.w600));
-    // Prefer the school provider's photo, fall back to the OIDC picture.
-    final providerPfp = me?.profilePictureUrl;
-    final avatarUrl = (providerPfp?.isNotEmpty ?? false) ? providerPfp : widget.pictureUrl;
+    // Prefer the school provider's photo (may be relative), fall back to OIDC.
+    final providerPfp = OidcConfig.resolveUrl(me?.profilePictureUrl);
+    final avatarUrl = providerPfp ?? widget.pictureUrl;
 
     return RefreshIndicator(
       onRefresh: () async {

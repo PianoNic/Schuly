@@ -1,5 +1,7 @@
 import 'package:schuly_api/schuly_api.dart';
 
+import '../config/oidc_config.dart';
+
 /// A school the signed-in user belongs to, from `GET /api/schools/my-schools`.
 /// Carries the school name plus the user's identity (full name + email) at
 /// that school — what the account switcher displays. [provider] is inferred
@@ -12,6 +14,9 @@ class MySchool {
   final String provider; // 'schulnetz' | 'odaorg'
   /// The plugin account id backing this school (for triggering a sync).
   final String? pluginAccountId;
+  /// Backend-supplied, fully-resolved URLs (null if not provided).
+  final String? logoUrl;
+  final String? profilePictureUrl;
 
   const MySchool({
     required this.id,
@@ -20,6 +25,8 @@ class MySchool {
     this.fullName,
     this.provider = 'schulnetz',
     this.pluginAccountId,
+    this.logoUrl,
+    this.profilePictureUrl,
   });
 
   factory MySchool.fromDto(
@@ -34,9 +41,11 @@ class MySchool {
         fullName: dto.fullName,
         provider: provider,
         pluginAccountId: pluginAccountId,
+        logoUrl: OidcConfig.resolveUrl(dto.logoUrl),
+        profilePictureUrl: OidcConfig.resolveUrl(dto.profilePictureUrl),
       );
 
-  /// Asset for this provider's logo.
+  /// Fallback asset for this provider's logo when [logoUrl] is null.
   String get logoAsset => switch (provider) {
         'odaorg' => 'assets/schoolsystems/odaorg.webp',
         _ => 'assets/schoolsystems/schulnetz.webp',

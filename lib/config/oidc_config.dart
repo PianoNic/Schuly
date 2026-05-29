@@ -17,4 +17,14 @@ class OidcConfig {
 
   static const tokenEndpoint = '$authority/api/oidc/token';
   static const authorizationEndpoint = '$authority/authorize';
+
+  /// Resolves a backend-supplied URL: absolute (http…) is used as-is, a
+  /// root-relative path (/api/avatars/…) is prefixed with [backendBaseUrl],
+  /// null/empty returns null. Signed capability URLs need no auth header.
+  static String? resolveUrl(String? url) {
+    if (url == null || url.isEmpty) return null;
+    if (url.startsWith('http')) return url;
+    if (url.startsWith('/')) return '$backendBaseUrl$url';
+    return url;
+  }
 }

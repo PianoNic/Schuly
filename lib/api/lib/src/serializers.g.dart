@@ -33,6 +33,7 @@ Serializers _$serializers =
           ..add(MySchoolDto.serializer)
           ..add(OAuthCallbackRequest.serializer)
           ..add(PluginDto.serializer)
+          ..add(PluginTaskStatus.serializer)
           ..add(ProblemDetails.serializer)
           ..add(Roles.serializer)
           ..add(SchoolDto.serializer)

@@ -89,6 +89,7 @@ Class | Method | HTTP request | Description
 [*ApplicationUsersApi*](doc/ApplicationUsersApi.md) | [**apiApplicationUsersPut**](doc/ApplicationUsersApi.md#apiapplicationusersput) | **PUT** /api/ApplicationUsers | 
 [*AuthApi*](doc/AuthApi.md) | [**apiAuthMeGet**](doc/AuthApi.md#apiauthmeget) | **GET** /api/Auth/me | 
 [*AuthApi*](doc/AuthApi.md) | [**apiAuthSyncGet**](doc/AuthApi.md#apiauthsyncget) | **GET** /api/Auth/sync | 
+[*AvatarsApi*](doc/AvatarsApi.md) | [**apiAvatarsSchoolUserIdGet**](doc/AvatarsApi.md#apiavatarsschooluseridget) | **GET** /api/avatars/{schoolUserId} | 
 [*ClassApi*](doc/ClassApi.md) | [**apiClassEnrolStudentPost**](doc/ClassApi.md#apiclassenrolstudentpost) | **POST** /api/Class/enrol-student | 
 [*ClassApi*](doc/ClassApi.md) | [**apiClassGet**](doc/ClassApi.md#apiclassget) | **GET** /api/Class | 
 [*ClassApi*](doc/ClassApi.md) | [**apiClassIdDelete**](doc/ClassApi.md#apiclassiddelete) | **DELETE** /api/Class/{id} | 
@@ -104,6 +105,7 @@ Class | Method | HTTP request | Description
 [*OAuthApi*](doc/OAuthApi.md) | [**apiPluginsSchulwareAccountsAccountIdAuthOauthCallbackPost**](doc/OAuthApi.md#apipluginsschulwareaccountsaccountidauthoauthcallbackpost) | **POST** /api/plugins/schulware/accounts/{accountId}/auth/oauth/callback | 
 [*OAuthApi*](doc/OAuthApi.md) | [**apiPluginsSchulwareAccountsAccountIdAuthOauthUrlGet**](doc/OAuthApi.md#apipluginsschulwareaccountsaccountidauthoauthurlget) | **GET** /api/plugins/schulware/accounts/{accountId}/auth/oauth/url | 
 [*PluginsApi*](doc/PluginsApi.md) | [**apiPluginsGet**](doc/PluginsApi.md#apipluginsget) | **GET** /api/Plugins | 
+[*PluginsApi*](doc/PluginsApi.md) | [**apiPluginsSchedulerGet**](doc/PluginsApi.md#apipluginsschedulerget) | **GET** /api/Plugins/scheduler | 
 [*SchoolUsersApi*](doc/SchoolUsersApi.md) | [**apiSchoolUsersGet**](doc/SchoolUsersApi.md#apischoolusersget) | **GET** /api/SchoolUsers | 
 [*SchoolUsersApi*](doc/SchoolUsersApi.md) | [**apiSchoolUsersIdDelete**](doc/SchoolUsersApi.md#apischoolusersiddelete) | **DELETE** /api/SchoolUsers/{id} | 
 [*SchoolUsersApi*](doc/SchoolUsersApi.md) | [**apiSchoolUsersIdGet**](doc/SchoolUsersApi.md#apischoolusersidget) | **GET** /api/SchoolUsers/{id} | 
@@ -159,6 +161,7 @@ Class | Method | HTTP request | Description
  - [MySchoolDto](doc/MySchoolDto.md)
  - [OAuthCallbackRequest](doc/OAuthCallbackRequest.md)
  - [PluginDto](doc/PluginDto.md)
+ - [PluginTaskStatus](doc/PluginTaskStatus.md)
  - [ProblemDetails](doc/ProblemDetails.md)
  - [Roles](doc/Roles.md)
  - [SchoolDto](doc/SchoolDto.md)

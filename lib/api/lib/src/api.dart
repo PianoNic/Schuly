@@ -15,6 +15,7 @@ import 'package:schuly_api/src/api/agendas_api.dart';
 import 'package:schuly_api/src/api/app_api.dart';
 import 'package:schuly_api/src/api/application_users_api.dart';
 import 'package:schuly_api/src/api/auth_api.dart';
+import 'package:schuly_api/src/api/avatars_api.dart';
 import 'package:schuly_api/src/api/class_api.dart';
 import 'package:schuly_api/src/api/exams_api.dart';
 import 'package:schuly_api/src/api/o_auth_api.dart';
@@ -115,6 +116,12 @@ class SchulyApi {
   /// by doing that all interceptors will not be executed
   AuthApi getAuthApi() {
     return AuthApi(dio, serializers);
+  }
+
+  /// Get AvatarsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  AvatarsApi getAvatarsApi() {
+    return AvatarsApi(dio, serializers);
   }
 
   /// Get ClassApi instance, base route and serializer can be overridden by a given but be careful,

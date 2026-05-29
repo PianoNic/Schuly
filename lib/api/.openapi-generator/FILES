@@ -14,6 +14,7 @@ doc/AppDto.md
 doc/ApplicationUserDto.md
 doc/ApplicationUsersApi.md
 doc/AuthApi.md
+doc/AvatarsApi.md
 doc/ClassApi.md
 doc/ClassDto.md
 doc/ConnectAccountRequest.md
@@ -35,6 +36,7 @@ doc/MySchoolDto.md
 doc/OAuthApi.md
 doc/OAuthCallbackRequest.md
 doc/PluginDto.md
+doc/PluginTaskStatus.md
 doc/PluginsApi.md
 doc/ProblemDetails.md
 doc/Roles.md
@@ -70,6 +72,7 @@ lib/src/api/agendas_api.dart
 lib/src/api/app_api.dart
 lib/src/api/application_users_api.dart
 lib/src/api/auth_api.dart
+lib/src/api/avatars_api.dart
 lib/src/api/class_api.dart
 lib/src/api/exams_api.dart
 lib/src/api/o_auth_api.dart
@@ -114,6 +117,7 @@ lib/src/model/grade_dto.dart
 lib/src/model/my_school_dto.dart
 lib/src/model/o_auth_callback_request.dart
 lib/src/model/plugin_dto.dart
+lib/src/model/plugin_task_status.dart
 lib/src/model/problem_details.dart
 lib/src/model/roles.dart
 lib/src/model/school_dto.dart
@@ -135,3 +139,4 @@ lib/src/model/user_class_dto.dart
 lib/src/model/user_state.dart
 lib/src/serializers.dart
 pubspec.yaml
+test/plugin_task_status_test.dart

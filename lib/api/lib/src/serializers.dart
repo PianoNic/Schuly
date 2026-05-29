@@ -39,6 +39,7 @@ import 'package:schuly_api/src/model/grade_dto.dart';
 import 'package:schuly_api/src/model/my_school_dto.dart';
 import 'package:schuly_api/src/model/o_auth_callback_request.dart';
 import 'package:schuly_api/src/model/plugin_dto.dart';
+import 'package:schuly_api/src/model/plugin_task_status.dart';
 import 'package:schuly_api/src/model/problem_details.dart';
 import 'package:schuly_api/src/model/roles.dart';
 import 'package:schuly_api/src/model/school_dto.dart';
@@ -87,6 +88,7 @@ part 'serializers.g.dart';
   MySchoolDto,
   OAuthCallbackRequest,
   PluginDto,
+  PluginTaskStatus,
   ProblemDetails,
   Roles,
   SchoolDto,
@@ -113,6 +115,14 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<ExamDto>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(SchoolDto)]),
+        () => ListBuilder<SchoolDto>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(StudentDocumentDto)]),
+        () => ListBuilder<StudentDocumentDto>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(PluginDto)]),
         () => ListBuilder<PluginDto>(),
       )
@@ -129,12 +139,8 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<ApplicationUserDto>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SchoolDto)]),
-        () => ListBuilder<SchoolDto>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(StudentDocumentDto)]),
-        () => ListBuilder<StudentDocumentDto>(),
+        const FullType(BuiltList, [FullType(PluginTaskStatus)]),
+        () => ListBuilder<PluginTaskStatus>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(MySchoolDto)]),

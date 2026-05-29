@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:schuly_api/schuly_api.dart';
 
+import '../../config/oidc_config.dart';
 import '../../services/api_client.dart';
 import '../core/grade_color.dart';
 
@@ -86,7 +87,10 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: FTile(
-                    prefix: const Icon(FIcons.user),
+                    prefix: _StudentAvatar(
+                      url: OidcConfig.resolveUrl(s.profilePictureUrl),
+                      name: '${s.firstName ?? ''} ${s.lastName ?? ''}'.trim(),
+                    ),
                     title: Text('${s.firstName ?? ''} ${s.lastName ?? ''}'.trim()),
                   ),
                 ),
@@ -131,6 +135,23 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
       ),
       child: body,
     );
+  }
+}
+
+class _StudentAvatar extends StatelessWidget {
+  final String? url;
+  final String name;
+  const _StudentAvatar({required this.url, required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.theme.colors;
+    final initial = name.isNotEmpty ? name.characters.first.toUpperCase() : '?';
+    final fallback = Text(initial,
+        style: TextStyle(color: colors.mutedForeground, fontWeight: FontWeight.w600));
+    return url == null
+        ? FAvatar.raw(size: 32, child: fallback)
+        : FAvatar(size: 32, image: NetworkImage(url!), fallback: fallback);
   }
 }
 

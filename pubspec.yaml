@@ -49,6 +49,8 @@ dependencies:
   flutter_inappwebview: ^6.1.5
   forui: ^0.17.0
   forui_assets: ^0.17.1
+  path_provider: ^2.1.2
+  open_filex: ^4.5.0
 
 dev_dependencies:
   flutter_test:

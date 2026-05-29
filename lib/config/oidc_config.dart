@@ -11,9 +11,10 @@ class OidcConfig {
   static const redirectUri = 'schulytest://callback';
   static const callbackScheme = 'schulytest';
 
-  // USB-tethered phone via `adb reverse tcp:5033 tcp:5033`. Use the LAN IP
-  // (http://192.168.188.93:5033) or `http://10.0.2.2:5033` (emulator) instead.
-  static const backendBaseUrl = 'http://localhost:5033';
+  // LAN address of the dev box (Wi-Fi, no cable needed). Use
+  // `http://localhost:5033` + `adb reverse tcp:5033 tcp:5033` for USB, or
+  // `http://10.0.2.2:5033` for the emulator.
+  static const backendBaseUrl = 'http://192.168.188.93:5033';
 
   static const tokenEndpoint = '$authority/api/oidc/token';
   static const authorizationEndpoint = '$authority/authorize';

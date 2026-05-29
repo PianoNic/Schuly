@@ -122,6 +122,26 @@ class ActiveAccountService extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Disconnects a connected school via its plugin's DELETE endpoint, then
+  /// reloads the account list (which reselects an active school).
+  Future<void> removeSchool(MySchool school) async {
+    final accountId = school.pluginAccountId;
+    if (accountId == null) return;
+    final accounts = ApiClient.instance.api.getAccountsApi();
+    if (school.provider == 'odaorg') {
+      await accounts.apiPluginsOdaorgAccountsAccountIdDelete(accountId: accountId);
+    } else {
+      await accounts.apiPluginsSchulwareAccountsAccountIdDelete(accountId: accountId);
+    }
+    // If we removed the active school, drop the selection so refresh picks a new one.
+    if (_activeId == school.id) {
+      _activeId = null;
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_activeIdKey);
+    }
+    await refresh();
+  }
+
   Future<void> clear() async {
     _schools = const [];
     _activeId = null;

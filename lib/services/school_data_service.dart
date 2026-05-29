@@ -20,6 +20,9 @@ class SchoolDataService extends ChangeNotifier {
   List<AgendaEntryDto> _agenda = const [];
   List<AbsenceDto> _absences = const [];
   List<ClassDto> _classes = const [];
+  List<SemesterReportDto> _reports = const [];
+  List<TeacherDto> _teachers = const [];
+  List<StudentDocumentDto> _documents = const [];
   bool _loading = false;
   Object? _error;
 
@@ -28,6 +31,9 @@ class SchoolDataService extends ChangeNotifier {
   List<AgendaEntryDto> get agenda => _agenda;
   List<AbsenceDto> get absences => _absences;
   List<ClassDto> get classes => _classes;
+  List<SemesterReportDto> get reports => _reports;
+  List<TeacherDto> get teachers => _teachers;
+  List<StudentDocumentDto> get documents => _documents;
   bool get loading => _loading;
   Object? get error => _error;
 
@@ -106,6 +112,22 @@ class SchoolDataService extends ChangeNotifier {
       _classes = (classes.data ?? BuiltList<ClassDto>())
           .where((c) => c.schoolId == schoolId)
           .toList(growable: false);
+
+      final meId = _me?.id;
+      final reports = await _api.getSemesterReportsApi().apiSemesterReportsGet();
+      _reports = (reports.data ?? BuiltList<SemesterReportDto>())
+          .where((r) => meId == null || r.schoolUserId == meId)
+          .toList(growable: false);
+
+      final teachers = await _api.getTeachersApi().apiTeachersGet();
+      _teachers = (teachers.data ?? BuiltList<TeacherDto>())
+          .where((t) => t.schoolId == schoolId)
+          .toList(growable: false);
+
+      final documents = await _api.getStudentDocumentsApi().apiDocumentsGet();
+      _documents = (documents.data ?? BuiltList<StudentDocumentDto>())
+          .where((d) => meId == null || d.schoolUserId == meId)
+          .toList(growable: false);
     } catch (e) {
       _error = e;
     } finally {
@@ -120,6 +142,9 @@ class SchoolDataService extends ChangeNotifier {
     _agenda = const [];
     _absences = const [];
     _classes = const [];
+    _reports = const [];
+    _teachers = const [];
+    _documents = const [];
     _error = null;
     notifyListeners();
   }

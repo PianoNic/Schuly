@@ -59,6 +59,10 @@ class ApiClient {
   late final Dio _dio;
   late final SchulyApi api;
 
+  /// The configured Dio (auth + refresh interceptor, backend base URL) for
+  /// requests the typed client doesn't cover well — e.g. binary downloads.
+  Dio get dio => _dio;
+
   /// In-flight refresh, shared so concurrent 401s trigger a single token
   /// exchange instead of a stampede.
   Future<String?>? _refreshing;

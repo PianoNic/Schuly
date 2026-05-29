@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
+import '../../../domain/schulware_account.dart';
 import '../../../services/active_account_service.dart';
 import 'add_school_modal.dart';
 
@@ -29,6 +30,31 @@ class AccountsSidebar extends StatelessWidget {
     this.userEmail,
     this.pictureUrl,
   });
+
+  Future<void> _confirmRemove(BuildContext context, MySchool school) async {
+    final confirmed = await showFDialog<bool>(
+      context: context,
+      builder: (dCtx, style, animation) => FDialog(
+        animation: animation,
+        title: const Text('Disconnect school'),
+        body: Text('Remove ${school.name}? You can reconnect it later.'),
+        actions: [
+          FButton(
+            onPress: () => Navigator.of(dCtx).pop(false),
+            child: const Text('Cancel'),
+          ),
+          FButton(
+            onPress: () => Navigator.of(dCtx).pop(true),
+            child: const Text('Disconnect'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+    try {
+      await ActiveAccountService.instance.removeSchool(school);
+    } catch (_) {/* keep the sheet open; list reflects whatever succeeded */}
+  }
 
   Future<void> _add(BuildContext context) async {
     final svc = ActiveAccountService.instance;
@@ -112,6 +138,7 @@ class AccountsSidebar extends StatelessWidget {
                               Navigator.of(context).maybePop();
                             }
                           },
+                          onLongPress: () => _confirmRemove(context, s),
                         ),
                     ],
                   ),

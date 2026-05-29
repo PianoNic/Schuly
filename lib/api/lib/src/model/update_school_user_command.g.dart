@@ -29,6 +29,8 @@ class _$UpdateSchoolUserCommand extends UpdateSchoolUserCommand {
   final Date? leaveDate;
   @override
   final UserState? state;
+  @override
+  final String? profilePictureUrl;
 
   factory _$UpdateSchoolUserCommand([
     void Function(UpdateSchoolUserCommandBuilder)? updates,
@@ -46,6 +48,7 @@ class _$UpdateSchoolUserCommand extends UpdateSchoolUserCommand {
     this.zip,
     this.leaveDate,
     this.state,
+    this.profilePictureUrl,
   }) : super._();
   @override
   UpdateSchoolUserCommand rebuild(
@@ -70,7 +73,8 @@ class _$UpdateSchoolUserCommand extends UpdateSchoolUserCommand {
         city == other.city &&
         zip == other.zip &&
         leaveDate == other.leaveDate &&
-        state == other.state;
+        state == other.state &&
+        profilePictureUrl == other.profilePictureUrl;
   }
 
   @override
@@ -87,6 +91,7 @@ class _$UpdateSchoolUserCommand extends UpdateSchoolUserCommand {
     _$hash = $jc(_$hash, zip.hashCode);
     _$hash = $jc(_$hash, leaveDate.hashCode);
     _$hash = $jc(_$hash, state.hashCode);
+    _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -104,7 +109,8 @@ class _$UpdateSchoolUserCommand extends UpdateSchoolUserCommand {
           ..add('city', city)
           ..add('zip', zip)
           ..add('leaveDate', leaveDate)
-          ..add('state', state))
+          ..add('state', state)
+          ..add('profilePictureUrl', profilePictureUrl))
         .toString();
   }
 }
@@ -158,6 +164,11 @@ class UpdateSchoolUserCommandBuilder
   UserState? get state => _$this._state;
   set state(UserState? state) => _$this._state = state;
 
+  String? _profilePictureUrl;
+  String? get profilePictureUrl => _$this._profilePictureUrl;
+  set profilePictureUrl(String? profilePictureUrl) =>
+      _$this._profilePictureUrl = profilePictureUrl;
+
   UpdateSchoolUserCommandBuilder() {
     UpdateSchoolUserCommand._defaults(this);
   }
@@ -176,6 +187,7 @@ class UpdateSchoolUserCommandBuilder
       _zip = $v.zip;
       _leaveDate = $v.leaveDate;
       _state = $v.state;
+      _profilePictureUrl = $v.profilePictureUrl;
       _$v = null;
     }
     return this;
@@ -209,6 +221,7 @@ class UpdateSchoolUserCommandBuilder
           zip: zip,
           leaveDate: leaveDate,
           state: state,
+          profilePictureUrl: profilePictureUrl,
         );
     replace(_$result);
     return _$result;

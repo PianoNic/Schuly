@@ -26,6 +26,7 @@ part 'create_school_user_command.g.dart';
 /// * [birthday] 
 /// * [entryDate] 
 /// * [role] 
+/// * [profilePictureUrl] 
 @BuiltValue()
 abstract class CreateSchoolUserCommand implements Built<CreateSchoolUserCommand, CreateSchoolUserCommandBuilder> {
   @BuiltValueField(wireName: r'applicationUserId')
@@ -67,6 +68,9 @@ abstract class CreateSchoolUserCommand implements Built<CreateSchoolUserCommand,
   @BuiltValueField(wireName: r'role')
   Roles? get role;
   // enum roleEnum {  Student,  Teacher,  Administrator,  };
+
+  @BuiltValueField(wireName: r'profilePictureUrl')
+  String? get profilePictureUrl;
 
   CreateSchoolUserCommand._();
 
@@ -180,6 +184,13 @@ class _$CreateSchoolUserCommandSerializer implements PrimitiveSerializer<CreateS
       yield serializers.serialize(
         object.role,
         specifiedType: const FullType(Roles),
+      );
+    }
+    if (object.profilePictureUrl != null) {
+      yield r'profilePictureUrl';
+      yield serializers.serialize(
+        object.profilePictureUrl,
+        specifiedType: const FullType.nullable(String),
       );
     }
   }
@@ -303,6 +314,14 @@ class _$CreateSchoolUserCommandSerializer implements PrimitiveSerializer<CreateS
             specifiedType: const FullType(Roles),
           ) as Roles;
           result.role = valueDes;
+          break;
+        case r'profilePictureUrl':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.profilePictureUrl = valueDes;
           break;
         default:
           unhandled.add(key);

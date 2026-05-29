@@ -23,6 +23,7 @@ import 'package:schuly_api/src/model/app_dto.dart';
 import 'package:schuly_api/src/model/application_user_dto.dart';
 import 'package:schuly_api/src/model/class_dto.dart';
 import 'package:schuly_api/src/model/connect_account_request.dart';
+import 'package:schuly_api/src/model/connect_oda_org_request.dart';
 import 'package:schuly_api/src/model/create_absence_command.dart';
 import 'package:schuly_api/src/model/create_agenda_entry_command.dart';
 import 'package:schuly_api/src/model/create_application_user_command.dart';
@@ -70,6 +71,7 @@ part 'serializers.g.dart';
   ApplicationUserDto,
   ClassDto,
   ConnectAccountRequest,
+  ConnectOdaOrgRequest,
   CreateAbsenceCommand,
   CreateAgendaEntryCommand,
   CreateApplicationUserCommand,

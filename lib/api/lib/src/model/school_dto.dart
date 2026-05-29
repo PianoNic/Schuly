@@ -22,6 +22,7 @@ part 'school_dto.g.dart';
 /// * [state] 
 /// * [zip] 
 /// * [country] 
+/// * [logoUrl] 
 /// * [createdAt] 
 /// * [updatedAt] 
 @BuiltValue()
@@ -58,6 +59,9 @@ abstract class SchoolDto implements Built<SchoolDto, SchoolDtoBuilder> {
 
   @BuiltValueField(wireName: r'country')
   String? get country;
+
+  @BuiltValueField(wireName: r'logoUrl')
+  String? get logoUrl;
 
   @BuiltValueField(wireName: r'createdAt')
   DateTime? get createdAt;
@@ -160,6 +164,13 @@ class _$SchoolDtoSerializer implements PrimitiveSerializer<SchoolDto> {
       yield r'country';
       yield serializers.serialize(
         object.country,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.logoUrl != null) {
+      yield r'logoUrl';
+      yield serializers.serialize(
+        object.logoUrl,
         specifiedType: const FullType.nullable(String),
       );
     }
@@ -286,6 +297,14 @@ class _$SchoolDtoSerializer implements PrimitiveSerializer<SchoolDto> {
           ) as String?;
           if (valueDes == null) continue;
           result.country = valueDes;
+          break;
+        case r'logoUrl':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.logoUrl = valueDes;
           break;
         case r'createdAt':
           final valueDes = serializers.deserialize(

@@ -30,6 +30,8 @@ class _$SchoolDto extends SchoolDto {
   @override
   final String? country;
   @override
+  final String? logoUrl;
+  @override
   final DateTime? createdAt;
   @override
   final DateTime? updatedAt;
@@ -49,6 +51,7 @@ class _$SchoolDto extends SchoolDto {
     this.state,
     this.zip,
     this.country,
+    this.logoUrl,
     this.createdAt,
     this.updatedAt,
   }) : super._();
@@ -74,6 +77,7 @@ class _$SchoolDto extends SchoolDto {
         state == other.state &&
         zip == other.zip &&
         country == other.country &&
+        logoUrl == other.logoUrl &&
         createdAt == other.createdAt &&
         updatedAt == other.updatedAt;
   }
@@ -92,6 +96,7 @@ class _$SchoolDto extends SchoolDto {
     _$hash = $jc(_$hash, state.hashCode);
     _$hash = $jc(_$hash, zip.hashCode);
     _$hash = $jc(_$hash, country.hashCode);
+    _$hash = $jc(_$hash, logoUrl.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jc(_$hash, updatedAt.hashCode);
     _$hash = $jf(_$hash);
@@ -112,6 +117,7 @@ class _$SchoolDto extends SchoolDto {
           ..add('state', state)
           ..add('zip', zip)
           ..add('country', country)
+          ..add('logoUrl', logoUrl)
           ..add('createdAt', createdAt)
           ..add('updatedAt', updatedAt))
         .toString();
@@ -165,6 +171,10 @@ class SchoolDtoBuilder implements Builder<SchoolDto, SchoolDtoBuilder> {
   String? get country => _$this._country;
   set country(String? country) => _$this._country = country;
 
+  String? _logoUrl;
+  String? get logoUrl => _$this._logoUrl;
+  set logoUrl(String? logoUrl) => _$this._logoUrl = logoUrl;
+
   DateTime? _createdAt;
   DateTime? get createdAt => _$this._createdAt;
   set createdAt(DateTime? createdAt) => _$this._createdAt = createdAt;
@@ -191,6 +201,7 @@ class SchoolDtoBuilder implements Builder<SchoolDto, SchoolDtoBuilder> {
       _state = $v.state;
       _zip = $v.zip;
       _country = $v.country;
+      _logoUrl = $v.logoUrl;
       _createdAt = $v.createdAt;
       _updatedAt = $v.updatedAt;
       _$v = null;
@@ -226,6 +237,7 @@ class SchoolDtoBuilder implements Builder<SchoolDto, SchoolDtoBuilder> {
           state: state,
           zip: zip,
           country: country,
+          logoUrl: logoUrl,
           createdAt: createdAt,
           updatedAt: updatedAt,
         );

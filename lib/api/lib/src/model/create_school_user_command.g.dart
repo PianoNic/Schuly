@@ -33,6 +33,8 @@ class _$CreateSchoolUserCommand extends CreateSchoolUserCommand {
   final Date? entryDate;
   @override
   final Roles? role;
+  @override
+  final String? profilePictureUrl;
 
   factory _$CreateSchoolUserCommand([
     void Function(CreateSchoolUserCommandBuilder)? updates,
@@ -52,6 +54,7 @@ class _$CreateSchoolUserCommand extends CreateSchoolUserCommand {
     this.birthday,
     this.entryDate,
     this.role,
+    this.profilePictureUrl,
   }) : super._();
   @override
   CreateSchoolUserCommand rebuild(
@@ -78,7 +81,8 @@ class _$CreateSchoolUserCommand extends CreateSchoolUserCommand {
         zip == other.zip &&
         birthday == other.birthday &&
         entryDate == other.entryDate &&
-        role == other.role;
+        role == other.role &&
+        profilePictureUrl == other.profilePictureUrl;
   }
 
   @override
@@ -97,6 +101,7 @@ class _$CreateSchoolUserCommand extends CreateSchoolUserCommand {
     _$hash = $jc(_$hash, birthday.hashCode);
     _$hash = $jc(_$hash, entryDate.hashCode);
     _$hash = $jc(_$hash, role.hashCode);
+    _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -116,7 +121,8 @@ class _$CreateSchoolUserCommand extends CreateSchoolUserCommand {
           ..add('zip', zip)
           ..add('birthday', birthday)
           ..add('entryDate', entryDate)
-          ..add('role', role))
+          ..add('role', role)
+          ..add('profilePictureUrl', profilePictureUrl))
         .toString();
   }
 }
@@ -179,6 +185,11 @@ class CreateSchoolUserCommandBuilder
   Roles? get role => _$this._role;
   set role(Roles? role) => _$this._role = role;
 
+  String? _profilePictureUrl;
+  String? get profilePictureUrl => _$this._profilePictureUrl;
+  set profilePictureUrl(String? profilePictureUrl) =>
+      _$this._profilePictureUrl = profilePictureUrl;
+
   CreateSchoolUserCommandBuilder() {
     CreateSchoolUserCommand._defaults(this);
   }
@@ -199,6 +210,7 @@ class CreateSchoolUserCommandBuilder
       _birthday = $v.birthday;
       _entryDate = $v.entryDate;
       _role = $v.role;
+      _profilePictureUrl = $v.profilePictureUrl;
       _$v = null;
     }
     return this;
@@ -234,6 +246,7 @@ class CreateSchoolUserCommandBuilder
           birthday: birthday,
           entryDate: entryDate,
           role: role,
+          profilePictureUrl: profilePictureUrl,
         );
     replace(_$result);
     return _$result;

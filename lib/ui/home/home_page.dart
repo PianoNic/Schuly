@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
-import 'package:schuly_api/schuly_api.dart';
 
 import '../../services/school_data_service.dart';
 import '../core/grade_color.dart';
@@ -17,23 +16,23 @@ class HomePage extends StatelessWidget {
     final today = DateTime(now.year, now.month, now.day);
 
     bool sameDay(DateTime d) => d.year == today.year && d.month == today.month && d.day == today.day;
+    DateTime dayOf(DateTime d) => DateTime(d.year, d.month, d.day);
 
-    final todayLessons = svc.agenda
-        .where((a) => a.entryType == AgendaEntryType.lesson && sameDay(a.date))
-        .toList()
+    final todayEntries = svc.agenda.where((a) => sameDay(a.date)).toList()
       ..sort((a, b) => a.date.compareTo(b.date));
 
-    final upcomingTests = svc.agenda.where((a) {
-      final d = a.date;
-      return a.entryType == AgendaEntryType.test &&
-          !d.isBefore(today) &&
-          d.isBefore(today.add(const Duration(days: 7)));
-    }).toList()
+    final upcoming = svc.agenda.where((a) => dayOf(a.date).isAfter(today)).toList()
       ..sort((a, b) => a.date.compareTo(b.date));
 
     final myGrades = svc.myGradesByExam;
     final examName = {for (final e in svc.exams) e.id: e.name};
-    final recentGrades = myGrades.entries.toList().reversed.take(5).toList();
+    // Only real grades on the latest-grades card (drop ungraded 0 placeholders).
+    final recentGrades = myGrades.entries
+        .where((e) => isGraded(e.value.score))
+        .toList()
+        .reversed
+        .take(5)
+        .toList();
 
     final recentAbsences = svc.absences.toList()
       ..sort((a, b) => b.from.compareTo(a.from));
@@ -46,26 +45,26 @@ class HomePage extends StatelessWidget {
       children: [
         _Section(
           title: 'Today',
-          emptyText: 'No lessons today',
+          emptyText: 'Nothing scheduled today',
           tiles: [
-            for (final l in todayLessons)
+            for (final l in todayEntries)
               FTile(
-                prefix: const Icon(FIcons.bookOpen),
-                title: Text(l.title ?? 'Lesson'),
-                subtitle: Text([_time(l.date), l.place].whereType<String>().join(' · ')),
+                prefix: const Icon(FIcons.calendarDays),
+                title: Text(l.title?.isNotEmpty == true ? l.title! : 'Entry'),
+                subtitle: Text([_time(l.date), l.place].whereType<String>().where((s) => s.isNotEmpty).join(' · ')),
               ),
           ],
         ),
         const SizedBox(height: 16),
         _Section(
-          title: 'Upcoming tests',
-          emptyText: 'Nothing in the next 7 days',
+          title: 'Upcoming',
+          emptyText: 'Nothing upcoming',
           tiles: [
-            for (final t in upcomingTests)
+            for (final t in upcoming.take(5))
               FTile(
-                prefix: const Icon(FIcons.clipboardList),
-                title: Text(t.title ?? 'Test'),
-                subtitle: Text(_dateLabel(t.date)),
+                prefix: const Icon(FIcons.calendarDays),
+                title: Text(t.title?.isNotEmpty == true ? t.title! : 'Entry'),
+                subtitle: Text('${_dateLabel(t.date)} · ${_time(t.date)}'),
               ),
           ],
         ),
@@ -77,7 +76,7 @@ class HomePage extends StatelessWidget {
             for (final entry in recentGrades)
               FTile(
                 title: Text(examName[entry.key] ?? 'Exam'),
-                suffix: _GradePill(entry.value.score ?? 0),
+                suffix: GradePill(entry.value.score),
               ),
           ],
         ),
@@ -145,20 +144,6 @@ class _Section extends StatelessWidget {
           for (final t in tiles)
             Padding(padding: const EdgeInsets.only(bottom: 8), child: t),
       ],
-    );
-  }
-}
-
-class _GradePill extends StatelessWidget {
-  final num score;
-  const _GradePill(this.score);
-  @override
-  Widget build(BuildContext context) {
-    final c = gradeColor(context, score);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: c.withValues(alpha: 0.18), borderRadius: BorderRadius.circular(8)),
-      child: Text(formatGrade(score), style: TextStyle(color: c, fontWeight: FontWeight.w700)),
     );
   }
 }

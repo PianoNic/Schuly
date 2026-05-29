@@ -69,6 +69,9 @@ Class | Method | HTTP request | Description
 [*AbsencesApi*](doc/AbsencesApi.md) | [**apiAbsencesPost**](doc/AbsencesApi.md#apiabsencespost) | **POST** /api/Absences | 
 [*AbsencesApi*](doc/AbsencesApi.md) | [**apiAbsencesPut**](doc/AbsencesApi.md#apiabsencesput) | **PUT** /api/Absences | 
 [*AbsencesApi*](doc/AbsencesApi.md) | [**apiAbsencesSearchGet**](doc/AbsencesApi.md#apiabsencessearchget) | **GET** /api/Absences/search | 
+[*AccountsApi*](doc/AccountsApi.md) | [**apiPluginsOdaorgAccountsAccountIdDelete**](doc/AccountsApi.md#apipluginsodaorgaccountsaccountiddelete) | **DELETE** /api/plugins/odaorg/accounts/{accountId} | 
+[*AccountsApi*](doc/AccountsApi.md) | [**apiPluginsOdaorgAccountsGet**](doc/AccountsApi.md#apipluginsodaorgaccountsget) | **GET** /api/plugins/odaorg/accounts | 
+[*AccountsApi*](doc/AccountsApi.md) | [**apiPluginsOdaorgAccountsPost**](doc/AccountsApi.md#apipluginsodaorgaccountspost) | **POST** /api/plugins/odaorg/accounts | 
 [*AccountsApi*](doc/AccountsApi.md) | [**apiPluginsSchulwareAccountsAccountIdDelete**](doc/AccountsApi.md#apipluginsschulwareaccountsaccountiddelete) | **DELETE** /api/plugins/schulware/accounts/{accountId} | 
 [*AccountsApi*](doc/AccountsApi.md) | [**apiPluginsSchulwareAccountsGet**](doc/AccountsApi.md#apipluginsschulwareaccountsget) | **GET** /api/plugins/schulware/accounts | 
 [*AccountsApi*](doc/AccountsApi.md) | [**apiPluginsSchulwareAccountsPost**](doc/AccountsApi.md#apipluginsschulwareaccountspost) | **POST** /api/plugins/schulware/accounts | 
@@ -113,10 +116,13 @@ Class | Method | HTTP request | Description
 [*SchoolsApi*](doc/SchoolsApi.md) | [**apiSchoolsPost**](doc/SchoolsApi.md#apischoolspost) | **POST** /api/Schools | 
 [*SchoolsApi*](doc/SchoolsApi.md) | [**apiSchoolsPut**](doc/SchoolsApi.md#apischoolsput) | **PUT** /api/Schools | 
 [*SemesterReportsApi*](doc/SemesterReportsApi.md) | [**apiSemesterReportsGet**](doc/SemesterReportsApi.md#apisemesterreportsget) | **GET** /api/SemesterReports | 
+[*StatusApi*](doc/StatusApi.md) | [**apiPluginsOdaorgStatusGet**](doc/StatusApi.md#apipluginsodaorgstatusget) | **GET** /api/plugins/odaorg/status | 
 [*StatusApi*](doc/StatusApi.md) | [**apiPluginsSchulwareStatusGet**](doc/StatusApi.md#apipluginsschulwarestatusget) | **GET** /api/plugins/schulware/status | 
 [*StudentDocumentsApi*](doc/StudentDocumentsApi.md) | [**apiDocumentsDocumentIdGet**](doc/StudentDocumentsApi.md#apidocumentsdocumentidget) | **GET** /api/documents/{documentId} | 
 [*StudentDocumentsApi*](doc/StudentDocumentsApi.md) | [**apiDocumentsGet**](doc/StudentDocumentsApi.md#apidocumentsget) | **GET** /api/documents | 
 [*StudentDocumentsApi*](doc/StudentDocumentsApi.md) | [**apiStudentsSchoolUserIdDocumentsPost**](doc/StudentDocumentsApi.md#apistudentsschooluseriddocumentspost) | **POST** /api/students/{schoolUserId}/documents | 
+[*SyncApi*](doc/SyncApi.md) | [**apiPluginsOdaorgAccountsAccountIdSyncGet**](doc/SyncApi.md#apipluginsodaorgaccountsaccountidsyncget) | **GET** /api/plugins/odaorg/accounts/{accountId}/sync | 
+[*SyncApi*](doc/SyncApi.md) | [**apiPluginsOdaorgAccountsAccountIdSyncPost**](doc/SyncApi.md#apipluginsodaorgaccountsaccountidsyncpost) | **POST** /api/plugins/odaorg/accounts/{accountId}/sync | 
 [*SyncApi*](doc/SyncApi.md) | [**apiPluginsSchulwareAccountsAccountIdSyncGet**](doc/SyncApi.md#apipluginsschulwareaccountsaccountidsyncget) | **GET** /api/plugins/schulware/accounts/{accountId}/sync | 
 [*SyncApi*](doc/SyncApi.md) | [**apiPluginsSchulwareAccountsAccountIdSyncPost**](doc/SyncApi.md#apipluginsschulwareaccountsaccountidsyncpost) | **POST** /api/plugins/schulware/accounts/{accountId}/sync | 
 [*TeachersApi*](doc/TeachersApi.md) | [**apiTeachersGet**](doc/TeachersApi.md#apiteachersget) | **GET** /api/Teachers | 
@@ -137,6 +143,7 @@ Class | Method | HTTP request | Description
  - [ApplicationUserDto](doc/ApplicationUserDto.md)
  - [ClassDto](doc/ClassDto.md)
  - [ConnectAccountRequest](doc/ConnectAccountRequest.md)
+ - [ConnectOdaOrgRequest](doc/ConnectOdaOrgRequest.md)
  - [CreateAbsenceCommand](doc/CreateAbsenceCommand.md)
  - [CreateAgendaEntryCommand](doc/CreateAgendaEntryCommand.md)
  - [CreateApplicationUserCommand](doc/CreateApplicationUserCommand.md)

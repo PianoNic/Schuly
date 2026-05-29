@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **state** | **String** |  | [optional] 
 **zip** | **String** |  | [optional] 
 **country** | **String** |  | [optional] 
+**logoUrl** | **String** |  | [optional] 
 **createdAt** | [**DateTime**](DateTime.md) |  | [optional] 
 **updatedAt** | [**DateTime**](DateTime.md) |  | [optional] 
 

@@ -96,7 +96,7 @@ class AccountsSidebar extends StatelessWidget {
                     children: [
                       for (final s in svc.schools)
                         FTile(
-                          prefix: const _SchoolAvatar(),
+                          prefix: _SchoolAvatar(asset: s.logoAsset),
                           title: Text(s.name),
                           subtitle: (s.fullName?.isNotEmpty ?? false)
                               ? Text(s.fullName!)
@@ -155,8 +155,8 @@ class AccountsSidebar extends StatelessWidget {
 /// once other providers exist this should pick the asset by provider.
 class _SchoolAvatar extends StatelessWidget {
   static const double size = 40;
-  static const _providerAsset = 'assets/schoolsystems/schulnetz.webp';
-  const _SchoolAvatar();
+  final String asset;
+  const _SchoolAvatar({required this.asset});
 
   @override
   Widget build(BuildContext context) {
@@ -169,7 +169,7 @@ class _SchoolAvatar extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       padding: const EdgeInsets.all(7),
-      child: Image.asset(_providerAsset, fit: BoxFit.contain),
+      child: Image.asset(asset, fit: BoxFit.contain),
     );
   }
 }

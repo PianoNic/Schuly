@@ -27,6 +27,8 @@ class _$CreateSchoolCommand extends CreateSchoolCommand {
   final String? zip;
   @override
   final String? country;
+  @override
+  final String? logoUrl;
 
   factory _$CreateSchoolCommand([
     void Function(CreateSchoolCommandBuilder)? updates,
@@ -43,6 +45,7 @@ class _$CreateSchoolCommand extends CreateSchoolCommand {
     this.state,
     this.zip,
     this.country,
+    this.logoUrl,
   }) : super._();
   @override
   CreateSchoolCommand rebuild(
@@ -66,7 +69,8 @@ class _$CreateSchoolCommand extends CreateSchoolCommand {
         city == other.city &&
         state == other.state &&
         zip == other.zip &&
-        country == other.country;
+        country == other.country &&
+        logoUrl == other.logoUrl;
   }
 
   @override
@@ -82,6 +86,7 @@ class _$CreateSchoolCommand extends CreateSchoolCommand {
     _$hash = $jc(_$hash, state.hashCode);
     _$hash = $jc(_$hash, zip.hashCode);
     _$hash = $jc(_$hash, country.hashCode);
+    _$hash = $jc(_$hash, logoUrl.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -98,7 +103,8 @@ class _$CreateSchoolCommand extends CreateSchoolCommand {
           ..add('city', city)
           ..add('state', state)
           ..add('zip', zip)
-          ..add('country', country))
+          ..add('country', country)
+          ..add('logoUrl', logoUrl))
         .toString();
   }
 }
@@ -147,6 +153,10 @@ class CreateSchoolCommandBuilder
   String? get country => _$this._country;
   set country(String? country) => _$this._country = country;
 
+  String? _logoUrl;
+  String? get logoUrl => _$this._logoUrl;
+  set logoUrl(String? logoUrl) => _$this._logoUrl = logoUrl;
+
   CreateSchoolCommandBuilder() {
     CreateSchoolCommand._defaults(this);
   }
@@ -164,6 +174,7 @@ class CreateSchoolCommandBuilder
       _state = $v.state;
       _zip = $v.zip;
       _country = $v.country;
+      _logoUrl = $v.logoUrl;
       _$v = null;
     }
     return this;
@@ -196,6 +207,7 @@ class CreateSchoolCommandBuilder
           state: state,
           zip: zip,
           country: country,
+          logoUrl: logoUrl,
         );
     replace(_$result);
     return _$result;

@@ -26,6 +26,8 @@ class _$SchoolUserDto extends SchoolUserDto {
   @override
   final String? phoneNumber;
   @override
+  final String? profilePictureUrl;
+  @override
   final String? street;
   @override
   final String? city;
@@ -65,6 +67,7 @@ class _$SchoolUserDto extends SchoolUserDto {
     this.email,
     this.privateEmail,
     this.phoneNumber,
+    this.profilePictureUrl,
     this.street,
     this.city,
     this.zip,
@@ -99,6 +102,7 @@ class _$SchoolUserDto extends SchoolUserDto {
         email == other.email &&
         privateEmail == other.privateEmail &&
         phoneNumber == other.phoneNumber &&
+        profilePictureUrl == other.profilePictureUrl &&
         street == other.street &&
         city == other.city &&
         zip == other.zip &&
@@ -126,6 +130,7 @@ class _$SchoolUserDto extends SchoolUserDto {
     _$hash = $jc(_$hash, email.hashCode);
     _$hash = $jc(_$hash, privateEmail.hashCode);
     _$hash = $jc(_$hash, phoneNumber.hashCode);
+    _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jc(_$hash, street.hashCode);
     _$hash = $jc(_$hash, city.hashCode);
     _$hash = $jc(_$hash, zip.hashCode);
@@ -155,6 +160,7 @@ class _$SchoolUserDto extends SchoolUserDto {
           ..add('email', email)
           ..add('privateEmail', privateEmail)
           ..add('phoneNumber', phoneNumber)
+          ..add('profilePictureUrl', profilePictureUrl)
           ..add('street', street)
           ..add('city', city)
           ..add('zip', zip)
@@ -212,6 +218,11 @@ class SchoolUserDtoBuilder
   String? _phoneNumber;
   String? get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
+
+  String? _profilePictureUrl;
+  String? get profilePictureUrl => _$this._profilePictureUrl;
+  set profilePictureUrl(String? profilePictureUrl) =>
+      _$this._profilePictureUrl = profilePictureUrl;
 
   String? _street;
   String? get street => _$this._street;
@@ -285,6 +296,7 @@ class SchoolUserDtoBuilder
       _email = $v.email;
       _privateEmail = $v.privateEmail;
       _phoneNumber = $v.phoneNumber;
+      _profilePictureUrl = $v.profilePictureUrl;
       _street = $v.street;
       _city = $v.city;
       _zip = $v.zip;
@@ -331,6 +343,7 @@ class SchoolUserDtoBuilder
             email: email,
             privateEmail: privateEmail,
             phoneNumber: phoneNumber,
+            profilePictureUrl: profilePictureUrl,
             street: street,
             city: city,
             zip: zip,

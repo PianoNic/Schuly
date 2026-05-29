@@ -5,8 +5,11 @@ import 'package:forui/forui.dart';
 import '../../services/active_account_service.dart';
 import '../../services/auth_service.dart';
 import '../../services/school_data_service.dart';
+import '../absences/absences_page.dart';
+import '../account/account_page.dart';
 import '../grades/grades_page.dart';
 import '../home/home_page.dart';
+import '../timetable/timetable_page.dart';
 import 'widgets/accounts_sidebar.dart';
 import 'widgets/add_school_modal.dart';
 
@@ -44,6 +47,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final id = ActiveAccountService.instance.active?.id;
     if (id != _lastSchoolId) {
       _lastSchoolId = id;
+      // Drop the previous school's cached data so we don't show stale content
+      // during the switch, then load the new school.
+      SchoolDataService.instance.clear();
       SchoolDataService.instance.refresh();
     }
   }
@@ -103,12 +109,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
         final data = SchoolDataService.instance;
         final active = account.active;
 
-        final pages = const [
-          HomePage(),
-          _Placeholder(label: 'Timetable'),
-          GradesPage(),
-          _Placeholder(label: 'Absences'),
-          _Placeholder(label: 'Account'),
+        final pages = [
+          const HomePage(),
+          const TimetablePage(),
+          const GradesPage(),
+          const AbsencesPage(),
+          AccountPage(
+            pictureUrl: _pictureUrl,
+            userName: _userName,
+            onOpenSwitcher: _openSidebar,
+            onSignOut: widget.onSignOut,
+          ),
         ];
 
         Widget body;
@@ -132,7 +143,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             subtitle: active?.fullName,
             pictureUrl: _pictureUrl,
             userName: _userName,
-            loading: data.loading,
             onAvatar: _openSidebar,
           ),
           footer: SafeArea(
@@ -166,14 +176,12 @@ class _TopBar extends StatelessWidget {
   final String? subtitle;
   final String? pictureUrl;
   final String? userName;
-  final bool loading;
   final VoidCallback onAvatar;
   const _TopBar({
     required this.title,
     required this.subtitle,
     required this.pictureUrl,
     required this.userName,
-    required this.loading,
     required this.onAvatar,
   });
 
@@ -215,11 +223,6 @@ class _TopBar extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (loading)
-                  const Padding(
-                    padding: EdgeInsets.only(left: 8),
-                    child: SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2)),
-                  ),
               ],
             ),
           ),
@@ -229,14 +232,4 @@ class _TopBar extends StatelessWidget {
       ),
     );
   }
-}
-
-class _Placeholder extends StatelessWidget {
-  final String label;
-  const _Placeholder({required this.label});
-  @override
-  Widget build(BuildContext context) => Center(
-        child: Text('$label — coming soon',
-            style: TextStyle(color: context.theme.colors.mutedForeground)),
-      );
 }

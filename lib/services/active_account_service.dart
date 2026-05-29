@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:schuly_api/schuly_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../domain/schulware_account.dart';
@@ -38,13 +39,17 @@ class ActiveAccountService extends ChangeNotifier {
     _error = null;
     notifyListeners();
     try {
-      final res = await ApiClient.instance.api
-          .getSchoolsApi()
-          .apiSchoolsMySchoolsGet();
+      final api = ApiClient.instance.api;
+      final res = await api.getSchoolsApi().apiSchoolsMySchoolsGet();
       final data = res.data;
+
+      final providerBySchoolId = await _detectProviders();
       _schools = data == null
           ? const []
-          : data.map(MySchool.fromDto).toList(growable: false);
+          : data
+              .map((dto) => MySchool.fromDto(dto,
+                  provider: providerBySchoolId[dto.id] ?? 'schulnetz'))
+              .toList(growable: false);
 
       // Keep the persisted active id only if it still resolves to a school.
       final prefs = await SharedPreferences.getInstance();
@@ -64,6 +69,38 @@ class ActiveAccountService extends ChangeNotifier {
     } finally {
       _loading = false;
       notifyListeners();
+    }
+  }
+
+  /// Maps schoolId → provider by cross-referencing the OdaOrg plugin's
+  /// accounts (which expose `schoolUserId`) against the user's SchoolUsers.
+  /// Anything not owned by OdaOrg defaults to Schulnetz. Best-effort: returns
+  /// an empty map on any failure so the account list still loads.
+  Future<Map<String, String>> _detectProviders() async {
+    try {
+      final api = ApiClient.instance.api;
+      final me = await api.getAuthApi().apiAuthMeGet();
+      final appUserId = me.data?.id;
+      if (appUserId == null) return const {};
+
+      final usersRes =
+          await api.getSchoolUsersApi().apiSchoolUsersGet(applicationUserId: appUserId);
+      final schoolIdByUser = <String, String>{
+        for (final u in (usersRes.data ?? const <SchoolUserDto>[]))
+          if (u.id != null && u.schoolId != null) u.id!: u.schoolId!,
+      };
+
+      final odaRes = await api.getAccountsApi().apiPluginsOdaorgAccountsGet();
+      final odaAccounts = (odaRes.data as List<dynamic>?) ?? const [];
+      final out = <String, String>{};
+      for (final a in odaAccounts.cast<Map<String, dynamic>>()) {
+        final suId = a['schoolUserId'] as String?;
+        final schoolId = suId == null ? null : schoolIdByUser[suId];
+        if (schoolId != null) out[schoolId] = 'odaorg';
+      }
+      return out;
+    } catch (_) {
+      return const {};
     }
   }
 

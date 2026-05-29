@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **email** | **String** |  | 
 **privateEmail** | **String** |  | [optional] 
 **phoneNumber** | **String** |  | [optional] 
+**profilePictureUrl** | **String** |  | [optional] 
 **street** | **String** |  | [optional] 
 **city** | **String** |  | [optional] 
 **zip** | **String** |  | [optional] 

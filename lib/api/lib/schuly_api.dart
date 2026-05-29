@@ -37,6 +37,7 @@ export 'package:schuly_api/src/model/app_dto.dart';
 export 'package:schuly_api/src/model/application_user_dto.dart';
 export 'package:schuly_api/src/model/class_dto.dart';
 export 'package:schuly_api/src/model/connect_account_request.dart';
+export 'package:schuly_api/src/model/connect_oda_org_request.dart';
 export 'package:schuly_api/src/model/create_absence_command.dart';
 export 'package:schuly_api/src/model/create_agenda_entry_command.dart';
 export 'package:schuly_api/src/model/create_application_user_command.dart';

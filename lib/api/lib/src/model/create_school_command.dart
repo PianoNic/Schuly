@@ -21,6 +21,7 @@ part 'create_school_command.g.dart';
 /// * [state] 
 /// * [zip] 
 /// * [country] 
+/// * [logoUrl] 
 @BuiltValue()
 abstract class CreateSchoolCommand implements Built<CreateSchoolCommand, CreateSchoolCommandBuilder> {
   @BuiltValueField(wireName: r'name')
@@ -52,6 +53,9 @@ abstract class CreateSchoolCommand implements Built<CreateSchoolCommand, CreateS
 
   @BuiltValueField(wireName: r'country')
   String? get country;
+
+  @BuiltValueField(wireName: r'logoUrl')
+  String? get logoUrl;
 
   CreateSchoolCommand._();
 
@@ -143,6 +147,13 @@ class _$CreateSchoolCommandSerializer implements PrimitiveSerializer<CreateSchoo
       yield r'country';
       yield serializers.serialize(
         object.country,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.logoUrl != null) {
+      yield r'logoUrl';
+      yield serializers.serialize(
+        object.logoUrl,
         specifiedType: const FullType.nullable(String),
       );
     }
@@ -248,6 +259,14 @@ class _$CreateSchoolCommandSerializer implements PrimitiveSerializer<CreateSchoo
           ) as String?;
           if (valueDes == null) continue;
           result.country = valueDes;
+          break;
+        case r'logoUrl':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.logoUrl = valueDes;
           break;
         default:
           unhandled.add(key);

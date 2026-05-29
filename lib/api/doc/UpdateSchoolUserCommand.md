@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **zip** | **String** |  | [optional] 
 **leaveDate** | [**Date**](Date.md) |  | [optional] 
 **state** | [**UserState**](UserState.md) |  | [optional] 
+**profilePictureUrl** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -24,6 +24,7 @@ part 'update_school_user_command.g.dart';
 /// * [zip] 
 /// * [leaveDate] 
 /// * [state] 
+/// * [profilePictureUrl] 
 @BuiltValue()
 abstract class UpdateSchoolUserCommand implements Built<UpdateSchoolUserCommand, UpdateSchoolUserCommandBuilder> {
   @BuiltValueField(wireName: r'schoolUserId')
@@ -59,6 +60,9 @@ abstract class UpdateSchoolUserCommand implements Built<UpdateSchoolUserCommand,
   @BuiltValueField(wireName: r'state')
   UserState? get state;
   // enum stateEnum {  None,  Active,  Inactive,  };
+
+  @BuiltValueField(wireName: r'profilePictureUrl')
+  String? get profilePictureUrl;
 
   UpdateSchoolUserCommand._();
 
@@ -158,6 +162,13 @@ class _$UpdateSchoolUserCommandSerializer implements PrimitiveSerializer<UpdateS
       yield serializers.serialize(
         object.state,
         specifiedType: const FullType(UserState),
+      );
+    }
+    if (object.profilePictureUrl != null) {
+      yield r'profilePictureUrl';
+      yield serializers.serialize(
+        object.profilePictureUrl,
+        specifiedType: const FullType.nullable(String),
       );
     }
   }
@@ -268,6 +279,14 @@ class _$UpdateSchoolUserCommandSerializer implements PrimitiveSerializer<UpdateS
             specifiedType: const FullType(UserState),
           ) as UserState;
           result.state = valueDes;
+          break;
+        case r'profilePictureUrl':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.profilePictureUrl = valueDes;
           break;
         default:
           unhandled.add(key);
